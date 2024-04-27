@@ -8,6 +8,7 @@ import { RegisterFormComponent } from './components/feature/register-form/regist
 import { ReactiveFormsModule } from '@angular/forms';
 import { RoleRegisterPageComponent } from './pages/role-register-page/role-register-page.component';
 import { CardRoleComponent } from './components/feature/card-role/card-role.component';
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CardRoleComponent } from './components/feature/card-role/card-role.comp
     RegisterRoutingModule,
     SharedComponentsModule,
     ReactiveFormsModule,
+    SidebarModule,
   ],
 })
 export class RegisterModule {}
