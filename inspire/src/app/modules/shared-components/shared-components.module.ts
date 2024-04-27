@@ -7,6 +7,9 @@ import { FormExperienceComponent } from './form-experience/form-experience.compo
 import { FormCourseComponent } from './form-course/form-course.component';
 import { FormAboutComponent } from './form-about/form-about.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ChipComponent } from './chip/chip.component';
+import { ButtonModule } from 'primeng/button';
+import { CardSkillComponent } from './card-skill/card-skill.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +19,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormExperienceComponent,
     FormCourseComponent,
     FormAboutComponent,
+    ChipComponent,
+    CardSkillComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ButtonModule],
   exports: [
     ButtonComponent,
     WelcomeComponent,
@@ -25,6 +30,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormExperienceComponent,
     FormCourseComponent,
     FormAboutComponent,
+    ChipComponent,
+    CardSkillComponent,
   ],
 })
 export class SharedComponentsModule {}

@@ -1,0 +1,16 @@
+@import "../../../../variables.scss";
+
+.chip {
+  border: none;
+  background-color: $anti-primary-color;
+  color: $primary-color;
+  border-radius: 10px;
+  font-size: 18px;
+  padding: 5px 10px;
+}
+.chip:visited,
+.chip:focus,
+.chip:focus-visible {
+  border: none;
+  box-shadow: none;
+}
