@@ -16,9 +16,11 @@ background-color: #fcf6f8;
   color: white;
   padding-left: 30px;
   padding-top: 10px;
-
-
 }
+
+.body-layout {
+  display: flex;
+  flex-direction: row;
 
 .container-side-nav {
   background-color: white;
@@ -45,9 +47,8 @@ background-color: #fcf6f8;
     border-radius: 10px;
    
    }
-  };
+  }
 }
-
 .container-side-nav ul li {
   margin: 10px 0; 
 }
@@ -55,5 +56,21 @@ background-color: #fcf6f8;
 .container-side-nav ul li:active {
   color: white; 
   background-color: #f8156b;
+}
+
+.container-body {
+  margin: 10px;
+  width: 80%;
+
+  h3 {
+    padding-top: 40px;
+    padding-left: 40px;
+  }
+
+  .body-contain {
+    padding-top: 40px;
+    padding-left: 40px;
+  }
+}
 }
 }
