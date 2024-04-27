@@ -1,0 +1,51 @@
+<form
+  class="form-inscription"
+  [formGroup]="loginForm"
+  (ngSubmit)="loginForm.valid && onSubmit()"
+  #formLogin="ngForm"
+>
+  <div class="container-input">
+    <label for="email">Email *</label>
+    <input
+      type="text"
+      id="email"
+      name="email"
+      formControlName="email"
+      placeholder="Votre email"
+    />
+
+    <div
+      *ngIf="
+        formLogin.submitted &&
+        loginForm.controls['email'].errors &&
+        !loginForm.controls['email'].pristine
+      "
+      class="error-msg"
+    >
+      <div [hidden]="!loginForm.controls['email'].errors['required']">
+        email is required.
+      </div>
+      <div [hidden]="!loginForm.controls['email'].invalid">
+        email is invalid.
+      </div>
+    </div>
+  </div>
+  <div class="container-input">
+    <label for="password">Mot de passe *</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      formControlName="password"
+      placeholder="Votre mot de passe"
+    />
+    <div
+      *ngIf="formLogin.submitted && loginForm.get('password')?.errors?.['required']"
+    >
+      Mot de passe requis
+    </div>
+  </div>
+  <div class="btn-connexion">
+    <app-button variant="pink" text="Connexion"></app-button>
+  </div>
+</form>
