@@ -1,8 +1,10 @@
 .form-inscription {
+  width: 100%;
   .container-input {
     display: flex;
     flex-direction: column;
     margin-top: 10px;
+    width: 100%;
 
     label {
       margin-top: 10px;
@@ -12,15 +14,21 @@
     }
 
     input {
-      padding: 12px 0px;
+      padding: 12px 10px;
       border: solid 1px black;
       border-radius: 5px;
       margin-top: 6px;
       &::placeholder {
-        padding-left: 10px;
-        color: black;
+        color: rgb(151, 150, 150);
         font-style: italic;
       }
     }
+  }
+  .btn-connexion {
+    margin-top: 30px;
+  }
+
+  .error-msg {
+    background-color: red;
   }
 }
