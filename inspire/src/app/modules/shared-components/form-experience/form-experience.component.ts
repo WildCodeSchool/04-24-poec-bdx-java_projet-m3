@@ -16,11 +16,7 @@ export class FormExperienceComponent {
   });
 
   onSubmit() {
-    if (this.experienceForm.valid) {
-      console.log(this.experienceForm.value);
-    } else {
-      console.log('Formulaire invalide');
-    }
+    console.log(this.experienceForm.value);
   }
 
   constructor(private fb: FormBuilder) {}

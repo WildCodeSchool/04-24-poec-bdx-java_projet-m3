@@ -12,11 +12,7 @@ export class FormAboutComponent {
   });
 
   onSubmit() {
-    if (this.aboutForm.valid) {
-      console.log(this.aboutForm.value);
-    } else {
-      console.log('Formulaire invalide');
-    }
+    console.log(this.aboutForm.value);
   }
 
   constructor(private fb: FormBuilder) {}

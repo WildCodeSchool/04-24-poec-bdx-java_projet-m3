@@ -1,4 +1,8 @@
-<form class="form-experience" (ngSubmit)="onSubmit()">
+<form
+  class="form-experience"
+  (ngSubmit)="onSubmit()"
+  [formGroup]="experienceForm"
+>
   <h1>Ajouter une expérience</h1>
   <div class="infos">
     <div class="container-input">

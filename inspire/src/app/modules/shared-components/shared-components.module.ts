@@ -6,6 +6,7 @@ import { SocialConnexionComponent } from './social-connexion/social-connexion.co
 import { FormExperienceComponent } from './form-experience/form-experience.component';
 import { FormCourseComponent } from './form-course/form-course.component';
 import { FormAboutComponent } from './form-about/form-about.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { FormAboutComponent } from './form-about/form-about.component';
     FormCourseComponent,
     FormAboutComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, ReactiveFormsModule],
   exports: [
     ButtonComponent,
     WelcomeComponent,

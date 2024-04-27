@@ -16,11 +16,7 @@ export class FormCourseComponent {
   });
 
   onSubmit() {
-    if (this.courseForm.valid) {
-      console.log(this.courseForm.value);
-    } else {
-      console.log('Formulaire invalide');
-    }
+    console.log(this.courseForm.value);
   }
 
   constructor(private fb: FormBuilder) {}
