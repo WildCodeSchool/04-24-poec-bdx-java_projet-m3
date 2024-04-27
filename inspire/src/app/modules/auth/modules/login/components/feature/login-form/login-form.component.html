@@ -1,1 +1,23 @@
-<p>login-form works!</p>
+<form class="form-inscription" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="container-input">
+    <label for="email">Email</label>
+    <input
+      type="text"
+      id="email"
+      name="email"
+      formControlName="email"
+      placeholder="Votre email"
+    />
+  </div>
+  <div class="container-input">
+    <label for="password">Mot de passe</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      formControlName="password"
+      placeholder="Votre mot de passe"
+    />
+  </div>
+  <app-button variant="pink" text="Connexion"></app-button>
+</form>

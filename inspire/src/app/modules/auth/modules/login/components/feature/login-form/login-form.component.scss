@@ -1,0 +1,26 @@
+.form-inscription {
+  .container-input {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+
+    label {
+      margin-top: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      color: black;
+    }
+
+    input {
+      padding: 12px 0px;
+      border: solid 1px black;
+      border-radius: 5px;
+      margin-top: 6px;
+      &::placeholder {
+        padding-left: 10px;
+        color: black;
+        font-style: italic;
+      }
+    }
+  }
+}
