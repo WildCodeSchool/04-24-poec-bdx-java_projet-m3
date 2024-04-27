@@ -4,6 +4,7 @@ import { ButtonComponent } from './button/button.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SocialConnexionComponent } from './social-connexion/social-connexion.component';
 import { FormExperienceComponent } from './form-experience/form-experience.component';
+import { FormCourseComponent } from './form-course/form-course.component';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { FormExperienceComponent } from './form-experience/form-experience.compo
     WelcomeComponent,
     SocialConnexionComponent,
     FormExperienceComponent,
+    FormCourseComponent,
   ],
   imports: [CommonModule],
   exports: [
@@ -18,6 +20,7 @@ import { FormExperienceComponent } from './form-experience/form-experience.compo
     WelcomeComponent,
     SocialConnexionComponent,
     FormExperienceComponent,
+    FormCourseComponent,
   ],
 })
 export class SharedComponentsModule {}
