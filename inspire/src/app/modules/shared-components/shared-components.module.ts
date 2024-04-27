@@ -3,10 +3,28 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './button/button.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SocialConnexionComponent } from './social-connexion/social-connexion.component';
+import { FormExperienceComponent } from './form-experience/form-experience.component';
+import { FormCourseComponent } from './form-course/form-course.component';
+import { FormAboutComponent } from './form-about/form-about.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ButtonComponent, WelcomeComponent, SocialConnexionComponent],
-  imports: [CommonModule],
-  exports: [ButtonComponent, WelcomeComponent, SocialConnexionComponent],
+  declarations: [
+    ButtonComponent,
+    WelcomeComponent,
+    SocialConnexionComponent,
+    FormExperienceComponent,
+    FormCourseComponent,
+    FormAboutComponent,
+  ],
+  imports: [CommonModule, ReactiveFormsModule],
+  exports: [
+    ButtonComponent,
+    WelcomeComponent,
+    SocialConnexionComponent,
+    FormExperienceComponent,
+    FormCourseComponent,
+    FormAboutComponent,
+  ],
 })
 export class SharedComponentsModule {}

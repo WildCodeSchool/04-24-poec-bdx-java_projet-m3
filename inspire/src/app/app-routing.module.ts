@@ -9,6 +9,13 @@ export const routes: Routes = [
         (m) => m.LoginModule
       ),
   },
+  {
+    path: 'register',
+    loadChildren: () =>
+      import('./modules/auth/modules/register/register.module').then(
+        (m) => m.RegisterModule
+      ),
+  },
 ];
 
 @NgModule({

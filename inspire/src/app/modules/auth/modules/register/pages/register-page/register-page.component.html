@@ -8,15 +8,19 @@
 
   <div class="right">
     <div class="right-title">
-      <h2>Connexion</h2>
+      <h2>Créer votre compte</h2>
+      <button (click)="sidebarVisible = true">sésame ouvre toi</button>
     </div>
-
-    <app-login-form class="inner-right"></app-login-form>
+    <app-register-form class="inner-right"></app-register-form>
 
     <div class="social-connexion">
       <app-social-connexion
-        title="Ou connectez-vous avec "
+        title="Ou créez votre compte avec "
       ></app-social-connexion>
     </div>
   </div>
 </div>
+
+<p-sidebar [(visible)]="sidebarVisible" position="right">
+  <app-form-course></app-form-course>
+</p-sidebar>
