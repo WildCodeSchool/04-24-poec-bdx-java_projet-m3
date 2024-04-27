@@ -6,9 +6,16 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 import { SharedComponentsModule } from '../../../shared-components/shared-components.module';
 import { RegisterFormComponent } from './components/feature/register-form/register-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RoleRegisterPageComponent } from './pages/role-register-page/role-register-page.component';
+import { CardRoleComponent } from './components/feature/card-role/card-role.component';
 
 @NgModule({
-  declarations: [RegisterPageComponent, RegisterFormComponent],
+  declarations: [
+    RegisterPageComponent,
+    RegisterFormComponent,
+    RoleRegisterPageComponent,
+    CardRoleComponent,
+  ],
   imports: [
     CommonModule,
     RegisterRoutingModule,
