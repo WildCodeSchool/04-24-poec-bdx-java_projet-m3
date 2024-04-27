@@ -21,3 +21,9 @@
   width: 45%;
   padding: 50px 40px;
 }
+
+@media screen and (max-width: 576px) {
+  .p-sidebar {
+    width: 100%;
+  }
+}

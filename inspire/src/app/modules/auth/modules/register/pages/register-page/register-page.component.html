@@ -1,5 +1,4 @@
 <div class="container-login-page">
-  <button (click)="sidebarVisible = true">sésame ouvre toi</button>
   <div class="left">
     <app-welcome
       title="Bienvenue !"
@@ -10,6 +9,7 @@
   <div class="right">
     <div class="right-title">
       <h2>Créer votre compte</h2>
+      <button (click)="sidebarVisible = true">sésame ouvre toi</button>
     </div>
     <app-register-form class="inner-right"></app-register-form>
 
@@ -17,7 +17,6 @@
       <app-social-connexion
         title="Ou créez votre compte avec "
       ></app-social-connexion>
-      <button (click)="sidebarVisible = true" icon="pi pi-arrow-right"></button>
     </div>
   </div>
 </div>
