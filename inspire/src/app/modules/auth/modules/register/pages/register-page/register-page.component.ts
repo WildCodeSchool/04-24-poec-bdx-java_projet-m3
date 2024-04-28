@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-register-page',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class RegisterPageComponent {
   sidebarVisible = false;
+  modalVisible = false;
 }
