@@ -12,6 +12,9 @@ import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
 import { CardSkillComponent } from './card-skill/card-skill.component';
 import { ListSkillsComponent } from './list-skills/list-skills.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { NavbarButtonComponent } from './navbar-button/navbar-button.component';
+import { DashboardLinksComponent } from './dashboard-links/dashboard-links.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { ListSkillsComponent } from './list-skills/list-skills.component';
     ChipComponent,
     CardSkillComponent,
     ListSkillsComponent,
+    SideNavComponent,
+    NavbarButtonComponent,
+    DashboardLinksComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, ButtonModule, DividerModule],
   exports: [
@@ -36,6 +42,7 @@ import { ListSkillsComponent } from './list-skills/list-skills.component';
     ChipComponent,
     CardSkillComponent,
     ListSkillsComponent,
+    SideNavComponent,
   ],
 })
 export class SharedComponentsModule {}
