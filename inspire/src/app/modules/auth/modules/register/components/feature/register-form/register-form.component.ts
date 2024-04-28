@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { checkEqualityValidator } from '../../../validator-password/equality-passwords-validator';
+import { passwordStrengthValidator } from '../../../validator-password/password-strength-validator';
 
 @Component({
   selector: 'app-register-form',
@@ -7,20 +9,22 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrl: './register-form.component.scss',
 })
 export class RegisterFormComponent {
-  registerForm = this.fb.group({
-    lastName: ['', [Validators.required]],
-    firstName: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]],
-    checkPassword: ['', [Validators.required]],
-  });
+  registerForm = this.fb.group(
+    {
+      lastName: ['', [Validators.required]],
+      firstName: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, passwordStrengthValidator]],
+      checkPassword: ['', [Validators.required]],
+      checkboxCgv: [false, [Validators.requiredTrue]],
+    },
+    {
+      validator: checkEqualityValidator('password', 'checkPassword'),
+    }
+  );
 
   onSubmit() {
-    if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
-    } else {
-      console.log('Formulaire invalide');
-    }
+    console.log(this.registerForm);
   }
 
   constructor(private fb: FormBuilder) {}

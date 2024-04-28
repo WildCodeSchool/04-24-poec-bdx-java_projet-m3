@@ -16,10 +16,12 @@
       <app-card-role
         title="Étudiant"
         subtitle="Je veux être accompagné par un mentor"
+        [link]="'/register/user'"
       ></app-card-role>
       <app-card-role
         title="Mentor"
         subtitle="Je veux accompagner un étudiant"
+        [link]="'/register/user'"
       ></app-card-role>
       <app-card-role
         title="Entreprise"
@@ -28,7 +30,10 @@
     </div>
 
     <div class="account">
-      <h4>Vous avez déjà un compte ? <span>Connexion</span></h4>
+      <h4>
+        Vous avez déjà un compte ?
+        <span><a [routerLink]="['/login']">Connexion</a></span>
+      </h4>
     </div>
   </div>
 </div>

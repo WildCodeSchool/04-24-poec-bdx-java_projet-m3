@@ -9,7 +9,7 @@ const routes: Routes = [
     component: RoleRegisterPageComponent,
   },
   {
-    path: 'student',
+    path: 'user',
     component: RegisterPageComponent,
   },
 ];
