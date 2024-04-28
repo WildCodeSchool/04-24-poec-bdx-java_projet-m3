@@ -3,7 +3,13 @@
     <h2>Bonjour {{ user.firstname | titlecase }}</h2>
     <p>Votre espace mentor de la Wild Code School</p>
   </div>
-  <div class="container-side-nav">
-    <app-dashboard-links></app-dashboard-links>
+  <div class="container-main">
+    <div class="container-side-nav">
+      <app-dashboard-links></app-dashboard-links>
+    </div>
+    <div class="container-outlet">
+      <app-list-generic></app-list-generic>
+      <app-list-generic></app-list-generic>
+    </div>
   </div>
 </div>

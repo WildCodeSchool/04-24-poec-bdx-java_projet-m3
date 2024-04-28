@@ -39,3 +39,10 @@
     }
   }
 }
+.container-main {
+  display: flex;
+  .container-outlet {
+    padding: 20px 10px;
+    width: 100%;
+  }
+}

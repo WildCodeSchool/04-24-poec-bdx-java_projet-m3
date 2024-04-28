@@ -17,6 +17,7 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { NavbarButtonComponent } from './navbar-button/navbar-button.component';
 import { DashboardLinksComponent } from './dashboard-links/dashboard-links.component';
 import { ListGenericComponent } from './list-generic/list-generic.component';
+import { RowReservationComponent } from './row-reservation/row-reservation.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { ListGenericComponent } from './list-generic/list-generic.component';
     NavbarButtonComponent,
     DashboardLinksComponent,
     ListGenericComponent,
+    RowReservationComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +54,8 @@ import { ListGenericComponent } from './list-generic/list-generic.component';
     CardSkillComponent,
     ListSkillsComponent,
     SideNavComponent,
+    ListGenericComponent,
+    RowReservationComponent,
   ],
 })
 export class SharedComponentsModule {}

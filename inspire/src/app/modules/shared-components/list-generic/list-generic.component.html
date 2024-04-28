@@ -1,34 +1,17 @@
-<div class="card">
-  <p-treeTable
-    [value]="files"
-    [columns]="cols"
-    [paginator]="true"
-    [rows]="10"
-    [scrollable]="true"
-    [tableStyle]="{ 'min-width': '50rem' }"
-  >
-    <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th *ngFor="let col of columns">
-          {{ col.header }}
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template
-      pTemplate="body"
-      let-rowNode
-      let-rowData="rowData"
-      let-columns="columns"
-    >
-      <tr [ttRow]="rowNode">
-        <td *ngFor="let col of columns; let i = index">
-          <p-treeTableToggler
-            [rowNode]="rowNode"
-            *ngIf="i === 0"
-          ></p-treeTableToggler>
-          {{ rowData[col.field] }}
-        </td>
-      </tr>
-    </ng-template>
-  </p-treeTable>
+<div class="list-generic">
+  <h3>Mes réservations à venir</h3>
+  <div class="list-header">
+    <div class="name">MENTOR</div>
+    <div class="promotion">PROMOTION</div>
+    <div class="sujet">SUJET</div>
+    <div class="date">DATE</div>
+    <div class="creneau">CRÉNEAU</div>
+    <div class="action">ACTION</div>
+  </div>
+  @for(item of list; track $index){
+
+  <app-row-reservation
+    [bgColor]="$index % 2 === 0 ? 'transparent' : 'grey'"
+  ></app-row-reservation>
+  }
 </div>
