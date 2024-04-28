@@ -1,7 +1,7 @@
 <form
   class="form-inscription"
   [formGroup]="registerForm"
-  (ngSubmit)="registerForm.valid && onSubmit()"
+  (ngSubmit)="onSubmit()"
   #formRegister="ngForm"
 >
   <div class="infos">
@@ -58,14 +58,17 @@
     />
     <div
       class="error"
-      *ngIf="formRegister.submitted && registerForm.controls['email'].errors"
+      *ngIf="
+    formRegister.submitted && registerForm.get('email')?.errors?.['required']
+     "
     >
-      <div [hidden]="!registerForm.controls['email'].errors['required']">
-        L'email est requis
-      </div>
-      <div [hidden]="!registerForm.controls['email'].invalid">
-        L'email est invalide
-      </div>
+      L'email est requis
+    </div>
+    <div
+      class="error"
+      *ngIf="formRegister.submitted && registerForm.get('email')?.invalid"
+    >
+      L'email est invalide
     </div>
   </div>
 
@@ -84,6 +87,12 @@
     >
       Mot de passe requis
     </div>
+    <div
+      class="error"
+      *ngIf="formRegister.submitted && registerForm.get('password')?.errors?.['strongPassword']"
+    >
+      Le mot de passe doit contenir au moins une majuscule
+    </div>
   </div>
   <div class="container-input">
     <label for="checkPassword">Confirmation du mot de passe *</label>
@@ -98,14 +107,29 @@
       class="error"
       *ngIf="formRegister.submitted && registerForm.get('checkPassword')?.errors?.['required']"
     >
-      Le mot de passe doit être identique
+      Le mot de passe est requis
+    </div>
+
+    <div
+      class="error"
+      *ngIf="formRegister.submitted && registerForm.errors?.['notEqual']"
+    >
+      Les mots de passe doivent être identiques
     </div>
   </div>
   <div class="checkbox-cgv">
-    <input type="checkbox" name="checkbox-cgv" id="checkbox-cgv" />
+    <input type="checkbox" formControlName="checkboxCgv" id="checkbox-cgv" />
     <label for="checkbox-cgv"
       >J'accepte les conditions générales d'utilisation</label
     >
+  </div>
+  <div
+    class="error"
+    *ngIf="
+   formRegister.submitted && registerForm.get('checkboxCgv')?.errors?.['required']
+    "
+  >
+    Vous devez accepter les conditions générales d'utilisation.
   </div>
 
   <div class="btn-connexion">
