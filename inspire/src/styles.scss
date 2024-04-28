@@ -27,3 +27,7 @@
     width: 100%;
   }
 }
+a {
+  color: inherit; /* Utilisez la couleur héritée du parent */
+  text-decoration: none; /* Supprimez la soulignement du lien si nécessaire */
+}
