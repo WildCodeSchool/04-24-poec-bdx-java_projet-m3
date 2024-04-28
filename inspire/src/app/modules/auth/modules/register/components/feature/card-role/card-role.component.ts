@@ -10,4 +10,6 @@ export class CardRoleComponent {
   title!: string;
   @Input()
   subtitle!: string;
+  @Input()
+  link!: string;
 }
