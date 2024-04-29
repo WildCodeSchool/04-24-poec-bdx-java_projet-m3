@@ -7,10 +7,17 @@ import { AppComponent } from './app.component';
 
 import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MentorModule } from './modules/mentor/mentor.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, ButtonModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ButtonModule,
+    ReactiveFormsModule,
+    MentorModule,
+  ],
   providers: [provideAnimations()],
   bootstrap: [AppComponent],
 })
