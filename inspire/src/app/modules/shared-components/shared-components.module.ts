@@ -13,7 +13,7 @@ import { DividerModule } from 'primeng/divider';
 import { CardSkillComponent } from './card-skill/card-skill.component';
 import { ListSkillsComponent } from './list-skills/list-skills.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
-import { CardMentorComponent } from './card-mentor/card-mentor.component';
+import { ListMentorsComponent } from '../students/pages/list-mentors/list-mentors.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +27,6 @@ import { CardMentorComponent } from './card-mentor/card-mentor.component';
     CardSkillComponent,
     ListSkillsComponent,
     SideNavComponent,
-    CardMentorComponent
   ],
   imports: [CommonModule, ReactiveFormsModule, ButtonModule, DividerModule],
   exports: [
@@ -40,6 +39,7 @@ import { CardMentorComponent } from './card-mentor/card-mentor.component';
     ChipComponent,
     CardSkillComponent,
     ListSkillsComponent,
+    ChipComponent,
   ],
 })
 export class SharedComponentsModule {}
