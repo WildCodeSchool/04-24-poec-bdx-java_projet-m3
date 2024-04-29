@@ -1,0 +1,20 @@
+<div class="row-reservation" [ngClass]="bgColor">
+  <div class="avatar-name">
+    <img
+      [src]="'https://placehold.jp/35x35.png'"
+      alt="avatar"
+      width="35"
+      height="35"
+    />
+    <p>{{ reservation.student.firstname }}</p>
+  </div>
+  <div class="promotion">
+    {{ reservation.promotion }}
+  </div>
+  <div class="sujet">{{ reservation.subject }}</div>
+  <div class="date">{{ reservation.date | date }}</div>
+  <div class="creneau">{{ reservation.slot }}</div>
+  <div class="action">
+    <button>Annuler</button>
+  </div>
+</div>
