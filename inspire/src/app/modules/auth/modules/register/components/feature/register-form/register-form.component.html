@@ -1,5 +1,5 @@
 <form
-  class="form-inscription"
+  class="formulaire"
   [formGroup]="registerForm"
   (ngSubmit)="onSubmit()"
   #formRegister="ngForm"
@@ -13,6 +13,7 @@
         name="lastName"
         formControlName="lastName"
         placeholder="Votre nom"
+        autocomplete="on"
       />
       <div
         class="error"
@@ -33,6 +34,7 @@
         name="firstName"
         formControlName="firstName"
         placeholder="Votre prénom"
+        autocomplete="on"
       />
       <div
         class="error"
@@ -55,6 +57,7 @@
       name="email"
       formControlName="email"
       placeholder="Votre email"
+      autocomplete="on"
     />
     <div
       class="error"
