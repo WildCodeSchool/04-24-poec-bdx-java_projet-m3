@@ -10,10 +10,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ChipComponent } from './chip/chip.component';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
+import { TreeTableModule } from 'primeng/treetable';
 import { CardSkillComponent } from './card-skill/card-skill.component';
 import { ListSkillsComponent } from './list-skills/list-skills.component';
-import { SideNavComponent } from './side-nav/side-nav.component';
-import { ListMentorsComponent } from '../students/pages/list-mentors/list-mentors.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +25,14 @@ import { ListMentorsComponent } from '../students/pages/list-mentors/list-mentor
     ChipComponent,
     CardSkillComponent,
     ListSkillsComponent,
-    SideNavComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, ButtonModule, DividerModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    DividerModule,
+    TreeTableModule,
+  ],
   exports: [
     ButtonComponent,
     WelcomeComponent,

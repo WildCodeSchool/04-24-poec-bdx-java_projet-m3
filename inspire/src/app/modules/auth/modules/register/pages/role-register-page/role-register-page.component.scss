@@ -1,24 +1,4 @@
-.container-login-page {
-  display: flex;
-  background-color: #fef7f1;
-  min-height: 100vh;
-}
-
-.left {
-  width: 35%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0px 50px;
-}
-
-.right {
-  background-color: white;
-  width: 65%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.right-content {
   padding: 0 100px;
   border-top-left-radius: 40px;
   border-bottom-left-radius: 40px;
@@ -34,14 +14,6 @@
   margin-top: 30px;
 }
 
-.inner-right {
-  width: 100%;
-}
-.right-title {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
 .account h4 {
   margin-top: 20px;
   font-weight: 300;
@@ -52,28 +24,17 @@
   font-weight: 600;
 }
 
-.social-connexion {
-  width: 100%;
-  margin-top: 50px;
-}
-
 @media screen and (max-width: 576px) {
   .container-login-page {
     flex-direction: column;
   }
-  .left {
-    width: 100%;
-  }
 
-  .right {
+  .right-content {
     width: 100%;
     border-top-right-radius: 40px;
     padding: 50px 20px;
   }
-  .right-title {
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
+
   .right-title h3 {
     font-weight: 300;
     font-size: 18px;

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SideNavComponent } from './modules/shared-components/side-nav/side-nav.component';
-import { ListMentorsComponent } from './modules/students/pages/list-mentors/list-mentors.component';
+import { LayoutMentor } from './modules/mentor/pages/layout/layout-mentor-component';
 
 export const routes: Routes = [
   {
@@ -18,7 +17,6 @@ export const routes: Routes = [
         (m) => m.StudentsModule
       ),
   },
-  { path: 'layout', component: SideNavComponent},
 
   {
     path: 'register',
@@ -27,6 +25,7 @@ export const routes: Routes = [
         (m) => m.RegisterModule
       ),
   },
+  { path: 'layout', component: LayoutMentor },
 ];
 
 @NgModule({
