@@ -4,7 +4,7 @@
   min-height: 100vh;
 }
 
-.left {
+.left-content {
   width: 35%;
   display: flex;
   align-items: center;
@@ -12,7 +12,7 @@
   padding: 0px 50px;
 }
 
-.right {
+.right-content {
   background-color: white;
   width: 65%;
   display: flex;
@@ -40,11 +40,11 @@
   .container-login-page {
     flex-direction: column;
   }
-  .left {
+  .left-content {
     width: 100%;
   }
 
-  .right {
+  .right-content {
     width: 100%;
     border-top-right-radius: 40px;
     padding: 50px 20px;
