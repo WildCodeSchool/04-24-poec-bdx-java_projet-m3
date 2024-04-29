@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MentorModule } from './modules/mentor/mentor.module';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,7 @@ import { MentorModule } from './modules/mentor/mentor.module';
     ReactiveFormsModule,
     MentorModule,
   ],
-  providers: [provideAnimations()],
+  providers: [provideAnimations(), provideHttpClient()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
