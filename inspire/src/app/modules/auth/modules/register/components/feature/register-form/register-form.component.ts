@@ -28,12 +28,7 @@ export class RegisterFormComponent {
   private serviceUser = inject(UserService);
 
   onSubmit() {
-    const user: User = {
-      email: this.registerForm.value.email,
-      password: this.registerForm.value.password,
-      role: 'student',
-    };
-    this.serviceUser.createUser(user).subscribe();
+    this.serviceUser.createStudent(this.registerForm.value).subscribe();
   }
 
   constructor(private fb: FormBuilder) {}

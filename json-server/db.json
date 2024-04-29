@@ -41,6 +41,24 @@
       "email": "toinudu33@gmail.fr",
       "password": "A1234",
       "role": "student"
+    },
+    {
+      "id": "d061",
+      "email": "de@gmail.com",
+      "password": "A",
+      "role": "student"
+    },
+    {
+      "id": "3080",
+      "email": "de@gmail.com",
+      "password": "AA",
+      "role": "student"
+    },
+    {
+      "id": "39b4",
+      "email": "p.lemoine@outlook.com",
+      "password": "A1234",
+      "role": "student"
     }
   ],
   "student": [
@@ -50,6 +68,16 @@
       "lastname": "Delaire",
       "descrition": "Super Mentor !!! ",
       "user_id": "b362"
+    },
+    {
+      "id": "d243",
+      "email": "p.lemoine@outlook.com",
+      "password": "A1234",
+      "role": "student",
+      "firstname": "Pierre",
+      "lastname": "Lemoine",
+      "description": "",
+      "userId": "39b4"
     }
   ]
 }
