@@ -12,6 +12,10 @@ import { ListGenericComponent } from './components/features/list-generic/list-ge
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CardInfosComponent } from './components/ui/card-infos/card-infos.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
+import { CardSkillComponent } from './components/ui/card-skill-mentor/card-skill-mentor.component';
+import { ListSkillsMentorComponent } from './components/ui/list-skills-mentor/list-skills-mentor.component';
+import { DividerModule } from 'primeng/divider';
+import { ProfilMentorComponent } from './pages/profil-mentor/profil-mentor.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,9 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
     DashboardLinksComponent,
     DashboardComponent,
     CardInfosComponent,
+    CardSkillComponent,
+    ListSkillsMentorComponent,
+    ProfilMentorComponent,
   ],
   imports: [
     CommonModule,
@@ -29,6 +36,7 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
     FormsModule,
     SharedModule,
     SharedComponentsModule,
+    DividerModule,
   ],
   exports: [
     RowReservationComponent,
