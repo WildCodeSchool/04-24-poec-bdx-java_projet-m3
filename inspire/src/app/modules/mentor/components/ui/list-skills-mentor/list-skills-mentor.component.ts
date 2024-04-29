@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 interface Skill {
   title: string;
@@ -13,6 +13,7 @@ interface Skill {
   styleUrl: './list-skills-mentor.component.scss',
 })
 export class ListSkillsMentorComponent {
+  @Input() title: string = '';
   skills: Skill[] = [
     {
       title: 'Formation 1',

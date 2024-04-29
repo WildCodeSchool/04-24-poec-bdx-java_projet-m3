@@ -44,5 +44,7 @@
   .container-outlet {
     padding: 35px 35px;
     width: 100%;
+    height: calc(100vh - 135px);
+    overflow-y: auto;
   }
 }

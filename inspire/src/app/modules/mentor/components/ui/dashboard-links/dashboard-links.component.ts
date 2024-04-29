@@ -15,13 +15,13 @@ export class DashboardLinksComponent {
     {
       title: 'dashboard',
       logoUrl: 'assets/svgs/dash.svg',
-      path: '',
+      path: 'mentor/dashboard',
       active: true,
     },
     {
       title: 'mon profil',
       logoUrl: 'assets/svgs/calendar.svg',
-      path: '',
+      path: 'mentor/profil',
       active: false,
     },
     {

@@ -1,1 +1,3 @@
-<button pButton pRipple label="title" class="chip">{{title}}</button>
+<button pButton pRipple class="chip" [ngClass]="dark ? 'dark' : 'light'">
+  {{ title }}
+</button>

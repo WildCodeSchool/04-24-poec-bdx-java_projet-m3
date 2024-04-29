@@ -1,2 +1,12 @@
-<app-card-infos></app-card-infos>
-<app-list-skills-mentor></app-list-skills-mentor>
+<div class="profil-mentor">
+  <div class="main">
+    <app-card-infos></app-card-infos>
+    <app-list-skills-mentor
+      [title]="'Mes compétences'"
+    ></app-list-skills-mentor>
+  </div>
+  <div class="side-left">
+    <app-list-skills-mentor [title]="'Mes formations'"></app-list-skills-mentor>
+    <app-list-languages [title]="'Langues'"></app-list-languages>
+  </div>
+</div>
