@@ -11,6 +11,14 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'mentors',
+    loadChildren: () =>
+      import('./modules/students/students.module').then(
+        (m) => m.StudentsModule
+      ),
+  },
+
+  {
     path: 'register',
     loadChildren: () =>
       import('./modules/auth/modules/register/register.module').then(

@@ -13,7 +13,6 @@ import { DividerModule } from 'primeng/divider';
 import { TreeTableModule } from 'primeng/treetable';
 import { CardSkillComponent } from './card-skill/card-skill.component';
 import { ListSkillsComponent } from './list-skills/list-skills.component';
-import { ListGenericComponent } from '../mentor/components/features/list-generic/list-generic.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +43,7 @@ import { ListGenericComponent } from '../mentor/components/features/list-generic
     ChipComponent,
     CardSkillComponent,
     ListSkillsComponent,
+    ChipComponent,
   ],
 })
 export class SharedComponentsModule {}
