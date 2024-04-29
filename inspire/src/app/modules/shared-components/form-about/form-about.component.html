@@ -1,0 +1,19 @@
+<form class="form-experience" (ngSubmit)="onSubmit()" [formGroup]="aboutForm">
+  <h1>Ajouter une petite description</h1>
+
+  <div class="container-input">
+    <label for="description">En savoir un peu plus sur vous</label>
+    <textarea
+      rows="5"
+      id="description"
+      name="description"
+      formControlName="description"
+      placeholder="Quelques lignes sur vous"
+    ></textarea>
+  </div>
+
+  <div class="btn-connexion">
+    <app-button variant="black" text="Annuler"></app-button>
+    <app-button variant="pink" text="Enregistrer"></app-button>
+  </div>
+</form>

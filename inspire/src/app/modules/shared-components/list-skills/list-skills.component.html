@@ -1,0 +1,7 @@
+<div class="list-skills">
+  @for( skill of skills; track $index ){
+  <app-card-skill [skill]="skill"></app-card-skill>
+  @if($index !== skills.length -1){
+  <p-divider></p-divider>
+  } }
+</div>

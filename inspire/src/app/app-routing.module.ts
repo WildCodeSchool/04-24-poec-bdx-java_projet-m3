@@ -10,7 +10,14 @@ export const routes: Routes = [
         (m) => m.LoginModule
       ),
   },
-  { path: 'layout', component: SideNavComponent}
+  { path: 'layout', component: SideNavComponent},
+  {
+    path: 'register',
+    loadChildren: () =>
+      import('./modules/auth/modules/register/register.module').then(
+        (m) => m.RegisterModule
+      ),
+  },
 ];
 
 @NgModule({

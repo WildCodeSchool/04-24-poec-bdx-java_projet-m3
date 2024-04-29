@@ -13,20 +13,15 @@
       formControlName="email"
       placeholder="Votre email"
     />
-
     <div
-      *ngIf="
-        formLogin.submitted &&
-        loginForm.controls['email'].errors &&
-        !loginForm.controls['email'].pristine
-      "
-      class="error-msg"
+      class="error"
+      *ngIf="formLogin.submitted && loginForm.controls['email'].errors"
     >
       <div [hidden]="!loginForm.controls['email'].errors['required']">
-        email is required.
+        L'email est requis
       </div>
       <div [hidden]="!loginForm.controls['email'].invalid">
-        email is invalid.
+        L'email est invalide
       </div>
     </div>
   </div>
@@ -40,6 +35,7 @@
       placeholder="Votre mot de passe"
     />
     <div
+      class="error"
       *ngIf="formLogin.submitted && loginForm.get('password')?.errors?.['required']"
     >
       Mot de passe requis

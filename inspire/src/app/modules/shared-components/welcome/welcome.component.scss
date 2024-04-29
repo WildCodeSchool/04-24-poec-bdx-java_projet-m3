@@ -12,3 +12,19 @@
   font-family: "Poller";
   font-size: 60px;
 }
+
+@media screen and (max-width: 576px) {
+  .welcome-titles {
+    display: none;
+  }
+  .welcome-container {
+    height: 200px;
+  }
+
+  .welcome-container-img img {
+    width: 300px;
+  }
+  .welcome-container-img {
+    padding-left: 130px;
+  }
+}

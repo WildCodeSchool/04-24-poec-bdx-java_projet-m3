@@ -16,3 +16,18 @@
 .img-fluid {
   width: 100%;
 }
+
+.p-sidebar {
+  width: 45%;
+  padding: 50px 40px;
+}
+
+@media screen and (max-width: 576px) {
+  .p-sidebar {
+    width: 100%;
+  }
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
