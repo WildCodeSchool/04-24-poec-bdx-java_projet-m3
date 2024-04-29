@@ -7,6 +7,7 @@ import { Reservation } from '../../../../../shared/models/reservation';
   styleUrl: './row-reservation-student.component.scss',
 })
 export class RowReservationComponent {
+  @Input()
   reservation: Reservation = {
     student: {
       firstname: 'Marie',

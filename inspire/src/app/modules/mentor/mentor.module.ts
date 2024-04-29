@@ -9,6 +9,9 @@ import { LayoutMentor } from './pages/layout/layout-mentor-component';
 import { SharedModule } from 'primeng/api';
 import { NavbarButtonComponent } from './components/ui/navbar-button/navbar-button.component';
 import { ListGenericComponent } from './components/features/list-generic/list-generic.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { CardInfosComponent } from './components/ui/card-infos/card-infos.component';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 @NgModule({
   declarations: [
@@ -17,8 +20,16 @@ import { ListGenericComponent } from './components/features/list-generic/list-ge
     NavbarButtonComponent,
     ListGenericComponent,
     DashboardLinksComponent,
+    DashboardComponent,
+    CardInfosComponent,
   ],
-  imports: [CommonModule, MentorRoutingModule, FormsModule, SharedModule],
+  imports: [
+    CommonModule,
+    MentorRoutingModule,
+    FormsModule,
+    SharedModule,
+    SharedComponentsModule,
+  ],
   exports: [
     RowReservationComponent,
     DashboardLinksComponent,
