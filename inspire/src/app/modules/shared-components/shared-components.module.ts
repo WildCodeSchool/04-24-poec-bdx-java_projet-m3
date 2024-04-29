@@ -10,8 +10,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ChipComponent } from './chip/chip.component';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
+import { TreeTableModule } from 'primeng/treetable';
 import { CardSkillComponent } from './card-skill/card-skill.component';
 import { ListSkillsComponent } from './list-skills/list-skills.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { NavbarButtonComponent } from './navbar-button/navbar-button.component';
+import { DashboardLinksComponent } from './dashboard-links/dashboard-links.component';
+import { ListGenericComponent } from './list-generic/list-generic.component';
+import { RowReservationComponent } from './row-reservation/row-reservation.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +30,19 @@ import { ListSkillsComponent } from './list-skills/list-skills.component';
     ChipComponent,
     CardSkillComponent,
     ListSkillsComponent,
+    SideNavComponent,
+    NavbarButtonComponent,
+    DashboardLinksComponent,
+    ListGenericComponent,
+    RowReservationComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, ButtonModule, DividerModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    DividerModule,
+    TreeTableModule,
+  ],
   exports: [
     ButtonComponent,
     WelcomeComponent,
@@ -36,6 +53,9 @@ import { ListSkillsComponent } from './list-skills/list-skills.component';
     ChipComponent,
     CardSkillComponent,
     ListSkillsComponent,
+    SideNavComponent,
+    ListGenericComponent,
+    RowReservationComponent,
   ],
 })
 export class SharedComponentsModule {}
