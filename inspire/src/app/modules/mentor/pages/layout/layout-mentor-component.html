@@ -5,11 +5,16 @@
   </div>
   <div class="container-main">
     <div class="container-side-nav">
-      <app-dashboard-links></app-dashboard-links>
+      <button
+        (click)="toggleVisibility()"
+        [ngClass]="!showNavbar ? 'light' : 'dark'"
+      >
+        <img [src]="'assets/svgs/burger.svg'" alt="" width="40" height="40" />
+      </button>
+      <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
     </div>
     <div class="container-outlet">
-      <app-list-generic></app-list-generic>
-      <app-list-generic></app-list-generic>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>
