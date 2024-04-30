@@ -7,6 +7,8 @@ import { Mentor } from '../../../../shared/models/user';
   styleUrl: './layout-mentor-component.scss',
 })
 export class LayoutMentor {
+  showNavbar = true;
+
   @Input()
   user: Mentor = {
     firstname: 'mahdi',
@@ -16,4 +18,9 @@ export class LayoutMentor {
     description: '',
     role: 'mentor',
   };
+
+  toggleVisibility() {
+    this.showNavbar = !this.showNavbar;
+    console.log(this.showNavbar);
+  }
 }

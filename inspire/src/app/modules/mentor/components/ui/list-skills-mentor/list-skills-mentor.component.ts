@@ -16,19 +16,19 @@ export class ListSkillsMentorComponent {
   @Input() title: string = '';
   skills: Skill[] = [
     {
-      title: 'Formation 1',
+      title: 'skill 1',
       date: '2024',
       place: 'Wild code School',
       url: 'assets/svgs/dash.svg',
     },
     {
-      title: 'Formation 1',
+      title: 'skill 2',
       date: '2024',
       place: 'Wild code School',
       url: 'assets/svgs/dash.svg',
     },
     {
-      title: 'Formation 1',
+      title: 'skill 3',
       date: '2024',
       place: 'Wild code School',
       url: 'assets/svgs/dash.svg',

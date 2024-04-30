@@ -17,6 +17,8 @@ import { ListSkillsMentorComponent } from './components/ui/list-skills-mentor/li
 import { DividerModule } from 'primeng/divider';
 import { ProfilMentorComponent } from './pages/profil-mentor/profil-mentor.component';
 import { ListLanguagesComponent } from './components/ui/list-languages/list-languages.component';
+import { CardFormationComponent } from './components/ui/card-formation/card-formation.component';
+import { ListFormationsComponent } from './components/ui/list-formations/list-formations.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ListLanguagesComponent } from './components/ui/list-languages/list-lang
     ListSkillsMentorComponent,
     ProfilMentorComponent,
     ListLanguagesComponent,
+    CardFormationComponent,
+    ListFormationsComponent,
   ],
   imports: [
     CommonModule,

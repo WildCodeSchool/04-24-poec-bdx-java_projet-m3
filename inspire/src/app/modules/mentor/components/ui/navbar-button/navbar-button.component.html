@@ -9,5 +9,5 @@
   (click)="changeState()"
 >
   <img [src]="logoUrl" alt="logo link" width="27" height="27" />
-  {{ text }}
+  <p [ngStyle]="{ display: !showText ? 'none' : 'inherit' }">{{ text }}</p>
 </button>

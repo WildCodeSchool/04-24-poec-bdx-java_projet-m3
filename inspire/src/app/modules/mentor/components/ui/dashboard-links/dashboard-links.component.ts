@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 type DashboardLink = {
   title: string;
   logoUrl: string;
@@ -11,6 +11,7 @@ type DashboardLink = {
   styleUrl: './dashboard-links.component.scss',
 })
 export class DashboardLinksComponent {
+  @Input() showText = true;
   listLink: DashboardLink[] = [
     {
       title: 'dashboard',

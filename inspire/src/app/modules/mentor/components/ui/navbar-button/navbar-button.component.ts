@@ -16,6 +16,7 @@ export class NavbarButtonComponent {
   @Input() active: boolean = false;
   @Input()
   variant!: 'light' | 'dark' | 'lightActive' | 'darkActive';
+  @Input() showText = false;
 
   @Output() stateEmitter = new EventEmitter<boolean>();
   router = inject(Router);
