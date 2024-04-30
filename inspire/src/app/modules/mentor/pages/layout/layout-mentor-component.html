@@ -6,10 +6,11 @@
   <div class="container-main">
     <div class="container-side-nav">
       <button
+        class="burger"
         (click)="toggleVisibility()"
         [ngClass]="!showNavbar ? 'light' : 'dark'"
       >
-        <img [src]="'assets/svgs/burger.svg'" alt="" width="40" height="40" />
+        <img [src]="'assets/svgs/burger.svg'" alt="" width="25" height="25" />
       </button>
       <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
     </div>
