@@ -13,6 +13,7 @@ import { DividerModule } from 'primeng/divider';
 import { TreeTableModule } from 'primeng/treetable';
 import { CardSkillComponent } from './card-skill/card-skill.component';
 import { ListSkillsComponent } from './list-skills/list-skills.component';
+import { SideNavComponent } from './side-nav/side-nav.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ListSkillsComponent } from './list-skills/list-skills.component';
     ChipComponent,
     CardSkillComponent,
     ListSkillsComponent,
+    SideNavComponent
   ],
   imports: [
     CommonModule,
@@ -44,6 +46,7 @@ import { ListSkillsComponent } from './list-skills/list-skills.component';
     CardSkillComponent,
     ListSkillsComponent,
     ChipComponent,
+    SideNavComponent
   ],
 })
 export class SharedComponentsModule {}
