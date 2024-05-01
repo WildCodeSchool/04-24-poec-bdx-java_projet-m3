@@ -10,9 +10,9 @@
   </div>
   @for(item of list; track $index){
 
-  <app-row-reservation
+  <app-reservation-with-swipe
     [reservation]="item"
     [bgColor]="$index % 2 === 0 ? 'transparent' : 'grey'"
-  ></app-row-reservation>
+  ></app-reservation-with-swipe>
   }
 </div>

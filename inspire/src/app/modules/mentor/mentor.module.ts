@@ -20,6 +20,7 @@ import { CardFormationComponent } from './components/ui/card-formation/card-form
 import { ListFormationsComponent } from './components/ui/list-formations/list-formations.component';
 import { ListReservationComponent } from './components/features/list-reservation/list-reservation.component';
 import { ListReservationHistoryComponent } from './components/features/list-reservation-history/list-reservation.component';
+import { ReservationWithSwipeComponent } from './components/ui/reservation-with-swipe/reservation-with-swipe.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ListReservationHistoryComponent } from './components/features/list-rese
     ListFormationsComponent,
     ListReservationComponent,
     ListReservationHistoryComponent,
+    ReservationWithSwipeComponent,
   ],
   imports: [
     CommonModule,
