@@ -15,7 +15,7 @@
     margin: 0 auto;
     border-radius: 15px;
     color: white;
-    padding-left: 30px;
+    padding: 0 30px;
 
     display: flex;
     flex-direction: column;
@@ -51,8 +51,25 @@
   }
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: $break-point-tablette-medium) {
   .container-side-nav {
     position: absolute;
+  }
+  .container-outlet {
+    margin-left: 20px;
+    overflow-y: auto;
+  }
+  .container-layout {
+    .header-container {
+      width: 70%;
+    }
+  }
+}
+
+@media screen and (max-width: $break-point-phone) {
+  .container-layout {
+    .header-container {
+      width: 90%;
+    }
   }
 }

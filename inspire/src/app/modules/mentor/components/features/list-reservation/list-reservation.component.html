@@ -1,0 +1,18 @@
+<div class="list-generic">
+  <h3>{{ title }}</h3>
+  <div class="list-header">
+    <div class="name">MENTOR</div>
+    <div class="promotion">PROMOTION</div>
+    <div class="sujet">SUJET</div>
+    <div class="date">DATE</div>
+    <div class="creneau">CRÉNEAU</div>
+    <div class="action">ACTION</div>
+  </div>
+  @for(item of list; track $index){
+
+  <app-row-reservation
+    [reservation]="item"
+    [bgColor]="$index % 2 === 0 ? 'transparent' : 'grey'"
+  ></app-row-reservation>
+  }
+</div>

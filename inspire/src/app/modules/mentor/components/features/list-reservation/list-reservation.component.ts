@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-list-generic',
-  templateUrl: './list-generic.component.html',
-  styleUrl: './list-generic.component.scss',
+  selector: 'app-list-reservation',
+  templateUrl: './list-reservation.component.html',
+  styleUrl: './list-reservation.component.scss',
 })
-export class ListGenericComponent {
+export class ListReservationComponent {
   list: any = [
     {
       student: {
