@@ -6,12 +6,14 @@ import { ListMentorsComponent } from './pages/list-mentors/list-mentors.componen
 import { CardMentorComponent } from './components/features/card-mentor/card-mentor.component';
 import { ChipComponent } from '../shared-components/chip/chip.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
+import { StudentLayoutComponent } from './pages/student-layout/student-layout.component';
 
 
 @NgModule({
   declarations: [
     ListMentorsComponent,
     CardMentorComponent,
+    StudentLayoutComponent,
   ],
   imports: [
     CommonModule,

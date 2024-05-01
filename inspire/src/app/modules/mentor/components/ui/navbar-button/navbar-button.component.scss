@@ -1,7 +1,7 @@
 @import "../../../../../../variables.scss";
 .light {
   background-color: white;
-  color: black;
+  color: #4F4E4E;
 }
 .lightActive {
   background-color: $primary-color;
@@ -18,7 +18,7 @@
 }
 .btn-general {
   width: 100%;
-  font-size: 18px;
+  font-size: 0.8em;
   font-weight: 600;
   padding: 15px 20px;
   border-radius: 6px;
