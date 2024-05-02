@@ -3,37 +3,37 @@
     {
       "id": "b362",
       "email": "marie.delaire@outlook.com",
-      "passeword": "1234",
+      "password": "1234",
       "role": "mentor"
     },
     {
       "id": "f4cf",
       "email": "chocholastico@gmail.com",
-      "passeword": "1234",
+      "password": "1234",
       "role": "mentor"
     },
     {
       "id": "8421",
       "email": "madix@gmail.com",
-      "passeword": "1234",
+      "password": "1234",
       "role": "mentor"
     },
     {
       "id": "f963",
       "email": "aurore@free.com",
-      "passeword": "1234",
+      "password": "1234",
       "role": "student"
     },
     {
       "id": "9e17",
       "email": "cassi@outlook.com",
-      "passeword": "1234",
+      "password": "1234",
       "role": "student"
     },
     {
       "id": "b51f",
       "email": "fred@gmail.com",
-      "passeword": "1234",
+      "password": "1234",
       "role": "student"
     },
     {

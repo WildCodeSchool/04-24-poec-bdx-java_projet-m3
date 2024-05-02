@@ -18,16 +18,14 @@ export class LoginFormComponent {
   onSubmit() {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
-
-    // Appelez la méthode de connexion du service userService en passant l'email et le mot de passe
-    this.userService.login(email, password).subscribe(
-      (response) => {
-        console.log('Connexion réussie', response);
-      },
-      (error) => {
-        console.error('Erreur de connexion', error);
-      }
-    );
+    this.userService.login(email, password).subscribe();
+    //   (response) => {
+    //     console.log('Connexion réussie', response);
+    //   },
+    //   (error) => {
+    //     console.error('Erreur de connexion', error);
+    //   }
+    // );
   }
   // if (this.loginForm.valid) {
   //   console.log(this.loginForm.value);

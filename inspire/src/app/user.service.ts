@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, map, switchMap, tap } from 'rxjs';
+import { Observable, first, map, switchMap, tap } from 'rxjs';
 import { Student, User } from './shared/models/user';
 
 @Injectable({
@@ -41,10 +41,19 @@ export class UserService {
 
   login(email: any, password: any): Observable<any> {
     return this.http
-      .get<any>(`${this.BASE_URL}/users?email=${email}&passeword=${password}`)
+      .get<any>(`${this.BASE_URL}/users?email=${email}&password=${password}`)
       .pipe(
-        map((user: User) => user.id),
-        tap((user) => console.log(user))
+        map((users) => {
+          if (users[0]) {
+            const user = users[0];
+            delete user.password;
+            console.log(user);
+            return true;
+          } else {
+            console.log('pas de user');
+            return false;
+          }
+        })
       );
   }
 }
