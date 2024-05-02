@@ -19,31 +19,5 @@ export class LoginFormComponent {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
     this.userService.login(email, password).subscribe();
-    //   (response) => {
-    //     console.log('Connexion réussie', response);
-    //   },
-    //   (error) => {
-    //     console.error('Erreur de connexion', error);
-    //   }
-    // );
   }
-  // if (this.loginForm.valid) {
-  //   console.log(this.loginForm.value);
-  // } else {
-
-  //   console.log('Formulaire invalide');
-  // }
-  // UserService : créer la méthode Login
-  // Requete en get : en passant email et mdp
-  // en retour j'ai mon user avec son id.
-  // J'extrait juste l'id
-  // Je le stock dans le local storage
-  // Le tout doit me faire un observable vrai ou faux si on s'est connexté
-
-  //et récupérer l'id du user
-
-  // Injecter le userservice.login avec les données récupérées de mon formulaire
-  // utiliser le service onSubmit
-  // stocer l'id du user dans le local stprage
-  //
 }
