@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListGenericComponent } from './list-generic.component';
+import { ListFormationsComponent } from './list-formations.component';
 
-describe('ListGenericComponent', () => {
-  let component: ListGenericComponent;
-  let fixture: ComponentFixture<ListGenericComponent>;
+describe('ListFormationsComponent', () => {
+  let component: ListFormationsComponent;
+  let fixture: ComponentFixture<ListFormationsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ListGenericComponent]
+      declarations: [ListFormationsComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ListGenericComponent);
+    fixture = TestBed.createComponent(ListFormationsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

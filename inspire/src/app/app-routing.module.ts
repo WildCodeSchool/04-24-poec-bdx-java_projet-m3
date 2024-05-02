@@ -17,6 +17,11 @@ export const routes: Routes = [
         (m) => m.StudentsModule
       ),
   },
+  {
+    path: 'mentor',
+    loadChildren: () =>
+      import('./modules/mentor/mentor.module').then((m) => m.MentorModule),
+  },
 
   {
     path: 'register',

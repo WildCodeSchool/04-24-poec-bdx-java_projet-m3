@@ -1,0 +1,43 @@
+@import "../../../../../variables.scss";
+
+.profil-mentor {
+  display: flex;
+
+  .main {
+    width: 70%;
+    padding-right: 35px;
+  }
+  .side-left {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: $break-point-phone) {
+  .profil-mentor {
+    flex-direction: column;
+    .main {
+      width: 100%;
+      padding: 0;
+      flex-direction: column;
+    }
+    .side-left {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: $break-point-tablette) {
+  .profil-mentor {
+    flex-direction: column;
+    gap: 20px;
+    .main {
+      width: 100%;
+      padding: 0;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .side-left {
+      width: 100%;
+    }
+  }
+}
