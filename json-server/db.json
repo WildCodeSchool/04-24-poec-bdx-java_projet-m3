@@ -1,5 +1,5 @@
 {
-  "user": [
+  "users": [
     {
       "id": "b362",
       "email": "marie.delaire@outlook.com",
@@ -85,13 +85,13 @@
       "role": "student"
     }
   ],
-  "student": [
+  "students": [
     {
       "id": "5e6e",
       "firstname": "Marie",
       "lastname": "Delaire",
       "descrition": "Super Mentor !!! ",
-      "user_id": "b362"
+      "userId": "b362"
     },
     {
       "id": "d243",
@@ -138,13 +138,13 @@
       "lastname": "test"
     }
   ],
-  "mentor": [
+  "mentors": [
     {
       "id": "45c7",
       "firstname": "Paul",
       "lastname": "Delaire",
       "descrition": "Super Mentor !!! ",
-      "user_id": "b362"
+      "userId": "b362"
     }
   ]
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, map, switchMap, tap } from 'rxjs';
 import { Student, User } from './shared/models/user';
 
 @Injectable({
@@ -37,5 +37,14 @@ export class UserService {
         return this.http.post<Student>(`${this.BASE_URL}/student`, student);
       })
     );
+  }
+
+  login(email: any, password: any): Observable<any> {
+    return this.http
+      .get<any>(`${this.BASE_URL}/users?email=${email}&passeword=${password}`)
+      .pipe(
+        map((user: User) => user.id),
+        tap((user) => console.log(user))
+      );
   }
 }
