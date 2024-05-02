@@ -15,69 +15,61 @@
     margin: 0 auto;
     border-radius: 15px;
     color: white;
-    padding-left: 30px;
+    padding: 0 30px;
 
     display: flex;
     flex-direction: column;
-  }
-
-  .container-side-nav {
-    position: relative;
-    background-color: white;
-    min-height: calc(100vh - 120px);
-    margin-top: 10px;
-    border-radius: 27px;
-    display: flex;
-    flex-direction: column;
-
-    button {
-      margin: 20px;
-      display: flex;
-      align-items: start;
-      justify-content: start;
-      border: none;
-      border-radius: 2px;
-    }
+    justify-content: center;
   }
 }
+
 .container-main {
   position: relative;
   display: flex;
+  .container-side-nav {
+    margin-top: 20px;
+    height: calc(100vh - 140px);
+    background-color: white;
+    border-radius: 10px;
+    transition: 0.2s all ease;
+
+    button.burger {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 5px;
+      background-color: transparent;
+      border: none;
+    }
+  }
   .container-outlet {
-    padding: 35px 35px;
-    width: 100%;
-    height: calc(100vh - 135px);
+    flex-grow: 1;
+    padding: 20px;
+    transition: 0.2s all ease;
+    height: calc(100vh - 120px);
     overflow-y: auto;
   }
 }
 
+@media screen and (max-width: $break-point-tablette-medium) {
+  .container-side-nav {
+    position: absolute;
+  }
+  .container-outlet {
+    margin-left: 20px;
+    overflow-y: auto;
+  }
+  .container-layout {
+    .header-container {
+      width: 70%;
+    }
+  }
+}
+
 @media screen and (max-width: $break-point-phone) {
-  .container-main {
-    .container-side-nav {
-      position: absolute;
-      // left: -40px;
-      margin: 0;
-      padding: 0;
+  .container-layout {
+    .header-container {
+      width: 90%;
     }
   }
-}
-
-@media screen and (max-width: $break-point-tablette) {
-  .container-main {
-    .container-side-nav {
-      position: absolute;
-      // left: -40px;
-      margin: 0;
-      padding: 0;
-    }
-  }
-}
-
-.light {
-  background-color: $primary-color;
-  color: $anti-primary-color;
-}
-.darkt {
-  background-color: $anti-primary-color;
-  color: $primary-color;
 }

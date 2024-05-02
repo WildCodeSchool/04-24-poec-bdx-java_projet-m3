@@ -17,10 +17,9 @@
   color: azure;
 }
 .btn-general {
-  width: 100%;
   font-size: 18px;
   font-weight: 600;
-  padding: 15px 0px;
+  padding: 10px 0px;
   border-radius: 6px;
   border: none;
   transition: transform 0.4s ease;
@@ -29,24 +28,31 @@
   transform: scale(0.95);
 }
 button {
-  margin: 10px 0;
-
+  margin: 5px;
   display: flex;
-  gap: 5px;
   align-items: center;
+  img,
+  p {
+    margin: 0 4px;
+  }
 }
 
 @media screen and (max-width: $break-point-tablette) {
   .btn-general {
     font-size: 14px;
-    margin: 0;
-    padding: 10px 20px;
+    // margin: 0;
+    // padding: 0px 5px;
     display: flex;
     justify-content: start;
     align-items: center;
     gap: 5px;
     img {
       margin: 0;
+    }
+  }
+  .container-layout {
+    .container-outlet {
+      margin-left: 60px;
     }
   }
 }
