@@ -59,6 +59,30 @@
       "email": "p.lemoine@outlook.com",
       "password": "A1234",
       "role": "student"
+    },
+    {
+      "id": "a4e4",
+      "email": "nassdu33@gmail.com",
+      "password": "A",
+      "role": "student"
+    },
+    {
+      "id": "",
+      "email": "marie@gmail.com",
+      "password": "A",
+      "role": "student"
+    },
+    {
+      "id": "",
+      "email": "marie@gmail.com",
+      "password": "A",
+      "role": "student"
+    },
+    {
+      "id": "",
+      "email": "test@gmail.com",
+      "password": "A",
+      "role": "student"
     }
   ],
   "student": [
@@ -78,6 +102,49 @@
       "lastname": "Lemoine",
       "description": "",
       "userId": "39b4"
+    },
+    {
+      "id": "8207",
+      "email": "nassdu33@gmail.com",
+      "password": "A",
+      "role": "student",
+      "firstname": "Nassime",
+      "lastname": "Harmach",
+      "description": "",
+      "userId": "a4e4"
+    },
+    {
+      "id": "",
+      "email": "marie@gmail.com",
+      "password": "A",
+      "role": "student",
+      "firstname": "Pierre",
+      "lastname": "Dupont"
+    },
+    {
+      "id": "",
+      "email": "marie@gmail.com",
+      "password": "A",
+      "role": "student",
+      "firstname": "Pierre",
+      "lastname": "Dupont"
+    },
+    {
+      "id": "",
+      "email": "test@gmail.com",
+      "password": "A",
+      "role": "student",
+      "firstname": "test",
+      "lastname": "test"
+    }
+  ],
+  "mentor": [
+    {
+      "id": "45c7",
+      "firstname": "Paul",
+      "lastname": "Delaire",
+      "descrition": "Super Mentor !!! ",
+      "user_id": "b362"
     }
   ]
 }
