@@ -16,8 +16,7 @@ export class LoginFormComponent {
   constructor(private fb: FormBuilder, private userService: UserService) {}
 
   onSubmit() {
-    const email = this.loginForm.value.email;
-    const password = this.loginForm.value.password;
+    const { email, password } = this.loginForm.value;
     this.userService.login(email, password).subscribe();
   }
 }
