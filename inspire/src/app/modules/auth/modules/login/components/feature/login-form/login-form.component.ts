@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { UserService } from '../../../../../../../user.service';
+import { User } from '../../../../../../../shared/models/user';
 
 @Component({
   selector: 'app-login-form',
@@ -11,14 +13,10 @@ export class LoginFormComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
+  constructor(private fb: FormBuilder, private userService: UserService) {}
 
   onSubmit() {
-    if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-    } else {
-      console.log('Formulaire invalide');
-    }
+    const { email, password } = this.loginForm.value;
+    this.userService.login(email, password).subscribe();
   }
-
-  constructor(private fb: FormBuilder) {}
 }
