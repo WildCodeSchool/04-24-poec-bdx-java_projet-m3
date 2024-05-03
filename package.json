@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "dev": "concurrently -c yellow,magenta \"npm:dev-*\"",
+    "dev-json": "npx json-server json-server/db.json",
+    "dev-angular": "cd ./inspire && ng s -o"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
