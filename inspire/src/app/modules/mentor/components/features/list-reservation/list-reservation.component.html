@@ -1,5 +1,5 @@
 <div class="list-generic">
-  <h3>Mes réservations à venir</h3>
+  <h3>{{ title }}</h3>
   <div class="list-header">
     <div class="name">MENTOR</div>
     <div class="promotion">PROMOTION</div>
@@ -11,6 +11,7 @@
   @for(item of list; track $index){
 
   <app-row-reservation
+    [reservation]="item"
     [bgColor]="$index % 2 === 0 ? 'transparent' : 'grey'"
   ></app-row-reservation>
   }

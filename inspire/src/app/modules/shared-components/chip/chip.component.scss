@@ -1,9 +1,16 @@
 @import "../../../../variables.scss";
 
-.chip {
-  border: none;
+.light {
   background-color: $anti-primary-color;
   color: $primary-color;
+}
+.dark {
+  background-color: $primary-color;
+  color: $anti-primary-color;
+}
+.chip {
+  border: none;
+
   border-radius: 10px;
   font-size: 18px;
   padding: 5px 10px;

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 type DashboardLink = {
   title: string;
   logoUrl: string;
@@ -11,17 +11,18 @@ type DashboardLink = {
   styleUrl: './dashboard-links.component.scss',
 })
 export class DashboardLinksComponent {
+  @Input() showText = true;
   listLink: DashboardLink[] = [
     {
       title: 'dashboard',
       logoUrl: 'assets/svgs/dash.svg',
-      path: '',
+      path: 'mentor/dashboard',
       active: true,
     },
     {
       title: 'mon profil',
       logoUrl: 'assets/svgs/calendar.svg',
-      path: '',
+      path: 'mentor/profil',
       active: false,
     },
     {

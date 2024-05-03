@@ -4,7 +4,7 @@
   height: 65px;
   padding-left: 33px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(6, auto);
 
   .avatar-name {
     display: flex;
@@ -36,4 +36,20 @@
 }
 .grey {
   background-color: $background-light-list;
+}
+
+@media screen and (max-width: $break-point-tablette-medium) {
+  .row-reservation {
+    padding-left: 0;
+    grid-template-columns: 2fr 2fr 1fr;
+    .sujet {
+      display: none;
+    }
+    .promotion {
+      display: none;
+    }
+    .creneau {
+      display: none;
+    }
+  }
 }

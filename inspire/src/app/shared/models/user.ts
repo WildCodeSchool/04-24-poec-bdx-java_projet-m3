@@ -1,4 +1,5 @@
 export class User {
+  id?: string = '';
   email: string = '';
   password: string = '';
   role: string = '';
@@ -19,4 +20,5 @@ export class Student extends User {
   firstname: string = '';
   lastname: string = '';
   description: string = '';
+  userId?: string = '';
 }

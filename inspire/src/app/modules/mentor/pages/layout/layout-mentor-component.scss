@@ -15,34 +15,61 @@
     margin: 0 auto;
     border-radius: 15px;
     color: white;
-    padding-left: 30px;
+    padding: 0 30px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
+}
 
+.container-main {
+  position: relative;
+  display: flex;
   .container-side-nav {
+    margin-top: 20px;
+    height: calc(100vh - 140px);
     background-color: white;
-    width: 16%;
-    min-height: 80vh;
-    margin-left: 30px;
-    margin-top: 10px;
-    padding-top: 20px;
-    border-radius: 27px;
+    border-radius: 10px;
+    transition: 0.2s all ease;
 
-    h1 {
-      padding-top: 20px;
-      padding-left: 20px;
-      font-size: 1.2em;
-      font-weight: 600;
+    button.burger {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 5px;
+      background-color: transparent;
+      border: none;
+    }
+  }
+  .container-outlet {
+    flex-grow: 1;
+    padding: 20px;
+    transition: 0.2s all ease;
+    height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+}
+
+@media screen and (max-width: $break-point-tablette-medium) {
+  .container-side-nav {
+    position: absolute;
+  }
+  .container-outlet {
+    margin-left: 20px;
+    overflow-y: auto;
+  }
+  .container-layout {
+    .header-container {
+      width: 70%;
     }
   }
 }
-.container-main {
-  display: flex;
-  .container-outlet {
-    padding: 20px 10px;
-    width: 100%;
+
+@media screen and (max-width: $break-point-phone) {
+  .container-layout {
+    .header-container {
+      width: 90%;
+    }
   }
 }

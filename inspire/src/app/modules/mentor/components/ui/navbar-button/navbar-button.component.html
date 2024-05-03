@@ -8,6 +8,6 @@
   class="btn-general"
   (click)="changeState()"
 >
-  <img [src]="logoUrl" alt="logo link" width="27" height="27" />
-  {{ text }}
+  <img [src]="logoUrl" alt="logo link" width="25" height="25" />
+  <p [ngStyle]="{ display: !showText ? 'none' : 'inherit' }">{{ text }}</p>
 </button>
