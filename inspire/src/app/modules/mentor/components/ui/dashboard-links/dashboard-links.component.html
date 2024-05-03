@@ -1,5 +1,4 @@
-<h1>Menu</h1>
-<div>
+
 @for(link of listLink; track $index){
 <app-navbar-button
   [showText]="showText"
@@ -11,4 +10,3 @@
   (stateEmitter)="handleLinkChange($event, $index)"
 ></app-navbar-button>
 }
-</div>

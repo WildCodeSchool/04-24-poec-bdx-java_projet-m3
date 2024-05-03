@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
-
+import { StorageModule } from '@ngx-pwa/local-storage';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -18,6 +18,7 @@ import { provideHttpClient } from '@angular/common/http';
     ButtonModule,
     ReactiveFormsModule,
     MentorModule,
+    StorageModule,
   ],
   providers: [provideAnimations(), provideHttpClient()],
   bootstrap: [AppComponent],

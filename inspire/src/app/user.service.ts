@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, map, switchMap } from 'rxjs';
+import { Observable, first, map, switchMap, tap } from 'rxjs';
 import { Student, User } from './shared/models/user';
 
 @Injectable({
@@ -16,24 +16,44 @@ export class UserService {
   }
 
   createStudent(registerFormValues: any): Observable<Student> {
-    const user: User = {
-      email: registerFormValues.email,
-      password: registerFormValues.password,
-      role: 'student',
-    };
+    const user: User = new User(
+      registerFormValues.email,
+      registerFormValues.password,
+      'student'
+    );
 
     return this.createUser(user).pipe(
-      switchMap((createdUser) => {
+      switchMap((createdUser: User) => {
         const userId = createdUser.id;
-        const student: Student = {
-          ...user,
-          firstname: registerFormValues.firstName,
-          lastname: registerFormValues.lastName,
-          description: '',
-          userId: userId,
-        };
+        const student: Student = new Student(
+          user.email,
+          user.password,
+          user.role,
+          registerFormValues.firstName,
+          registerFormValues.lastName,
+          registerFormValues.description
+        );
+
         return this.http.post<Student>(`${this.BASE_URL}/student`, student);
       })
     );
+  }
+
+  login(email: any, password: any): Observable<any> {
+    return this.http
+      .get<any>(`${this.BASE_URL}/users?email=${email}&password=${password}`)
+      .pipe(
+        map((users) => {
+          if (users[0]) {
+            const user = users[0];
+            delete user.password;
+            console.log(user);
+            return true;
+          } else {
+            console.log('pas de user');
+            return false;
+          }
+        })
+      );
   }
 }
