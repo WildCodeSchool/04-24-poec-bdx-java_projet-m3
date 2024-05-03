@@ -83,6 +83,12 @@
       "email": "test@gmail.com",
       "password": "A",
       "role": "student"
+    },
+    {
+      "id": "793d",
+      "email": "marie.delo@outlook.com",
+      "password": "1234",
+      "role": "mentor"
     }
   ],
   "students": [
@@ -91,51 +97,66 @@
       "firstname": "Marie",
       "lastname": "Delaire",
       "descrition": "Super Mentor !!! ",
+      "imgUrl": "https://picsum.photos/200/300",
+      "title": "Dev Web",
+      "github": "https://www.github.com/",
+      "linkedinUrl": "https://www.linkedin.com/",
       "userId": "b362"
     },
     {
       "id": "d243",
-      "email": "p.lemoine@outlook.com",
-      "password": "A1234",
-      "role": "student",
       "firstname": "Pierre",
       "lastname": "Lemoine",
       "description": "",
+      "imgUrl": "https://picsum.photos/200/300",
+      "title": "Dev Web",
+      "github": "https://www.github.com/",
+      "linkedinUrl": "https://www.linkedin.com/",
       "userId": "39b4"
     },
     {
       "id": "8207",
-      "email": "nassdu33@gmail.com",
-      "password": "A",
-      "role": "student",
       "firstname": "Nassime",
       "lastname": "Harmach",
       "description": "",
+      "imgUrl": "https://picsum.photos/200/300",
+      "title": "Dev Web",
+      "github": "https://www.github.com/",
+      "linkedinUrl": "https://www.linkedin.com/",
       "userId": "a4e4"
     },
     {
       "id": "",
-      "email": "marie@gmail.com",
-      "password": "A",
-      "role": "student",
       "firstname": "Pierre",
-      "lastname": "Dupont"
+      "lastname": "Dupont",
+      "description": "",
+      "imgUrl": "https://picsum.photos/200/300",
+      "title": "Dev Web",
+      "github": "https://www.github.com/",
+      "linkedinUrl": "https://www.linkedin.com/",
+      "userId": "39b4"
     },
     {
       "id": "",
-      "email": "marie@gmail.com",
-      "password": "A",
-      "role": "student",
       "firstname": "Pierre",
-      "lastname": "Dupont"
+      "lastname": "Dupont",
+      "description": "",
+      "imgUrl": "https://picsum.photos/200/300",
+      "title": "Dev Web",
+      "github": "https://www.github.com/",
+      "linkedinUrl": "https://www.linkedin.com/",
+      "userId": "39b4"
     },
     {
       "id": "",
-      "email": "test@gmail.com",
-      "password": "A",
-      "role": "student",
       "firstname": "test",
-      "lastname": "test"
+      "lastname": "test",
+      "description": "",
+      "imgUrl": "https://picsum.photos/200/300",
+      "title": "Dev Web",
+      "github": "https://www.github.com/",
+      "linkedinUrl": "https://www.linkedin.com/",
+      "userId": "39b4"
     }
   ],
   "mentors": [
@@ -144,7 +165,302 @@
       "firstname": "Paul",
       "lastname": "Delaire",
       "descrition": "Super Mentor !!! ",
+      "imgUrl": "https://picsum.photos/200/300",
+      "title": "Dev Web",
+      "github": "https://www.github.com/",
+      "linkedinUrl": "https://www.linkedin.com/",
       "userId": "b362"
+    },
+    {
+      "id": "5bd2",
+      "firstname": "Pierre-Louis",
+      "lastname": "Bastin",
+      "descrition": "Super Mentor !!! ",
+      "imgUrl": "https://picsum.photos/200/300",
+      "title": "angular",
+      "github": "https://www.github.com/",
+      "linkedinUrl": "https://www.linkedin.com/",
+      "userId": "f4cf"
+    },
+    {
+      "id": "ada1",
+      "firstname": "Nick",
+      "lastname": "Elham",
+      "descrition": "Super Mentor !!! ",
+      "imgUrl": "https://picsum.photos/200/300",
+      "title": "angular",
+      "github": "https://www.github.com/",
+      "linkedinUrl": "https://www.linkedin.com/",
+      "userId": "8421"
+    }
+  ],
+  "skills": [
+    {
+      "id": "6a04",
+      "name": "javascript"
+    },
+    {
+      "id": "8376",
+      "name": "C plus plus"
+    },
+    {
+      "id": "f7f7",
+      "name": "C Sharp"
+    },
+    {
+      "id": "bcae",
+      "name": "java"
+    },
+    {
+      "id": "b6f5",
+      "name": "html"
+    },
+    {
+      "id": "d45d",
+      "name": "css"
+    },
+    {
+      "id": "11b0",
+      "name": "angular"
+    },
+    {
+      "id": "7f92",
+      "name": "react"
+    },
+    {
+      "id": "1bd3",
+      "name": "spring"
+    },
+    {
+      "id": "001e",
+      "name": "node"
+    }
+  ],
+  "skillUsers": [
+    {
+      "id": "632e",
+      "userId": "b362",
+      "skillId": "6a04"
+    },
+    {
+      "id": "1205",
+      "userId": "b362",
+      "skillId": "8376"
+    },
+    {
+      "id": "04ce",
+      "userId": "f4cf",
+      "skillId": "8376"
+    }
+  ],
+  "languages": [
+    {
+      "id": "1457",
+      "name": "francais"
+    },
+    {
+      "id": "9b4b",
+      "name": "anglais"
+    },
+    {
+      "id": "c082",
+      "name": "arabe"
+    },
+    {
+      "id": "90b9",
+      "name": "italien"
+    },
+    {
+      "id": "23a9",
+      "name": "espagnol"
+    },
+    {
+      "id": "07ed",
+      "name": "chinois"
+    }
+  ],
+  "userLanguages": [
+    {
+      "id": "8230",
+      "languageId": "1457",
+      "userId": "b362"
+    },
+    {
+      "id": "1aa1",
+      "languageId": "9b4b",
+      "userId": "b362"
+    },
+    {
+      "id": "d841",
+      "languageId": "23a9",
+      "userId": "b362"
+    },
+    {
+      "id": "dd25",
+      "languageId": "9b4b",
+      "userId": "f4cf"
+    }
+  ],
+  "experiences": [
+    {
+      "id": "fd56",
+      "title": "formateur",
+      "company": "wild code school",
+      "dateBegin": "21-04-1986",
+      "dateEnd": "04-05-2024",
+      "city": "Bordeaux",
+      "country": "France",
+      "userId": "b362"
+    },
+    {
+      "id": "334b",
+      "title": "serveur ",
+      "company": "del arte",
+      "dateBegin": "21-04-1986",
+      "dateEnd": "04-05-2024",
+      "city": "Bordeaux",
+      "country": "France",
+      "userId": "b362"
+    },
+    {
+      "id": "9ee4",
+      "title": "chomeur ",
+      "company": "chez moi",
+      "dateBegin": "21-04-1986",
+      "dateEnd": "04-05-2024",
+      "city": "Bordeaux",
+      "country": "France",
+      "userId": "b362"
+    },
+    {
+      "id": "d901",
+      "title": "chomeuse ",
+      "company": "chez moi",
+      "dateBegin": "25-08-1994",
+      "dateEnd": "04-05-2024",
+      "city": "Bordeaux",
+      "country": "France",
+      "userId": "f4cf"
+    },
+    {
+      "id": "65f4",
+      "title": "chomeur ",
+      "company": "chez moi",
+      "dateBegin": "14-08-1990",
+      "dateEnd": "04-05-2024",
+      "city": "Bordeaux",
+      "country": "France",
+      "userId": "8421"
+    }
+  ],
+  "formations": [
+    {
+      "id": "dacc",
+      "title": "Dev web react ",
+      "school": "wild code school",
+      "dateBegin": "09-11-2023",
+      "dateEnd": "09-02-2024",
+      "city": "Bordeaux",
+      "country": "France",
+      "userId": "8421"
+    },
+    {
+      "id": "133b",
+      "title": "Dev web angular ",
+      "school": "wild code school",
+      "dateBegin": "09-11-2023",
+      "dateEnd": "09-02-2024",
+      "city": "Bordeaux",
+      "country": "France",
+      "userId": "8421"
+    },
+    {
+      "id": "887b",
+      "title": "Dev web java ",
+      "school": "wild code school",
+      "dateBegin": "09-11-2023",
+      "dateEnd": "09-02-2024",
+      "city": "Bordeaux",
+      "country": "France",
+      "userId": "8421"
+    },
+    {
+      "id": "5e5f",
+      "title": "Dev web java ",
+      "school": "wild code school",
+      "dateBegin": "09-11-2023",
+      "dateEnd": "09-02-2024",
+      "city": "Bordeaux",
+      "country": "France",
+      "userId": "b362"
+    },
+    {
+      "id": "729e",
+      "title": "Dev web java  angular",
+      "school": "wild code school",
+      "dateBegin": "09-11-2023",
+      "dateEnd": "09-02-2024",
+      "city": "Bordeaux",
+      "country": "France",
+      "userId": "b362"
+    }
+  ],
+  "reservations": [
+    {
+      "id": "325d",
+      "subject": "un autre sujet pour changer",
+      "message": "hola chico",
+      "slotId": "7775",
+      "userId": "9e17"
+    },
+    {
+      "id": "ce5c",
+      "subject": "reseautage",
+      "message": "hola chico",
+      "slotId": "9368",
+      "userId": "9e17"
+    }
+  ],
+  "slots": [
+    {
+      "id": "9368",
+      "date": "09-11-2023",
+      "startAt": "08:30",
+      "visio": true,
+      "userId": "b362"
+    },
+    {
+      "id": "7775",
+      "date": "09-11-2024",
+      "startAt": "08:30",
+      "visio": true,
+      "userId": "b362"
+    },
+    {
+      "id": "50c6",
+      "date": "09-11-2024",
+      "startAt": "08:30",
+      "visio": true,
+      "userId": "9e17"
+    },
+    {
+      "id": "6277",
+      "date": "09-10-2024",
+      "startAt": "08:30",
+      "visio": true,
+      "userId": "9e17"
+    }
+  ],
+  "favorites": [
+    {
+      "id": "736e",
+      "studentId": "5e6e",
+      "mentorId": "45c7"
+    },
+    {
+      "id": "ea86",
+      "studentId": "5e6e",
+      "mentorId": "5bd2"
     }
   ]
 }
