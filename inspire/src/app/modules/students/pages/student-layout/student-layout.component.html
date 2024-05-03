@@ -7,7 +7,7 @@
     <div class="container-side-nav">
       <h1>Menu</h1>
       <ul>
-        <li>Dashboard</li>
+        <li><a [routerLink]="['dashboard']">Dashboard</a></li>
         <li>Mon profil</li>
         <li>Mon agenda</li>
       </ul>
@@ -15,7 +15,7 @@
     <div class="container-body">
       <h3>Mes favoris</h3>
       <div class="body-contain">
-        <app-list-mentors></app-list-mentors>
+      <router-outlet></router-outlet>
       </div>
     </div>
   </div>

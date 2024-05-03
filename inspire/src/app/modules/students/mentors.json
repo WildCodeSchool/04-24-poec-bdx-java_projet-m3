@@ -1,0 +1,50 @@
+[
+  {
+      "id": 1,
+      "firstname": "Marie",
+      "lastname": "Delaire",
+      "picture": "inspire/src/assets/marieD.webp",
+      "description": "Je m'appelle Marie",
+      "poste": "Développeuse Front-end",
+      "skill": [
+        {
+          "skill-1": "JavaScript",
+          "skill-2": "Java"
+        }
+      ],
+      "linkedin_url": "",
+      "github_url": ""
+  },
+  {
+      "id": 2,
+      "firstname": "Mathieu",
+      "lastname": "Chauveau",
+      "picture": "inspire/src/assets/MathieuC.jpg",
+      "description": "Je m'appelle Mathieu",
+      "poste": "Développeur Front-end spécialisé en UX/UI",
+      "skill": [
+        {
+          "skill-1": "JavaScript",
+          "skill-2": "Java"
+        }
+      ],
+      "linkedin_url": "",
+      "github_url": ""
+  },
+  {
+    "id": 3,
+    "firstname": "Mahdi",
+    "lastname": "Mcheik",
+    "picture": "inspire/src/assets/Mahdi.jpg",
+    "description": "Je m'appelle Mahdi",
+    "poste": "Développeur back-end",
+    "skill": [
+      {
+        "skill-1": "JavaScript",
+        "skill-2": "Java"
+      }
+    ],
+    "linkedin_url": "",
+    "github_url": ""
+}
+]

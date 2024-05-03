@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-card-mentor',
@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrl: './card-mentor.component.scss'
 })
 export class CardMentorComponent {
+
+  @Input()
+  mentor!: any;
 
 }

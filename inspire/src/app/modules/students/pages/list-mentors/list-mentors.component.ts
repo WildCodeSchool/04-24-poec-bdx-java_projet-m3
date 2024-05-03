@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MentorServiceService } from '../../shared/mentor-service.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-list-mentors',
@@ -6,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './list-mentors.component.scss'
 })
 export class ListMentorsComponent {
+
+
 
 }
