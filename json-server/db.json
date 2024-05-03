@@ -405,7 +405,22 @@
       "userId": "b362"
     }
   ],
-  "reservations": [],
+  "reservations": [
+    {
+      "id": "325d",
+      "subject": "un autre sujet pour changer",
+      "message": "hola chico",
+      "slotId": "7775",
+      "userId": "9e17"
+    },
+    {
+      "id": "ce5c",
+      "subject": "reseautage",
+      "message": "hola chico",
+      "slotId": "9368",
+      "userId": "9e17"
+    }
+  ],
   "slots": [
     {
       "id": "9368",
@@ -434,6 +449,18 @@
       "startAt": "08:30",
       "visio": true,
       "userId": "9e17"
+    }
+  ],
+  "favorites": [
+    {
+      "id": "736e",
+      "studentId": "5e6e",
+      "mentorId": "45c7"
+    },
+    {
+      "id": "ea86",
+      "studentId": "5e6e",
+      "mentorId": "5bd2"
     }
   ]
 }
