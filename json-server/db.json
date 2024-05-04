@@ -89,6 +89,18 @@
       "email": "marie.delo@outlook.com",
       "password": "1234",
       "role": "mentor"
+    },
+    {
+      "id": "",
+      "email": "Nathan@yesenia.net",
+      "password": "A",
+      "role": "student"
+    },
+    {
+      "id": "",
+      "email": "Nathan@yesenia.net",
+      "password": "A",
+      "role": "student"
     }
   ],
   "students": [
@@ -157,6 +169,14 @@
       "github": "https://www.github.com/",
       "linkedinUrl": "https://www.linkedin.com/",
       "userId": "39b4"
+    },
+    {
+      "id": "",
+      "email": "Nathan@yesenia.net",
+      "password": "A",
+      "role": "student",
+      "firstname": "tedy",
+      "lastname": "tedy"
     }
   ],
   "mentors": [

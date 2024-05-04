@@ -12,7 +12,7 @@ export class UserService {
   constructor() {}
 
   private createUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.BASE_URL}/user`, user);
+    return this.http.post<User>(`${this.BASE_URL}/users`, user);
   }
 
   createStudent(registerFormValues: any): Observable<Student> {
@@ -34,7 +34,7 @@ export class UserService {
           registerFormValues.description
         );
 
-        return this.http.post<Student>(`${this.BASE_URL}/student`, student);
+        return this.http.post<Student>(`${this.BASE_URL}/students`, student);
       })
     );
   }
