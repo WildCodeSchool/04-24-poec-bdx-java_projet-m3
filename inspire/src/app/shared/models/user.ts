@@ -12,7 +12,7 @@ export class User {
 }
 
 export class Mentor {
-  id?: string = '';
+  id?: string;
   firstname: string = '';
   lastname: string = '';
   description: string = '';
