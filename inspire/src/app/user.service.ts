@@ -26,12 +26,10 @@ export class UserService {
       switchMap((createdUser: User) => {
         const userId = createdUser.id || '';
         const student: Student = new Student(
-          '',
           userId,
-          createdUser,
           registerFormValues.firstName,
           registerFormValues.lastName,
-          registerFormValues.description,
+          '',
           '',
           '',
           '',
