@@ -15,10 +15,12 @@ export class LayoutMentor implements OnInit {
   user: Mentor = {
     firstname: 'mahdi',
     lastname: 'mcheik',
-    email: 'mahdi@wcs.com',
-    password: '1234',
+    imgUrl: 'https://randomuser.me,api/portraits',
     description: '',
-    role: 'mentor',
+    githubUrl: '',
+    linkedinUrl: '',
+    userId: '',
+    title: '',
   };
 
   toggleVisibility() {
