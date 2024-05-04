@@ -56,6 +56,8 @@ export class UserService {
           if (users[0]) {
             const user = users[0];
             this.userStore.setUserConnected(user);
+            const userString = JSON.stringify(user);
+            window.localStorage.setItem('user', userString);
             console.log(user);
             return user;
           } else {
