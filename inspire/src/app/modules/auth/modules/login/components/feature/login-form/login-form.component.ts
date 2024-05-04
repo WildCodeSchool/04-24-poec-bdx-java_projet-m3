@@ -13,6 +13,7 @@ export class LoginFormComponent {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
+
   constructor(private fb: FormBuilder, private userService: UserService) {}
 
   onSubmit() {

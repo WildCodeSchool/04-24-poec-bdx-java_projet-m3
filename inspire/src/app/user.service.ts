@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, first, map, switchMap, tap } from 'rxjs';
 import { Student, User } from './shared/models/user';
+import { UserStoreService } from './shared/services/stores/user-store.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ import { Student, User } from './shared/models/user';
 export class UserService {
   private readonly BASE_URL = 'http://localhost:3000';
   private http = inject(HttpClient);
+  private userStore = inject(UserStoreService);
   constructor() {}
 
   private createUser(user: User): Observable<User> {
@@ -46,19 +48,19 @@ export class UserService {
     );
   }
 
-  login(email: any, password: any): Observable<any> {
+  login(email: any, password: any): Observable<User | null> {
     return this.http
-      .get<any>(`${this.BASE_URL}/users?email=${email}&password=${password}`)
+      .get<User[]>(`${this.BASE_URL}/users?email=${email}&password=${password}`)
       .pipe(
         map((users) => {
           if (users[0]) {
             const user = users[0];
-            delete user.password;
+            this.userStore.setUserConnected(user);
             console.log(user);
-            return true;
+            return user;
           } else {
             console.log('pas de user');
-            return false;
+            return null;
           }
         })
       );
