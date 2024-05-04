@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, inject } from '@angular/core';
-import { Mentor } from '../../../../shared/models/user';
+import { Component, OnInit, inject } from '@angular/core';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
+import { MentorService } from '../../../../shared/services/mentor.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -11,15 +11,9 @@ export class LayoutMentor implements OnInit {
   showNavbar = true;
 
   windowWatcher = inject(WindowWatcherService);
-  @Input()
-  user: Mentor = {
-    firstname: 'mahdi',
-    lastname: 'mcheik',
-    email: 'mahdi@wcs.com',
-    password: '1234',
-    description: '',
-    role: 'mentor',
-  };
+  // b362
+  mentor$ = inject(MentorService).getMentorById('f4cf');
+  mentorS$ = inject(MentorService).activeMentor$;
 
   toggleVisibility() {
     this.showNavbar = !this.showNavbar;
@@ -28,8 +22,6 @@ export class LayoutMentor implements OnInit {
 
   ngOnInit(): void {
     this.windowWatcher.windowSizeChanged.subscribe((option) => {
-      console.log('size changed');
-
       this.showNavbar = option;
     });
   }

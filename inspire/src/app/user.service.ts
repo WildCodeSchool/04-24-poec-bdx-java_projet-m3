@@ -26,12 +26,14 @@ export class UserService {
       switchMap((createdUser: User) => {
         const userId = createdUser.id;
         const student: Student = new Student(
-          user.email,
-          user.password,
-          user.role,
-          registerFormValues.firstName,
-          registerFormValues.lastName,
-          registerFormValues.description
+          '2123',
+          'firstname ',
+          'lastname',
+          'descriptionssss',
+          'https://picsum.photos/200/300',
+          'pro web',
+          'www.github.com',
+          'www.linkedin.com'
         );
 
         return this.http.post<Student>(`${this.BASE_URL}/student`, student);
