@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "m3": "concurrently -c yellow,magenta \"npm:m3-*\"",
+    "m3-json": "npx json-server json-server/db.json",
+    "m3-angular": "cd ./inspire && ng s -o"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
