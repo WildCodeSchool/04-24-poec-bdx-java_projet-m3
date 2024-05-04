@@ -12,6 +12,9 @@ export class UserService {
   constructor() {}
 
   private createUser(user: User): Observable<User> {
+    if (user.id) {
+      delete user.id;
+    }
     return this.http.post<User>(`${this.BASE_URL}/users`, user);
   }
 
@@ -24,7 +27,9 @@ export class UserService {
 
     return this.createUser(user).pipe(
       switchMap((createdUser: User) => {
-        const userId = createdUser.id || '';
+        const userId = createdUser.id as string;
+        console.log(createdUser);
+
         const student: Student = new Student(
           userId,
           registerFormValues.firstName,
