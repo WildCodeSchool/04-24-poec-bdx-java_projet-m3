@@ -10,14 +10,14 @@ export class RowReservationComponent {
   @Input()
   reservation: Reservation = {
     student: {
-      firstname: 'mahdi',
-      lastname: 'mcheik',
+      firstname: 'Marie',
+      lastname: 'Delaire',
+      imgUrl: 'https://randomuser.me,api/portraits',
       description: '',
-      title: '',
-      imgUrl: '',
       githubUrl: '',
       linkedinUrl: '',
       userId: '',
+      title: '',
     },
     promotion: 'JavaScript',
     subject: 'Aide au devoir',

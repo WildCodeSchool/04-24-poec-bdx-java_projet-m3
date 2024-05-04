@@ -1,5 +1,5 @@
 export class User {
-  id?: string = '';
+  id?: string;
   email: string = '';
   password: string = '';
   role: string = '';
@@ -12,7 +12,7 @@ export class User {
 }
 
 export class Mentor {
-  id?: string = '';
+  id?: string;
   firstname: string = '';
   lastname: string = '';
   description: string = '';
@@ -44,25 +44,25 @@ export class Mentor {
 }
 
 export class Student {
-  id?: string = '';
-  firstname: string = '';
-  lastname: string = '';
-  description: string = '';
-  imgUrl: string = '';
-  title: string = '';
-  githubUrl: string = '';
-  linkedinUrl: string = '';
-  userId: string = '';
+  id?: string;
+  firstname: string;
+  lastname: string;
+  description: string;
+  imgUrl: string;
+  title: string;
+  githubUrl: string;
+  linkedinUrl: string;
+  userId: string;
 
   constructor(
     userId: string,
     firstname: string,
     lastname: string,
-    description: string,
-    imgUrl: string,
-    title: string,
-    githubUrl: string,
-    linkedinUrl: string
+    description: string = '',
+    imgUrl: string = '',
+    title: string = '',
+    githubUrl: string = '',
+    linkedinUrl: string = ''
   ) {
     this.userId = userId;
     this.firstname = firstname;
