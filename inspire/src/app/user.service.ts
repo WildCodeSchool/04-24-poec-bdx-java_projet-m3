@@ -24,14 +24,18 @@ export class UserService {
 
     return this.createUser(user).pipe(
       switchMap((createdUser: User) => {
-        const userId = createdUser.id;
+        const userId = createdUser.id || '';
         const student: Student = new Student(
-          user.email,
-          user.password,
-          user.role,
+          '',
+          userId,
+          createdUser,
           registerFormValues.firstName,
           registerFormValues.lastName,
-          registerFormValues.description
+          registerFormValues.description,
+          '',
+          '',
+          '',
+          ''
         );
 
         return this.http.post<Student>(`${this.BASE_URL}/students`, student);

@@ -64,17 +64,19 @@ export class Student {
 
   constructor(
     id: string,
+    userId: string,
+    user: User,
     firstname: string,
     lastname: string,
     description: string,
     imgUrl: string,
     title: string,
     github: string,
-    linkedinUrl: string,
-    userId: string,
-    user: User
+    linkedinUrl: string
   ) {
     this.id = id;
+    this.userId = userId;
+    this.user = user;
     this.firstname = firstname;
     this.lastname = lastname;
     this.description = description;
@@ -82,7 +84,5 @@ export class Student {
     this.title = title;
     this.github = github;
     this.linkedinUrl = linkedinUrl;
-    this.userId = userId;
-    this.user = user;
   }
 }
