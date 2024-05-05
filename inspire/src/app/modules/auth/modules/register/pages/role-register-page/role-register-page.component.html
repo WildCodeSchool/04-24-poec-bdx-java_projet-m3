@@ -10,6 +10,9 @@
     <div class="right-title">
       <h2>Créer votre compte</h2>
       <h3>Je crée mon compte en tant que...</h3>
+      <div *ngIf="user$ | async as user">
+        {{ user.email }}
+      </div>
     </div>
 
     <div class="container-card">
