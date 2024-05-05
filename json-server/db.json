@@ -185,6 +185,12 @@
       "email": "MentorTTT@gmail.com",
       "password": "MentorTTT",
       "role": "student"
+    },
+    {
+      "id": "8c80",
+      "email": "TestStudentRedirect@gmail.com",
+      "password": "TestStudentRedirect",
+      "role": "student"
     }
   ],
   "students": [
@@ -388,6 +394,17 @@
       "userId": "a460",
       "firstname": "MentorTTT",
       "lastname": "MentorTTT",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "2c0e",
+      "userId": "8c80",
+      "firstname": "TestStudentRedirect",
+      "lastname": "TestStudentRedirect",
       "description": "",
       "imgUrl": "",
       "title": "",

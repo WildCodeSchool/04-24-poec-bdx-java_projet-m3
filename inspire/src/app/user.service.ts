@@ -3,12 +3,14 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, first, map, switchMap, tap } from 'rxjs';
 import { Mentor, Student, User } from './shared/models/user';
 import { UserStoreService } from './shared/services/stores/user-store.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private readonly BASE_URL = 'http://localhost:3000';
+  private router = inject(Router);
   private http = inject(HttpClient);
   private userStore = inject(UserStoreService);
   constructor() {}
@@ -42,6 +44,7 @@ export class UserService {
           '',
           ''
         );
+        this.router.navigate(['/login']);
 
         return this.http.post<Student>(`${this.BASE_URL}/students`, student);
       })
