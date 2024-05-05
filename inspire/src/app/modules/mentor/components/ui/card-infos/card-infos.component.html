@@ -24,8 +24,8 @@
     </div>
     <div class="skills">
       <h2>{{ mentor.title }}</h2>
-      <ng-container *ngIf="chips$ | async as mySkills">
-        <app-list-chip [chips]="mySkills"></app-list-chip>
+      <ng-container *ngIf="chips">
+        <app-list-chip [chips]="chips"></app-list-chip>
       </ng-container>
     </div>
   </div>

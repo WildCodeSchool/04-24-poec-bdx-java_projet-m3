@@ -1,10 +1,10 @@
 <div class="card-skill">
   <div class="card-skill-body">
     <button>
-      <img [src]="skill.url" alt="skill" width="43" height="43" />
+      <img src="assets/svgs/job.svg" alt="skill" width="43" height="43" />
     </button>
     <div class="details">
-      <p class="title">{{ skill.title }}</p>
+      <p class="title">{{ experience.title }}</p>
       <div class="date-place">
         <img
           src="assets/svgs/calendar.svg"
@@ -12,7 +12,7 @@
           width="23"
           height="23"
         />
-        <p>{{ skill.place }}</p>
+        <p>{{ experience.city | titlecase }}</p>
       </div>
     </div>
   </div>

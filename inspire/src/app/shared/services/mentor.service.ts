@@ -10,7 +10,7 @@ import {
   switchMap,
   tap,
 } from 'rxjs';
-import { Mentor } from '../models/user';
+import { Mentor, MentorFullProfil } from '../models/user';
 import { Skill } from '../models/chip';
 import { Language } from '../models/language';
 import { Formation } from '../models/formation';
@@ -38,7 +38,9 @@ export class MentorService {
 
   constructor() {}
 
-  activeMentor$: BehaviorSubject<Mentor> = new BehaviorSubject({} as Mentor);
+  activeMentor$: BehaviorSubject<MentorFullProfil> = new BehaviorSubject(
+    {} as MentorFullProfil
+  );
 
   getMentorById(id: string) {
     return this.httpClient
@@ -82,7 +84,7 @@ export class MentorService {
         }),
         tap((res) => {
           console.log('fork joined results ', res);
-          // this.activeMentor$.next(res);
+          this.activeMentor$.next(res);
         })
       );
   }
@@ -90,13 +92,7 @@ export class MentorService {
   getMentorByIdBackUp(id: string) {
     return this.httpClient
       .get<Mentor[]>(environment.BASE_URL + '/mentors?userId=' + id)
-      .pipe(map((res) => res[0]))
-      .pipe(
-        tap((res) => {
-          this.activeMentor$.next(res);
-          console.log(res);
-        })
-      );
+      .pipe(map((res) => res[0]));
   }
 
   getMentorSkills(id: string) {
