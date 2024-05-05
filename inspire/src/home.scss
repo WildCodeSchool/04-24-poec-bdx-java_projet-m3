@@ -54,3 +54,17 @@
     margin-bottom: 20px;
   }
 }
+@media screen and (min-width: 577px) and (max-width: 1000px) {
+  .right-content {
+    padding: 0 50px;
+  }
+  .left-content {
+    padding: 0 20px;
+  }
+  h2 {
+    font-size: 18px;
+  }
+  h1 {
+    font-size: 30px;
+  }
+}
