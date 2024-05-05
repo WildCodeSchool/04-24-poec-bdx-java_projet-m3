@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { Mentor } from '../../../../shared/models/user';
 import { MentorService } from '../../../../shared/services/mentor.service';
 
 @Component({

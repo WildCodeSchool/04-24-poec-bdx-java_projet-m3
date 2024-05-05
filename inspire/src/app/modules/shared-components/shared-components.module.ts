@@ -14,6 +14,11 @@ import { TreeTableModule } from 'primeng/treetable';
 import { CardSkillComponent } from './card-skill/card-skill.component';
 import { ListSkillsComponent } from './list-skills/list-skills.component';
 import { ListChipComponent } from './list-chip/list-chip.component';
+import { CardFormationComponent } from './ui/card-formation/card-formation.component';
+import { ListFormationComponent } from './ui/list-formation/list-formation.component';
+import { CardExperienceComponent } from './ui/card-experience/card-experience.component';
+import { ListExperienceComponent } from './ui/list-experience/list-experience.component';
+import { ListLanguageComponent } from './ui/list-language/list-language.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,11 @@ import { ListChipComponent } from './list-chip/list-chip.component';
     CardSkillComponent,
     ListSkillsComponent,
     ListChipComponent,
+    CardFormationComponent,
+    ListFormationComponent,
+    CardExperienceComponent,
+    ListExperienceComponent,
+    ListLanguageComponent,
   ],
   imports: [
     CommonModule,
@@ -47,6 +57,11 @@ import { ListChipComponent } from './list-chip/list-chip.component';
     ListSkillsComponent,
     ChipComponent,
     ListChipComponent,
+    CardFormationComponent,
+    ListFormationComponent,
+    CardExperienceComponent,
+    ListExperienceComponent,
+    ListLanguageComponent,
   ],
 })
 export class SharedComponentsModule {}

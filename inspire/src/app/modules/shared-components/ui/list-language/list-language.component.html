@@ -1,0 +1,10 @@
+<div class="list-languages">
+  <h3>{{ title }}</h3>
+  <div class="languages" *ngIf="languages">
+    <app-chip
+      *ngFor="let language of languages"
+      [title]="language.name"
+      [dark]="true"
+    ></app-chip>
+  </div>
+</div>

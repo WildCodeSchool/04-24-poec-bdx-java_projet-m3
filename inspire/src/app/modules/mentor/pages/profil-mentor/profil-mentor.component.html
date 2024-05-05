@@ -4,13 +4,19 @@
       [mentor]="mentor.profil"
       [chips]="mentor.skills"
     ></app-card-infos>
-    <app-list-experience-mentor
+    <app-list-experience
       [title]="'Mes compétences'"
       [experiences]="mentor.experiences"
-    ></app-list-experience-mentor>
+    ></app-list-experience>
   </div>
   <div class="side-left">
-    <app-list-formation [title]="'Mes formations'"></app-list-formation>
-    <app-list-languages [title]="'Langues'"></app-list-languages>
+    <app-list-formation
+      [title]="'Mes formations'"
+      [formations]="mentor.formations"
+    ></app-list-formation>
+    <app-list-language
+      [title]="'Mes langues'"
+      [languages]="mentor.languages"
+    ></app-list-language>
   </div>
 </div>

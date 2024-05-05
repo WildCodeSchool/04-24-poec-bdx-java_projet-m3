@@ -2,9 +2,7 @@
   <h3>{{ title }}</h3>
   <ng-container *ngIf="experiences">
     @for( experience of experiences; track $index ){
-    <app-card-experience-mentor
-      [experience]="experience"
-    ></app-card-experience-mentor>
+    <app-card-experience [experience]="experience"></app-card-experience>
     @if($index !== experiences.length -1){
     <p-divider></p-divider>
     } }

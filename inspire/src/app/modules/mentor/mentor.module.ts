@@ -11,16 +11,11 @@ import { NavbarButtonComponent } from './components/ui/navbar-button/navbar-butt
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CardInfosComponent } from './components/ui/card-infos/card-infos.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
-import { ListExperienceMentorComponent } from './components/ui/list-skills-mentor/list-experience-mentor.component';
 import { DividerModule } from 'primeng/divider';
 import { ProfilMentorComponent } from './pages/profil-mentor/profil-mentor.component';
-import { ListLanguagesComponent } from './components/ui/list-languages/list-languages.component';
-import { CardFormationComponent } from './components/ui/card-formation/card-formation.component';
-import { ListFormationsComponent } from './components/ui/list-formations/list-formations.component';
 import { ListReservationComponent } from './components/features/list-reservation/list-reservation.component';
 import { ListReservationHistoryComponent } from './components/features/list-reservation-history/list-reservation.component';
 import { ReservationWithSwipeComponent } from './components/ui/reservation-with-swipe/reservation-with-swipe.component';
-import { CardExperienceComponent } from './components/ui/card-skill-mentor/card-experience-mentor.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +25,7 @@ import { CardExperienceComponent } from './components/ui/card-skill-mentor/card-
     DashboardLinksComponent,
     DashboardComponent,
     CardInfosComponent,
-    CardExperienceComponent,
-    ListExperienceMentorComponent,
     ProfilMentorComponent,
-    ListLanguagesComponent,
-    CardFormationComponent,
-    ListFormationsComponent,
     ListReservationComponent,
     ListReservationHistoryComponent,
     ReservationWithSwipeComponent,
