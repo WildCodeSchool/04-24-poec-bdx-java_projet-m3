@@ -185,12 +185,6 @@
       "email": "MentorTTT@gmail.com",
       "password": "MentorTTT",
       "role": "student"
-    },
-    {
-      "id": "3059",
-      "email": "MentorAAA@gmail.com",
-      "password": "MentorAAA",
-      "role": "mentor"
     }
   ],
   "students": [
