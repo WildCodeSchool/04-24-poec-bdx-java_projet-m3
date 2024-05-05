@@ -54,13 +54,12 @@
     margin-bottom: 20px;
   }
 }
-/* Breakpoint pour les écrans de taille moyenne */
 @media screen and (min-width: 577px) and (max-width: 1000px) {
   .right-content {
-    padding: 0 50px; /* Padding ajusté pour les écrans de taille moyenne */
+    padding: 0 50px;
   }
   .left-content {
-    padding: 0 20px; /* Padding ajusté pour les écrans de taille moyenne */
+    padding: 0 20px;
   }
   h2 {
     font-size: 18px;
