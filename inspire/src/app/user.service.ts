@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, first, map, switchMap, tap } from 'rxjs';
-import { Student, User } from './shared/models/user';
+import { Mentor, Student, User } from './shared/models/user';
 import { UserStoreService } from './shared/services/stores/user-store.service';
 
 @Injectable({
@@ -44,6 +44,34 @@ export class UserService {
         );
 
         return this.http.post<Student>(`${this.BASE_URL}/students`, student);
+      })
+    );
+  }
+
+  createMentor(registerFormValues: any): Observable<Mentor> {
+    const user: User = new User(
+      registerFormValues.email,
+      registerFormValues.password,
+      'mentor'
+    );
+
+    return this.createUser(user).pipe(
+      switchMap((createdUser: User) => {
+        const userId = createdUser.id as string;
+        console.log(createdUser);
+
+        const mentor: Mentor = new Mentor(
+          userId,
+          registerFormValues.firstName,
+          registerFormValues.lastName,
+          '',
+          '',
+          '',
+          '',
+          ''
+        );
+
+        return this.http.post<Mentor>(`${this.BASE_URL}/mentors`, mentor);
       })
     );
   }
