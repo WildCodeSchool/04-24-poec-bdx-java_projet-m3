@@ -90,9 +90,10 @@ export class UserService {
             const userString = JSON.stringify(user);
             window.localStorage.setItem('user', userString);
             console.log(user);
+            this.router.navigate(['/layout']);
             return user;
           } else {
-            console.log('pas de user');
+            alert('Identifiants incorrects');
             return null;
           }
         })
