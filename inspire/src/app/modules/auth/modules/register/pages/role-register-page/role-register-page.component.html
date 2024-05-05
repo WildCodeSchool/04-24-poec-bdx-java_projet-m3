@@ -10,18 +10,21 @@
     <div class="right-title">
       <h2>Créer votre compte</h2>
       <h3>Je crée mon compte en tant que...</h3>
+      <div *ngIf="user$ | async as user">
+        {{ user.email }}
+      </div>
     </div>
 
     <div class="container-card">
       <app-card-role
         title="Étudiant"
         subtitle="Je veux être accompagné par un mentor"
-        [link]="'/register/user'"
+        [link]="'/register/student'"
       ></app-card-role>
       <app-card-role
         title="Mentor"
         subtitle="Je veux accompagner un étudiant"
-        [link]="'/register/user'"
+        [link]="'/register/mentor'"
       ></app-card-role>
       <app-card-role
         title="Entreprise"

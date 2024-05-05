@@ -9,8 +9,14 @@ const routes: Routes = [
     component: RoleRegisterPageComponent,
   },
   {
-    path: 'user',
+    path: 'student',
     component: RegisterPageComponent,
+    data: { role: 'student' },
+  },
+  {
+    path: 'mentor',
+    component: RegisterPageComponent,
+    data: { role: 'mentor' },
   },
 ];
 
