@@ -1,3 +1,8 @@
+import { Skill } from './chip';
+import { Experience } from './experience';
+import { Formation } from './formation';
+import { Language } from './language';
+
 export class User {
   id?: string;
   email: string = '';
@@ -42,6 +47,14 @@ export class Mentor {
     this.linkedinUrl = linkedinUrl;
   }
 }
+
+export type MentorFullProfil = {
+  profil: Mentor;
+  languages: Language[];
+  formations: Formation[];
+  experiences: Experience[];
+  skills: Skill[];
+};
 
 export class Student {
   id?: string;

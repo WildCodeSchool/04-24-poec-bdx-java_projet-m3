@@ -12,7 +12,7 @@ export class LayoutMentor implements OnInit {
 
   windowWatcher = inject(WindowWatcherService);
   // b362
-  mentor$ = inject(MentorService).getMentorById('f4cf');
+  mentor$ = inject(MentorService).getMentorById('b362');
   mentorS$ = inject(MentorService).activeMentor$;
 
   toggleVisibility() {
