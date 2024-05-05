@@ -8,7 +8,7 @@
     <div class="creneau">CRÉNEAU</div>
     <div class="action">ACTION</div>
   </div>
-  @for(item of list; track $index){
+  @for(item of reservations; track $index){
 
   <app-reservation-with-swipe
     [reservation]="item"

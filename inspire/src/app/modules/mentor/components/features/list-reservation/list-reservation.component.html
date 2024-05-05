@@ -8,11 +8,13 @@
     <div class="creneau">CRÉNEAU</div>
     <div class="action">ACTION</div>
   </div>
-  @for(item of list; track $index){
+  <ng-container *ngIf="reservations">
+    @for(item of reservations; track $index){
 
-  <app-row-reservation
-    [reservation]="item"
-    [bgColor]="$index % 2 === 0 ? 'transparent' : 'grey'"
-  ></app-row-reservation>
-  }
+    <app-row-reservation
+      [reservation]="item"
+      [bgColor]="$index % 2 === 0 ? 'transparent' : 'grey'"
+    ></app-row-reservation>
+    }
+  </ng-container>
 </div>

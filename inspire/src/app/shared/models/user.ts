@@ -66,6 +66,7 @@ export class Student {
   githubUrl: string;
   linkedinUrl: string;
   userId: string;
+  promotion?: string = 'javascript';
 
   constructor(
     userId: string,
