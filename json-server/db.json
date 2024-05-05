@@ -191,6 +191,24 @@
       "email": "TestStudentRedirect@gmail.com",
       "password": "TestStudentRedirect",
       "role": "student"
+    },
+    {
+      "id": "5468",
+      "email": "marie@gmail.com",
+      "password": "A",
+      "role": "student"
+    },
+    {
+      "id": "c9c1",
+      "email": "test1@gmail.com",
+      "password": "A",
+      "role": "student"
+    },
+    {
+      "id": "1e3b",
+      "email": "Test2@gmail.com",
+      "password": "Test2",
+      "role": "student"
     }
   ],
   "students": [
@@ -405,6 +423,39 @@
       "userId": "8c80",
       "firstname": "TestStudentRedirect",
       "lastname": "TestStudentRedirect",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "47ea",
+      "userId": "5468",
+      "firstname": "Marie",
+      "lastname": "Delaire",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "ca96",
+      "userId": "c9c1",
+      "firstname": "test1",
+      "lastname": "test1",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "ccbc",
+      "userId": "1e3b",
+      "firstname": "Test2",
+      "lastname": "Test2",
       "description": "",
       "imgUrl": "",
       "title": "",

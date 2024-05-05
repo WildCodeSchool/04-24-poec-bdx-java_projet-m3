@@ -44,9 +44,12 @@ export class UserService {
           '',
           ''
         );
-        this.router.navigate(['/login']);
 
         return this.http.post<Student>(`${this.BASE_URL}/students`, student);
+      }),
+      map((data) => {
+        this.router.navigate(['/login']);
+        return data;
       })
     );
   }
@@ -75,6 +78,10 @@ export class UserService {
         );
 
         return this.http.post<Mentor>(`${this.BASE_URL}/mentors`, mentor);
+      }),
+      map((data) => {
+        this.router.navigate(['/login']);
+        return data;
       })
     );
   }
