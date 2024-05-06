@@ -20,11 +20,10 @@
     <div class="promotion">
       {{ reservation.student.promotion || "Angular" | titlecase }}
     </div>
-    <div class="sujet">{{ reservation.subject }}</div>
+    <div class="sujet">
+      {{ reservation.subject || "sans sujet" | titlecase }}
+    </div>
     <div class="date">{{ reservation.slot.date }}</div>
     <div class="creneau">{{ reservation.slot.startAt }}</div>
-    <div class="action">
-      <button>Annuler</button>
-    </div>
   </div>
 </div>
