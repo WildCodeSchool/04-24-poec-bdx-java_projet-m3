@@ -13,7 +13,7 @@
   font-size: 60px;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 600px) {
   .welcome-titles {
     display: none;
   }
@@ -26,5 +26,11 @@
   }
   .welcome-container-img {
     padding-left: 130px;
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1000px) {
+  .welcome-container h1 {
+    font-size: 35px;
   }
 }

@@ -1,5 +1,4 @@
 .right-content {
-  padding: 0 100px;
   border-top-left-radius: 40px;
   border-bottom-left-radius: 40px;
 }
@@ -24,7 +23,7 @@
   font-weight: 600;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: px) {
   .container-login-page {
     flex-direction: column;
   }
