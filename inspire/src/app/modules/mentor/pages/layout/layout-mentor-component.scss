@@ -31,28 +31,31 @@
 .container-main {
   position: relative;
   display: flex;
+
+  button.burger {
+    position: absolute;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: transparent;
+    border: none;
+  }
   .container-side-nav {
+    margin-top: 40px;
     height: calc(100vh - 140px);
     background-color: white;
     border-radius: 10px;
     transition: 0.2s all ease;
     padding: 10px 10px;
     z-index: 10;
-
-    button.burger {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 30px;
-      background-color: transparent;
-      border: none;
-    }
   }
   .container-outlet {
     flex-grow: 1;
     padding: 20px;
     transition: 0.2s all ease;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 140px);
     overflow-y: auto;
     margin-top: 30px;
   }
@@ -63,7 +66,7 @@
     position: absolute;
   }
   .container-outlet {
-    margin-left: 60px;
+    margin-left: 10px;
     overflow-y: auto;
   }
   .container-layout {
