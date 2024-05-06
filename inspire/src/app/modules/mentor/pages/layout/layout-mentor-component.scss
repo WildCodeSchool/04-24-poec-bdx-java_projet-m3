@@ -37,6 +37,7 @@
     border-radius: 10px;
     transition: 0.2s all ease;
     padding: 10px 10px;
+    z-index: 10;
 
     button.burger {
       display: flex;
@@ -62,7 +63,7 @@
     position: absolute;
   }
   .container-outlet {
-    margin-left: 20px;
+    margin-left: 60px;
     overflow-y: auto;
   }
   .container-layout {

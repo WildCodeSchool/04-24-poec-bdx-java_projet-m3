@@ -16,7 +16,7 @@ export class DashboardLinksComponent {
     {
       title: 'dashboard',
       logoUrl: 'assets/svgs/dash.svg',
-      path: 'mentor/dashboard',
+      path: 'mentor',
       active: true,
     },
     {
