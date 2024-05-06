@@ -6,19 +6,17 @@
         <p>Votre espace mentor de la Wild Code School</p>
       </div>
       <div class="container-main">
-        <div class="container-side-nav">
-          <button
-            class="burger"
-            (click)="toggleVisibility()"
-            [ngClass]="!showNavbar ? 'light' : 'dark'"
-          >
-            <img
-              [src]="'assets/svgs/burger.svg'"
-              alt=""
-              width="25"
-              height="25"
-            />
-          </button>
+        <button
+          class="burger"
+          (click)="toggleVisibility()"
+          [ngClass]="!showNavbar ? 'light' : 'dark'"
+        >
+          <img [src]="'assets/svgs/burger.svg'" alt="" width="25" height="25" />
+        </button>
+        <div
+          class="container-side-nav"
+          [ngStyle]="{transform: !showNavbar? 'scaleX(0)' : 'scaleX(1)'}"
+        >
           <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
         </div>
         <div class="container-outlet">
