@@ -468,7 +468,7 @@
       "id": "45c7",
       "firstname": "Paul",
       "lastname": "Delaire",
-      "description": "Super Mentor !!! ",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse nec porttitor nunc, id bibendum libero. Morbi imperdiet interdum diam, at iaculis nibh sodales nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris quis tempus leo, ac semper tortor. Morbi ultricies elit leo, et interdum mi aliquet a. Morbi rutrum auctor purus. Sed lobortis ipsum eget sapien tincidunt ultricies. Vestibulum bibendum mi quis erat luctus, nec dignissim dui egestas. Sed ac molestie lacus. Aliquam massa tellus, lacinia a eleifend a, mollis eget nulla. Suspendisse felis ipsum, rutrum quis euismod at, pharetra ut velit.",
       "imgUrl": "https://picsum.photos/200/300",
       "title": "Dev Web",
       "githubUrl": "https://www.github.com/",
@@ -641,8 +641,8 @@
   "experiences": [
     {
       "id": "fd56",
-      "title": "formateur",
-      "company": "wild code school",
+      "title": "Formateur JavaScript",
+      "company": "Wild Code School",
       "dateBegin": "21-04-1986",
       "dateEnd": "04-05-2024",
       "city": "Bordeaux",
@@ -651,8 +651,8 @@
     },
     {
       "id": "334b",
-      "title": "serveur ",
-      "company": "del arte",
+      "title": "Serveur Pizza Del Arte ",
+      "company": "Del arte",
       "dateBegin": "21-04-1986",
       "dateEnd": "04-05-2024",
       "city": "Bordeaux",
@@ -661,8 +661,8 @@
     },
     {
       "id": "9ee4",
-      "title": "chomeur ",
-      "company": "chez moi",
+      "title": "Responsable de rayon  ",
+      "company": "Décathlon",
       "dateBegin": "21-04-1986",
       "dateEnd": "04-05-2024",
       "city": "Bordeaux",
@@ -671,7 +671,7 @@
     },
     {
       "id": "d901",
-      "title": "chomeuse ",
+      "title": "Responsable de rayon  ",
       "company": "chez moi",
       "dateBegin": "25-08-1994",
       "dateEnd": "04-05-2024",
@@ -681,8 +681,8 @@
     },
     {
       "id": "65f4",
-      "title": "chomeur ",
-      "company": "chez moi",
+      "title": "Responsable de rayon ",
+      "company": "Décathlon",
       "dateBegin": "14-08-1990",
       "dateEnd": "04-05-2024",
       "city": "Bordeaux",

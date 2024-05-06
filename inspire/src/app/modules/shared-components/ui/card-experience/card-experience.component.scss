@@ -25,15 +25,15 @@
 
     .details {
       p {
-        font-size: 22px;
+        font-size: 18px;
       }
       .date-place {
         display: flex;
         color: $font-color-grey;
 
         p {
-          margin-left: 5px;
-          font-size: 15px;
+          font-size: 16px;
+          margin-top: -6px;
         }
       }
     }

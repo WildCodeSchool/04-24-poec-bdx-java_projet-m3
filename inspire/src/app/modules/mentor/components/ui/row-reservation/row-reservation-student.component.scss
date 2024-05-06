@@ -25,17 +25,17 @@
   .action button {
     background-color: black;
     color: white;
-    padding: 2px 6px;
+    padding: 10px 18px;
     border: none;
     border-radius: 6px;
   }
 }
 
 .transparent {
-  background-color: transparent;
+  background-color: white;
 }
 .grey {
-  background-color: $background-light-list;
+  background-color: $background-light-list-pink;
 }
 
 @media screen and (max-width: $break-point-tablette-medium) {
