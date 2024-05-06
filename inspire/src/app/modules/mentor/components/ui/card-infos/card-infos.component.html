@@ -1,5 +1,8 @@
 <div class="title-about">
   <h2>A Propos</h2>
+  <button class="edit-button">
+    <img src="assets/svgs/edit.svg" alt="edit" width="25" height="25" />
+  </button>
 </div>
 <div class="container-card-infos" *ngIf="mentor">
   <div class="logo-chips">
@@ -26,14 +29,24 @@
       </div>
     </div>
     <div class="skills">
-      <h2>{{ mentor.title }}</h2>
+      <div class="title">
+        <h2>{{ mentor.title }}</h2>
+        <button class="edit-button">
+          <img src="assets/svgs/edit.svg" alt="edit" width="25" height="25" />
+        </button>
+      </div>
       <ng-container *ngIf="chips">
         <app-list-chip [chips]="chips"></app-list-chip>
       </ng-container>
     </div>
   </div>
   <div class="description">
-    <h3>Un peu plus sur moi</h3>
+    <div class="title-propos">
+      <h3>Un peu plus sur moi</h3>
+      <button class="edit-button">
+        <img src="assets/svgs/edit.svg" alt="edit" width="25" height="25" />
+      </button>
+    </div>
     <p>
       {{ mentor.description }}
     </p>
