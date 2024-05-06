@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 type DashboardLink = {
   title: string;
   logoUrl: string;
+  logoUrlActive: string;
   path: string;
   active: boolean;
 };
@@ -16,18 +17,21 @@ export class DashboardLinksComponent {
     {
       title: 'dashboard',
       logoUrl: 'assets/svgs/dash.svg',
+      logoUrlActive: 'assets/svgs/dash-white.svg',
       path: 'mentor',
       active: true,
     },
     {
       title: 'mon profil',
       logoUrl: 'assets/svgs/calendar.svg',
+      logoUrlActive: 'assets/svgs/calendar-white.svg',
       path: 'mentor/profil',
       active: false,
     },
     {
       title: 'agenda',
       logoUrl: 'assets/svgs/edit.svg',
+      logoUrlActive: 'assets/svgs/edit-white.svg',
       path: '',
       active: false,
     },
