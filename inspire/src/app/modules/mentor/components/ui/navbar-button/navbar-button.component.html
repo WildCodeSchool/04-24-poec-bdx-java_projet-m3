@@ -8,6 +8,12 @@
   class="btn-general"
   (click)="changeState()"
 >
-  <img [src]="logoUrl" alt="logo link" width="25" height="25" />
+  <img
+    [src]="active ? logoUrlActive : logoUrl"
+    alt="logo link"
+    width="25"
+    height="25"
+    [ngStyle]="{ stroke: 'red', fill: 'red' }"
+  />
   <p [ngStyle]="{ display: !showText ? 'none' : 'inherit' }">{{ text }}</p>
 </button>

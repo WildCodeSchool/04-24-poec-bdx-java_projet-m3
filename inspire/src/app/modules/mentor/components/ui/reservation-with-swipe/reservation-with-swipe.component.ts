@@ -33,12 +33,10 @@ export class ReservationWithSwipeComponent implements AfterViewInit {
       ele.preventDefault();
       console.log(ele);
       this.startingPosition = ele.touches[0].clientX;
-      ele.stopPropagation();
     });
 
-    fromEvent<TouchEvent>(this.elementRef.nativeElement, 'touchmove')
-      .pipe(auditTime(20))
-      .subscribe((ele: TouchEvent) => {
+    fromEvent<TouchEvent>(this.elementRef.nativeElement, 'touchmove').subscribe(
+      (ele: TouchEvent) => {
         ele.stopPropagation();
         ele.preventDefault();
         const touch = ele.changedTouches[0];
@@ -49,7 +47,8 @@ export class ReservationWithSwipeComponent implements AfterViewInit {
               : 150;
           this.elementRef.nativeElement.style.transform = `translateX(${this.offsetRight}px)`;
         }
-      });
+      }
+    );
 
     fromEvent<TouchEvent>(this.elementRef.nativeElement, 'touchend').subscribe(
       (ele: TouchEvent) => {
@@ -58,9 +57,6 @@ export class ReservationWithSwipeComponent implements AfterViewInit {
         const touch = ele.changedTouches[0];
         this.offsetRight = touch.clientX - this.startingPosition;
 
-        // if (this.showAction) {
-
-        // } else
         if (this.offsetRight > 75) {
           this.elementRef.nativeElement.style.transform = `translateX(150px)`;
           this.showAction = true;
