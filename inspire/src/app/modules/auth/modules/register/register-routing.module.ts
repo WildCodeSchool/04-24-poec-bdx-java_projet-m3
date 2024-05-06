@@ -16,6 +16,7 @@ const routes: Routes = [
   {
     path: 'mentor',
     component: RegisterPageComponent,
+
     data: { role: 'mentor' },
   },
 ];

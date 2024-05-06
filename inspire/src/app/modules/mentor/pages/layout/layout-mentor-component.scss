@@ -34,9 +34,10 @@
   .container-side-nav {
     height: calc(100vh - 140px);
     background-color: white;
-    border-radius: 10px;
+    border-radius: 20px;
     transition: 0.2s all ease;
     padding: 10px 10px;
+    margin-top: 20px;
 
     button.burger {
       display: flex;
@@ -62,7 +63,7 @@
     position: absolute;
   }
   .container-outlet {
-    margin-left: 20px;
+    margin-left: 60px;
     overflow-y: auto;
   }
   .container-layout {
