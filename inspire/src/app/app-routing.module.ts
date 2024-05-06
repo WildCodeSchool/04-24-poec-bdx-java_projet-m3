@@ -5,14 +5,14 @@ import { isConnected } from './shared/auth.guard';
 
 export const routes: Routes = [
   {
-    path: 'login',
+    path: '',
     loadChildren: () =>
       import('./modules/auth/modules/login/login.module').then(
         (m) => m.LoginModule
       ),
   },
   {
-    path: 'mentors',
+    path: 'student',
     loadChildren: () =>
       import('./modules/students/students.module').then(
         (m) => m.StudentsModule

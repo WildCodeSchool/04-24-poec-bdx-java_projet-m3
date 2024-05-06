@@ -1,21 +1,23 @@
-<div class="container-layout">
-  <div class="header-container">
-    <h2>Bonjour {{ user.firstname }}</h2>
-    <p>Votre espace mentor de la Wild Code School</p>
-  </div>
-  <div class="container-main">
-    <div class="container-side-nav">
-      <button
-        class="burger"
-        (click)="toggleVisibility()"
-        [ngClass]="!showNavbar ? 'light' : 'dark'"
-      >
-        <img [src]="'assets/svgs/burger.svg'" alt="" width="25" height="25" />
-      </button>
-      <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
+<ng-container *ngIf="mentor$ | async as mentor">
+  <div class="container-layout">
+    <div class="header-container">
+      <h2>Bonjour {{mentor.profil.firstname}}</h2>
+      <p>Votre espace mentor de la Wild Code School</p>
     </div>
-    <div class="container-outlet">
-      <router-outlet></router-outlet>
+    <div class="container-main">
+      <div class="container-side-nav">
+        <button
+          class="burger"
+          (click)="toggleVisibility()"
+          [ngClass]="!showNavbar ? 'light' : 'dark'"
+        >
+          <img [src]="'assets/svgs/burger.svg'" alt="" width="25" height="25" />
+        </button>
+        <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
+      </div>
+      <div class="container-outlet">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>

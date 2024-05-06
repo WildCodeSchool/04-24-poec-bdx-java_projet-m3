@@ -1,3 +1,8 @@
+import { Skill } from './chip';
+import { Experience } from './experience';
+import { Formation } from './formation';
+import { Language } from './language';
+
 export class User {
   id?: string;
   email: string = '';
@@ -43,6 +48,14 @@ export class Mentor {
   }
 }
 
+export type MentorFullProfil = {
+  profil: Mentor;
+  languages: Language[];
+  formations: Formation[];
+  experiences: Experience[];
+  skills: Skill[];
+};
+
 export class Student {
   id?: string;
   firstname: string;
@@ -53,6 +66,7 @@ export class Student {
   githubUrl: string;
   linkedinUrl: string;
   userId: string;
+  promotion?: string = 'javascript';
 
   constructor(
     userId: string,

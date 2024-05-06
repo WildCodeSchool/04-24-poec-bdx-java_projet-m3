@@ -1,47 +1,38 @@
-<div class="container-card-infos">
+<div class="container-card-infos" *ngIf="mentor">
   <div class="logo-chips">
     <div class="avatar-social">
       <img
         class="logo"
-        src="https://picsum.photos/200/200"
-        alt=""
+        [src]="mentor.imgUrl ? mentor.imgUrl : 'https://picsum.photos/200/200'"
+        alt="avatar mentor"
         width="162"
         height="162"
       />
       <div class="social">
-        <img
-          src="https://picsum.photos/200/201"
-          alt=""
-          width="35"
-          height="35"
-        />
-        <img
-          src="https://picsum.photos/200/199"
-          alt=""
-          width="35"
-          height="35"
-        />
+        <a [href]="mentor.linkedinUrl">
+          <img
+            src="assets/linkedin.png"
+            alt="linkedin"
+            width="35"
+            height="35"
+          />
+        </a>
+        <a [href]="mentor.githubUrl">
+          <img src="assets/github.png" alt="github" width="35" height="35" />
+        </a>
       </div>
     </div>
     <div class="skills">
-      <h2>title</h2>
-      <div class="list-skills">
-        <app-chip></app-chip>
-        <app-chip></app-chip>
-        <app-chip></app-chip>
-        <app-chip></app-chip>
-        <app-chip></app-chip>
-        <app-chip></app-chip>
-      </div>
+      <h2>{{ mentor.title }}</h2>
+      <ng-container *ngIf="chips">
+        <app-list-chip [chips]="chips"></app-list-chip>
+      </ng-container>
     </div>
   </div>
   <div class="description">
-    <h3>Un peu sur moi</h3>
+    <h3>Un peu plus sur moi</h3>
     <p>
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam iste
-      mollitia similique vero nesciunt voluptate laborum labore dolore, facere
-      autem ratione, quas fuga eligendi, consequuntur sed id! Aperiam, excepturi
-      voluptatibus?
+      {{ mentor.description }}
     </p>
   </div>
 </div>

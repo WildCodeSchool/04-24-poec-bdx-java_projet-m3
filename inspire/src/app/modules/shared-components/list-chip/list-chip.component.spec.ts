@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListLanguagesComponent } from './list-languages.component';
+import { ListChipComponent } from './list-chip.component';
 
-describe('ListLanguagesComponent', () => {
-  let component: ListLanguagesComponent;
-  let fixture: ComponentFixture<ListLanguagesComponent>;
+describe('ListChipComponent', () => {
+  let component: ListChipComponent;
+  let fixture: ComponentFixture<ListChipComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ListLanguagesComponent]
+      declarations: [ListChipComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ListLanguagesComponent);
+    fixture = TestBed.createComponent(ListChipComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

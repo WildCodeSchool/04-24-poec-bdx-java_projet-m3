@@ -97,7 +97,8 @@ export class UserService {
             const userString = JSON.stringify(user);
             window.localStorage.setItem('user', userString);
             console.log(user);
-            this.router.navigate(['/layout']);
+            if (user.role === 'mentor') this.router.navigate(['/mentor']);
+            if (user.role === 'student') this.router.navigate(['/student']);
             return user;
           } else {
             alert('Identifiants incorrects');
