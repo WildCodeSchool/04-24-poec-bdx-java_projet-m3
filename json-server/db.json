@@ -641,8 +641,8 @@
   "experiences": [
     {
       "id": "fd56",
-      "title": "formateur",
-      "company": "wild code school",
+      "title": "Formateur JavaScript",
+      "company": "Wild Code School",
       "dateBegin": "21-04-1986",
       "dateEnd": "04-05-2024",
       "city": "Bordeaux",
@@ -651,8 +651,8 @@
     },
     {
       "id": "334b",
-      "title": "serveur ",
-      "company": "del arte",
+      "title": "Serveur Pizza Del Arte ",
+      "company": "Del arte",
       "dateBegin": "21-04-1986",
       "dateEnd": "04-05-2024",
       "city": "Bordeaux",
@@ -661,8 +661,8 @@
     },
     {
       "id": "9ee4",
-      "title": "chomeur ",
-      "company": "chez moi",
+      "title": "Responsable de rayon  ",
+      "company": "Décathlon",
       "dateBegin": "21-04-1986",
       "dateEnd": "04-05-2024",
       "city": "Bordeaux",
@@ -671,7 +671,7 @@
     },
     {
       "id": "d901",
-      "title": "chomeuse ",
+      "title": "Responsable de rayon  ",
       "company": "chez moi",
       "dateBegin": "25-08-1994",
       "dateEnd": "04-05-2024",
@@ -681,8 +681,8 @@
     },
     {
       "id": "65f4",
-      "title": "chomeur ",
-      "company": "chez moi",
+      "title": "Responsable de rayon ",
+      "company": "Décathlon",
       "dateBegin": "14-08-1990",
       "dateEnd": "04-05-2024",
       "city": "Bordeaux",
