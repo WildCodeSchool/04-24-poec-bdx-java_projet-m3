@@ -9,4 +9,9 @@ import { Formation } from '../../../../shared/models/formation';
 export class ListFormationComponent {
   @Input() title: string = '';
   @Input() formations!: Formation[];
+  isVisibleFormCourse = false;
+
+  addCourse() {
+    this.isVisibleFormCourse = true;
+  }
 }

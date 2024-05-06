@@ -8,4 +8,9 @@ import { Formation } from '../../../../shared/models/formation';
 })
 export class CardFormationComponent {
   @Input() formation!: Formation;
+  isVisibleFormEditCourse = false;
+
+  showEditForm() {
+    this.isVisibleFormEditCourse = true;
+  }
 }

@@ -4,7 +4,7 @@ import { ButtonComponent } from './button/button.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SocialConnexionComponent } from './social-connexion/social-connexion.component';
 import { FormExperienceComponent } from './form-experience/form-experience.component';
-import { FormCourseComponent } from './form-course/form-course.component';
+import { FormAddCourseComponent } from './form-add-course/form-add-course.component';
 import { FormAboutComponent } from './form-about/form-about.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChipComponent } from './chip/chip.component';
@@ -19,6 +19,9 @@ import { ListFormationComponent } from './ui/list-formation/list-formation.compo
 import { CardExperienceComponent } from './ui/card-experience/card-experience.component';
 import { ListExperienceComponent } from './ui/list-experience/list-experience.component';
 import { ListLanguageComponent } from './ui/list-language/list-language.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { DialogModule } from 'primeng/dialog';
+import { FormEditCourseComponent } from './form-edit-course/form-edit-course.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,7 @@ import { ListLanguageComponent } from './ui/list-language/list-language.componen
     WelcomeComponent,
     SocialConnexionComponent,
     FormExperienceComponent,
-    FormCourseComponent,
+    FormAddCourseComponent,
     FormAboutComponent,
     ChipComponent,
     CardSkillComponent,
@@ -37,6 +40,7 @@ import { ListLanguageComponent } from './ui/list-language/list-language.componen
     CardExperienceComponent,
     ListExperienceComponent,
     ListLanguageComponent,
+    FormEditCourseComponent,
   ],
   imports: [
     CommonModule,
@@ -44,13 +48,15 @@ import { ListLanguageComponent } from './ui/list-language/list-language.componen
     ButtonModule,
     DividerModule,
     TreeTableModule,
+    SidebarModule,
+    DialogModule,
   ],
   exports: [
     ButtonComponent,
     WelcomeComponent,
     SocialConnexionComponent,
     FormExperienceComponent,
-    FormCourseComponent,
+    FormAddCourseComponent,
     FormAboutComponent,
     ChipComponent,
     CardSkillComponent,

@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="card-skill-control">
-    <button>
+    <button (click)="showEditForm()">
       <img src="assets/svgs/edit.svg" alt="edit" width="20" height="20" />
     </button>
     <button>
@@ -19,3 +19,7 @@
     </button>
   </div>
 </div>
+
+<p-sidebar [(visible)]="isVisibleFormEditCourse" position="right">
+  <app-form-edit-course [formation]="formation"></app-form-edit-course>
+</p-sidebar>

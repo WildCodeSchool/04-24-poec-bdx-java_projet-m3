@@ -1,6 +1,6 @@
 <div class="title-list">
   <h3>{{ title }}</h3>
-  <button class="edit-button">
+  <button class="edit-button" (click)="addCourse()">
     <img src="assets/svgs/plus.svg" alt="edit" width="25" height="25" />
   </button>
 </div>
@@ -13,3 +13,7 @@
     } }
   </ng-container>
 </div>
+
+<p-sidebar [(visible)]="isVisibleFormCourse" position="right">
+  <app-form-add-course></app-form-add-course>
+</p-sidebar>
