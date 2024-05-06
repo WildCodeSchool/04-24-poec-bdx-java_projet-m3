@@ -1,5 +1,7 @@
-<div class="list-skills">
+<div class="title-list">
   <h3>{{ title }}</h3>
+</div>
+<div class="list-skills">
   <ng-container *ngIf="formations">
     @for( formation of formations; track $index ){
     <app-card-formation [formation]="formation"></app-card-formation>

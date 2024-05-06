@@ -15,25 +15,25 @@
       justify-content: center;
       background-color: $secondary-color;
       border: none;
-      border-radius: 15px;
+      border-radius: 10px;
       margin-right: 14px;
 
       img {
-        margin: 10px;
+        margin: 8px;
       }
     }
 
     .details {
       p {
-        font-size: 14px;
+        font-size: 13px;
+        margin-top: -5px;
       }
       .date-place {
         display: flex;
         color: $font-color-grey;
 
         p {
-          margin-left: 5px;
-          font-size: 10px;
+          font-size: 12px;
         }
       }
     }
