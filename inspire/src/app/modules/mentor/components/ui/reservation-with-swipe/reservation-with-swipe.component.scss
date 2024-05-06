@@ -6,7 +6,7 @@
   height: 65px;
   padding-left: 33px;
   display: grid;
-  grid-template-columns: repeat(6, auto);
+  grid-template-columns: repeat(5, 1fr);
 
   .avatar-name {
     display: flex;
@@ -48,9 +48,6 @@
       display: none;
     }
     .promotion {
-      display: none;
-    }
-    .action {
       display: none;
     }
   }
