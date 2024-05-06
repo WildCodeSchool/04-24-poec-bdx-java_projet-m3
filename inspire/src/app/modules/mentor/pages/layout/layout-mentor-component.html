@@ -15,7 +15,7 @@
         </button>
         <div
           class="container-side-nav"
-          [ngStyle]="{transform: !showNavbar? 'scaleX(0)' : 'scaleX(1)', transformOrigin: 'top left'}"
+          [ngStyle]="{transform: (!showNavbar && !windowWatcher.windowSizeChanged.value)? 'scaleX(0)' : 'scaleX(1)', transformOrigin: 'top left'}"
         >
           <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
         </div>
