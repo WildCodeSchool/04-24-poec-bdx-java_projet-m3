@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
@@ -14,10 +14,15 @@ export class FormAddCourseComponent {
     dateEnd: [''],
     description: [''],
   });
+  @Input() destroy!: () => void;
 
   onSubmit() {
     console.log(this.courseForm.value);
   }
 
   constructor(private fb: FormBuilder) {}
+
+  cancel() {
+    this.destroy();
+  }
 }

@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Formation } from '../../../../shared/models/formation';
+import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 
 @Component({
   selector: 'app-list-formation',
@@ -11,7 +12,13 @@ export class ListFormationComponent {
   @Input() formations!: Formation[];
   isVisibleFormCourse = false;
 
+  windowWatcherService = inject(WindowWatcherService);
+
   addCourse() {
     this.isVisibleFormCourse = true;
   }
+
+  hideAddFormation = () => {
+    this.isVisibleFormCourse = false;
+  };
 }

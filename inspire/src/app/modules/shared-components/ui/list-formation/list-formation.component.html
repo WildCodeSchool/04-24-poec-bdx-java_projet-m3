@@ -14,6 +14,21 @@
   </ng-container>
 </div>
 
-<p-sidebar [(visible)]="isVisibleFormCourse" position="right">
-  <app-form-add-course></app-form-add-course>
-</p-sidebar>
+<ng-container
+  *ngIf="{
+    phoneMode: windowWatcherService.windowSizeChanged.asObservable() | async
+  } as phoneMode"
+>
+  <p-sidebar
+    [(visible)]="isVisibleFormCourse"
+    position="right"
+    (onHide)="hideAddFormation()"
+    *ngIf="isVisibleFormCourse"
+    position="right"
+    [style]="{
+      width: phoneMode.phoneMode ? 'max(50vw, 400px)' : '100vw'
+    }"
+  >
+    <app-form-add-course [destroy]="hideAddFormation"></app-form-add-course>
+  </p-sidebar>
+</ng-container>
