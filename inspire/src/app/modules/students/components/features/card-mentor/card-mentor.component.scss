@@ -8,7 +8,6 @@
     position: relative;
     height: 170px;
     border-radius: 15px 15px 0 0;
- 
 
     img {
       width: 100%;
@@ -18,27 +17,35 @@
       border-radius: 15px 15px 0 0;
     }
   }
-  
+
   .img-card h1 {
-    position: absolute; 
-    bottom: 0; 
-    left: 0; 
-    margin: 0; 
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
     font-size: 1.6em;
-    color: white; 
+    color: white;
     padding: 5px 15px;
   }
-  
-.title-card {
-  margin-top: 10px;
-  padding: 5px 10px;
-}
 
-.chip-container {
-  padding: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-}
+  .title-card {
+    margin-top: 10px;
+    padding: 5px 10px;
+  }
 
+  .chip-container {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .social-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+
+    .img-linkedin img{
+      height: 30px;
+    }
+  }
 }
