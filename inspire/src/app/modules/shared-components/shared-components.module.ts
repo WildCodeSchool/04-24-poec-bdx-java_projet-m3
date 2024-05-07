@@ -22,6 +22,7 @@ import { ListLanguageComponent } from './ui/list-language/list-language.componen
 import { SidebarModule } from 'primeng/sidebar';
 import { DialogModule } from 'primeng/dialog';
 import { FormEditCourseComponent } from './form-edit-course/form-edit-course.component';
+import { ModalValidateComponent } from './modal-validate/modal-validate.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { FormEditCourseComponent } from './form-edit-course/form-edit-course.com
     ListExperienceComponent,
     ListLanguageComponent,
     FormEditCourseComponent,
+    ModalValidateComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +70,7 @@ import { FormEditCourseComponent } from './form-edit-course/form-edit-course.com
     CardExperienceComponent,
     ListExperienceComponent,
     ListLanguageComponent,
+    ModalValidateComponent,
   ],
 })
 export class SharedComponentsModule {}

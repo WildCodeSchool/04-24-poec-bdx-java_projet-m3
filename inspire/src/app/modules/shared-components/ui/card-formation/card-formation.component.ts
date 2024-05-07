@@ -10,6 +10,7 @@ import { WindowWatcherService } from '../../../../shared/services/window-watcher
 export class CardFormationComponent {
   @Input() formation!: Formation;
   isVisibleFormEditCourse = false;
+  popupDeleteVisible = false;
 
   windowWatcherService = inject(WindowWatcherService);
 
@@ -21,4 +22,8 @@ export class CardFormationComponent {
     this.isVisibleFormEditCourse = false;
     console.log('called');
   };
+
+  showPopUpDelete() {
+    this.popupDeleteVisible = true;
+  }
 }

@@ -1,0 +1,32 @@
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '50vw', height: '50vh' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="modal">
+    <p>{{ question }}</p>
+    <div class="control">
+      <button
+        (click)="cancel()"
+        class="btn-general"
+        (focus)="focusCancel()"
+        (focusout)="focusOutCancel()"
+        [ngClass]="focusBtnCancel ? 'pink' : ''"
+      >
+        Annuler
+      </button>
+
+      <button
+        (click)="validate()"
+        class="btn-general"
+        (focus)="focusValidate()"
+        (focusout)="focusOutValidate()"
+        [ngClass]="focusBtnValidate ? 'pink' : ''"
+      >
+        Valider
+      </button>
+    </div>
+  </div>
+</p-dialog>
