@@ -4,7 +4,7 @@
   height: 65px;
   padding-left: 33px;
   display: grid;
-  grid-template-columns: repeat(6, auto);
+  grid-template-columns: repeat(6, 1fr);
 
   .avatar-name {
     display: flex;
@@ -25,17 +25,17 @@
   .action button {
     background-color: black;
     color: white;
-    padding: 2px 6px;
+    padding: 10px 18px;
     border: none;
     border-radius: 6px;
   }
 }
 
 .transparent {
-  background-color: transparent;
+  background-color: white;
 }
 .grey {
-  background-color: $background-light-list;
+  background-color: $background-light-list-pink;
 }
 
 @media screen and (max-width: $break-point-tablette-medium) {

@@ -36,7 +36,7 @@
   margin-top: 50px;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 850px) {
   .container-login-page {
     flex-direction: column;
   }
@@ -52,5 +52,21 @@
   .right-title {
     font-size: 20px;
     margin-bottom: 20px;
+  }
+}
+@media screen and (min-width: 851px) and (max-width: 1000px) {
+  .right-content {
+    padding: 0 50px;
+  }
+  .left-content {
+    padding: 0 50px;
+    margin-right: 50;
+  }
+  .left-content h2 {
+    font-size: 18px;
+  }
+
+  .left-content h1 {
+    font-size: 18px;
   }
 }

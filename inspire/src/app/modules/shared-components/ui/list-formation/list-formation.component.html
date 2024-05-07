@@ -1,0 +1,15 @@
+<div class="title-list">
+  <h3>{{ title }}</h3>
+  <button class="edit-button">
+    <img src="assets/svgs/plus.svg" alt="edit" width="25" height="25" />
+  </button>
+</div>
+<div class="list-skills">
+  <ng-container *ngIf="formations">
+    @for( formation of formations; track $index ){
+    <app-card-formation [formation]="formation"></app-card-formation>
+    @if($index !== formations.length -1){
+    <p-divider></p-divider>
+    } }
+  </ng-container>
+</div>

@@ -13,6 +13,8 @@ export class NavbarButtonComponent {
   text!: string;
   @Input()
   logoUrl!: string;
+  @Input()
+  logoUrlActive!: string;
   @Input() active: boolean = false;
   @Input()
   variant!: 'light' | 'dark' | 'lightActive' | 'darkActive';

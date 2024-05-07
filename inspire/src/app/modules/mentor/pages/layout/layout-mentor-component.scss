@@ -1,11 +1,15 @@
 @import "../../../../../variables.scss";
 
+.container-general-layout {
+  background-color: #fcf6f8;
+}
+
 .container-layout {
-  width: 100%;
   margin: 0 auto;
   margin-top: 0;
   padding: 0;
   min-height: 100vh;
+  max-width: 1280px;
   background-color: #fcf6f8;
 
   .header-container {
@@ -13,9 +17,10 @@
     width: 60%;
     height: 100px;
     margin: 0 auto;
-    border-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     color: white;
-    padding: 0 30px;
+    padding: 0 20px;
 
     display: flex;
     flex-direction: column;
@@ -26,28 +31,33 @@
 .container-main {
   position: relative;
   display: flex;
+
+  button.burger {
+    position: absolute;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: transparent;
+    border: none;
+  }
   .container-side-nav {
-    margin-top: 20px;
+    margin-top: 40px;
     height: calc(100vh - 140px);
     background-color: white;
     border-radius: 10px;
     transition: 0.2s all ease;
-
-    button.burger {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 5px;
-      background-color: transparent;
-      border: none;
-    }
+    padding: 10px 10px;
+    z-index: 10;
   }
   .container-outlet {
     flex-grow: 1;
     padding: 20px;
     transition: 0.2s all ease;
-    height: calc(100vh - 120px);
+    height: calc(100vh - 140px);
     overflow-y: auto;
+    margin-top: 30px;
   }
 }
 
@@ -56,7 +66,7 @@
     position: absolute;
   }
   .container-outlet {
-    margin-left: 20px;
+    margin-left: 10px;
     overflow-y: auto;
   }
   .container-layout {

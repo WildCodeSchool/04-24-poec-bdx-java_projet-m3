@@ -11,7 +11,7 @@ const routes: Routes = [
     component: LayoutMentor,
     children: [
       {
-        path: 'dashboard',
+        path: '',
         component: DashboardComponent,
       },
       {

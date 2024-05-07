@@ -1,0 +1,50 @@
+@import "../../../../../variables.scss";
+
+.card-skill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .card-skill-body {
+    display: flex;
+    align-items: center;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $secondary-color;
+      border: none;
+      border-radius: 10px;
+      margin-right: 10px;
+
+      img {
+        margin: 8px;
+      }
+    }
+
+    .details {
+      p {
+        font-size: 14px;
+        margin-top: -5px;
+      }
+      .date-place {
+        display: flex;
+        color: $font-color-grey;
+
+        p {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+
+  .card-skill-control {
+    display: flex;
+    gap: 5px;
+    button {
+      border: none;
+      background-color: transparent;
+    }
+  }
+}

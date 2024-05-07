@@ -1,5 +1,10 @@
+import { Skill } from './chip';
+import { Experience } from './experience';
+import { Formation } from './formation';
+import { Language } from './language';
+
 export class User {
-  id?: string = '';
+  id?: string;
   email: string = '';
   password: string = '';
   role: string = '';
@@ -10,42 +15,76 @@ export class User {
     this.role = role;
   }
 }
-export class Mentor extends User {
+
+export class Mentor {
+  id?: string;
   firstname: string = '';
   lastname: string = '';
   description: string = '';
+  imgUrl: string = '';
+  title: string = '';
+  githubUrl: string = '';
+  linkedinUrl: string = '';
+  userId: string = '';
 
   constructor(
-    email: string,
-    password: string,
-    role: string,
+    userId: string,
     firstname: string,
     lastname: string,
-    description: string
+    description: string,
+    imgUrl: string,
+    title: string,
+    githubUrl: string,
+    linkedinUrl: string
   ) {
-    super(email, password, role);
+    this.userId = userId;
     this.firstname = firstname;
     this.lastname = lastname;
     this.description = description;
+    this.imgUrl = imgUrl;
+    this.title = title;
+    this.githubUrl = githubUrl;
+    this.linkedinUrl = linkedinUrl;
   }
 }
 
-export class Student extends User {
-  firstname: string = '';
-  lastname: string = '';
-  description: string = '';
+export type MentorFullProfil = {
+  profil: Mentor;
+  languages: Language[];
+  formations: Formation[];
+  experiences: Experience[];
+  skills: Skill[];
+};
+
+export class Student {
+  id?: string;
+  firstname: string;
+  lastname: string;
+  description: string;
+  imgUrl: string;
+  title: string;
+  githubUrl: string;
+  linkedinUrl: string;
+  userId: string;
+  promotion?: string = 'javascript';
 
   constructor(
-    email: string,
-    password: string,
-    role: string,
+    userId: string,
     firstname: string,
     lastname: string,
-    description: string
+    description: string = '',
+    imgUrl: string = '',
+    title: string = '',
+    githubUrl: string = '',
+    linkedinUrl: string = ''
   ) {
-    super(email, password, role);
+    this.userId = userId;
     this.firstname = firstname;
     this.lastname = lastname;
     this.description = description;
+    this.imgUrl = imgUrl;
+    this.title = title;
+    this.githubUrl = githubUrl;
+    this.linkedinUrl = linkedinUrl;
   }
 }

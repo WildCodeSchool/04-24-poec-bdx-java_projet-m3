@@ -1,4 +1,4 @@
-<div class="row-reservation" [ngClass]="bgColor">
+<div class="row-reservation" [ngClass]="bgColor" *ngIf="reservation">
   <div class="avatar-name">
     <img
       [src]="'https://placehold.jp/35x35.png'"
@@ -9,11 +9,15 @@
     <p>{{ reservation.student.firstname }}</p>
   </div>
   <div class="promotion">
-    {{ reservation.promotion }}
+    {{ reservation.student.promotion ?? "Java" }}
   </div>
-  <div class="sujet">{{ reservation.subject }}</div>
-  <div class="date">{{ reservation.date | date }}</div>
-  <div class="creneau">{{ reservation.slot }}</div>
+  <div class="sujet">{{ reservation.subject || "sans sujet" | titlecase }}</div>
+  <div class="date">
+    {{ reservation.slot.date }}
+  </div>
+  <div class="creneau">
+    {{ reservation.slot.startAt }}
+  </div>
   <div class="action">
     <button>Annuler</button>
   </div>
