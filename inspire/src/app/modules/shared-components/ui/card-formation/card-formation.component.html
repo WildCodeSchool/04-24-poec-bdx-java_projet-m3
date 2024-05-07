@@ -19,10 +19,23 @@
     </button>
   </div>
 </div>
-
-<p-sidebar [(visible)]="isVisibleFormEditCourse" position="right">
-  <app-form-edit-course
-    [formation]="formation"
-    [destroy]="hideEditForm"
-  ></app-form-edit-course>
-</p-sidebar>
+<ng-container
+  *ngIf="{
+    phoneMode: windowWatcherService.windowSizeChanged.asObservable() | async
+  } as phoneMode"
+>
+  <p-sidebar
+    (onHide)="hideEditForm()"
+    *ngIf="isVisibleFormEditCourse"
+    [(visible)]="isVisibleFormEditCourse"
+    position="right"
+    [style]="{
+      width: phoneMode.phoneMode ? 'max(50vw, 400px)' : '100vw'
+    }"
+  >
+    <app-form-edit-course
+      [formation]="formation"
+      [destroy]="hideEditForm"
+    ></app-form-edit-course>
+  </p-sidebar>
+</ng-container>

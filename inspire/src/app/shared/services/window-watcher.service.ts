@@ -17,7 +17,7 @@ export class WindowWatcherService {
   windowSizeWatcher = fromEvent(window, 'resize')
     .pipe(
       auditTime(100),
-      map(() => window.innerWidth >= 890),
+      map(() => window.innerWidth >= 992),
       distinctUntilChanged()
     )
     .subscribe((ele) => {
