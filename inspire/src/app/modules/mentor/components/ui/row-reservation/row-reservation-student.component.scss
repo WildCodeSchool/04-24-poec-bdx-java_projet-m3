@@ -38,7 +38,7 @@
   background-color: $background-light-list-pink;
 }
 
-@media screen and (max-width: $break-point-tablette-medium) {
+@media screen and (max-width: $large) {
   .row-reservation {
     padding-left: 0;
     grid-template-columns: 2fr 2fr 1fr;

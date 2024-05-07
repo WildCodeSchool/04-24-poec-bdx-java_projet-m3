@@ -209,6 +209,12 @@
       "email": "Test2@gmail.com",
       "password": "Test2",
       "role": "student"
+    },
+    {
+      "id": "4526",
+      "email": "marie.delaire@outlook.com",
+      "password": "1234",
+      "role": "student"
     }
   ],
   "students": [
@@ -456,6 +462,18 @@
       "userId": "1e3b",
       "firstname": "Test2",
       "lastname": "Test2",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "fc80",
+      "promotion": "javascript",
+      "userId": "4526",
+      "firstname": "",
+      "lastname": "",
       "description": "",
       "imgUrl": "",
       "title": "",

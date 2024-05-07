@@ -13,4 +13,8 @@ export class CardFormationComponent {
   showEditForm() {
     this.isVisibleFormEditCourse = true;
   }
+
+  hideEditForm = () => {
+    this.isVisibleFormEditCourse = false;
+  };
 }

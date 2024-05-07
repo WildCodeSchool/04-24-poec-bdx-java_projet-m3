@@ -21,5 +21,8 @@
 </div>
 
 <p-sidebar [(visible)]="isVisibleFormEditCourse" position="right">
-  <app-form-edit-course [formation]="formation"></app-form-edit-course>
+  <app-form-edit-course
+    [formation]="formation"
+    [destroy]="hideEditForm"
+  ></app-form-edit-course>
 </p-sidebar>

@@ -10,6 +10,7 @@ import { Formation } from '../../../shared/models/formation';
 export class FormEditCourseComponent implements OnInit {
   @Input() formation!: Formation;
   courseForm!: FormGroup<any>;
+  @Input() destroy!: () => void;
 
   onSubmit() {
     console.log(this.courseForm.value);
@@ -24,5 +25,10 @@ export class FormEditCourseComponent implements OnInit {
       dateEnd: [this.formation.dateEnd],
       description: [''],
     });
+  }
+  cancel() {
+    console.log('cancel run');
+
+    this.destroy();
   }
 }
