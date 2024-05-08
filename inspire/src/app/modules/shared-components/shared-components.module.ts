@@ -6,7 +6,7 @@ import { SocialConnexionComponent } from './social-connexion/social-connexion.co
 import { FormExperienceComponent } from './form-experience/form-experience.component';
 import { FormAddCourseComponent } from './form-add-course/form-add-course.component';
 import { FormAboutComponent } from './form-about/form-about.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChipComponent } from './chip/chip.component';
 import { ButtonModule } from 'primeng/button';
 import { DividerModule } from 'primeng/divider';
@@ -23,6 +23,8 @@ import { SidebarModule } from 'primeng/sidebar';
 import { DialogModule } from 'primeng/dialog';
 import { FormEditCourseComponent } from './form-edit-course/form-edit-course.component';
 import { ModalValidateComponent } from './modal-validate/modal-validate.component';
+import { ModalEditLanguagesComponent } from './modal-edit-languages/modal-edit-languages.component';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { ModalValidateComponent } from './modal-validate/modal-validate.componen
     ListLanguageComponent,
     FormEditCourseComponent,
     ModalValidateComponent,
+    ModalEditLanguagesComponent,
   ],
   imports: [
     CommonModule,
@@ -52,6 +55,8 @@ import { ModalValidateComponent } from './modal-validate/modal-validate.componen
     TreeTableModule,
     SidebarModule,
     DialogModule,
+    MultiSelectModule,
+    FormsModule,
   ],
   exports: [
     ButtonComponent,

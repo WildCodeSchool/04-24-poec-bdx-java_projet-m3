@@ -20,6 +20,7 @@ export class ModalValidateComponent {
 
   closeDialog() {
     this.visible = false;
+    this.onCancel.emit();
   }
 
   validate() {

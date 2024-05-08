@@ -8,6 +8,19 @@
 >
   <div class="modal">
     <p>{{ question }}</p>
+    <div class="card flex justify-content-center select-languages">
+      <form [formGroup]="formGroup">
+        <p-multiSelect
+          [options]="languages"
+          formControlName="selectedLanguages"
+          placeholder="Choisissez vos langues"
+          optionLabel="name"
+          display="chip"
+          [showClear]="true"
+        />
+      </form>
+    </div>
+
     <div class="control">
       <button
         (click)="cancel()"
