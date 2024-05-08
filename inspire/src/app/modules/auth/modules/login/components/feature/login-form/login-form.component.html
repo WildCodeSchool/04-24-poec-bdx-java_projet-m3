@@ -46,11 +46,9 @@
     <app-button variant="pink" text="Connexion"></app-button>
   </div>
 </form>
-<!-- <div>
-  <h3>Mot de passe oublié</h3>
-  <button>coucou</button>
-</div> -->
-<button (click)="modalVisible = true">modale ouvre toi</button>
+<div class="forgot-pwd">
+  <h3 (click)="modalVisible = true">Mot de passe oublié ?</h3>
+</div>
 
 <p-dialog
   header=""
@@ -69,18 +67,17 @@
       />
     </div>
 
-    <h1>Vous avez oublié votre mot de passe ?</h1>
+    <h1>Oups, avez-vous oublié votre mot de passe ?</h1>
     <p>
-      Oups, avez-vous oublié votre mot de passe ? Pas de panique ! Entrez votre
-      adresse e-mail ci-dessous et nous vous enverrons un lien pour
-      réinitialiser votre mot de passe.
+      Pas de panique ! Entrez votre adresse e-mail ci-dessous et nous vous
+      enverrons un lien pour réinitialiser votre mot de passe.
     </p>
     <form>
       <div class="container-input">
         <label for="email">Votre email</label>
-        <input type="email" />
+        <input type="email" placeholder="L'email de votre compte" />
       </div>
-      <app-button variant="pink" text="Envoyer"></app-button>
+      <app-button variant="pink" text="Récupérer mon mot de passe"></app-button>
     </form>
   </div>
 </p-dialog>
