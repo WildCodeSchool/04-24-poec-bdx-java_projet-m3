@@ -105,10 +105,11 @@
       Mot de passe requis
     </div>
     <div
-      class="error"
-      *ngIf="formRegister.submitted && registerForm.get('password')?.errors?.['strongPassword']"
+      class="mdp-error"
+      *ngIf="registerForm.get('password')?.errors?.['strongPassword']"
     >
-      Le mot de passe doit contenir au moins une majuscule
+      Le mot de passe doit contenir au moins une lettre majuscule et avoir une
+      longueur minimale de 8 caractères.
     </div>
   </div>
   <div class="container-input">

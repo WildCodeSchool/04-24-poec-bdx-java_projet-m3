@@ -341,6 +341,12 @@
       "email": "marie@gmail.com",
       "password": "",
       "role": "mentor"
+    },
+    {
+      "id": "7ddb",
+      "email": "marie@gmail.com",
+      "password": "frrfrfrffrA",
+      "role": "mentor"
     }
   ],
   "students": [
@@ -918,6 +924,17 @@
       "githubUrl": "",
       "linkedinUrl": "",
       "userId": "1c6c"
+    },
+    {
+      "id": "0e36",
+      "firstname": "Marie",
+      "lastname": "Delaire",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "7ddb"
     }
   ],
   "skills": [

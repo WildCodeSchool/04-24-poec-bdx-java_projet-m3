@@ -1,16 +1,21 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export function passwordStrengthValidator(
-  control: AbstractControl
-): ValidationErrors | null {
-  const passwordRegex = RegExp('(?=.*[A-Z])');
-  const valid = passwordRegex.test(control.value);
+export function strongPasswordValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    if (!control.value) {
+      // Valeur vide, pas d'erreur
+      return null;
+    }
 
-  const errors = {
-    strongPassword: {
-      rules: 'must contain at least one uppercase letter',
-    },
+    const hasUppercase = /[A-Z]/.test(control.value);
+    const isLongEnough = control.value.length >= 8;
+
+    if (!hasUppercase || !isLongEnough) {
+      // Une des conditions n'est pas remplie, retourner l'erreur
+      return { strongPassword: true };
+    }
+
+    // Le mot de passe est fort, pas d'erreur
+    return null;
   };
-
-  return !valid ? errors : null;
 }

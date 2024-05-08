@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { checkEqualityValidator } from '../../../validator-password/equality-passwords-validator';
-import { passwordStrengthValidator } from '../../../validator-password/password-strength-validator';
+import { strongPasswordValidator } from '../../../validator-password/password-strength-validator';
 import { UserService } from '../../../../../../../user.service';
 import { ActivatedRoute } from '@angular/router';
 import { emailSchoolValidator } from '../../../validator-email/school-email-validator';
@@ -25,7 +25,7 @@ export class RegisterFormComponent implements OnInit {
           emailSchoolValidator(environment.EXTENSION_EMAIL),
         ],
       ],
-      password: ['', [Validators.required, passwordStrengthValidator]],
+      password: ['', [Validators.required, strongPasswordValidator()]],
       checkPassword: ['', [Validators.required]],
       checkboxCgv: [false, [Validators.requiredTrue]],
     },
