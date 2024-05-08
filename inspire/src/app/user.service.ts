@@ -48,7 +48,7 @@ export class UserService {
         return this.http.post<Student>(`${this.BASE_URL}/students`, student);
       }),
       map((data) => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
         return data;
       })
     );
@@ -64,8 +64,6 @@ export class UserService {
     return this.createUser(user).pipe(
       switchMap((createdUser: User) => {
         const userId = createdUser.id as string;
-        console.log(createdUser);
-
         const mentor: Mentor = new Mentor(
           userId,
           registerFormValues.firstName,
@@ -80,7 +78,7 @@ export class UserService {
         return this.http.post<Mentor>(`${this.BASE_URL}/mentors`, mentor);
       }),
       map((data) => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
         return data;
       })
     );

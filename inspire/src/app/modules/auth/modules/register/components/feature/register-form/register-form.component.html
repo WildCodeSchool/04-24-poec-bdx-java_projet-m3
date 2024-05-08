@@ -1,7 +1,7 @@
 <form
   class="formulaire"
   [formGroup]="registerForm"
-  (ngSubmit)="onSubmit()"
+  (ngSubmit)="registerForm.valid && onSubmit()"
   #formRegister="ngForm"
 >
   <div class="infos">

@@ -347,6 +347,42 @@
       "email": "marie@gmail.com",
       "password": "frrfrfrffrA",
       "role": "mentor"
+    },
+    {
+      "id": "efbc",
+      "email": "marie@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
+    },
+    {
+      "id": "a9fb",
+      "email": "fr@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
+    },
+    {
+      "id": "602e",
+      "email": "",
+      "password": "",
+      "role": "mentor"
+    },
+    {
+      "id": "242e",
+      "email": "de@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
+    },
+    {
+      "id": "fd93",
+      "email": "fr@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
+    },
+    {
+      "id": "475a",
+      "email": "marie2@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
     }
   ],
   "students": [
@@ -935,6 +971,72 @@
       "githubUrl": "",
       "linkedinUrl": "",
       "userId": "7ddb"
+    },
+    {
+      "id": "2381",
+      "firstname": "Marie",
+      "lastname": "Delaire",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "efbc"
+    },
+    {
+      "id": "739e",
+      "firstname": "fr",
+      "lastname": "fr",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "a9fb"
+    },
+    {
+      "id": "f378",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "602e"
+    },
+    {
+      "id": "6a60",
+      "firstname": "de",
+      "lastname": "de",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "242e"
+    },
+    {
+      "id": "981f",
+      "firstname": "fr",
+      "lastname": "fr",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "fd93"
+    },
+    {
+      "id": "f978",
+      "firstname": "Marie",
+      "lastname": "Delaire",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "475a"
     }
   ],
   "skills": [
