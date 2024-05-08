@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 .container-login-page {
   display: flex;
   background-color: #fef7f1;
@@ -36,7 +38,7 @@
   margin-top: 50px;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: $small) {
   .container-login-page {
     flex-direction: column;
   }
@@ -54,19 +56,15 @@
     margin-bottom: 20px;
   }
 }
-@media screen and (min-width: 851px) and (max-width: 1000px) {
+@media screen and (min-width: $small) and (max-width: $large) {
   .right-content {
-    padding: 0 50px;
+    padding: 0 80px;
   }
   .left-content {
     padding: 0 50px;
     margin-right: 50;
   }
   .left-content h2 {
-    font-size: 18px;
-  }
-
-  .left-content h1 {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
