@@ -1,3 +1,4 @@
+@import "../../../../variables.scss";
 .form-experience {
   width: 100%;
 }
@@ -23,7 +24,7 @@ label {
 input,
 textarea {
   padding: 12px 10px;
-  border: solid 1px #f7156b;
+  border: solid 1px $primary-color;
   border-radius: 5px;
   margin-top: 6px;
   &::placeholder {
