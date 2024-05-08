@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -6,9 +6,9 @@ import { Component, Input } from '@angular/core';
   styleUrl: './button.component.scss',
 })
 export class ButtonComponent {
-  @Input()
-  text!: string;
+  @Input() text!: string;
+  @Input() type: string = 'button';
+  @Input() variant!: 'pink' | 'black';
 
-  @Input()
-  variant!: 'pink' | 'black';
+  @Output() onSubmit = new EventEmitter();
 }

@@ -35,7 +35,23 @@
       />
     </div>
   </div>
-
+  <!-- [(ngModel)]="selectedLanguages" -->
+  <div class="infos">
+    <div class="card flex justify-content-center container-input">
+      <label for="skills">Editez vos skills *</label>
+      <p-multiSelect
+        id="skills"
+        name="skills"
+        [options]="skills"
+        placeholder="Choisissez vos skills"
+        formControlName="selectedSkills"
+        optionLabel="name"
+        [showClear]="true"
+        [virtualScroll]="true"
+        [virtualScrollItemSize]="43"
+      />
+    </div>
+  </div>
   <div class="container-input">
     <label for="description">Description *</label>
     <textarea
@@ -48,6 +64,10 @@
 
   <div class="btn-connexion">
     <app-button variant="black" text="Annuler" (click)="cancel()"></app-button>
-    <app-button variant="pink" text="Enregistrer"></app-button>
+    <app-button
+      variant="pink"
+      text="Enregistrer"
+      [type]="'submit'"
+    ></app-button>
   </div>
 </form>
