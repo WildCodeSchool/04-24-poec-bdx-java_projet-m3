@@ -395,6 +395,12 @@
       "email": "lulu@coucou.fr",
       "password": "A123456789",
       "role": "mentor"
+    },
+    {
+      "id": "9d90",
+      "email": "coucou@coucou.fr",
+      "password": "A123456789",
+      "role": "student"
     }
   ],
   "students": [
@@ -822,6 +828,18 @@
       "userId": "68b8",
       "firstname": "Nathan",
       "lastname": "Juino",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "653e",
+      "promotion": "javascript",
+      "userId": "9d90",
+      "firstname": "Marie",
+      "lastname": "Delaire",
       "description": "",
       "imgUrl": "",
       "title": "",
