@@ -39,6 +39,7 @@ export const routes: Routes = [
       import('./modules/auth/modules/register/register.module').then(
         (m) => m.RegisterModule
       ),
+    canActivate: [isMentorLog, isStudentLog],
   },
   { path: 'layout', component: LayoutMentor },
 ];
