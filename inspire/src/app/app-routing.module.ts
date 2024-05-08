@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutMentor } from './modules/mentor/pages/layout/layout-mentor-component';
-import { isConnected, isMentor } from './shared/auth.guard';
+import { isConnected, isMentor, isStudent } from './shared/auth.guard';
 
 export const routes: Routes = [
   {
@@ -17,7 +17,7 @@ export const routes: Routes = [
       import('./modules/students/students.module').then(
         (m) => m.StudentsModule
       ),
-    canActivate: [isConnected],
+    canActivate: [isConnected, isStudent],
   },
   {
     path: 'mentor',

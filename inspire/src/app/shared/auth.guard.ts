@@ -30,3 +30,18 @@ export const isMentor: CanActivateFn = (route, state) => {
     return false;
   }
 };
+
+export const isStudent: CanActivateFn = (route, state) => {
+  const router = inject(Router);
+  const store = inject(UserStoreService);
+
+  const student = store.getUserConnected$().value?.role;
+  console.log(student);
+
+  if (student === 'student') {
+    return true;
+  } else {
+    router.navigate(['']);
+    return false;
+  }
+};
