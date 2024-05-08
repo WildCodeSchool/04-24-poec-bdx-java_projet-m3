@@ -1,0 +1,22 @@
+<div class="container-layout">
+  <div class="header-container">
+    <h2>Bonjour Marie</h2>
+    <p>Votre espace mentor de la Wild Code School</p>
+  </div>
+  <div class="body-layout">
+    <div class="container-side-nav">
+      <h1>Menu</h1>
+      <ul>
+        <li><a [routerLink]="['dashboard']">Mon Profil</a></li>
+        <li><a [routerLink]="['list-mentors']">Trouver un mentor</a></li>
+        <li>Mes réservations</li>
+        <li>Mes favoris</li>
+      </ul>
+    </div>
+    <div class="container-body">
+      <div class="body-contain">
+      <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

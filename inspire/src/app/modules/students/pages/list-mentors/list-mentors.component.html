@@ -1,2 +1,6 @@
-<p>list-mentors works!</p>
-<app-card-mentor></app-card-mentor>
+<h1>Listes des mentors</h1>
+<div *ngIf="mentorList$ | async as mentorList" class="card-container">
+  <div *ngFor="let mentor of mentorList">
+    <app-card-mentor [mentor]="mentor"></app-card-mentor>
+  </div>
+</div>
