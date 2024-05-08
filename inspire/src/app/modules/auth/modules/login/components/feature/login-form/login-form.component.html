@@ -41,7 +41,46 @@
       Mot de passe requis
     </div>
   </div>
+
   <div class="btn-connexion">
     <app-button variant="pink" text="Connexion"></app-button>
   </div>
 </form>
+<!-- <div>
+  <h3>Mot de passe oublié</h3>
+  <button>coucou</button>
+</div> -->
+<button (click)="modalVisible = true">modale ouvre toi</button>
+
+<p-dialog
+  header=""
+  [(visible)]="modalVisible"
+  [modal]="true"
+  [style]="{ width: '30vw', height: '70vh' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="forgot-pwd-pop-up">
+    <div class="container-img-forgot">
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/forgot-pwd.svg"
+        alt=""
+      />
+    </div>
+
+    <h1>Vous avez oublié votre mot de passe ?</h1>
+    <p>
+      Oups, avez-vous oublié votre mot de passe ? Pas de panique ! Entrez votre
+      adresse e-mail ci-dessous et nous vous enverrons un lien pour
+      réinitialiser votre mot de passe.
+    </p>
+    <form>
+      <div class="container-input">
+        <label for="email">Votre email</label>
+        <input type="email" />
+      </div>
+      <app-button variant="pink" text="Envoyer"></app-button>
+    </form>
+  </div>
+</p-dialog>

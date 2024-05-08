@@ -12,4 +12,6 @@ export class CardRoleComponent {
   subtitle!: string;
   @Input()
   link!: string;
+  @Input()
+  imgCard!: string;
 }

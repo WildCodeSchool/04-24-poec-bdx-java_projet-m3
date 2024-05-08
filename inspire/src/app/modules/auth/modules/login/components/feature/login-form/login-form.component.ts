@@ -14,6 +14,7 @@ export class LoginFormComponent {
     password: ['', [Validators.required]],
   });
 
+  modalVisible = false;
   constructor(private fb: FormBuilder, private userService: UserService) {}
 
   onSubmit() {

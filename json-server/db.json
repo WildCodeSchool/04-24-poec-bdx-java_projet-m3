@@ -383,6 +383,18 @@
       "email": "marie2@coucou.fr",
       "password": "A123456789",
       "role": "mentor"
+    },
+    {
+      "id": "660d",
+      "email": "marie@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
+    },
+    {
+      "id": "d5d8",
+      "email": "lulu@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
     }
   ],
   "students": [
@@ -1037,6 +1049,28 @@
       "githubUrl": "",
       "linkedinUrl": "",
       "userId": "475a"
+    },
+    {
+      "id": "470e",
+      "firstname": "Pierre",
+      "lastname": "Delaire",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "660d"
+    },
+    {
+      "id": "7058",
+      "firstname": "Lulu",
+      "lastname": "Abajoli",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "d5d8"
     }
   ],
   "skills": [
