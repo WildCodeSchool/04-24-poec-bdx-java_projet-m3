@@ -25,6 +25,7 @@ import { FormEditCourseComponent } from './form-edit-course/form-edit-course.com
 import { ModalValidateComponent } from './modal-validate/modal-validate.component';
 import { ModalEditLanguagesComponent } from './modal-edit-languages/modal-edit-languages.component';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { FormEditAproposComponent } from './form-edit-apropos/form-edit-apropos.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     FormEditCourseComponent,
     ModalValidateComponent,
     ModalEditLanguagesComponent,
+    FormEditAproposComponent,
   ],
   imports: [
     CommonModule,
@@ -76,6 +78,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     ListExperienceComponent,
     ListLanguageComponent,
     ModalValidateComponent,
+    FormEditAproposComponent,
   ],
 })
 export class SharedComponentsModule {}
