@@ -347,6 +347,60 @@
       "email": "marie@gmail.com",
       "password": "frrfrfrffrA",
       "role": "mentor"
+    },
+    {
+      "id": "efbc",
+      "email": "marie@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
+    },
+    {
+      "id": "a9fb",
+      "email": "fr@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
+    },
+    {
+      "id": "602e",
+      "email": "",
+      "password": "",
+      "role": "mentor"
+    },
+    {
+      "id": "242e",
+      "email": "de@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
+    },
+    {
+      "id": "fd93",
+      "email": "fr@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
+    },
+    {
+      "id": "475a",
+      "email": "marie2@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
+    },
+    {
+      "id": "660d",
+      "email": "marie@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
+    },
+    {
+      "id": "d5d8",
+      "email": "lulu@coucou.fr",
+      "password": "A123456789",
+      "role": "mentor"
+    },
+    {
+      "id": "9d90",
+      "email": "coucou@coucou.fr",
+      "password": "A123456789",
+      "role": "student"
     }
   ],
   "students": [
@@ -779,6 +833,18 @@
       "title": "",
       "githubUrl": "",
       "linkedinUrl": ""
+    },
+    {
+      "id": "653e",
+      "promotion": "javascript",
+      "userId": "9d90",
+      "firstname": "Marie",
+      "lastname": "Delaire",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
     }
   ],
   "mentors": [
@@ -935,6 +1001,94 @@
       "githubUrl": "",
       "linkedinUrl": "",
       "userId": "7ddb"
+    },
+    {
+      "id": "2381",
+      "firstname": "Marie",
+      "lastname": "Delaire",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "efbc"
+    },
+    {
+      "id": "739e",
+      "firstname": "fr",
+      "lastname": "fr",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "a9fb"
+    },
+    {
+      "id": "f378",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "602e"
+    },
+    {
+      "id": "6a60",
+      "firstname": "de",
+      "lastname": "de",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "242e"
+    },
+    {
+      "id": "981f",
+      "firstname": "fr",
+      "lastname": "fr",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "fd93"
+    },
+    {
+      "id": "f978",
+      "firstname": "Marie",
+      "lastname": "Delaire",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "475a"
+    },
+    {
+      "id": "470e",
+      "firstname": "Pierre",
+      "lastname": "Delaire",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "660d"
+    },
+    {
+      "id": "7058",
+      "firstname": "Lulu",
+      "lastname": "Abajoli",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "d5d8"
     }
   ],
   "skills": [

@@ -6,6 +6,7 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { LoginFormComponent } from './components/feature/login-form/login-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedComponentsModule } from '../../../shared-components/shared-components.module';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [LoginPageComponent, LoginFormComponent],
@@ -14,6 +15,7 @@ import { SharedComponentsModule } from '../../../shared-components/shared-compon
     LoginRoutingModule,
     ReactiveFormsModule,
     SharedComponentsModule,
+    DialogModule,
   ],
 })
 export class LoginModule {}

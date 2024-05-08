@@ -7,17 +7,24 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  min-height: 330px;
+  min-height: 400px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container-card:hover {
+  transform: translateY(-3px);
+  border: solid 1px #fb9d01;
 }
 .container-img {
-  width: 150px;
+  width: 200px;
 }
 .container-card h2 {
   margin-top: 20px;
-  font-size: 18px;
+  font-size: 22px;
 }
 .container-card p {
-  font-size: 13px;
+  margin-top: 10px;
+  font-size: 16px;
   font-style: italic;
   line-height: 18px;
 }
