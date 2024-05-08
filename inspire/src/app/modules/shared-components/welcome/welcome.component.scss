@@ -1,3 +1,4 @@
+@import "../../../../variables.scss";
 .welcome-container {
   background-color: #fef7f1;
 }
@@ -13,7 +14,7 @@
   font-size: 60px;
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: $small) {
   .welcome-titles {
     display: none;
   }
@@ -26,5 +27,11 @@
   }
   .welcome-container-img {
     padding-left: 130px;
+  }
+}
+
+@media screen and (min-width: $small) and (max-width: $large) {
+  .welcome-container h1 {
+    font-size: 35px;
   }
 }

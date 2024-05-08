@@ -17,7 +17,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userSubscription = this.store.getUserConnected$().subscribe((user) => {
       this.userDansLeLocalStorage = user;
-      console.log(this.userDansLeLocalStorage);
     });
 
     const storedUser = localStorage.getItem('user');
