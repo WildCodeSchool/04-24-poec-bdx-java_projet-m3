@@ -1,7 +1,8 @@
 @import "../../../../variables.scss";
+
 .modal {
   background-color: white;
-  border-radius: 10px;
+  border-radius: 50px;
   padding: 20px;
   width: 100%;
   height: 100%;
@@ -16,8 +17,11 @@
   }
 
   .select-languages {
+    display: flex;
+    justify-content: center;
     margin: 30px auto;
     margin-top: 10px;
+    min-width: 300px;
   }
 
   .control {
