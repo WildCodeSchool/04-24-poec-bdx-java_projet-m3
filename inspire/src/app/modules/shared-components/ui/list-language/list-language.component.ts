@@ -9,4 +9,13 @@ import { Language } from '../../../../shared/models/language';
 export class ListLanguageComponent {
   @Input() title: string = '';
   @Input() languages!: Language[];
+  isModalVisible = false;
+
+  showEditModal() {
+    this.isModalVisible = true;
+  }
+
+  hideEditModal() {
+    this.isModalVisible = false;
+  }
 }

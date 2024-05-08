@@ -16,6 +16,8 @@ import { ProfilMentorComponent } from './pages/profil-mentor/profil-mentor.compo
 import { ListReservationComponent } from './components/features/list-reservation/list-reservation.component';
 import { ListReservationHistoryComponent } from './components/features/list-reservation-history/list-reservation.component';
 import { ReservationWithSwipeComponent } from './components/ui/reservation-with-swipe/reservation-with-swipe.component';
+import { SidebarModule } from 'primeng/sidebar';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { ReservationWithSwipeComponent } from './components/ui/reservation-with-
     SharedModule,
     SharedComponentsModule,
     DividerModule,
+    SidebarModule,
+    DialogModule,
   ],
   exports: [
     RowReservationComponent,

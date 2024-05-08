@@ -1,6 +1,6 @@
 <div class="title-about">
   <h2>A Propos</h2>
-  <button class="edit-button">
+  <button class="edit-button" (click)="openEditFormApropos()">
     <img src="assets/svgs/edit.svg" alt="edit" width="25" height="25" />
   </button>
 </div>
@@ -52,3 +52,9 @@
     </p>
   </div>
 </div>
+
+<ng-container *ngIf="editFormApropoVisible">
+  <p-sidebar position="right" [(visible)]="editFormApropoVisible">
+    <app-form-edit-apropos></app-form-edit-apropos>
+  </p-sidebar>
+</ng-container>

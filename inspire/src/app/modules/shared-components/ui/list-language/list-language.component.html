@@ -1,5 +1,10 @@
 <div class="list-languages">
-  <h3>{{ title }}</h3>
+  <div class="title-list">
+    <h3>{{ title }}</h3>
+    <button class="edit-button" (click)="showEditModal()">
+      <img src="assets/svgs/plus.svg" alt="edit" width="25" height="25" />
+    </button>
+  </div>
   <div class="languages" *ngIf="languages">
     <app-chip
       *ngFor="let language of languages"
@@ -8,3 +13,11 @@
     ></app-chip>
   </div>
 </div>
+<ng-container *ngIf="isModalVisible">
+  <app-modal-edit-languages
+    [selectedLanguages]="languages"
+    [visible]="isModalVisible"
+    [question]="'Editez vos langues'"
+    (onCancel)="isModalVisible = false"
+  ></app-modal-edit-languages>
+</ng-container>
