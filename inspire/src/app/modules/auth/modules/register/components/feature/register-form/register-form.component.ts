@@ -4,7 +4,7 @@ import { checkEqualityValidator } from '../../../validator-password/equality-pas
 import { passwordStrengthValidator } from '../../../validator-password/password-strength-validator';
 import { UserService } from '../../../../../../../user.service';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { emailSchoolValidator } from '../../../validator-email/school-email-validator';
 
 @Component({
   selector: 'app-register-form',
@@ -16,7 +16,14 @@ export class RegisterFormComponent implements OnInit {
     {
       lastName: ['', [Validators.required]],
       firstName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          emailSchoolValidator(`wilder.fr`),
+        ],
+      ],
       password: ['', [Validators.required, passwordStrengthValidator]],
       checkPassword: ['', [Validators.required]],
       checkboxCgv: [false, [Validators.requiredTrue]],
@@ -41,6 +48,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.registerForm);
     if (this.role === 'student') {
       this.userService.createStudent(this.registerForm.value).subscribe();
     } else if (this.role === 'mentor') {

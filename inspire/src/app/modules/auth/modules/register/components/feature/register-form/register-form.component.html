@@ -69,9 +69,16 @@
     </div>
     <div
       class="error"
-      *ngIf="formRegister.submitted && registerForm.get('email')?.invalid"
+      *ngIf="formRegister.submitted && registerForm.get('email')?.errors?.['email']"
     >
       L'email est invalide
+    </div>
+
+    <div
+      class="error"
+      *ngIf="registerForm.get('email')?.errors?.['extension'] && formRegister.submitted"
+    >
+      L'email doit appartenir au domaine 'wilder.fr'
     </div>
   </div>
 
