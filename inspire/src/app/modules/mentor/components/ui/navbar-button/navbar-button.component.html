@@ -15,5 +15,7 @@
     height="25"
     [ngStyle]="{ stroke: 'red', fill: 'red' }"
   />
-  <p [ngStyle]="{ display: !showText ? 'none' : 'inherit' }">{{ text }}</p>
+  <p *ngIf="showText" [ngStyle]="{ display: !showText ? 'none' : 'inherit' }">
+    {{ text }}
+  </p>
 </button>

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { checkEqualityValidator } from '../../../validator-password/equality-passwords-validator';
-import { passwordStrengthValidator } from '../../../validator-password/password-strength-validator';
+import { strongPasswordValidator } from '../../../validator-password/password-strength-validator';
 import { UserService } from '../../../../../../../user.service';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { emailSchoolValidator } from '../../../validator-email/school-email-validator';
+import { environment } from '../../../../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-register-form',
@@ -16,8 +17,15 @@ export class RegisterFormComponent implements OnInit {
     {
       lastName: ['', [Validators.required]],
       firstName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, passwordStrengthValidator]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.email,
+          emailSchoolValidator(environment.EXTENSION_EMAIL),
+        ],
+      ],
+      password: ['', [Validators.required, strongPasswordValidator()]],
       checkPassword: ['', [Validators.required]],
       checkboxCgv: [false, [Validators.requiredTrue]],
     },

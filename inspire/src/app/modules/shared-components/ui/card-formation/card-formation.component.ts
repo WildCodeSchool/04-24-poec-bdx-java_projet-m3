@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Formation } from '../../../../shared/models/formation';
+import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 
 @Component({
   selector: 'app-card-formation',
@@ -8,4 +9,21 @@ import { Formation } from '../../../../shared/models/formation';
 })
 export class CardFormationComponent {
   @Input() formation!: Formation;
+  isVisibleFormEditCourse = false;
+  popupDeleteVisible = false;
+
+  windowWatcherService = inject(WindowWatcherService);
+
+  showEditForm() {
+    this.isVisibleFormEditCourse = true;
+  }
+
+  hideEditForm = () => {
+    this.isVisibleFormEditCourse = false;
+    console.log('called');
+  };
+
+  showPopUpDelete() {
+    this.popupDeleteVisible = true;
+  }
 }

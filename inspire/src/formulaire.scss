@@ -9,6 +9,12 @@
   width: 100%;
 }
 
+.container-input span {
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+}
+
 .btn-connexion {
   margin-top: 50px;
 }
@@ -37,6 +43,13 @@ input {
 .error {
   font-size: 14px;
   color: red;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.mdp-error {
+  font-size: 14px;
+  color: black;
   margin-top: 5px;
   font-style: italic;
 }

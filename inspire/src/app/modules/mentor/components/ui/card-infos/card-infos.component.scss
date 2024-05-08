@@ -78,7 +78,7 @@
   padding-left: 5px;
 }
 
-@media screen and (max-width: $break-point-tablette-medium) {
+@media screen and (max-width: $large) {
   .logo-chips {
     flex-direction: column;
   }

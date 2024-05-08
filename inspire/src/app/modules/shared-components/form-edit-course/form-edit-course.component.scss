@@ -1,5 +1,5 @@
 @import "../../../../variables.scss";
-.form-experience {
+.form-course {
   width: 100%;
 }
 
@@ -33,7 +33,7 @@ textarea {
   }
 }
 
-.form-experience h1 {
+.form-course h1 {
   font-size: 24px;
   color: black;
   margin-top: 30px;
@@ -69,7 +69,7 @@ textarea {
   gap: 10px;
   justify-content: flex-end;
 }
-@media screen and (max-width: 576px) {
+@media screen and (max-width: $extra-large) {
   .infos {
     flex-direction: column;
   }
