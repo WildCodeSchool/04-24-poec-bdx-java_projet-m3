@@ -78,7 +78,8 @@
       class="error"
       *ngIf="registerForm.get('email')?.errors?.['extension'] && formRegister.submitted"
     >
-      L'email doit appartenir au domaine 'wilder.fr'
+      L'email doit appartenir au domaine
+      {{ registerForm.get('email')?.errors?.['extension']?.expected }}
     </div>
   </div>
 
