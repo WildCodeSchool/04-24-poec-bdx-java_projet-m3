@@ -50,7 +50,13 @@
   </div>
 
   <div class="container-input">
-    <label for="email">Email *</label>
+    <label for="email"
+      >Email *
+      <span
+        >Utilisez votre adresse
+        {{ registerForm.get('email')?.errors?.['extension']?.expected }}
+      </span></label
+    >
     <input
       type="text"
       id="email"
@@ -69,9 +75,17 @@
     </div>
     <div
       class="error"
-      *ngIf="formRegister.submitted && registerForm.get('email')?.invalid"
+      *ngIf="formRegister.submitted && registerForm.get('email')?.errors?.['email']"
     >
       L'email est invalide
+    </div>
+
+    <div
+      class="error"
+      *ngIf="registerForm.get('email')?.errors?.['extension'] && formRegister.submitted"
+    >
+      L'email doit appartenir au domaine
+      {{ registerForm.get('email')?.errors?.['extension']?.expected }}
     </div>
   </div>
 
@@ -91,10 +105,11 @@
       Mot de passe requis
     </div>
     <div
-      class="error"
-      *ngIf="formRegister.submitted && registerForm.get('password')?.errors?.['strongPassword']"
+      class="mdp-error"
+      *ngIf="registerForm.get('password')?.errors?.['strongPassword']"
     >
-      Le mot de passe doit contenir au moins une majuscule
+      Le mot de passe doit contenir au moins une lettre majuscule et avoir une
+      longueur minimale de 8 caractères.
     </div>
   </div>
   <div class="container-input">
