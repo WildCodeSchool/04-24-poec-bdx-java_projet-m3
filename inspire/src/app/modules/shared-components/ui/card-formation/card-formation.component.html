@@ -11,11 +11,39 @@
     </div>
   </div>
   <div class="card-skill-control">
-    <button>
+    <button (click)="showEditForm()">
       <img src="assets/svgs/edit.svg" alt="edit" width="20" height="20" />
     </button>
-    <button>
+    <button (click)="showPopUpDelete()">
       <img src="assets/svgs/delete.svg" alt="delete" width="22" height="22" />
     </button>
   </div>
 </div>
+<ng-container
+  *ngIf="{
+    phoneMode: windowWatcherService.windowSizeChanged.asObservable() | async
+  } as phoneMode"
+>
+  <p-sidebar
+    (onHide)="hideEditForm()"
+    *ngIf="isVisibleFormEditCourse"
+    [(visible)]="isVisibleFormEditCourse"
+    position="right"
+    [style]="{
+      width: phoneMode.phoneMode ? 'max(50vw, 400px)' : '100vw'
+    }"
+  >
+    <app-form-edit-course
+      [formation]="formation"
+      [destroy]="hideEditForm"
+    ></app-form-edit-course>
+  </p-sidebar>
+</ng-container>
+
+<app-modal-validate
+  *ngIf="popupDeleteVisible"
+  [visible]="popupDeleteVisible"
+  [question]="'Cliquez sur \'Valider\' cette formation ?'"
+  (onCancel)="popupDeleteVisible = false"
+  (onValidate)="popupDeleteVisible = false"
+></app-modal-validate>

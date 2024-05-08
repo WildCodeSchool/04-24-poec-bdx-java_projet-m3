@@ -62,7 +62,7 @@
   }
 }
 
-@media screen and (max-width: $break-point-tablette-medium) {
+@media screen and (max-width: $large) {
   .container-side-nav {
     position: absolute;
   }
@@ -77,7 +77,7 @@
   }
 }
 
-@media screen and (max-width: $break-point-phone) {
+@media screen and (max-width: $small) {
   .container-layout {
     .header-container {
       width: 90%;
