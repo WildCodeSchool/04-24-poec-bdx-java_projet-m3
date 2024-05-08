@@ -11,7 +11,22 @@ export const isConnected: CanActivateFn = (route, state) => {
   if (user) {
     return true;
   } else {
-    router.navigate(['/login']);
+    router.navigate(['']);
+    return false;
+  }
+};
+
+export const isMentor: CanActivateFn = (route, state) => {
+  const router = inject(Router);
+  const store = inject(UserStoreService);
+
+  const mentor = store.getUserConnected$().value?.role;
+  console.log(mentor);
+
+  if (mentor === 'mentor') {
+    return true;
+  } else {
+    router.navigate(['']);
     return false;
   }
 };
