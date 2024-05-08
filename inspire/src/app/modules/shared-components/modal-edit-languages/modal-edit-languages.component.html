@@ -8,6 +8,18 @@
 >
   <div class="modal">
     <p>{{ question }}</p>
+    <div class="card flex justify-content-center select-languages">
+      <p-multiSelect
+        [options]="languages"
+        [(ngModel)]="selectedLanguages"
+        placeholder="Choisissez vos langues"
+        optionLabel="name"
+        [showClear]="true"
+        [virtualScroll]="true"
+        [virtualScrollItemSize]="43"
+      />
+    </div>
+
     <div class="control">
       <button
         (click)="cancel()"

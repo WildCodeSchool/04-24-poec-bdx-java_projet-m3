@@ -10,4 +10,13 @@ import { Skill } from '../../../../../shared/models/chip';
 export class CardInfosComponent {
   @Input() mentor!: Mentor;
   @Input() chips!: Skill[];
+  editFormApropoVisible = false;
+
+  openEditFormApropos() {
+    this.editFormApropoVisible = true;
+    console.log('clicked edit');
+  }
+  closeEditFormApropos() {
+    this.editFormApropoVisible = false;
+  }
 }

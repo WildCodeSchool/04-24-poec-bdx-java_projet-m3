@@ -20,6 +20,7 @@
     "@angular/router": "^17.0.0",
     "@ngx-pwa/local-storage": "^17.0.0",
     "dotenv": "^16.4.5",
+    "json-server": "^1.0.0-alpha.23",
     "primeng": "^17.14.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

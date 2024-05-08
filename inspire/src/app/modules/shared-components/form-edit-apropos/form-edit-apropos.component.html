@@ -1,0 +1,73 @@
+<form class="form-course" (ngSubmit)="onSubmit()" [formGroup]="aproposForm">
+  <h1>Editer une Formation</h1>
+  <div class="infos">
+    <div class="container-input">
+      <label for="title">Titre *</label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        formControlName="title"
+        placeholder="Votre titre"
+      />
+    </div>
+  </div>
+
+  <div class="infos">
+    <div class="container-input">
+      <label for="diplome">Github *</label>
+      <input
+        type="text"
+        id="github"
+        name="github"
+        formControlName="githubUrl"
+        placeholder="Github :"
+      />
+    </div>
+    <div class="container-input">
+      <label for="diplome">Linkedin *</label>
+      <input
+        type="text"
+        id="linkedin"
+        name="linkedin"
+        formControlName="linkedinUrl"
+        placeholder="Linkedin :"
+      />
+    </div>
+  </div>
+  <!-- [(ngModel)]="selectedLanguages" -->
+  <div class="infos">
+    <div class="card flex justify-content-center container-input">
+      <label for="skills">Editez vos skills *</label>
+      <p-multiSelect
+        id="skills"
+        name="skills"
+        [options]="skills"
+        placeholder="Choisissez vos skills"
+        formControlName="selectedSkills"
+        optionLabel="name"
+        [showClear]="true"
+        [virtualScroll]="true"
+        [virtualScrollItemSize]="43"
+      />
+    </div>
+  </div>
+  <div class="container-input">
+    <label for="description">Description *</label>
+    <textarea
+      pInputTextarea
+      aria-labelledby="Description"
+      formControlName="description"
+      id="description"
+    ></textarea>
+  </div>
+
+  <div class="btn-connexion">
+    <app-button variant="black" text="Annuler" (click)="cancel()"></app-button>
+    <app-button
+      variant="pink"
+      text="Enregistrer"
+      [type]="'submit'"
+    ></app-button>
+  </div>
+</form>
