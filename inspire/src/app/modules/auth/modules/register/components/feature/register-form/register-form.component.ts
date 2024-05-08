@@ -5,6 +5,7 @@ import { passwordStrengthValidator } from '../../../validator-password/password-
 import { UserService } from '../../../../../../../user.service';
 import { ActivatedRoute } from '@angular/router';
 import { emailSchoolValidator } from '../../../validator-email/school-email-validator';
+import { environment } from '../../../../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-register-form',
@@ -21,7 +22,7 @@ export class RegisterFormComponent implements OnInit {
         [
           Validators.required,
           Validators.email,
-          emailSchoolValidator(`wilder.fr`),
+          emailSchoolValidator(environment.EXTENSION_EMAIL),
         ],
       ],
       password: ['', [Validators.required, passwordStrengthValidator]],
@@ -48,7 +49,6 @@ export class RegisterFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.registerForm);
     if (this.role === 'student') {
       this.userService.createStudent(this.registerForm.value).subscribe();
     } else if (this.role === 'mentor') {

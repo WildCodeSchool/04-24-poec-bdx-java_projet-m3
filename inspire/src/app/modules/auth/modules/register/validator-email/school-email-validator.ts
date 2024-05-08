@@ -1,4 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { environment } from '../../../../../../environments/environment.development';
 
 export function emailSchoolValidator(extention: string): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -6,7 +7,10 @@ export function emailSchoolValidator(extention: string): ValidatorFn {
 
     if (!isValid) {
       return {
-        extension: { value: control.value, expected: extention },
+        extension: {
+          value: control.value,
+          expected: environment.EXTENSION_EMAIL,
+        },
       };
     } else {
       return null;
