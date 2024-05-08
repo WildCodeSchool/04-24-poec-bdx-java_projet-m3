@@ -1,3 +1,4 @@
+@import "../../../../../../../variables.scss";
 .right-content {
   border-top-left-radius: 40px;
   border-bottom-left-radius: 40px;
@@ -23,7 +24,7 @@
   font-weight: 600;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: $small) {
   .container-login-page {
     flex-direction: column;
   }
