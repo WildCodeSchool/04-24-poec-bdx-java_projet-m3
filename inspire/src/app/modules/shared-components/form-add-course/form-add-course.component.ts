@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 
 @Component({
-  selector: 'app-form-course',
-  templateUrl: './form-course.component.html',
-  styleUrl: './form-course.component.scss',
+  selector: 'app-form-add-course',
+  templateUrl: './form-add-course.component.html',
+  styleUrl: './form-add-course.component.scss',
 })
-export class FormCourseComponent {
+export class FormAddCourseComponent {
   courseForm = this.fb.group({
     diplome: [''],
     school: [''],
@@ -14,10 +14,15 @@ export class FormCourseComponent {
     dateEnd: [''],
     description: [''],
   });
+  @Input() destroy!: () => void;
 
   onSubmit() {
     console.log(this.courseForm.value);
   }
 
   constructor(private fb: FormBuilder) {}
+
+  cancel() {
+    this.destroy();
+  }
 }

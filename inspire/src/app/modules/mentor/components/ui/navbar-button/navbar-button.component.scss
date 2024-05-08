@@ -38,7 +38,7 @@ button {
   }
 }
 
-@media screen and (max-width: $break-point-tablette) {
+@media screen and (max-width: $extra-large) {
   .btn-general {
     font-size: 14px;
     // margin: 0;
@@ -58,7 +58,7 @@ button {
   }
 }
 
-@media screen and (max-width: $break-point-tablette-medium) {
+@media screen and (max-width: $large) {
   .btn-general {
     font-size: 12px;
   }
