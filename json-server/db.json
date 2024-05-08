@@ -215,6 +215,90 @@
       "email": "marie.delaire@outlook.com",
       "password": "1234",
       "role": "student"
+    },
+    {
+      "id": "164b",
+      "email": "fr",
+      "password": "",
+      "role": "student"
+    },
+    {
+      "id": "d003",
+      "email": "fred@gmail.com",
+      "password": "",
+      "role": "student"
+    },
+    {
+      "id": "02e2",
+      "email": "fred@gmail.com",
+      "password": "",
+      "role": "student"
+    },
+    {
+      "id": "babd",
+      "email": "marie@gmail.com",
+      "password": "",
+      "role": "student"
+    },
+    {
+      "id": "49a8",
+      "email": "",
+      "password": "",
+      "role": "student"
+    },
+    {
+      "id": "b13e",
+      "email": "",
+      "password": "",
+      "role": "student"
+    },
+    {
+      "id": "64e5",
+      "email": "",
+      "password": "",
+      "role": "student"
+    },
+    {
+      "id": "8597",
+      "email": "",
+      "password": "",
+      "role": "student"
+    },
+    {
+      "id": "44a5",
+      "email": "",
+      "password": "",
+      "role": "student"
+    },
+    {
+      "id": "298b",
+      "email": "marie@gmail.com",
+      "password": "A",
+      "role": "student"
+    },
+    {
+      "id": "9e99",
+      "email": "",
+      "password": "",
+      "role": "student"
+    },
+    {
+      "id": "726d",
+      "email": "Nathan@yesenia.net",
+      "password": "",
+      "role": "student"
+    },
+    {
+      "id": "9f89",
+      "email": "Nathan@yesenia.net",
+      "password": "",
+      "role": "student"
+    },
+    {
+      "id": "68b8",
+      "email": "Nathan@wilder.fr",
+      "password": "A",
+      "role": "student"
     }
   ],
   "students": [
@@ -474,6 +558,174 @@
       "userId": "4526",
       "firstname": "",
       "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "b12d",
+      "promotion": "javascript",
+      "userId": "164b",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "4ec7",
+      "promotion": "javascript",
+      "userId": "d003",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "af1e",
+      "promotion": "javascript",
+      "userId": "02e2",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "d2a5",
+      "promotion": "javascript",
+      "userId": "babd",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "24a2",
+      "promotion": "javascript",
+      "userId": "49a8",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "610a",
+      "promotion": "javascript",
+      "userId": "b13e",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "41d3",
+      "promotion": "javascript",
+      "userId": "64e5",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "dbe1",
+      "promotion": "javascript",
+      "userId": "8597",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "400f",
+      "promotion": "javascript",
+      "userId": "44a5",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "9916",
+      "promotion": "javascript",
+      "userId": "298b",
+      "firstname": "Nem",
+      "lastname": "Bend",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "1284",
+      "promotion": "javascript",
+      "userId": "9e99",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "c804",
+      "promotion": "javascript",
+      "userId": "726d",
+      "firstname": "",
+      "lastname": "",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "5f27",
+      "promotion": "javascript",
+      "userId": "9f89",
+      "firstname": "",
+      "lastname": "de",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "89a7",
+      "promotion": "javascript",
+      "userId": "68b8",
+      "firstname": "Nathan",
+      "lastname": "Juino",
       "description": "",
       "imgUrl": "",
       "title": "",
