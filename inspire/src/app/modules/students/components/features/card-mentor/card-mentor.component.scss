@@ -26,6 +26,7 @@
     font-size: 1.6em;
     color: white;
     padding: 5px 15px;
+    background-color: rgba(0, 0, 0, 0.184);
   }
 
   .title-card {
@@ -43,8 +44,15 @@
     display: flex;
     flex-direction: row;
     justify-content: start;
+    margin-top: 10px;
+    padding-left: 20px;
+    gap: 10px;
 
     .img-linkedin img{
+      height: 30px;
+    }
+
+    .img-github img {
       height: 30px;
     }
   }

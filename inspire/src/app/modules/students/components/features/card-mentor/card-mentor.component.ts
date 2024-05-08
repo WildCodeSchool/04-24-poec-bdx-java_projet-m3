@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { Mentor } from '../../../../../shared/models/user';
+import { Skill } from '../../../../../shared/models/chip';
 
 @Component({
   selector: 'app-card-mentor',
@@ -8,6 +10,8 @@ import { Component, Input } from '@angular/core';
 export class CardMentorComponent {
 
   @Input()
-  mentor!: any;
+  mentor!: Mentor;
+
+  @Input() chips!: Skill[];
 
 }

@@ -1,11 +1,11 @@
 
 <div class="container-card">
   <div class="img-card">
-    <img src="../../../../assets/marieD.webp" alt="">
-    <h1>Marie</h1>
+    <img src={{mentor.imgUrl}} alt="">
+    <h1>{{mentor.firstname}} {{mentor.lastname}}</h1>
   </div>
   <div class="title-card">
-    <p>Développeur Web Java/Angular spécialisé UX/UI</p>
+    <p>{{mentor.title}}</p>
   </div>
     <div class="chip-container">
     <app-chip></app-chip>
@@ -14,10 +14,10 @@
   </div>
   <div class="social-container">
     <div class="img-linkedin">
-      <img src="../../../../../../assets/svgs/linkedin-icon2.svg" alt="">
+      <a [href]="mentor.linkedinUrl" target="_blank"><img src="../../../../../../assets/linkedin.png" alt=""></a>
     </div>
     <div class="img-github">
-      <img src="../../../../../../assets/svgs/github-icon.svg" alt="">
+      <a [href]="mentor.githubUrl" target="_blank"><img src="../../../../../../assets/github.png" alt=""></a>
     </div>
   </div>
 </div>
