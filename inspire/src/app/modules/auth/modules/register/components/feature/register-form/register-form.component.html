@@ -50,7 +50,13 @@
   </div>
 
   <div class="container-input">
-    <label for="email">Email *</label>
+    <label for="email"
+      >Email *
+      <span
+        >Utilisez votre adresse
+        {{ registerForm.get('email')?.errors?.['extension']?.expected }}
+      </span></label
+    >
     <input
       type="text"
       id="email"
