@@ -9,6 +9,9 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
 import { StudentLayoutComponent } from './pages/student-layout/student-layout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { FilterSearchListComponent } from './components/features/filter-search-list/filter-search-list.component';
+import { FormsModule } from '@angular/forms';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 
 @NgModule({
@@ -17,12 +20,15 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     CardMentorComponent,
     StudentLayoutComponent,
     DashboardComponent,
+    FilterSearchListComponent,
   ],
   imports: [
     CommonModule,
     StudentsRoutingModule,
     SharedComponentsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    MultiSelectModule
   ]
 })
 export class StudentsModule { }

@@ -1,4 +1,5 @@
 <h1>Listes des mentors</h1>
+<app-filter-search-list></app-filter-search-list>
 <div *ngIf="mentorList$ | async as mentorList" class="card-container">
   <div *ngFor="let mentor of mentorList">
     <app-card-mentor [mentor]="mentor"></app-card-mentor>
