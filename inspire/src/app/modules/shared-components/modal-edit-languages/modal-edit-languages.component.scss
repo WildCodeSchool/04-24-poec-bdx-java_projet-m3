@@ -1,34 +1,34 @@
 @import "../../../../variables.scss";
 
 .modal {
-  background-color: white;
-  border-radius: 50px;
-  padding: 20px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  p {
-    text-align: center;
-    font-weight: 800;
-    margin: 10px 0;
+  .container-chips {
+    display: flex;
+    gap: 20px;
+  }
+  h1 {
+    font-size: 24px;
+    color: black;
+    margin: 30px 0px 0px 0px;
+  }
+  h2 {
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+    margin-bottom: 20px;
   }
 
   .select-languages {
-    display: flex;
-    justify-content: center;
-    margin: 30px auto;
-    margin-top: 10px;
-    min-width: 300px;
+    margin-top: 20px;
   }
+}
 
-  .control {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-  }
+.container-select {
+  margin-top: 30px;
+
+  display: flex;
+}
+p-multiselect-label {
+  background-color: blueviolet;
 }
 
 @media screen and (max-width: $small) {

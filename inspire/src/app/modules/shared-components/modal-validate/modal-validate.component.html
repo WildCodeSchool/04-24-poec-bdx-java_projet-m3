@@ -1,20 +1,27 @@
 <p-dialog
   [(visible)]="visible"
   [modal]="true"
-  [style]="{ width: '50vw', height: '50vh' }"
+  [style]="{ width: '30vw', height: '50vh' }"
   [draggable]="false"
   [resizable]="false"
   (onHide)="closeDialog()"
 >
   <div class="modal">
-    <p>{{ question }}</p>
+    <div class="container-img-forgot">
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/question.svg"
+        alt=""
+      />
+    </div>
+    <h1>{{ question }}</h1>
     <div class="control">
       <button
         (click)="cancel()"
         class="btn-general"
         (focus)="focusCancel()"
         (focusout)="focusOutCancel()"
-        [ngClass]="focusBtnCancel ? 'pink' : ''"
+        [ngClass]="focusBtnCancel ? 'black' : ''"
       >
         Annuler
       </button>

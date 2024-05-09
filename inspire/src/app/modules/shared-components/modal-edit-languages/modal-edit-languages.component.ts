@@ -8,6 +8,7 @@ import { Language } from '../../../shared/models/language';
 })
 export class ModalEditLanguagesComponent implements OnInit {
   @Input() question: string = '';
+  @Input() subtitle: string = '';
   @Output() onValidate = new EventEmitter();
   @Output() onCancel = new EventEmitter();
   @Input() visible: boolean = true;

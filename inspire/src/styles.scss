@@ -38,3 +38,27 @@ a {
   color: white;
   fill: wheat;
 }
+
+.languages .p-multiselect-label {
+  padding: 10px 20px;
+
+  width: 350px;
+}
+.languages .p-multiselect-items span {
+  padding-left: 20px;
+}
+
+.p-multiselect-panel {
+  width: 400px;
+}
+
+.languages .p-multiselect-header {
+  height: 50px;
+}
+
+.languages .p-multiselect-filter-container {
+  padding-left: 20px;
+}
+.languages .p-multiselect-filter-icon {
+  margin-top: -8px;
+}

@@ -401,6 +401,12 @@
       "email": "coucou@coucou.fr",
       "password": "A123456789",
       "role": "student"
+    },
+    {
+      "id": "c7d2",
+      "email": "adrien@coucou.fr",
+      "password": "A123456789",
+      "role": "student"
     }
   ],
   "students": [
@@ -840,6 +846,18 @@
       "userId": "9d90",
       "firstname": "Marie",
       "lastname": "Delaire",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
+    },
+    {
+      "id": "efc1",
+      "promotion": "javascript",
+      "userId": "c7d2",
+      "firstname": "Adrien",
+      "lastname": "Russo",
       "description": "",
       "imgUrl": "",
       "title": "",

@@ -1,25 +1,32 @@
 @import "../../../../variables.scss";
 .modal {
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  width: 100%;
-  height: 100%;
+  padding: 20px 40px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
 
-  p {
+  h1 {
+    margin-top: 30px;
+    font-size: 20px;
+    line-height: 20px;
     text-align: center;
-    font-weight: 800;
-    margin: 10px 0;
   }
 
   .control {
+    margin-top: 30px;
     display: flex;
     gap: 20px;
-    justify-content: center;
   }
+}
+
+.forgot-img {
+  width: 200px;
+}
+
+.container-img-forgot {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
 @media screen and (max-width: $small) {

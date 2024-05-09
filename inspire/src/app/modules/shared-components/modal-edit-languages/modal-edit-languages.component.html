@@ -1,26 +1,32 @@
-<p-dialog
+<p-sidebar
   [(visible)]="visible"
   [modal]="true"
-  [style]="{ width: '50vw', height: '50vh' }"
   [draggable]="false"
-  [resizable]="false"
   (onHide)="closeDialog()"
+  position="right"
 >
   <div class="modal">
-    <p>{{ question }}</p>
-    <div class="card flex justify-content-center select-languages">
+    <h1>{{ question }}</h1>
+    <h2>Veuillez sélectionner les langues que vous parlez couramment.</h2>
+    <div class="container-chips">
+      <div *ngFor="let language of selectedLanguages">
+        <app-chip class="" [title]="language.name"></app-chip>
+      </div>
+    </div>
+
+    <div class="container-select">
       <p-multiSelect
+        class="languages"
         [options]="languages"
         [(ngModel)]="selectedLanguages"
         placeholder="Choisissez vos langues"
         optionLabel="name"
-        [showClear]="true"
         [virtualScroll]="true"
-        [virtualScrollItemSize]="43"
+        [virtualScrollItemSize]="50"
       />
     </div>
 
-    <div class="control">
+    <!-- <div class="control">
       <button
         (click)="cancel()"
         class="btn-general"
@@ -40,6 +46,6 @@
       >
         Valider
       </button>
-    </div>
+    </div> -->
   </div>
-</p-dialog>
+</p-sidebar>
