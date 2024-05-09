@@ -97,6 +97,11 @@
   gap: 20px;
 }
 
+.logout h4 {
+  font-weight: 200;
+  cursor: pointer;
+}
+
 @media screen and (max-width: $large) {
   .container-side-nav {
     position: absolute;
