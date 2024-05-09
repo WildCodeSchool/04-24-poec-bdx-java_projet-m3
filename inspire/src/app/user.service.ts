@@ -105,4 +105,9 @@ export class UserService {
         })
       );
   }
+  logout() {
+    localStorage.removeItem('user');
+    this.userStore.setUserConnected(null);
+    this.router.navigate(['']);
+  }
 }

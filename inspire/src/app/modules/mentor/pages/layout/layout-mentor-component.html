@@ -18,7 +18,45 @@
           [ngStyle]="{transform: (!showNavbar && !windowWatcher.windowSizeChanged.value)? 'scaleX(0)' : 'scaleX(1)', transformOrigin: 'top left'}"
         >
           <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
+          <div class="logout">
+            <h4 (click)="modalVisible = true">Déconnexion</h4>
+          </div>
         </div>
+
+        <p-dialog
+          header=""
+          [(visible)]="modalVisible"
+          [modal]="true"
+          [style]="{ width: '30vw', height: '50vh' }"
+          [draggable]="false"
+          [resizable]="false"
+        >
+          <div class="logout-pop-up">
+            <div class="container-img-forgot">
+              <img
+                class="img-fluid forgot-img"
+                src="/assets/svgs/logout.svg"
+                alt=""
+              />
+            </div>
+
+            <h1>Êtes vous sur de vouloir vous déconnecter ?</h1>
+            <div class="btn-logout-container">
+              <app-button
+                variant="black"
+                text="Annuler"
+                type="submit"
+              ></app-button>
+              <app-button
+                variant="pink"
+                text="Me déconnecter"
+                type="submit"
+                (click)="logout()"
+              ></app-button>
+            </div>
+          </div>
+        </p-dialog>
+
         <div class="container-outlet">
           <router-outlet></router-outlet>
         </div>

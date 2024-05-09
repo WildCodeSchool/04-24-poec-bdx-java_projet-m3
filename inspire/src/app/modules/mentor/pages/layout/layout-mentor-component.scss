@@ -62,6 +62,46 @@
   }
 }
 
+.logout-pop-up {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logout-pop-up h1 {
+  margin-top: 30px;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.logout-pop-up p {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.forgot-img {
+  width: 200px;
+}
+
+.container-img-forgot {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-logout-container {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.logout h4 {
+  font-weight: 200;
+  cursor: pointer;
+}
+
 @media screen and (max-width: $large) {
   .container-side-nav {
     position: absolute;

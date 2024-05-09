@@ -20,7 +20,7 @@ export class UserStoreService {
     return this.userConnected$;
   }
 
-  setUserConnected(user: User): void {
+  setUserConnected(user: User | null): void {
     this.userConnected$.next(user);
   }
 }
