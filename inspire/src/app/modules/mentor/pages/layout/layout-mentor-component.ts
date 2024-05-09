@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { MentorService } from '../../../../shared/services/mentor.service';
+import { UserService } from '../../../../user.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-side-nav',
@@ -9,6 +11,8 @@ import { MentorService } from '../../../../shared/services/mentor.service';
 })
 export class LayoutMentor implements OnInit {
   showNavbar = true;
+  modalVisible = false;
+  userService = inject(UserService);
 
   windowWatcher = inject(WindowWatcherService);
   // b362
@@ -17,6 +21,10 @@ export class LayoutMentor implements OnInit {
   toggleVisibility() {
     this.showNavbar = !this.showNavbar;
     console.log(this.showNavbar);
+  }
+
+  logout() {
+    this.userService.logout();
   }
 
   ngOnInit(): void {

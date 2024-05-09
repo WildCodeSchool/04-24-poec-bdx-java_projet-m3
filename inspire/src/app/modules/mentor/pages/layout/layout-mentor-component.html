@@ -4,6 +4,9 @@
       <div class="header-container">
         <h2>Bonjour {{mentor.profil.firstname}}</h2>
         <p>Votre espace mentor de la Wild Code School</p>
+        <div class="forgot-pwd">
+          <h3 (click)="modalVisible = true">Déconnexion</h3>
+        </div>
       </div>
       <div class="container-main">
         <button
@@ -19,6 +22,41 @@
         >
           <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
         </div>
+
+        <p-dialog
+          header=""
+          [(visible)]="modalVisible"
+          [modal]="true"
+          [style]="{ width: '30vw', height: '50vh' }"
+          [draggable]="false"
+          [resizable]="false"
+        >
+          <div class="logout-pop-up">
+            <div class="container-img-forgot">
+              <img
+                class="img-fluid forgot-img"
+                src="/assets/svgs/logout.svg"
+                alt=""
+              />
+            </div>
+
+            <h1>Êtes vous sur de vouloir vous déconnecter ?</h1>
+            <div class="btn-logout-container">
+              <app-button
+                variant="black"
+                text="Annuler"
+                type="submit"
+              ></app-button>
+              <app-button
+                variant="pink"
+                text="Me déconnecter"
+                type="submit"
+                (click)="logout()"
+              ></app-button>
+            </div>
+          </div>
+        </p-dialog>
+
         <div class="container-outlet">
           <router-outlet></router-outlet>
         </div>
