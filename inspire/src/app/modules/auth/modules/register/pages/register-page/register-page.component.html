@@ -9,8 +9,6 @@
   <div class="right-content">
     <div class="right-title">
       <h2>Créer votre compte</h2>
-      <button (click)="sidebarVisible = true">sésame ouvre toi</button>
-      <button (click)="modalVisible = true">modale ouvre toi</button>
     </div>
     <app-register-form class="inner-right"></app-register-form>
 
@@ -21,36 +19,3 @@
     </div>
   </div>
 </div>
-
-<p-sidebar [(visible)]="sidebarVisible" position="right">
-  <app-form-add-course></app-form-add-course>
-</p-sidebar>
-<p-dialog
-  header="Vous allez réserver votre séance de mentorat"
-  [(visible)]="modalVisible"
-  [modal]="true"
-  [style]="{ width: '50vw', height: '50vh' }"
-  [draggable]="false"
-  [resizable]="false"
->
-  <form>
-    <div>
-      <label for="subject">Choissisez un thème</label>
-      <select name="subject" id="subject">
-        <option value="bug">Débeugage</option>
-        <option value="reseautage">Réseautage</option>
-        <option value="entretien">Entretien</option>
-      </select>
-    </div>
-    <div>
-      <label for="type-meeting">Présentiel ou visio ?</label>
-      <select name="type-meeting" id="type-meeting">
-        <option value="presentiel">Présentiel</option>
-        <option value="visio">Visio</option>
-      </select>
-    </div>
-    <div class="btn-connexion">
-      <app-button variant="pink" text="Réserver !"></app-button>
-    </div>
-  </form>
-</p-dialog>
