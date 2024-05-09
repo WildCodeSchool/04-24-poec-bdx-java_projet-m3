@@ -11,11 +11,12 @@ export default class MentorManager {
     }
   }
 
-  static async read(mentorId) {
+  static async read(userId) {
     try {
-      const [rows] = await client.query(`select * from mentors where id = ?`, [
-        mentorId,
-      ]);
+      const [rows] = await client.query(
+        `select * from mentors where userId = ?`,
+        [userId]
+      );
       return rows[0];
     } catch (error) {
       console.error(error.message);

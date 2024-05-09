@@ -12,43 +12,43 @@ export class FormEditAproposComponent implements OnInit {
   @Output() destroy = new EventEmitter();
   @Input() skills: Skill[] = [
     {
-      id: '6a04',
+      id: 1,
       name: 'javascript',
     },
     {
-      id: '8376',
+      id: 2,
       name: 'C plus plus',
     },
     {
-      id: 'f7f7',
+      id: 3,
       name: 'C Sharp',
     },
     {
-      id: 'bcae',
+      id: 4,
       name: 'java',
     },
     {
-      id: 'b6f5',
+      id: 5,
       name: 'html',
     },
     {
-      id: 'd45d',
+      id: 6,
       name: 'css',
     },
     {
-      id: '11b0',
+      id: 7,
       name: 'angular',
     },
     {
-      id: '7f92',
+      id: 8,
       name: 'react',
     },
     {
-      id: '1bd3',
+      id: 9,
       name: 'spring',
     },
     {
-      id: '001e',
+      id: 10,
       name: 'node',
     },
   ];

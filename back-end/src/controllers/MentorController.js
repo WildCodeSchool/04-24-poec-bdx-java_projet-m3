@@ -12,8 +12,8 @@ export default class MentorController {
 
   static async read(req, res) {
     try {
-      const { mentorId } = req.params;
-      const result = await MentorManager.read(mentorId);
+      const { userId } = req.params;
+      const result = await MentorManager.read(userId);
       res.status(200).json(result);
     } catch (error) {
       res.status(401).json({ message: "Demande refusée" });
