@@ -44,7 +44,7 @@ export class MentorService {
 
   getMentorById(id: string) {
     return this.httpClient
-      .get<Mentor[]>(environment.BASE_URL + '/mentors?userId=' + id)
+      .get<Mentor[]>(environment.BASE_URL + '/mentor/mentors/2') // + id)
       .pipe(map((res) => res[0]))
       .pipe(
         switchMap((res) => {

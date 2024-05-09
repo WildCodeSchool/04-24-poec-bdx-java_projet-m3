@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class UserService {
-  private readonly BASE_URL = 'http://localhost:3000';
+  private readonly BASE_URL = 'http://localhost:3310';
   private router = inject(Router);
   private http = inject(HttpClient);
   private userStore = inject(UserStoreService);
@@ -85,25 +85,30 @@ export class UserService {
   }
 
   login(email: any, password: any): Observable<User | null> {
-    return this.http
-      .get<User[]>(`${this.BASE_URL}/users?email=${email}&password=${password}`)
-      .pipe(
-        map((users) => {
-          if (users[0]) {
-            const user = users[0];
-            this.userStore.setUserConnected(user);
-            const userString = JSON.stringify(user);
-            window.localStorage.setItem('user', userString);
-            console.log(user);
-            if (user.role === 'mentor') this.router.navigate(['/mentor']);
-            if (user.role === 'student') this.router.navigate(['/student']);
-            return user;
-          } else {
-            alert('Identifiants incorrects');
-            return null;
-          }
-        })
-      );
+    return (
+      this.http
+        // .get<User[]>(`${this.BASE_URL}/users?email=${email}&password=${password}`)
+        .get<User>(`${this.BASE_URL}/users/${email}/${password}`)
+
+        .pipe(
+          tap((ele) => console.log(ele)),
+          map((users) => {
+            if (users) {
+              const user = users;
+              this.userStore.setUserConnected(user);
+              const userString = JSON.stringify(user);
+              window.localStorage.setItem('user', userString);
+              console.log(user);
+              if (user.role === 'mentor') this.router.navigate(['/mentor']);
+              if (user.role === 'student') this.router.navigate(['/student']);
+              return user;
+            } else {
+              alert('Identifiants incorrects');
+              return null;
+            }
+          })
+        )
+    );
   }
   logout() {
     localStorage.removeItem('user');

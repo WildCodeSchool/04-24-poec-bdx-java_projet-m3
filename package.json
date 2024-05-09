@@ -1,8 +1,11 @@
 {
   "scripts": {
     "m3": "concurrently -c yellow,magenta \"npm:m3-*\"",
+    "mcube": "concurrently -c yellow,magenta \"npm:mcube-*\"",
     "m3-json": "npx json-server json-server/db.json",
-    "m3-angular": "cd ./inspire && ng s -o"
+    "m3-angular": "cd ./inspire && ng s -o",
+    "mcube-angular": "cd ./inspire && ng s -o",
+    "mcube-express": "cd ./back-end && npm run dev"
   },
   "dependencies": {
     "concurrently": "^8.2.2"
