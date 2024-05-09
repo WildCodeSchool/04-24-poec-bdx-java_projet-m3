@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { MentorServiceService } from '../../shared/mentor-service.service';
 import { Observable } from 'rxjs';
 import { Mentor } from '../../../../shared/models/user';
@@ -11,6 +11,7 @@ import { Mentor } from '../../../../shared/models/user';
 export class ListMentorsComponent {
 
   mentorList$: Observable<Mentor[]> = this._mentorService.getMentorsList$();
+
 
   constructor(private _mentorService: MentorServiceService) { }
 
