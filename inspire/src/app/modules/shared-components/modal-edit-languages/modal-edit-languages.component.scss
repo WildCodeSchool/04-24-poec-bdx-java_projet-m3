@@ -27,8 +27,13 @@
 
   display: flex;
 }
-p-multiselect-label {
-  background-color: blueviolet;
+
+.btn-container {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+  width: 300px;
+  padding-left: 2px;
 }
 
 @media screen and (max-width: $small) {
