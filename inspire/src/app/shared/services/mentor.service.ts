@@ -55,7 +55,6 @@ export class MentorService {
         switchMap((ele) => {
           const listSkills = this.getMentorSkills();
           const listLanguages = this.getMentorLanguages();
-          this.activeMentor$.next({ ...this.activeMentor$.value, profil: ele });
           return forkJoin({
             profil: of(ele),
             languages: listLanguages,

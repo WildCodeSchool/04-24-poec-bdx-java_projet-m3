@@ -1,64 +1,37 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Skill } from '../../../shared/models/chip';
+import { UserService } from '../../../user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-form-edit-apropos',
   templateUrl: './form-edit-apropos.component.html',
   styleUrl: './form-edit-apropos.component.scss',
 })
-export class FormEditAproposComponent implements OnInit {
+export class FormEditAproposComponent implements OnInit, OnDestroy {
   aproposForm!: FormGroup<any>;
   @Output() destroy = new EventEmitter();
-  @Input() skills: Skill[] = [
-    {
-      id: 1,
-      name: 'javascript',
-    },
-    {
-      id: 2,
-      name: 'C plus plus',
-    },
-    {
-      id: 3,
-      name: 'C Sharp',
-    },
-    {
-      id: 4,
-      name: 'java',
-    },
-    {
-      id: 5,
-      name: 'html',
-    },
-    {
-      id: 6,
-      name: 'css',
-    },
-    {
-      id: 7,
-      name: 'angular',
-    },
-    {
-      id: 8,
-      name: 'react',
-    },
-    {
-      id: 9,
-      name: 'spring',
-    },
-    {
-      id: 10,
-      name: 'node',
-    },
-  ];
+  @Input() skills!: Skill[];
   @Input() selectedSkills!: Skill[];
+
+  listSkills$ = inject(UserService).getListSkills();
 
   onSubmit() {
     console.log(this.aproposForm.value);
   }
 
+  listSkillsSubscriptionRef!: Subscription;
   constructor(private fb: FormBuilder) {}
+
   ngOnInit(): void {
     this.aproposForm = this.fb.group({
       title: [''],
@@ -68,15 +41,20 @@ export class FormEditAproposComponent implements OnInit {
       description: [''],
       selectedSkills: new FormControl<Skill[] | null>(this.selectedSkills),
     });
+    this.listSkillsSubscriptionRef = this.listSkills$.subscribe(
+      (res) => (this.skills = res)
+    );
   }
-  cancel() {
-    console.log('cancel run');
 
+  ngOnDestroy(): void {
+    this.listSkillsSubscriptionRef.unsubscribe();
+  }
+
+  cancel() {
     this.destroy.emit();
   }
 
   submit() {
-    console.log('submit run');
     this.destroy.emit();
   }
 }

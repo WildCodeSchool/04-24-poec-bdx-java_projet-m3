@@ -4,6 +4,7 @@ import { Observable, first, map, switchMap, tap } from 'rxjs';
 import { Mentor, Student, User } from './shared/models/user';
 import { UserStoreService } from './shared/services/stores/user-store.service';
 import { Router } from '@angular/router';
+import { Skill } from './shared/models/chip';
 
 @Injectable({
   providedIn: 'root',
@@ -110,9 +111,14 @@ export class UserService {
         )
     );
   }
+
   logout() {
     localStorage.removeItem('user');
     this.userStore.setUserConnected(null);
     this.router.navigate(['']);
+  }
+
+  getListSkills() {
+    return this.http.get<Skill[]>(`${this.BASE_URL}/skill/skills`);
   }
 }
