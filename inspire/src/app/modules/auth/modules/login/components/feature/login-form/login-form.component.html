@@ -5,8 +5,9 @@
   #formLogin="ngForm"
 >
   <div class="container-input">
-    <label for="email">Email *</label>
+    <label class="label-form" for="email">Email *</label>
     <input
+      class="input-form"
       type="text"
       id="email"
       name="email"
@@ -26,8 +27,9 @@
     </div>
   </div>
   <div class="container-input">
-    <label for="password">Mot de passe *</label>
+    <label class="label-form" for="password">Mot de passe *</label>
     <input
+      class="input-form"
       type="password"
       id="password"
       name="password"
@@ -74,8 +76,12 @@
     </p>
     <form>
       <div class="container-input">
-        <label for="email">Votre email</label>
-        <input type="email" placeholder="L'email de votre compte" />
+        <label class="label-form" for="email">Votre email</label>
+        <input
+          class="input-form"
+          type="email"
+          placeholder="L'email de votre compte"
+        />
       </div>
       <app-button
         variant="pink"

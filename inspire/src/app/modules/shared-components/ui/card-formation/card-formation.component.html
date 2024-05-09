@@ -42,7 +42,7 @@
 <ng-container *ngIf="popupDeleteVisible">
   <app-modal-validate
     [visible]="popupDeleteVisible"
-    [question]="'Cliquez sur \'Valider\' cette formation ?'"
+    [question]="'Souhaitez-vous supprimer cette formation?'"
     (onCancel)="popupDeleteVisible = false"
     (onValidate)="popupDeleteVisible = false"
   ></app-modal-validate>

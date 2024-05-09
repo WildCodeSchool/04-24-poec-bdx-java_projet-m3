@@ -35,7 +35,7 @@
             <div class="container-img-forgot">
               <img
                 class="img-fluid forgot-img"
-                src="/assets/svgs/logout.svg"
+                src="/assets/svgs/question.svg"
                 alt=""
               />
             </div>
@@ -43,13 +43,14 @@
             <h1>Êtes vous sur de vouloir vous déconnecter ?</h1>
             <div class="btn-logout-container">
               <app-button
+                (click)="modalVisible = false"
                 variant="black"
                 text="Annuler"
                 type="submit"
               ></app-button>
               <app-button
                 variant="pink"
-                text="Me déconnecter"
+                text="Déconnexion"
                 type="submit"
                 (click)="logout()"
               ></app-button>

@@ -6,8 +6,9 @@
 >
   <div class="infos">
     <div class="container-input">
-      <label for="lastName">Nom *</label>
+      <label class="label-form" for="lastName">Nom *</label>
       <input
+        class="input-form"
         type="text"
         id="lastName"
         name="lastName"
@@ -27,8 +28,9 @@
       </div>
     </div>
     <div class="container-input">
-      <label for="firstName">Prénom *</label>
+      <label class="label-form" for="firstName">Prénom *</label>
       <input
+        class="input-form"
         type="text"
         id="firstName"
         name="firstName"
@@ -50,7 +52,7 @@
   </div>
 
   <div class="container-input">
-    <label for="email"
+    <label class="label-form" for="email"
       >Email *
       <span
         >Utilisez votre adresse
@@ -58,6 +60,7 @@
       </span></label
     >
     <input
+      class="input-form"
       type="text"
       id="email"
       name="email"
@@ -90,8 +93,9 @@
   </div>
 
   <div class="container-input">
-    <label for="password">Mot de passe *</label>
+    <label class="label-form" for="password">Mot de passe *</label>
     <input
+      class="input-form"
       type="password"
       id="password"
       name="password"
@@ -113,8 +117,11 @@
     </div>
   </div>
   <div class="container-input">
-    <label for="checkPassword">Confirmation du mot de passe *</label>
+    <label class="label-form" for="checkPassword"
+      >Confirmation du mot de passe *</label
+    >
     <input
+      class="input-form"
       type="password"
       id="checkPassword"
       name="checkPassword"
@@ -136,7 +143,12 @@
     </div>
   </div>
   <div class="checkbox-cgv">
-    <input type="checkbox" formControlName="checkboxCgv" id="checkbox-cgv" />
+    <input
+      class="input-form"
+      type="checkbox"
+      formControlName="checkboxCgv"
+      id="checkbox-cgv"
+    />
     <label for="checkbox-cgv"
       >J'accepte les conditions générales d'utilisation</label
     >
