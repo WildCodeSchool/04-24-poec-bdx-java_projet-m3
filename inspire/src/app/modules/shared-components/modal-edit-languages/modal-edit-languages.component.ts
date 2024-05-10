@@ -1,12 +1,22 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import { Language } from '../../../shared/models/language';
+import { UserService } from '../../../user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-modal-edit-languages',
   templateUrl: './modal-edit-languages.component.html',
   styleUrl: './modal-edit-languages.component.scss',
 })
-export class ModalEditLanguagesComponent implements OnInit {
+export class ModalEditLanguagesComponent implements OnInit, OnDestroy {
   @Input() question: string = '';
   @Input() subtitle: string = '';
   @Output() onValidate = new EventEmitter();
@@ -14,32 +24,10 @@ export class ModalEditLanguagesComponent implements OnInit {
   @Input() visible: boolean = true;
 
   @Input() selectedLanguages!: Language[];
-  @Input() languages: Language[] = [
-    {
-      id: '1457',
-      name: 'francais',
-    },
-    {
-      id: '9b4b',
-      name: 'anglais',
-    },
-    {
-      id: 'c082',
-      name: 'arabe',
-    },
-    {
-      id: '90b9',
-      name: 'italien',
-    },
-    {
-      id: '23a9',
-      name: 'espagnol',
-    },
-    {
-      id: '07ed',
-      name: 'chinois',
-    },
-  ];
+  languages!: Language[];
+
+  userService = inject(UserService);
+  userServiceSubscription!: Subscription;
 
   focusBtnCancel = true;
   focusBtnValidate = false;
@@ -47,7 +35,15 @@ export class ModalEditLanguagesComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.selectedLanguages);
+    this.userServiceSubscription = this.userService
+      .getListLanguages()
+      .subscribe((listLanguages) => {
+        this.languages = listLanguages;
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.userServiceSubscription.unsubscribe();
   }
 
   showDialog() {
