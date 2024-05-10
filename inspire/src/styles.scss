@@ -73,3 +73,52 @@ a {
   border-color: #f8156b;
   background-color: #f8156b;
 }
+
+.filter .p-multiselect {
+  border-color: #f8156b;
+}
+
+.filter .p-multiselect-label {
+  padding-left: 10px;
+}
+
+.filter .p-multiselect-filter-icon {
+  margin-top: -8px;
+}
+
+.filter .p-multiselect-filter-container {
+  padding-left: 20px;
+}
+
+.filter .p-multiselect-items span {
+  padding-left: 10px;
+}
+
+.filter .p-multiselect-label {
+  padding: 5px 10px;
+  max-width: 220px;
+}
+
+.filter .p-checkbox-box {
+  margin-left: 5px;
+  width: 15px;
+  height: 15px;
+  align-self: center;
+}
+
+.filter .p-multiselect-token {
+  background-color: #f8156b;
+  color: white;
+  border-radius: 10px;
+  padding: 2px 5px;
+  margin: 1px 2px;
+}
+
+.filter .p-multiselect-token-icon {
+  padding-left: 2px;
+  margin-left: 5px;
+}
+
+.filter .p-multiselect-clear-icon {
+  display: none;
+}
