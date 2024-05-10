@@ -31,13 +31,37 @@ export default class ReservationManager {
 
   async getMentorReservations(mentorId) {
     try {
-      const [reservations] = await this.database.query(
-        `SELECT r.subject, sl.dateTime, s.firstname, s.lastname , s.userId, s.imgUrl, sl.visio, s.title from reservations as r
+      let [reservations] = await this.database.query(
+        `SELECT r.subject as subject, sl.dateTime as dateTime, sl.id as slotId, s.firstname as firstname,
+         s.lastname  as lastname, s.userId as studentId, s.imgUrl as imgUrl, sl.visio as visio,
+          s.title as title from reservations as r
             join slots as sl on sl.id = r.slotId
             join students as s on s.userId = r.userId       
             where sl.mentorId = ?`,
         [mentorId]
       );
+      if (reservations.length) {
+        reservations = reservations.map((reservation) => {
+          return {
+            slotId: +reservation.slotId,
+            userId: +reservation.studentId,
+            message: "",
+            subject: reservation.subject,
+            slot: {
+              dateTime: reservation.dateTime,
+              mentorId: 0,
+              visio: true,
+            },
+            student: {
+              firstname: reservation.firstname,
+              lastname: reservation.lastname,
+              title: reservation.title,
+              imgUrl: reservation.imgUrl,
+              userId: +reservation.studentId,
+            },
+          };
+        });
+      }
       return reservations;
     } catch (error) {
       throw error;

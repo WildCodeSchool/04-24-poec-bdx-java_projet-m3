@@ -8,6 +8,7 @@ import routerSkill from "./routes/routerSkill.js";
 import routerLanguage from "./routes/routerLanguage.js";
 import routerMentor from "./routes/routerMentor.js";
 import routerFormation from "./routes/routerFormation.js";
+import routerExperience from "./routes/routerExperience.js";
 import routerReservation from "./routes/routerReservation.js";
 
 dotenv.config();
@@ -27,6 +28,7 @@ app.use("/mentor", routerMentor);
 app.use("/language", routerLanguage);
 app.use("/formation", routerFormation);
 app.use("/reservation", routerReservation);
+app.use("/experience", routerExperience);
 
 app.get(
   "*.*",

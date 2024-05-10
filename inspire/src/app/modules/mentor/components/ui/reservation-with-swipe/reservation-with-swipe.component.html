@@ -23,7 +23,7 @@
     <div class="sujet">
       {{ reservation.subject || "sans sujet" | titlecase }}
     </div>
-    <div class="date">{{ reservation.slot.date }}</div>
-    <div class="creneau">{{ reservation.slot.startAt }}</div>
+    <div class="date">{{ reservation.slot.dateTime }}</div>
+    <div class="creneau">{{ reservation.slot.dateTime }}</div>
   </div>
 </div>

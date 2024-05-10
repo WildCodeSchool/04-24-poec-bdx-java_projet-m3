@@ -13,10 +13,10 @@
   </div>
   <div class="sujet">{{ reservation.subject || "sans sujet" | titlecase }}</div>
   <div class="date">
-    {{ reservation.slot.date }}
+    {{ reservation.slot.dateTime }}
   </div>
   <div class="creneau">
-    {{ reservation.slot.startAt }}
+    {{ reservation.slot.dateTime }}
   </div>
   <div class="action">
     <button>Annuler</button>
