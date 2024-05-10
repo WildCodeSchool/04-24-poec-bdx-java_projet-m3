@@ -6,13 +6,13 @@
       <input
         type="text"
         id="diplome"
-        name="title"
+        name="diplome"
         formControlName="diplome"
         placeholder="Le diplôme obtenu"
       />
     </div>
     <div class="container-input">
-      <label for="school">Nom de l'établissement</label>
+      <label for="school">Nom de l'établissement $*</label>
       <input
         type="text"
         id="school"
@@ -44,19 +44,9 @@
       placeholder="Date de fin"
     />
   </div>
-  <div class="container-input">
-    <label for="description">Description *</label>
-    <textarea
-      rows="5"
-      id="description"
-      name="description"
-      formControlName="description"
-      placeholder="Description de la formation"
-    ></textarea>
-  </div>
 
   <div class="btn-connexion">
     <app-button variant="black" text="Annuler" (click)="cancel()"></app-button>
-    <app-button variant="pink" text="Enregistrer"></app-button>
+    <app-button variant="pink" text="Enregistrer" type="submit"></app-button>
   </div>
 </form>

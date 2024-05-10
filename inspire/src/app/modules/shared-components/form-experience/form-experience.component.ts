@@ -9,7 +9,7 @@ import { FormBuilder } from '@angular/forms';
 export class FormExperienceComponent {
   experienceForm = this.fb.group({
     title: [''],
-    society: [''],
+    company: [''],
     dateBeggin: [''],
     dateEnd: [''],
     description: [''],

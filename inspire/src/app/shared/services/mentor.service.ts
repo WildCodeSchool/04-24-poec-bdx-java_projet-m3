@@ -56,12 +56,13 @@ export class MentorService {
           const listSkills = this.getMentorSkills();
           const listLanguages = this.getMentorLanguages();
           const listFormations = this.getMentorFormations();
+          const listExperiences = this.getMentorExperiences();
           return forkJoin({
             profil: of(ele),
             languages: listLanguages,
             skills: listSkills,
             formations: listFormations,
-            experiences: of([] as Experience[]),
+            experiences: listExperiences,
           });
         })
       )
@@ -96,5 +97,14 @@ export class MentorService {
           this.userConnected.value?.id
       )
       .pipe(tap((ele) => console.log('languages', ele)));
+  }
+  getMentorExperiences() {
+    return this.httpClient
+      .get<Experience[]>(
+        environment.BASE_URL +
+          '/experience/experiences/user/' +
+          this.userConnected.value?.id
+      )
+      .pipe(tap((ele) => console.log('les experiences', ele)));
   }
 }
