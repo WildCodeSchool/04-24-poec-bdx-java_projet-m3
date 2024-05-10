@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs';
 export class FormEditAproposComponent implements OnInit, OnDestroy {
   aproposForm!: FormGroup<any>;
   @Output() destroy = new EventEmitter();
-  @Input() skills!: Skill[];
+  skills!: Skill[];
   @Input() selectedSkills!: Skill[];
 
   listSkills$ = inject(UserService).getListSkills();
