@@ -26,6 +26,8 @@ import { ModalValidateComponent } from './modal-validate/modal-validate.componen
 import { ModalEditLanguagesComponent } from './modal-edit-languages/modal-edit-languages.component';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { FormEditAproposComponent } from './form-edit-apropos/form-edit-apropos.component';
+import { FormAddExperienceComponent } from './form-add-experience/form-add-experience.component';
+import { FormEditExperienceComponent } from './form-edit-experience/form-edit-experience.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { FormEditAproposComponent } from './form-edit-apropos/form-edit-apropos.
     ModalValidateComponent,
     ModalEditLanguagesComponent,
     FormEditAproposComponent,
+    FormAddExperienceComponent,
+    FormEditExperienceComponent,
   ],
   imports: [
     CommonModule,
