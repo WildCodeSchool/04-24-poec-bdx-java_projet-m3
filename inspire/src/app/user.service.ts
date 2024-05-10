@@ -5,6 +5,7 @@ import { Mentor, Student, User } from './shared/models/user';
 import { UserStoreService } from './shared/services/stores/user-store.service';
 import { Router } from '@angular/router';
 import { Skill } from './shared/models/chip';
+import { Language } from './shared/models/language';
 
 @Injectable({
   providedIn: 'root',
@@ -120,5 +121,9 @@ export class UserService {
 
   getListSkills() {
     return this.http.get<Skill[]>(`${this.BASE_URL}/skill/skills`);
+  }
+
+  getListLanguages() {
+    return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
   }
 }
