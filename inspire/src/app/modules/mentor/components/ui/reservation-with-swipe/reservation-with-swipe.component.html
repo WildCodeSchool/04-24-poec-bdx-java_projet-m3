@@ -23,7 +23,9 @@
     <div class="sujet">
       {{ reservation.subject || "sans sujet" | titlecase }}
     </div>
-    <div class="date">{{ reservation.slot.dateTime }}</div>
-    <div class="creneau">{{ reservation.slot.dateTime }}</div>
+    <div class="date">
+      {{ reservation.slot.dateTime | date : "dd/MM/yyyy" }}
+    </div>
+    <div class="creneau">{{ endAt | date : "dd/MM/yyyy" }}</div>
   </div>
 </div>
