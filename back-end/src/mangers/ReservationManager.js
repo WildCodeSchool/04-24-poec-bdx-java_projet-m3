@@ -28,7 +28,7 @@ export default class ReservationManager {
       throw error;
     }
   }
-  //  join mentors as m on s.mentorId = m.id
+
   async getMentorReservations(mentorId) {
     try {
       const [reservations] = await this.database.query(
