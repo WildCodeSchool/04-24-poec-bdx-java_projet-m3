@@ -18,8 +18,8 @@
   </div>
   <div class="filter-mode">
     <p-multiSelect 
-    [options]="skills" 
-    [(ngModel)]="selectedSkill" 
+    [options]="mode" 
+    [(ngModel)]="selectedMode" 
     placeholder="Mode"
     optionLabel="name" 
     display="chip" 
@@ -28,13 +28,14 @@
   </div>
   <div class="filter-xp">
     <p-multiSelect 
-    [options]="skills" 
-    [(ngModel)]="selectedSkill" 
+    [options]="level" 
+    [(ngModel)]="selectedLevel" 
     placeholder="Niveau d'expérience"
     optionLabel="name" 
     display="chip" 
     [showClear]="true"
-    class="custom-multiselect" />
+    class="custom-multiselect"
+    [styleClass]="'custom-multiselect'"  />
   </div>
 </div>
 </div>

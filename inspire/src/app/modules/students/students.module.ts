@@ -12,6 +12,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FilterSearchListComponent } from './components/features/filter-search-list/filter-search-list.component';
 import { FormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ListboxModule } from 'primeng/listbox';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     SharedComponentsModule,
     HttpClientModule,
     FormsModule,
-    MultiSelectModule
+    MultiSelectModule,
+    ListboxModule
   ]
 })
 export class StudentsModule { }

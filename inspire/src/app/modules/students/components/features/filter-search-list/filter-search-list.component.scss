@@ -42,10 +42,10 @@
       background-color: white;
       border-radius: 10px;
     }
-
-    .custom-multiselect p-placeholder {
-      color: gray;
-      font-style: italic;
-    }
   }
 }
+
+.p-multiselect-filter-container {
+  background-color: red; /* Définis le style ici */
+}
+
