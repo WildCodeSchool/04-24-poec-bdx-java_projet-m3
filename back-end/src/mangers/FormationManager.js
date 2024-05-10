@@ -12,7 +12,7 @@ export default class FormationManager {
   static async getUserFormations(userId) {
     try {
       const [formations] = await client.query(
-        `SELECT * FROM skills
+        `SELECT * FROM formations
           WHERE userId = ?`,
         [userId]
       );
