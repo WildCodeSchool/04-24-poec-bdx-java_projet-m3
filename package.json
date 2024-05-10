@@ -5,7 +5,8 @@
     "m3-json": "npx json-server json-server/db.json",
     "m3-angular": "cd ./inspire && ng s -o",
     "mcube-angular": "cd ./inspire && ng s -o",
-    "mcube-express": "cd ./back-end && npm run dev"
+    "mcube-express": "cd ./back-end && npm run dev",
+    "migrate": "cd ./back-end && npm run build"
   },
   "dependencies": {
     "concurrently": "^8.2.2"

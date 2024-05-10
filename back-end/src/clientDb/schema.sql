@@ -175,6 +175,11 @@ FROM
     LIMIT 100;
 
 
+-- Insérer des données dans la table formations
+
+-- Exemple 1 : Formation en informatique
+
+
 
 INSERT INTO user_skills (userId, skillId)
 SELECT 
@@ -185,3 +190,50 @@ FROM
     information_schema.tables t2
     LIMIT 100;
 
+
+INSERT INTO formations (title, company, dateBegin, dateEnd, city, country, userId)
+VALUES ('Certification en développement web', 'Tech Academy', '2023-02-15', '2023-05-20', 'Paris', 'France', 1);
+
+-- Exemple 2 : Formation en gestion de projet
+INSERT INTO formations (title, company, dateBegin, dateEnd, city, country, userId)
+VALUES ('Diplôme en gestion de projet', 'Business School', '2022-09-10', '2023-01-15', 'New York', 'USA', 1);
+
+-- Exemple 3 : Formation en marketing digital
+INSERT INTO formations (title, company, dateBegin, dateEnd, city, country, userId)
+VALUES ('Certificat en marketing numérique', 'Digital Marketing Institute', '2023-03-25', NULL, 'London', 'UK', 2);
+-- Exemple 4 : Formation en langues
+INSERT INTO formations (title, company, dateBegin, dateEnd, city, country, userId)
+VALUES ('Cours d''anglais avancé', 'Language Institute', '2023-06-10', '2023-08-20', 'Madrid', 'Spain', 2);
+
+-- Exemple 5 : Formation en finance
+INSERT INTO formations (title, company, dateBegin, dateEnd, city, country, userId)
+VALUES ('Certification en analyse financière', 'Finance Academy', '2023-01-05', '2023-04-15', 'Toronto', 'Canada', 3);
+
+-- Exemple 6 : Formation en développement personnel
+INSERT INTO formations (title, company, dateBegin, dateEnd, city, country, userId)
+VALUES ('Atelier de développement personnel', 'Self-Improvement Center', '2023-09-20', '2023-10-15', 'Sydney', 'Australia', 3);
+
+
+
+
+INSERT INTO experiences (title, company, dateBegin, dateEnd, city, country, userId)
+VALUES ('Certification en développement web', 'Tech Academy', '2023-02-15', '2023-05-20', 'Paris', 'France', 1);
+
+-- Exemple 2 : Formation en gestion de projet
+INSERT INTO experiences (title, company, dateBegin, dateEnd, city, country, userId)
+VALUES ('Diplôme en gestion de projet', 'Business School', '2022-09-10', '2023-01-15', 'New York', 'USA', 1);
+
+-- Exemple 3 : Formation en marketing digital
+INSERT INTO experiences (title, company, dateBegin, dateEnd, city, country, userId)
+VALUES ('Certificat en marketing numérique', 'Digital Marketing Institute', '2023-03-25', NULL, 'London', 'UK', 2);
+-- Exemple 4 : Formation en langues
+INSERT INTO experiences (title, company, dateBegin, dateEnd, city, country, userId)
+VALUES ('Cours d''anglais avancé', 'Language Institute', '2023-06-10', '2023-08-20', 'Madrid', 'Spain', 2);
+
+-- Exemple 5 : Formation en finance
+INSERT INTO experiences (title, company, dateBegin, dateEnd, city, country, userId)
+VALUES ('Certification en analyse financière', 'Finance Academy', '2023-01-05', '2023-04-15', 'Toronto', 'Canada', 3);
+
+-- Exemple 6 : Formation en développement personnel
+INSERT INTO experiences (title, company, dateBegin, dateEnd, city, country, userId)
+VALUES ('Atelier de développement personnel', 'Self-Improvement Center', '2023-09-20', '2023-10-15', 'Sydney', 'Australia', 3);

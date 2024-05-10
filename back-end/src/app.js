@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 import routerSkill from "./routes/routerSkill.js";
 import routerLanguage from "./routes/routerLanguage.js";
 import routerMentor from "./routes/routerMentor.js";
+import routerFormation from "./routes/routerFormation.js";
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,8 @@ app.use("/", route);
 app.use("/skill", routerSkill);
 app.use("/mentor", routerMentor);
 app.use("/language", routerLanguage);
+app.use("/formation", routerFormation);
+
 app.get(
   "*.*",
   express.static(path.join(__dirname, "../public"), { maxAge: "1y" })
