@@ -16,27 +16,27 @@ export class ModalEditLanguagesComponent implements OnInit {
   @Input() selectedLanguages!: Language[];
   @Input() languages: Language[] = [
     {
-      id: '1457',
+      id: 1,
       name: 'francais',
     },
     {
-      id: '9b4b',
+      id: 2,
       name: 'anglais',
     },
     {
-      id: 'c082',
+      id: 3,
       name: 'arabe',
     },
     {
-      id: '90b9',
+      id: 4,
       name: 'italien',
     },
     {
-      id: '23a9',
+      id: 5,
       name: 'espagnol',
     },
     {
-      id: '07ed',
+      id: 6,
       name: 'chinois',
     },
   ];

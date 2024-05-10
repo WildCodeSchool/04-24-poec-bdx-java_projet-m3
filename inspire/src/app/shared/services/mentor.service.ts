@@ -15,6 +15,7 @@ import { Skill } from '../models/chip';
 import { Language } from '../models/language';
 import { Formation } from '../models/formation';
 import { Experience } from '../models/experience';
+import { UserStoreService } from './stores/user-store.service';
 
 type ResponseSkill = {
   id: string;
@@ -35,6 +36,7 @@ type ResponseLanguage = {
 })
 export class MentorService {
   httpClient = inject(HttpClient);
+  userConnected = inject(UserStoreService).getUserConnected$();
 
   constructor() {}
 
@@ -42,79 +44,57 @@ export class MentorService {
     {} as MentorFullProfil
   );
 
-  getMentorById(id: string) {
+  getMentorById() {
+    console.log('connected user value', this.userConnected.value);
+
     return this.httpClient
-      .get<Mentor[]>(environment.BASE_URL + '/mentors?userId=' + id)
-      .pipe(map((res) => res[0]))
+      .get<Mentor>(
+        environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
+      )
       .pipe(
-        switchMap((res) => {
-          const skills = this.httpClient
-            .get<ResponseSkill[]>(
-              environment.BASE_URL +
-                '/skillUsers?userId=' +
-                res.userId +
-                '&_embed=skill'
-            )
-            .pipe(map((response) => response.map((ele) => ele.skill)));
-
-          const languages = this.httpClient
-            .get<ResponseLanguage[]>(
-              environment.BASE_URL +
-                '/userLanguages?userId=' +
-                res.userId +
-                '&_embed=language'
-            )
-            .pipe(map((response) => response.map((ele) => ele.language)));
-
-          const formations = this.httpClient.get<Formation[]>(
-            environment.BASE_URL + '/formations?userId=' + res.userId
-          );
-
-          const experiences = this.httpClient.get<Experience[]>(
-            environment.BASE_URL + '/experiences?userId=' + res.userId
-          );
-
+        switchMap((ele) => {
+          const listSkills = this.getMentorSkills();
+          const listLanguages = this.getMentorLanguages();
+          const listFormations = this.getMentorFormations();
           return forkJoin({
-            profil: of(res),
-            languages,
-            skills,
-            experiences,
-            formations,
+            profil: of(ele),
+            languages: listLanguages,
+            skills: listSkills,
+            formations: listFormations,
+            experiences: of([] as Experience[]),
           });
-        }),
-        tap((res) => {
-          console.log('fork joined results ', res);
-          this.activeMentor$.next(res);
         })
-      );
-  }
-
-  getMentorByIdBackUp(id: string) {
-    return this.httpClient
-      .get<Mentor[]>(environment.BASE_URL + '/mentors?userId=' + id)
-      .pipe(map((res) => res[0]));
-  }
-
-  getMentorSkills(id: string) {
-    console.log('userId ', id);
-
-    return this.httpClient
-      .get<ResponseSkill[]>(
-        environment.BASE_URL + '/skillUsers?userId=' + id + '&_embed=skill'
       )
-      .pipe(map((response) => response.map((ele) => ele.skill)));
+      .pipe(tap((fullProfil) => this.activeMentor$.next(fullProfil)));
   }
 
-  getMentorLanguages(id: string) {
-    console.log('userId ', id);
-
+  getMentorSkills() {
     return this.httpClient
-      .get<ResponseLanguage[]>(
+      .get<Skill[]>(
         environment.BASE_URL +
-          '/userLanguages?userId=' +
-          id +
-          '&_embed=language'
+          '/skill/skills/user/' +
+          this.userConnected.value?.id
       )
-      .pipe(map((response) => response.map((ele) => ele.language)));
+      .pipe(tap((ele) => console.log('skills', ele)));
+  }
+
+  getMentorLanguages() {
+    return this.httpClient
+      .get<Language[]>(
+        environment.BASE_URL +
+          '/language/languages/user/' +
+          this.userConnected.value?.id
+      )
+      .pipe(tap((ele) => console.log('languages', ele)));
+  }
+
+  getMentorFormations() {
+    return this.httpClient
+      .get<Formation[]>(
+        environment.BASE_URL +
+          '/formation/formations/user/' +
+          this.userConnected.value?.id
+      )
+      .pipe(tap((ele) => console.log('languages', ele)));
   }
 }
