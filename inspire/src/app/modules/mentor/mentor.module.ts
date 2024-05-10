@@ -18,6 +18,8 @@ import { ListReservationHistoryComponent } from './components/features/list-rese
 import { ReservationWithSwipeComponent } from './components/ui/reservation-with-swipe/reservation-with-swipe.component';
 import { SidebarModule } from 'primeng/sidebar';
 import { DialogModule } from 'primeng/dialog';
+import { AgendaComponent } from './pages/agenda/agenda.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { DialogModule } from 'primeng/dialog';
     ListReservationComponent,
     ListReservationHistoryComponent,
     ReservationWithSwipeComponent,
+    AgendaComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +44,7 @@ import { DialogModule } from 'primeng/dialog';
     DividerModule,
     SidebarModule,
     DialogModule,
+    FullCalendarModule,
   ],
   exports: [
     RowReservationComponent,
