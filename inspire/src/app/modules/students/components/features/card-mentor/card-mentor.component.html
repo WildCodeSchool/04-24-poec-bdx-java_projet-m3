@@ -8,9 +8,9 @@
     <p>{{mentor.title}}</p>
   </div>
     <div class="chip-container">
-    <app-chip></app-chip>
-    <app-chip></app-chip>
-    <app-chip></app-chip>
+      <ng-container *ngIf="chips">
+        <app-list-chip [chips]="chips"></app-list-chip>
+      </ng-container>
   </div>
   <div class="social-container">
     <div class="img-linkedin">
