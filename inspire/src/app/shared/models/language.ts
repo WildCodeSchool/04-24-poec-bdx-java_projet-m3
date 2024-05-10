@@ -1,4 +1,4 @@
 export type Language = {
   name: string;
-  id?: string;
+  id?: number;
 };

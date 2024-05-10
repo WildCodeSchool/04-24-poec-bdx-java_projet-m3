@@ -16,7 +16,7 @@ export class LayoutMentor implements OnInit {
 
   windowWatcher = inject(WindowWatcherService);
   // b362
-  mentor$ = inject(MentorService).getMentorById('b362');
+  mentor$ = inject(MentorService).getMentorById();
 
   toggleVisibility() {
     this.showNavbar = !this.showNavbar;
