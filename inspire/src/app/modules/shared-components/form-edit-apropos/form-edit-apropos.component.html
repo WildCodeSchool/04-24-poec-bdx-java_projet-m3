@@ -1,8 +1,8 @@
 <form class="form-course" (ngSubmit)="onSubmit()" [formGroup]="aproposForm">
-  <h1>Editer une Formation</h1>
+  <h1>Editer votre profil</h1>
   <div class="infos">
     <div class="container-input">
-      <label for="title">Titre *</label>
+      <label for="title">Titre de votre profil*</label>
       <input
         type="text"
         id="title"
@@ -36,30 +36,30 @@
     </div>
   </div>
   <!-- [(ngModel)]="selectedLanguages" -->
-  <div class="infos">
-    <div class="card flex justify-content-center container-input">
-      <label for="skills">Editez vos skills *</label>
-      <p-multiSelect
-        id="skills"
-        name="skills"
-        [options]="skills"
-        placeholder="Choisissez vos skills"
-        formControlName="selectedSkills"
-        optionLabel="name"
-        [showClear]="true"
-        [virtualScroll]="true"
-        [virtualScrollItemSize]="43"
-      />
-    </div>
+  <div class="edit-skill">
+    <label for="skills">Editez vos skills *</label>
   </div>
-  <div class="container-input">
-    <label for="description">Description *</label>
-    <textarea
-      pInputTextarea
-      aria-labelledby="Description"
-      formControlName="description"
-      id="description"
-    ></textarea>
+  <div class="skills" *ngIf="skills">
+    <app-chip
+      *ngFor="let skill of skills"
+      [title]="skill.name"
+      [dark]="true"
+    ></app-chip>
+  </div>
+
+  <div class="container-select">
+    <p-multiSelect
+      class="languages"
+      id="skills"
+      name="skills"
+      [options]="skills"
+      placeholder="Choisissez vos skills"
+      formControlName="selectedSkills"
+      optionLabel="name"
+      [showClear]="true"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="43"
+    />
   </div>
 
   <div class="btn-connexion">
