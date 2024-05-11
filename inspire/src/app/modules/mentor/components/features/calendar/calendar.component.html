@@ -1,4 +1,5 @@
-<div class="control">
+<div class="control"></div>
+<ng-container *ngIf="today?.length">
   <h3>La semaine de {{ today }}</h3>
-</div>
+</ng-container>
 <full-calendar [options]="calendarOptions" #calendar></full-calendar>
