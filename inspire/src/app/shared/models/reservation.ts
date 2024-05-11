@@ -3,24 +3,23 @@ import { Student } from './user';
 export class Reservation {
   id?: string = '';
   subject: string = '';
-  message: string = '';
-  userId: string = '';
+  message?: string = '';
+  mentorId: string = '';
   slotId: string = '';
 }
 
 export type Slot = {
   id?: string;
-  date: string;
-  startAt: string;
-  userId: string;
-  vision: boolean;
+  dateTime: Date;
+  mentorId: number;
+  visio: boolean;
 };
 
 export class ResponseReservation {
   id?: string = '';
-  slotId: string = '';
-  userId: string = '';
-  message: string = '';
+  slotId?: number;
+  userId?: number;
+  message?: string = '';
   subject: string = '';
   slot: Slot = {} as Slot;
   student: Student = {} as Student;
