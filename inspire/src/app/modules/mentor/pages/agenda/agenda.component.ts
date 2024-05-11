@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { CalendarOptions } from '@fullcalendar/core';
-import dayGridPlugin from '@fullcalendar/daygrid';
+import { Component, inject } from '@angular/core';
+
+import { MentorService } from '../../../../shared/services/mentor.service';
 
 @Component({
   selector: 'app-agenda',
@@ -8,8 +8,5 @@ import dayGridPlugin from '@fullcalendar/daygrid';
   styleUrl: './agenda.component.scss',
 })
 export class AgendaComponent {
-  calendarOptions: CalendarOptions = {
-    initialView: 'dayGridMonth',
-    plugins: [dayGridPlugin],
-  };
+  activeMentor$ = inject(MentorService).activeMentor$;
 }

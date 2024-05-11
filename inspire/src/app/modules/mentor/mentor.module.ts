@@ -20,6 +20,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { DialogModule } from 'primeng/dialog';
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarComponent } from './components/features/calendar/calendar.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     ListReservationHistoryComponent,
     ReservationWithSwipeComponent,
     AgendaComponent,
+    CalendarComponent,
   ],
   imports: [
     CommonModule,
