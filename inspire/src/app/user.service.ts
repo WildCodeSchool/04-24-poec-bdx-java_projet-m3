@@ -144,10 +144,20 @@ export class UserService {
     );
   }
 
-  editFormation(formation: any, formationId: any): Observable<Formation> {
-    return this.http.put<Formation>(
+  editFormation(
+    formation: any,
+    formationId: any
+  ): Observable<{ affectedRows: number }> {
+    return this.http.put<{ affectedRows: number }>(
       `${this.BASE_URL}/formation/formations/${formationId}`,
       formation
+    );
+  }
+
+  deleteFormation(formationId: any): Observable<Formation> {
+    return this.http.put<Formation>(
+      `${this.BASE_URL}/formation/formations/${formationId}`,
+      formationId
     );
   }
 }
