@@ -3,6 +3,7 @@ import {
   Component,
   ElementRef,
   Input,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import { ResponseReservation } from '../../../../../shared/models/reservation';
@@ -13,7 +14,7 @@ import { auditTime, fromEvent } from 'rxjs';
   templateUrl: './reservation-with-swipe.component.html',
   styleUrl: './reservation-with-swipe.component.scss',
 })
-export class ReservationWithSwipeComponent implements AfterViewInit {
+export class ReservationWithSwipeComponent implements AfterViewInit, OnInit {
   @Input()
   reservation!: ResponseReservation;
   @Input()
@@ -23,6 +24,13 @@ export class ReservationWithSwipeComponent implements AfterViewInit {
   startingPosition!: number;
   offsetRight = 0;
   showAction = false;
+
+  endAt!: Date;
+
+  ngOnInit(): void {
+    this.endAt = new Date(this.reservation.slot.dateTime);
+    this.endAt.setTime(this.endAt.getTime() + 3600000);
+  }
 
   ngAfterViewInit(): void {
     fromEvent<TouchEvent>(

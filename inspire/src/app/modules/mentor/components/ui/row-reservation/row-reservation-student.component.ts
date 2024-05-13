@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   Reservation,
   ResponseReservation,
@@ -9,9 +9,17 @@ import {
   templateUrl: './row-reservation-student.component.html',
   styleUrl: './row-reservation-student.component.scss',
 })
-export class RowReservationComponent {
+export class RowReservationComponent implements OnInit {
   @Input()
   reservation!: ResponseReservation;
   @Input()
   bgColor: string = 'transparent';
+  @Input()
+  slotLength: number = 1;
+  endAt!: Date;
+
+  ngOnInit(): void {
+    this.endAt = new Date(this.reservation.slot.dateTime);
+    this.endAt.setTime(this.endAt.getTime() + this.slotLength * 3600000);
+  }
 }

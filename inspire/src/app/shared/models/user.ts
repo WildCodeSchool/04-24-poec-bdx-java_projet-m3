@@ -4,7 +4,7 @@ import { Formation } from './formation';
 import { Language } from './language';
 
 export class User {
-  id?: string;
+  id?: number;
   email: string = '';
   password: string = '';
   role: string = '';
@@ -17,7 +17,7 @@ export class User {
 }
 
 export class Mentor {
-  id?: string;
+  id?: number;
   firstname: string = '';
   lastname: string = '';
   description: string = '';
@@ -25,10 +25,10 @@ export class Mentor {
   title: string = '';
   githubUrl: string = '';
   linkedinUrl: string = '';
-  userId: string = '';
+  userId: number;
 
   constructor(
-    userId: string,
+    userId: number,
     firstname: string,
     lastname: string,
     description: string,
@@ -57,7 +57,7 @@ export type MentorFullProfil = {
 };
 
 export class Student {
-  id?: string;
+  id?: number;
   firstname: string;
   lastname: string;
   description: string;
@@ -65,11 +65,11 @@ export class Student {
   title: string;
   githubUrl: string;
   linkedinUrl: string;
-  userId: string;
+  userId: number;
   promotion?: string = 'javascript';
 
   constructor(
-    userId: string,
+    userId: number,
     firstname: string,
     lastname: string,
     description: string = '',

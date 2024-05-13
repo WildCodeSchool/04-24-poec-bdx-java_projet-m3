@@ -1,0 +1,76 @@
+@import "../../../../variables.scss";
+.form-course {
+  width: 100%;
+}
+
+.container-input {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.btn-connexion {
+  margin-top: 50px;
+}
+
+label {
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  color: black;
+}
+
+input,
+textarea {
+  padding: 12px 10px;
+  border: solid 1px $primary-color;
+  border-radius: 5px;
+  margin-top: 6px;
+  &::placeholder {
+    color: rgb(151, 150, 150);
+    font-style: italic;
+  }
+}
+
+.form-course h1 {
+  font-size: 24px;
+  color: black;
+  margin-top: 30px;
+}
+
+.form-inscription.ng-submitted input.ng-invalid {
+  border-color: red;
+}
+.error {
+  font-size: 14px;
+  color: red;
+  margin-top: 5px;
+  font-style: italic;
+}
+
+.checkbox-cgv {
+  margin-top: 20px;
+}
+
+.checkbox-cgv label {
+  margin-left: 10px;
+  font-weight: 300;
+  font-size: 13px;
+  font-style: italic;
+}
+.infos {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-connexion {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+@media screen and (max-width: 576px) {
+  .infos {
+    flex-direction: column;
+  }
+}

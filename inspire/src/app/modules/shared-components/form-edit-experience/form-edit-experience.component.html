@@ -1,18 +1,14 @@
-<form
-  class="form-experience"
-  (ngSubmit)="onSubmit()"
-  [formGroup]="experienceForm"
->
-  <h1>Ajouter une expérience</h1>
+<form class="form-course" (ngSubmit)="onSubmit()" [formGroup]="experienceForm">
+  <h1>Editer une Expérience</h1>
   <div class="infos">
     <div class="container-input">
-      <label for="title">Titre de l'expérience *</label>
+      <label for="title">Votre poste *</label>
       <input
         type="text"
         id="title"
         name="title"
         formControlName="title"
-        placeholder="Le post occupé"
+        placeholder="Titre du poste occupé"
       />
     </div>
     <div class="container-input">
@@ -22,7 +18,7 @@
         id="company"
         name="company"
         formControlName="company"
-        placeholder="Nom de la société"
+        placeholder="Nom de l'entreprise"
       />
     </div>
   </div>
@@ -50,7 +46,7 @@
   </div>
 
   <div class="btn-connexion">
-    <app-button variant="black" text="Annuler"></app-button>
-    <app-button variant="pink" text="Enregistrer"></app-button>
+    <app-button variant="black" text="Annuler" (click)="cancel()"></app-button>
+    <app-button variant="pink" text="Enregistrer" type="submit"></app-button>
   </div>
 </form>
