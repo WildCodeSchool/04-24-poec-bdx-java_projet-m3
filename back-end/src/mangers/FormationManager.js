@@ -9,6 +9,18 @@ export default class FormationManager {
     }
   }
 
+  static async getFormationById(formationId) {
+    try {
+      const [formation] = await client.query(
+        `SELECT * FROM formations where id = ?`,
+        [formationId]
+      );
+      return formation;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async getUserFormations(userId) {
     try {
       const [formations] = await client.query(

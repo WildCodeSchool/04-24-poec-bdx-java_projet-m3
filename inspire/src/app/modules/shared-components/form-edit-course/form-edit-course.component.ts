@@ -18,13 +18,15 @@ export class FormEditCourseComponent implements OnInit {
 
   onSubmit() {
     const formationId = this.formation.id;
+    console.log('formation', this.formation);
+
     this.userService
       .editFormation(this.courseForm.value, formationId)
       .subscribe((data) => {
         const newFormations =
           this.mentorService.activeMentor$.value.formations.map((formation) => {
             if (this.formation.id === formation.id) {
-              return this.courseForm.value;
+              return { ...this.courseForm.value, id: formationId };
             } else {
               return formation;
             }

@@ -1,5 +1,28 @@
 <form class="form-course" (ngSubmit)="onSubmit()" [formGroup]="aproposForm">
   <h1>Editer votre profil</h1>
+
+  <div class="infos">
+    <div class="container-input">
+      <label for="firstname">Prénom *</label>
+      <input
+        type="text"
+        id="firstname"
+        name="firstname"
+        formControlName="firstname"
+        placeholder="Votre prénom :"
+      />
+    </div>
+    <div class="container-input">
+      <label for="lastname">Nom *</label>
+      <input
+        type="text"
+        id="lastname"
+        name="lastname"
+        formControlName="lastname"
+        placeholder="Vote nom"
+      />
+    </div>
+  </div>
   <div class="infos">
     <div class="container-input">
       <label for="title">Titre de votre profil*</label>
@@ -15,7 +38,7 @@
 
   <div class="infos">
     <div class="container-input">
-      <label for="diplome">Github *</label>
+      <label for="github">Github *</label>
       <input
         type="text"
         id="github"
@@ -35,7 +58,20 @@
       />
     </div>
   </div>
-  <!-- [(ngModel)]="selectedLanguages" -->
+
+  <div class="infos">
+    <div class="container-input">
+      <label for="title">Je décris mon profil </label>
+      <textarea
+        type="text"
+        id="profil"
+        name="profil"
+        formControlName="description"
+        placeholder="Un peu plus sur moi"
+      ></textarea>
+    </div>
+  </div>
+
   <div class="edit-skill">
     <label for="skills">Editez vos skills *</label>
   </div>
@@ -53,6 +89,7 @@
       id="skills"
       name="skills"
       [options]="skills"
+      [(ngModel)]="skills"
       placeholder="Choisissez vos skills"
       formControlName="selectedSkills"
       optionLabel="name"

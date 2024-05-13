@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { Mentor } from '../../../../../shared/models/user';
 import { Skill } from '../../../../../shared/models/chip';
+import { MentorService } from '../../../../../shared/services/mentor.service';
 
 @Component({
   selector: 'app-card-infos',
@@ -12,11 +13,20 @@ export class CardInfosComponent {
   @Input() chips!: Skill[];
   editFormApropoVisible = false;
 
+  mentorService = inject(MentorService);
+
   openEditFormApropos() {
     this.editFormApropoVisible = true;
     console.log('clicked edit');
   }
   closeEditFormApropos() {
     this.editFormApropoVisible = false;
+  }
+
+  updateProfil(event: any) {
+    console.log('received : ', event);
+    this.mentorService
+      .updateMentorProfil(event)
+      .subscribe((ele) => console.log('lol', ele));
   }
 }

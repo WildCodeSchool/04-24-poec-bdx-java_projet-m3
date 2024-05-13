@@ -7,6 +7,6 @@ route.get("/mentors", MentorController.browse);
 route.get("/mentors/:userId", MentorController.read);
 route.post("/mentors", MentorController.add);
 route.delete("/mentors/:mentorId", MentorController.delete);
-route.patch("/mentors", MentorController.update);
+route.put("/mentors/:mentorId", MentorController.update);
 
 export default route;

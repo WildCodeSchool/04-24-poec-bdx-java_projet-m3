@@ -58,6 +58,7 @@ export default class FormationController {
         formationId,
         props
       );
+
       res.status(202).json({ affectedRows });
     } catch (error) {
       res

@@ -1,15 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import {
-  BehaviorSubject,
-  Observable,
-  forkJoin,
-  map,
-  of,
-  switchMap,
-  tap,
-} from 'rxjs';
+import { BehaviorSubject, forkJoin, of, switchMap, tap } from 'rxjs';
 import { Mentor, MentorFullProfil } from '../models/user';
 import { Skill } from '../models/chip';
 import { Language } from '../models/language';
@@ -81,9 +73,7 @@ export class MentorService {
 
   getMentorSkillsById(userId: number) {
     return this.httpClient
-      .get<Skill[]>(`${
-        environment.BASE_URL}/skill/skills/user/${userId}`
-      )
+      .get<Skill[]>(`${environment.BASE_URL}/skill/skills/user/${userId}`)
       .pipe(tap((ele) => console.log('skills', ele)));
   }
 
@@ -125,5 +115,16 @@ export class MentorService {
         languages
       )
       .pipe(tap((ele) => console.log('languages new list', ele)));
+  }
+
+  updateMentorProfil(mentor: Mentor) {
+    return this.httpClient
+      .put<{ affectedRows: number }>(
+        environment.BASE_URL +
+          '/mentor/mentors/' +
+          this.activeMentor$.value.profil.id,
+        mentor
+      )
+      .pipe(tap((ele) => console.log('profil ', ele)));
   }
 }
