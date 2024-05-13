@@ -45,9 +45,6 @@ CREATE TABLE user_skills (
     CONSTRAINT sans_repetition_skill UNIQUE (userId, skillId)
 );
 
-ALTER TABLE m3.user_skills
-ADD CONSTRAINT user_skills_UN UNIQUE KEY (userId, skillId);
-
 CREATE TABLE languages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL
