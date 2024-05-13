@@ -407,6 +407,18 @@
       "email": "adrien@coucou.fr",
       "password": "A123456789",
       "role": "student"
+    },
+    {
+      "id": "8497",
+      "email": "matlementor@coucou.fr",
+      "password": "A1234567890",
+      "role": "mentor"
+    },
+    {
+      "id": "94af",
+      "email": "matlestudent@coucou.fr",
+      "password": "A123456789",
+      "role": "student"
     }
   ],
   "students": [
@@ -863,6 +875,18 @@
       "title": "",
       "githubUrl": "",
       "linkedinUrl": ""
+    },
+    {
+      "id": "3353",
+      "promotion": "javascript",
+      "userId": "94af",
+      "firstname": "mat",
+      "lastname": "chauchau",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": ""
     }
   ],
   "mentors": [
@@ -1107,6 +1131,17 @@
       "githubUrl": "",
       "linkedinUrl": "",
       "userId": "d5d8"
+    },
+    {
+      "id": "2f5c",
+      "firstname": "mat",
+      "lastname": "chauchau",
+      "description": "",
+      "imgUrl": "",
+      "title": "",
+      "githubUrl": "",
+      "linkedinUrl": "",
+      "userId": "8497"
     }
   ],
   "skills": [
