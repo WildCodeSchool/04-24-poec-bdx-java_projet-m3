@@ -1,23 +1,31 @@
-
 <div class="container-card">
   <div class="img-card">
-    <img src={{mentor.imgUrl}} alt="">
-    <h1>{{mentor.firstname}} {{mentor.lastname}}</h1>
+    <img src="{{ mentor.imgUrl }}" alt="" />
+    <h1>{{ mentor.firstname }} {{ mentor.lastname }}</h1>
   </div>
   <div class="title-card">
-    <p>{{mentor.title}}</p>
+    <p>{{ mentor.title }}</p>
   </div>
-    <div class="chip-container">
-      <ng-container *ngIf="chips">
-        <app-list-chip [chips]="chips"></app-list-chip>
-      </ng-container>
+  <div class="chip-container">
+    <ng-container *ngIf="skillList$ | async as skillList">
+      <div *ngFor="let skill of skillList.slice(0, 5)" class="skill-list">
+        {{ skill.name }}
+      </div>
+    </ng-container>
   </div>
   <div class="social-container">
     <div class="img-linkedin">
-      <a [href]="mentor.linkedinUrl" target="_blank"><img src="../../../../../../assets/linkedin.png" alt=""></a>
+      <a [href]="mentor.linkedinUrl" target="_blank"
+        ><img src="../../../../../../assets/linkedin.png" alt=""
+      /></a>
     </div>
     <div class="img-github">
-      <a [href]="mentor.githubUrl" target="_blank"><img src="../../../../../../assets/github.png" alt=""></a>
+      <a [href]="mentor.githubUrl" target="_blank"
+        ><img src="../../../../../../assets/github.png" alt=""
+      /></a>
     </div>
   </div>
+</div>
+<div *ngIf="skillList$ | async as skillList">
+
 </div>

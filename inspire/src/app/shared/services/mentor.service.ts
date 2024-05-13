@@ -79,6 +79,14 @@ export class MentorService {
       .pipe(tap((ele) => console.log('skills', ele)));
   }
 
+  getMentorSkillsById(userId: number) {
+    return this.httpClient
+      .get<Skill[]>(`${
+        environment.BASE_URL}/skill/skills/user/${userId}`
+      )
+      .pipe(tap((ele) => console.log('skills', ele)));
+  }
+
   getMentorLanguages() {
     return this.httpClient
       .get<Language[]>(

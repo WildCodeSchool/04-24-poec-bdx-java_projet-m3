@@ -12,6 +12,8 @@ export class ListMentorsComponent {
 
   mentorList$: Observable<Mentor[]> = this._mentorService.getMentorsList$();
 
+  
+
   constructor(private _mentorService: MentorServiceService) { }
 
 }
