@@ -38,13 +38,20 @@
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 7px;
+
+    .skill-list {
+      background-color: #ffdbe3;
+      padding: 2px 15px;
+      border-radius: 5px;
+      color: #f7156b ;
+    }
   }
   .social-container {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    margin-top: 10px;
+    padding-top: 10px;
     padding-left: 20px;
     gap: 10px;
 
