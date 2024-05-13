@@ -48,6 +48,20 @@ export default class LanguagesController {
     }
   }
 
+  async editLanguagesList(req, res) {
+    const { userId } = req.params;
+    const data = req.body;
+    console.log("languages", data);
+    console.log("userId", userId);
+
+    try {
+      const result = await this.languageManager.editLanguagesList(userId, data);
+      res.json(result);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
   async addLanguage(req, res) {
     try {
       const { name } = req.body;

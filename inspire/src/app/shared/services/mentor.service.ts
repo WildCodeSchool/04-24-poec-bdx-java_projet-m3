@@ -107,4 +107,15 @@ export class MentorService {
       )
       .pipe(tap((ele) => console.log('les experiences', ele)));
   }
+
+  updateMentorLanguagesList(languages: Language[]) {
+    return this.httpClient
+      .post<{ success: boolean; message: string }>(
+        environment.BASE_URL +
+          '/language/languages/user/' +
+          this.userConnected.value?.id,
+        languages
+      )
+      .pipe(tap((ele) => console.log('languages new list', ele)));
+  }
 }
