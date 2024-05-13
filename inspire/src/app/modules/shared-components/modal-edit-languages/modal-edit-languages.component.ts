@@ -55,6 +55,7 @@ export class ModalEditLanguagesComponent implements OnInit, OnDestroy {
   closeDialog() {
     this.visible = false;
     this.onCancel.emit();
+    console.log();
   }
 
   validate() {
