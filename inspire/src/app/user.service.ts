@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Skill } from './shared/models/chip';
 import { Language } from './shared/models/language';
 import { Experience } from './shared/models/experience';
+import { Formation } from './shared/models/formation';
 
 @Injectable({
   providedIn: 'root',
@@ -140,6 +141,13 @@ export class UserService {
     return this.http.put<Experience>(
       `${this.BASE_URL}/experience/experiences/${experienceId}`,
       experience
+    );
+  }
+
+  editFormation(formation: any, formationId: any): Observable<Formation> {
+    return this.http.put<Formation>(
+      `${this.BASE_URL}/formation/formations/${formationId}`,
+      formation
     );
   }
 }

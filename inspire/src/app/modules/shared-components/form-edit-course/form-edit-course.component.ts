@@ -14,17 +14,23 @@ export class FormEditCourseComponent implements OnInit {
   @Input() destroy!: () => void;
 
   onSubmit() {
-    console.log(this.courseForm.value);
+    const formationId = this.formation.id;
+    this.userService
+      .editFormation(this.courseForm.value, formationId)
+      .subscribe();
   }
 
   constructor(private fb: FormBuilder, private userService: UserService) {}
   ngOnInit(): void {
+    const date = new Date(this.formation.dateBegin);
+    const formattedDate = date.toISOString().split('T')[0];
+    const endDate = new Date(this.formation.dateEnd);
+    const formattedEndDate = endDate.toISOString().split('T')[0];
     this.courseForm = this.fb.group({
-      diplome: [this.formation.title],
-      school: [this.formation.company],
-      dateBegin: [this.formation.dateBegin],
-      dateEnd: [this.formation.dateEnd],
-      description: [''],
+      title: [this.formation.title],
+      company: [this.formation.company],
+      dateBegin: [formattedDate],
+      dateEnd: [formattedEndDate],
     });
   }
   cancel() {

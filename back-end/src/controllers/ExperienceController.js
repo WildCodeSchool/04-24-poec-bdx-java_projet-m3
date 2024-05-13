@@ -53,7 +53,7 @@ export default class ExperienceController {
   static async update(req, res) {
     try {
       const { experienceId } = req.params;
-      console.log(experienceId, "coucou");
+
       const props = req.body;
       const affectedRows = await ExperienceManager.updateExperience(
         experienceId,
