@@ -19,7 +19,15 @@
         >
           <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
           <div class="logout">
-            <h4 (click)="modalVisible = true">Déconnexion</h4>
+            <button (click)="modalVisible = true" class="logout-btn">
+              <img
+                src="assets/svgs/logout.svg"
+                alt="logout"
+                width="30"
+                height="30"
+              />
+              <ng-container *ngIf="showNavbar">Déconnexion</ng-container>
+            </button>
           </div>
         </div>
 

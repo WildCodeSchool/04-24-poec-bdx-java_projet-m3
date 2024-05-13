@@ -10,6 +10,7 @@ import {
 import { Language } from '../../../shared/models/language';
 import { UserService } from '../../../user.service';
 import { Subscription } from 'rxjs';
+import { MentorService } from '../../../shared/services/mentor.service';
 
 @Component({
   selector: 'app-modal-edit-languages',
@@ -19,7 +20,7 @@ import { Subscription } from 'rxjs';
 export class ModalEditLanguagesComponent implements OnInit, OnDestroy {
   @Input() question: string = '';
   @Input() subtitle: string = '';
-  @Output() onValidate = new EventEmitter();
+  @Output() onValidate = new EventEmitter<Language[]>();
   @Output() onCancel = new EventEmitter();
   @Input() visible: boolean = true;
 
@@ -27,6 +28,7 @@ export class ModalEditLanguagesComponent implements OnInit, OnDestroy {
   languages!: Language[];
 
   userService = inject(UserService);
+
   userServiceSubscription!: Subscription;
 
   focusBtnCancel = true;
@@ -56,7 +58,7 @@ export class ModalEditLanguagesComponent implements OnInit, OnDestroy {
   }
 
   validate() {
-    this.onValidate.emit();
+    this.onValidate.emit(this.selectedLanguages);
     console.log('validate');
   }
 

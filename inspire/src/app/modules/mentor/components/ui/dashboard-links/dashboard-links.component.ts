@@ -32,7 +32,7 @@ export class DashboardLinksComponent {
       title: 'agenda',
       logoUrl: 'assets/svgs/edit.svg',
       logoUrlActive: 'assets/svgs/edit-white.svg',
-      path: '',
+      path: 'mentor/agenda',
       active: false,
     },
   ];
