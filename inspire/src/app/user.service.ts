@@ -6,6 +6,7 @@ import { UserStoreService } from './shared/services/stores/user-store.service';
 import { Router } from '@angular/router';
 import { Skill } from './shared/models/chip';
 import { Language } from './shared/models/language';
+import { Experience } from './shared/models/experience';
 
 @Injectable({
   providedIn: 'root',
@@ -133,5 +134,12 @@ export class UserService {
 
   getListLanguages() {
     return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
+  }
+
+  editExperience(experience: any, experienceId: any): Observable<Experience> {
+    return this.http.put<Experience>(
+      `${this.BASE_URL}/experience/experiences/${experienceId}`,
+      experience
+    );
   }
 }

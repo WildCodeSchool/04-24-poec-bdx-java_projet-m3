@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Formation } from '../../../shared/models/formation';
+import { UserService } from '../../../user.service';
 
 @Component({
   selector: 'app-form-edit-course',
@@ -16,7 +17,7 @@ export class FormEditCourseComponent implements OnInit {
     console.log(this.courseForm.value);
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private userService: UserService) {}
   ngOnInit(): void {
     this.courseForm = this.fb.group({
       diplome: [this.formation.title],
