@@ -52,7 +52,7 @@ class UserController {
     try {
       const { email, password, role } = req.body;
       const result = await UserManager.add(email, password, role);
-      res.status(201).json({ affectedRows: result.affectedRows });
+      res.status(201).json({ userId: result.insertId });
     } catch (error) {
       res.status(401).json({ message: `Demande refusée: ${error.message}` });
     }

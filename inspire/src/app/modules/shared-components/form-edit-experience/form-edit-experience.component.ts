@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Experience } from '../../../shared/models/experience';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { UserService } from '../../../user.service';
 
 @Component({
   selector: 'app-form-edit-experience',
@@ -13,16 +14,24 @@ export class FormEditExperienceComponent implements OnInit {
   @Input() destroy!: () => void;
 
   onSubmit() {
-    console.log(this.experienceForm.value);
+    const experienceId = this.experience.id;
+    this.userService
+      .editExperience(this.experienceForm.value, experienceId)
+      .subscribe();
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private userService: UserService) {}
   ngOnInit(): void {
+    const date = new Date(this.experience.dateBegin);
+    const formattedDate = date.toISOString().split('T')[0];
+    const endDate = new Date(this.experience.dateEnd);
+    const formattedEndDate = endDate.toISOString().split('T')[0];
+
     this.experienceForm = this.fb.group({
       title: [this.experience.title],
       company: [this.experience.company],
-      dateBegin: [this.experience.dateBegin],
-      dateEnd: [this.experience.dateEnd],
+      dateBegin: [formattedDate],
+      dateEnd: [formattedEndDate],
     });
   }
   cancel() {

@@ -32,7 +32,11 @@ textarea {
     font-style: italic;
   }
 }
+.container-select {
+  margin-top: 30px;
 
+  display: flex;
+}
 .form-course h1 {
   font-size: 24px;
   color: black;
@@ -64,10 +68,21 @@ textarea {
   gap: 10px;
 }
 
+.skills {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
 .btn-connexion {
   display: flex;
   gap: 10px;
   justify-content: flex-end;
+}
+
+.edit-skill {
+  margin-top: 20px;
 }
 @media screen and (max-width: $extra-large) {
   .infos {

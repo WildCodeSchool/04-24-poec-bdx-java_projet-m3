@@ -6,6 +6,8 @@ import { UserStoreService } from './shared/services/stores/user-store.service';
 import { Router } from '@angular/router';
 import { Skill } from './shared/models/chip';
 import { Language } from './shared/models/language';
+import { Experience } from './shared/models/experience';
+import { Formation } from './shared/models/formation';
 
 @Injectable({
   providedIn: 'root',
@@ -32,8 +34,9 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
+      tap((data) => console.log(data)),
       switchMap((createdUser: User) => {
-        const userId = createdUser.id || 0;
+        const userId = createdUser.userId || 0;
         console.log(createdUser);
 
         const student: Student = new Student(
@@ -47,7 +50,10 @@ export class UserService {
           ''
         );
 
-        return this.http.post<Student>(`${this.BASE_URL}/students`, student);
+        return this.http.post<Student>(
+          `${this.BASE_URL}/student/students`,
+          student
+        );
       }),
       map((data) => {
         this.router.navigate(['']);
@@ -64,8 +70,9 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
+      tap((data) => console.log(data)),
       switchMap((createdUser: User) => {
-        const userId = createdUser.id;
+        const userId = createdUser.userId;
         const mentor: Mentor = new Mentor(
           userId || 0,
           registerFormValues.firstName,
@@ -77,7 +84,10 @@ export class UserService {
           ''
         );
 
-        return this.http.post<Mentor>(`${this.BASE_URL}/mentors`, mentor);
+        return this.http.post<Mentor>(
+          `${this.BASE_URL}/mentor/mentors`,
+          mentor
+        );
       }),
       map((data) => {
         this.router.navigate(['']);
@@ -125,5 +135,19 @@ export class UserService {
 
   getListLanguages() {
     return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
+  }
+
+  editExperience(experience: any, experienceId: any): Observable<Experience> {
+    return this.http.put<Experience>(
+      `${this.BASE_URL}/experience/experiences/${experienceId}`,
+      experience
+    );
+  }
+
+  editFormation(formation: any, formationId: any): Observable<Formation> {
+    return this.http.put<Formation>(
+      `${this.BASE_URL}/formation/formations/${formationId}`,
+      formation
+    );
   }
 }
