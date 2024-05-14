@@ -63,13 +63,18 @@ export default class LanguageManager {
             `INSERT INTO user_languages (userId, languageId) VALUES (?, ? )`,
             [userId, language.id]
           );
+          const newLanguagesList = await this.getUserLanguages(userId);
           return res.insertId;
         })
       );
 
       console.log("result added ", resultAddLanguagues);
 
-      return { success: true, message: "languages added successfully" };
+      return {
+        success: true,
+        message: "languages added successfully",
+        languages: newLanguagesList,
+      };
     } catch (error) {
       throw error;
     }
