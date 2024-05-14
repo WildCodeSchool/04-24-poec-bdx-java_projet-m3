@@ -3,9 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import {
   BehaviorSubject,
-  Observable,
   forkJoin,
-  map,
   of,
   switchMap,
   tap,
@@ -17,19 +15,6 @@ import { Formation } from '../models/formation';
 import { Experience } from '../models/experience';
 import { UserStoreService } from './stores/user-store.service';
 
-type ResponseSkill = {
-  id: string;
-  userId: string;
-  skillId: string;
-  skill: Skill;
-};
-
-type ResponseLanguage = {
-  id: string;
-  userId: string;
-  skillId: string;
-  language: Language;
-};
 
 @Injectable({
   providedIn: 'root',

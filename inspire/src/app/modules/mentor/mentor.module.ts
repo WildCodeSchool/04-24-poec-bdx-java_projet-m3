@@ -52,6 +52,8 @@ import { CalendarComponent } from './components/features/calendar/calendar.compo
     RowReservationComponent,
     DashboardLinksComponent,
     RowReservationComponent,
+    NavbarButtonComponent,
+    DialogModule,
   ],
 })
 export class MentorModule {}

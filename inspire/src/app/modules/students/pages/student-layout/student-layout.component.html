@@ -1,22 +1,75 @@
-<div class="container-layout">
-  <div class="header-container">
-    <h2>Bonjour Marie</h2>
-    <p>Votre espace étudiant de la Wild Code School</p>
-  </div>
-  <div class="body-layout">
-    <div class="container-side-nav">
-      <h1>Menu</h1>
-      <ul>
-        <li><a [routerLink]="['dashboard']">Mon Profil</a></li>
-        <li><a [routerLink]="['list-mentors']">Trouver un mentor</a></li>
-        <li>Mes réservations</li>
-        <li>Mes favoris</li>
-      </ul>
-    </div>
-    <div class="container-body">
-      <div class="body-contain">
-      <router-outlet></router-outlet>
+<ng-container *ngIf="student$ | async as student">
+  <div class="container-general-layout">
+    <div class="container-layout">
+      <div class="header-container">
+        <h2>Bonjour Marie</h2>
+        <p>Votre espace mentor de la Wild Code School</p>
+      </div>
+      <div class="container-main">
+        <button
+          class="burger"
+          (click)="toggleVisibility()"
+          [ngClass]="!showNavbar ? 'light' : 'dark'"
+        >
+          <img [src]="'assets/svgs/burger.svg'" alt="" width="25" height="25" />
+        </button>
+        <div
+          class="container-side-nav"
+          [ngStyle]="{transform: (!showNavbar && !windowWatcher.windowSizeChanged.value)? 'scaleX(0)' : 'scaleX(1)', transformOrigin: 'top left'}"
+        >
+          <app-dashboard-link-student [showText]="showNavbar"></app-dashboard-link-student>
+          <div class="logout">
+            <button (click)="modalVisible = true" class="logout-btn">
+              <img
+                src="assets/svgs/logout.svg"
+                alt="logout"
+                width="30"
+                height="30"
+              />
+              <ng-container *ngIf="showNavbar">Déconnexion</ng-container>
+            </button>
+          </div>
+        </div>
+
+        <p-dialog
+          header=""
+          [(visible)]="modalVisible"
+          [modal]="true"
+          [style]="{ width: '40vw', height: '60vh' }"
+          [draggable]="false"
+          [resizable]="false"
+        >
+          <div class="logout-pop-up">
+            <div class="container-img-forgot">
+              <img
+                class="img-fluid forgot-img"
+                src="/assets/svgs/question.svg"
+                alt=""
+              />
+            </div>
+
+            <h1>Êtes vous sûr de vouloir vous déconnecter ?</h1>
+            <div class="btn-logout-container">
+              <app-button
+                (click)="modalVisible = false"
+                variant="black"
+                text="Annuler"
+                type="submit"
+              ></app-button>
+              <app-button
+                variant="pink"
+                text="Déconnexion"
+                type="submit"
+                (click)="logout()"
+              ></app-button>
+            </div>
+          </div>
+        </p-dialog>
+
+        <div class="container-outlet">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</ng-container>
