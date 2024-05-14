@@ -55,8 +55,14 @@ export default class LanguagesController {
     console.log("userId", userId);
 
     try {
+      console.log("before edit done ");
+
       const result = await this.languageManager.editLanguagesList(userId, data);
-      res.json(result);
+      console.log("edit done ");
+      const newLanguagesList = await this.languageManager.getUserLanguages(
+        userId
+      );
+      res.json({ ...result, languages: newLanguagesList });
     } catch (error) {
       throw new Error(error.message);
     }
