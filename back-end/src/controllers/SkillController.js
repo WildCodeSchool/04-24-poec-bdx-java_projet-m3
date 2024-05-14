@@ -84,4 +84,19 @@ export default class SkillsController {
         .json({ success: false, message: "Internal Server Error" });
     }
   }
+
+  async editSkillsList(req, res) {
+    const { userId } = req.params;
+    const data = req.body;
+    console.log("skills", data);
+    console.log("userId", userId);
+
+    try {
+      const result = await this.skillsManager.editSkillsList(userId, data);
+      const newSkillsList = await this.skillsManager.getUserSkills(userId);
+      res.json({ ...result, skills: newSkillsList });
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
 }

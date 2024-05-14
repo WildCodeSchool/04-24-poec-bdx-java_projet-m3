@@ -445,7 +445,7 @@ SELECT DISTINCT
     FLOOR(RAND() * 10) + 1 AS userId,
     FLOOR(RAND() * 10) + 1 AS languageId
 FROM information_schema.tables t1, information_schema.tables t2
-LIMIT 100;
+LIMIT 50;
 
 INSERT INTO
     user_skills (userId, skillId)
@@ -453,7 +453,7 @@ SELECT DISTINCT
     FLOOR(RAND() * 10) + 1 AS userId,
     FLOOR(RAND() * 10) + 1 AS skillId
 FROM information_schema.tables t1, information_schema.tables t2
-LIMIT 100;
+LIMIT 50;
 
 INSERT INTO
     formations (

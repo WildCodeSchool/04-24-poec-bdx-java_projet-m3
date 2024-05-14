@@ -108,4 +108,35 @@ export default class SkillsManager {
       throw error;
     }
   }
+
+  async editSkillsList(userId, skills) {
+    try {
+      // delete all languages for specific user
+
+      const deleteUserSkills = await this.database.query(
+        `delete from user_skills where userId = ?`,
+        [userId]
+      );
+      console.log("dleted user skills", deleteUserSkills);
+      const resultAddSkills = await Promise.all(
+        skills.map(async (skill) => {
+          const [res] = await this.database.query(
+            `INSERT INTO user_skills (userId, skillId) VALUES (?, ? )`,
+            [userId, skill.id]
+          );
+          console.log("apres async await ");
+          return res.insertId;
+        })
+      );
+
+      console.log("result added ", resultAddSkills);
+
+      return {
+        success: true,
+        message: "languages added successfully",
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
 }

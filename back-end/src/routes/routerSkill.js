@@ -17,8 +17,8 @@ router.post("/skills", (req, res) => {
   skillsController.addSkill(req, res);
 });
 
-router.post("/skills/user/:userId", (req, res) => {
-  skillsController.addUserSkill(req, res);
+router.put("/skills/user/:userId", (req, res) => {
+  skillsController.editSkillsList(req, res);
 });
 
 router.delete("/skills/:skillId", (req, res) => {
