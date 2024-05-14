@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../../../user.service';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
-import { MentorService } from '../../../../shared/services/mentor.service';
+import { StudentService } from '../../../../shared/services/student.service';
 
 @Component({
   selector: 'app-student-layout',
@@ -14,8 +14,8 @@ export class StudentLayoutComponent implements OnInit {
   userService = inject(UserService);
 
   windowWatcher = inject(WindowWatcherService);
-  // b362
-  student$ = inject(MentorService).getMentorById();
+
+  student$ = inject(StudentService).getStudentById();
 
   toggleVisibility() {
     this.showNavbar = !this.showNavbar;
