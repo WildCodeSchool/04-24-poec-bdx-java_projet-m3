@@ -1,77 +1,149 @@
+@import "../../../../../variables.scss";
+
+.container-general-layout {
+  background-color: #fcf6f8;
+}
 
 .container-layout {
-  width: 100%;
   margin: 0 auto;
   margin-top: 0;
   padding: 0;
   min-height: 100vh;
+  max-width: 1280px;
   background-color: #fcf6f8;
-  
+
   .header-container {
     background-color: #f8156b;
     width: 60%;
     height: 100px;
     margin: 0 auto;
-    border-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
     color: white;
-    padding-left: 30px;
-    padding-top: 10px;
-  }
-  
-  .body-layout {
+    padding: 0 20px;
+
     display: flex;
-    flex-direction: row;
-  
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.container-main {
+  position: relative;
+  display: flex;
+
+  button.burger {
+    position: absolute;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: transparent;
+    border: none;
+  }
   .container-side-nav {
+    margin-top: 40px;
+    height: calc(100vh - 140px);
     background-color: white;
-    width: 16%;
-    min-height: 80vh;
-    margin-left: 30px;
-    margin-top: 10px;
-    border-radius: 27px;
-  
-    h1 {
-      padding-top: 20px;
-      padding-left: 20px;
-      font-size: 1.2em;
-      font-weight: 600;
-    }
-  
-    ul {
-      padding: 10px 20px;
-  
-     li {
-      padding: 10px;
-      color: #4F4E4E;
+    border-radius: 20px;
+    transition: 0.2s all ease;
+    padding: 10px 10px;
+    margin-top: 20px;
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .logout {
       margin: 0 auto;
-      border-radius: 10px;
-      font-size: 0.8em;
-     
-     }
+
+      .logout-btn {
+        display: flex;
+        background-color: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
     }
   }
-  .container-side-nav ul li {
-    margin: 10px 0; 
+  .container-outlet {
+    flex-grow: 1;
+    padding: 20px;
+    transition: 0.2s all ease;
+    height: calc(100vh - 130px);
+    overflow-y: auto;
+    margin-top: 30px;
   }
-  
-  .container-side-nav ul li:active {
-    color: white; 
-    background-color: #f8156b;
+}
+
+.logout-pop-up {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logout-pop-up h1 {
+  margin-top: 30px;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.logout-pop-up p {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.forgot-img {
+  width: 200px;
+}
+
+.container-img-forgot {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-logout-container {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.logout h4 {
+  font-weight: 200;
+  cursor: pointer;
+}
+
+@media screen and (max-width: $large) {
+  .container-side-nav {
+    position: absolute;
   }
-  
-  .container-body {
-    margin: 10px;
-    width: 80%;
-  
-    h3 {
-      padding-top: 40px;
-      padding-left: 40px;
+  .container-outlet {
+    margin-left: 10px;
+    overflow-y: auto;
+  }
+  .container-layout {
+    .header-container {
+      width: 70%;
     }
-  
-    .body-contain {
-      padding-top: 40px;
-      padding-left: 40px;
+  }
+  .btn-logout-container {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: $small) {
+  .container-layout {
+    .header-container {
+      width: 90%;
     }
   }
+  .btn-logout-container {
+    flex-direction: column;
   }
-  }
+}
