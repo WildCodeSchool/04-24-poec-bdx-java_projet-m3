@@ -57,6 +57,14 @@ export type MentorFullProfil = {
   skills: Skill[];
 };
 
+export type StudentFullProfil = {
+  profil: Student;
+  languages: Language[];
+  formations: Formation[];
+  experiences: Experience[];
+  skills: Skill[];
+};
+
 export class Student {
   id?: number;
   firstname: string;
