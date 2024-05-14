@@ -45,5 +45,6 @@
     [question]="'Souhaitez-vous supprimer cette formation?'"
     (onCancel)="popupDeleteVisible = false"
     (onValidate)="popupDeleteVisible = false"
+    (onDelete)="deleteFormation()"
   ></app-modal-validate>
 </ng-container>

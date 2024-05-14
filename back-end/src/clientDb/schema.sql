@@ -45,9 +45,6 @@ CREATE TABLE user_skills (
     CONSTRAINT sans_repetition_skill UNIQUE (userId, skillId)
 );
 
-ALTER TABLE m3.user_skills
-ADD CONSTRAINT user_skills_UN UNIQUE KEY (userId, skillId);
-
 CREATE TABLE languages (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL
@@ -61,7 +58,6 @@ CREATE TABLE user_languages (
     FOREIGN KEY (languageId) REFERENCES languages (id),
     CONSTRAINT sans_repetition_language UNIQUE (userId, languageId)
 );
-
 
 CREATE TABLE experiences (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -443,25 +439,21 @@ VALUES ('français'),
 
 TRUNCATE TABLE user_skills;
 
-INSERT INTO user_languages (userId, languageId)
+INSERT INTO
+    user_languages (userId, languageId)
 SELECT DISTINCT
-    FLOOR(RAND() * 10) + 1 AS userId, 
-    FLOOR(RAND() * 10) + 1 AS languageId  
-FROM
-    information_schema.tables t1,
-    information_schema.tables t2
-    LIMIT 100;
+    FLOOR(RAND() * 10) + 1 AS userId,
+    FLOOR(RAND() * 10) + 1 AS languageId
+FROM information_schema.tables t1, information_schema.tables t2
+LIMIT 100;
 
-
-INSERT INTO user_skills (userId, skillId)
+INSERT INTO
+    user_skills (userId, skillId)
 SELECT DISTINCT
-    FLOOR(RAND() * 10) + 1 AS userId, 
-    FLOOR(RAND() * 10) + 1 AS skillId 
-FROM
-    information_schema.tables t1,
-    information_schema.tables t2
-    LIMIT 100;
-
+    FLOOR(RAND() * 10) + 1 AS userId,
+    FLOOR(RAND() * 10) + 1 AS skillId
+FROM information_schema.tables t1, information_schema.tables t2
+LIMIT 100;
 
 INSERT INTO
     formations (

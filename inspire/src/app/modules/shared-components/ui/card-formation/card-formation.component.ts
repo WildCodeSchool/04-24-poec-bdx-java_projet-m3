@@ -28,9 +28,9 @@ export class CardFormationComponent {
   showPopUpDelete() {
     this.popupDeleteVisible = true;
   }
-  onValidate() {
+  deleteFormation() {
     const formationId = this.formation.id;
-    console.log(formationId);
+    console.log(formationId, 'coucou');
     this.userService.deleteFormation(formationId).subscribe();
   }
 }
