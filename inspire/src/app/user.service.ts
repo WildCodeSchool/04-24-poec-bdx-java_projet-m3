@@ -160,4 +160,11 @@ export class UserService {
       formationId
     );
   }
+
+  deleteExperience(experienceId: any): Observable<any> {
+    return this.http.delete<any>(
+      `${this.BASE_URL}/experience/experiences/${experienceId}`,
+      experienceId
+    );
+  }
 }

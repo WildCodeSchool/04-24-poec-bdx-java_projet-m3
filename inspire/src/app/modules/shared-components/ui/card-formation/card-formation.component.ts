@@ -29,7 +29,6 @@ export class CardFormationComponent {
     this.popupDeleteVisible = true;
   }
   deleteFormation() {
-    console.log('coucocuocucocu');
     const formationId = this.formation.id;
     console.log(formationId, 'coucou');
     this.userService.deleteFormation(formationId).subscribe();

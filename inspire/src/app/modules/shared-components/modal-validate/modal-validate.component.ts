@@ -15,7 +15,7 @@ export class ModalValidateComponent {
   focusBtnCancel = true;
   focusBtnValidate = false;
 
-  deleteFormation() {
+  deleteInfo() {
     this.onDelete.emit();
     console.log('delete');
   }
