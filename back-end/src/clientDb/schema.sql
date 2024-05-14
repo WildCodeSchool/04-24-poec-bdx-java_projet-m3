@@ -41,7 +41,8 @@ CREATE TABLE user_skills (
     userId INT,
     skillId INT,
     FOREIGN KEY (userId) REFERENCES users (id),
-    FOREIGN KEY (skillId) REFERENCES skills (id)
+    FOREIGN KEY (skillId) REFERENCES skills (id),
+    CONSTRAINT sans_repetition_skill UNIQUE (userId, skillId)
 );
 
 CREATE TABLE languages (
@@ -54,7 +55,8 @@ CREATE TABLE user_languages (
     userId INT,
     languageId INT,
     FOREIGN KEY (userId) REFERENCES users (id),
-    FOREIGN KEY (languageId) REFERENCES languages (id)
+    FOREIGN KEY (languageId) REFERENCES languages (id),
+    CONSTRAINT sans_repetition_language UNIQUE (userId, languageId)
 );
 
 CREATE TABLE experiences (
@@ -437,28 +439,41 @@ VALUES ('français'),
 
 TRUNCATE TABLE user_skills;
 
-INSERT INTO user_languages (userId, languageId)
-SELECT 
-    FLOOR(RAND() * 10) + 1 AS userId, 
-    FLOOR(RAND() * 10) + 1 AS languageId  
-FROM
-    information_schema.tables t1,
-    information_schema.tables t2
-    LIMIT 100;
+INSERT INTO
+    user_languages (userId, languageId)
+SELECT DISTINCT
+    FLOOR(RAND() * 10) + 1 AS userId,
+    FLOOR(RAND() * 10) + 1 AS languageId
+FROM information_schema.tables t1, information_schema.tables t2
+LIMIT 100;
 
+INSERT INTO
+    user_skills (userId, skillId)
+SELECT DISTINCT
+    FLOOR(RAND() * 10) + 1 AS userId,
+    FLOOR(RAND() * 10) + 1 AS skillId
+FROM information_schema.tables t1, information_schema.tables t2
+LIMIT 100;
 
-INSERT INTO user_skills (userId, skillId)
-SELECT 
-    FLOOR(RAND() * 10) + 1 AS userId, 
-    FLOOR(RAND() * 10) + 1 AS skillId 
-FROM
-    information_schema.tables t1,
-    information_schema.tables t2
-    LIMIT 100;
-
-
-INSERT INTO formations (title, company, dateBegin, dateEnd, city, country, userId)
-VALUES ('Certification en développement web', 'Tech Academy', '2023-02-15', '2023-05-20', 'Paris', 'France', 1);
+INSERT INTO
+    formations (
+        title,
+        company,
+        dateBegin,
+        dateEnd,
+        city,
+        country,
+        userId
+    )
+VALUES (
+        'Certification en développement web',
+        'Tech Academy',
+        '2023-02-15',
+        '2023-05-20',
+        'Paris',
+        'France',
+        1
+    );
 
 -- Exemple 2 : Formation en gestion de projet
 INSERT INTO
@@ -668,9 +683,25 @@ VALUES (
     );
 
 -- Exemple 6 : Formation en développement personnel
-INSERT INTO experiences (title, company, dateBegin, dateEnd, city, country, userId)
-VALUES ('Atelier de développement personnel', 'Self-Improvement Center', '2023-09-20', '2023-10-15', 'Sydney', 'Australia', 3);
-
+INSERT INTO
+    experiences (
+        title,
+        company,
+        dateBegin,
+        dateEnd,
+        city,
+        country,
+        userId
+    )
+VALUES (
+        'Atelier de développement personnel',
+        'Self-Improvement Center',
+        '2023-09-20',
+        '2023-10-15',
+        'Sydney',
+        'Australia',
+        3
+    );
 
 CREATE TABLE slots (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -685,43 +716,149 @@ CREATE TABLE reservations (
     message TEXT,
     slotId INT,
     userId INT,
-    FOREIGN KEY (slotId) REFERENCES slots(id),
-    FOREIGN KEY (userId) REFERENCES users(id)
+    FOREIGN KEY (slotId) REFERENCES slots (id),
+    FOREIGN KEY (userId) REFERENCES users (id)
 );
 
-INSERT INTO slots (dateTime, visio, mentorId) VALUES
-( NOW(), true, 1),
-( DATE_ADD(NOW(), INTERVAL 1 HOUR), true, 2),
-( DATE_ADD(NOW(), INTERVAL 2 HOUR), false, 1),
-( DATE_ADD(NOW(), INTERVAL 1 DAY), true, 3),
-( DATE_ADD(DATE_ADD(NOW(), INTERVAL 1 DAY), INTERVAL 1 HOUR), false, 2),
-( DATE_ADD(DATE_ADD(NOW(), INTERVAL 1 DAY), INTERVAL 2 HOUR), true, 3),
-( DATE_ADD(NOW(), INTERVAL 3 HOUR), true, 2),
-( DATE_ADD(NOW(), INTERVAL 4 HOUR), false, 1),
-( DATE_ADD(NOW(), INTERVAL 2 DAY), true, 3),
-( DATE_ADD(DATE_ADD(NOW(), INTERVAL 2 DAY), INTERVAL 4 HOUR), false, 2),
-( DATE_ADD(DATE_ADD(NOW(), INTERVAL 2 DAY), INTERVAL 5 HOUR), true, 3),
-( DATE_ADD(DATE_ADD(NOW(), INTERVAL 2 DAY), INTERVAL 2 HOUR), true, 2),
-( DATE_ADD(DATE_ADD(NOW(), INTERVAL 2 DAY), INTERVAL 3 HOUR), false, 1),
-( DATE_ADD(NOW(), INTERVAL 3 DAY), true, 3),
-( DATE_ADD(DATE_ADD(NOW(), INTERVAL 3 DAY), INTERVAL 1 HOUR), false, 2),
-( DATE_ADD(DATE_ADD(NOW(), INTERVAL 3 DAY), INTERVAL 2 HOUR), true, 3);
-
+INSERT INTO
+    slots (dateTime, visio, mentorId)
+VALUES (NOW(), true, 1),
+    (
+        DATE_ADD(NOW(), INTERVAL 1 HOUR),
+        true,
+        2
+    ),
+    (
+        DATE_ADD(NOW(), INTERVAL 2 HOUR),
+        false,
+        1
+    ),
+    (
+        DATE_ADD(NOW(), INTERVAL 1 DAY),
+        true,
+        3
+    ),
+    (
+        DATE_ADD(
+            DATE_ADD(NOW(), INTERVAL 1 DAY),
+            INTERVAL 1 HOUR
+        ),
+        false,
+        2
+    ),
+    (
+        DATE_ADD(
+            DATE_ADD(NOW(), INTERVAL 1 DAY),
+            INTERVAL 2 HOUR
+        ),
+        true,
+        3
+    ),
+    (
+        DATE_ADD(NOW(), INTERVAL 3 HOUR),
+        true,
+        2
+    ),
+    (
+        DATE_ADD(NOW(), INTERVAL 4 HOUR),
+        false,
+        1
+    ),
+    (
+        DATE_ADD(NOW(), INTERVAL 2 DAY),
+        true,
+        3
+    ),
+    (
+        DATE_ADD(
+            DATE_ADD(NOW(), INTERVAL 2 DAY),
+            INTERVAL 4 HOUR
+        ),
+        false,
+        2
+    ),
+    (
+        DATE_ADD(
+            DATE_ADD(NOW(), INTERVAL 2 DAY),
+            INTERVAL 5 HOUR
+        ),
+        true,
+        3
+    ),
+    (
+        DATE_ADD(
+            DATE_ADD(NOW(), INTERVAL 2 DAY),
+            INTERVAL 2 HOUR
+        ),
+        true,
+        2
+    ),
+    (
+        DATE_ADD(
+            DATE_ADD(NOW(), INTERVAL 2 DAY),
+            INTERVAL 3 HOUR
+        ),
+        false,
+        1
+    ),
+    (
+        DATE_ADD(NOW(), INTERVAL 3 DAY),
+        true,
+        3
+    ),
+    (
+        DATE_ADD(
+            DATE_ADD(NOW(), INTERVAL 3 DAY),
+            INTERVAL 1 HOUR
+        ),
+        false,
+        2
+    ),
+    (
+        DATE_ADD(
+            DATE_ADD(NOW(), INTERVAL 3 DAY),
+            INTERVAL 2 HOUR
+        ),
+        true,
+        3
+    );
 
 -- Insérer des réservations avec des valeurs aléatoires pour slotId et userId
-INSERT INTO reservations ( subject, message, slotId, userId) VALUES
-( 'Sujet 1', 'Message 1', 1, 11),
-( 'Sujet 2', 'Message 2', 2, 12),
-( 'Sujet 3', 'Message 3', 4, 13),
-( 'Sujet 4', 'Message 4', 3, 14),
-( 'Sujet 5', 'Message 5', 5, 15),
-( 'Sujet 6', 'Message 6', 6, 11),
-( 'Sujet 7', 'Message 7', 7, 12),
-( 'Sujet 8', 'Message 8', 8, 11),
-( 'Sujet 9', 'Message 9', 9, 15),
-( 'Sujet 10', 'Message 10', 10, 16),
-( 'Sujet 11', 'Message 11', 11, 17),
-( 'Sujet 12', 'Message 12', 12, 18);
+INSERT INTO
+    reservations (
+        subject,
+        message,
+        slotId,
+        userId
+    )
+VALUES ('Sujet 1', 'Message 1', 1, 11),
+    ('Sujet 2', 'Message 2', 2, 12),
+    ('Sujet 3', 'Message 3', 4, 13),
+    ('Sujet 4', 'Message 4', 3, 14),
+    ('Sujet 5', 'Message 5', 5, 15),
+    ('Sujet 6', 'Message 6', 6, 11),
+    ('Sujet 7', 'Message 7', 7, 12),
+    ('Sujet 8', 'Message 8', 8, 11),
+    ('Sujet 9', 'Message 9', 9, 15),
+    (
+        'Sujet 10',
+        'Message 10',
+        10,
+        16
+    ),
+    (
+        'Sujet 11',
+        'Message 11',
+        11,
+        17
+    ),
+    (
+        'Sujet 12',
+        'Message 12',
+        12,
+        18
+    );
+
 INSERT INTO
     experiences (
         title,

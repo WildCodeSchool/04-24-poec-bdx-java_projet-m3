@@ -48,10 +48,37 @@ export default class LanguageManager {
     }
   }
 
+  async editLanguagesList(userId, languages) {
+    try {
+      // delete all languages for specific user
+
+      const deleteUserLanguages = await this.database.query(
+        `delete from user_languages where userId = ?`,
+        [userId]
+      );
+      console.log(languages);
+      const resultAddLanguagues = await Promise.all(
+        languages.map(async (language) => {
+          const [res] = await this.database.query(
+            `INSERT INTO user_languages (userId, languageId) VALUES (?, ? )`,
+            [userId, language.id]
+          );
+          return res.insertId;
+        })
+      );
+
+      console.log("result added ", resultAddLanguagues);
+
+      return { success: true, message: "languages added successfully" };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async addUserLanguage(userId, languageId) {
     try {
       const [language] = await this.database.query(
-        `SELECT * FROM languages where id = ? `,
+        `SELECT * FROM languages where id =  ? `,
         [languageId]
       );
 

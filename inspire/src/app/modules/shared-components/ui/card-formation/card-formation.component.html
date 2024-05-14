@@ -35,7 +35,7 @@
   >
     <app-form-edit-course
       [formation]="formation"
-      [destroy]="hideEditForm"
+      (onValidate)="hideEditForm()"
     ></app-form-edit-course>
   </p-sidebar>
 </ng-container>
@@ -45,5 +45,6 @@
     [question]="'Souhaitez-vous supprimer cette formation?'"
     (onCancel)="popupDeleteVisible = false"
     (onValidate)="popupDeleteVisible = false"
+    (onDelete)="deleteFormation()"
   ></app-modal-validate>
 </ng-container>
