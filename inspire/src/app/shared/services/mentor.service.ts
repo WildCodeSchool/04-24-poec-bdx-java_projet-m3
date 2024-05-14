@@ -94,13 +94,22 @@ export class MentorService {
 
   updateMentorLanguagesList(languages: Language[]) {
     return this.httpClient
-      .post<{ success: boolean; message: string }>(
+      .post<{ success: boolean; message: string; languages: Language[] }>(
         environment.BASE_URL +
           '/language/languages/user/' +
           this.userConnected.value?.id,
         languages
       )
-      .pipe(tap((ele) => console.log('languages new list', ele)));
+      .pipe(
+        tap((res) => {
+          if (res.success) {
+            this.activeMentor$.next({
+              ...this.activeMentor$.value,
+              languages,
+            });
+          }
+        })
+      );
   }
 
   updateMentorProfil(mentor: Mentor) {
@@ -114,3 +123,14 @@ export class MentorService {
       .pipe(tap((ele) => console.log('profil ', ele)));
   }
 }
+
+// updateMentorProfil(mentor: Mentor) {
+//   return this.httpClient
+//     .put<{ affectedRows: number }>(
+//       environment.BASE_URL +
+//         '/mentor/mentors/' +
+//         this.activeMentor$.value.profil.id,
+//       mentor
+//     )
+//     .pipe(tap((ele) => console.log('profil ', ele)));
+// }
