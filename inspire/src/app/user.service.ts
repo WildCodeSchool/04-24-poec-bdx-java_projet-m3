@@ -96,6 +96,17 @@ export class UserService {
     );
   }
 
+  getUserByToken(token: string): Observable<User> {
+    return this.http.post<User>(`${this.BASE_URL}/users/me`, { token }).pipe(
+      map((user) => {
+        const userString = JSON.stringify(user);
+        window.localStorage.setItem('user', userString);
+        this.userStore.setUserConnected(user);
+        return user;
+      })
+    );
+  }
+
   login(email: any, password: any): Observable<User | null> {
     return (
       this.http

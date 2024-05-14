@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import UserManager from "../mangers/UserManager.js";
 import Authentification from "../middlewares/Authentification.js";
 
@@ -46,6 +47,22 @@ class UserController {
       }
     } catch (error) {
       res.status(401).json({ message: "Mauvais identifiants" });
+    }
+  }
+  static async getUserByToken(req, res) {
+    try {
+      const token = req.body.token;
+      const userInfo = jwt.verify(token, process.env.APP_SECRET);
+      console.log(userInfo);
+      const result = await UserManager.read(userInfo.email);
+      if (result) {
+        const token = await Authentification.generateToken(result);
+        res.status(200).json({ ...result, token });
+      } else {
+        res.status(404).json({ message: "Mauvais identifiants" });
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
   static async add(req, res) {
