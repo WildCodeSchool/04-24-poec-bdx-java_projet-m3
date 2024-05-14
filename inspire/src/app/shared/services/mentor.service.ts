@@ -113,14 +113,13 @@ export class MentorService {
   }
 
   updateMentorProfil(mentor: Mentor) {
-    return this.httpClient
-      .put<{ affectedRows: number }>(
-        environment.BASE_URL +
-          '/mentor/mentors/' +
-          this.activeMentor$.value.profil.id,
-        mentor
-      )
-      .pipe(tap((ele) => console.log('profil ', ele)));
+    return this.httpClient.put<{ affectedRows: number }>(
+      environment.BASE_URL +
+        '/mentor/mentors/' +
+        this.activeMentor$.value.profil.id,
+      mentor
+    );
+    // .pipe(tap((ele) => console.log('profil ', ele))).pipe(switchMap());
   }
 }
 

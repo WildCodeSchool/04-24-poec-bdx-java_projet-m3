@@ -83,7 +83,7 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
       linkedinUrl: this.aproposForm.value.linkedinUrl,
       githubUrl: this.aproposForm.value.githubUrl,
       description: this.aproposForm.value.description,
-      // selectedSkills: this.aproposForm.value.selectedSkills,
+      selectedSkills: this.aproposForm.value.selectedSkills,
     } as profilType);
     console.log('submit called');
 

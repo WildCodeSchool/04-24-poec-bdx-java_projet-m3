@@ -77,7 +77,7 @@
   </div>
   <div class="skills" *ngIf="skills">
     <app-chip
-      *ngFor="let skill of skills"
+      *ngFor="let skill of selectedSkills"
       [title]="skill.name"
       [dark]="true"
     ></app-chip>
@@ -89,7 +89,7 @@
       id="skills"
       name="skills"
       [options]="skills"
-      [(ngModel)]="skills"
+      [(ngModel)]="selectedSkills"
       placeholder="Choisissez vos skills"
       formControlName="selectedSkills"
       optionLabel="name"
