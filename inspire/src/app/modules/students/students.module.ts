@@ -13,6 +13,8 @@ import { FilterSearchListComponent } from './components/features/filter-search-l
 import { FormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ListboxModule } from 'primeng/listbox';
+import { DashboardLinkStudentComponent } from './components/ui/dashboard-link-student/dashboard-link-student.component';
+import { MentorModule } from '../mentor/mentor.module';
 
 
 @NgModule({
@@ -22,6 +24,7 @@ import { ListboxModule } from 'primeng/listbox';
     StudentLayoutComponent,
     DashboardComponent,
     FilterSearchListComponent,
+    DashboardLinkStudentComponent,
   ],
   imports: [
     CommonModule,
@@ -30,7 +33,8 @@ import { ListboxModule } from 'primeng/listbox';
     HttpClientModule,
     FormsModule,
     MultiSelectModule,
-    ListboxModule
+    ListboxModule,
+    MentorModule
   ]
 })
 export class StudentsModule { }

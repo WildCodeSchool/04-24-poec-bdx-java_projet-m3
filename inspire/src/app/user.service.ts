@@ -154,10 +154,17 @@ export class UserService {
     );
   }
 
-  deleteFormation(formationId: any): Observable<Formation> {
-    return this.http.put<Formation>(
+  deleteFormation(formationId: any): Observable<any> {
+    return this.http.delete<any>(
       `${this.BASE_URL}/formation/formations/${formationId}`,
       formationId
+    );
+  }
+
+  deleteExperience(experienceId: any): Observable<any> {
+    return this.http.delete<any>(
+      `${this.BASE_URL}/experience/experiences/${experienceId}`,
+      experienceId
     );
   }
 }
