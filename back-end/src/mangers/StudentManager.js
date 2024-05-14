@@ -84,7 +84,7 @@ export default class StudentManager {
       sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
       sqlValues.push(value);
     }
-    sql += ` where id = ?`;
+    sql += ` where userId = ?`;
     sqlValues.push(id);
     const [res] = await client.query(sql, sqlValues);
     return res.affectedRows;

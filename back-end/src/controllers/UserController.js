@@ -80,7 +80,8 @@ class UserController {
       const result = await UserManager.login(email, props.password);
       if (result) {
         const affectedRows = await UserManager.update(email, props);
-        res.status(202).json({ affectedRows });
+        const profil = await UserManager.read(email);
+        res.status(202).json({ affectedRows, profil });
       } else
         res
           .status(401)

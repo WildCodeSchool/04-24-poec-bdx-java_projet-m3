@@ -66,12 +66,13 @@ export default class StudentController {
 
   static async update(req, res) {
     try {
-      const { studentId } = req.params;
+      const { userId } = req.params;
       const props = req.body;
-      const result = await StudentManager.read(studentId);
+      const result = await StudentManager.read(userId);
       if (result) {
-        const affectedRows = await StudentManager.update(studentId, props);
-        res.status(202).json({ affectedRows });
+        const affectedRows = await StudentManager.update(userId, props);
+        const profil = await StudentManager.read(userId);
+        res.status(202).json({ affectedRows, profil });
       } else
         res
           .status(401)
