@@ -28,10 +28,6 @@ export class ModalValidateComponent {
     this.onCancel.emit();
   }
 
-  validate() {
-    this.onValidate.emit();
-  }
-
   cancel() {
     this.onCancel.emit();
   }
