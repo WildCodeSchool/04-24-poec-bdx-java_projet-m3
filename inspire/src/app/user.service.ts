@@ -143,6 +143,13 @@ export class UserService {
     return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
   }
 
+  postExperience(experience: Experience): Observable<any> {
+    return this.http.post<any>(
+      `${this.BASE_URL}/experience/experiences/`,
+      experience
+    );
+  }
+
   editExperience(experience: any, experienceId: any): Observable<Experience> {
     return this.http.put<Experience>(
       `${this.BASE_URL}/experience/experiences/${experienceId}`,

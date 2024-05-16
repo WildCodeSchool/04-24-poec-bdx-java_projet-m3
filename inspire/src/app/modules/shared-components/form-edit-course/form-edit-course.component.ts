@@ -55,6 +55,8 @@ export class FormEditCourseComponent implements OnInit {
       company: [this.formation.company],
       dateBegin: [formattedDate],
       dateEnd: [formattedEndDate],
+      city: [this.formation.city],
+      country: [this.formation.country],
     });
   }
   cancel() {

@@ -12,8 +12,9 @@ import { Slot } from '../../../../../shared/models/reservation';
 })
 export class FilterSearchListComponent {
   skills: Skill[] = [];
-  disponibily: any[] = []
+  disponibily: any[] = [];
   level: any[] = [];
+  mode: any[] = [];
 
   selectedSkill: Skill[] = [];
   selectedDisponibily: any[] = [];
@@ -36,9 +37,9 @@ export class FilterSearchListComponent {
     this.disponibily = [
       { name: "Aujourd'hui" },
       { name: 'Dans la semaine' },
-      { name: 'Peu importe' }
+      { name: 'Peu importe' },
     ];
-      
+
     this.mode = [{ name: 'Presentiel' }, { name: 'Distanciel' }];
 
     this.level = [

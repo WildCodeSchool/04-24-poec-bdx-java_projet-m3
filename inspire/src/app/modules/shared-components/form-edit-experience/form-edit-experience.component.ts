@@ -32,6 +32,8 @@ export class FormEditExperienceComponent implements OnInit {
       company: [this.experience.company],
       dateBegin: [formattedDate],
       dateEnd: [formattedEndDate],
+      city: [this.experience.city],
+      country: [this.experience.country],
     });
   }
   cancel() {
