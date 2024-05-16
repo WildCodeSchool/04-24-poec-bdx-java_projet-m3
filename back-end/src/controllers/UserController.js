@@ -1,10 +1,10 @@
+import jwt from "jsonwebtoken";
 import UserManager from "../mangers/UserManager.js";
 import Authentification from "../middlewares/Authentification.js";
 
 class UserController {
   static async browse(req, res) {
     try {
-      console.log("triggered");
       const result = await UserManager.browse();
       res.status(200).json(result);
     } catch (error) {
@@ -16,7 +16,6 @@ class UserController {
       const { email } = req.params;
       const result = await UserManager.read(email);
       res.status(200).json(result);
-      console.log(result);
     } catch (error) {
       res.status(401).json({ message: "Demande refusée" });
     }
@@ -47,6 +46,19 @@ class UserController {
     } catch (error) {
       res.status(401).json({ message: "Mauvais identifiants" });
     }
+  }
+  static async getUserByToken(req, res) {
+    try {
+      const token = req.body.token;
+      const userInfo = jwt.verify(token, process.env.APP_SECRET);
+      const result = await UserManager.read(userInfo.email);
+      if (result) {
+        const token = await Authentification.generateToken(result);
+        res.status(200).json({ ...result, token });
+      } else {
+        res.status(404).json({ message: "Mauvais identifiants" });
+      }
+    } catch (error) {}
   }
   static async add(req, res) {
     try {

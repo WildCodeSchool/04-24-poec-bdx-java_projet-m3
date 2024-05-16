@@ -16,20 +16,17 @@ export class MentorServiceService {
   constructor() {}
 
   getMentorsList$(): Observable<Mentor[]> {
-    return this.http
-      .get<any>(environment.BASE_URL + '/mentor/mentors')
-      .pipe(tap((res) => console.log(res)));
+    return this.http.get<any>(environment.BASE_URL + '/mentor/mentors');
   }
 
   getMentorsBySkills(selectedSkills: Skill[]): Observable<Mentor[]> {
-  
-    const skillNames = selectedSkills.map(skill => skill.name);
-
-    console.log(skillNames)
+    const skillNames = selectedSkills.map((skill) => skill.name);
 
     const params = new HttpParams().set('skills', skillNames.join(','));
 
-    return this.http.get<Mentor[]>(environment.BASE_URL + '/mentor/mentors', { params });
+    return this.http.get<Mentor[]>(environment.BASE_URL + '/mentor/mentors', {
+      params,
+    });
   }
 
   updateMentorList(mentors: Mentor[]): void {

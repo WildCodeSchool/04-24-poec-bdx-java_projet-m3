@@ -29,7 +29,6 @@ export class FormEditCourseComponent implements OnInit {
               return formation;
             }
           });
-        console.log(this.courseForm.value);
 
         if (data.affectedRows) {
           this.mentorService.activeMentor$.next({
@@ -59,8 +58,6 @@ export class FormEditCourseComponent implements OnInit {
     });
   }
   cancel() {
-    console.log('cancel run');
-
     this.destroy();
   }
 }

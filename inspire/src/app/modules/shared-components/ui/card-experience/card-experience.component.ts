@@ -22,7 +22,6 @@ export class CardExperienceComponent {
 
   hideEditForm = () => {
     this.isVisibleFormEditExperience = false;
-    console.log('called');
   };
 
   showPopUpDelete() {
@@ -31,7 +30,6 @@ export class CardExperienceComponent {
 
   deleteExperience() {
     const experienceId = this.experience.id;
-    console.log(experienceId);
     this.userService.deleteExperience(experienceId).subscribe();
   }
 }

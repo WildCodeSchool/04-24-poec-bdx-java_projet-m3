@@ -21,7 +21,6 @@ export const isMentor: CanActivateFn = (route, state) => {
   const store = inject(UserStoreService);
 
   const mentor = store.getUserConnected$().value?.role;
-  console.log(mentor);
 
   if (mentor === 'mentor') {
     return true;
@@ -36,7 +35,6 @@ export const isStudent: CanActivateFn = (route, state) => {
   const store = inject(UserStoreService);
 
   const student = store.getUserConnected$().value?.role;
-  console.log(student);
 
   if (student === 'student') {
     return true;
