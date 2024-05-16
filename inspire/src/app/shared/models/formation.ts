@@ -1,10 +1,8 @@
-import { Language } from './language';
-
 export type Formation = {
   id?: string;
   userId: string;
   title: string;
-  company: Language;
+  school: string;
   dateBegin: Date;
   dateEnd: Date;
   city: string;

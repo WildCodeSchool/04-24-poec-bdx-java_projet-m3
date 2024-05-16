@@ -172,6 +172,13 @@ export class UserService {
     );
   }
 
+  postFormation(formation: Formation): Observable<any> {
+    return this.http.post<any>(
+      `${this.BASE_URL}/formation/formations/`,
+      formation
+    );
+  }
+
   deleteExperience(experienceId: any): Observable<any> {
     return this.http.delete<any>(
       `${this.BASE_URL}/experience/experiences/${experienceId}`,
