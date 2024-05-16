@@ -8,6 +8,7 @@ import { Skill } from './shared/models/chip';
 import { Language } from './shared/models/language';
 import { Experience } from './shared/models/experience';
 import { Formation } from './shared/models/formation';
+import { MentorService } from './shared/services/mentor.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,8 @@ export class UserService {
   private router = inject(Router);
   private http = inject(HttpClient);
   private userStore = inject(UserStoreService);
+  private mentorService = inject(MentorService);
+
   constructor() {}
 
   private createUser(user: User): Observable<User> {
@@ -174,11 +177,17 @@ export class UserService {
     );
   }
 
-  postFormation(formation: Formation): Observable<any> {
-    return this.http.post<any>(
-      `${this.BASE_URL}/formation/formations/`,
-      formation
-    );
+  postFormationMentor(formation: Formation): Observable<any> {
+    return this.http
+      .post<any>(`${this.BASE_URL}/formation/formations/`, formation)
+      .pipe(
+        tap((ele) =>
+          this.mentorService.activeMentor$.next({
+            ...this.mentorService.activeMentor$.value,
+            formations: ele.formations,
+          })
+        )
+      );
   }
 
   deleteExperience(experienceId: any): Observable<any> {

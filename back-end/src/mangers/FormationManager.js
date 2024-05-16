@@ -48,8 +48,13 @@ export default class FormationManager {
       (? , ?, ? , ? ,? ,? ,?)`,
         [title, company, dateBegin, dateEnd, city, country, userId]
       );
+      const formations = await FormationManager.getUserFormations(userId);
 
-      return { success: true, message: "formation added successfully" };
+      return {
+        success: true,
+        message: "formation added successfully",
+        formations,
+      };
     } catch (error) {
       throw error;
     }
