@@ -59,7 +59,10 @@ export default class ExperienceController {
         experienceId,
         props
       );
-      res.status(202).json({ affectedRows });
+      const experiences = await ExperienceManager.getUserExperiences(
+        props.userId
+      );
+      res.status(202).json({ affectedRows, experiences });
     } catch (error) {
       res
         .status(401)
