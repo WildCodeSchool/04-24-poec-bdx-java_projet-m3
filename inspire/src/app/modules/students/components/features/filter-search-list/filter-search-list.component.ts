@@ -5,11 +5,10 @@ import { Mentor } from '../../../../../shared/models/user';
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Slot } from '../../../../../shared/models/reservation';
 
-
 @Component({
   selector: 'app-filter-search-list',
   templateUrl: './filter-search-list.component.html',
-  styleUrl: './filter-search-list.component.scss'
+  styleUrl: './filter-search-list.component.scss',
 })
 export class FilterSearchListComponent {
   skills: Skill[] = [];
@@ -31,7 +30,7 @@ export class FilterSearchListComponent {
       { name: 'java' },
       { name: 'Angular' },
       { name: 'React' },
-      { name: 'CSS' }
+      { name: 'CSS' },
     ];
 
     this.disponibily = [
@@ -39,50 +38,53 @@ export class FilterSearchListComponent {
       { name: 'Dans la semaine' },
       { name: 'Peu importe' }
     ];
+      
+    this.mode = [{ name: 'Presentiel' }, { name: 'Distanciel' }];
 
     this.level = [
       { name: "Moins d'un an" },
-      { name: "Entre 1 et 2 ans" },
-      { name: "Entre 2 et 5 ans" },
+      { name: 'Entre 1 et 2 ans' },
+      { name: 'Entre 2 et 5 ans' },
     ];
   }
 
   filterMentorsBySkills() {
-    console.log('Selected skills:', this.selectedSkill);
     if (this.selectedSkill && this.selectedSkill.length > 0) {
-      this._mentorService.getMentorsList$().subscribe(mentors => {
+      this._mentorService.getMentorsList$().subscribe((mentors) => {
         let filteredMentors: Mentor[] = [];
         let completedRequests = 0;
-        mentors.forEach(mentor => {
-          this._mentorDetailsService.getMentorSkillsById(mentor.userId).subscribe(skills => {
-            if (this.selectedSkill.every(skill => skills.some(mentorSkill => mentorSkill.name === skill.name))) {
-              filteredMentors.push(mentor);
-            }
-            completedRequests++;
-            if (completedRequests === mentors.length) {
-              this.filteredMentors.emit(filteredMentors);
-              console.log('Filtered mentors:', filteredMentors);
-            }
-          });
+        mentors.forEach((mentor) => {
+          this._mentorDetailsService
+            .getMentorSkillsById(mentor.userId)
+            .subscribe((skills) => {
+              if (
+                this.selectedSkill.every((skill) =>
+                  skills.some((mentorSkill) => mentorSkill.name === skill.name)
+                )
+              ) {
+                filteredMentors.push(mentor);
+              }
+              completedRequests++;
+              if (completedRequests === mentors.length) {
+                this.filteredMentors.emit(filteredMentors);
+              }
+            });
         });
       });
     } else {
-      this._mentorService.getMentorsList$().subscribe(mentorList => {
+      this._mentorService.getMentorsList$().subscribe((mentorList) => {
         this.filteredMentors.emit(mentorList);
-        console.log('Complete mentor list:', mentorList);
       });
     }
   }
 
   resetFilters() {
-  
     this.selectedSkill = [];
     this.selectedDisponibily = [];
     this.selectedLevel = [];
 
-    this._mentorService.getMentorsList$().subscribe(mentorList => {
+    this._mentorService.getMentorsList$().subscribe((mentorList) => {
       this.filteredMentors.emit(mentorList);
     });
   }
-  
 }

@@ -28,7 +28,6 @@ export default class LanguageManager {
 
   async addLanguage(name) {
     try {
-      console.log("skill", name);
       const [language] = await this.database.query(
         `SELECT * FROM languages where name = ? `,
         [name]
@@ -56,7 +55,6 @@ export default class LanguageManager {
         `delete from user_languages where userId = ?`,
         [userId]
       );
-      console.log(languages);
       const resultAddLanguagues = await Promise.all(
         languages.map(async (language) => {
           const [res] = await this.database.query(
@@ -66,8 +64,6 @@ export default class LanguageManager {
           return res.insertId;
         })
       );
-
-      console.log("result added ", resultAddLanguagues);
 
       return { success: true, message: "languages added successfully" };
     } catch (error) {
@@ -94,7 +90,6 @@ export default class LanguageManager {
           `SELECT * FROM user_languages where userId = ? and languageId = ? `,
           [userId, languageId]
         );
-        console.log("user languages :", userLanguage);
         if (userLanguage.length !== 0) {
           return { success: false, message: "language already exists" };
         }

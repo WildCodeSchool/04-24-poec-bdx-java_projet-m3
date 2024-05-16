@@ -20,7 +20,6 @@ export class LayoutMentor implements OnInit {
 
   toggleVisibility() {
     this.showNavbar = !this.showNavbar;
-    console.log(this.showNavbar);
   }
 
   logout() {

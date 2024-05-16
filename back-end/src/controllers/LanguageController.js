@@ -51,8 +51,6 @@ export default class LanguagesController {
   async editLanguagesList(req, res) {
     const { userId } = req.params;
     const data = req.body;
-    console.log("languages", data);
-    console.log("userId", userId);
 
     try {
       const result = await this.languageManager.editLanguagesList(userId, data);

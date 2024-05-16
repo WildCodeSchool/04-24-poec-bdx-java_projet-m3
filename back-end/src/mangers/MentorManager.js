@@ -34,16 +34,6 @@ export default class MentorManager {
     githubUrl = "www.github.com",
     linkedinUrl = "www.linkedin.com"
   ) {
-    console.log(
-      firstname,
-      lastname,
-      title,
-      description,
-      parseInt(userId),
-      imgUrl,
-      githubUrl,
-      linkedinUrl
-    );
     try {
       const [result] = await client.query(
         `insert into mentors (firstname, lastname, title, description,userId, imgUrl, githubUrl, linkedinUrl) 

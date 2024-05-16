@@ -10,6 +10,7 @@ route.get(
   Authentification.authenticate,
   UserController.getProfile
 );
+route.post("/users/me", UserController.getUserByToken);
 route.get("/users/:email", UserController.read);
 route.get("/users/:email/:password", UserController.login);
 route.post("/users", UserController.add);

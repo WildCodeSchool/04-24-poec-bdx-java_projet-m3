@@ -39,7 +39,6 @@ export class ReservationWithSwipeComponent implements AfterViewInit, OnInit {
     ).subscribe((ele: TouchEvent) => {
       ele.stopPropagation();
       ele.preventDefault();
-      console.log(ele);
       this.startingPosition = ele.touches[0].clientX;
     });
 

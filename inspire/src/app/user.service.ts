@@ -34,10 +34,8 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
-      tap((data) => console.log(data)),
       switchMap((createdUser: User) => {
         const userId = createdUser.userId || 0;
-        console.log(createdUser);
 
         const student: Student = new Student(
           userId,
@@ -70,7 +68,6 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
-      tap((data) => console.log(data)),
       switchMap((createdUser: User) => {
         const userId = createdUser.userId;
         const mentor: Mentor = new Mentor(
@@ -96,6 +93,17 @@ export class UserService {
     );
   }
 
+  getUserByToken(token: string): Observable<User> {
+    return this.http.post<User>(`${this.BASE_URL}/users/me`, { token }).pipe(
+      map((user) => {
+        const userString = JSON.stringify(user);
+        window.localStorage.setItem('user', userString);
+        this.userStore.setUserConnected(user);
+        return user;
+      })
+    );
+  }
+
   login(email: any, password: any): Observable<User | null> {
     return (
       this.http
@@ -103,14 +111,12 @@ export class UserService {
         .get<User>(`${this.BASE_URL}/users/${email}/${password}`)
 
         .pipe(
-          tap((ele) => console.log(ele)),
           map((users) => {
             if (users) {
               const user = users;
               this.userStore.setUserConnected(user);
               const userString = JSON.stringify(user);
               window.localStorage.setItem('user', userString);
-              console.log(user);
               if (user.role === 'mentor') this.router.navigate(['/mentor']);
               if (user.role === 'student') this.router.navigate(['/student']);
               return user;
@@ -158,6 +164,13 @@ export class UserService {
     return this.http.delete<any>(
       `${this.BASE_URL}/formation/formations/${formationId}`,
       formationId
+    );
+  }
+
+  postFormation(formation: Formation): Observable<any> {
+    return this.http.post<any>(
+      `${this.BASE_URL}/formation/formations/`,
+      formation
     );
   }
 

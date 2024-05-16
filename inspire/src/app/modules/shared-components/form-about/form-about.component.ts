@@ -11,9 +11,7 @@ export class FormAboutComponent {
     description: [''],
   });
 
-  onSubmit() {
-    console.log(this.aboutForm.value);
-  }
+  onSubmit() {}
 
   constructor(private fb: FormBuilder) {}
 }

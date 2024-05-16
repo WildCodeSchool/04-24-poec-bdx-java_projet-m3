@@ -22,7 +22,6 @@ export class CardFormationComponent {
 
   hideEditForm() {
     this.isVisibleFormEditCourse = false;
-    console.log('called');
   }
 
   showPopUpDelete() {
@@ -30,7 +29,6 @@ export class CardFormationComponent {
   }
   deleteFormation() {
     const formationId = this.formation.id;
-    console.log(formationId, 'coucou');
     this.userService.deleteFormation(formationId).subscribe();
   }
 }
