@@ -181,12 +181,12 @@ export class UserService {
     return this.http
       .post<any>(`${this.BASE_URL}/formation/formations/`, formation)
       .pipe(
-        tap((ele) =>
-          this.mentorService.activeMentor$.next({
-            ...this.mentorService.activeMentor$.value,
-            formations: ele.formations,
-          })
-        )
+        tap()
+        // (ele) =>
+        // this.mentorService.activeMentor$.next({
+        //   ...this.mentorService.activeMentor$.value,
+        //   formations: ele.formations,
+        // })
       );
   }
 

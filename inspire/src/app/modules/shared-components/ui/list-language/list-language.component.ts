@@ -33,14 +33,9 @@ export class ListLanguageComponent {
       .updateMentorLanguagesList(newLanguageList)
       .subscribe((res) => {
         if (res.success) {
-          this.mentorService.activeMentor$.next({
-            ...this.mentorService.activeMentor$.value,
-            languages: newLanguageList,
-          });
+          this.mentorService.activeMentorLanguages$.next(res.languages);
         }
-
         this.mentorSubscription.unsubscribe();
-
         this.hideEditModal();
       });
   }

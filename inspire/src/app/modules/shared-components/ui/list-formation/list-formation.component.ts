@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, inject } from '@angular/core';
 import { Formation } from '../../../../shared/models/formation';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
-import { UserService } from '../../../../user.service';
 import { Subscription } from 'rxjs';
+import { MentorService } from '../../../../shared/services/mentor.service';
 
 @Component({
   selector: 'app-list-formation',
@@ -15,7 +15,7 @@ export class ListFormationComponent implements OnDestroy {
   isVisibleFormCourse = false;
 
   windowWatcherService = inject(WindowWatcherService);
-  userService = inject(UserService);
+  mentorService = inject(MentorService);
   formationsSubscriptions!: Subscription;
 
   addCourse() {
@@ -28,8 +28,8 @@ export class ListFormationComponent implements OnDestroy {
 
   postFormation(formation: Formation) {
     console.log('output formation : ', formation);
-    this.formationsSubscriptions = this.userService
-      .postFormationMentor(formation)
+    this.formationsSubscriptions = this.mentorService
+      .addFormationMentor(formation)
       .subscribe();
   }
 

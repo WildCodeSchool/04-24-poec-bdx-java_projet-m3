@@ -7,5 +7,10 @@ import { MentorService } from '../../../../shared/services/mentor.service';
   styleUrl: './profil-mentor.component.scss',
 })
 export class ProfilMentorComponent {
-  activeMentor$ = inject(MentorService).activeMentor$;
+  mentorService = inject(MentorService);
+  languages$ = this.mentorService.activeMentorLanguages$;
+  experiences$ = this.mentorService.activeMentorExperiences$;
+  formations$ = this.mentorService.activeMentorFormations$;
+  skills$ = this.mentorService.activeMentorSkills$;
+  profil$ = this.mentorService.activeMentorProfil$;
 }

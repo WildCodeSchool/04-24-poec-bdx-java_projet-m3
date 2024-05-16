@@ -21,22 +21,21 @@ export class FormEditCourseComponent implements OnInit {
     this.userService
       .editFormation(this.courseForm.value, formationId)
       .subscribe((data) => {
-        const newFormations =
-          this.mentorService.activeMentor$.value.formations.map((formation) => {
-            if (this.formation.id === formation.id) {
-              return this.courseForm.value;
-            } else {
-              return formation;
-            }
-          });
-
-        if (data.affectedRows) {
-          this.mentorService.activeMentor$.next({
-            ...this.mentorService.activeMentor$.value,
-            formations: newFormations, // []
-          });
-          this.onValidate.emit(false);
-        }
+        // const newFormations =
+        //   this.mentorService.activeMentor$.value.formations.map((formation) => {
+        //     if (this.formation.id === formation.id) {
+        //       return this.courseForm.value;
+        //     } else {
+        //       return formation;
+        //     }
+        //   });
+        // if (data.affectedRows) {
+        //   this.mentorService.activeMentor$.next({
+        //     ...this.mentorService.activeMentor$.value,
+        //     formations: newFormations, // []
+        //   });
+        //   this.onValidate.emit(false);
+        // }
       });
   }
 
