@@ -44,7 +44,12 @@ export class MentorService {
           });
         })
       )
-      .pipe(tap((fullProfil) => this.activeMentor$.next(fullProfil)));
+      .pipe(
+        tap((fullProfil) => {
+          this.activeMentor$.next(fullProfil);
+          console.log('full profil from gard', fullProfil);
+        })
+      );
   }
 
   getMentorSkills() {
@@ -105,12 +110,19 @@ export class MentorService {
 
   updateMentorProfil(mentor: Mentor) {
     return this.httpClient
-      .put<{ affectedRows: number }>(
+      .put<{ affectedRows: number; profil: Mentor }>(
         environment.BASE_URL +
           '/mentor/mentors/' +
           this.activeMentor$.value.profil.id,
         mentor
       )
-      .pipe(tap((ele) => console.log('profil ', ele)));
+      .pipe(
+        tap((ele) =>
+          this.activeMentor$.next({
+            ...this.activeMentor$.value,
+            profil: ele.profil,
+          })
+        )
+      );
   }
 }

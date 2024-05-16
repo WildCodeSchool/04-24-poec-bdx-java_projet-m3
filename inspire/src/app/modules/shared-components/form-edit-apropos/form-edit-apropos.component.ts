@@ -21,7 +21,7 @@ type profilType = {
   linkedinUrl: string;
   githubUrl: string;
   description: string;
-  selectedSkills: Skill[];
+  selectedSkills?: Skill[];
 };
 
 @Component({
@@ -35,6 +35,7 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
   @Output() profilEmitter = new EventEmitter<profilType>();
   skills!: Skill[];
   @Input() selectedSkills!: Skill[];
+  fullProfil!: profilType;
 
   mentorSubscription!: Subscription;
   mentorService = inject(MentorService);
@@ -48,6 +49,8 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
 
   listSkillsSubscriptionRef!: Subscription;
   constructor(private fb: FormBuilder) {}
+
+  // new FormControl<Skill[] | null>(mentor.skills),
 
   ngOnInit(): void {
     const mentor = this.mentorService.activeMentor$.value;
@@ -64,6 +67,7 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
     this.listSkillsSubscriptionRef = this.listSkills$.subscribe(
       (res) => (this.skills = res)
     );
+    this.fullProfil = mentor.profil;
   }
 
   ngOnDestroy(): void {

@@ -1,6 +1,7 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { UserStoreService } from './services/stores/user-store.service';
 import { inject } from '@angular/core';
+import { MentorService } from './services/mentor.service';
 
 export const isConnected: CanActivateFn = (route, state) => {
   const router = inject(Router);
