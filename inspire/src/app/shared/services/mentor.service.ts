@@ -7,6 +7,7 @@ import {
   forkJoin,
   of,
   switchMap,
+  take,
   tap,
 } from 'rxjs';
 import { Mentor, MentorFullProfil } from '../models/user';
@@ -42,10 +43,10 @@ export class MentorService {
   );
 
   getFullMentorProfil() {
-    this.getMentorFormations().subscribe().unsubscribe();
-    this.getMentorSkills().subscribe().unsubscribe();
-    this.getMentorLanguages().subscribe().unsubscribe();
-    this.getMentorExperiences().subscribe().unsubscribe();
+    this.getMentorFormations().pipe(take(1)).subscribe();
+    this.getMentorSkills().pipe(take(1)).subscribe();
+    this.getMentorLanguages().pipe(take(1)).subscribe();
+    this.getMentorExperiences().pipe(take(1)).subscribe();
   }
 
   getMentorProfil() {
@@ -127,5 +128,42 @@ export class MentorService {
         formations: Formation[];
       }>(`${environment.BASE_URL}/formation/formations/`, formation)
       .pipe(tap((ele) => this.activeMentorFormations$.next(ele.formations)));
+  }
+
+  updateFormationMentor(formation: Formation): Observable<{
+    success: string;
+    affectedRows: number;
+    formations: Formation[];
+  }> {
+    return this.httpClient
+      .put<{
+        success: string;
+        affectedRows: number;
+        formations: Formation[];
+      }>(
+        `${environment.BASE_URL}/formation/formations/${formation.id}`,
+        formation
+      )
+      .pipe(
+        tap((result) => this.activeMentorFormations$.next(result.formations))
+      );
+  }
+
+  deleteFormationMentor(formationId: number): Observable<{
+    success: string;
+    message: string;
+    formations: Formation[];
+  }> {
+    return this.httpClient
+      .delete<{
+        success: string;
+        message: string;
+        formations: Formation[];
+      }>(
+        `${environment.BASE_URL}/formation/formations/${formationId}/${this.userConnected.value?.id}`
+      )
+      .pipe(
+        tap((result) => this.activeMentorFormations$.next(result.formations))
+      );
   }
 }

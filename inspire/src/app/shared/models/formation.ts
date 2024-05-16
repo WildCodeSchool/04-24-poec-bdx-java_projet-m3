@@ -1,5 +1,5 @@
 export type Formation = {
-  id?: string;
+  id?: number;
   title: string;
   company: string;
   dateBegin: string;
