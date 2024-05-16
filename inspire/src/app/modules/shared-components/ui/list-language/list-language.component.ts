@@ -29,7 +29,6 @@ export class ListLanguageComponent {
   }
 
   updateListLanguages(newLanguageList: Language[]) {
-    console.log('request sent to update languages ', newLanguageList);
     this.mentorSubscription = this.mentorService
       .updateMentorLanguagesList(newLanguageList)
       .subscribe((res) => {

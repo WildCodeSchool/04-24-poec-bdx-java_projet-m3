@@ -15,9 +15,7 @@ export class FormAddExperienceComponent {
   });
   @Input() destroy!: () => void;
 
-  onSubmit() {
-    console.log(this.experienceForm.value);
-  }
+  onSubmit() {}
 
   constructor(private fb: FormBuilder) {}
 

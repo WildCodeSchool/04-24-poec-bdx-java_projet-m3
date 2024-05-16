@@ -28,7 +28,6 @@ export default class SkillsManager {
 
   async addSkill(skillName) {
     try {
-      console.log("skill", skillName);
       const [skill] = await this.database.query(
         `SELECT * FROM skills where name = ? `,
         [skillName]
@@ -96,8 +95,6 @@ export default class SkillsManager {
 
   async updateSkill(skillId, newName) {
     try {
-      console.log("name ", newName);
-      // Mettre à jour le nom du skill dans la table des skills
       await this.database.query(`UPDATE skills SET name = ? WHERE id = ?`, [
         newName,
         skillId,

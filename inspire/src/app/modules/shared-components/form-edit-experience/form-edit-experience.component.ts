@@ -35,8 +35,6 @@ export class FormEditExperienceComponent implements OnInit {
     });
   }
   cancel() {
-    console.log('cancel run');
-
     this.destroy();
   }
 }

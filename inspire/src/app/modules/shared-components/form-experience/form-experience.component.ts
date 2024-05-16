@@ -15,9 +15,7 @@ export class FormExperienceComponent {
     description: [''],
   });
 
-  onSubmit() {
-    console.log(this.experienceForm.value);
-  }
+  onSubmit() {}
 
   constructor(private fb: FormBuilder) {}
 }

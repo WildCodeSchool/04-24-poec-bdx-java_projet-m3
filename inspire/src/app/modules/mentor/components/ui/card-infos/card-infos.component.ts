@@ -14,7 +14,6 @@ export class CardInfosComponent {
 
   openEditFormApropos() {
     this.editFormApropoVisible = true;
-    console.log('clicked edit');
   }
   closeEditFormApropos() {
     this.editFormApropoVisible = false;

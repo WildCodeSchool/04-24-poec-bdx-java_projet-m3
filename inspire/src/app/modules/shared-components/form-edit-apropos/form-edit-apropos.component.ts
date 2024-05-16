@@ -25,9 +25,7 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
 
   listSkills$ = inject(UserService).getListSkills();
 
-  onSubmit() {
-    console.log(this.aproposForm.value);
-  }
+  onSubmit() {}
 
   listSkillsSubscriptionRef!: Subscription;
   constructor(private fb: FormBuilder) {}

@@ -16,9 +16,7 @@ export class FormAddCourseComponent {
   });
   @Input() destroy!: () => void;
 
-  onSubmit() {
-    console.log(this.courseForm.value);
-  }
+  onSubmit() {}
 
   constructor(private fb: FormBuilder) {}
 

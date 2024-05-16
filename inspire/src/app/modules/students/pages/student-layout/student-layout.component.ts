@@ -6,7 +6,7 @@ import { StudentService } from '../../../../shared/services/student.service';
 @Component({
   selector: 'app-student-layout',
   templateUrl: './student-layout.component.html',
-  styleUrl: './student-layout.component.scss'
+  styleUrl: './student-layout.component.scss',
 })
 export class StudentLayoutComponent implements OnInit {
   showNavbar = true;
@@ -19,7 +19,6 @@ export class StudentLayoutComponent implements OnInit {
 
   toggleVisibility() {
     this.showNavbar = !this.showNavbar;
-    console.log(this.showNavbar);
   }
 
   logout() {
