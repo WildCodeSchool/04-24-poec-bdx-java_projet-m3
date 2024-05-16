@@ -3,6 +3,7 @@ import { Skill } from '../../../../../shared/models/chip';
 import { MentorServiceService } from '../../../shared/mentor-service.service';
 import { Mentor } from '../../../../../shared/models/user';
 import { MentorService } from '../../../../../shared/services/mentor.service';
+import { Slot } from '../../../../../shared/models/reservation';
 
 
 @Component({
@@ -12,11 +13,11 @@ import { MentorService } from '../../../../../shared/services/mentor.service';
 })
 export class FilterSearchListComponent {
   skills: Skill[] = [];
-  mode: any[] = [];
+  disponibily: any[] = []
   level: any[] = [];
 
   selectedSkill: Skill[] = [];
-  selectedMode: any[] = [];
+  selectedDisponibily: any[] = [];
   selectedLevel: any[] = [];
 
   @Output() filteredMentors = new EventEmitter<Mentor[]>();
@@ -33,9 +34,10 @@ export class FilterSearchListComponent {
       { name: 'CSS' }
     ];
 
-    this.mode = [
-      { name: 'Presentiel' },
-      { name: 'Distanciel' },
+    this.disponibily = [
+      { name: "Aujourd'hui" },
+      { name: 'Dans la semaine' },
+      { name: 'Peu importe' }
     ];
 
     this.level = [
@@ -75,7 +77,7 @@ export class FilterSearchListComponent {
   resetFilters() {
   
     this.selectedSkill = [];
-    this.selectedMode = [];
+    this.selectedDisponibily = [];
     this.selectedLevel = [];
 
     this._mentorService.getMentorsList$().subscribe(mentorList => {
