@@ -29,9 +29,6 @@
       width: phoneMode.phoneMode ? 'max(50vw, 400px)' : '100vw'
     }"
   >
-    <app-form-add-course
-      (destroy)="hideAddFormation()"
-      (formationEmitter)="postFormation($event)"
-    ></app-form-add-course>
+    <app-form-add-course (destroy)="hideAddFormation()"></app-form-add-course>
   </p-sidebar>
 </ng-container>

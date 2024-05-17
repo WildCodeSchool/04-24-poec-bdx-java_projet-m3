@@ -59,7 +59,7 @@ export default class ExperienceController {
         experienceId,
         props
       );
-      res.status(202).json({ affectedRows });
+      res.status(202).json({ ...affectedRows });
     } catch (error) {
       res
         .status(401)

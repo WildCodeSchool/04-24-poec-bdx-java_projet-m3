@@ -38,16 +38,16 @@ export class LayoutMentor implements OnInit {
       this.mentorService.activeMentorProfil$.next(
         this.activatedRoute.snapshot.data['profil']
       );
-      this.mentorService.activeMentorLanguages$.next(
+      this.userService.activeMentorLanguages$.next(
         this.activatedRoute.snapshot.data['languages']
       );
-      this.mentorService.activeMentorSkills$.next(
+      this.userService.activeMentorSkills$.next(
         this.activatedRoute.snapshot.data['skills']
       );
-      this.mentorService.activeMentorExperiences$.next(
+      this.userService.activeMentorExperiences$.next(
         this.activatedRoute.snapshot.data['experiences']
       );
-      this.mentorService.activeMentorFormations$.next(
+      this.userService.activeMentorFormations$.next(
         this.activatedRoute.snapshot.data['formations']
       );
     }

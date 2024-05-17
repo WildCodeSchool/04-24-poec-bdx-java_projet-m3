@@ -7,6 +7,7 @@ import { Skill } from '../models/chip';
 import { Experience } from '../models/experience';
 import { Formation } from '../models/formation';
 import { Observable } from 'rxjs';
+import { UserService } from '../../user.service';
 
 export const mentorProfilResolver: ResolveFn<Mentor> = (route, state) => {
   return inject(MentorService).getMentorProfil();
@@ -16,23 +17,23 @@ export const mentorLanguagesResolver: ResolveFn<Observable<Language[]>> = (
   route,
   state
 ) => {
-  return inject(MentorService).getMentorLanguages();
+  return inject(UserService).getMentorLanguages();
 };
 
 export const mentorSkillsResolver: ResolveFn<Skill[]> = (route, state) => {
-  return inject(MentorService).getMentorSkills();
+  return inject(UserService).getMentorSkills();
 };
 
 export const mentorExperiencesResolver: ResolveFn<Experience[]> = (
   route,
   state
 ) => {
-  return inject(MentorService).getMentorExperiences();
+  return inject(UserService).getMentorExperiences();
 };
 
 export const mentorFormationsResolver: ResolveFn<Formation[]> = (
   route,
   state
 ) => {
-  return inject(MentorService).getMentorFormations();
+  return inject(UserService).getMentorFormations();
 };

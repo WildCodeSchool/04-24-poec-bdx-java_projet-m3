@@ -26,12 +26,12 @@ export class ListFormationComponent implements OnDestroy {
     this.isVisibleFormCourse = false;
   }
 
-  postFormation(formation: Formation) {
-    console.log('output formation : ', formation);
-    this.formationsSubscriptions = this.mentorService
-      .addFormationMentor(formation)
-      .subscribe();
-  }
+  // postFormation(formation: Formation) {
+  //   console.log('output formation : ', formation);
+  //   this.formationsSubscriptions = this.mentorService
+  //     .addFormationMentor(formation)
+  //     .subscribe();
+  // }
 
   ngOnDestroy(): void {
     this.formationsSubscriptions?.unsubscribe();

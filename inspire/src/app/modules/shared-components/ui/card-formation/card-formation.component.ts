@@ -2,8 +2,6 @@ import { Component, Input, inject } from '@angular/core';
 import { Formation } from '../../../../shared/models/formation';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { UserService } from '../../../../user.service';
-import { MentorService } from '../../../../shared/services/mentor.service';
-import { Form } from '@angular/forms';
 
 @Component({
   selector: 'app-card-formation',
@@ -17,7 +15,6 @@ export class CardFormationComponent {
 
   windowWatcherService = inject(WindowWatcherService);
   userService = inject(UserService);
-  mentorService = inject(MentorService);
 
   showEditForm() {
     this.isVisibleFormEditCourse = true;
@@ -32,11 +29,11 @@ export class CardFormationComponent {
   }
 
   editForm(formation: Formation) {
-    this.mentorService.updateFormationMentor(formation).subscribe();
+    this.userService.updateFormationMentor(formation).subscribe();
     this.isVisibleFormEditCourse = false;
   }
   deleteFormation() {
     const formationId = this.formation.id;
-    this.mentorService.deleteFormationMentor(formationId as number).subscribe();
+    this.userService.deleteFormationMentor(formationId as number).subscribe();
   }
 }

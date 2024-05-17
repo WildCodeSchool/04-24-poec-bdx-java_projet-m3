@@ -42,7 +42,7 @@ export class FormAddExperienceComponent {
       userId: user.id as number,
     };
 
-    this.userService.postExperience(experience).subscribe();
+    this.userService.addMentorExperience(experience).subscribe();
   }
 
   cancel() {

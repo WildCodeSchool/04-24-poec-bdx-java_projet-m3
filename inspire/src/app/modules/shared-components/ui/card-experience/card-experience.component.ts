@@ -20,9 +20,9 @@ export class CardExperienceComponent {
     this.isVisibleFormEditExperience = true;
   }
 
-  hideEditForm = () => {
+  hideEditForm() {
     this.isVisibleFormEditExperience = false;
-  };
+  }
 
   showPopUpDelete() {
     this.popupDeleteVisible = true;

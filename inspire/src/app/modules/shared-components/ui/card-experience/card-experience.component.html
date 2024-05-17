@@ -35,7 +35,7 @@
   >
     <app-form-edit-experience
       [experience]="experience"
-      [destroy]="hideEditForm"
+      (destroy)="hideEditForm()"
     ></app-form-edit-experience>
   </p-sidebar>
 </ng-container>

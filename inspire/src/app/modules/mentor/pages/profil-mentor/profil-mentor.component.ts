@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MentorService } from '../../../../shared/services/mentor.service';
+import { UserService } from '../../../../user.service';
 
 @Component({
   selector: 'app-profil-mentor',
@@ -7,10 +8,11 @@ import { MentorService } from '../../../../shared/services/mentor.service';
   styleUrl: './profil-mentor.component.scss',
 })
 export class ProfilMentorComponent {
+  userService = inject(UserService);
   mentorService = inject(MentorService);
-  languages$ = this.mentorService.activeMentorLanguages$;
-  experiences$ = this.mentorService.activeMentorExperiences$;
-  formations$ = this.mentorService.activeMentorFormations$;
-  skills$ = this.mentorService.activeMentorSkills$;
+  languages$ = this.userService.activeMentorLanguages$;
+  experiences$ = this.userService.activeMentorExperiences$;
+  formations$ = this.userService.activeMentorFormations$;
+  skills$ = this.userService.activeMentorSkills$;
   profil$ = this.mentorService.activeMentorProfil$;
 }
