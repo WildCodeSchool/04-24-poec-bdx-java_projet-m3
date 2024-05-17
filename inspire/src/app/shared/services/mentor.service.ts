@@ -127,7 +127,11 @@ export class MentorService {
         message: string;
         formations: Formation[];
       }>(`${environment.BASE_URL}/formation/formations/`, formation)
-      .pipe(tap((ele) => this.activeMentorFormations$.next(ele.formations)));
+      .pipe(
+        tap((response) =>
+          this.activeMentorFormations$.next(response.formations)
+        )
+      );
   }
 
   updateFormationMentor(formation: Formation): Observable<{
@@ -145,7 +149,9 @@ export class MentorService {
         formation
       )
       .pipe(
-        tap((result) => this.activeMentorFormations$.next(result.formations))
+        tap((response) =>
+          this.activeMentorFormations$.next(response.formations)
+        )
       );
   }
 
@@ -163,7 +169,9 @@ export class MentorService {
         `${environment.BASE_URL}/formation/formations/${formationId}/${this.userConnected.value?.id}`
       )
       .pipe(
-        tap((result) => this.activeMentorFormations$.next(result.formations))
+        tap((response) =>
+          this.activeMentorFormations$.next(response.formations)
+        )
       );
   }
 }
