@@ -299,7 +299,10 @@ export class UserService {
         message: string;
         success: boolean;
         experiences: Experience[];
-      }>(`${environment.BASE_URL}/experience/experiences/`, experience)
+      }>(`${environment.BASE_URL}/experience/experiences/`, {
+        ...experience,
+        userId: this.userStore.getUserConnected$().value?.id,
+      })
       .pipe(
         tap((response) =>
           this.activeMentorExperiences$.next(response.experiences)

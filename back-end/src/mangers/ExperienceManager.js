@@ -48,8 +48,13 @@ export default class ExperienceManager {
         (? , ?, ? , ? ,? ,? ,?)`,
         [title, company, dateBegin, dateEnd, city, country, userId]
       );
+      const experiences = await ExperienceManager.getUserExperiences(userId);
 
-      return { success: true, message: "experience added successfully" };
+      return {
+        success: true,
+        message: "experience added successfully",
+        experiences,
+      };
     } catch (error) {
       throw error;
     }
