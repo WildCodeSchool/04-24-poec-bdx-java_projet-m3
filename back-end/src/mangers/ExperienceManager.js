@@ -60,12 +60,17 @@ export default class ExperienceManager {
     }
   }
 
-  static async deleteExperience(experienceId) {
+  static async deleteExperience(experienceId, userId) {
     try {
       await client.query(`DELETE FROM experiences WHERE id = ?`, [
         experienceId,
       ]);
-      return { success: true, message: "experience deleted successfully" };
+      const experiences = await ExperienceManager.getUserExperiences(userId);
+      return {
+        success: true,
+        message: "experience deleted successfully",
+        experiences,
+      };
     } catch (error) {
       throw error;
     }

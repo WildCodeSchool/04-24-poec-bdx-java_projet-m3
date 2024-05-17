@@ -159,7 +159,9 @@ export class UserService {
   // `a corriger
   deleteExperience(experienceId: any): Observable<any> {
     return this.http.delete<any>(
-      `${this.BASE_URL}/experience/experiences/${experienceId}`,
+      `${this.BASE_URL}/experience/experiences/${experienceId}/${
+        this.userStore.getUserConnected$().value?.id
+      }`,
       experienceId
     );
   }
