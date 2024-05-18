@@ -3,7 +3,8 @@ import MentorManager from "../mangers/MentorManager.js";
 export default class MentorController {
   static async browse(req, res) {
     try {
-      const result = await MentorManager.browse();
+      const { perPage, offset } = req.query;
+      const result = await MentorManager.browse(perPage, offset);
       res.status(200).json(result);
     } catch (error) {
       res.status(401).json({ message: "Demande refusée" });
@@ -13,6 +14,7 @@ export default class MentorController {
   static async read(req, res) {
     try {
       const { userId } = req.params;
+
       const result = await MentorManager.read(userId);
       res.status(200).json(result);
     } catch (error) {

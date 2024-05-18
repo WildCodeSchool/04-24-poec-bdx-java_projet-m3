@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment.development';
 import { BehaviorSubject, tap } from 'rxjs';
 import { Mentor } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
+import { Skill } from '../models/chip';
 
 @Injectable({
   providedIn: 'root',
@@ -25,8 +26,6 @@ export class MentorService {
   }
 
   updateMentorProfil(profil: Mentor) {
-    // console.log({ ...profil, userId: this.userConnected.value?.id });
-
     return this.httpClient
       .put<{ affectedRow: number; profil: Mentor; success: boolean }>(
         environment.BASE_URL +
@@ -35,5 +34,18 @@ export class MentorService {
         { ...profil, userId: this.userConnected.value?.id }
       )
       .pipe(tap((result) => this.activeMentorProfil$.next(result.profil)));
+  }
+
+  getMentorsList() {
+    return this.httpClient.get<Mentor[]>(
+      environment.BASE_URL + '/mentor/mentors'
+    );
+  }
+
+  getMentorListPagination(perPage: number, offset: number) {
+    return this.httpClient.get<Mentor[]>(
+      environment.BASE_URL +
+        `/mentor/mentors?perPage=${perPage}&offset=${offset}`
+    );
   }
 }

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { Mentor } from '../../../../../shared/models/user';
 import { Skill } from '../../../../../shared/models/chip';
-import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Observable } from 'rxjs';
+import { UserService } from '../../../../../user.service';
 
 @Component({
   selector: 'app-card-mentor',
@@ -13,11 +13,9 @@ export class CardMentorComponent implements OnInit {
   @Input() mentor!: Mentor;
 
   skillList$?: Observable<Skill[]>;
-  mentorService = inject(MentorService);
+  userService = inject(UserService);
 
   ngOnInit(): void {
-    // this.skillList$ = this.mentorService.getMentorSkillsById(
-    //   this.mentor.userId
-    // );
+    this.skillList$ = this.userService.getMentorSkillsById(this.mentor.userId);
   }
 }

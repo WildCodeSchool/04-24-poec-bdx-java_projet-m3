@@ -1,14 +1,17 @@
 import { client } from "../clientDb/client.js";
 
 export default class MentorManager {
-  static async browse() {
-    try {
-      const [rows] = await client.query(`select * from mentors`);
-      return rows;
-    } catch (error) {
-      console.error(error.message);
-      throw new Error(error.message);
+  static async browse(perPage, offset) {
+    let sql = `select * from mentors`;
+    const sqlValues = [];
+
+    if (+perPage && +offset !== undefined) {
+      sql += ` limit ? offset ?`;
+      sqlValues.push(+perPage);
+      sqlValues.push(+offset);
     }
+    const [rows] = await client.query(sql, sqlValues);
+    return rows;
   }
 
   static async read(userId) {
@@ -78,7 +81,6 @@ export default class MentorManager {
     sqlValues.push(userId);
     const [res] = await client.query(sql, sqlValues);
     const profil = await MentorManager.read(userId);
-    console.log(profil);
     return { affectedRows: res.affectedRows, profil, success: true };
   }
 }
