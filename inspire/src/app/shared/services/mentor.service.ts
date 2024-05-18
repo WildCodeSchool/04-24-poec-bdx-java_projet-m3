@@ -5,6 +5,7 @@ import { BehaviorSubject, tap } from 'rxjs';
 import { Mentor } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
 import { Skill } from '../models/chip';
+import { ResponseReservation } from '../models/reservation';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +16,11 @@ export class MentorService {
 
   constructor() {}
 
-  activeMentorProfil$: BehaviorSubject<Mentor> = new BehaviorSubject(
+  activeMentorProfil$: BehaviorSubject<Mentor> = new BehaviorSubject<Mentor>(
     {} as Mentor
   );
+  mentorsReservations$: BehaviorSubject<ResponseReservation[]> =
+    new BehaviorSubject<ResponseReservation[]>([]);
 
   getMentorProfil() {
     return this.httpClient.get<Mentor>(
@@ -46,6 +49,14 @@ export class MentorService {
     return this.httpClient.get<Mentor[]>(
       environment.BASE_URL +
         `/mentor/mentors?perPage=${perPage}&offset=${offset}`
+    );
+  }
+
+  getMentorReservationsList() {
+    return this.httpClient.get<ResponseReservation[]>(
+      environment.BASE_URL +
+        '/reservation/reservations/mentor' +
+        this.userConnected.value?.id
     );
   }
 }

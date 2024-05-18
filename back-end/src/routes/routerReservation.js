@@ -12,9 +12,16 @@ router.get("/reservations", (req, res) => {
 router.get("/reservations/user/:userId", (req, res) => {
   reservationController.getUserReservations(req, res);
 });
+router.get("/reservations/user/history/:userId", (req, res) => {
+  reservationController.getUserReservationsHistory(req, res);
+});
 
 router.get("/reservations/mentor/:mentorId", (req, res) => {
   reservationController.getMentorReservations(req, res);
+});
+
+router.get("/reservations/mentor/history/:mentorId", (req, res) => {
+  reservationController.getMentorReservationsHistory(req, res);
 });
 
 router.delete("/reservations/:reservationId", (req, res) => {
