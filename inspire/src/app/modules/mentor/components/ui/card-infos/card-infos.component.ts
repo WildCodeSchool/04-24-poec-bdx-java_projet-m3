@@ -28,7 +28,6 @@ export class CardInfosComponent {
   }
 
   updateProfil(newProfil: { profil: Mentor | Student; skills: Skill[] }) {
-    console.log('profil', newProfil.profil);
     this.mentorService
       .updateMentorProfil(newProfil.profil)
       .pipe(takeUntilDestroyed(this.destroyRef))

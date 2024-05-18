@@ -77,7 +77,6 @@ export default class ExperienceManager {
   }
 
   static async updateExperience(id, props) {
-    console.log(props);
     let sql = `UPDATE experiences set`;
     const sqlValues = [];
     for (const [key, value] of Object.entries(props)) {
@@ -90,7 +89,6 @@ export default class ExperienceManager {
     const experiences = await ExperienceManager.getUserExperiences(
       props.userId
     );
-    console.log(experiences);
     return { affectedRows: res.affectedRows, experiences };
   }
 }
