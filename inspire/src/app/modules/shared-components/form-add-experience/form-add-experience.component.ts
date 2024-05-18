@@ -29,7 +29,6 @@ export class FormAddExperienceComponent {
   ) {}
 
   onSubmit() {
-    console.log(this.experienceForm.value);
     const user = this.userStore.getUserConnected$().value as User;
 
     const experience: Experience = {
