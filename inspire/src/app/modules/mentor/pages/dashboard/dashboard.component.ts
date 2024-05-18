@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MentorService } from '../../../../shared/services/mentor.service';
-import { ResponseReservation } from '../../../../shared/models/reservation';
+import { reservationForMentorDTO } from '../../../../shared/models/reservation';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,7 +8,7 @@ import { ResponseReservation } from '../../../../shared/models/reservation';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-  reservations!: ResponseReservation[];
+  reservations!: reservationForMentorDTO[];
 
   mentorService = inject(MentorService);
 

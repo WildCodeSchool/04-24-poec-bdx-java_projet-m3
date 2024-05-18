@@ -4,8 +4,7 @@ import { environment } from '../../../environments/environment.development';
 import { BehaviorSubject, tap } from 'rxjs';
 import { Mentor } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
-import { Skill } from '../models/chip';
-import { ResponseReservation } from '../models/reservation';
+import { reservationForMentorDTO } from '../models/reservation';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +18,8 @@ export class MentorService {
   activeMentorProfil$: BehaviorSubject<Mentor> = new BehaviorSubject<Mentor>(
     {} as Mentor
   );
-  mentorsReservations$: BehaviorSubject<ResponseReservation[]> =
-    new BehaviorSubject<ResponseReservation[]>([]);
+  mentorsReservations$: BehaviorSubject<reservationForMentorDTO[]> =
+    new BehaviorSubject<reservationForMentorDTO[]>([]);
 
   getMentorProfil() {
     return this.httpClient.get<Mentor>(
@@ -53,7 +52,7 @@ export class MentorService {
   }
 
   getMentorReservationsList() {
-    return this.httpClient.get<ResponseReservation[]>(
+    return this.httpClient.get<reservationForMentorDTO[]>(
       environment.BASE_URL +
         '/reservation/reservations/mentor' +
         this.userConnected.value?.id

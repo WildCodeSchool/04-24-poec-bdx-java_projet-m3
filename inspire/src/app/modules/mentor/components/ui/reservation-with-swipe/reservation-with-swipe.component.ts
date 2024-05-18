@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { ResponseReservation } from '../../../../../shared/models/reservation';
+import { reservationForMentorDTO } from '../../../../../shared/models/reservation';
 import { auditTime, fromEvent } from 'rxjs';
 
 @Component({
@@ -16,7 +16,7 @@ import { auditTime, fromEvent } from 'rxjs';
 })
 export class ReservationWithSwipeComponent implements AfterViewInit, OnInit {
   @Input()
-  reservation!: ResponseReservation;
+  reservation!: reservationForMentorDTO;
   @Input()
   bgColor: string = 'transparent';
   @ViewChild('thisRef')
@@ -28,7 +28,7 @@ export class ReservationWithSwipeComponent implements AfterViewInit, OnInit {
   endAt!: Date;
 
   ngOnInit(): void {
-    this.endAt = new Date(this.reservation.slot.dateTime);
+    this.endAt = new Date(this.reservation.dateTime);
     this.endAt.setTime(this.endAt.getTime() + 3600000);
   }
 
