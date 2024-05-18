@@ -28,6 +28,7 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
     skills: Skill[];
   }>();
   @Input() selectedSkills!: Skill[];
+  @Input() profil!: Mentor;
   skills!: Skill[];
 
   destroyRef = inject(DestroyRef);
@@ -35,7 +36,15 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.profilEmitter.emit({
-      profil: this.aproposForm.value,
+      profil: {
+        title: this.aproposForm.value['title'],
+        firstname: this.aproposForm.value['firstname'],
+        lastname: this.aproposForm.value['lastname'],
+        description: this.aproposForm.value['description'],
+        imgUrl: this.aproposForm.value['imgUrl'],
+        linkedinUrl: this.aproposForm.value['linkedinUrl'],
+        githubUrl: this.aproposForm.value['githubUrl'],
+      } as Mentor,
       skills: this.selectedSkills,
     });
     this.destroy.emit();
@@ -46,13 +55,13 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.aproposForm = this.fb.group({
-      title: [''],
-      imgUrl: [''],
-      linkedinUrl: [''],
-      githubUrl: [''],
-      firstname: [''],
-      lastname: [''],
-      description: [''],
+      title: [this.profil.title],
+      imgUrl: [this.profil.imgUrl],
+      linkedinUrl: [this.profil.linkedinUrl],
+      githubUrl: [this.profil.githubUrl],
+      firstname: [this.profil.firstname],
+      lastname: [this.profil.lastname],
+      description: [this.profil.description],
       selectedSkill: [this.selectedSkills],
     });
 

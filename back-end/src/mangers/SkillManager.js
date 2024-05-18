@@ -47,6 +47,35 @@ export default class SkillsManager {
     }
   }
 
+  async editSkillsList(userId, skills) {
+    try {
+      // delete all languages for specific user
+
+      const deleteUserSkills = await this.database.query(
+        `delete from user_skills where userId = ?`,
+        [userId]
+      );
+      const resultAddSkills = await Promise.all(
+        skills.map(async (skill) => {
+          const [res] = await this.database.query(
+            `INSERT INTO user_skills (userId, skillId) VALUES (?, ? )`,
+            [userId, skill.id]
+          );
+          return res.insertId;
+        })
+      );
+      const skillsList = await this.getUserSkills(userId);
+
+      return {
+        success: true,
+        message: "skills added successfully",
+        skills: skillsList,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async addUserSkill(userId, skillId) {
     try {
       const [language] = await this.database.query(

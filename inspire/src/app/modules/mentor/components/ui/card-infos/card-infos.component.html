@@ -51,6 +51,7 @@
   <p-sidebar position="right" [(visible)]="editFormApropoVisible">
     <app-form-edit-apropos
       [selectedSkills]="chips"
+      [profil]="mentor"
       (destroy)="editFormApropoVisible = false"
       (profilEmitter)="updateProfil($event)"
     ></app-form-edit-apropos>

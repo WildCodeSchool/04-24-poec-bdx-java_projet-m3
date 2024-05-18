@@ -278,6 +278,17 @@ export class UserService {
       .pipe(tap((skills) => this.activeMentorSkills$.next(skills)));
   }
 
+  updateMentorSkills(skills: Skill[]) {
+    return this.http
+      .post<{ success: boolean; message: string; skills: Skill[] }>(
+        environment.BASE_URL +
+          '/skill/skills/user/' +
+          this.userStore.getUserConnected$().value?.id,
+        skills
+      )
+      .pipe(tap((result) => this.activeMentorSkills$.next(result.skills)));
+  }
+
   // CRUD Experience
   getMentorExperiences() {
     return this.http
