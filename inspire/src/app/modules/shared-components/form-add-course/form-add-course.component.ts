@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { UserService } from '../../../user.service';
 import { Formation } from '../../../shared/models/formation';
 import { UserStoreService } from '../../../shared/services/stores/user-store.service';
 import { User } from '../../../shared/models/user';
@@ -19,7 +18,8 @@ export class FormAddCourseComponent {
     dateEnd: [''],
     title: [''],
   });
-  @Input() destroy!: () => void;
+  @Output() destroy = new EventEmitter();
+  @Output() formationEmitter = new EventEmitter<Formation>();
 
   onSubmit() {
     const user = this.userStore.getUserConnected$().value as User;
@@ -33,17 +33,13 @@ export class FormAddCourseComponent {
       country: this.courseForm.value.country as string,
       userId: user.id as number,
     };
-
-    this.userService.postFormation(formation).subscribe();
+    this.formationEmitter.emit(formation);
+    this.destroy.emit();
   }
 
-  constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    private userStore: UserStoreService
-  ) {}
+  constructor(private fb: FormBuilder, private userStore: UserStoreService) {}
 
   cancel() {
-    this.destroy();
+    this.destroy.emit();
   }
 }

@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { ReservationService } from '../../../../shared/services/reservation.service';
 import { MentorService } from '../../../../shared/services/mentor.service';
 
 @Component({
@@ -9,7 +8,4 @@ import { MentorService } from '../../../../shared/services/mentor.service';
 })
 export class DashboardComponent {
   mentorService = inject(MentorService);
-  reservations$ = inject(ReservationService).getMentorReservationList(
-    this.mentorService.activeMentor$.value.profil.userId
-  );
 }

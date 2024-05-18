@@ -64,8 +64,13 @@ export default class LanguageManager {
           return res.insertId;
         })
       );
+      const languagesList = await this.getUserLanguages(userId);
 
-      return { success: true, message: "languages added successfully" };
+      return {
+        success: true,
+        message: "languages added successfully",
+        languages: languagesList,
+      };
     } catch (error) {
       throw error;
     }

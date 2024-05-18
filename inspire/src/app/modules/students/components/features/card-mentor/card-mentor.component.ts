@@ -10,15 +10,14 @@ import { Observable } from 'rxjs';
   styleUrl: './card-mentor.component.scss',
 })
 export class CardMentorComponent implements OnInit {
-  @Input()
-  mentor!: Mentor;
+  @Input() mentor!: Mentor;
 
   skillList$?: Observable<Skill[]>;
   mentorService = inject(MentorService);
 
   ngOnInit(): void {
-    this.skillList$ = this.mentorService.getMentorSkillsById(
-      this.mentor.userId
-    );
+    // this.skillList$ = this.mentorService.getMentorSkillsById(
+    //   this.mentor.userId
+    // );
   }
 }

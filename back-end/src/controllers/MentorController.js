@@ -66,12 +66,12 @@ export default class MentorController {
 
   static async update(req, res) {
     try {
-      const { mentorId } = req.params;
+      const { userId } = req.params;
       const props = req.body;
-      const result = await MentorManager.read(mentorId);
+      const result = await MentorManager.read(userId);
       if (result) {
-        const affectedRows = await MentorManager.update(mentorId, props);
-        res.status(202).json({ affectedRows });
+        const affectedRows = await MentorManager.update(userId, props);
+        res.status(202).json({ ...affectedRows });
       } else
         res
           .status(401)

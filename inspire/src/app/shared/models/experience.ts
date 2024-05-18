@@ -1,7 +1,7 @@
 import { Language } from './language';
 
 export type Experience = {
-  id?: string;
+  id?: number;
   userId: number;
   title: string;
   company: string;
