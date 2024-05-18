@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Mentor } from '../../../../../shared/models/user';
+import { Mentor, Student } from '../../../../../shared/models/user';
 import { Skill } from '../../../../../shared/models/chip';
 
 @Component({
@@ -17,5 +17,9 @@ export class CardInfosComponent {
   }
   closeEditFormApropos() {
     this.editFormApropoVisible = false;
+  }
+
+  updateProfil(newProfil: { profil: Mentor | Student; skills: Skill[] }) {
+    console.log(newProfil);
   }
 }

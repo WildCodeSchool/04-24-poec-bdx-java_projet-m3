@@ -1,5 +1,6 @@
 import {
   Component,
+  DestroyRef,
   EventEmitter,
   Input,
   OnDestroy,
@@ -11,6 +12,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Skill } from '../../../shared/models/chip';
 import { UserService } from '../../../user.service';
 import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Mentor, Student } from '../../../shared/models/user';
 
 @Component({
   selector: 'app-form-edit-apropos',
@@ -20,12 +23,23 @@ import { Subscription } from 'rxjs';
 export class FormEditAproposComponent implements OnInit, OnDestroy {
   aproposForm!: FormGroup<any>;
   @Output() destroy = new EventEmitter();
-  skills!: Skill[];
+  @Output() profilEmitter = new EventEmitter<{
+    profil: Mentor | Student;
+    skills: Skill[];
+  }>();
   @Input() selectedSkills!: Skill[];
+  skills!: Skill[];
 
+  destroyRef = inject(DestroyRef);
   listSkills$ = inject(UserService).getListSkills();
 
-  onSubmit() {}
+  onSubmit() {
+    this.profilEmitter.emit({
+      profil: this.aproposForm.value,
+      skills: this.selectedSkills,
+    });
+    this.destroy.emit();
+  }
 
   listSkillsSubscriptionRef!: Subscription;
   constructor(private fb: FormBuilder) {}
@@ -36,12 +50,19 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
       imgUrl: [''],
       linkedinUrl: [''],
       githubUrl: [''],
+      firstname: [''],
+      lastname: [''],
       description: [''],
-      selectedSkills: new FormControl<Skill[] | null>(this.selectedSkills),
+      selectedSkill: [this.selectedSkills],
     });
-    this.listSkillsSubscriptionRef = this.listSkills$.subscribe(
-      (res) => (this.skills = res)
-    );
+
+    this.listSkillsSubscriptionRef = this.listSkills$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((res) => (this.skills = res));
+  }
+
+  setSkills(val: Skill[]) {
+    this.selectedSkills = val;
   }
 
   ngOnDestroy(): void {
@@ -52,7 +73,5 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
     this.destroy.emit();
   }
 
-  submit() {
-    this.destroy.emit();
-  }
+  submit() {}
 }

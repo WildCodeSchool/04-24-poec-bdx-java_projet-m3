@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { BehaviorSubject } from 'rxjs';
-import { Mentor, MentorFullProfil } from '../models/user';
+import { Mentor } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
 
 @Injectable({

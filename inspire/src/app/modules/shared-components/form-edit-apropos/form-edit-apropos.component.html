@@ -15,6 +15,29 @@
 
   <div class="infos">
     <div class="container-input">
+      <label for="firstname">Prénom *</label>
+      <input
+        type="text"
+        id="firstname"
+        name="firstname"
+        formControlName="firstname"
+        placeholder="Github :"
+      />
+    </div>
+    <div class="container-input">
+      <label for="lastname">Nom *</label>
+      <input
+        type="text"
+        id="lastname"
+        name="lastname"
+        formControlName="lastname"
+        placeholder="Linkedin :"
+      />
+    </div>
+  </div>
+
+  <div class="infos">
+    <div class="container-input">
       <label for="diplome">Github *</label>
       <input
         type="text"
@@ -25,7 +48,7 @@
       />
     </div>
     <div class="container-input">
-      <label for="diplome">Linkedin *</label>
+      <label for="linkedin">Linkedin *</label>
       <input
         type="text"
         id="linkedin"
@@ -35,13 +58,26 @@
       />
     </div>
   </div>
-  <!-- [(ngModel)]="selectedLanguages" -->
+
+  <div class="infos">
+    <div class="container-input">
+      <label for="description">Votre description *</label>
+      <textarea
+        type="text"
+        id="description"
+        name="description"
+        formControlName="description"
+        placeholder="Votre description"
+      ></textarea>
+    </div>
+  </div>
   <div class="edit-skill">
     <label for="skills">Editez vos skills *</label>
   </div>
+
   <div class="skills" *ngIf="skills">
     <app-chip
-      *ngFor="let skill of skills"
+      *ngFor="let skill of selectedSkills"
       [title]="skill.name"
       [dark]="true"
     ></app-chip>
@@ -54,7 +90,8 @@
       name="skills"
       [options]="skills"
       placeholder="Choisissez vos skills"
-      formControlName="selectedSkills"
+      [formControlName]="'selectedSkill'"
+      (onChange)="setSkills($event.value)"
       optionLabel="name"
       [showClear]="true"
       [virtualScroll]="true"
