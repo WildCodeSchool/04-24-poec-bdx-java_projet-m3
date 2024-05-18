@@ -48,17 +48,27 @@ export default class FormationManager {
       (? , ?, ? , ? ,? ,? ,?)`,
         [title, company, dateBegin, dateEnd, city, country, userId]
       );
+      const formations = await FormationManager.getUserFormations(userId);
 
-      return { success: true, message: "formation added successfully" };
+      return {
+        success: true,
+        message: "formation added successfully",
+        formations,
+      };
     } catch (error) {
       throw error;
     }
   }
 
-  static async deleteFormation(formationId) {
+  static async deleteFormation(formationId, userId) {
     try {
       await client.query(`DELETE FROM formations WHERE id = ?`, [formationId]);
-      return { success: true, message: "formation deleted successfully" };
+      const formations = await FormationManager.getUserFormations(userId);
+      return {
+        success: true,
+        message: "formation deleted successfully",
+        formations,
+      };
     } catch (error) {
       throw error;
     }
@@ -74,6 +84,7 @@ export default class FormationManager {
     sql += ` where id = ?`;
     sqlValues.push(id);
     const [res] = await client.query(sql, sqlValues);
-    return res.affectedRows;
+    const formations = await FormationManager.getUserFormations(props.userId);
+    return { affectedRows: res.affectedRows, formations };
   }
 }

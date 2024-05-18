@@ -1,6 +1,10 @@
-import { Component, Input } from '@angular/core';
-import { Mentor } from '../../../../../shared/models/user';
+import { Component, DestroyRef, Input, inject } from '@angular/core';
+import { Mentor, Student } from '../../../../../shared/models/user';
 import { Skill } from '../../../../../shared/models/chip';
+import { MentorService } from '../../../../../shared/services/mentor.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ProfilMentorComponent } from '../../../pages/profil-mentor/profil-mentor.component';
+import { UserService } from '../../../../../user.service';
 
 @Component({
   selector: 'app-card-infos',
@@ -12,10 +16,26 @@ export class CardInfosComponent {
   @Input() chips!: Skill[];
   editFormApropoVisible = false;
 
+  mentorService = inject(MentorService);
+  userService = inject(UserService);
+  destroyRef = inject(DestroyRef);
+
   openEditFormApropos() {
     this.editFormApropoVisible = true;
   }
   closeEditFormApropos() {
     this.editFormApropoVisible = false;
+  }
+
+  updateProfil(newProfil: { profil: Mentor | Student; skills: Skill[] }) {
+    console.log('profil', newProfil.profil);
+    this.mentorService
+      .updateMentorProfil(newProfil.profil)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+    this.userService
+      .updateMentorSkills(newProfil.skills)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 }

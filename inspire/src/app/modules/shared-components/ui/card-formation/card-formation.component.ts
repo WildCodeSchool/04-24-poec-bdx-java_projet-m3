@@ -27,8 +27,13 @@ export class CardFormationComponent {
   showPopUpDelete() {
     this.popupDeleteVisible = true;
   }
+
+  editForm(formation: Formation) {
+    this.userService.updateFormationMentor(formation).subscribe();
+    this.isVisibleFormEditCourse = false;
+  }
   deleteFormation() {
     const formationId = this.formation.id;
-    this.userService.deleteFormation(formationId).subscribe();
+    this.userService.deleteFormationMentor(formationId as number).subscribe();
   }
 }

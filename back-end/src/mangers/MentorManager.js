@@ -67,16 +67,18 @@ export default class MentorManager {
     }
   }
 
-  static async update(id, props) {
+  static async update(userId, props) {
     let sql = `UPDATE mentors set`;
     const sqlValues = [];
     for (const [key, value] of Object.entries(props)) {
       sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
       sqlValues.push(value);
     }
-    sql += ` where id = ?`;
-    sqlValues.push(id);
+    sql += ` where userId = ?`;
+    sqlValues.push(userId);
     const [res] = await client.query(sql, sqlValues);
-    return res.affectedRows;
+    const profil = await MentorManager.read(userId);
+    console.log(profil);
+    return { affectedRows: res.affectedRows, profil, success: true };
   }
 }

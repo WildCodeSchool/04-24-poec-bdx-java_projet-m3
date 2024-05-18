@@ -8,6 +8,13 @@ import {
   isStudent,
   isStudentLog,
 } from './shared/auth.guard';
+import {
+  mentorExperiencesResolver,
+  mentorFormationsResolver,
+  mentorLanguagesResolver,
+  mentorProfilResolver,
+  mentorSkillsResolver,
+} from './shared/resolvers/mentor.resolver';
 
 export const routes: Routes = [
   {
@@ -31,6 +38,13 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./modules/mentor/mentor.module').then((m) => m.MentorModule),
     canActivate: [isConnected, isMentor],
+    resolve: {
+      languages: mentorLanguagesResolver,
+      experiences: mentorExperiencesResolver,
+      formations: mentorFormationsResolver,
+      skills: mentorSkillsResolver,
+      profil: mentorProfilResolver,
+    },
   },
 
   {
