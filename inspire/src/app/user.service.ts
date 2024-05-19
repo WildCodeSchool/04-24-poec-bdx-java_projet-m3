@@ -152,11 +152,6 @@ export class UserService {
     return this.http.get<Skill[]>(`${this.BASE_URL}/skill/skills`);
   }
 
-  // `a corriger
-
-  // `a corriger
-
-  // `a corriger
   deleteExperience(experienceId: any): Observable<any> {
     return this.http.delete<any>(
       `${this.BASE_URL}/experience/experiences/${experienceId}/${
@@ -267,7 +262,7 @@ export class UserService {
       );
   }
 
-  // CRUD Skill
+  // CRUD Skill for active mentor
   getMentorSkills() {
     return this.http
       .get<Skill[]>(
@@ -287,6 +282,12 @@ export class UserService {
         skills
       )
       .pipe(tap((result) => this.activeMentorSkills$.next(result.skills)));
+  }
+
+  getMentorSkillsById(userId: number) {
+    return this.http.get<Skill[]>(
+      environment.BASE_URL + '/skill/skills/user/' + userId
+    );
   }
 
   // CRUD Experience

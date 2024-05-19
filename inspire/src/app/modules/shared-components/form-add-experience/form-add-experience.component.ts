@@ -34,16 +34,9 @@ export class FormAddExperienceComponent {
 
   destroyedRef = inject(DestroyRef);
 
-  constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    private userStore: UserStoreService
-  ) {}
+  constructor(private fb: FormBuilder) {}
 
   onSubmit() {
-    // console.log(this.experienceForm.value);
-    // const user = this.userStore.getUserConnected$().value as User;
-
     const experience: Experience = {
       title: this.experienceForm.value.title as string,
       company: this.experienceForm.value.company as string,
@@ -52,13 +45,8 @@ export class FormAddExperienceComponent {
       city: this.experienceForm.value.city as string,
       country: this.experienceForm.value.country as string,
     } as Experience;
-    console.log('formation form ', experience);
 
     this.onExperienceAdd.emit(experience);
-    // this.userService
-    //   .addMentorExperience(experience)
-    //   .pipe(takeUntilDestroyed(this.destroyedRef))
-    //   .subscribe();
   }
 
   cancel() {

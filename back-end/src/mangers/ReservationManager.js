@@ -14,55 +14,149 @@ export default class ReservationManager {
     }
   }
 
-  async getUserReservations(userId) {
+  async getUserReservations(userId, perPage, offset) {
     try {
-      const [reservations] = await this.database.query(
-        `SELECT r.subject , s.dateTime, s.visio, m.firstname , m.lastname, m.imgUrl, m.title FROM reservations as r
-         join slots as s on s.id = slotId
-         join mentors as m on s.mentorId = m.id
-         where r.userId = ?`,
-        [userId]
-      );
-      return reservations;
+      let timeNow = new Date();
+      timeNow.setHours(timeNow.getHours() - 1);
+      let query = `SELECT  r.subject , s.dateTime, s.visio, m.firstname , m.lastname, 
+      m.imgUrl, m.title , m.id as mentorId,m.userId as userId,s.id as slotId,
+      COUNT(*) OVER() as totalCount FROM reservations as r
+      join slots as s on s.id = slotId
+      join mentors as m on s.mentorId = m.id
+      where r.userId = ? and s.dateTime >= ?
+      order by s.dateTime asc
+      `;
+      let values = [userId, timeNow];
+
+      if (perPage && offset !== undefined) {
+        query += `limit ? offset ?`;
+        values.push(+perPage);
+        values.push(+offset);
+      }
+      const [reservations] = await this.database.query(query, values);
+      console.log(reservations);
+      const total = reservations[0]?.totalCount ?? 0;
+      return { reservations, total };
     } catch (error) {
       throw error;
     }
   }
 
-  async getMentorReservations(mentorId) {
+  async getUserReservationsHistory(userId, perPage, offset) {
     try {
-      let [reservations] = await this.database.query(
-        `SELECT r.subject as subject, sl.dateTime as dateTime, sl.id as slotId, s.firstname as firstname,
-         s.lastname  as lastname, s.userId as studentId, s.imgUrl as imgUrl, sl.visio as visio,
-          s.title as title from reservations as r
-            join slots as sl on sl.id = r.slotId
-            join students as s on s.userId = r.userId       
-            where sl.mentorId = ?`,
-        [mentorId]
-      );
+      let timeNow = new Date();
+      timeNow.setHours(timeNow.getHours() - 1);
+      let query = `SELECT  r.subject , s.dateTime, s.visio, m.firstname , m.lastname, m.imgUrl, 
+      m.title , m.id as mentorId, m.userId as userId, s.id as slotId, 
+      count(*) over() as totalCount FROM reservations as r
+      join slots as s on s.id = slotId
+      join mentors as m on s.mentorId = m.id
+      where r.userId = ? and s.dateTime < ?
+      order by s.dateTime desc
+      `;
+      let values = [userId, timeNow];
+
+      if (perPage && offset !== undefined) {
+        query += `limit ? offset ?`;
+        values.push(+perPage);
+        values.push(+offset);
+      }
+      const [reservations] = await this.database.query(query, values);
+      const total = reservations[0]?.totalCount ?? 0;
+      return { reservations, total };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getMentorReservations(mentorId, perPage, offset) {
+    try {
+      let timeNow = new Date();
+      timeNow.setHours(timeNow.getHours() - 1);
+
+      let query = `SELECT r.subject as subject, sl.dateTime as dateTime, sl.id as slotId, s.firstname as firstname,
+      s.lastname  as lastname, s.id as studentId,s.userId as userId, s.imgUrl as imgUrl, sl.visio as visio,
+       s.title as title, COUNT(*) OVER() as totalCount from reservations as r
+         join slots as sl on sl.id = r.slotId
+         join students as s on s.userId = r.userId       
+         where sl.mentorId = ? and sl.dateTime >= ?
+       order by sl.dateTime asc
+         `;
+      let values = [mentorId, timeNow];
+      if (perPage && offset !== undefined) {
+        query += `limit ? offset ?`;
+        values.push(+perPage);
+        values.push(+offset);
+      }
+      let [reservations] = await this.database.query(query, values);
+
+      const total = reservations[0]?.totalCount ?? 0;
+
       if (reservations.length) {
         reservations = reservations.map((reservation) => {
           return {
             slotId: +reservation.slotId,
-            userId: +reservation.studentId,
+            studentId: +reservation.studentId,
+            userId: +reservation.userId,
             message: "",
             subject: reservation.subject,
-            slot: {
-              dateTime: reservation.dateTime,
-              mentorId: 0,
-              visio: true,
-            },
-            student: {
-              firstname: reservation.firstname,
-              lastname: reservation.lastname,
-              title: reservation.title,
-              imgUrl: reservation.imgUrl,
-              userId: +reservation.studentId,
-            },
+            dateTime: reservation.dateTime,
+            visio: true,
+
+            firstname: reservation.firstname,
+            lastname: reservation.lastname,
+            title: reservation.title,
+            imgUrl: reservation.imgUrl,
           };
         });
       }
-      return reservations;
+      return { reservations, total };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getMentorReservationsHistory(mentorId, perPage, offset) {
+    try {
+      let timeNow = new Date();
+      timeNow.setHours(timeNow.getHours() - 1);
+
+      let query = `SELECT r.subject as subject, sl.dateTime as dateTime, sl.id as slotId, s.firstname as firstname,
+      s.lastname  as lastname, s.id as studentId, s.userId as userId, s.imgUrl as imgUrl, sl.visio as visio,
+       s.title as title, COUNT(*) OVER() as totalCount from reservations as r
+         join slots as sl on sl.id = r.slotId
+         join students as s on s.userId = r.userId       
+         where sl.mentorId = ? and sl.dateTime < ?
+       order by sl.dateTime desc
+         `;
+      let values = [mentorId, timeNow];
+      if (perPage && offset !== undefined) {
+        query += `limit ? offset ?`;
+        values.push(+perPage);
+        values.push(+offset);
+      }
+      let [reservations] = await this.database.query(query, values);
+
+      const total = reservations[0]?.totalCount ?? 0;
+
+      if (reservations.length) {
+        reservations = reservations.map((reservation) => {
+          return {
+            slotId: +reservation.slotId,
+            studentId: +reservation.studentId,
+            userId: +reservation.userId,
+            message: "",
+            subject: reservation.subject,
+            dateTime: reservation.dateTime,
+            visio: true,
+            firstname: reservation.firstname,
+            lastname: reservation.lastname,
+            title: reservation.title,
+            imgUrl: reservation.imgUrl,
+          };
+        });
+      }
+      return { reservations, total };
     } catch (error) {
       throw error;
     }
