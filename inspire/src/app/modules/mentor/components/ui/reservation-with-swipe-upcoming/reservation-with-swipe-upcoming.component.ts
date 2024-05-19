@@ -28,10 +28,13 @@ export class ReservationWithSwipeComponentUpcoming
   offsetRight = 0;
   showAction = false;
   modalVisible: boolean = false;
+  newNote: string = 'RAS';
 
   destroyRef = inject(DestroyRef);
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.newNote = this.reservation.message || 'RAS';
+  }
 
   ngAfterViewInit(): void {
     fromEvent<TouchEvent>(this.elementRef.nativeElement, 'touchstart')
@@ -94,5 +97,9 @@ export class ReservationWithSwipeComponentUpcoming
 
   cancel() {
     this.modalVisible = false;
+  }
+
+  updateReservation() {
+    this.reservation.message = this.newNote;
   }
 }

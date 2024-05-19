@@ -10,18 +10,21 @@ import { Observable, map } from 'rxjs';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-  reservations$!: Observable<reservationForMentorDTO[]>;
-  reservationsHistory$!: Observable<reservationForMentorDTO[]>;
+  reservations$!: Observable<{
+    reservations: reservationForMentorDTO[];
+    total: number;
+  }>;
+  reservationsHistory$!: Observable<{
+    reservations: reservationForMentorDTO[];
+    total: number;
+  }>;
 
   reservationService = inject(ReservationService);
   activeMentor$ = inject(MentorService).activeMentorProfil$;
 
   ngOnInit(): void {
-    this.reservations$ = this.reservationService
-      .getMentorReservationList(1, 3, 0)
-      .pipe(map((res) => res.reservations));
-    this.reservationsHistory$ = this.reservationService
-      .getMentorReservationHistoryList(1, 3, 0)
-      .pipe(map((res) => res.reservations));
+    this.reservations$ = this.reservationService.activeMentorReservations$;
+    this.reservationsHistory$ =
+      this.reservationService.activeMentorReservationsHistory$;
   }
 }

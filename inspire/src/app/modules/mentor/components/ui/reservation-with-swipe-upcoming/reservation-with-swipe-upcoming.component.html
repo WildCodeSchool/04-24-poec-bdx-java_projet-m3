@@ -26,7 +26,7 @@
     </div>
 
     <div class="action" *ngIf="!isHistory">
-      <button (click)="showModalNote()">No</button>
+      <button (click)="showModalNote()">Annuler</button>
     </div>
     <div class="action" *ngIf="isHistory">
       <button (click)="showModalNote()">
@@ -52,6 +52,7 @@
     <h3>Vous avez assisté {{ reservation.firstname | titlecase }}</h3>
     <h4>Le {{ reservation.dateTime | date : "short" }}</h4>
     <h3>Notez cette intervention</h3>
+    <input name="Note" id="note" [(ngModel)]="newNote" />
 
     <div class="control">
       <app-button
@@ -59,7 +60,10 @@
         [variant]="'pink'"
         (onSubmit)="cancel()"
       ></app-button>
-      <app-button [text]="'Valider'"></app-button>
+      <app-button
+        [text]="'Valider'"
+        (onSubmit)="updateReservation()"
+      ></app-button>
     </div>
   </div>
   <div class="modal-note" *ngIf="!isHistory">
