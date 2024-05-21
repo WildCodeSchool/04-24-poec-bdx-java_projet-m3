@@ -41,9 +41,12 @@ export default class FormationController {
 
   static async delete(req, res) {
     try {
-      const { formationId } = req.params;
+      const { formationId, userId } = req.params;
 
-      const result = await FormationManager.deleteFormation(formationId);
+      const result = await FormationManager.deleteFormation(
+        formationId,
+        userId
+      );
       res.status(202).json({ ...result });
     } catch (error) {
       res.status(401).json({ message: `Demande refusée: ${error.message}` });
@@ -58,7 +61,7 @@ export default class FormationController {
         formationId,
         props
       );
-      res.status(202).json({ affectedRows });
+      res.status(202).json({ ...affectedRows, success: true });
     } catch (error) {
       res
         .status(401)

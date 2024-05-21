@@ -22,15 +22,18 @@ export class CardFormationComponent {
 
   hideEditForm() {
     this.isVisibleFormEditCourse = false;
-    console.log('called');
   }
 
   showPopUpDelete() {
     this.popupDeleteVisible = true;
   }
+
+  editForm(formation: Formation) {
+    this.userService.updateFormationMentor(formation).subscribe();
+    this.isVisibleFormEditCourse = false;
+  }
   deleteFormation() {
     const formationId = this.formation.id;
-    console.log(formationId, 'coucou');
-    this.userService.deleteFormation(formationId).subscribe();
+    this.userService.deleteFormationMentor(formationId as number).subscribe();
   }
 }

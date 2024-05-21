@@ -1,22 +1,28 @@
-<div class="profil-mentor" *ngIf="activeMentor$ | async as mentor">
+<div class="profil-mentor">
   <div class="main">
-    <app-card-infos
-      [mentor]="mentor.profil"
-      [chips]="mentor.skills"
-    ></app-card-infos>
+    <div *ngIf="profil$ | async as profil">
+      <app-card-infos
+        *ngIf="skills$ | async as skills"
+        [chips]="skills"
+        [mentor]="profil"
+      ></app-card-infos>
+    </div>
     <app-list-experience
+      *ngIf="experiences$ | async as experiences"
+      [experiences]="experiences"
       [title]="'Mes expériences'"
-      [experiences]="mentor.experiences"
     ></app-list-experience>
   </div>
   <div class="side-left">
     <app-list-formation
+      *ngIf="formations$ | async as formations"
+      [formations]="formations"
       [title]="'Mes formations'"
-      [formations]="mentor.formations"
     ></app-list-formation>
     <app-list-language
+      *ngIf="languages$ | async as languages"
+      [languages]="languages"
       [title]="'Mes langues'"
-      [languages]="mentor.languages"
     ></app-list-language>
   </div>
 </div>

@@ -58,6 +58,18 @@ export default class SkillsController {
     }
   }
 
+  async editSkillsList(req, res) {
+    const { userId } = req.params;
+    const data = req.body;
+
+    try {
+      const result = await this.skillsManager.editSkillsList(userId, data);
+      res.json(result);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  }
+
   async deleteSkill(req, res) {
     try {
       const { skillId } = req.params;

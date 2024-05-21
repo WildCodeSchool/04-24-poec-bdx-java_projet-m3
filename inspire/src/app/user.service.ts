@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, first, map, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, first, map, switchMap, tap } from 'rxjs';
 import { Mentor, Student, User } from './shared/models/user';
 import { UserStoreService } from './shared/services/stores/user-store.service';
 import { Router } from '@angular/router';
@@ -8,6 +8,8 @@ import { Skill } from './shared/models/chip';
 import { Language } from './shared/models/language';
 import { Experience } from './shared/models/experience';
 import { Formation } from './shared/models/formation';
+import { MentorService } from './shared/services/mentor.service';
+import { environment } from '../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +19,20 @@ export class UserService {
   private router = inject(Router);
   private http = inject(HttpClient);
   private userStore = inject(UserStoreService);
+
+  activeMentorFormations$: BehaviorSubject<Formation[]> = new BehaviorSubject(
+    [] as Formation[]
+  );
+  activeMentorExperiences$: BehaviorSubject<Experience[]> = new BehaviorSubject(
+    [] as Experience[]
+  );
+  activeMentorLanguages$: BehaviorSubject<Language[]> = new BehaviorSubject(
+    [] as Language[]
+  );
+  activeMentorSkills$: BehaviorSubject<Skill[]> = new BehaviorSubject(
+    [] as Skill[]
+  );
+
   constructor() {}
 
   private createUser(user: User): Observable<User> {
@@ -34,10 +50,8 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
-      tap((data) => console.log(data)),
       switchMap((createdUser: User) => {
         const userId = createdUser.userId || 0;
-        console.log(createdUser);
 
         const student: Student = new Student(
           userId,
@@ -70,7 +84,6 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
-      tap((data) => console.log(data)),
       switchMap((createdUser: User) => {
         const userId = createdUser.userId;
         const mentor: Mentor = new Mentor(
@@ -96,31 +109,37 @@ export class UserService {
     );
   }
 
-  login(email: any, password: any): Observable<User | null> {
-    return (
-      this.http
-        // .get<User[]>(`${this.BASE_URL}/users?email=${email}&password=${password}`)
-        .get<User>(`${this.BASE_URL}/users/${email}/${password}`)
-
-        .pipe(
-          tap((ele) => console.log(ele)),
-          map((users) => {
-            if (users) {
-              const user = users;
-              this.userStore.setUserConnected(user);
-              const userString = JSON.stringify(user);
-              window.localStorage.setItem('user', userString);
-              console.log(user);
-              if (user.role === 'mentor') this.router.navigate(['/mentor']);
-              if (user.role === 'student') this.router.navigate(['/student']);
-              return user;
-            } else {
-              alert('Identifiants incorrects');
-              return null;
-            }
-          })
-        )
+  getUserByToken(token: string): Observable<User> {
+    return this.http.post<User>(`${this.BASE_URL}/users/me`, { token }).pipe(
+      map((user) => {
+        const userString = JSON.stringify(user);
+        window.localStorage.setItem('user', userString);
+        this.userStore.setUserConnected(user);
+        return user;
+      })
     );
+  }
+
+  login(email: any, password: any): Observable<User | null> {
+    return this.http
+      .get<User>(`${this.BASE_URL}/users/${email}/${password}`)
+
+      .pipe(
+        map((users) => {
+          if (users) {
+            const user = users;
+            this.userStore.setUserConnected(user);
+            const userString = JSON.stringify(user);
+            window.localStorage.setItem('user', userString);
+            if (user.role === 'mentor') this.router.navigate(['/mentor']);
+            if (user.role === 'student') this.router.navigate(['/student']);
+            return user;
+          } else {
+            alert('Identifiants incorrects');
+            return null;
+          }
+        })
+      );
   }
 
   logout() {
@@ -133,38 +152,195 @@ export class UserService {
     return this.http.get<Skill[]>(`${this.BASE_URL}/skill/skills`);
   }
 
+  deleteExperience(experienceId: any): Observable<any> {
+    return this.http.delete<any>(
+      `${this.BASE_URL}/experience/experiences/${experienceId}/${
+        this.userStore.getUserConnected$().value?.id
+      }`,
+      experienceId
+    );
+  }
+
+  // CRUD languages
+
   getListLanguages() {
     return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
   }
 
-  editExperience(experience: any, experienceId: any): Observable<Experience> {
-    return this.http.put<Experience>(
-      `${this.BASE_URL}/experience/experiences/${experienceId}`,
-      experience
+  getMentorLanguages() {
+    return this.http
+      .get<Language[]>(
+        environment.BASE_URL +
+          '/language/languages/user/' +
+          this.userStore.getUserConnected$().value?.id
+      )
+      .pipe(tap((languages) => this.activeMentorLanguages$.next(languages)));
+  }
+
+  updateMentorLanguages(languages: Language[]) {
+    return this.http
+      .post<{ success: boolean; message: string; languages: Language[] }>(
+        environment.BASE_URL +
+          '/language/languages/user/' +
+          this.userStore.getUserConnected$().value?.id,
+        languages
+      )
+      .pipe(
+        tap((result) => this.activeMentorLanguages$.next(result.languages))
+      );
+  }
+
+  // CRUD Formation
+  getMentorFormations() {
+    return this.http
+      .get<Formation[]>(
+        environment.BASE_URL +
+          '/formation/formations/user/' +
+          this.userStore.getUserConnected$().value?.id
+      )
+      .pipe(tap((formations) => this.activeMentorFormations$.next(formations)));
+  }
+
+  addFormationMentor(formation: Formation): Observable<{
+    success: string;
+    message: string;
+    formations: Formation[];
+  }> {
+    return this.http
+      .post<{
+        success: string;
+        message: string;
+        formations: Formation[];
+      }>(`${environment.BASE_URL}/formation/formations/`, formation)
+      .pipe(
+        tap((response) =>
+          this.activeMentorFormations$.next(response.formations)
+        )
+      );
+  }
+
+  updateFormationMentor(formation: Formation): Observable<{
+    success: string;
+    affectedRows: number;
+    formations: Formation[];
+  }> {
+    return this.http
+      .put<{
+        success: string;
+        affectedRows: number;
+        formations: Formation[];
+      }>(
+        `${environment.BASE_URL}/formation/formations/${formation.id}`,
+        formation
+      )
+      .pipe(
+        tap((response) =>
+          this.activeMentorFormations$.next(response.formations)
+        )
+      );
+  }
+
+  deleteFormationMentor(formationId: number): Observable<{
+    success: string;
+    message: string;
+    formations: Formation[];
+  }> {
+    return this.http
+      .delete<{
+        success: string;
+        message: string;
+        formations: Formation[];
+      }>(
+        `${environment.BASE_URL}/formation/formations/${formationId}/${
+          this.userStore.getUserConnected$().value?.id
+        }`
+      )
+      .pipe(
+        tap((response) =>
+          this.activeMentorFormations$.next(response.formations)
+        )
+      );
+  }
+
+  // CRUD Skill for active mentor
+  getMentorSkills() {
+    return this.http
+      .get<Skill[]>(
+        environment.BASE_URL +
+          '/skill/skills/user/' +
+          this.userStore.getUserConnected$().value?.id
+      )
+      .pipe(tap((skills) => this.activeMentorSkills$.next(skills)));
+  }
+
+  updateMentorSkills(skills: Skill[]) {
+    return this.http
+      .post<{ success: boolean; message: string; skills: Skill[] }>(
+        environment.BASE_URL +
+          '/skill/skills/user/' +
+          this.userStore.getUserConnected$().value?.id,
+        skills
+      )
+      .pipe(tap((result) => this.activeMentorSkills$.next(result.skills)));
+  }
+
+  getMentorSkillsById(userId: number) {
+    return this.http.get<Skill[]>(
+      environment.BASE_URL + '/skill/skills/user/' + userId
     );
   }
 
-  editFormation(
-    formation: any,
-    formationId: any
-  ): Observable<{ affectedRows: number }> {
-    return this.http.put<{ affectedRows: number }>(
-      `${this.BASE_URL}/formation/formations/${formationId}`,
-      formation
-    );
+  // CRUD Experience
+  getMentorExperiences() {
+    return this.http
+      .get<Experience[]>(
+        environment.BASE_URL +
+          '/experience/experiences/user/' +
+          this.userStore.getUserConnected$().value?.id
+      )
+      .pipe(
+        tap((experiences) => this.activeMentorExperiences$.next(experiences))
+      );
   }
 
-  deleteFormation(formationId: any): Observable<any> {
-    return this.http.delete<any>(
-      `${this.BASE_URL}/formation/formations/${formationId}`,
-      formationId
-    );
+  addMentorExperience(experience: Experience): Observable<{
+    message: string;
+    success: boolean;
+    experiences: Experience[];
+  }> {
+    return this.http
+      .post<{
+        message: string;
+        success: boolean;
+        experiences: Experience[];
+      }>(`${environment.BASE_URL}/experience/experiences/`, {
+        ...experience,
+        userId: this.userStore.getUserConnected$().value?.id,
+      })
+      .pipe(
+        tap((response) =>
+          this.activeMentorExperiences$.next(response.experiences)
+        )
+      );
   }
 
-  deleteExperience(experienceId: any): Observable<any> {
-    return this.http.delete<any>(
-      `${this.BASE_URL}/experience/experiences/${experienceId}`,
-      experienceId
-    );
+  editExperience(
+    experience: Experience,
+    experienceId: number
+  ): Observable<{
+    affectedRows: number;
+    experiences: Experience[];
+  }> {
+    return this.http
+      .put<{
+        affectedRows: number;
+        experiences: Experience[];
+      }>(`${this.BASE_URL}/experience/experiences/${experienceId}`, {
+        ...experience,
+        userId: this.userStore.getUserConnected$().value?.id,
+      })
+      .pipe(
+        tap((result) => this.activeMentorExperiences$.next(result.experiences))
+      );
   }
 }

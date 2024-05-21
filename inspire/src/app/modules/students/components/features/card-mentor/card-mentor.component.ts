@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { Mentor } from '../../../../../shared/models/user';
 import { Skill } from '../../../../../shared/models/chip';
-import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Observable } from 'rxjs';
 import { FavoritesService } from '../../../shared/favorites.service';
 import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
+import { UserService } from '../../../../../user.service';
 
 @Component({
   selector: 'app-card-mentor',
@@ -12,9 +12,7 @@ import { UserStoreService } from '../../../../../shared/services/stores/user-sto
   styleUrls: ['./card-mentor.component.scss']
 })
 export class CardMentorComponent implements OnInit {
-
-  @Input()
-  mentor!: Mentor;
+  @Input() mentor!: Mentor;
 
   isFavorite: boolean = false;
 
@@ -24,10 +22,11 @@ export class CardMentorComponent implements OnInit {
   ) {}
 
   skillList$?: Observable<Skill[]>;
-  mentorService = inject(MentorService);
+  
+userService = inject(UserService);
 
   ngOnInit(): void {
-    this.skillList$ = this.mentorService.getMentorSkillsById(this.mentor.userId);
+    this.skillList$ = this.userService.getMentorSkillsById(this.mentor.userId);
     console.log("mentor:", this.mentor);
     this.checkIfFavorite();
   }

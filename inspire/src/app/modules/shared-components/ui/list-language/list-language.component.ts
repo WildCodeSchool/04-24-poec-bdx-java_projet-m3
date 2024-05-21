@@ -2,10 +2,6 @@ import { Component, Input, inject } from '@angular/core';
 import { Language } from '../../../../shared/models/language';
 import { MentorService } from '../../../../shared/services/mentor.service';
 import { Subscription } from 'rxjs';
-type responseLanguageUpdate = {
-  success: string;
-  message: string;
-};
 
 @Component({
   selector: 'app-list-language',
@@ -28,21 +24,15 @@ export class ListLanguageComponent {
     this.isModalVisible = false;
   }
 
-  updateListLanguages(newLanguageList: Language[]) {
-    console.log('request sent to update languages ', newLanguageList);
-    this.mentorSubscription = this.mentorService
-      .updateMentorLanguagesList(newLanguageList)
-      .subscribe((res) => {
-        if (res.success) {
-          this.mentorService.activeMentor$.next({
-            ...this.mentorService.activeMentor$.value,
-            languages: newLanguageList,
-          });
-        }
-
-        this.mentorSubscription.unsubscribe();
-
-        this.hideEditModal();
-      });
-  }
+  // updateListLanguages(newLanguageList: Language[]) {
+  //   this.mentorSubscription = this.mentorService
+  //     .updateMentorLanguagesList(newLanguageList)
+  //     .subscribe((res) => {
+  //       if (res.success) {
+  //         this.mentorService.activeMentorLanguages$.next(res.languages);
+  //       }
+  //       this.mentorSubscription.unsubscribe();
+  //       this.hideEditModal();
+  //     });
+  // }
 }

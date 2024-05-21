@@ -17,7 +17,6 @@ export class ModalValidateComponent {
 
   deleteInfo() {
     this.onDelete.emit();
-    console.log('delete');
   }
 
   showDialog() {
@@ -29,14 +28,8 @@ export class ModalValidateComponent {
     this.onCancel.emit();
   }
 
-  validate() {
-    this.onValidate.emit();
-    console.log('validate');
-  }
-
   cancel() {
     this.onCancel.emit();
-    console.log('validate');
   }
 
   focusValidate() {

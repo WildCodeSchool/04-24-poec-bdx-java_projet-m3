@@ -59,12 +59,10 @@ export class ModalEditLanguagesComponent implements OnInit, OnDestroy {
 
   validate() {
     this.onValidate.emit(this.selectedLanguages);
-    console.log('validate');
   }
 
   cancel() {
     this.onCancel.emit();
-    console.log('validate');
   }
 
   focusValidate() {

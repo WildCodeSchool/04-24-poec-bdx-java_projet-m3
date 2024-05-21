@@ -28,7 +28,6 @@ export default class SkillsManager {
 
   async addSkill(skillName) {
     try {
-      console.log("skill", skillName);
       const [skill] = await this.database.query(
         `SELECT * FROM skills where name = ? `,
         [skillName]
@@ -43,6 +42,35 @@ export default class SkillsManager {
       ]);
 
       return { success: true, message: "Skill added successfully" };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async editSkillsList(userId, skills) {
+    try {
+      // delete all languages for specific user
+
+      const deleteUserSkills = await this.database.query(
+        `delete from user_skills where userId = ?`,
+        [userId]
+      );
+      const resultAddSkills = await Promise.all(
+        skills.map(async (skill) => {
+          const [res] = await this.database.query(
+            `INSERT INTO user_skills (userId, skillId) VALUES (?, ? )`,
+            [userId, skill.id]
+          );
+          return res.insertId;
+        })
+      );
+      const skillsList = await this.getUserSkills(userId);
+
+      return {
+        success: true,
+        message: "skills added successfully",
+        skills: skillsList,
+      };
     } catch (error) {
       throw error;
     }
@@ -96,8 +124,6 @@ export default class SkillsManager {
 
   async updateSkill(skillId, newName) {
     try {
-      console.log("name ", newName);
-      // Mettre à jour le nom du skill dans la table des skills
       await this.database.query(`UPDATE skills SET name = ? WHERE id = ?`, [
         newName,
         skillId,

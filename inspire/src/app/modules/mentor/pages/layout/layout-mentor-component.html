@@ -1,8 +1,8 @@
-<ng-container *ngIf="mentor$ | async as mentor">
+<ng-container *ngIf="mentorProfil$ | async as mentor">
   <div class="container-general-layout">
     <div class="container-layout">
       <div class="header-container">
-        <h2>Bonjour {{mentor.profil.firstname}}</h2>
+        <h2>Bonjour {{mentor.firstname}}</h2>
         <p>Votre espace mentor de la Wild Code School</p>
       </div>
       <div class="container-main">

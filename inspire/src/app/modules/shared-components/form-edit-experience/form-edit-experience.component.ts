@@ -1,7 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import { Experience } from '../../../shared/models/experience';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../../user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-form-edit-experience',
@@ -10,14 +19,18 @@ import { UserService } from '../../../user.service';
 })
 export class FormEditExperienceComponent implements OnInit {
   @Input() experience!: Experience;
+  @Output() destroy = new EventEmitter();
   experienceForm!: FormGroup<any>;
-  @Input() destroy!: () => void;
+
+  destroyRef = inject(DestroyRef);
 
   onSubmit() {
     const experienceId = this.experience.id;
     this.userService
-      .editExperience(this.experienceForm.value, experienceId)
+      .editExperience(this.experienceForm.value, experienceId as number)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
+    this.destroy.emit();
   }
 
   constructor(private fb: FormBuilder, private userService: UserService) {}
@@ -32,11 +45,11 @@ export class FormEditExperienceComponent implements OnInit {
       company: [this.experience.company],
       dateBegin: [formattedDate],
       dateEnd: [formattedEndDate],
+      city: [this.experience.city],
+      country: [this.experience.country],
     });
   }
   cancel() {
-    console.log('cancel run');
-
-    this.destroy();
+    this.destroy.emit();
   }
 }

@@ -21,6 +21,7 @@ import { DialogModule } from 'primeng/dialog';
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarComponent } from './components/features/calendar/calendar.component';
+import { ReservationWithSwipeComponentUpcoming } from './components/ui/reservation-with-swipe-upcoming/reservation-with-swipe-upcoming.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CalendarComponent } from './components/features/calendar/calendar.compo
     ReservationWithSwipeComponent,
     AgendaComponent,
     CalendarComponent,
+    ReservationWithSwipeComponentUpcoming,
   ],
   imports: [
     CommonModule,

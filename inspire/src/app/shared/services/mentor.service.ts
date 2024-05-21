@@ -1,20 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import {
-  BehaviorSubject,
-  forkJoin,
-  of,
-  switchMap,
-  tap,
-} from 'rxjs';
-import { Mentor, MentorFullProfil } from '../models/user';
-import { Skill } from '../models/chip';
-import { Language } from '../models/language';
-import { Formation } from '../models/formation';
-import { Experience } from '../models/experience';
+import { BehaviorSubject, tap } from 'rxjs';
+import { Mentor } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
-
+import { reservationForMentorDTO } from '../models/reservation';
 
 @Injectable({
   providedIn: 'root',
@@ -25,90 +15,47 @@ export class MentorService {
 
   constructor() {}
 
-  activeMentor$: BehaviorSubject<MentorFullProfil> = new BehaviorSubject(
-    {} as MentorFullProfil
+  activeMentorProfil$: BehaviorSubject<Mentor> = new BehaviorSubject<Mentor>(
+    {} as Mentor
   );
+  mentorsReservations$: BehaviorSubject<reservationForMentorDTO[]> =
+    new BehaviorSubject<reservationForMentorDTO[]>([]);
 
-  getMentorById() {
-    console.log('connected user value', this.userConnected.value);
-
-    return this.httpClient
-      .get<Mentor>(
-        environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
-      )
-      .pipe(
-        switchMap((ele) => {
-          const listSkills = this.getMentorSkills();
-          const listLanguages = this.getMentorLanguages();
-          const listFormations = this.getMentorFormations();
-          const listExperiences = this.getMentorExperiences();
-          return forkJoin({
-            profil: of(ele),
-            languages: listLanguages,
-            skills: listSkills,
-            formations: listFormations,
-            experiences: listExperiences,
-          });
-        })
-      )
-      .pipe(tap((fullProfil) => this.activeMentor$.next(fullProfil)));
+  getMentorProfil() {
+    return this.httpClient.get<Mentor>(
+      environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
+    );
   }
 
-  getMentorSkills() {
+  updateMentorProfil(profil: Mentor) {
     return this.httpClient
-      .get<Skill[]>(
+      .put<{ affectedRow: number; profil: Mentor; success: boolean }>(
         environment.BASE_URL +
-          '/skill/skills/user/' +
-          this.userConnected.value?.id
-      )
-      .pipe(tap((ele) => console.log('skills', ele)));
-  }
-
-  getMentorSkillsById(userId: number) {
-    return this.httpClient
-      .get<Skill[]>(`${
-        environment.BASE_URL}/skill/skills/user/${userId}`
-      )
-      .pipe(tap((ele) => console.log('skills', ele)));
-  }
-
-  getMentorLanguages() {
-    return this.httpClient
-      .get<Language[]>(
-        environment.BASE_URL +
-          '/language/languages/user/' +
-          this.userConnected.value?.id
-      )
-      .pipe(tap((ele) => console.log('languages', ele)));
-  }
-
-  getMentorFormations() {
-    return this.httpClient
-      .get<Formation[]>(
-        environment.BASE_URL +
-          '/formation/formations/user/' +
-          this.userConnected.value?.id
-      )
-      .pipe(tap((ele) => console.log('languages', ele)));
-  }
-  getMentorExperiences() {
-    return this.httpClient
-      .get<Experience[]>(
-        environment.BASE_URL +
-          '/experience/experiences/user/' +
-          this.userConnected.value?.id
-      )
-      .pipe(tap((ele) => console.log('les experiences', ele)));
-  }
-
-  updateMentorLanguagesList(languages: Language[]) {
-    return this.httpClient
-      .post<{ success: boolean; message: string }>(
-        environment.BASE_URL +
-          '/language/languages/user/' +
+          '/mentor/mentors/' +
           this.userConnected.value?.id,
-        languages
+        { ...profil, userId: this.userConnected.value?.id }
       )
-      .pipe(tap((ele) => console.log('languages new list', ele)));
+      .pipe(tap((result) => this.activeMentorProfil$.next(result.profil)));
+  }
+
+  getMentorsList() {
+    return this.httpClient.get<Mentor[]>(
+      environment.BASE_URL + '/mentor/mentors'
+    );
+  }
+
+  getMentorListPagination(perPage: number, offset: number) {
+    return this.httpClient.get<Mentor[]>(
+      environment.BASE_URL +
+        `/mentor/mentors?perPage=${perPage}&offset=${offset}`
+    );
+  }
+
+  getMentorReservationsList() {
+    return this.httpClient.get<reservationForMentorDTO[]>(
+      environment.BASE_URL +
+        '/reservation/reservations/mentor' +
+        this.userConnected.value?.id
+    );
   }
 }
