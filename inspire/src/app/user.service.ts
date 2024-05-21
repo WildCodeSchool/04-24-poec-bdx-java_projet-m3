@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { DestroyRef, Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, first, map, switchMap, tap } from 'rxjs';
 import { Mentor, Student, User } from './shared/models/user';
 import { UserStoreService } from './shared/services/stores/user-store.service';
@@ -10,6 +10,7 @@ import { Experience } from './shared/models/experience';
 import { Formation } from './shared/models/formation';
 import { MentorService } from './shared/services/mentor.service';
 import { environment } from '../environments/environment.development';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -177,7 +178,9 @@ export class UserService {
       .pipe(tap((languages) => this.activeMentorLanguages$.next(languages)));
   }
 
-  updateMentorLanguages(languages: Language[]) {
+  updateMentorLanguages(languages: Language[], destroyRef: DestroyRef) {
+    console.log('user id', this.userStore.getUserConnected$().value?.id);
+
     return this.http
       .post<{ success: boolean; message: string; languages: Language[] }>(
         environment.BASE_URL +
@@ -186,7 +189,11 @@ export class UserService {
         languages
       )
       .pipe(
-        tap((result) => this.activeMentorLanguages$.next(result.languages))
+        tap((result) => {
+          console.log('response languages', result);
+          this.activeMentorLanguages$.next(result.languages);
+        })
+        //takeUntilDestroyed(destroyRef)
       );
   }
 

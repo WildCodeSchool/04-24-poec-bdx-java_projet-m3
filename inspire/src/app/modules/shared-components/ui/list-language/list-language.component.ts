@@ -1,7 +1,5 @@
 import { Component, Input, inject } from '@angular/core';
 import { Language } from '../../../../shared/models/language';
-import { MentorService } from '../../../../shared/services/mentor.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-language',
@@ -13,9 +11,6 @@ export class ListLanguageComponent {
   @Input() languages!: Language[];
   isModalVisible = false;
 
-  mentorService = inject(MentorService);
-  mentorSubscription!: Subscription;
-
   showEditModal() {
     this.isModalVisible = true;
   }
@@ -23,16 +18,4 @@ export class ListLanguageComponent {
   hideEditModal() {
     this.isModalVisible = false;
   }
-
-  // updateListLanguages(newLanguageList: Language[]) {
-  //   this.mentorSubscription = this.mentorService
-  //     .updateMentorLanguagesList(newLanguageList)
-  //     .subscribe((res) => {
-  //       if (res.success) {
-  //         this.mentorService.activeMentorLanguages$.next(res.languages);
-  //       }
-  //       this.mentorSubscription.unsubscribe();
-  //       this.hideEditModal();
-  //     });
-  // }
 }

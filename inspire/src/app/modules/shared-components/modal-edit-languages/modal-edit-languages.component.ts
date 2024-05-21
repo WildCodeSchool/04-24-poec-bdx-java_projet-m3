@@ -1,5 +1,6 @@
 import {
   Component,
+  DestroyRef,
   EventEmitter,
   Input,
   OnDestroy,
@@ -11,13 +12,15 @@ import { Language } from '../../../shared/models/language';
 import { UserService } from '../../../user.service';
 import { Subscription } from 'rxjs';
 import { MentorService } from '../../../shared/services/mentor.service';
+import { UserStoreService } from '../../../shared/services/stores/user-store.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-modal-edit-languages',
   templateUrl: './modal-edit-languages.component.html',
   styleUrl: './modal-edit-languages.component.scss',
 })
-export class ModalEditLanguagesComponent implements OnInit, OnDestroy {
+export class ModalEditLanguagesComponent implements OnInit {
   @Input() question: string = '';
   @Input() subtitle: string = '';
   @Output() onValidate = new EventEmitter<Language[]>();
@@ -28,6 +31,8 @@ export class ModalEditLanguagesComponent implements OnInit, OnDestroy {
   languages!: Language[];
 
   userService = inject(UserService);
+  userStoreService = inject(UserStoreService);
+  destroyRef = inject(DestroyRef);
 
   userServiceSubscription!: Subscription;
 
@@ -39,13 +44,10 @@ export class ModalEditLanguagesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userServiceSubscription = this.userService
       .getListLanguages()
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((listLanguages) => {
         this.languages = listLanguages;
       });
-  }
-
-  ngOnDestroy(): void {
-    this.userServiceSubscription.unsubscribe();
   }
 
   showDialog() {
@@ -58,6 +60,10 @@ export class ModalEditLanguagesComponent implements OnInit, OnDestroy {
   }
 
   validate() {
+    this.userService
+      .updateMentorLanguages(this.selectedLanguages, this.destroyRef)
+      .subscribe();
+
     this.onValidate.emit(this.selectedLanguages);
   }
 
