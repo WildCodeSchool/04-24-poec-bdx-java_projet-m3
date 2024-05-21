@@ -17,7 +17,7 @@ export default class ReservationManager {
   async getUserReservations(userId, perPage, offset) {
     try {
       let timeNow = new Date();
-      timeNow.setHours(timeNow.getHours() - 1);
+      timeNow.setHours(timeNow.getHours());
       let query = `SELECT  r.subject , s.dateTime, s.visio, m.firstname , m.lastname, 
       m.imgUrl, m.title , m.id as mentorId,m.userId as userId,s.id as slotId,
       COUNT(*) OVER() as totalCount FROM reservations as r
@@ -45,7 +45,7 @@ export default class ReservationManager {
   async getUserReservationsHistory(userId, perPage, offset) {
     try {
       let timeNow = new Date();
-      timeNow.setHours(timeNow.getHours() - 1);
+      timeNow.setHours(timeNow.getHours());
       let query = `SELECT  r.subject , s.dateTime, s.visio, m.firstname , m.lastname, m.imgUrl, 
       m.title , m.id as mentorId, m.userId as userId, s.id as slotId, 
       count(*) over() as totalCount FROM reservations as r
@@ -72,7 +72,7 @@ export default class ReservationManager {
   async getMentorReservations(mentorId, perPage, offset) {
     try {
       let timeNow = new Date();
-      timeNow.setHours(timeNow.getHours() - 1);
+      timeNow.setHours(timeNow.getHours());
 
       let query = `SELECT r.subject as subject, sl.dateTime as dateTime, sl.id as slotId, s.firstname as firstname,
       s.lastname  as lastname, s.id as studentId,s.userId as userId, s.imgUrl as imgUrl, sl.visio as visio,
@@ -119,9 +119,9 @@ export default class ReservationManager {
   async getMentorReservationsHistory(mentorId, perPage, offset) {
     try {
       let timeNow = new Date();
-      timeNow.setHours(timeNow.getHours() - 1);
+      timeNow.setHours(timeNow.getHours());
 
-      let query = `SELECT r.subject as subject, sl.dateTime as dateTime, sl.id as slotId, s.firstname as firstname,
+      let query = `SELECT r.subject as subject, r.id,r.message, sl.dateTime as dateTime, sl.id as slotId, s.firstname as firstname,
       s.lastname  as lastname, s.id as studentId, s.userId as userId, s.imgUrl as imgUrl, sl.visio as visio,
        s.title as title, COUNT(*) OVER() as totalCount from reservations as r
          join slots as sl on sl.id = r.slotId
@@ -142,10 +142,11 @@ export default class ReservationManager {
       if (reservations.length) {
         reservations = reservations.map((reservation) => {
           return {
+            id: +reservation.id,
             slotId: +reservation.slotId,
             studentId: +reservation.studentId,
             userId: +reservation.userId,
-            message: "",
+            message: reservation.message,
             subject: reservation.subject,
             dateTime: reservation.dateTime,
             visio: true,
@@ -210,5 +211,21 @@ export default class ReservationManager {
     sqlValues.push(id);
     const [res] = await this.database.query(sql, sqlValues);
     return res.affectedRows;
+  }
+
+  async updateReservationNote(id, props) {
+    let sql = `UPDATE reservations set`;
+    const sqlValues = [];
+    for (const [key, value] of Object.entries(props)) {
+      if (key !== "id") {
+        sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
+        sqlValues.push(value);
+      }
+    }
+    sql += ` where id = ?`;
+    sqlValues.push(id);
+    const [res] = await this.database.query(sql, sqlValues);
+
+    return { affectedRows: res.affectedRows };
   }
 }

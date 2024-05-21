@@ -1,20 +1,3 @@
-import { Student } from './user';
-
-export class Reservation {
-  subject: string = '';
-  message?: string = '';
-  mentorId: string = '';
-  slotId: string = '';
-}
-
-export class ReservationDTO {
-  id: number = 0;
-  subject: string = '';
-  message?: string = '';
-  mentorId: string = '';
-  slotId: string = '';
-}
-
 export type Slot = {
   dateTime: Date;
   mentorId: number;
@@ -28,7 +11,29 @@ export type SlotDTO = {
   visio: boolean;
 };
 
+export type Reservation = {
+  subject: string;
+  message?: string;
+  mentorId: string;
+  slotId: string;
+};
+
+export type ReservationForStudentDTO = {
+  mentorId: number;
+  slotId: number;
+  userId: number;
+  message: string;
+  subject: string;
+  dateTime: Date;
+  visio: boolean;
+  title: string;
+  firstname: string;
+  lastname: string;
+  imgUrl: string;
+};
+
 export type reservationForMentorDTO = {
+  id: number;
   studentId: number;
   slotId: number;
   userId: number;

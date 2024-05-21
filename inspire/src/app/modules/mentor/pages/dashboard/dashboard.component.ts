@@ -1,6 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { MentorService } from '../../../../shared/services/mentor.service';
 import { reservationForMentorDTO } from '../../../../shared/models/reservation';
+import { ReservationService } from '../../../../shared/services/reservation.service';
+import { MentorService } from '../../../../shared/services/mentor.service';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,9 +10,21 @@ import { reservationForMentorDTO } from '../../../../shared/models/reservation';
   styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent implements OnInit {
-  reservations!: reservationForMentorDTO[];
+  reservations$!: Observable<{
+    reservations: reservationForMentorDTO[];
+    total: number;
+  }>;
+  reservationsHistory$!: Observable<{
+    reservations: reservationForMentorDTO[];
+    total: number;
+  }>;
 
-  mentorService = inject(MentorService);
+  reservationService = inject(ReservationService);
+  activeMentor$ = inject(MentorService).activeMentorProfil$;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.reservations$ = this.reservationService.activeMentorReservations$;
+    this.reservationsHistory$ =
+      this.reservationService.activeMentorReservationsHistory$;
+  }
 }

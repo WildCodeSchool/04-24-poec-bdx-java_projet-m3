@@ -9,4 +9,6 @@ import { reservationForMentorDTO } from '../../../../../shared/models/reservatio
 export class ListReservationHistoryComponent {
   @Input() reservations!: reservationForMentorDTO[];
   @Input() title: string = '';
+  @Input() isHistory: boolean = false;
+  @Input() isStudent: boolean = false;
 }

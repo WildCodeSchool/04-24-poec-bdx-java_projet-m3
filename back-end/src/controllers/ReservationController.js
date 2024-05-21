@@ -141,7 +141,7 @@ export default class ReservationController {
     try {
       const { reservationId } = req.params;
       const prop = req.body;
-      const result = await this.reservationManager.updateReservation(
+      const result = await this.reservationManager.updateReservationNote(
         reservationId,
         prop
       );
