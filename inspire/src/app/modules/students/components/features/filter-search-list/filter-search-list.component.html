@@ -2,7 +2,7 @@
   <div class="top-part">
     <h1>Rechercher un mentor</h1>
     <div class="btn-reset">
-      <button type="button">Réinitialiser</button>
+      <button type="button" (click)="resetFilters()">Réinitialiser</button>
     </div>
   </div>
   <div class="bottom-part">
@@ -41,7 +41,7 @@
       />
     </div>
     <div class="filter-button">
-      <button>Filtrer</button>
+      <button (click)="filterMentorsBySkills()">Filtrer</button>
     </div>
   </div>
 </div>

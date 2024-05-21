@@ -20,7 +20,30 @@ export default class ReservationController {
   async getUserReservations(req, res) {
     try {
       const { userId } = req.params;
-      const result = await this.reservationManager.getUserReservations(userId);
+      const { perPage, offset } = req.query;
+      const result = await this.reservationManager.getUserReservations(
+        userId,
+        perPage,
+        offset
+      );
+      res.json(result);
+    } catch (error) {
+      console.error(error.message);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal Server Error" });
+    }
+  }
+
+  async getUserReservationsHistory(req, res) {
+    try {
+      const { userId } = req.params;
+      const { perPage, offset } = req.query;
+      const result = await this.reservationManager.getUserReservationsHistory(
+        userId,
+        perPage,
+        offset
+      );
       res.json(result);
     } catch (error) {
       console.error(error.message);
@@ -32,9 +55,30 @@ export default class ReservationController {
 
   async getMentorReservations(req, res) {
     try {
+      const { perPage, offset } = req.query;
       const { mentorId } = req.params;
       const result = await this.reservationManager.getMentorReservations(
-        mentorId
+        mentorId,
+        perPage,
+        offset
+      );
+      res.json(result);
+    } catch (error) {
+      console.error(error.message);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal Server Error" });
+    }
+  }
+
+  async getMentorReservationsHistory(req, res) {
+    try {
+      const { perPage, offset } = req.query;
+      const { mentorId } = req.params;
+      const result = await this.reservationManager.getMentorReservationsHistory(
+        mentorId,
+        perPage,
+        offset
       );
       res.json(result);
     } catch (error) {
@@ -97,7 +141,7 @@ export default class ReservationController {
     try {
       const { reservationId } = req.params;
       const prop = req.body;
-      const result = await this.reservationManager.updateReservation(
+      const result = await this.reservationManager.updateReservationNote(
         reservationId,
         prop
       );

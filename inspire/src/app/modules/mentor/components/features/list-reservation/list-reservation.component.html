@@ -10,11 +10,11 @@
   </div>
   <ng-container *ngIf="reservations">
     @for(item of reservations; track $index){
-
-    <app-row-reservation
+    <app-reservation-with-swipe-upcoming
       [reservation]="item"
       [bgColor]="$index % 2 === 0 ? 'transparent' : 'grey'"
-    ></app-row-reservation>
+      [isHistory]="true"
+    ></app-reservation-with-swipe-upcoming>
     }
   </ng-container>
 </div>
