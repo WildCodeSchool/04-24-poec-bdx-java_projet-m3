@@ -11,10 +11,10 @@ import { MentorService } from '../../../shared/services/mentor.service';
 })
 export class FormEditCourseComponent implements OnInit {
   @Input() formation!: Formation;
-  courseForm!: FormGroup<any>;
   @Input() destroy!: () => void;
   @Output()
   formationEmitter = new EventEmitter<Formation>();
+  courseForm!: FormGroup<any>;
 
   onSubmit() {
     const id = this.formation.id;

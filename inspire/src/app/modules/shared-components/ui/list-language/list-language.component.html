@@ -19,6 +19,6 @@
     [visible]="isModalVisible"
     [question]="'Editez vos langues'"
     (onCancel)="isModalVisible = false"
-    (onValidate)="isModalVisible = false"
+    (onValidate)="updateLanguages($event)"
   ></app-modal-edit-languages>
 </ng-container>

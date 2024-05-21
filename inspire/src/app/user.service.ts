@@ -153,15 +153,6 @@ export class UserService {
     return this.http.get<Skill[]>(`${this.BASE_URL}/skill/skills`);
   }
 
-  deleteExperience(experienceId: any): Observable<any> {
-    return this.http.delete<any>(
-      `${this.BASE_URL}/experience/experiences/${experienceId}/${
-        this.userStore.getUserConnected$().value?.id
-      }`,
-      experienceId
-    );
-  }
-
   // CRUD languages
 
   getListLanguages() {
@@ -178,7 +169,7 @@ export class UserService {
       .pipe(tap((languages) => this.activeMentorLanguages$.next(languages)));
   }
 
-  updateMentorLanguages(languages: Language[], destroyRef: DestroyRef) {
+  updateMentorLanguages(languages: Language[]) {
     console.log('user id', this.userStore.getUserConnected$().value?.id);
 
     return this.http
@@ -190,10 +181,8 @@ export class UserService {
       )
       .pipe(
         tap((result) => {
-          console.log('response languages', result);
           this.activeMentorLanguages$.next(result.languages);
         })
-        //takeUntilDestroyed(destroyRef)
       );
   }
 
@@ -347,7 +336,28 @@ export class UserService {
         userId: this.userStore.getUserConnected$().value?.id,
       })
       .pipe(
-        tap((result) => this.activeMentorExperiences$.next(result.experiences))
+        tap((result) => {
+          this.activeMentorExperiences$.next(result.experiences);
+          console.log(result);
+        })
       );
+  }
+
+  deleteExperience(experienceId: number): Observable<{
+    message: string;
+    success: boolean;
+    experiences: Experience[];
+  }> {
+    return this.http
+      .delete<{
+        message: string;
+        success: boolean;
+        experiences: Experience[];
+      }>(
+        `${this.BASE_URL}/experience/experiences/${experienceId}/${
+          this.userStore.getUserConnected$().value?.id
+        }`
+      )
+      .pipe(tap((res) => this.activeMentorExperiences$.next(res.experiences)));
   }
 }

@@ -1,5 +1,7 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, DestroyRef, Input, inject } from '@angular/core';
 import { Language } from '../../../../shared/models/language';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { UserService } from '../../../../user.service';
 
 @Component({
   selector: 'app-list-language',
@@ -11,11 +13,21 @@ export class ListLanguageComponent {
   @Input() languages!: Language[];
   isModalVisible = false;
 
+  userService = inject(UserService);
+  destroyRef = inject(DestroyRef);
+
   showEditModal() {
     this.isModalVisible = true;
   }
 
   hideEditModal() {
+    this.isModalVisible = false;
+  }
+  updateLanguages(newLanguages: Language[]) {
+    this.userService
+      .updateMentorLanguages(newLanguages)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
     this.isModalVisible = false;
   }
 }

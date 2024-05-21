@@ -20,16 +20,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class FormEditExperienceComponent implements OnInit {
   @Input() experience!: Experience;
   @Output() destroy = new EventEmitter();
+  @Output() experienceEmitter = new EventEmitter<Experience>();
   experienceForm!: FormGroup<any>;
 
   destroyRef = inject(DestroyRef);
 
   onSubmit() {
-    const experienceId = this.experience.id;
-    this.userService
-      .editExperience(this.experienceForm.value, experienceId as number)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+    const id = this.experience.id;
+    this.experienceEmitter.emit({ ...this.experienceForm.value, id });
+    // this.userService
+    //   .editExperience(this.experienceForm.value, experienceId as number)
+    //   .pipe(takeUntilDestroyed(this.destroyRef))
+    //   .subscribe();
     this.destroy.emit();
   }
 
