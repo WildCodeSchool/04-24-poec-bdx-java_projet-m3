@@ -23,4 +23,8 @@ export class UserStoreService {
   setUserConnected(user: User | null): void {
     this.userConnected$.next(user);
   }
+
+  getUserId(): number | null {
+    return this.userConnected$.value?.id ?? null;
+  }
 }
