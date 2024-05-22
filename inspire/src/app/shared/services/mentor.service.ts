@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
 import { Mentor } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
 import { reservationForMentorDTO } from '../models/reservation';
@@ -65,5 +65,26 @@ export class MentorService {
         '/reservation/reservations/mentor' +
         this.userConnected.value?.id
     );
+  }
+
+  updateMentorImage(file: File) {
+    if (file) {
+      const formData = new FormData();
+
+      formData.append('file', file);
+
+      return this.httpClient
+        .put<{
+          affectedRow: number;
+          profil: Mentor;
+          success: boolean;
+        }>(
+          environment.BASE_URL +
+            '/mentor/mentors/image/' +
+            this.userConnected.value?.id,
+          formData
+        )
+        .pipe(switchMap(() => this.getMentorProfil()));
+    } else return of();
   }
 }

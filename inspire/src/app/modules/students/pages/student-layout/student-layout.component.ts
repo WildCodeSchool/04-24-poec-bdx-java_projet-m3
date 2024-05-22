@@ -15,7 +15,7 @@ export class StudentLayoutComponent implements OnInit {
 
   windowWatcher = inject(WindowWatcherService);
 
-  student$ = inject(StudentService).getStudentById();
+  student$ = inject(StudentService).activeStudentProfil$;
 
   toggleVisibility() {
     this.showNavbar = !this.showNavbar;

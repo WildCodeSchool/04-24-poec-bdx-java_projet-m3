@@ -8,7 +8,7 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Skill } from '../../../shared/models/chip';
 import { UserService } from '../../../user.service';
 import { Subscription } from 'rxjs';
@@ -26,7 +26,11 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
   @Output() profilEmitter = new EventEmitter<{
     profil: Mentor | Student;
     skills: Skill[];
+    file?: File;
+    fileName?: string;
   }>();
+  file!: File;
+  fileName!: string;
   @Input() selectedSkills!: Skill[];
   @Input() profil!: Mentor;
   skills!: Skill[];
@@ -46,6 +50,8 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
         githubUrl: this.aproposForm.value['githubUrl'],
       } as Mentor,
       skills: this.selectedSkills,
+      file: this.file,
+      fileName: this.fileName,
     });
     this.destroy.emit();
   }
@@ -83,4 +89,10 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
   }
 
   submit() {}
+
+  receiveImage(event: { file: File; fileName: string }) {
+    console.log(event);
+    this.file = event.file;
+    this.fileName = event.fileName;
+  }
 }

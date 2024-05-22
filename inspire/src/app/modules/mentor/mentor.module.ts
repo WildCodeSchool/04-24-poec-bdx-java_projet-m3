@@ -9,7 +9,6 @@ import { LayoutMentor } from './pages/layout/layout-mentor-component';
 import { SharedModule } from 'primeng/api';
 import { NavbarButtonComponent } from './components/ui/navbar-button/navbar-button.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { CardInfosComponent } from './components/ui/card-infos/card-infos.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { DividerModule } from 'primeng/divider';
 import { ProfilMentorComponent } from './pages/profil-mentor/profil-mentor.component';
@@ -30,7 +29,6 @@ import { ReservationWithSwipeComponentUpcoming } from './components/ui/reservati
     NavbarButtonComponent,
     DashboardLinksComponent,
     DashboardComponent,
-    CardInfosComponent,
     ProfilMentorComponent,
     ListReservationComponent,
     ListReservationHistoryComponent,

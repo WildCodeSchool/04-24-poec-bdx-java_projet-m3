@@ -71,7 +71,29 @@ export default class StudentController {
       const result = await StudentManager.read(studentId);
       if (result) {
         const affectedRows = await StudentManager.update(studentId, props);
-        res.status(202).json({ affectedRows });
+        res.status(202).json({ ...affectedRows });
+      } else
+        res
+          .status(401)
+          .json({ message: `Mise à jour refusée : Mauvais identifiants` });
+    } catch (error) {
+      res
+        .status(401)
+        .json({ message: `Mise à jour refusée : ${error.message}` });
+    }
+  }
+
+  static async updateImage(req, res) {
+    try {
+      console.log(req.newPath, req.relativePath);
+      const { userId } = req.params;
+      const result = await StudentManager.read(userId);
+      if (result) {
+        const affectedRows = await StudentManager.updateImage(
+          userId,
+          req.newPath
+        );
+        res.status(202).json({ ...affectedRows });
       } else
         res
           .status(401)
