@@ -3,8 +3,7 @@ import { WindowWatcherService } from '../../../../shared/services/window-watcher
 import { MentorService } from '../../../../shared/services/mentor.service';
 import { UserService } from '../../../../user.service';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Language } from '../../../../shared/models/language';
+import { BehaviorSubject } from 'rxjs';
 import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
 import { Mentor } from '../../../../shared/models/user';
 
@@ -38,18 +37,18 @@ export class LayoutMentor implements OnInit {
       this.mentorService.activeMentorProfil$.next(
         this.activatedRoute.snapshot.data['profil']
       );
-      this.userService.activeMentorLanguages$.next(
-        this.activatedRoute.snapshot.data['languages']
-      );
-      this.userService.activeMentorSkills$.next(
-        this.activatedRoute.snapshot.data['skills']
-      );
-      this.userService.activeMentorExperiences$.next(
-        this.activatedRoute.snapshot.data['experiences']
-      );
-      this.userService.activeMentorFormations$.next(
-        this.activatedRoute.snapshot.data['formations']
-      );
+      // this.userService.activeMentorLanguages$.next(
+      //   this.activatedRoute.snapshot.data['languages']
+      // );
+      // this.userService.activeMentorSkills$.next(
+      //   this.activatedRoute.snapshot.data['skills']
+      // );
+      // this.userService.activeMentorExperiences$.next(
+      //   this.activatedRoute.snapshot.data['experiences']
+      // );
+      // this.userService.activeMentorFormations$.next(
+      //   this.activatedRoute.snapshot.data['formations']
+      // );
     }
     this.mentorProfil$ = this.mentorService.activeMentorProfil$;
   }

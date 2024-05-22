@@ -10,9 +10,9 @@ import { UserService } from '../../../../user.service';
 export class ProfilMentorComponent {
   userService = inject(UserService);
   mentorService = inject(MentorService);
-  languages$ = this.userService.activeMentorLanguages$;
-  experiences$ = this.userService.activeMentorExperiences$;
-  formations$ = this.userService.activeMentorFormations$;
-  skills$ = this.userService.activeMentorSkills$;
+  languages$ = this.userService.activeUserLanguages$;
+  experiences$ = this.userService.activeUserExperiences$;
+  formations$ = this.userService.activeUserFormations$;
+  skills$ = this.userService.activeUserSkills$;
   profil$ = this.mentorService.activeMentorProfil$;
 }

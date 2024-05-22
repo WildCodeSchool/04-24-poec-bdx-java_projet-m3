@@ -32,7 +32,7 @@ export class CardFormationComponent {
 
   editForm(formation: Formation) {
     this.userService
-      .updateFormationMentor(formation)
+      .updateFormationUser(formation)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
     this.isVisibleFormEditCourse = false;
@@ -41,7 +41,7 @@ export class CardFormationComponent {
   deleteFormation() {
     const formationId = this.formation.id;
     this.userService
-      .deleteFormationMentor(formationId as number)
+      .deleteFormationUser(formationId as number)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }

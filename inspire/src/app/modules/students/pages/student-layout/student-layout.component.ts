@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../../../user.service';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { StudentService } from '../../../../shared/services/student.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-student-layout',
@@ -50,7 +51,7 @@ export class StudentLayoutComponent implements OnInit {
   ];
 
   userService = inject(UserService);
-
+  activatedRoute = inject(ActivatedRoute);
   windowWatcher = inject(WindowWatcherService);
 
   student$ = inject(StudentService).activeStudentProfil$;
