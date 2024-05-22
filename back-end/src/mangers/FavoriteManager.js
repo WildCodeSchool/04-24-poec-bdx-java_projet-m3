@@ -39,11 +39,11 @@ export default class FavoriteManager {
 
   static async isFavorite(studentId, mentorId) {
     try {
-      const [favorite] = await client.query(
-        `SELECT * FROM favorite_mentor_student WHERE studentId = ? AND mentorId = ?`,
+      const [result] = await client.query(
+        `SELECT COUNT(*) as count FROM favorite_mentor_student WHERE studentId = ? AND mentorId = ?`,
         [studentId, mentorId]
       );
-      return favorite.length > 0;
+      return { isFavorite: result[0].count > 0 };
     } catch (error) {
       throw error;
     }
@@ -56,6 +56,20 @@ export default class FavoriteManager {
         [studentId]
       );
       return favorites;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getMentorsFavoriteByStudent(studentId) {
+    try {
+      const [mentors] = await client.query(
+        `SELECT m.* FROM mentors m 
+         JOIN favorite_mentor_student fms ON m.id = fms.mentorId 
+         WHERE fms.studentId = ?`,
+        [studentId]
+      );
+      return mentors;
     } catch (error) {
       throw error;
     }

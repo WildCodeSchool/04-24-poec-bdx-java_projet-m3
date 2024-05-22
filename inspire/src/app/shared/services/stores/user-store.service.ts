@@ -9,6 +9,7 @@ export class UserStoreService {
   private userConnected$: BehaviorSubject<User | null> =
     new BehaviorSubject<User | null>(null);
 
+
   getUserConnected$(): BehaviorSubject<User | null> {
     return this.userConnected$;
   }

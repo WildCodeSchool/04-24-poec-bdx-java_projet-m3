@@ -1,19 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Mentor } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
 import { reservationForMentorDTO } from '../models/reservation';
+import { FavoritesService } from '../../modules/students/shared/favorites.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MentorService {
-  httpClient = inject(HttpClient);
+  constructor(
+    private httpClient: HttpClient,
+    private userStoreService: UserStoreService,
+    private favoritesService: FavoritesService
+  ) {}
+ 
   userConnected = inject(UserStoreService).getUserConnected$();
-
-  constructor() {}
 
   activeMentorProfil$: BehaviorSubject<Mentor> = new BehaviorSubject<Mentor>(
     {} as Mentor
@@ -49,6 +53,10 @@ export class MentorService {
       environment.BASE_URL +
         `/mentor/mentors?perPage=${perPage}&offset=${offset}`
     );
+  }
+
+  getMentorListFavoriteByStudent(studentId: number): Observable<Mentor[]> {
+    return this.httpClient.get<Mentor[]>(environment.BASE_URL + `/favorite/mentors/${studentId}`);
   }
 
   getMentorReservationsList() {
