@@ -41,7 +41,7 @@ export class DashboardLinkStudentComponent {
       title: 'Mes favoris',
       logoUrl: 'assets/svgs/edit.svg',
       logoUrlActive: 'assets/svgs/edit-white.svg',
-      path: 'student',
+      path: 'student/list-favorites',
       active: false,
     },
   ];
