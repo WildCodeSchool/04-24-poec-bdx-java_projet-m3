@@ -83,4 +83,16 @@ export default class MentorManager {
     const profil = await MentorManager.read(userId);
     return { affectedRows: res.affectedRows, profil, success: true };
   }
+
+  static async updateImage(userId, imgUrl) {
+    console.log("here");
+    const res = await client.query(
+      `UPDATE mentors SET imgUrl = ? WHERE userId = ?`,
+      [imgUrl, +userId]
+    );
+
+    console.log(res);
+    const profil = await MentorManager.read(userId);
+    return { affectedRows: res.affectedRows, profil, success: true };
+  }
 }

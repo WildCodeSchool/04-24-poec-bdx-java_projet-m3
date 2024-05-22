@@ -8,7 +8,7 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Skill } from '../../../shared/models/chip';
 import { UserService } from '../../../user.service';
 import { Subscription } from 'rxjs';
@@ -83,4 +83,8 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
   }
 
   submit() {}
+
+  receiveImage(event: { file: File; fileName: string }) {
+    console.log(event);
+  }
 }

@@ -29,6 +29,7 @@ import { FormEditAproposComponent } from './form-edit-apropos/form-edit-apropos.
 import { FormAddExperienceComponent } from './form-add-experience/form-add-experience.component';
 import { FormEditExperienceComponent } from './form-edit-experience/form-edit-experience.component';
 import { CardInfosComponent } from './ui/card-infos/card-infos.component';
+import { FileUploadComponent } from './ui/file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { CardInfosComponent } from './ui/card-infos/card-infos.component';
     FormAddExperienceComponent,
     FormEditExperienceComponent,
     CardInfosComponent,
+    FileUploadComponent,
   ],
   imports: [
     CommonModule,
@@ -86,6 +88,7 @@ import { CardInfosComponent } from './ui/card-infos/card-infos.component';
     ModalValidateComponent,
     FormEditAproposComponent,
     CardInfosComponent,
+    FileUploadComponent,
   ],
 })
 export class SharedComponentsModule {}
