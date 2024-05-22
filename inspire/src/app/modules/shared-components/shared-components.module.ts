@@ -28,6 +28,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { FormEditAproposComponent } from './form-edit-apropos/form-edit-apropos.component';
 import { FormAddExperienceComponent } from './form-add-experience/form-add-experience.component';
 import { FormEditExperienceComponent } from './form-edit-experience/form-edit-experience.component';
+import { CardInfosComponent } from './ui/card-infos/card-infos.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { FormEditExperienceComponent } from './form-edit-experience/form-edit-ex
     FormEditAproposComponent,
     FormAddExperienceComponent,
     FormEditExperienceComponent,
+    CardInfosComponent,
   ],
   imports: [
     CommonModule,
@@ -83,6 +85,7 @@ import { FormEditExperienceComponent } from './form-edit-experience/form-edit-ex
     ListLanguageComponent,
     ModalValidateComponent,
     FormEditAproposComponent,
+    CardInfosComponent,
   ],
 })
 export class SharedComponentsModule {}
