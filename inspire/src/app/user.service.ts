@@ -34,6 +34,14 @@ export class UserService {
     [] as Skill[]
   );
 
+  activeStudentLanguages$: BehaviorSubject<Language[]> = new BehaviorSubject(
+    [] as Language[]
+  );
+
+  activeStudentSkills$: BehaviorSubject<Skill[]> = new BehaviorSubject(
+    [] as Skill[]
+  );
+
   constructor() {}
 
   private createUser(user: User): Observable<User> {
@@ -169,6 +177,16 @@ export class UserService {
       .pipe(tap((languages) => this.activeMentorLanguages$.next(languages)));
   }
 
+  getStudentLanguages() {
+    return this.http
+      .get<Language[]>(
+        environment.BASE_URL +
+          '/language/languages/user/' +
+          this.userStore.getUserConnected$().value?.id
+      )
+      .pipe(tap((languages) => this.activeStudentLanguages$.next(languages)));
+  }
+
   updateMentorLanguages(languages: Language[]) {
     console.log('user id', this.userStore.getUserConnected$().value?.id);
 
@@ -267,6 +285,16 @@ export class UserService {
           this.userStore.getUserConnected$().value?.id
       )
       .pipe(tap((skills) => this.activeMentorSkills$.next(skills)));
+  }
+
+  getStudentSkills() {
+    return this.http
+      .get<Skill[]>(
+        environment.BASE_URL +
+          '/skill/skills/user/' +
+          this.userStore.getUserConnected$().value?.id
+      )
+      .pipe(tap((skills) => this.activeStudentSkills$.next(skills)));
   }
 
   updateMentorSkills(skills: Skill[]) {

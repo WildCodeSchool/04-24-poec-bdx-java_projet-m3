@@ -15,6 +15,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ListboxModule } from 'primeng/listbox';
 import { DashboardLinkStudentComponent } from './components/ui/dashboard-link-student/dashboard-link-student.component';
 import { MentorModule } from '../mentor/mentor.module';
+import { ProfilStudentComponent } from './pages/profil-student/profil-student.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { MentorModule } from '../mentor/mentor.module';
     DashboardComponent,
     FilterSearchListComponent,
     DashboardLinkStudentComponent,
+    ProfilStudentComponent,
   ],
   imports: [
     CommonModule,
