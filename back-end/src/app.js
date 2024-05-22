@@ -11,6 +11,7 @@ import routerStudent from "./routes/routerStudent.js";
 import routerFormation from "./routes/routerFormation.js";
 import routerExperience from "./routes/routerExperience.js";
 import routerReservation from "./routes/routerReservation.js";
+import routerSlot from "./routes/routerSlot.js";
 
 dotenv.config();
 const app = express();
@@ -31,6 +32,7 @@ app.use("/language", routerLanguage);
 app.use("/formation", routerFormation);
 app.use("/reservation", routerReservation);
 app.use("/experience", routerExperience);
+app.use("/slot", routerSlot);
 
 app.get(
   "*.*",

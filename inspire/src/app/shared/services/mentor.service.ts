@@ -27,6 +27,9 @@ export class MentorService {
     );
   }
 
+  setActiveMentor(mentor: Mentor): void {
+    this.activeMentorProfil$.next(mentor);
+  }
   updateMentorProfil(profil: Mentor) {
     return this.httpClient
       .put<{ affectedRow: number; profil: Mentor; success: boolean }>(

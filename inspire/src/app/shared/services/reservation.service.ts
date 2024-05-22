@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { reservationForMentorDTO } from '../models/reservation';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +27,20 @@ export class ReservationService {
   });
 
   constructor() {}
+
+  addSlotToMentor(slotInfo: any): Observable<any> {
+    // Reformater les données avant de les envoyer au backend
+    const formattedSlotInfo = {
+      dateTime: slotInfo.dateTime, // Vous pouvez formater si nécessaire, par exemple en utilisant toISOString()
+      visio: slotInfo.visio,
+      mentorId: slotInfo.mentorId,
+    };
+
+    return this.httpClient
+      .post(`${environment.BASE_URL}/slot/slots`, formattedSlotInfo)
+      .pipe(tap((res) => console.log('res', res)));
+  }
+
   getMentorReservationList(id: number, perPage: number, offset: number) {
     return this.httpClient
       .get<{
