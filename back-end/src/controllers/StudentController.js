@@ -71,7 +71,7 @@ export default class StudentController {
       const result = await StudentManager.read(studentId);
       if (result) {
         const affectedRows = await StudentManager.update(studentId, props);
-        res.status(202).json({ affectedRows });
+        res.status(202).json({ ...affectedRows });
       } else
         res
           .status(401)

@@ -3,8 +3,9 @@ import { Mentor, Student } from '../../../../../shared/models/user';
 import { Skill } from '../../../../../shared/models/chip';
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ProfilMentorComponent } from '../../../pages/profil-mentor/profil-mentor.component';
 import { UserService } from '../../../../../user.service';
+import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
+import { StudentService } from '../../../../../shared/services/student.service';
 
 @Component({
   selector: 'app-card-infos',
@@ -17,7 +18,9 @@ export class CardInfosComponent {
   editFormApropoVisible = false;
 
   mentorService = inject(MentorService);
+  studentService = inject(StudentService);
   userService = inject(UserService);
+  userStoreService = inject(UserStoreService);
   destroyRef = inject(DestroyRef);
 
   openEditFormApropos() {
@@ -28,10 +31,19 @@ export class CardInfosComponent {
   }
 
   updateProfil(newProfil: { profil: Mentor | Student; skills: Skill[] }) {
-    this.mentorService
-      .updateMentorProfil(newProfil.profil)
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+    if (this.userStoreService.getUserConnected$().value?.role === 'mentor') {
+      this.mentorService
+        .updateMentorProfil(newProfil.profil)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe();
+    }
+    if (this.userStoreService.getUserConnected$().value?.role === 'student') {
+      this.studentService
+        .updateStudentProfil(newProfil.profil)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe();
+    }
+
     this.userService
       .updateMentorSkills(newProfil.skills)
       .pipe(takeUntilDestroyed(this.destroyRef))
