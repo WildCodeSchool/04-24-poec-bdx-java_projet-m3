@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { FavoritesService } from '../../../shared/favorites.service';
 import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
 import { UserService } from '../../../../../user.service';
+import { StudentService } from '../../../../../shared/services/student.service';
+import { MentorService } from '../../../../../shared/services/mentor.service';
 
 @Component({
   selector: 'app-card-mentor',
@@ -18,7 +20,9 @@ export class CardMentorComponent implements OnInit {
 
   constructor(
     private favoritesService: FavoritesService,
-    private userStoreService: UserStoreService
+    private userStoreService: UserStoreService,
+    private studentService: StudentService,
+    private mentorService: MentorService
   ) {}
 
   skillList$?: Observable<Skill[]>;
@@ -27,15 +31,15 @@ userService = inject(UserService);
 
   ngOnInit(): void {
     this.skillList$ = this.userService.getMentorSkillsById(this.mentor.userId);
-    console.log("mentor:", this.mentor);
+    console.log("mentor:", this.mentor.id);
     this.checkIfFavorite();
   }
 
   checkIfFavorite(): void {
     const studentId = this.userStoreService.getUserId();
     if (studentId) {
-      this.favoritesService.isFavorite(studentId, this.mentor.userId).subscribe(result => {
-        this.isFavorite = result;
+      this.favoritesService.isFavorite(this.studentService.activeStudentProfil$.value.id || 0, this.mentor.id || 0).subscribe(result => {
+        this.isFavorite = result.isFavorite;
       }, error => {
         console.error('Error checking favorite status:', error);
       });
@@ -46,15 +50,15 @@ userService = inject(UserService);
     const studentId = this.userStoreService.getUserId();
     if (studentId) {
       if (this.isFavorite) {
-        this.isFavorite = false;
-        this.favoritesService.removeFromFavorites(studentId, this.mentor.userId).subscribe(() => {
+        this.isFavorite = true;
+        this.favoritesService.removeFromFavorites(this.studentService.activeStudentProfil$.value.id || 0, this.mentor.id || 0).subscribe(() => {
           this.isFavorite = false;
         }, error => {
           console.error('Error removing from favorites:', error);
         });
       } else {
         this.isFavorite = true;
-        this.favoritesService.addToFavorites(studentId, this.mentor.userId).subscribe(() => {
+        this.favoritesService.addToFavorites(this.studentService.activeStudentProfil$.value.id || 0, this.mentor.id || 0).subscribe(() => {
           this.isFavorite = true;
         }, error => {
           console.error('Error adding to favorites:', error);

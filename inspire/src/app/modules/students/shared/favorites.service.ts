@@ -25,8 +25,8 @@ export class FavoritesService {
     return this.http.delete(environment.BASE_URL + `/favorite/remove/${studentId}/${mentorId}`);
   }
 
-  isFavorite(studentId: number, mentorId: number): Observable<boolean> {
-    return this.http.get<boolean>(environment.BASE_URL + `/favorite/${studentId}/${mentorId}`);
+  isFavorite(studentId: number, mentorId: number): Observable<{ isFavorite: boolean }> {
+    return this.http.get<{ isFavorite: boolean }>(environment.BASE_URL + `/favorite/${studentId}/${mentorId}`);
   }
 
   getStudentFavorite(studentId: number): Observable<any> {

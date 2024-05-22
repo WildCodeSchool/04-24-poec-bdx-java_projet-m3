@@ -84,7 +84,7 @@ export class MentorService {
             this.userConnected.value?.id,
           formData
         )
-        .pipe(switchMap(() => this.getMentorProfil()));
+        .pipe(tap(res => this.activeMentorProfil$.next(res.profil)));
     } else return of();
   }
 }

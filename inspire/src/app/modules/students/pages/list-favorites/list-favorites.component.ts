@@ -4,6 +4,7 @@ import { Mentor } from '../../../../shared/models/user';
 import { MentorService } from '../../../../shared/services/mentor.service';
 import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
 import { FavoritesService } from '../../shared/favorites.service';
+import { StudentService } from '../../../../shared/services/student.service';
 
 @Component({
   selector: 'app-list-favorites',
@@ -17,6 +18,7 @@ export class ListFavoritesComponent {
   constructor(
     private _mentorService: MentorService,
     private userStoreService: UserStoreService,
+    private studentService: StudentService
   ) {}
 
   mentorList$: Observable<Mentor[]> = this.mentorListSubject.asObservable();
@@ -27,7 +29,7 @@ export class ListFavoritesComponent {
   }
 
   getListFavoriteMentor(): void {
-    this._mentorService.getMentorListFavoriteByStudent(2).subscribe((mentors) => {
+    this._mentorService.getMentorListFavoriteByStudent(this.studentService.activeStudentProfil$.value.id || 0).subscribe((mentors) => {
       this.mentorListSubject.next(mentors);
     });
   }
