@@ -4,7 +4,6 @@ export default class SlotManager {
   }
 
   async addSlot(slotInfo) {
-    console.log("Received slotInfo", slotInfo); // Log the received slotInfo
     try {
       const [slot] = await this.database.query(
         `SELECT * FROM slots where dateTime = ? and visio = ?`,

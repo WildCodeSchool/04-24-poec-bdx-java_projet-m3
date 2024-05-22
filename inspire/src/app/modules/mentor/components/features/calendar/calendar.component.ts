@@ -25,6 +25,8 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   selectedSlot: any;
   mentorId!: number;
   mentorSubscription!: Subscription;
+  events: any[] = [];
+  forceEventDuration = true;
 
   constructor(
     private reservationService: ReservationService,
@@ -40,27 +42,20 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
   onDateSelect = (selectionInfo: any) => {
     const formattedSlotInfo = {
-      dateTime: selectionInfo.startStr, // Utiliser startStr pour obtenir une chaîne de date
-      visio: true, // Remplacez par le statut visio réel
-      mentorId: this.mentorId, // Utiliser l'ID du mentor dynamique
+      dateTime: selectionInfo.startStr,
+      visio: true,
+      mentorId: this.mentorId,
     };
 
-    console.log('Formatted Slot Info:', formattedSlotInfo);
-
-    this.reservationService.addSlotToMentor(formattedSlotInfo).subscribe(
-      (res) => console.log('Slot added successfully:', res),
-      (err) => console.error('Error adding slot:', err)
-    );
+    this.reservationService.addSlotToMentor(formattedSlotInfo).subscribe();
   };
 
   handleDateClick(arg: any) {
-    // Capture the selected date
     this.selectedSlot = {
-      dateTime: arg.dateStr, // Utiliser arg.dateStr pour obtenir une chaîne de date
-      visio: true, // Remplacez par le statut visio réel
-      mentorId: this.mentorId, // Utiliser l'ID du mentor dynamique
+      dateTime: arg.dateStr,
+      visio: true,
+      mentorId: this.mentorId,
     };
-    console.log('Selected Slot:', this.selectedSlot);
   }
 
   calendarOptions: CalendarOptions = {
