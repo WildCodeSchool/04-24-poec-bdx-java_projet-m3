@@ -84,4 +84,26 @@ export default class MentorController {
         .json({ message: `Mise à jour refusée : ${error.message}` });
     }
   }
+
+  static async updateImage(req, res) {
+    try {
+      console.log(req.newPath, req.relativePath);
+      const { userId } = req.params;
+      const result = await MentorManager.read(userId);
+      if (result) {
+        const affectedRows = await MentorManager.updateImage(
+          userId,
+          req.newPath
+        );
+        res.status(202).json({ ...affectedRows });
+      } else
+        res
+          .status(401)
+          .json({ message: `Mise à jour refusée : Mauvais identifiants` });
+    } catch (error) {
+      res
+        .status(401)
+        .json({ message: `Mise à jour refusée : ${error.message}` });
+    }
+  }
 }
