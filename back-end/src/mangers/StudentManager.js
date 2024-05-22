@@ -67,16 +67,29 @@ export default class StudentManager {
     }
   }
 
-  static async update(id, props) {
+  static async update(userId, props) {
     let sql = `UPDATE students set`;
     const sqlValues = [];
     for (const [key, value] of Object.entries(props)) {
       sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
       sqlValues.push(value);
     }
-    sql += ` where id = ?`;
-    sqlValues.push(id);
+    sql += ` where userId = ?`;
+    sqlValues.push(userId);
     const [res] = await client.query(sql, sqlValues);
-    return res.affectedRows;
+    const profil = await StudentManager.read(userId);
+    return { affectedRows: res.affectedRows, profil, success: true };
+  }
+
+  static async updateImage(userId, imgUrl) {
+    console.log("here");
+    const res = await client.query(
+      `UPDATE students SET imgUrl = ? WHERE userId = ?`,
+      [imgUrl, +userId]
+    );
+
+    console.log(res);
+    const profil = await MentorManager.read(userId);
+    return { affectedRows: res.affectedRows, profil, success: true };
   }
 }

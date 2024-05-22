@@ -15,6 +15,7 @@ import {
   mentorProfilResolver,
   mentorSkillsResolver,
 } from './shared/resolvers/mentor.resolver';
+import { studentProfilResolver } from './shared/resolvers/student.resolver';
 
 export const routes: Routes = [
   {
@@ -32,6 +33,9 @@ export const routes: Routes = [
         (m) => m.StudentsModule
       ),
     canActivate: [isConnected, isStudent],
+    resolve: {
+      profil: studentProfilResolver,
+    },
   },
   {
     path: 'mentor',
