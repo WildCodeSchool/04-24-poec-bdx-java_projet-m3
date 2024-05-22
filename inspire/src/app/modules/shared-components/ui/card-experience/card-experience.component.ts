@@ -30,10 +30,18 @@ export class CardExperienceComponent {
     this.popupDeleteVisible = true;
   }
 
+  editExperience(experience: Experience) {
+    console.log(experience);
+    this.userService
+      .editExperience(experience, experience.id || 0)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+  }
+
   deleteExperience() {
     const experienceId = this.experience.id;
     this.userService
-      .deleteExperience(experienceId)
+      .deleteExperience(experienceId || 0)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
     this.popupDeleteVisible = false;

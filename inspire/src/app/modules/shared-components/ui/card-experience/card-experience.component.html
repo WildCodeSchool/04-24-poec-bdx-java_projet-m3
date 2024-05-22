@@ -36,6 +36,7 @@
     <app-form-edit-experience
       [experience]="experience"
       (destroy)="hideEditForm()"
+      (experienceEmitter)="editExperience($event)"
     ></app-form-edit-experience>
   </p-sidebar>
 </ng-container>
@@ -44,7 +45,6 @@
     [visible]="popupDeleteVisible"
     [question]="'Souhaitez-vous supprimer cette experience ?'"
     (onCancel)="popupDeleteVisible = false"
-    (onValidate)="popupDeleteVisible = false"
     (onDelete)="deleteExperience()"
   ></app-modal-validate>
 </ng-container>

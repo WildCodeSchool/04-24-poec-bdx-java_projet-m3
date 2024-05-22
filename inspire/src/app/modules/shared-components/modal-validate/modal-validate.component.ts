@@ -8,7 +8,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ModalValidateComponent {
   @Input() question: string = '';
   @Output() onDelete = new EventEmitter();
-  @Output() onValidate = new EventEmitter();
   @Output() onCancel = new EventEmitter();
   @Input() visible: boolean = false;
 

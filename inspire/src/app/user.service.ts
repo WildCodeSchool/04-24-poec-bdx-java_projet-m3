@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { DestroyRef, Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, first, map, switchMap, tap } from 'rxjs';
 import { Mentor, Student, User } from './shared/models/user';
 import { UserStoreService } from './shared/services/stores/user-store.service';
@@ -10,6 +10,7 @@ import { Experience } from './shared/models/experience';
 import { Formation } from './shared/models/formation';
 import { MentorService } from './shared/services/mentor.service';
 import { environment } from '../environments/environment.development';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -152,15 +153,6 @@ export class UserService {
     return this.http.get<Skill[]>(`${this.BASE_URL}/skill/skills`);
   }
 
-  deleteExperience(experienceId: any): Observable<any> {
-    return this.http.delete<any>(
-      `${this.BASE_URL}/experience/experiences/${experienceId}/${
-        this.userStore.getUserConnected$().value?.id
-      }`,
-      experienceId
-    );
-  }
-
   // CRUD languages
 
   getListLanguages() {
@@ -178,6 +170,8 @@ export class UserService {
   }
 
   updateMentorLanguages(languages: Language[]) {
+    console.log('user id', this.userStore.getUserConnected$().value?.id);
+
     return this.http
       .post<{ success: boolean; message: string; languages: Language[] }>(
         environment.BASE_URL +
@@ -186,7 +180,9 @@ export class UserService {
         languages
       )
       .pipe(
-        tap((result) => this.activeMentorLanguages$.next(result.languages))
+        tap((result) => {
+          this.activeMentorLanguages$.next(result.languages);
+        })
       );
   }
 
@@ -340,7 +336,28 @@ export class UserService {
         userId: this.userStore.getUserConnected$().value?.id,
       })
       .pipe(
-        tap((result) => this.activeMentorExperiences$.next(result.experiences))
+        tap((result) => {
+          this.activeMentorExperiences$.next(result.experiences);
+          console.log(result);
+        })
       );
+  }
+
+  deleteExperience(experienceId: number): Observable<{
+    message: string;
+    success: boolean;
+    experiences: Experience[];
+  }> {
+    return this.http
+      .delete<{
+        message: string;
+        success: boolean;
+        experiences: Experience[];
+      }>(
+        `${this.BASE_URL}/experience/experiences/${experienceId}/${
+          this.userStore.getUserConnected$().value?.id
+        }`
+      )
+      .pipe(tap((res) => this.activeMentorExperiences$.next(res.experiences)));
   }
 }
