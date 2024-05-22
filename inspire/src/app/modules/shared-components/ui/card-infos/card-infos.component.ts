@@ -30,7 +30,20 @@ export class CardInfosComponent {
     this.editFormApropoVisible = false;
   }
 
-  updateProfil(newProfil: { profil: Mentor | Student; skills: Skill[] }) {
+  updateProfil(newProfil: {
+    profil: Mentor | Student;
+    skills: Skill[];
+    file?: File;
+    fileName?: string;
+  }) {
+    if (newProfil.file && newProfil.fileName) {
+      console.log(newProfil);
+      this.mentorService
+        .updateMentorImage(newProfil.file)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe();
+    }
+
     if (this.userStoreService.getUserConnected$().value?.role === 'mentor') {
       this.mentorService
         .updateMentorProfil(newProfil.profil)

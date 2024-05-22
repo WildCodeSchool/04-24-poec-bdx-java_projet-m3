@@ -26,7 +26,11 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
   @Output() profilEmitter = new EventEmitter<{
     profil: Mentor | Student;
     skills: Skill[];
+    file?: File;
+    fileName?: string;
   }>();
+  file!: File;
+  fileName!: string;
   @Input() selectedSkills!: Skill[];
   @Input() profil!: Mentor;
   skills!: Skill[];
@@ -46,6 +50,8 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
         githubUrl: this.aproposForm.value['githubUrl'],
       } as Mentor,
       skills: this.selectedSkills,
+      file: this.file,
+      fileName: this.fileName,
     });
     this.destroy.emit();
   }
@@ -86,5 +92,7 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
 
   receiveImage(event: { file: File; fileName: string }) {
     console.log(event);
+    this.file = event.file;
+    this.fileName = event.fileName;
   }
 }
