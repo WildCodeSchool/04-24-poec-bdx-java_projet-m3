@@ -3,7 +3,6 @@ import { client } from "../clientDb/client.js";
 export default class FavoriteManager {
   static async addFavorite(studentId, mentorId) {
     try {
-      // Vérifier si le favori existe déjà
       const [favorite] = await client.query(
         `SELECT * FROM favorite_mentor_student WHERE studentId = ? AND mentorId = ?`,
         [studentId, mentorId]
@@ -13,7 +12,6 @@ export default class FavoriteManager {
         return { success: false, message: "Mentor is already in favorites" };
       }
 
-      // Ajouter le favori
       await client.query(
         `INSERT INTO favorite_mentor_student (studentId, mentorId) VALUES (?, ?)`,
         [studentId, mentorId]

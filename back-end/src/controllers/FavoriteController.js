@@ -14,9 +14,7 @@ export default class FavoriteController {
 
   static async removeFavorite(req, res) {
     try {
-      const { mentorId } = req.params;
-      const studentId = req.user.id;
-
+      const { mentorId, studentId} = req.params;
       const result = await FavoriteManager.removeFavorite(studentId, mentorId);
       res.status(202).json(result);
     } catch (error) {
