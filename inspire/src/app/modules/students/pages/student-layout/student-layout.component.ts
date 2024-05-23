@@ -28,7 +28,7 @@ export class StudentLayoutComponent implements OnInit {
       active: true,
     },
     {
-      title: 'Trouver un mentor',
+      title: 'Recherche',
       logoUrl: 'assets/svgs/calendar.svg',
       logoUrlActive: 'assets/svgs/calendar-white.svg',
       path: 'student/list-mentors',
