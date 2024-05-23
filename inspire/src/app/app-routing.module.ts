@@ -15,7 +15,12 @@ import {
   mentorProfilResolver,
   mentorSkillsResolver,
 } from './shared/resolvers/mentor.resolver';
-import { studentProfilResolver } from './shared/resolvers/student.resolver';
+import {
+  studentExperiencesResolver,
+  studentFormationsResolver,
+  studentProfilResolver,
+  studentSkillsResolver,
+} from './shared/resolvers/student.resolver';
 
 export const routes: Routes = [
   {
@@ -35,6 +40,10 @@ export const routes: Routes = [
     canActivate: [isConnected, isStudent],
     resolve: {
       profil: studentProfilResolver,
+      languages: mentorLanguagesResolver,
+      skills: studentSkillsResolver,
+      formations: studentFormationsResolver,
+      experiences: studentExperiencesResolver,
     },
   },
   {

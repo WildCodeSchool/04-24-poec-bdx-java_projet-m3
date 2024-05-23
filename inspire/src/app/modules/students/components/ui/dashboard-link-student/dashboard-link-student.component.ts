@@ -10,10 +10,9 @@ type DashboardLink = {
 @Component({
   selector: 'app-dashboard-link-student',
   templateUrl: './dashboard-link-student.component.html',
-  styleUrl: './dashboard-link-student.component.scss'
+  styleUrl: './dashboard-link-student.component.scss',
 })
 export class DashboardLinkStudentComponent {
-
   @Input() showText = true;
   listLink: DashboardLink[] = [
     {
@@ -41,7 +40,7 @@ export class DashboardLinkStudentComponent {
       title: 'Mes favoris',
       logoUrl: 'assets/svgs/edit.svg',
       logoUrlActive: 'assets/svgs/edit-white.svg',
-      path: 'student',
+      path: 'student/list-favorites',
       active: false,
     },
   ];

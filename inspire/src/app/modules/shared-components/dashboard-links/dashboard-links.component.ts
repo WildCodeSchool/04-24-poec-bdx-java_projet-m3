@@ -13,7 +13,7 @@ type DashboardLink = {
 })
 export class DashboardLinksComponent {
   @Input() showText = true;
-  listLink: DashboardLink[] = [
+  @Input() listLink: DashboardLink[] = [
     {
       title: 'dashboard',
       logoUrl: 'assets/svgs/dash.svg',

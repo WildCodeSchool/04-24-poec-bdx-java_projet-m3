@@ -1,19 +1,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { BehaviorSubject, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
 import { Mentor } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
 import { reservationForMentorDTO } from '../models/reservation';
+import { FavoritesService } from '../../modules/students/shared/favorites.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MentorService {
-  httpClient = inject(HttpClient);
-  userConnected = inject(UserStoreService).getUserConnected$();
+  constructor(
+    private httpClient: HttpClient,
+    private userStoreService: UserStoreService,
+    private favoritesService: FavoritesService
+  ) {}
 
-  constructor() {}
+  userConnected = inject(UserStoreService).getUserConnected$();
 
   activeMentorProfil$: BehaviorSubject<Mentor> = new BehaviorSubject<Mentor>(
     {} as Mentor
@@ -54,6 +58,12 @@ export class MentorService {
     );
   }
 
+  getMentorListFavoriteByStudent(studentId: number): Observable<Mentor[]> {
+    return this.httpClient.get<Mentor[]>(
+      environment.BASE_URL + `/favorite/mentors/${studentId}`
+    );
+  }
+
   getMentorReservationsList() {
     return this.httpClient.get<reservationForMentorDTO[]>(
       environment.BASE_URL +
@@ -79,7 +89,7 @@ export class MentorService {
             this.userConnected.value?.id,
           formData
         )
-        .pipe(switchMap(() => this.getMentorProfil()));
+        .pipe(tap((res) => this.activeMentorProfil$.next(res.profil)));
     } else return of();
   }
 }
