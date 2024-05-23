@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { StudentsRoutingModule } from './students-routing.module';
 import { ListMentorsComponent } from './pages/list-mentors/list-mentors.component';
 import { CardMentorComponent } from './components/features/card-mentor/card-mentor.component';
-import { ChipComponent } from '../shared-components/chip/chip.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { StudentLayoutComponent } from './pages/student-layout/student-layout.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,8 +14,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ListboxModule } from 'primeng/listbox';
 import { DashboardLinkStudentComponent } from './components/ui/dashboard-link-student/dashboard-link-student.component';
 import { MentorModule } from '../mentor/mentor.module';
+import { ProfilStudentComponent } from './pages/profil-student/profil-student.component';
 import { ListFavoritesComponent } from './pages/list-favorites/list-favorites.component';
-
 
 @NgModule({
   declarations: [
@@ -26,6 +25,7 @@ import { ListFavoritesComponent } from './pages/list-favorites/list-favorites.co
     DashboardComponent,
     FilterSearchListComponent,
     DashboardLinkStudentComponent,
+    ProfilStudentComponent,
     ListFavoritesComponent,
   ],
   imports: [
@@ -36,7 +36,7 @@ import { ListFavoritesComponent } from './pages/list-favorites/list-favorites.co
     FormsModule,
     MultiSelectModule,
     ListboxModule,
-    MentorModule
-  ]
+    MentorModule,
+  ],
 })
-export class StudentsModule { }
+export class StudentsModule {}

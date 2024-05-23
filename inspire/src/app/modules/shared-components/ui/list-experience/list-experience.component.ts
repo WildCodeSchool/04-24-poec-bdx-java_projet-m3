@@ -21,7 +21,7 @@ export class ListExperienceComponent {
 
   addExperience(experience: Experience) {
     this.userService
-      .addMentorExperience(experience)
+      .addUserExperience(experience)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
     this.isVisibleFormExperience = false;

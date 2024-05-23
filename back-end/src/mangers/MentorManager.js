@@ -91,7 +91,6 @@ export default class MentorManager {
       [imgUrl, +userId]
     );
 
-    console.log(res);
     const profil = await MentorManager.read(userId);
     return { affectedRows: res.affectedRows, profil, success: true };
   }

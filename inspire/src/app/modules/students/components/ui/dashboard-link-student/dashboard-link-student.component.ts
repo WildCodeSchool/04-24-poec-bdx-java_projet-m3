@@ -10,10 +10,9 @@ type DashboardLink = {
 @Component({
   selector: 'app-dashboard-link-student',
   templateUrl: './dashboard-link-student.component.html',
-  styleUrl: './dashboard-link-student.component.scss'
+  styleUrl: './dashboard-link-student.component.scss',
 })
 export class DashboardLinkStudentComponent {
-
   @Input() showText = true;
   listLink: DashboardLink[] = [
     {

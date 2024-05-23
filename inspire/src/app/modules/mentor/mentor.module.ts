@@ -4,10 +4,9 @@ import { CommonModule } from '@angular/common';
 import { MentorRoutingModule } from './mentor-routing.module';
 import { FormsModule } from '@angular/forms';
 import { RowReservationComponent } from './components/ui/row-reservation/row-reservation-student.component';
-import { DashboardLinksComponent } from './components/ui/dashboard-links/dashboard-links.component';
 import { LayoutMentor } from './pages/layout/layout-mentor-component';
 import { SharedModule } from 'primeng/api';
-import { NavbarButtonComponent } from './components/ui/navbar-button/navbar-button.component';
+import { NavbarButtonComponent } from '../shared-components/ui/navbar-button/navbar-button.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { DividerModule } from 'primeng/divider';
@@ -26,8 +25,6 @@ import { ReservationWithSwipeComponentUpcoming } from './components/ui/reservati
   declarations: [
     LayoutMentor,
     RowReservationComponent,
-    NavbarButtonComponent,
-    DashboardLinksComponent,
     DashboardComponent,
     ProfilMentorComponent,
     ListReservationComponent,
@@ -50,7 +47,6 @@ import { ReservationWithSwipeComponentUpcoming } from './components/ui/reservati
   ],
   exports: [
     RowReservationComponent,
-    DashboardLinksComponent,
     RowReservationComponent,
     NavbarButtonComponent,
     DialogModule,

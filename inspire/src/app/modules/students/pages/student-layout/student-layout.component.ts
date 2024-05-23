@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { UserService } from '../../../../user.service';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { StudentService } from '../../../../shared/services/student.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-student-layout',
@@ -11,8 +12,46 @@ import { StudentService } from '../../../../shared/services/student.service';
 export class StudentLayoutComponent implements OnInit {
   showNavbar = true;
   modalVisible = false;
-  userService = inject(UserService);
 
+  listLink: {
+    title: string;
+    logoUrl: string;
+    logoUrlActive: string;
+    path: string;
+    active: boolean;
+  }[] = [
+    {
+      title: 'Mon profil',
+      logoUrl: 'assets/svgs/dash.svg',
+      logoUrlActive: 'assets/svgs/dash-white.svg',
+      path: 'student',
+      active: true,
+    },
+    {
+      title: 'Trouver un mentor',
+      logoUrl: 'assets/svgs/calendar.svg',
+      logoUrlActive: 'assets/svgs/calendar-white.svg',
+      path: 'student/list-mentors',
+      active: false,
+    },
+    {
+      title: 'Mes réservations',
+      logoUrl: 'assets/svgs/edit.svg',
+      logoUrlActive: 'assets/svgs/edit-white.svg',
+      path: 'student',
+      active: false,
+    },
+    {
+      title: 'Mes favoris',
+      logoUrl: 'assets/svgs/edit.svg',
+      logoUrlActive: 'assets/svgs/edit-white.svg',
+      path: 'student',
+      active: false,
+    },
+  ];
+
+  userService = inject(UserService);
+  activatedRoute = inject(ActivatedRoute);
   windowWatcher = inject(WindowWatcherService);
 
   student$ = inject(StudentService).activeStudentProfil$;
