@@ -9,10 +9,9 @@ import { StudentService } from '../../../../shared/services/student.service';
 @Component({
   selector: 'app-list-favorites',
   templateUrl: './list-favorites.component.html',
-  styleUrl: './list-favorites.component.scss'
+  styleUrl: './list-favorites.component.scss',
 })
 export class ListFavoritesComponent {
-
   private mentorListSubject = new BehaviorSubject<Mentor[]>([]);
 
   constructor(
@@ -25,12 +24,16 @@ export class ListFavoritesComponent {
 
   ngOnInit(): void {
     this.getListFavoriteMentor();
-    console.log("list:", this.getListFavoriteMentor())
+    console.log('list:', this.getListFavoriteMentor());
   }
 
   getListFavoriteMentor(): void {
-    this._mentorService.getMentorListFavoriteByStudent(this.studentService.activeStudentProfil$.value.id || 0).subscribe((mentors) => {
-      this.mentorListSubject.next(mentors);
-    });
+    this._mentorService
+      .getMentorListFavoriteByStudent(
+        this.studentService.activeStudentProfil$.value.id || 0
+      )
+      .subscribe((mentors) => {
+        this.mentorListSubject.next(mentors);
+      });
   }
 }
