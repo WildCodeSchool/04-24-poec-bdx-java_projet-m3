@@ -48,6 +48,13 @@ export class StudentLayoutComponent implements OnInit {
       path: 'student',
       active: false,
     },
+    {
+      title: 'Mentor',
+      logoUrl: 'assets/svgs/edit.svg',
+      logoUrlActive: 'assets/svgs/edit-white.svg',
+      path: 'student/mentor-details/1',
+      active: false,
+    },
   ];
 
   userService = inject(UserService);

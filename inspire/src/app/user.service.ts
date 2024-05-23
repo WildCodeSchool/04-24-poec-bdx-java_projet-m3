@@ -171,21 +171,6 @@ export class UserService {
       );
   }
 
-  // getStudentLanguages() {
-  //   return this.http
-  //     .get<Language[]>(
-  //       environment.BASE_URL +
-  //         '/language/languages/user/' +
-  //         this.userStore.getUserConnected$().value?.id
-  //     )
-  //     .pipe(
-  //       tap((languages) => {
-  //         this.activeStudentLanguages$.next(languages);
-  //         console.log(languages);
-  //       })
-  //     );
-  // }
-
   updateUserLanguages(languages: Language[]) {
     console.log('user id', this.userStore.getUserConnected$().value?.id);
 

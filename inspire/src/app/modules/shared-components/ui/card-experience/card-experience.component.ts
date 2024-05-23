@@ -10,6 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './card-experience.component.scss',
 })
 export class CardExperienceComponent {
+  @Input() editModeOn: boolean = false;
   @Input() experience!: Experience;
   isVisibleFormEditExperience = false;
   popupDeleteVisible = false;

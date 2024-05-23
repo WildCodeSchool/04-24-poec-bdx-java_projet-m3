@@ -15,6 +15,7 @@ import { StudentService } from '../../../../shared/services/student.service';
 export class CardInfosComponent {
   @Input() mentor!: Mentor;
   @Input() chips!: Skill[];
+  @Input() editModeOn = true;
   editFormApropoVisible = false;
 
   mentorService = inject(MentorService);

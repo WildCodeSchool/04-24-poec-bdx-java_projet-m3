@@ -12,6 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class ListExperienceComponent {
   @Input() title: string = '';
   @Input() experiences!: Experience[];
+  @Input() editModeOn: boolean = true;
   isVisibleFormExperience = false;
 
   userService = inject(UserService);

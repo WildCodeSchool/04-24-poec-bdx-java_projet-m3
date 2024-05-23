@@ -12,6 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class ListFormationComponent {
   @Input() title: string = '';
   @Input() formations!: Formation[];
+  @Input() editModeOn: boolean = false;
   isVisibleFormCourse = false;
 
   windowWatcherService = inject(WindowWatcherService);

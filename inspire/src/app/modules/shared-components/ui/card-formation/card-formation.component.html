@@ -10,7 +10,7 @@
       </div>
     </div>
   </div>
-  <div class="card-skill-control">
+  <div class="card-skill-control" *ngIf="editModeOn">
     <button (click)="showEditForm()">
       <img src="assets/svgs/edit.svg" alt="edit" width="20" height="20" />
     </button>

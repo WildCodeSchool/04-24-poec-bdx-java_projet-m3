@@ -16,6 +16,7 @@ import { DashboardLinkStudentComponent } from './components/ui/dashboard-link-st
 import { MentorModule } from '../mentor/mentor.module';
 import { ProfilStudentComponent } from './pages/profil-student/profil-student.component';
 import { ListFavoritesComponent } from './pages/list-favorites/list-favorites.component';
+import { MentorProfilByStudentComponent } from './pages/mentor-profil-by-student/mentor-profil-by-student.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ListFavoritesComponent } from './pages/list-favorites/list-favorites.co
     DashboardLinkStudentComponent,
     ProfilStudentComponent,
     ListFavoritesComponent,
+    MentorProfilByStudentComponent,
   ],
   imports: [
     CommonModule,
