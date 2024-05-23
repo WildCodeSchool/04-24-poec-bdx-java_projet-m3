@@ -85,7 +85,6 @@ export default class MentorManager {
   }
 
   static async updateImage(userId, imgUrl) {
-    console.log("here");
     const res = await client.query(
       `UPDATE mentors SET imgUrl = ? WHERE userId = ?`,
       [imgUrl, +userId]

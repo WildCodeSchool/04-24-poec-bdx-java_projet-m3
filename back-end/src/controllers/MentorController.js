@@ -87,7 +87,6 @@ export default class MentorController {
 
   static async updateImage(req, res) {
     try {
-      console.log(req.newPath, req.relativePath);
       const { userId } = req.params;
       const result = await MentorManager.read(userId);
       if (result) {

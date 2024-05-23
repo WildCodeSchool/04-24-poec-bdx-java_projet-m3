@@ -38,10 +38,18 @@ export class CardInfosComponent {
   }) {
     if (newProfil.file && newProfil.fileName) {
       console.log(newProfil);
-      this.mentorService
-        .updateMentorImage(newProfil.file)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe();
+      if (this.userStoreService.getUserConnected$().value?.role === 'mentor') {
+        this.mentorService
+          .updateMentorImage(newProfil.file)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe();
+      }
+      if (this.userStoreService.getUserConnected$().value?.role === 'student') {
+        this.studentService
+          .updateStudentImage(newProfil.file)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe();
+      }
     }
 
     if (this.userStoreService.getUserConnected$().value?.role === 'mentor') {
