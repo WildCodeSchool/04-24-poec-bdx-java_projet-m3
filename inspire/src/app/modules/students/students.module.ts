@@ -16,6 +16,9 @@ import { ListboxModule } from 'primeng/listbox';
 import { DashboardLinkStudentComponent } from './components/ui/dashboard-link-student/dashboard-link-student.component';
 import { MentorModule } from '../mentor/mentor.module';
 import { ListFavoritesComponent } from './pages/list-favorites/list-favorites.component';
+import { StudentReservationComponent } from './pages/student-reservation/student-reservation.component';
+import { ListStudentReservationComponent } from './components/features/list-student-reservation/list-student-reservation.component';
+import { StudentReservationWithSwipeUpcomingComponent } from './components/ui/student-reservation-with-swipe-upcoming/student-reservation-with-swipe-upcoming.component';
 
 
 @NgModule({
@@ -27,6 +30,9 @@ import { ListFavoritesComponent } from './pages/list-favorites/list-favorites.co
     FilterSearchListComponent,
     DashboardLinkStudentComponent,
     ListFavoritesComponent,
+    StudentReservationComponent,
+    ListStudentReservationComponent,
+    StudentReservationWithSwipeUpcomingComponent,
   ],
   imports: [
     CommonModule,

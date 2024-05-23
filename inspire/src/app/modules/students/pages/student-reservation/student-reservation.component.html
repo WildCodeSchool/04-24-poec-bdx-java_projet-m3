@@ -1,0 +1,14 @@
+<ng-container *ngIf="reservations$ | async as reservations">
+  <app-list-student-reservation
+    [title]="'Mes réservations à venir'"
+    [reservations]="reservations.reservations"
+  ></app-list-student-reservation>
+</ng-container>
+<ng-container *ngIf="reservationsHistory$ | async as reservations">
+  <app-list-student-reservation
+    [title]="'Historique de mes réservations'"
+    [reservations]="reservations.reservations"
+    [isHistory]="true"
+  ></app-list-student-reservation>
+</ng-container>
+

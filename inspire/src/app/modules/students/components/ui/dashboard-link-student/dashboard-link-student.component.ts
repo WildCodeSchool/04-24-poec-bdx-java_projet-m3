@@ -34,7 +34,7 @@ export class DashboardLinkStudentComponent {
       title: 'Mes réservations',
       logoUrl: 'assets/svgs/edit.svg',
       logoUrlActive: 'assets/svgs/edit-white.svg',
-      path: 'student',
+      path: 'student/reservations',
       active: false,
     },
     {
