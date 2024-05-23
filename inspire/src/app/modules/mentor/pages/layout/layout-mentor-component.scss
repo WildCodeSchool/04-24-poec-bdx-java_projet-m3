@@ -34,6 +34,8 @@
 
   button.burger {
     position: absolute;
+    top: -10px;
+    left: 15px;
     height: 30px;
     display: flex;
     justify-content: center;
@@ -41,6 +43,7 @@
     margin-bottom: 30px;
     background-color: transparent;
     border: none;
+    margin-left: 10px;
   }
   .container-side-nav {
     margin-top: 40px;
@@ -51,13 +54,14 @@
     padding: 10px 10px;
     margin-top: 20px;
     z-index: 10;
+    // flex-basis: 250px;
 
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 
     .logout {
-      margin: 0 auto;
+      margin-left: 20px;
 
       .logout-btn {
         display: flex;
@@ -66,12 +70,13 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        justify-content: start;
       }
     }
   }
   .container-outlet {
     flex-grow: 1;
-    padding: 20px;
+    padding: 15px;
     transition: 0.2s all ease;
     height: calc(100vh - 130px);
     overflow-y: auto;
@@ -137,7 +142,7 @@
   }
 }
 
-@media screen and (max-width: $small) {
+@media screen and (max-width: $medium) {
   .container-layout {
     .header-container {
       width: 90%;

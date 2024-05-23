@@ -18,7 +18,10 @@
           [ngStyle]="{transform: (!showNavbar && !windowWatcher.windowSizeChanged.value)? 'scaleX(0)' : 'scaleX(1)', transformOrigin: 'top left'}"
         >
           <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
-          <div class="logout">
+          <div
+            class="logout"
+            [ngStyle]="{ margin: showNavbar ? '0 0 0 20px' : '0 auto' }"
+          >
             <button (click)="modalVisible = true" class="logout-btn">
               <img
                 src="assets/svgs/logout.svg"
