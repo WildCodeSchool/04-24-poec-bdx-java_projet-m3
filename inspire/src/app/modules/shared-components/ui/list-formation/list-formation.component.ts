@@ -28,7 +28,7 @@ export class ListFormationComponent {
 
   addNewCourse(formation: Formation) {
     this.userService
-      .addFormationMentor(formation)
+      .addFormationUser(formation)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }

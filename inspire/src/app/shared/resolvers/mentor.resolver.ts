@@ -17,23 +17,23 @@ export const mentorLanguagesResolver: ResolveFn<Observable<Language[]>> = (
   route,
   state
 ) => {
-  return inject(UserService).getMentorLanguages();
+  return inject(UserService).getUserLanguages();
 };
 
 export const mentorSkillsResolver: ResolveFn<Skill[]> = (route, state) => {
-  return inject(UserService).getMentorSkills();
+  return inject(UserService).getUserSkills();
 };
 
 export const mentorExperiencesResolver: ResolveFn<Experience[]> = (
   route,
   state
 ) => {
-  return inject(UserService).getMentorExperiences();
+  return inject(UserService).getUserExperiences();
 };
 
 export const mentorFormationsResolver: ResolveFn<Formation[]> = (
   route,
   state
 ) => {
-  return inject(UserService).getMentorFormations();
+  return inject(UserService).getUserFormations();
 };

@@ -30,6 +30,8 @@ import { FormAddExperienceComponent } from './form-add-experience/form-add-exper
 import { FormEditExperienceComponent } from './form-edit-experience/form-edit-experience.component';
 import { CardInfosComponent } from './ui/card-infos/card-infos.component';
 import { FileUploadComponent } from './ui/file-upload/file-upload.component';
+import { DashboardLinksComponent } from './dashboard-links/dashboard-links.component';
+import { NavbarButtonComponent } from './ui/navbar-button/navbar-button.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { FileUploadComponent } from './ui/file-upload/file-upload.component';
     FormEditExperienceComponent,
     CardInfosComponent,
     FileUploadComponent,
+    DashboardLinksComponent,
+    NavbarButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -89,6 +93,8 @@ import { FileUploadComponent } from './ui/file-upload/file-upload.component';
     FormEditAproposComponent,
     CardInfosComponent,
     FileUploadComponent,
+    DashboardLinksComponent,
+    NavbarButtonComponent,
   ],
 })
 export class SharedComponentsModule {}

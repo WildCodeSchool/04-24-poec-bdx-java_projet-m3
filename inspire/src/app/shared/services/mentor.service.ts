@@ -16,7 +16,7 @@ export class MentorService {
     private userStoreService: UserStoreService,
     private favoritesService: FavoritesService
   ) {}
- 
+
   userConnected = inject(UserStoreService).getUserConnected$();
 
   activeMentorProfil$: BehaviorSubject<Mentor> = new BehaviorSubject<Mentor>(
@@ -56,7 +56,9 @@ export class MentorService {
   }
 
   getMentorListFavoriteByStudent(studentId: number): Observable<Mentor[]> {
-    return this.httpClient.get<Mentor[]>(environment.BASE_URL + `/favorite/mentors/${studentId}`);
+    return this.httpClient.get<Mentor[]>(
+      environment.BASE_URL + `/favorite/mentors/${studentId}`
+    );
   }
 
   getMentorReservationsList() {
@@ -84,7 +86,7 @@ export class MentorService {
             this.userConnected.value?.id,
           formData
         )
-        .pipe(tap(res => this.activeMentorProfil$.next(res.profil)));
+        .pipe(tap((res) => this.activeMentorProfil$.next(res.profil)));
     } else return of();
   }
 }

@@ -58,7 +58,7 @@ export class CardInfosComponent {
     }
 
     this.userService
-      .updateMentorSkills(newProfil.skills)
+      .updateUserSkills(newProfil.skills)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }

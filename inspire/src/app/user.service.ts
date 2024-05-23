@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { DestroyRef, Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, first, map, switchMap, tap } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { BehaviorSubject, Observable, map, switchMap, tap } from 'rxjs';
 import { Mentor, Student, User } from './shared/models/user';
 import { UserStoreService } from './shared/services/stores/user-store.service';
 import { Router } from '@angular/router';
@@ -8,9 +8,7 @@ import { Skill } from './shared/models/chip';
 import { Language } from './shared/models/language';
 import { Experience } from './shared/models/experience';
 import { Formation } from './shared/models/formation';
-import { MentorService } from './shared/services/mentor.service';
 import { environment } from '../environments/environment.development';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root',
@@ -21,16 +19,16 @@ export class UserService {
   private http = inject(HttpClient);
   private userStore = inject(UserStoreService);
 
-  activeMentorFormations$: BehaviorSubject<Formation[]> = new BehaviorSubject(
+  activeUserFormations$: BehaviorSubject<Formation[]> = new BehaviorSubject(
     [] as Formation[]
   );
-  activeMentorExperiences$: BehaviorSubject<Experience[]> = new BehaviorSubject(
+  activeUserExperiences$: BehaviorSubject<Experience[]> = new BehaviorSubject(
     [] as Experience[]
   );
-  activeMentorLanguages$: BehaviorSubject<Language[]> = new BehaviorSubject(
+  activeUserLanguages$: BehaviorSubject<Language[]> = new BehaviorSubject(
     [] as Language[]
   );
-  activeMentorSkills$: BehaviorSubject<Skill[]> = new BehaviorSubject(
+  activeUserSkills$: BehaviorSubject<Skill[]> = new BehaviorSubject(
     [] as Skill[]
   );
 
@@ -159,17 +157,36 @@ export class UserService {
     return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
   }
 
-  getMentorLanguages() {
+  getUserLanguages() {
     return this.http
       .get<Language[]>(
         environment.BASE_URL +
           '/language/languages/user/' +
           this.userStore.getUserConnected$().value?.id
       )
-      .pipe(tap((languages) => this.activeMentorLanguages$.next(languages)));
+      .pipe(
+        tap((languages) => {
+          this.activeUserLanguages$.next(languages);
+        })
+      );
   }
 
-  updateMentorLanguages(languages: Language[]) {
+  // getStudentLanguages() {
+  //   return this.http
+  //     .get<Language[]>(
+  //       environment.BASE_URL +
+  //         '/language/languages/user/' +
+  //         this.userStore.getUserConnected$().value?.id
+  //     )
+  //     .pipe(
+  //       tap((languages) => {
+  //         this.activeStudentLanguages$.next(languages);
+  //         console.log(languages);
+  //       })
+  //     );
+  // }
+
+  updateUserLanguages(languages: Language[]) {
     console.log('user id', this.userStore.getUserConnected$().value?.id);
 
     return this.http
@@ -181,23 +198,23 @@ export class UserService {
       )
       .pipe(
         tap((result) => {
-          this.activeMentorLanguages$.next(result.languages);
+          this.activeUserLanguages$.next(result.languages);
         })
       );
   }
 
   // CRUD Formation
-  getMentorFormations() {
+  getUserFormations() {
     return this.http
       .get<Formation[]>(
         environment.BASE_URL +
           '/formation/formations/user/' +
           this.userStore.getUserConnected$().value?.id
       )
-      .pipe(tap((formations) => this.activeMentorFormations$.next(formations)));
+      .pipe(tap((formations) => this.activeUserFormations$.next(formations)));
   }
 
-  addFormationMentor(formation: Formation): Observable<{
+  addFormationUser(formation: Formation): Observable<{
     success: string;
     message: string;
     formations: Formation[];
@@ -209,13 +226,11 @@ export class UserService {
         formations: Formation[];
       }>(`${environment.BASE_URL}/formation/formations/`, formation)
       .pipe(
-        tap((response) =>
-          this.activeMentorFormations$.next(response.formations)
-        )
+        tap((response) => this.activeUserFormations$.next(response.formations))
       );
   }
 
-  updateFormationMentor(formation: Formation): Observable<{
+  updateFormationUser(formation: Formation): Observable<{
     success: string;
     affectedRows: number;
     formations: Formation[];
@@ -230,13 +245,11 @@ export class UserService {
         formation
       )
       .pipe(
-        tap((response) =>
-          this.activeMentorFormations$.next(response.formations)
-        )
+        tap((response) => this.activeUserFormations$.next(response.formations))
       );
   }
 
-  deleteFormationMentor(formationId: number): Observable<{
+  deleteFormationUser(formationId: number): Observable<{
     success: string;
     message: string;
     formations: Formation[];
@@ -252,24 +265,22 @@ export class UserService {
         }`
       )
       .pipe(
-        tap((response) =>
-          this.activeMentorFormations$.next(response.formations)
-        )
+        tap((response) => this.activeUserFormations$.next(response.formations))
       );
   }
 
   // CRUD Skill for active mentor
-  getMentorSkills() {
+  getUserSkills() {
     return this.http
       .get<Skill[]>(
         environment.BASE_URL +
           '/skill/skills/user/' +
           this.userStore.getUserConnected$().value?.id
       )
-      .pipe(tap((skills) => this.activeMentorSkills$.next(skills)));
+      .pipe(tap((skills) => this.activeUserSkills$.next(skills)));
   }
 
-  updateMentorSkills(skills: Skill[]) {
+  updateUserSkills(skills: Skill[]) {
     return this.http
       .post<{ success: boolean; message: string; skills: Skill[] }>(
         environment.BASE_URL +
@@ -277,7 +288,7 @@ export class UserService {
           this.userStore.getUserConnected$().value?.id,
         skills
       )
-      .pipe(tap((result) => this.activeMentorSkills$.next(result.skills)));
+      .pipe(tap((result) => this.activeUserSkills$.next(result.skills)));
   }
 
   getMentorSkillsById(userId: number) {
@@ -287,7 +298,7 @@ export class UserService {
   }
 
   // CRUD Experience
-  getMentorExperiences() {
+  getUserExperiences() {
     return this.http
       .get<Experience[]>(
         environment.BASE_URL +
@@ -295,11 +306,11 @@ export class UserService {
           this.userStore.getUserConnected$().value?.id
       )
       .pipe(
-        tap((experiences) => this.activeMentorExperiences$.next(experiences))
+        tap((experiences) => this.activeUserExperiences$.next(experiences))
       );
   }
 
-  addMentorExperience(experience: Experience): Observable<{
+  addUserExperience(experience: Experience): Observable<{
     message: string;
     success: boolean;
     experiences: Experience[];
@@ -314,9 +325,9 @@ export class UserService {
         userId: this.userStore.getUserConnected$().value?.id,
       })
       .pipe(
-        tap((response) =>
-          this.activeMentorExperiences$.next(response.experiences)
-        )
+        tap((result) => {
+          this.activeUserExperiences$.next(result.experiences);
+        })
       );
   }
 
@@ -337,7 +348,8 @@ export class UserService {
       })
       .pipe(
         tap((result) => {
-          this.activeMentorExperiences$.next(result.experiences);
+          this.activeUserExperiences$.next(result.experiences);
+
           console.log(result);
         })
       );
@@ -358,6 +370,10 @@ export class UserService {
           this.userStore.getUserConnected$().value?.id
         }`
       )
-      .pipe(tap((res) => this.activeMentorExperiences$.next(res.experiences)));
+      .pipe(
+        tap((res) => {
+          this.activeUserExperiences$.next(res.experiences);
+        })
+      );
   }
 }
