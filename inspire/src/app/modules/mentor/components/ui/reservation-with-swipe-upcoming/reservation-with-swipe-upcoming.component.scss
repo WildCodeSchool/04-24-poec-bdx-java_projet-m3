@@ -1,0 +1,127 @@
+@import "../../../../../../variables.scss";
+.row-reservation {
+  transition: 0.2s all ease;
+  position: relative;
+  width: 100%;
+  height: 65px;
+  padding-left: 33px;
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
+
+  .avatar-name {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    img {
+      border-radius: 50%;
+    }
+  }
+  .promotion,
+  .sujet,
+  .date,
+  .action {
+    display: flex;
+    align-items: center;
+  }
+  .date {
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+  }
+  .action button {
+    background-color: rgba(112, 102, 102, 0.1);
+    color: black;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    margin: 5px 5px;
+    min-width: 90px;
+
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+}
+
+.transparent {
+  background-color: white;
+}
+.grey {
+  background-color: $background-light-list;
+}
+
+@media screen and (max-width: $large) {
+  .row-reservation {
+    padding-left: 0;
+    grid-template-columns: 2fr 1fr 2fr 1fr;
+
+    .action {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: $medium) {
+  .row-reservation {
+    padding-left: 0;
+    grid-template-columns: 2fr 2fr 1fr;
+
+    .promotion {
+      display: none;
+    }
+  }
+}
+
+.main {
+  display: flex;
+  overflow: auto;
+  flex-wrap: nowrap;
+  position: relative;
+  overflow-x: hidden;
+
+  .action-phone {
+    position: absolute;
+    margin: 15px;
+
+    animation: showUp 0.2s ease;
+    button {
+      border: none;
+      background-color: transparent;
+      margin: 0 10px;
+    }
+  }
+}
+
+.slide-right {
+  transform: translate(150px);
+  transition: 0.2s all ease;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes showUp {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.modal-note {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .control {
+    margin: 10px 0;
+    display: flex;
+    gap: 10px;
+  }
+}

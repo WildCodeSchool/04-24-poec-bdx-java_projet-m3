@@ -38,14 +38,14 @@
     .filter-button {
       align-self: center;
 
-    button {
-      padding: 5px 15px;
-      color:  white;
-      border: none;
-      background-color: #f7156b;
-      border-radius: 10px;
+      button {
+        padding: 5px 15px;
+        color: white;
+        border: none;
+        background-color: #f7156b;
+        border-radius: 10px;
+      }
     }
-  }
   }
 }
 
@@ -56,4 +56,3 @@
 .p-multiselect-filter-container {
   background-color: red; /* Définis le style ici */
 }
-

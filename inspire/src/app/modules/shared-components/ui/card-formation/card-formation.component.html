@@ -35,7 +35,7 @@
   >
     <app-form-edit-course
       [formation]="formation"
-      (onValidate)="hideEditForm()"
+      (formationEmitter)="editForm($event)"
     ></app-form-edit-course>
   </p-sidebar>
 </ng-container>

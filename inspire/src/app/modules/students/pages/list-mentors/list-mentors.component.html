@@ -1,5 +1,6 @@
-
-<app-filter-search-list (filteredMentors)="updateMentorList($event)"></app-filter-search-list>
+<app-filter-search-list
+  (filteredMentors)="updateMentorList($event)"
+></app-filter-search-list>
 <h1>{{ (mentorList$ | async)?.length }} mentors disponibles</h1>
 <div *ngIf="mentorList$ | async as mentorList">
   <div class="card-container">

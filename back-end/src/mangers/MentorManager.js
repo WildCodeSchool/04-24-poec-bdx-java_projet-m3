@@ -1,14 +1,17 @@
 import { client } from "../clientDb/client.js";
 
 export default class MentorManager {
-  static async browse() {
-    try {
-      const [rows] = await client.query(`select * from mentors`);
-      return rows;
-    } catch (error) {
-      console.error(error.message);
-      throw new Error(error.message);
+  static async browse(perPage, offset) {
+    let sql = `select * from mentors`;
+    const sqlValues = [];
+
+    if (+perPage && +offset !== undefined) {
+      sql += ` limit ? offset ?`;
+      sqlValues.push(+perPage);
+      sqlValues.push(+offset);
     }
+    const [rows] = await client.query(sql, sqlValues);
+    return rows;
   }
 
   static async read(userId) {
@@ -67,16 +70,29 @@ export default class MentorManager {
     }
   }
 
-  static async update(id, props) {
+  static async update(userId, props) {
     let sql = `UPDATE mentors set`;
     const sqlValues = [];
     for (const [key, value] of Object.entries(props)) {
       sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
       sqlValues.push(value);
     }
-    sql += ` where id = ?`;
-    sqlValues.push(id);
+    sql += ` where userId = ?`;
+    sqlValues.push(userId);
     const [res] = await client.query(sql, sqlValues);
-    return res.affectedRows;
+    const profil = await MentorManager.read(userId);
+    return { affectedRows: res.affectedRows, profil, success: true };
+  }
+
+  static async updateImage(userId, imgUrl) {
+    console.log("here");
+    const res = await client.query(
+      `UPDATE mentors SET imgUrl = ? WHERE userId = ?`,
+      [imgUrl, +userId]
+    );
+
+    console.log(res);
+    const profil = await MentorManager.read(userId);
+    return { affectedRows: res.affectedRows, profil, success: true };
   }
 }

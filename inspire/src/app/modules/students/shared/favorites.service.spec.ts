@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { MentorServiceService } from './mentor-service.service';
+import { FavoritesService } from './favorites.service';
 
-describe('MentorServiceService', () => {
-  let service: MentorServiceService;
+describe('FavoritesService', () => {
+  let service: FavoritesService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(MentorServiceService);
+    service = TestBed.inject(FavoritesService);
   });
 
   it('should be created', () => {

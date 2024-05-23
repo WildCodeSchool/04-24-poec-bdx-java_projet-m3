@@ -1,93 +1,90 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { BehaviorSubject, forkJoin, of, switchMap, tap } from 'rxjs';
-import { Mentor, MentorFullProfil } from '../models/user';
-import { Skill } from '../models/chip';
-import { Language } from '../models/language';
-import { Formation } from '../models/formation';
-import { Experience } from '../models/experience';
+import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
+import { Mentor } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
+import { reservationForMentorDTO } from '../models/reservation';
+import { FavoritesService } from '../../modules/students/shared/favorites.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MentorService {
-  httpClient = inject(HttpClient);
+  constructor(
+    private httpClient: HttpClient,
+    private userStoreService: UserStoreService,
+    private favoritesService: FavoritesService
+  ) {}
+ 
   userConnected = inject(UserStoreService).getUserConnected$();
 
-  constructor() {}
-
-  activeMentor$: BehaviorSubject<MentorFullProfil> = new BehaviorSubject(
-    {} as MentorFullProfil
+  activeMentorProfil$: BehaviorSubject<Mentor> = new BehaviorSubject<Mentor>(
+    {} as Mentor
   );
+  mentorsReservations$: BehaviorSubject<reservationForMentorDTO[]> =
+    new BehaviorSubject<reservationForMentorDTO[]>([]);
 
-  getMentorById() {
+  getMentorProfil() {
+    return this.httpClient.get<Mentor>(
+      environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
+    );
+  }
+
+  updateMentorProfil(profil: Mentor) {
     return this.httpClient
-      .get<Mentor>(
-        environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
+      .put<{ affectedRow: number; profil: Mentor; success: boolean }>(
+        environment.BASE_URL +
+          '/mentor/mentors/' +
+          this.userConnected.value?.id,
+        { ...profil, userId: this.userConnected.value?.id }
       )
-      .pipe(
-        switchMap((ele) => {
-          const listSkills = this.getMentorSkills();
-          const listLanguages = this.getMentorLanguages();
-          const listFormations = this.getMentorFormations();
-          const listExperiences = this.getMentorExperiences();
-          return forkJoin({
-            profil: of(ele),
-            languages: listLanguages,
-            skills: listSkills,
-            formations: listFormations,
-            experiences: listExperiences,
-          });
-        })
-      )
-      .pipe(tap((fullProfil) => this.activeMentor$.next(fullProfil)));
+      .pipe(tap((result) => this.activeMentorProfil$.next(result.profil)));
   }
 
-  getMentorSkills() {
-    return this.httpClient.get<Skill[]>(
+  getMentorsList() {
+    return this.httpClient.get<Mentor[]>(
+      environment.BASE_URL + '/mentor/mentors'
+    );
+  }
+
+  getMentorListPagination(perPage: number, offset: number) {
+    return this.httpClient.get<Mentor[]>(
       environment.BASE_URL +
-        '/skill/skills/user/' +
+        `/mentor/mentors?perPage=${perPage}&offset=${offset}`
+    );
+  }
+
+  getMentorListFavoriteByStudent(studentId: number): Observable<Mentor[]> {
+    return this.httpClient.get<Mentor[]>(environment.BASE_URL + `/favorite/mentors/${studentId}`);
+  }
+
+  getMentorReservationsList() {
+    return this.httpClient.get<reservationForMentorDTO[]>(
+      environment.BASE_URL +
+        '/reservation/reservations/mentor' +
         this.userConnected.value?.id
     );
   }
 
-  getMentorSkillsById(userId: number) {
-    return this.httpClient.get<Skill[]>(
-      `${environment.BASE_URL}/skill/skills/user/${userId}`
-    );
-  }
+  updateMentorImage(file: File) {
+    if (file) {
+      const formData = new FormData();
 
-  getMentorLanguages() {
-    return this.httpClient.get<Language[]>(
-      environment.BASE_URL +
-        '/language/languages/user/' +
-        this.userConnected.value?.id
-    );
-  }
+      formData.append('file', file);
 
-  getMentorFormations() {
-    return this.httpClient.get<Formation[]>(
-      environment.BASE_URL +
-        '/formation/formations/user/' +
-        this.userConnected.value?.id
-    );
-  }
-  getMentorExperiences() {
-    return this.httpClient.get<Experience[]>(
-      environment.BASE_URL +
-        '/experience/experiences/user/' +
-        this.userConnected.value?.id
-    );
-  }
-
-  updateMentorLanguagesList(languages: Language[]) {
-    return this.httpClient.post<{ success: boolean; message: string }>(
-      environment.BASE_URL +
-        '/language/languages/user/' +
-        this.userConnected.value?.id,
-      languages
-    );
+      return this.httpClient
+        .put<{
+          affectedRow: number;
+          profil: Mentor;
+          success: boolean;
+        }>(
+          environment.BASE_URL +
+            '/mentor/mentors/image/' +
+            this.userConnected.value?.id,
+          formData
+        )
+        .pipe(tap(res => this.activeMentorProfil$.next(res.profil)));
+    } else return of();
   }
 }

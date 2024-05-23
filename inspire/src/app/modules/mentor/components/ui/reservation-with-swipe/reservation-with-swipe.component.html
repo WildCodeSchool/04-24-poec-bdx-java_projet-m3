@@ -15,16 +15,16 @@
         width="35"
         height="35"
       />
-      <p>{{ reservation.student.firstname }}</p>
+      <p>{{ reservation.firstname }}</p>
     </div>
     <div class="promotion">
-      {{ reservation.student.promotion || "Angular" | titlecase }}
+      {{ reservation.title | titlecase }}
     </div>
     <div class="sujet">
       {{ reservation.subject || "sans sujet" | titlecase }}
     </div>
     <div class="date">
-      {{ reservation.slot.dateTime | date : "dd/MM/yyyy" }}
+      {{ reservation.dateTime | date : "dd/MM/yyyy" }}
     </div>
     <div class="creneau">{{ endAt | date : "dd/MM/yyyy" }}</div>
   </div>

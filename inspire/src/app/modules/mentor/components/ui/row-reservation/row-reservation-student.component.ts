@@ -1,8 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {
-  Reservation,
-  ResponseReservation,
-} from '../../../../../shared/models/reservation';
+import { reservationForMentorDTO } from '../../../../../shared/models/reservation';
 
 @Component({
   selector: 'app-row-reservation',
@@ -11,7 +8,7 @@ import {
 })
 export class RowReservationComponent implements OnInit {
   @Input()
-  reservation!: ResponseReservation;
+  reservation!: reservationForMentorDTO;
   @Input()
   bgColor: string = 'transparent';
   @Input()
@@ -19,7 +16,7 @@ export class RowReservationComponent implements OnInit {
   endAt!: Date;
 
   ngOnInit(): void {
-    this.endAt = new Date(this.reservation.slot.dateTime);
+    this.endAt = new Date(this.reservation.dateTime);
     this.endAt.setTime(this.endAt.getTime() + this.slotLength * 3600000);
   }
 }

@@ -1,9 +1,18 @@
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  Input,
+  Output,
+  inject,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { UserService } from '../../../user.service';
 import { UserStoreService } from '../../../shared/services/stores/user-store.service';
 import { User } from '../../../shared/models/user';
 import { Experience } from '../../../shared/models/experience';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Formation } from '../../../shared/models/formation';
 
 @Component({
   selector: 'app-form-add-experience',
@@ -20,18 +29,14 @@ export class FormAddExperienceComponent {
     country: [''],
   });
 
-  @Input() destroy!: () => void;
+  @Output() destroy = new EventEmitter();
+  @Output() onExperienceAdd = new EventEmitter<Formation>();
 
-  constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    private userStore: UserStoreService
-  ) {}
+  destroyedRef = inject(DestroyRef);
+
+  constructor(private fb: FormBuilder) {}
 
   onSubmit() {
-    console.log(this.experienceForm.value);
-    const user = this.userStore.getUserConnected$().value as User;
-
     const experience: Experience = {
       title: this.experienceForm.value.title as string,
       company: this.experienceForm.value.company as string,
@@ -39,13 +44,12 @@ export class FormAddExperienceComponent {
       dateEnd: this.experienceForm.value.dateEnd as string,
       city: this.experienceForm.value.city as string,
       country: this.experienceForm.value.country as string,
-      userId: user.id as number,
-    };
+    } as Experience;
 
-    this.userService.postExperience(experience).subscribe();
+    this.onExperienceAdd.emit(experience);
   }
 
   cancel() {
-    this.destroy();
+    this.destroy.emit();
   }
 }

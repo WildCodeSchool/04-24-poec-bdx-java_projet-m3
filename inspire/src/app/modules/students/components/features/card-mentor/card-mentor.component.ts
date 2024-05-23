@@ -1,24 +1,69 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { Mentor } from '../../../../../shared/models/user';
 import { Skill } from '../../../../../shared/models/chip';
-import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Observable } from 'rxjs';
+import { FavoritesService } from '../../../shared/favorites.service';
+import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
+import { UserService } from '../../../../../user.service';
+import { StudentService } from '../../../../../shared/services/student.service';
+import { MentorService } from '../../../../../shared/services/mentor.service';
 
 @Component({
   selector: 'app-card-mentor',
   templateUrl: './card-mentor.component.html',
-  styleUrl: './card-mentor.component.scss',
+  styleUrls: ['./card-mentor.component.scss']
 })
 export class CardMentorComponent implements OnInit {
-  @Input()
-  mentor!: Mentor;
+  @Input() mentor!: Mentor;
+
+  isFavorite: boolean = false;
+
+  constructor(
+    private favoritesService: FavoritesService,
+    private userStoreService: UserStoreService,
+    private studentService: StudentService,
+    private mentorService: MentorService
+  ) {}
 
   skillList$?: Observable<Skill[]>;
-  mentorService = inject(MentorService);
+  
+userService = inject(UserService);
 
   ngOnInit(): void {
-    this.skillList$ = this.mentorService.getMentorSkillsById(
-      this.mentor.userId
-    );
+    this.skillList$ = this.userService.getMentorSkillsById(this.mentor.userId);
+    console.log("mentor:", this.mentor.id);
+    this.checkIfFavorite();
+  }
+
+  checkIfFavorite(): void {
+    const studentId = this.userStoreService.getUserId();
+    if (studentId) {
+      this.favoritesService.isFavorite(this.studentService.activeStudentProfil$.value.id || 0, this.mentor.id || 0).subscribe(result => {
+        this.isFavorite = result.isFavorite;
+      }, error => {
+        console.error('Error checking favorite status:', error);
+      });
+    }
+  }
+
+  toggleFavorite(): void {
+    const studentId = this.userStoreService.getUserId();
+    if (studentId) {
+      if (this.isFavorite) {
+        this.isFavorite = true;
+        this.favoritesService.removeFromFavorites(this.studentService.activeStudentProfil$.value.id || 0, this.mentor.id || 0).subscribe(() => {
+          this.isFavorite = false;
+        }, error => {
+          console.error('Error removing from favorites:', error);
+        });
+      } else {
+        this.isFavorite = true;
+        this.favoritesService.addToFavorites(this.studentService.activeStudentProfil$.value.id || 0, this.mentor.id || 0).subscribe(() => {
+          this.isFavorite = true;
+        }, error => {
+          console.error('Error adding to favorites:', error);
+        });
+      }
+    }
   }
 }

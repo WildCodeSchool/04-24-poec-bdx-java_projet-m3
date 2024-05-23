@@ -1,6 +1,8 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, DestroyRef, Input, inject } from '@angular/core';
 import { Experience } from '../../../../shared/models/experience';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
+import { UserService } from '../../../../user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-list-experience',
@@ -12,13 +14,24 @@ export class ListExperienceComponent {
   @Input() experiences!: Experience[];
   isVisibleFormExperience = false;
 
+  userService = inject(UserService);
+  destroyRef = inject(DestroyRef);
+
   windowWatcherService = inject(WindowWatcherService);
 
-  addExperience() {
+  addExperience(experience: Experience) {
+    this.userService
+      .addMentorExperience(experience)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+    this.isVisibleFormExperience = false;
+  }
+
+  showAddExperienceForm() {
     this.isVisibleFormExperience = true;
   }
 
-  hideAddExperience = () => {
+  hideAddExperience() {
     this.isVisibleFormExperience = false;
-  };
+  }
 }

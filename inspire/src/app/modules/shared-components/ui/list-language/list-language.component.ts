@@ -1,11 +1,7 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, DestroyRef, Input, inject } from '@angular/core';
 import { Language } from '../../../../shared/models/language';
-import { MentorService } from '../../../../shared/services/mentor.service';
-import { Subscription } from 'rxjs';
-type responseLanguageUpdate = {
-  success: string;
-  message: string;
-};
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { UserService } from '../../../../user.service';
 
 @Component({
   selector: 'app-list-language',
@@ -17,8 +13,8 @@ export class ListLanguageComponent {
   @Input() languages!: Language[];
   isModalVisible = false;
 
-  mentorService = inject(MentorService);
-  mentorSubscription!: Subscription;
+  userService = inject(UserService);
+  destroyRef = inject(DestroyRef);
 
   showEditModal() {
     this.isModalVisible = true;
@@ -27,21 +23,11 @@ export class ListLanguageComponent {
   hideEditModal() {
     this.isModalVisible = false;
   }
-
-  updateListLanguages(newLanguageList: Language[]) {
-    this.mentorSubscription = this.mentorService
-      .updateMentorLanguagesList(newLanguageList)
-      .subscribe((res) => {
-        if (res.success) {
-          this.mentorService.activeMentor$.next({
-            ...this.mentorService.activeMentor$.value,
-            languages: newLanguageList,
-          });
-        }
-
-        this.mentorSubscription.unsubscribe();
-
-        this.hideEditModal();
-      });
+  updateLanguages(newLanguages: Language[]) {
+    this.userService
+      .updateMentorLanguages(newLanguages)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+    this.isModalVisible = false;
   }
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ResponseReservation } from '../../../../../shared/models/reservation';
+import { reservationForMentorDTO } from '../../../../../shared/models/reservation';
 
 @Component({
   selector: 'app-list-reservation-history',
@@ -7,6 +7,8 @@ import { ResponseReservation } from '../../../../../shared/models/reservation';
   styleUrl: './list-reservation-history.component.scss',
 })
 export class ListReservationHistoryComponent {
-  @Input() reservations!: ResponseReservation[];
+  @Input() reservations!: reservationForMentorDTO[];
   @Input() title: string = '';
+  @Input() isHistory: boolean = false;
+  @Input() isStudent: boolean = false;
 }

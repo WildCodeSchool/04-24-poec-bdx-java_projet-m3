@@ -9,7 +9,6 @@ import { LayoutMentor } from './pages/layout/layout-mentor-component';
 import { SharedModule } from 'primeng/api';
 import { NavbarButtonComponent } from './components/ui/navbar-button/navbar-button.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { CardInfosComponent } from './components/ui/card-infos/card-infos.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { DividerModule } from 'primeng/divider';
 import { ProfilMentorComponent } from './pages/profil-mentor/profil-mentor.component';
@@ -21,6 +20,7 @@ import { DialogModule } from 'primeng/dialog';
 import { AgendaComponent } from './pages/agenda/agenda.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarComponent } from './components/features/calendar/calendar.component';
+import { ReservationWithSwipeComponentUpcoming } from './components/ui/reservation-with-swipe-upcoming/reservation-with-swipe-upcoming.component';
 
 @NgModule({
   declarations: [
@@ -29,13 +29,13 @@ import { CalendarComponent } from './components/features/calendar/calendar.compo
     NavbarButtonComponent,
     DashboardLinksComponent,
     DashboardComponent,
-    CardInfosComponent,
     ProfilMentorComponent,
     ListReservationComponent,
     ListReservationHistoryComponent,
     ReservationWithSwipeComponent,
     AgendaComponent,
     CalendarComponent,
+    ReservationWithSwipeComponentUpcoming,
   ],
   imports: [
     CommonModule,

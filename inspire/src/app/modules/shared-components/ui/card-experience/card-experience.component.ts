@@ -1,7 +1,8 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, DestroyRef, Input, inject } from '@angular/core';
 import { Experience } from '../../../../shared/models/experience';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { UserService } from '../../../../user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-card-experience',
@@ -15,21 +16,34 @@ export class CardExperienceComponent {
 
   windowWatcherService = inject(WindowWatcherService);
   userService = inject(UserService);
+  destroyRef = inject(DestroyRef);
 
   showEditForm() {
     this.isVisibleFormEditExperience = true;
   }
 
-  hideEditForm = () => {
+  hideEditForm() {
     this.isVisibleFormEditExperience = false;
-  };
+  }
 
   showPopUpDelete() {
     this.popupDeleteVisible = true;
   }
 
+  editExperience(experience: Experience) {
+    console.log(experience);
+    this.userService
+      .editExperience(experience, experience.id || 0)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+  }
+
   deleteExperience() {
     const experienceId = this.experience.id;
-    this.userService.deleteExperience(experienceId).subscribe();
+    this.userService
+      .deleteExperience(experienceId || 0)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+    this.popupDeleteVisible = false;
   }
 }

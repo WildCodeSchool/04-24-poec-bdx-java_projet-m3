@@ -1,6 +1,6 @@
 <div class="title-list">
   <h3>{{ title }}</h3>
-  <button class="edit-button" (click)="addExperience()">
+  <button class="edit-button" (click)="showAddExperienceForm()">
     <img src="assets/svgs/plus.svg" alt="edit" width="25" height="25" />
   </button>
 </div>
@@ -28,7 +28,10 @@
       width: phoneMode.phoneMode ? 'max(50vw, 400px)' : '100vw'
     }"
   >
-    <app-form-add-experience [destroy]="hideAddExperience">
+    <app-form-add-experience
+      (destroy)="hideAddExperience()"
+      (onExperienceAdd)="addExperience($event)"
+    >
     </app-form-add-experience>
   </p-sidebar>
 </ng-container>

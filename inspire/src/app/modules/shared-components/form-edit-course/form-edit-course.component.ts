@@ -11,40 +11,21 @@ import { MentorService } from '../../../shared/services/mentor.service';
 })
 export class FormEditCourseComponent implements OnInit {
   @Input() formation!: Formation;
-  courseForm!: FormGroup<any>;
   @Input() destroy!: () => void;
   @Output()
-  onValidate = new EventEmitter<boolean>();
+  formationEmitter = new EventEmitter<Formation>();
+  courseForm!: FormGroup<any>;
 
   onSubmit() {
-    const formationId = this.formation.id;
-    this.userService
-      .editFormation(this.courseForm.value, formationId)
-      .subscribe((data) => {
-        const newFormations =
-          this.mentorService.activeMentor$.value.formations.map((formation) => {
-            if (this.formation.id === formation.id) {
-              return this.courseForm.value;
-            } else {
-              return formation;
-            }
-          });
-
-        if (data.affectedRows) {
-          this.mentorService.activeMentor$.next({
-            ...this.mentorService.activeMentor$.value,
-            formations: newFormations, // []
-          });
-          this.onValidate.emit(false);
-        }
-      });
+    const id = this.formation.id;
+    this.formationEmitter.emit({
+      ...this.courseForm.value,
+      id,
+      userId: this.formation.userId,
+    } as Formation);
   }
 
-  constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    private mentorService: MentorService
-  ) {}
+  constructor(private fb: FormBuilder, private userService: UserService) {}
   ngOnInit(): void {
     const date = new Date(this.formation.dateBegin);
     const formattedDate = date.toISOString().split('T')[0];

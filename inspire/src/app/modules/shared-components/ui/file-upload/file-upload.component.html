@@ -1,0 +1,10 @@
+<input
+  type="file"
+  class="file-input"
+  (change)="onFileSelected($event)"
+  #fileUpload
+  [accept]="'image/png, image/jpeg, image/svg+xml, image/webp'"
+/>
+<ng-container *ngIf="imageUrl">
+  <img [src]="imageUrl" alt="" width="75" height="75" />
+</ng-container>
