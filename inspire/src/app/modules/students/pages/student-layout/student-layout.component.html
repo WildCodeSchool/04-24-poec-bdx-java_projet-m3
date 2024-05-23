@@ -3,7 +3,7 @@
     <div class="container-layout">
       <div class="header-container">
         <h2>Bonjour {{ student.firstname }}</h2>
-        <p>Votre espace étudiant de la Wild Code School</p>
+        <p>Votre espace élève de la Wild Code School</p>
       </div>
       <div class="container-main">
         <button
@@ -23,10 +23,10 @@
             transformOrigin: 'top left'
           }"
         >
-          <app-dashboard-link-student
+          <app-dashboard-links
             [showText]="showNavbar"
-          ></app-dashboard-link-student>
-
+            [listLink]="listLink"
+          ></app-dashboard-links>
           <div class="logout">
             <button (click)="modalVisible = true" class="logout-btn">
               <img

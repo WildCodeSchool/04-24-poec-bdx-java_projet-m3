@@ -28,10 +28,17 @@ export class StudentLayoutComponent implements OnInit {
       active: true,
     },
     {
-      title: 'Recherche',
+      title: 'Mentors',
       logoUrl: 'assets/svgs/calendar.svg',
       logoUrlActive: 'assets/svgs/calendar-white.svg',
       path: 'student/list-mentors',
+      active: false,
+    },
+    {
+      title: 'Mes favoris',
+      logoUrl: 'assets/svgs/edit.svg',
+      logoUrlActive: 'assets/svgs/edit-white.svg',
+      path: 'student/list-favorites',
       active: false,
     },
     {
@@ -39,20 +46,6 @@ export class StudentLayoutComponent implements OnInit {
       logoUrl: 'assets/svgs/edit.svg',
       logoUrlActive: 'assets/svgs/edit-white.svg',
       path: 'student',
-      active: false,
-    },
-    {
-      title: 'Mes favoris',
-      logoUrl: 'assets/svgs/edit.svg',
-      logoUrlActive: 'assets/svgs/edit-white.svg',
-      path: 'student',
-      active: false,
-    },
-    {
-      title: 'Mentor',
-      logoUrl: 'assets/svgs/edit.svg',
-      logoUrlActive: 'assets/svgs/edit-white.svg',
-      path: 'student/mentor-details/1',
       active: false,
     },
   ];

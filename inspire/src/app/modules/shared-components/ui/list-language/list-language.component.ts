@@ -12,7 +12,7 @@ import { UserStoreService } from '../../../../shared/services/stores/user-store.
 export class ListLanguageComponent {
   @Input() title: string = '';
   @Input() languages!: Language[];
-  @Input() editModeOn: boolean = false;
+  @Input() editModeOn: boolean = true;
 
   isModalVisible = false;
 
