@@ -1,6 +1,10 @@
 <div class="container-card">
   <div class="img-card">
     <img src="{{ mentor.imgUrl }}" alt="" />
+    <div class="img-favorite" (click)="toggleFavorite()">
+      <img *ngIf="!isFavorite" src="../../../../../../assets/svgs/heart-regular.svg" alt="Add to favorites" />
+      <img *ngIf="isFavorite" src="../../../../../../assets/svgs/heart-solid.svg" alt="Remove from favorites" />
+    </div>
     <h1>{{ mentor.firstname }} {{ mentor.lastname }}</h1>
   </div>
   <div class="title-card">

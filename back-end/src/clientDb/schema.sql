@@ -31,6 +31,15 @@ CREATE TABLE students (
     FOREIGN KEY (userId) REFERENCES users (id)
 );
 
+    CREATE TABLE favorite_mentor_student (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    studentId INT NOT NULL,
+    mentorId INT NOT NULL,
+    FOREIGN KEY (studentId) REFERENCES students(id),
+    FOREIGN KEY (mentorId) REFERENCES mentors(id),
+    UNIQUE (studentId, mentorId)
+);
+
 CREATE TABLE skills (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL
@@ -410,6 +419,9 @@ VALUES (
         'https://www.linkedin.com/',
         20
     );
+
+INSERT INTO favorite_mentor_student (studentId, mentorId) VALUES (2, 1), (3, 2), (1, 2);
+
 
 INSERT INTO
     skills (name)
@@ -878,3 +890,6 @@ VALUES (
         'Australia',
         3
     );
+
+
+

@@ -15,6 +15,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { DashboardLinkStudentComponent } from './components/ui/dashboard-link-student/dashboard-link-student.component';
 import { MentorModule } from '../mentor/mentor.module';
 import { ProfilStudentComponent } from './pages/profil-student/profil-student.component';
+import { ListFavoritesComponent } from './pages/list-favorites/list-favorites.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ProfilStudentComponent } from './pages/profil-student/profil-student.co
     FilterSearchListComponent,
     DashboardLinkStudentComponent,
     ProfilStudentComponent,
+    ListFavoritesComponent,
   ],
   imports: [
     CommonModule,
