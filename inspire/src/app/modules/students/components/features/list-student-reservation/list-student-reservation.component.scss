@@ -1,0 +1,65 @@
+@import "../../../../../../variables.scss";
+.list-generic {
+  display: block;
+  width: 100%;
+
+  h3 {
+    margin: 50px 0 30px 0;
+    font-weight: 600;
+  }
+
+  .history {
+    background-color: $secondary-color;
+  }
+  .upcoming {
+    background-color: $primary-color;
+  }
+
+  .list-header {
+    color: white;
+    height: 65px;
+    padding-left: 33px;
+    // background-color: $secondary-color;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
+
+    .name,
+    .promotion,
+    .sujet,
+    .date,
+    .creneau,
+    .action {
+      display: flex;
+      align-items: center;
+    }
+    .name {
+      margin-left: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: $large) {
+  .list-generic {
+    .list-header {
+      padding-left: 0;
+      grid-template-columns: 2fr 1fr 2fr 1fr;
+      .action {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $medium) {
+  .list-generic {
+    .list-header {
+      padding-left: 0;
+      grid-template-columns: 2fr 2fr 1fr;
+      .promotion {
+        display: none;
+      }
+    }
+  }
+}

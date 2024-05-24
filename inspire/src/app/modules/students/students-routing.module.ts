@@ -14,6 +14,11 @@ import {
   mentorProfilByIdResolver,
   mentorSkillsByIdResolver,
 } from '../../shared/resolvers/mentor.resolver';
+import { StudentReservationComponent } from './pages/student-reservation/student-reservation.component';
+import {
+  studentReservationsHistoryResolver,
+  studentReservationsResolver,
+} from '../../shared/resolvers/reservations.resolver';
 
 const routes: Routes = [
   {
@@ -33,6 +38,14 @@ const routes: Routes = [
           skills: mentorSkillsByIdResolver,
           formations: mentorFormationsByIdResolver,
           experiences: mentorExperiencesByIdResolver,
+        },
+      },
+      {
+        path: 'reservations',
+        component: StudentReservationComponent,
+        resolve: {
+          reservationsData: studentReservationsResolver,
+          reservationsHistoryData: studentReservationsHistoryResolver,
         },
       },
     ],
