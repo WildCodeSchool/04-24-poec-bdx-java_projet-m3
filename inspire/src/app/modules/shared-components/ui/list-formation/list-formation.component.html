@@ -1,6 +1,6 @@
 <div class="title-list">
   <h3>{{ title }}</h3>
-  <button class="edit-button" (click)="addCourse()">
+  <button class="edit-button" (click)="addCourse()" *ngIf="editModeOn">
     <img src="assets/svgs/plus.svg" alt="edit" width="25" height="25" />
   </button>
 </div>

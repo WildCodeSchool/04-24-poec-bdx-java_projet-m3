@@ -19,6 +19,7 @@ export type Reservation = {
 };
 
 export type ReservationForStudentDTO = {
+  id: number;
   mentorId: number;
   slotId: number;
   userId: number;

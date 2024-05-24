@@ -12,6 +12,8 @@ import { UserStoreService } from '../../../../shared/services/stores/user-store.
 export class ListLanguageComponent {
   @Input() title: string = '';
   @Input() languages!: Language[];
+  @Input() editModeOn: boolean = true;
+
   isModalVisible = false;
 
   userService = inject(UserService);

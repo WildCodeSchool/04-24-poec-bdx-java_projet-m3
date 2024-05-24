@@ -1,0 +1,25 @@
+<div class="list-generic">
+  <h3>{{ title }}</h3>
+  <div class="list-header" [ngClass]="isHistory ? 'history' : 'upcoming'">
+    <div class="name">ELEVE</div>
+    <div class="promotion">TITRE</div>
+    <div class="sujet">SUJET</div>
+    <div class="creneau">CRÉNEAU</div>
+    <div class="action">{{ isHistory ? "MESSAGE" : "ACTION" }}</div>
+  </div>
+  <h3 *ngIf="!reservations.length">
+    {{
+      isHistory
+        ? "Aucune ancienne réservation"
+        : "Pas de nouvelles réservations"
+    }}
+  </h3>
+  @for(item of reservations; track $index){
+
+  <app-student-reservation-with-swipe-upcoming
+    [reservation]="item"
+    [bgColor]="$index % 2 === 0 ? 'transparent' : 'grey'"
+    [isHistory]="isHistory"
+  ></app-student-reservation-with-swipe-upcoming>
+  }
+</div>

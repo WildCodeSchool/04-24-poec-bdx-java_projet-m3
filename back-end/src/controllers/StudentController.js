@@ -16,7 +16,7 @@ export default class StudentController {
       const result = await StudentManager.read(userId);
       res.status(200).json(result);
     } catch (error) {
-      res.status(401).json({ message: "Demande refusée" });
+      res.status(401).json({ message: "Demande refusée user" });
     }
   }
 
@@ -66,11 +66,11 @@ export default class StudentController {
 
   static async update(req, res) {
     try {
-      const { studentId } = req.params;
+      const { userId } = req.params;
       const props = req.body;
-      const result = await StudentManager.read(studentId);
+      const result = await StudentManager.read(userId);
       if (result) {
-        const affectedRows = await StudentManager.update(studentId, props);
+        const affectedRows = await StudentManager.update(userId, props);
         res.status(202).json({ ...affectedRows });
       } else
         res
@@ -85,7 +85,6 @@ export default class StudentController {
 
   static async updateImage(req, res) {
     try {
-      console.log(req.newPath, req.relativePath);
       const { userId } = req.params;
       const result = await StudentManager.read(userId);
       if (result) {

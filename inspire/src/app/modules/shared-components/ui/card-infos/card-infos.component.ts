@@ -15,7 +15,9 @@ import { StudentService } from '../../../../shared/services/student.service';
 export class CardInfosComponent {
   @Input() mentor!: Mentor;
   @Input() chips!: Skill[];
+  @Input() editModeOn = true;
   editFormApropoVisible = false;
+  isFavorite: boolean = false;
 
   mentorService = inject(MentorService);
   studentService = inject(StudentService);
@@ -29,7 +31,6 @@ export class CardInfosComponent {
   closeEditFormApropos() {
     this.editFormApropoVisible = false;
   }
-
   updateProfil(newProfil: {
     profil: Mentor | Student;
     skills: Skill[];
@@ -38,10 +39,18 @@ export class CardInfosComponent {
   }) {
     if (newProfil.file && newProfil.fileName) {
       console.log(newProfil);
-      this.mentorService
-        .updateMentorImage(newProfil.file)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe();
+      if (this.userStoreService.getUserConnected$().value?.role === 'mentor') {
+        this.mentorService
+          .updateMentorImage(newProfil.file)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe();
+      }
+      if (this.userStoreService.getUserConnected$().value?.role === 'student') {
+        this.studentService
+          .updateStudentImage(newProfil.file)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe();
+      }
     }
 
     if (this.userStoreService.getUserConnected$().value?.role === 'mentor') {
@@ -61,5 +70,11 @@ export class CardInfosComponent {
       .updateUserSkills(newProfil.skills)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
+  }
+
+  toggleFavorite() {
+    console.log('lol');
+
+    this.isFavorite != this.isFavorite;
   }
 }

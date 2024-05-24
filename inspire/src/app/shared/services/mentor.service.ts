@@ -26,8 +26,15 @@ export class MentorService {
     new BehaviorSubject<reservationForMentorDTO[]>([]);
 
   getMentorProfil() {
+    return this.httpClient
+      .get<Mentor>(
+        environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
+      )
+      .pipe(tap((res) => this.activeMentorProfil$.next(res)));
+  }
+  getMentorProfilById(userId: number) {
     return this.httpClient.get<Mentor>(
-      environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
+      environment.BASE_URL + '/mentor/mentors/' + userId
     );
   }
 

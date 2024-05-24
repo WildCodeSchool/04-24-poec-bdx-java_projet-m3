@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MentorModule } from './modules/mentor/mentor.module';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
@@ -19,6 +19,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     ReactiveFormsModule,
     MentorModule,
     FullCalendarModule,
+    HttpClientModule,
   ],
   providers: [provideAnimations(), provideHttpClient()],
   bootstrap: [AppComponent],

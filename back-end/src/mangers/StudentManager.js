@@ -82,14 +82,12 @@ export default class StudentManager {
   }
 
   static async updateImage(userId, imgUrl) {
-    console.log("here");
     const res = await client.query(
       `UPDATE students SET imgUrl = ? WHERE userId = ?`,
       [imgUrl, +userId]
     );
 
-    console.log(res);
-    const profil = await MentorManager.read(userId);
+    const profil = await StudentManager.read(userId);
     return { affectedRows: res.affectedRows, profil, success: true };
   }
 }
