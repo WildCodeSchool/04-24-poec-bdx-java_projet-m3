@@ -17,6 +17,7 @@ export class CardInfosComponent {
   @Input() chips!: Skill[];
   @Input() editModeOn = true;
   editFormApropoVisible = false;
+  isFavorite: boolean = false;
 
   mentorService = inject(MentorService);
   studentService = inject(StudentService);
@@ -30,7 +31,6 @@ export class CardInfosComponent {
   closeEditFormApropos() {
     this.editFormApropoVisible = false;
   }
-
   updateProfil(newProfil: {
     profil: Mentor | Student;
     skills: Skill[];
@@ -70,5 +70,11 @@ export class CardInfosComponent {
       .updateUserSkills(newProfil.skills)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
+  }
+
+  toggleFavorite() {
+    console.log('lol');
+
+    this.isFavorite != this.isFavorite;
   }
 }
