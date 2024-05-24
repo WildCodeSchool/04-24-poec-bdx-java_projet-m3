@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { ReservationForStudentDTO, reservationForMentorDTO } from '../models/reservation';
-import { BehaviorSubject, tap } from 'rxjs';
+import { reservationForMentorDTO } from '../models/reservation';
+import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
+import { ReservationForStudentDTO } from '../models/reservation';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +44,25 @@ export class ReservationService {
   });
 
   constructor() {}
+
+  addSlotToMentor(slotInfo: any): Observable<any> {
+    const formattedSlotInfo = {
+      dateTime: slotInfo.dateTime,
+      visio: slotInfo.visio,
+      mentorId: slotInfo.mentorId,
+    };
+
+    return this.httpClient
+      .post(`${environment.BASE_URL}/slot/slots`, formattedSlotInfo)
+      .pipe(switchMap(() => this.getSlotsForMentor(slotInfo.mentorId)));
+  }
+
+  getSlotsForMentor(mentorId: number): Observable<any> {
+    return this.httpClient.get(
+      `${environment.BASE_URL}/slots?mentorId=${mentorId}`
+    );
+  }
+
   getMentorReservationList(id: number, perPage: number, offset: number) {
     return this.httpClient
       .get<{
@@ -99,12 +119,19 @@ export class ReservationService {
         environment.BASE_URL +
           `/reservation/reservations/user/${userId}?perPage=${perPage}&offset=${offset}`
       )
-      .pipe(tap((res) => 
-        {console.log("ma liste de resa", res);
-        this.activeStudentReservations$.next(res)}));
+      .pipe(
+        tap((res) => {
+          console.log('ma liste de resa', res);
+          this.activeStudentReservations$.next(res);
+        })
+      );
   }
 
-  getStudentReservationHistoryList(userId: number, perPage: number, offset: number) {
+  getStudentReservationHistoryList(
+    userId: number,
+    perPage: number,
+    offset: number
+  ) {
     console.log('called');
 
     return this.httpClient
