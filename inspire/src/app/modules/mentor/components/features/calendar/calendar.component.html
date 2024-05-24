@@ -2,4 +2,13 @@
 <ng-container *ngIf="today?.length">
   <h3>La semaine de {{ today }}</h3>
 </ng-container>
+<button (click)="visible = true">open</button>
 <full-calendar [options]="calendarOptions" #calendar></full-calendar>
+<p-dialog
+  header="Edit Profile"
+  [modal]="true"
+  [(visible)]="visible"
+  [style]="{ width: '25rem' }"
+>
+  coucou
+</p-dialog>
