@@ -43,13 +43,6 @@ export class DashboardLinkStudentComponent {
       path: 'student/list-favorites',
       active: false,
     },
-    {
-      title: 'Mentor',
-      logoUrl: 'assets/svgs/edit.svg',
-      logoUrlActive: 'assets/svgs/edit-white.svg',
-      path: 'student/mentor-details/1',
-      active: false,
-    },
   ];
   handleLinkChange(event: boolean, index: number) {
     this.listLink.forEach((link, i) => {
