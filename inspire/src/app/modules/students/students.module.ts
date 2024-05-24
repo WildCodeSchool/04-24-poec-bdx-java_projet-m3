@@ -16,6 +16,9 @@ import { DashboardLinkStudentComponent } from './components/ui/dashboard-link-st
 import { MentorModule } from '../mentor/mentor.module';
 import { ProfilStudentComponent } from './pages/profil-student/profil-student.component';
 import { ListFavoritesComponent } from './pages/list-favorites/list-favorites.component';
+import { StudentReservationComponent } from './pages/student-reservation/student-reservation.component';
+import { ListStudentReservationComponent } from './components/features/list-student-reservation/list-student-reservation.component';
+import { StudentReservationWithSwipeUpcomingComponent } from './components/ui/student-reservation-with-swipe-upcoming/student-reservation-with-swipe-upcoming.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { ListFavoritesComponent } from './pages/list-favorites/list-favorites.co
     DashboardLinkStudentComponent,
     ProfilStudentComponent,
     ListFavoritesComponent,
+    StudentReservationComponent,
+    ListStudentReservationComponent,
+    StudentReservationWithSwipeUpcomingComponent,
   ],
   imports: [
     CommonModule,

@@ -5,6 +5,8 @@ import { StudentLayoutComponent } from './pages/student-layout/student-layout.co
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfilStudentComponent } from './pages/profil-student/profil-student.component';
 import { ListFavoritesComponent } from './pages/list-favorites/list-favorites.component';
+import { StudentReservationComponent } from './pages/student-reservation/student-reservation.component';
+import { studentReservationsHistoryResolver, studentReservationsResolver } from '../../shared/resolvers/reservations.resolver';
 
 const routes: Routes = [
   {
@@ -15,6 +17,12 @@ const routes: Routes = [
       { path: 'list-mentors', component: ListMentorsComponent },
       { path: '', component: ProfilStudentComponent },
       { path: 'list-favorites', component: ListFavoritesComponent },
+      { path: 'reservations', component: StudentReservationComponent,
+      resolve: {
+        reservationsData: studentReservationsResolver,
+        reservationsHistoryData: studentReservationsHistoryResolver
+      }
+       },
     ],
   },
 ];

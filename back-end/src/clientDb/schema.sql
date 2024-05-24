@@ -833,9 +833,10 @@ VALUES (NOW(), true, 1),
         ),
         true,
         3
-    );
+    ),
+    ('2023-05-20 10:00:00', false, 1),
+    (DATE_ADD(NOW(), INTERVAL 7 DAY), true, 2);
 
--- Insérer des réservations avec des valeurs aléatoires pour slotId et userId
 INSERT INTO
     reservations (
         subject,
@@ -852,6 +853,7 @@ VALUES ('Sujet 1', 'Message 1', 1, 11),
     ('Sujet 7', 'Message 7', 7, 12),
     ('Sujet 8', 'Message 8', 8, 11),
     ('Sujet 9', 'Message 9', 9, 15),
+    ('Sujet 16', 'Message 16', 16, 12),
     (
         'Sujet 10',
         'Message 10',
