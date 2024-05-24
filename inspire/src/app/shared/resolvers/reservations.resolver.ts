@@ -43,7 +43,8 @@ export const studentReservationsResolver: ResolveFn<{
   reservations: ReservationForStudentDTO[];
   total: number;
 }> = (route, state) => {
-  const userId = inject(UserStoreService).getUserConnected$().value?.userId;
+  const userId = inject(UserStoreService).getUserConnected$().value?.id;
+  console.log("yo where is my userId?", userId)
   const reservationService = inject(ReservationService);
 
   return reservationService.getStudentReservationList(userId || 0, 10, 0) 
@@ -54,7 +55,7 @@ export const studentReservationsHistoryResolver: ResolveFn<{
   reservations: ReservationForStudentDTO[];
   total: number;
 }> = (route, state) => {
-  const userId = inject(UserStoreService).getUserConnected$().value?.userId;
+  const userId = inject(UserStoreService).getUserConnected$().value?.id;
   const reservationService = inject(ReservationService);
   return reservationService.getStudentReservationHistoryList(userId || 0, 10, 0)
 };
