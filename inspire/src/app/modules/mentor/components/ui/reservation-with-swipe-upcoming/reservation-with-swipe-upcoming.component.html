@@ -6,12 +6,7 @@
   </div>
   <div class="row-reservation" [ngClass]="bgColor" #thisRef>
     <div class="avatar-name">
-      <img
-        [src]="'https://placehold.jp/35x35.png'"
-        alt="avatar"
-        width="35"
-        height="35"
-      />
+      <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" />
       <p>{{ reservation.firstname }}</p>
     </div>
     <div class="promotion">

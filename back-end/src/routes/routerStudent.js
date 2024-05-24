@@ -9,7 +9,7 @@ route.get("/students", StudentController.browse);
 route.get("/students/:userId", StudentController.read);
 route.post("/students", StudentController.add);
 route.delete("/students/:studentId", StudentController.delete);
-route.patch("/students", StudentController.update);
+route.put("/students/:userId", StudentController.update);
 const upload = multer({ dest: "./public/uploads/" });
 route.put(
   "/students/image/:userId",

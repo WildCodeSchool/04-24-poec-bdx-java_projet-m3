@@ -34,7 +34,6 @@ export default class ReservationManager {
         values.push(+offset);
       }
       const [reservations] = await this.database.query(query, values);
-      console.log(reservations);
       const total = reservations[0]?.totalCount ?? 0;
       return { reservations, total };
     } catch (error) {

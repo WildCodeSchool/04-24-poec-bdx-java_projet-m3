@@ -11,6 +11,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class CardFormationComponent {
   @Input() formation!: Formation;
+  @Input() editModeOn: boolean = false;
   isVisibleFormEditCourse = false;
   popupDeleteVisible = false;
 

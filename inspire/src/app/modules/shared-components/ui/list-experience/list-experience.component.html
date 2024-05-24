@@ -1,13 +1,20 @@
 <div class="title-list">
   <h3>{{ title }}</h3>
-  <button class="edit-button" (click)="showAddExperienceForm()">
+  <button
+    class="edit-button"
+    (click)="showAddExperienceForm()"
+    *ngIf="editModeOn"
+  >
     <img src="assets/svgs/plus.svg" alt="edit" width="25" height="25" />
   </button>
 </div>
 <div class="list-skills">
   <ng-container *ngIf="experiences">
     @for( experience of experiences; track $index ){
-    <app-card-experience [experience]="experience"></app-card-experience>
+    <app-card-experience
+      [experience]="experience"
+      [editModeOn]="editModeOn"
+    ></app-card-experience>
     @if($index !== experiences.length -1){
     <p-divider></p-divider>
     } }
