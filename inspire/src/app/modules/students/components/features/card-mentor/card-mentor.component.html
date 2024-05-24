@@ -1,7 +1,7 @@
-<div class="container-card">
+<div class="container-card" [routerLink]="['/student/mentor-details', mentor.userId]">
   <div class="img-card">
     <img src="{{ mentor.imgUrl }}" alt="" />
-    <div class="img-favorite" (click)="toggleFavorite()">
+    <div class="img-favorite" (click)="toggleFavorite($event)">
       <img *ngIf="!isFavorite" src="../../../../../../assets/svgs/heart-regular.svg" alt="Add to favorites" />
       <img *ngIf="isFavorite" src="../../../../../../assets/svgs/heart-solid.svg" alt="Remove from favorites" />
     </div>
