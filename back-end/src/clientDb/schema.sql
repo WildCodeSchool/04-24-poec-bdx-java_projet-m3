@@ -151,7 +151,7 @@ VALUES (
     'student'
 ),
 (
-    'marie@gmail.com',
+    'mahdi@gmail.com',
     '$2b$10$hVjaq5YMTbZIVq8oF6Edj.Xvth4cH6g/G5M95wHEyD02P4Axizsp6',
     'student'
 ),
@@ -228,8 +228,8 @@ VALUES (
         2
     ),
     (
-        'Nassime',
-        'Harmach',
+        'Mahdi',
+        'Mcheik',
         '',
         './assets/Mahdi.jpg',
         'Developpeur Web FullStack Binaire',
@@ -238,58 +238,58 @@ VALUES (
         3
     ),
     (
-        'Pierre',
-        'Dupont',
-        '',
-        'https://picsum.photos/200/300',
-        'Dev Web',
+        'Raphael',
+        'Bard',
+        "Trés bon en SCSS mais c'est tout",
+        './assets/RaphC.jpg',
+        'Developpeur Web | Integrateur de génie',
         'https://www.github.com/',
         'https://www.linkedin.com/',
         4
     ),
     (
-        'Pierre',
-        'Dupont',
-        '',
-        'https://picsum.photos/200/300',
-        'Dev Web',
+        'Aurore',
+        'Valeix',
+        'Il va vous chercher partout',
+        './assets/AuroreC.jpg',
+        'DevOps en herbe',
         'https://www.github.com/',
         'https://www.linkedin.com/',
         5
     ),
     (
-        'test',
-        'test',
+        'Nassime',
+        'Harmach',
         '',
-        'https://picsum.photos/200/300',
-        'Dev Web',
+        './assets/NassimeC.jpg',
+        'Concepteur de package Expert Npm',
         'https://www.github.com/',
         'https://www.linkedin.com/',
         6
     ),
     (
-        'Nassime',
-        'Harmach',
+        'Victor',
+        'Garcia',
         '',
-        'https://picsum.photos/200/300',
-        'Dev Web',
+        './assets/VictoreGarciaC.jpg',
+        'Developpeur Web sous cafeine',
         'https://www.github.com/',
         'https://www.linkedin.com/',
         7
     ),
     (
-        'Pierre',
-        'Dupont',
+        'Adam',
+        'Hermamou',
         '',
-        'https://picsum.photos/200/300',
+        './assets/AdamC.jpg',
         'Dev Web',
         'https://www.github.com/',
         'https://www.linkedin.com/',
         8
     ),
     (
-        'Pierre',
-        'Dupont',
+        'Pierre Louis',
+        'Bastin',
         '',
         'https://picsum.photos/200/300',
         'Dev Web',
@@ -298,10 +298,10 @@ VALUES (
         9
     ),
     (
-        'test',
-        'test',
+        'Angeline',
+        'lineline',
         '',
-        'https://picsum.photos/200/300',
+        './assets/Angeline.jpeg',
         'Dev Web',
         'https://www.github.com/',
         'https://www.linkedin.com/',
@@ -330,8 +330,8 @@ VALUES (
         11
     ),
     (
-        'Pierre S',
-        'Lemoine',
+        'Mahdi',
+        'Mcheik',
         '',
         'https://picsum.photos/200/300',
         'Dev Web',

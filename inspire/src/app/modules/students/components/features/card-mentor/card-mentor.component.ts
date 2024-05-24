@@ -17,6 +17,7 @@ export class CardMentorComponent implements OnInit {
   @Input() mentor!: Mentor;
 
   isFavorite: boolean = false;
+  mentorId!: number;
 
   constructor(
     private favoritesService: FavoritesService,
@@ -33,6 +34,7 @@ userService = inject(UserService);
     this.skillList$ = this.userService.getMentorSkillsById(this.mentor.userId);
     console.log("mentor:", this.mentor.id);
     this.checkIfFavorite();
+
   }
 
   checkIfFavorite(): void {
@@ -46,7 +48,8 @@ userService = inject(UserService);
     }
   }
 
-  toggleFavorite(): void {
+  toggleFavorite(event: Event): void {
+    event.stopPropagation();
     const studentId = this.userStoreService.getUserId();
     if (studentId) {
       if (this.isFavorite) {

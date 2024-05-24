@@ -3,6 +3,7 @@
   background-color: white;
   border-radius: 15px;
   min-height: 400px;
+  cursor: pointer;
 
   .img-card {
     position: relative;
@@ -44,6 +45,7 @@
   .title-card {
     margin-top: 10px;
     padding: 5px 10px;
+    font-weight: 500;
   }
 
   .chip-container {
