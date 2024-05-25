@@ -718,6 +718,7 @@ VALUES (
 CREATE TABLE slots (
     id INT AUTO_INCREMENT PRIMARY KEY,
     dateTime DATETIME,
+    dateEnd DATETIME,
     visio BOOLEAN,
     mentorId INT,
      FOREIGN KEY (mentorId) REFERENCES mentors (userId)
