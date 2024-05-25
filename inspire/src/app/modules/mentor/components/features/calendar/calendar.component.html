@@ -3,12 +3,41 @@
   <h3>La semaine de {{ today }}</h3>
 </ng-container>
 <button (click)="visible = true">open</button>
-<full-calendar [options]="calendarOptions" #calendar></full-calendar>
+<full-calendar
+  [events]="events"
+  [options]="calendarOptions"
+  #calendar
+></full-calendar>
 <p-dialog
-  header="Edit Profile"
   [modal]="true"
-  [(visible)]="visible"
+  [(visible)]="visible && formattedSlotInfo"
   [style]="{ width: '25rem' }"
 >
-  coucou
+  <div class="modal">
+    <div class="container-img-forgot">
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/question.svg"
+        alt=""
+      />
+    </div>
+    <h1>Validez le créneau d'ouverture</h1>
+    <div class="content">
+      <p>
+        Le créneau selectionné est le {{ formattedSlotInfo?.dateTime | date }}
+      </p>
+
+      <p>
+        Le créneau selectionné est
+        {{ formattedSlotInfo?.visio ? " en Visio" : "en Présentiel" }}
+      </p>
+    </div>
+
+    <div class="control">
+      <button class="btn-general black" (click)="visible = false">
+        Annuler
+      </button>
+      <button class="btn-general pink" (click)="validateSlot()">Valider</button>
+    </div>
+  </div>
 </p-dialog>

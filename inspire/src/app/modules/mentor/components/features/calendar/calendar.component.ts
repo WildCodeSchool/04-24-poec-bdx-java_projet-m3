@@ -1,5 +1,11 @@
-import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
-import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
+import {
+  AfterViewChecked,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { CalendarOptions, EventClickArg, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
@@ -10,6 +16,7 @@ import { ReservationService } from '../../../../../shared/services/reservation.s
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Subscription } from 'rxjs';
 import { Mentor } from '../../../../../shared/models/user';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-calendar',
@@ -17,21 +24,32 @@ import { Mentor } from '../../../../../shared/models/user';
   styleUrl: './calendar.component.scss',
 })
 export class CalendarComponent implements OnInit, AfterViewChecked {
-  @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
+  @ViewChild('calendar')
+  calendarComponent!: FullCalendarComponent;
+
   today!: string;
   visible = false;
-  info = null;
-  selectedEvent: any = null;
-  selectedSlot: any;
   mentorId!: number;
+  userId!: number;
   mentorSubscription!: Subscription;
-  events: any[] = [];
-  forceEventDuration = true;
+  @Input()
+  formattedSlotInfo!: any;
+  events: EventInput[] = [];
+
+  visioOptions = [
+    { value: true, label: 'Visio' },
+    { value: false, label: 'Présentiel' },
+  ];
 
   constructor(
     private reservationService: ReservationService,
-    private mentorService: MentorService
+    private mentorService: MentorService,
+    private fb: FormBuilder
   ) {}
+
+  optionsForm = this.fb.group({
+    option: [''],
+  });
 
   selectAllow = (selectionInfo: any) => {
     if (selectionInfo.start > new Date()) {
@@ -41,21 +59,23 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   };
 
   onDateSelect = (selectionInfo: any) => {
-    const formattedSlotInfo = {
+    this.formattedSlotInfo = {
       dateTime: selectionInfo.startStr,
+      dateEnd: selectionInfo.endStr,
       visio: true,
       mentorId: this.mentorId,
     };
 
-    this.reservationService.addSlotToMentor(formattedSlotInfo).subscribe();
+    this.visible = true;
   };
 
-  handleDateClick(arg: any) {
-    this.selectedSlot = {
-      dateTime: arg.dateStr,
-      visio: true,
-      mentorId: this.mentorId,
-    };
+  validateSlot() {
+    this.reservationService
+      .addSlotToMentor(this.formattedSlotInfo)
+      .subscribe(() => {
+        this.visible = false;
+        this.loadSlots();
+      });
   }
 
   calendarOptions: CalendarOptions = {
@@ -127,32 +147,50 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
     weekNumbers: true,
     selectMirror: true,
-    unselectAuto: false,
+    unselectAuto: true,
     selectOverlap: false,
-    editable: true,
+    editable: false,
     // https://fullcalendar.io/docs/select-callback
     selectable: true,
+    eventDurationEditable: false,
+    defaultTimedEventDuration: '01:00:00',
 
-    select: this.onDateSelect, // méthode déclenchée chaque fois qu'un créneau est sélectionné dans le calendrier
-    selectAllow: this.selectAllow, // permet de définir si un créneau est sélectionnable ou non
+    droppable: false,
+
+    select: this.onDateSelect,
+    selectAllow: this.selectAllow,
   };
+
+  loadSlots(): void {
+    const mentorId = this.mentorId;
+    this.reservationService.getSlotsForMentor(mentorId).subscribe((slots) => {
+      this.events = this.formatSlotsToEvents(slots);
+    });
+  }
+  formatSlotsToEvents(slots: any[]): EventInput[] {
+    return slots.map((slot) => ({
+      title: slot.visio ? 'Visio' : 'Présentiel',
+      start: slot.dateTime,
+      end: slot.dateEnd,
+      color: 'blue',
+    }));
+  }
 
   ngOnInit(): void {
     this.calendarOptions.locale = frLocale;
     this.calendarOptions.allDayText = 'Heures';
 
-    // S'abonner au BehaviorSubject pour obtenir l'ID du mentor
     this.mentorSubscription = this.mentorService.activeMentorProfil$.subscribe(
       (mentor: Mentor) => {
         if (mentor && mentor.id) {
-          this.mentorId = mentor.id;
+          this.mentorId = mentor.userId;
         }
       }
     );
+    this.loadSlots();
   }
 
   ngOnDestroy(): void {
-    // Désabonnez-vous pour éviter les fuites de mémoire
     if (this.mentorSubscription) {
       this.mentorSubscription.unsubscribe();
     }
