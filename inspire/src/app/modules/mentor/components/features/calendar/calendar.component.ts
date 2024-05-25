@@ -16,6 +16,7 @@ import { ReservationService } from '../../../../../shared/services/reservation.s
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Subscription } from 'rxjs';
 import { Mentor } from '../../../../../shared/models/user';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-calendar',
@@ -35,10 +36,20 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   formattedSlotInfo!: any;
   events: EventInput[] = [];
 
+  visioOptions = [
+    { value: true, label: 'Visio' },
+    { value: false, label: 'Présentiel' },
+  ];
+
   constructor(
     private reservationService: ReservationService,
-    private mentorService: MentorService
+    private mentorService: MentorService,
+    private fb: FormBuilder
   ) {}
+
+  optionsForm = this.fb.group({
+    option: [''],
+  });
 
   selectAllow = (selectionInfo: any) => {
     if (selectionInfo.start > new Date()) {
