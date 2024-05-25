@@ -1,4 +1,5 @@
-@import "../../../../../../variables.scss";
+@import "variables.scss";
+
 .row-reservation {
   transition: 0.2s all ease;
   position: relative;
@@ -127,4 +128,8 @@
     display: flex;
     gap: 10px;
   }
+}
+
+.editor {
+  width: 300px;
 }

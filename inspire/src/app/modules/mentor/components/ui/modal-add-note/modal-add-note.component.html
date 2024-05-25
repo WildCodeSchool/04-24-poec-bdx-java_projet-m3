@@ -1,0 +1,37 @@
+<div class="modal-note" *ngIf="isHistory">
+  <h3>Vous avez assisté {{ reservation.firstname | titlecase }}</h3>
+  <h4>Le {{ reservation.dateTime | date : "short" }}</h4>
+  <h3>Notez cette session</h3>
+
+  <div class="card">
+    <pre [innerHTML]="newNote"></pre>
+  </div>
+  <div class="action">
+    <p-editor [(ngModel)]="newNote" [style]="{ height: '200px' }" />
+  </div>
+  <div class="control">
+    <app-button
+      [text]="'Annuler'"
+      [variant]="'pink'"
+      (onSubmit)="onCancel.emit()"
+    ></app-button>
+    <app-button
+      [text]="'Valider'"
+      (onSubmit)="onSubmit.emit(newNote)"
+    ></app-button>
+  </div>
+</div>
+<div class="modal-note" *ngIf="!isHistory">
+  <h3>Réservation prévue avec {{ reservation.firstname | titlecase }}</h3>
+  <h4>Le {{ reservation.dateTime | date : "short" }}</h4>
+  <h3>Annulez cette réservation?</h3>
+
+  <div class="control">
+    <app-button
+      [text]="'Annuler'"
+      [variant]="'pink'"
+      (onSubmit)="onCancel.emit()"
+    ></app-button>
+    <app-button [text]="'Valider'"></app-button>
+  </div>
+</div>
