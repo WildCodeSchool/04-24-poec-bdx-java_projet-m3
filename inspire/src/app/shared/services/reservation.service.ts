@@ -97,19 +97,21 @@ export class ReservationService {
 
   updateMentorReservationHistoryList(
     id: number,
-    mentorId: number,
+    userId: number,
     message: string
   ) {
     return this.httpClient
-      .post<{ reservations: reservationForMentorDTO[]; total: number }>(
-        environment.BASE_URL + `/reservation/reservations/mentor/${id}`,
+      .put<{ reservations: reservationForMentorDTO[]; total: number }>(
+        environment.BASE_URL + `/reservation/reservations/${id}`,
         {
-          mentorId,
           message,
+          mentorId: userId,
         }
       )
       .pipe(
         tap((res) => {
+          console.log('respond upate res', res);
+
           this.activeMentorReservationsHistory$.next(res);
         })
       );

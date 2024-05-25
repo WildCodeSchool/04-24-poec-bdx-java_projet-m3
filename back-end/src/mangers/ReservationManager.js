@@ -213,18 +213,14 @@ export default class ReservationManager {
   }
 
   async updateReservationNote(id, props) {
-    let sql = `UPDATE reservations set`;
-    const sqlValues = [];
-    for (const [key, value] of Object.entries(props)) {
-      if (key !== "id") {
-        sql += `${sqlValues.length ? "," : ""} ${key} = ?`;
-        sqlValues.push(value);
-      }
-    }
-    sql += ` where id = ?`;
-    sqlValues.push(id);
-    const [res] = await this.database.query(sql, sqlValues);
+    let sql = `UPDATE reservations set message = ? where id = ? `;
 
-    return { affectedRows: res.affectedRows };
+    const [res] = await this.database.query(sql, [props.message, id]);
+    const reservations = await this.getMentorReservationsHistory(
+      props.mentorId,
+      5,
+      0
+    );
+    return { affectedRows: res.affectedRows, ...reservations };
   }
 }

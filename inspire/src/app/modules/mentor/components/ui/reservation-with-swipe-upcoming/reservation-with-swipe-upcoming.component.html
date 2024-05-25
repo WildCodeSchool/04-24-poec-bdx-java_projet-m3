@@ -1,4 +1,4 @@
-<div class="main">
+<div class="main" *ngIf="reservation">
   <div class="action-phone" *ngIf="showAction">
     <button (click)="delete()">
       <img src="assets/svgs/stop.svg" alt="" width="25" height="25" />

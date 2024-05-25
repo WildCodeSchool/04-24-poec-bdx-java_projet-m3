@@ -7,7 +7,7 @@
     <div class="creneau">CRÉNEAU</div>
     <div class="action">{{ isHistory ? "MESSAGE" : "ACTION" }}</div>
   </div>
-  <h3 *ngIf="!reservations.length">
+  <h3 *ngIf="!reservations?.length">
     {{
       isHistory
         ? "Aucune ancienne réservation"

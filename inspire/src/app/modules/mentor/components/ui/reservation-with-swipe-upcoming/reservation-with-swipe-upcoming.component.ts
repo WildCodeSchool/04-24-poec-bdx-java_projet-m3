@@ -13,6 +13,8 @@ import {
 import { reservationForMentorDTO } from '../../../../../shared/models/reservation';
 import { fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ReservationService } from '../../../../../shared/services/reservation.service';
+import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
 
 @Component({
   selector: 'app-reservation-with-swipe-upcoming',
@@ -33,6 +35,8 @@ export class ReservationWithSwipeComponentUpcoming
   newNote: string = '<p>lolus</p>';
 
   destroyRef = inject(DestroyRef);
+  connectedUser = inject(UserStoreService).getUserConnected$();
+  reservationService = inject(ReservationService);
 
   ngOnInit(): void {
     this.newNote =
@@ -106,7 +110,15 @@ export class ReservationWithSwipeComponentUpcoming
 
   updateReservation(event: string) {
     this.reservation.message = event;
-    console.log(event);
+    console.log('message ', event);
     this.modalVisible = false;
+    this.reservationService
+      .updateMentorReservationHistoryList(
+        this.reservation.id,
+        this.connectedUser.value?.id || 0,
+        event
+      )
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 }
