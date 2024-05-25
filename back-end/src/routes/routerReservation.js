@@ -16,11 +16,11 @@ router.get("/reservations/user/history/:userId", (req, res) => {
   reservationController.getUserReservationsHistory(req, res);
 });
 
-router.get("/reservations/mentor/:mentorId", (req, res) => {
+router.get("/reservations/mentor/:userId", (req, res) => {
   reservationController.getMentorReservations(req, res);
 });
 
-router.get("/reservations/mentor/history/:mentorId", (req, res) => {
+router.get("/reservations/mentor/history/:userId", (req, res) => {
   reservationController.getMentorReservationsHistory(req, res);
 });
 

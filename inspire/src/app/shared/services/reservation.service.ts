@@ -76,24 +76,29 @@ export class ReservationService {
     );
   }
 
-  getMentorReservationList(id: number, perPage: number, offset: number) {
+  getMentorReservationList(userId: number, perPage: number, offset: number) {
     return this.httpClient
       .get<{
         reservations: reservationForMentorDTO[];
         total: number;
       }>(
         environment.BASE_URL +
-          `/reservation/reservations/mentor/${id}?perPage=${perPage}&offset=${offset}`
+          `/reservation/reservations/mentor/${userId}?perPage=${perPage}&offset=${offset}`
       )
       .pipe(tap((res) => this.activeMentorReservations$.next(res)));
   }
-  getMentorReservationHistoryList(id: number, perPage: number, offset: number) {
+
+  getMentorReservationHistoryList(
+    userId: number,
+    perPage: number,
+    offset: number
+  ) {
     console.log('called');
 
     return this.httpClient
       .get<{ reservations: reservationForMentorDTO[]; total: number }>(
         environment.BASE_URL +
-          `/reservation/reservations/mentor/history/${id}?perPage=${perPage}&offset=${offset}`
+          `/reservation/reservations/mentor/history/${userId}?perPage=${perPage}&offset=${offset}`
       )
       .pipe(
         tap((res) => {

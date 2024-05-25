@@ -22,7 +22,7 @@ export default class ReservationManager {
       m.imgUrl, m.title , m.id as mentorId,m.userId as userId,s.id as slotId,
       COUNT(*) OVER() as totalCount FROM reservations as r
       join slots as s on s.id = slotId
-      join mentors as m on s.mentorId = m.id
+      join mentors as m on s.mentorId = m.userId
       where r.userId = ? and s.dateTime >= ?
       order by s.dateTime asc
       `;
@@ -49,7 +49,7 @@ export default class ReservationManager {
       m.title , m.id as mentorId, m.userId as userId, s.id as slotId, 
       count(*) over() as totalCount FROM reservations as r
       join slots as s on s.id = slotId
-      join mentors as m on s.mentorId = m.id
+      join mentors as m on s.mentorId = m.userId
       where r.userId = ? and s.dateTime < ?
       order by s.dateTime desc
       `;

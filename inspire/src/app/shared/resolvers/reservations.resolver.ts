@@ -1,5 +1,8 @@
 import { ResolveFn } from '@angular/router';
-import { ReservationForStudentDTO, reservationForMentorDTO } from '../models/reservation';
+import {
+  ReservationForStudentDTO,
+  reservationForMentorDTO,
+} from '../models/reservation';
 import { ReservationService } from '../services/reservation.service';
 import { inject } from '@angular/core';
 import { Mentor } from '../models/user';
@@ -12,31 +15,26 @@ export const mentorReservationsResolver: ResolveFn<{
   reservations: reservationForMentorDTO[];
   total: number;
 }> = (route, state) => {
-  const mentorId = inject(UserStoreService).getUserConnected$().value?.id;
-  const reservationService = inject(ReservationService);
+  const userId = inject(UserStoreService).getUserConnected$().value?.id;
 
-  return inject(MentorService)
-    .getMentorProfil()
-    .pipe(
-      switchMap((res) =>
-        reservationService.getMentorReservationList(res?.id || 0, 10, 0)
-      )
-    );
+  return inject(ReservationService).getMentorReservationList(
+    userId || 0,
+    10,
+    0
+  );
 };
 
 export const mentorReservationsHistoryResolver: ResolveFn<{
   reservations: reservationForMentorDTO[];
   total: number;
 }> = (route, state) => {
-  const mentorId = inject(UserStoreService).getUserConnected$().value?.id;
-  const reservationService = inject(ReservationService);
-  return inject(MentorService)
-    .getMentorProfil()
-    .pipe(
-      switchMap((res) =>
-        reservationService.getMentorReservationHistoryList(res?.id || 0, 10, 0)
-      )
-    );
+  const userId = inject(UserStoreService).getUserConnected$().value?.id;
+
+  return inject(ReservationService).getMentorReservationHistoryList(
+    userId || 0,
+    10,
+    0
+  );
 };
 
 export const studentReservationsResolver: ResolveFn<{
@@ -44,11 +42,10 @@ export const studentReservationsResolver: ResolveFn<{
   total: number;
 }> = (route, state) => {
   const userId = inject(UserStoreService).getUserConnected$().value?.id;
-  console.log("yo where is my userId?", userId)
+  console.log('yo where is my userId?', userId);
   const reservationService = inject(ReservationService);
 
-  return reservationService.getStudentReservationList(userId || 0, 10, 0) 
-
+  return reservationService.getStudentReservationList(userId || 0, 10, 0);
 };
 
 export const studentReservationsHistoryResolver: ResolveFn<{
@@ -57,5 +54,9 @@ export const studentReservationsHistoryResolver: ResolveFn<{
 }> = (route, state) => {
   const userId = inject(UserStoreService).getUserConnected$().value?.id;
   const reservationService = inject(ReservationService);
-  return reservationService.getStudentReservationHistoryList(userId || 0, 10, 0)
+  return reservationService.getStudentReservationHistoryList(
+    userId || 0,
+    10,
+    0
+  );
 };
