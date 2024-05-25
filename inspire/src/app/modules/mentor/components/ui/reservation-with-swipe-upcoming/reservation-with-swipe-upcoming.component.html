@@ -43,7 +43,6 @@
   <app-modal-add-note
     *ngIf="modalVisible"
     [reservation]="reservation"
-    [newNote]="newNote"
     [isHistory]="isHistory"
     (onCancel)="modalVisible = false"
     (onSubmit)="updateReservation($event)"

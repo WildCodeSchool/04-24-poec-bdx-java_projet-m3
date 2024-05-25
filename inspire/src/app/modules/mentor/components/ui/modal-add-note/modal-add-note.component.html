@@ -3,22 +3,24 @@
   <h4>Le {{ reservation.dateTime | date : "short" }}</h4>
   <h3>Notez cette session</h3>
 
-  <div class="card">
-    <pre [innerHTML]="newNote"></pre>
+  <div class="card" *ngIf="!editMessage">
+    <pre [innerHTML]="reservation.message"></pre>
+    <app-button
+      [text]="'Editer'"
+      [variant]="'pink'"
+      (onSubmit)="editMessage = true"
+    ></app-button>
   </div>
-  <div class="action">
-    <p-editor [(ngModel)]="newNote" [style]="{ height: '200px' }" />
+  <div class="action" *ngIf="editMessage">
+    <p-editor [(ngModel)]="reservation.message" [style]="{ height: '200px' }" />
   </div>
-  <div class="control">
+  <div class="control" *ngIf="editMessage">
     <app-button
       [text]="'Annuler'"
       [variant]="'pink'"
       (onSubmit)="onCancel.emit()"
     ></app-button>
-    <app-button
-      [text]="'Valider'"
-      (onSubmit)="onSubmit.emit(newNote)"
-    ></app-button>
+    <app-button [text]="'Valider'" (onSubmit)="updateMessage()"></app-button>
   </div>
 </div>
 <div class="modal-note" *ngIf="!isHistory">

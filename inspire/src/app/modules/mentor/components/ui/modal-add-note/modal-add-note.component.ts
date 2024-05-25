@@ -8,8 +8,13 @@ import { reservationForMentorDTO } from '../../../../../shared/models/reservatio
 })
 export class ModalAddNoteComponent {
   @Input() reservation!: reservationForMentorDTO;
-  @Input() newNote!: string;
   @Input() isHistory!: boolean;
   @Output() onCancel = new EventEmitter();
   @Output() onSubmit = new EventEmitter<string>();
+
+  editMessage: boolean = false;
+
+  updateMessage() {
+    this.onSubmit.emit(this.reservation.message);
+  }
 }

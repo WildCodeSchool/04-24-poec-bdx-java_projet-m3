@@ -107,5 +107,6 @@ export class ReservationWithSwipeComponentUpcoming
   updateReservation(event: string) {
     this.reservation.message = event;
     console.log(event);
+    this.modalVisible = false;
   }
 }
