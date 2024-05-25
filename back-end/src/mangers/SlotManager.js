@@ -45,6 +45,34 @@ export default class SlotManager {
       throw error;
     }
   }
+  async deleteSlot(id) {
+    try {
+      const [slot] = await this.database.query(
+        `SELECT * FROM slots where id = ?`,
+        [id]
+      );
+
+      if (slot.length === 0) {
+        return { success: false, message: "Slot not found" };
+      }
+
+      await this.database.query(`DELETE FROM reservations WHERE slotId = ?`, [
+        id,
+      ]);
+
+      const result = await this.database.query(
+        `DELETE FROM slots WHERE id = ?`,
+        [id]
+      );
+
+      return {
+        success: true,
+        message: "Slot deleted successfully",
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
 
   // async updateSlot(id, slotInfo) {
   //   try {

@@ -41,3 +41,38 @@
     </div>
   </div>
 </p-dialog>
+<p-dialog
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '35rem' }"
+>
+  <div class="modal">
+    <div class="container-img-forgot">
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/question.svg"
+        alt=""
+      />
+    </div>
+    <h1>Information sur votre créneau</h1>
+    <div class="content">
+      <p>
+        Le créneau selectionné est le {{ formattedSlotInfo?.dateTime | date }}
+      </p>
+
+      <p>
+        Le créneau selectionné est
+        {{ formattedSlotInfo?.visio ? " en Visio" : "en Présentiel" }}
+      </p>
+    </div>
+
+    <div class="control">
+      <button class="btn-general black" (click)="displayModal = false">
+        Annuler
+      </button>
+      <button class="btn-general pink" (click)="deleteSlot()">
+        Supprimer ce créneau
+      </button>
+    </div>
+  </div>
+</p-dialog>

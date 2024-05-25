@@ -8,7 +8,6 @@ export default class SlotController {
   async addSlot(req, res) {
     try {
       const slotInfo = req.body;
-      console.log("slotInfo", slotInfo);
       const result = await this.slotManager.addSlot(slotInfo);
       res.json(result);
     } catch (error) {
@@ -40,6 +39,19 @@ export default class SlotController {
       res.json(filteredSlots);
     } catch (error) {
       console.error("Error getting slots:", error);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal Server Error" });
+    }
+  }
+
+  async deleteSlot(req, res) {
+    try {
+      const id = req.params.id;
+      const result = await this.slotManager.deleteSlot(id);
+      res.json(result);
+    } catch (error) {
+      console.error("Error deleting slot:", error);
       res
         .status(500)
         .json({ success: false, message: "Internal Server Error" });
