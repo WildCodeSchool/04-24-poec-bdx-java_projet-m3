@@ -5,12 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import {
-  CalendarOptions,
-  EventClickArg,
-  EventDropArg,
-  EventInput,
-} from '@fullcalendar/core';
+import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
@@ -66,7 +61,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       .addSlotToMentor(this.formattedSlotInfo)
       .subscribe(() => {
         this.visible = false;
-        this.loadSlots(); // Recharge les créneaux après la validation
+        this.loadSlots();
       });
   }
 
@@ -146,10 +141,8 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     selectable: true,
     eventDurationEditable: false,
 
-    select: this.onDateSelect, // méthode déclenchée chaque fois qu'un créneau est sélectionné dans le calendrier
+    select: this.onDateSelect,
     selectAllow: this.selectAllow,
-
-    // permet de définir si un créneau est sélectionnable ou non
   };
 
   loadSlots(): void {
