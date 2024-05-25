@@ -719,7 +719,8 @@ CREATE TABLE slots (
     id INT AUTO_INCREMENT PRIMARY KEY,
     dateTime DATETIME,
     visio BOOLEAN,
-    mentorId INT
+    mentorId INT,
+     FOREIGN KEY (mentorId) REFERENCES mentors (userId)
 );
 
 CREATE TABLE reservations (

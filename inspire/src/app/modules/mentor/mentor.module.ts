@@ -20,6 +20,8 @@ import { AgendaComponent } from './pages/agenda/agenda.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarComponent } from './components/features/calendar/calendar.component';
 import { ReservationWithSwipeComponentUpcoming } from './components/ui/reservation-with-swipe-upcoming/reservation-with-swipe-upcoming.component';
+import { EditorModule } from 'primeng/editor';
+import { ModalAddNoteComponent } from './components/ui/modal-add-note/modal-add-note.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { ReservationWithSwipeComponentUpcoming } from './components/ui/reservati
     AgendaComponent,
     CalendarComponent,
     ReservationWithSwipeComponentUpcoming,
+    ModalAddNoteComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +47,7 @@ import { ReservationWithSwipeComponentUpcoming } from './components/ui/reservati
     SidebarModule,
     DialogModule,
     FullCalendarModule,
+    EditorModule,
   ],
   exports: [
     RowReservationComponent,

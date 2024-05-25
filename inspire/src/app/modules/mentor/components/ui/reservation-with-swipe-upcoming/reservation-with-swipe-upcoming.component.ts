@@ -4,7 +4,9 @@ import {
   DestroyRef,
   ElementRef,
   Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
   ViewChild,
   inject,
 } from '@angular/core';
@@ -18,7 +20,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './reservation-with-swipe-upcoming.component.scss',
 })
 export class ReservationWithSwipeComponentUpcoming
-  implements AfterViewInit, OnInit
+  implements AfterViewInit, OnInit, OnChanges
 {
   @Input() reservation!: reservationForMentorDTO;
   @Input() bgColor: string = 'transparent';
@@ -28,13 +30,16 @@ export class ReservationWithSwipeComponentUpcoming
   offsetRight = 0;
   showAction = false;
   modalVisible: boolean = false;
-  newNote: string = 'RAS';
+  newNote: string = '<p>lolus</p>';
 
   destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.newNote = this.reservation.message || 'RAS';
+    this.newNote =
+      this.reservation.message ||
+      '<div>Hello World!</div><div>PrimeNG <b>Editor</b> Rocks</div><div><br></div>';
   }
+  ngOnChanges(changes: SimpleChanges): void {}
 
   ngAfterViewInit(): void {
     fromEvent<TouchEvent>(this.elementRef.nativeElement, 'touchstart')
@@ -99,7 +104,9 @@ export class ReservationWithSwipeComponentUpcoming
     this.modalVisible = false;
   }
 
-  updateReservation() {
-    this.reservation.message = this.newNote;
+  updateReservation(event: string) {
+    this.reservation.message = event;
+    console.log(event);
+    this.modalVisible = false;
   }
 }
