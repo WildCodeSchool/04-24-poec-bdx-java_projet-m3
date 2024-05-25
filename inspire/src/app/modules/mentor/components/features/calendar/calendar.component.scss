@@ -1,0 +1,65 @@
+@import "../../../../../../variables.scss";
+.modal {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    margin-top: 30px;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  .control {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+  .content {
+    margin-top: 20px;
+    text-align: center;
+  }
+}
+
+.forgot-img {
+  width: 200px;
+}
+
+.container-img-forgot {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+@media screen and (max-width: $small) {
+  .modal {
+    .control {
+      flex-direction: column;
+    }
+  }
+}
+
+.pink {
+  background-color: $primary-color;
+  color: white;
+}
+
+.black {
+  background-color: black;
+  color: azure;
+}
+.btn-general {
+  width: 100%;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 11px 20px;
+  border-radius: 6px;
+  border: none;
+  transition: transform 0.4s ease;
+}
+.btn-general:hover {
+  transform: scale(0.95);
+}

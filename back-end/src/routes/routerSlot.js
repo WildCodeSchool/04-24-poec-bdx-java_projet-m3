@@ -9,4 +9,11 @@ router.post("/slots", (req, res) => {
   slotController.addSlot(req, res);
 });
 
+router.get("/slots", (req, res) => {
+  slotController.getSlots(req, res);
+});
+
+router.put("/slots/:slotId", (req, res) => {
+  slotController.updateSlot(req, res);
+});
 export default router;
