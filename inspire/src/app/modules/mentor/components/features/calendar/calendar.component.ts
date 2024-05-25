@@ -149,10 +149,13 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     selectMirror: true,
     unselectAuto: true,
     selectOverlap: false,
-    editable: true,
+    editable: false,
     // https://fullcalendar.io/docs/select-callback
     selectable: true,
     eventDurationEditable: false,
+    defaultTimedEventDuration: '01:00:00',
+
+    droppable: false,
 
     select: this.onDateSelect,
     selectAllow: this.selectAllow,
