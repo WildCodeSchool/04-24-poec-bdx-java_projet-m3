@@ -16,4 +16,8 @@ router.get("/slots", (req, res) => {
 router.put("/slots/:slotId", (req, res) => {
   slotController.updateSlot(req, res);
 });
+
+router.delete("/slots/:id", (req, res) => {
+  slotController.deleteSlot(req, res);
+});
 export default router;
