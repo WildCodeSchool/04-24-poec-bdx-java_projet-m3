@@ -31,12 +31,12 @@ CREATE TABLE students (
     FOREIGN KEY (userId) REFERENCES users (id)
 );
 
-    CREATE TABLE favorite_mentor_student (
+CREATE TABLE favorite_mentor_student (
     id INT AUTO_INCREMENT PRIMARY KEY,
     studentId INT NOT NULL,
     mentorId INT NOT NULL,
-    FOREIGN KEY (studentId) REFERENCES students(id),
-    FOREIGN KEY (mentorId) REFERENCES mentors(id),
+    FOREIGN KEY (studentId) REFERENCES students (id),
+    FOREIGN KEY (mentorId) REFERENCES mentors (id),
     UNIQUE (studentId, mentorId)
 );
 
@@ -420,8 +420,11 @@ VALUES (
         20
     );
 
-INSERT INTO favorite_mentor_student (studentId, mentorId) VALUES (2, 1), (3, 2), (1, 2);
-
+INSERT INTO
+    favorite_mentor_student (studentId, mentorId)
+VALUES (2, 1),
+    (3, 2),
+    (1, 2);
 
 INSERT INTO
     skills (name)
@@ -721,7 +724,7 @@ CREATE TABLE slots (
     dateEnd DATETIME,
     visio BOOLEAN,
     mentorId INT,
-     FOREIGN KEY (mentorId) REFERENCES mentors (userId)
+    FOREIGN KEY (mentorId) REFERENCES mentors (userId)
 );
 
 CREATE TABLE reservations (
@@ -836,8 +839,16 @@ VALUES (NOW(), true, 1),
         true,
         3
     ),
-    ('2023-05-20 10:00:00', false, 1),
-    (DATE_ADD(NOW(), INTERVAL 7 DAY), true, 2);
+    (
+        '2023-05-20 10:00:00',
+        false,
+        1
+    ),
+    (
+        DATE_ADD(NOW(), INTERVAL 7 DAY),
+        true,
+        2
+    );
 
 INSERT INTO
     reservations (
@@ -855,7 +866,12 @@ VALUES ('Sujet 1', 'Message 1', 1, 11),
     ('Sujet 7', 'Message 7', 7, 12),
     ('Sujet 8', 'Message 8', 8, 11),
     ('Sujet 9', 'Message 9', 9, 15),
-    ('Sujet 16', 'Message 16', 16, 12),
+    (
+        'Sujet 16',
+        'Message 16',
+        16,
+        12
+    ),
     (
         'Sujet 10',
         'Message 10',
@@ -894,6 +910,3 @@ VALUES (
         'Australia',
         3
     );
-
-
-

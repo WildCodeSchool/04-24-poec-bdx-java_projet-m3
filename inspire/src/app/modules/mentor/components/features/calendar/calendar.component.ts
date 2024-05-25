@@ -35,21 +35,14 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   @Input()
   formattedSlotInfo!: any;
   events: EventInput[] = [];
-
-  visioOptions = [
-    { value: true, label: 'Visio' },
-    { value: false, label: 'Présentiel' },
-  ];
+  displayModal: boolean = false;
+  eventDetails: any = {};
 
   constructor(
     private reservationService: ReservationService,
     private mentorService: MentorService,
     private fb: FormBuilder
   ) {}
-
-  optionsForm = this.fb.group({
-    option: [''],
-  });
 
   selectAllow = (selectionInfo: any) => {
     if (selectionInfo.start > new Date()) {
@@ -68,7 +61,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
     this.visible = true;
   };
-
   validateSlot() {
     this.reservationService
       .addSlotToMentor(this.formattedSlotInfo)
@@ -76,6 +68,17 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
         this.visible = false;
         this.loadSlots();
       });
+  }
+
+  deleteSlot() {
+    if (this.eventDetails.id) {
+      this.reservationService.deleteSlot(this.eventDetails.id).subscribe(() => {
+        this.loadSlots();
+        this.displayModal = false;
+      });
+    } else {
+      console.error('Pas de slot à supprimer');
+    }
   }
 
   calendarOptions: CalendarOptions = {
@@ -159,7 +162,20 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
     select: this.onDateSelect,
     selectAllow: this.selectAllow,
+    eventClick: this.handleEventClick.bind(this),
   };
+
+  handleEventClick(eventClickArg: EventClickArg) {
+    this.eventDetails = {
+      id: eventClickArg.event.id,
+      title: eventClickArg.event.title,
+      start: eventClickArg.event.start,
+      end: eventClickArg.event.end,
+      allDay: eventClickArg.event.allDay,
+    };
+    this.displayModal = true;
+    eventClickArg.jsEvent.preventDefault();
+  }
 
   loadSlots(): void {
     const mentorId = this.mentorId;
@@ -169,6 +185,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
   formatSlotsToEvents(slots: any[]): EventInput[] {
     return slots.map((slot) => ({
+      id: slot.id,
       title: slot.visio ? 'Visio' : 'Présentiel',
       start: slot.dateTime,
       end: slot.dateEnd,

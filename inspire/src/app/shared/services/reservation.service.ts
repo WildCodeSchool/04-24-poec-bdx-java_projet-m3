@@ -64,6 +64,10 @@ export class ReservationService {
     );
   }
 
+  deleteSlot(id: number): Observable<any> {
+    return this.httpClient.delete(`${environment.BASE_URL}/slot/slots/${id}`);
+  }
+
   // updateSlot(slotId: number, slotInfo: any): Observable<any> {
   //   const updatedSlotInfo = {
   //     dateTime: slotInfo.dateTime,
