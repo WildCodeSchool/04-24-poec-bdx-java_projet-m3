@@ -5,7 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { CalendarOptions, EventInput } from '@fullcalendar/core';
+import { CalendarOptions, EventClickArg, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
@@ -29,6 +29,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   today!: string;
   visible = false;
   mentorId!: number;
+  userId!: number;
   mentorSubscription!: Subscription;
   @Input()
   formattedSlotInfo!: any;
@@ -49,6 +50,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   onDateSelect = (selectionInfo: any) => {
     this.formattedSlotInfo = {
       dateTime: selectionInfo.startStr,
+      dateEnd: selectionInfo.endStr,
       visio: true,
       mentorId: this.mentorId,
     };
@@ -134,7 +136,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
     weekNumbers: true,
     selectMirror: true,
-    unselectAuto: false,
+    unselectAuto: true,
     selectOverlap: false,
     editable: true,
     // https://fullcalendar.io/docs/select-callback
@@ -153,9 +155,9 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
   formatSlotsToEvents(slots: any[]): EventInput[] {
     return slots.map((slot) => ({
-      title: 'Créneau',
+      title: slot.visio ? 'Visio' : 'Présentiel',
       start: slot.dateTime,
-      end: slot.dateTime,
+      end: slot.dateEnd,
       color: 'blue',
     }));
   }
@@ -167,7 +169,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     this.mentorSubscription = this.mentorService.activeMentorProfil$.subscribe(
       (mentor: Mentor) => {
         if (mentor && mentor.id) {
-          this.mentorId = mentor.id;
+          this.mentorId = mentor.userId;
         }
       }
     );

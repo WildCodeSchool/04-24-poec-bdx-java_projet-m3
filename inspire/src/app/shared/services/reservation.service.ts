@@ -48,6 +48,7 @@ export class ReservationService {
   addSlotToMentor(slotInfo: any): Observable<any> {
     const formattedSlotInfo = {
       dateTime: slotInfo.dateTime,
+      dateEnd: slotInfo.dateEnd,
       visio: slotInfo.visio,
       mentorId: slotInfo.mentorId,
     };

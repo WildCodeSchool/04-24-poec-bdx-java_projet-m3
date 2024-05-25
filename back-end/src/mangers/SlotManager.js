@@ -6,8 +6,8 @@ export default class SlotManager {
   async addSlot(slotInfo) {
     try {
       const [slot] = await this.database.query(
-        `SELECT * FROM slots where dateTime = ? and visio = ?`,
-        [slotInfo.dateTime, slotInfo.visio]
+        `SELECT * FROM slots where dateTime = ? and dateEnd = ? and visio = ?`,
+        [slotInfo.dateTime, slotInfo.dateEnd, slotInfo.visio]
       );
 
       if (slot.length > 0) {
@@ -15,8 +15,8 @@ export default class SlotManager {
       }
 
       const result = await this.database.query(
-        `INSERT INTO slots (dateTime, visio, mentorId) VALUES (?,?,?)`,
-        [slotInfo.dateTime, slotInfo.visio, slotInfo.mentorId]
+        `INSERT INTO slots (dateTime, dateEnd, visio, mentorId) VALUES (?,?,?,?)`,
+        [slotInfo.dateTime, slotInfo.dateEnd, slotInfo.visio, slotInfo.mentorId]
       );
 
       return {
