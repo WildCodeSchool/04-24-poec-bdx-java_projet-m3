@@ -5,7 +5,12 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
+import {
+  CalendarOptions,
+  EventClickArg,
+  EventDropArg,
+  EventInput,
+} from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
@@ -32,7 +37,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   mentorSubscription!: Subscription;
   @Input()
   formattedSlotInfo!: any;
-  events: any[] = [];
+  events: EventInput[] = [];
 
   constructor(
     private reservationService: ReservationService,
@@ -57,7 +62,12 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   };
 
   validateSlot() {
-    this.reservationService.addSlotToMentor(this.formattedSlotInfo).subscribe();
+    this.reservationService
+      .addSlotToMentor(this.formattedSlotInfo)
+      .subscribe(() => {
+        this.visible = false;
+        this.loadSlots(); // Recharge les créneaux après la validation
+      });
   }
 
   calendarOptions: CalendarOptions = {
@@ -134,13 +144,30 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     editable: true,
     // https://fullcalendar.io/docs/select-callback
     selectable: true,
+    eventDurationEditable: false,
 
     select: this.onDateSelect, // méthode déclenchée chaque fois qu'un créneau est sélectionné dans le calendrier
-    selectAllow: this.selectAllow, // permet de définir si un créneau est sélectionnable ou non
+    selectAllow: this.selectAllow,
+
+    // permet de définir si un créneau est sélectionnable ou non
   };
 
+  loadSlots(): void {
+    const mentorId = this.mentorId;
+    this.reservationService.getSlotsForMentor(mentorId).subscribe((slots) => {
+      this.events = this.formatSlotsToEvents(slots);
+    });
+  }
+  formatSlotsToEvents(slots: any[]): EventInput[] {
+    return slots.map((slot) => ({
+      title: 'Créneau',
+      start: slot.dateTime,
+      end: slot.dateTime,
+      color: 'blue',
+    }));
+  }
+
   ngOnInit(): void {
-    console.log(this.formattedSlotInfo);
     this.calendarOptions.locale = frLocale;
     this.calendarOptions.allDayText = 'Heures';
 
@@ -151,6 +178,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
         }
       }
     );
+    this.loadSlots();
   }
 
   ngOnDestroy(): void {

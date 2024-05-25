@@ -3,7 +3,11 @@
   <h3>La semaine de {{ today }}</h3>
 </ng-container>
 <button (click)="visible = true">open</button>
-<full-calendar [options]="calendarOptions" #calendar></full-calendar>
+<full-calendar
+  [events]="events"
+  [options]="calendarOptions"
+  #calendar
+></full-calendar>
 <p-dialog
   [modal]="true"
   [(visible)]="visible && formattedSlotInfo"
@@ -22,6 +26,7 @@
       <p>
         Le créneau selectionné est le {{ formattedSlotInfo?.dateTime | date }}
       </p>
+
       <p>
         Le créneau selectionné est
         {{ formattedSlotInfo?.visio ? " en Visio" : "en Présentiel" }}

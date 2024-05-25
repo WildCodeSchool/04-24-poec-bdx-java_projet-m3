@@ -59,7 +59,20 @@ export class ReservationService {
 
   getSlotsForMentor(mentorId: number): Observable<any> {
     return this.httpClient.get(
-      `${environment.BASE_URL}/slots?mentorId=${mentorId}`
+      `${environment.BASE_URL}/slot/slots?mentorId=${mentorId}`
+    );
+  }
+
+  updateSlot(slotId: number, slotInfo: any): Observable<any> {
+    const updatedSlotInfo = {
+      dateTime: slotInfo.dateTime,
+      visio: slotInfo.visio,
+      mentorId: slotInfo.mentorId,
+    };
+
+    return this.httpClient.put(
+      `${environment.BASE_URL}/slot/slots/${slotId}`,
+      updatedSlotInfo
     );
   }
 

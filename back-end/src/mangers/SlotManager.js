@@ -28,4 +28,46 @@ export default class SlotManager {
       throw error;
     }
   }
+
+  async getSlots(mentorId) {
+    try {
+      let query = `SELECT * FROM slots`;
+      const params = [];
+
+      if (mentorId) {
+        query += ` WHERE mentorId = ?`;
+        params.push(mentorId);
+      }
+
+      const [slots] = await this.database.query(query, params);
+      return slots;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  // async updateSlot(id, slotInfo) {
+  //   try {
+  //     const [slot] = await this.database.query(
+  //       `SELECT * FROM slots where id = ?`,
+  //       [id]
+  //     );
+
+  //     if (slot.length === 0) {
+  //       return { success: false, message: "Slot not found" };
+  //     }
+
+  //     const result = await this.database.query(
+  //       `UPDATE slots SET dateTime = ?, visio = ? WHERE id = ?`,
+  //       [slotInfo.dateTime, slotInfo.visio, id]
+  //     );
+
+  //     return {
+  //       success: true,
+  //       message: "Slot updated successfully",
+  //     };
+  //   } catch (error) {
+  //     throw error;
+  //   }
+  // }
 }

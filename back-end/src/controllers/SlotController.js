@@ -18,4 +18,45 @@ export default class SlotController {
         .json({ success: false, message: "Internal Server Error" });
     }
   }
+
+  async getSlots(req, res) {
+    const mentorId = req.query.mentorId;
+
+    if (!mentorId) {
+      return res.status(400).json({ error: "mentorId est requis" });
+    }
+
+    try {
+      const slots = await this.slotManager.getSlots();
+
+      const filteredSlots = slots.filter((slot) => slot.mentorId == mentorId);
+
+      if (filteredSlots.length === 0) {
+        return res
+          .status(404)
+          .json({ error: "Aucun créneau trouvé pour ce mentorId" });
+      }
+
+      res.json(filteredSlots);
+    } catch (error) {
+      console.error("Error getting slots:", error);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal Server Error" });
+    }
+  }
+
+  // async updateSlotByMentorId(req, res) {
+  //   try {
+  //     const id = req.params.id;
+  //     const slotInfo = req.body;
+  //     const result = await this.slotManager.updateSlot(id, slotInfo);
+  //     res.json(result);
+  //   } catch (error) {
+  //     console.error("Error updating slot:", error);
+  //     res
+  //       .status(500)
+  //       .json({ success: false, message: "Internal Server Error" });
+  //   }
+  // }
 }
