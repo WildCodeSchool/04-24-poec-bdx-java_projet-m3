@@ -56,9 +56,9 @@ export default class ReservationController {
   async getMentorReservations(req, res) {
     try {
       const { perPage, offset } = req.query;
-      const { mentorId } = req.params;
+      const { userId } = req.params;
       const result = await this.reservationManager.getMentorReservations(
-        mentorId,
+        userId,
         perPage,
         offset
       );
@@ -74,9 +74,9 @@ export default class ReservationController {
   async getMentorReservationsHistory(req, res) {
     try {
       const { perPage, offset } = req.query;
-      const { mentorId } = req.params;
+      const { userId } = req.params;
       const result = await this.reservationManager.getMentorReservationsHistory(
-        mentorId,
+        userId,
         perPage,
         offset
       );
