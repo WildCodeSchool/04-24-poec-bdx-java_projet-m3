@@ -1,4 +1,10 @@
-import { AfterViewChecked, Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { CalendarOptions, EventClickArg } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -17,16 +23,16 @@ import { Mentor } from '../../../../../shared/models/user';
   styleUrl: './calendar.component.scss',
 })
 export class CalendarComponent implements OnInit, AfterViewChecked {
-  @ViewChild('calendar') calendarComponent!: FullCalendarComponent;
+  @ViewChild('calendar')
+  calendarComponent!: FullCalendarComponent;
+
   today!: string;
   visible = false;
-  info = null;
-  selectedEvent: any = null;
-  selectedSlot: any;
   mentorId!: number;
   mentorSubscription!: Subscription;
+  @Input()
+  formattedSlotInfo!: any;
   events: any[] = [];
-  forceEventDuration = true;
 
   constructor(
     private reservationService: ReservationService,
@@ -41,21 +47,17 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   };
 
   onDateSelect = (selectionInfo: any) => {
-    const formattedSlotInfo = {
+    this.formattedSlotInfo = {
       dateTime: selectionInfo.startStr,
       visio: true,
       mentorId: this.mentorId,
     };
 
-    this.reservationService.addSlotToMentor(formattedSlotInfo).subscribe();
+    this.visible = true;
   };
 
-  handleDateClick(arg: any) {
-    this.selectedSlot = {
-      dateTime: arg.dateStr,
-      visio: true,
-      mentorId: this.mentorId,
-    };
+  validateSlot() {
+    this.reservationService.addSlotToMentor(this.formattedSlotInfo).subscribe();
   }
 
   calendarOptions: CalendarOptions = {
@@ -138,10 +140,10 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   };
 
   ngOnInit(): void {
+    console.log(this.formattedSlotInfo);
     this.calendarOptions.locale = frLocale;
     this.calendarOptions.allDayText = 'Heures';
 
-    // S'abonner au BehaviorSubject pour obtenir l'ID du mentor
     this.mentorSubscription = this.mentorService.activeMentorProfil$.subscribe(
       (mentor: Mentor) => {
         if (mentor && mentor.id) {
@@ -152,7 +154,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnDestroy(): void {
-    // Désabonnez-vous pour éviter les fuites de mémoire
     if (this.mentorSubscription) {
       this.mentorSubscription.unsubscribe();
     }
