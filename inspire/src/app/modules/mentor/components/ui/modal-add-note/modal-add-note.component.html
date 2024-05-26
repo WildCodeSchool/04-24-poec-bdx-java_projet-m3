@@ -34,6 +34,9 @@
       [variant]="'pink'"
       (onSubmit)="onCancel.emit()"
     ></app-button>
-    <app-button [text]="'Valider'"></app-button>
+    <app-button
+      [text]="'Valider'"
+      (onSubmit)="deleteReservation()"
+    ></app-button>
   </div>
 </div>

@@ -18,10 +18,10 @@ export default class ReservationManager {
     try {
       let timeNow = new Date();
       timeNow.setHours(timeNow.getHours());
-      let query = `SELECT  r.subject , s.dateTime, s.visio, m.firstname , m.lastname, 
+      let query = `SELECT  r.subject , r.id, s.dateTime, s.visio, m.firstname , m.lastname, 
       m.imgUrl, m.title , m.id as mentorId,m.userId as userId,s.id as slotId,
       COUNT(*) OVER() as totalCount FROM reservations as r
-      join slots as s on s.id = slotId
+      join slots as s on s.id = slotId 
       join mentors as m on s.mentorId = m.userId
       where r.userId = ? and s.dateTime >= ?
       order by s.dateTime asc
@@ -45,7 +45,7 @@ export default class ReservationManager {
     try {
       let timeNow = new Date();
       timeNow.setHours(timeNow.getHours());
-      let query = `SELECT  r.subject , s.dateTime, s.visio, m.firstname , m.lastname, m.imgUrl, 
+      let query = `SELECT  r.subject ,r.id , s.dateTime, s.visio, m.firstname , m.lastname, m.imgUrl, 
       m.title , m.id as mentorId, m.userId as userId, s.id as slotId, 
       count(*) over() as totalCount FROM reservations as r
       join slots as s on s.id = slotId
@@ -73,7 +73,7 @@ export default class ReservationManager {
       let timeNow = new Date();
       timeNow.setHours(timeNow.getHours());
 
-      let query = `SELECT r.subject as subject, sl.dateTime as dateTime, sl.id as slotId, s.firstname as firstname,
+      let query = `SELECT r.subject as subject, r.id, sl.dateTime as dateTime, sl.id as slotId, s.firstname as firstname,
       s.lastname  as lastname, s.id as studentId,s.userId as userId, s.imgUrl as imgUrl, sl.visio as visio,
        s.title as title, COUNT(*) OVER() as totalCount from reservations as r
          join slots as sl on sl.id = r.slotId
@@ -94,6 +94,7 @@ export default class ReservationManager {
       if (reservations.length) {
         reservations = reservations.map((reservation) => {
           return {
+            id: +reservation.id,
             slotId: +reservation.slotId,
             studentId: +reservation.studentId,
             userId: +reservation.userId,
@@ -137,6 +138,7 @@ export default class ReservationManager {
       let [reservations] = await this.database.query(query, values);
 
       const total = reservations[0]?.totalCount ?? 0;
+      console.log(reservations);
 
       if (reservations.length) {
         reservations = reservations.map((reservation) => {
@@ -164,7 +166,6 @@ export default class ReservationManager {
 
   async deleteReservation(reservationId) {
     try {
-      // Supprimer le skill de la table des skills
       await this.database.query(`DELETE FROM reservations WHERE id = ?`, [
         reservationId,
       ]);
@@ -222,5 +223,21 @@ export default class ReservationManager {
       0
     );
     return { affectedRows: res.affectedRows, ...reservations };
+  }
+
+  async deleteMentorReservation(reservationId, userId) {
+    try {
+      await this.database.query(`DELETE FROM reservations WHERE id = ?`, [
+        reservationId,
+      ]);
+      const reservations = await this.getMentorReservations(userId, 5, 0);
+      return {
+        success: true,
+        message: "Skill deleted successfully",
+        ...reservations,
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 }

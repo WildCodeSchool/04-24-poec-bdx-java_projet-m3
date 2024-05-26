@@ -14,12 +14,14 @@
         : "Pas de nouvelles réservations"
     }}
   </h3>
-  @for(item of reservations; track $index){
+  <ng-container *ngIf="reservations.length">
+    @for(item of reservations; track $index){
 
-  <app-reservation-with-swipe-upcoming
-    [reservation]="item"
-    [bgColor]="$index % 2 === 0 ? 'transparent' : 'grey'"
-    [isHistory]="isHistory"
-  ></app-reservation-with-swipe-upcoming>
-  }
+    <app-reservation-with-swipe-upcoming
+      [reservation]="item"
+      [bgColor]="$index % 2 === 0 ? 'transparent' : 'grey'"
+      [isHistory]="isHistory"
+    ></app-reservation-with-swipe-upcoming>
+    }
+  </ng-container>
 </div>

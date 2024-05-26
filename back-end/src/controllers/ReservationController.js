@@ -119,6 +119,22 @@ export default class ReservationController {
     }
   }
 
+  async deleteMentorReservation(req, res) {
+    try {
+      const { reservationId, userId } = req.params;
+      const result = await this.reservationManager.deleteMentorReservation(
+        reservationId,
+        userId
+      );
+      res.json(result);
+    } catch (error) {
+      console.error("Error deleting skill:", error);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal Server Error" });
+    }
+  }
+
   async addReservation(req, res) {
     try {
       const { subject, message, slotId, userId } = req.body;

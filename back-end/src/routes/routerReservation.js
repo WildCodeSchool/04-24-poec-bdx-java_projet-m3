@@ -24,8 +24,11 @@ router.get("/reservations/mentor/history/:userId", (req, res) => {
   reservationController.getMentorReservationsHistory(req, res);
 });
 
-router.delete("/reservations/:reservationId", (req, res) => {
-  reservationController.deletereservation(req, res);
+// router.delete("/reservations/:reservationId", (req, res) => {
+//   reservationController.deletereservation(req, res);
+// });
+router.delete("/reservations/:reservationId/:userId", (req, res) => {
+  reservationController.deleteMentorReservation(req, res);
 });
 
 router.post("/reservations", (req, res) => {

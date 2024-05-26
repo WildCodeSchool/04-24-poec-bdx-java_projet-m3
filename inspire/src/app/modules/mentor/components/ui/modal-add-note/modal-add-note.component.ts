@@ -11,10 +11,16 @@ export class ModalAddNoteComponent {
   @Input() isHistory!: boolean;
   @Output() onCancel = new EventEmitter();
   @Output() onSubmit = new EventEmitter<string>();
+  @Output() onDeleteReservation = new EventEmitter();
 
   editMessage: boolean = false;
 
   updateMessage() {
     this.onSubmit.emit(this.reservation.message);
+  }
+
+  deleteReservation() {
+    this.onDeleteReservation.emit();
+    console.log('reservation delete ');
   }
 }
