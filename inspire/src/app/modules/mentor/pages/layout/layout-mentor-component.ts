@@ -5,7 +5,7 @@ import { UserService } from '../../../../user.service';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
-import { Mentor } from '../../../../shared/models/user';
+import { Mentor, MentorDTO } from '../../../../shared/models/user';
 
 @Component({
   selector: 'app-side-nav',
@@ -19,7 +19,7 @@ export class LayoutMentor implements OnInit {
   userStoreService = inject(UserStoreService);
   windowWatcher = inject(WindowWatcherService);
   activatedRoute = inject(ActivatedRoute);
-  mentorProfil$: BehaviorSubject<Mentor> =
+  mentorProfil$: BehaviorSubject<MentorDTO> =
     inject(MentorService).activeMentorProfil$;
   toggleVisibility() {
     this.showNavbar = !this.showNavbar;

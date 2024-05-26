@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../../models/user';
+import { User, UserDTO } from '../../models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserStoreService {
-  private userConnected$: BehaviorSubject<User | null> =
-    new BehaviorSubject<User | null>(null);
+  private userConnected$: BehaviorSubject<UserDTO> =
+    new BehaviorSubject<UserDTO>({} as UserDTO);
 
-
-  getUserConnected$(): BehaviorSubject<User | null> {
+  getUserConnected$(): BehaviorSubject<UserDTO> {
     return this.userConnected$;
   }
 
-  setUserConnected(user: User | null): void {
+  setUserConnected(user: UserDTO): void {
     this.userConnected$.next(user);
   }
 
-  getUserId(): number | null {
+  getUserId(): number {
     return this.userConnected$.value?.id ?? null;
   }
 }

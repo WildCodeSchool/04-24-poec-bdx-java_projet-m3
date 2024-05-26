@@ -22,7 +22,7 @@ export class FormAddCourseComponent {
   @Output() formationEmitter = new EventEmitter<Formation>();
 
   onSubmit() {
-    const user = this.userStore.getUserConnected$().value as User;
+    const user = this.userStore.getUserConnected$().value;
 
     const formation: Formation = {
       title: this.courseForm.value.title as string,

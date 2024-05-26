@@ -3,7 +3,7 @@ import { UserService } from '../../../../user.service';
 import { MentorService } from '../../../../shared/services/mentor.service';
 import { ActivatedRoute } from '@angular/router';
 import { Language } from '../../../../shared/models/language';
-import { Mentor } from '../../../../shared/models/user';
+import { Mentor, MentorDTO } from '../../../../shared/models/user';
 import { Experience } from '../../../../shared/models/experience';
 import { Formation } from '../../../../shared/models/formation';
 import { Skill } from '../../../../shared/models/chip';
@@ -25,5 +25,5 @@ export class MentorProfilByStudentComponent {
   ] as Experience[];
   formations = this.activatedRoute.snapshot.data['formations'] as Formation[];
   skills = this.activatedRoute.snapshot.data['skills'] as Skill[];
-  profil = this.activatedRoute.snapshot.data['profil'] as Mentor;
+  profil = this.activatedRoute.snapshot.data['profil'] as MentorDTO;
 }

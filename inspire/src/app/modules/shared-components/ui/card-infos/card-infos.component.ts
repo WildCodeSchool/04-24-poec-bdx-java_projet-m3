@@ -1,5 +1,10 @@
 import { Component, DestroyRef, Input, inject } from '@angular/core';
-import { Mentor, Student } from '../../../../shared/models/user';
+import {
+  Mentor,
+  MentorDTO,
+  Student,
+  StudentDTO,
+} from '../../../../shared/models/user';
 import { Skill } from '../../../../shared/models/chip';
 import { MentorService } from '../../../../shared/services/mentor.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -13,7 +18,7 @@ import { StudentService } from '../../../../shared/services/student.service';
   styleUrl: './card-infos.component.scss',
 })
 export class CardInfosComponent {
-  @Input() mentor!: Mentor;
+  @Input() mentor!: MentorDTO;
   @Input() chips!: Skill[];
   @Input() editModeOn = true;
   editFormApropoVisible = false;
@@ -32,7 +37,7 @@ export class CardInfosComponent {
     this.editFormApropoVisible = false;
   }
   updateProfil(newProfil: {
-    profil: Mentor | Student;
+    profil: MentorDTO | StudentDTO;
     skills: Skill[];
     file?: File;
     fileName?: string;

@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { UserStoreService } from '../../../../../../shared/services/stores/user-store.service';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../../../../../../shared/models/user';
+import { User, UserDTO } from '../../../../../../shared/models/user';
 
 @Component({
   selector: 'app-role-register-page',
@@ -9,7 +9,7 @@ import { User } from '../../../../../../shared/models/user';
   styleUrl: './role-register-page.component.scss',
 })
 export class RoleRegisterPageComponent implements OnInit {
-  user$?: BehaviorSubject<User | null>;
+  user$?: BehaviorSubject<UserDTO>;
   private userStore = inject(UserStoreService);
 
   ngOnInit(): void {

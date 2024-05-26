@@ -1,11 +1,4 @@
-import { Skill } from './chip';
-import { Experience } from './experience';
-import { Formation } from './formation';
-import { Language } from './language';
-
 export class User {
-  id?: number;
-  userId?: number;
   email: string = '';
   password: string = '';
   role: string = '';
@@ -17,8 +10,14 @@ export class User {
   }
 }
 
+export type UserDTO = {
+  id: number;
+  email: string;
+  password: string;
+  role: string;
+};
+
 export class Mentor {
-  id?: number;
   firstname: string = '';
   lastname: string = '';
   description: string = '';
@@ -49,20 +48,16 @@ export class Mentor {
   }
 }
 
-export type MentorFullProfil = {
-  profil: Mentor;
-  languages: Language[];
-  formations: Formation[];
-  experiences: Experience[];
-  skills: Skill[];
-};
-
-export type StudentFullProfil = {
-  profil: Student;
-  languages: Language[];
-  formations: Formation[];
-  experiences: Experience[];
-  skills: Skill[];
+export type MentorDTO = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  description: string;
+  imgUrl: string;
+  title: string;
+  githubUrl: string;
+  linkedinUrl: string;
+  userId: number;
 };
 
 export class Student {
@@ -97,3 +92,15 @@ export class Student {
     this.linkedinUrl = linkedinUrl;
   }
 }
+
+export type StudentDTO = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  description: string;
+  imgUrl: string;
+  title: string;
+  githubUrl: string;
+  linkedinUrl: string;
+  userId: number;
+};

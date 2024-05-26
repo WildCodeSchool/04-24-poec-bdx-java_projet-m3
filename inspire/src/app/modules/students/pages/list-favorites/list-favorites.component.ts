@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Mentor } from '../../../../shared/models/user';
+import { Mentor, MentorDTO } from '../../../../shared/models/user';
 import { MentorService } from '../../../../shared/services/mentor.service';
 import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
 import { FavoritesService } from '../../shared/favorites.service';
@@ -12,15 +12,14 @@ import { StudentService } from '../../../../shared/services/student.service';
   styleUrl: './list-favorites.component.scss',
 })
 export class ListFavoritesComponent {
-  private mentorListSubject = new BehaviorSubject<Mentor[]>([]);
+  private mentorListSubject = new BehaviorSubject<MentorDTO[]>([]);
 
   constructor(
     private _mentorService: MentorService,
-    private userStoreService: UserStoreService,
     private studentService: StudentService
   ) {}
 
-  mentorList$: Observable<Mentor[]> = this.mentorListSubject.asObservable();
+  mentorList$: Observable<MentorDTO[]> = this.mentorListSubject.asObservable();
 
   ngOnInit(): void {
     this.getListFavoriteMentor();

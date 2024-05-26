@@ -13,7 +13,12 @@ import { Skill } from '../../../shared/models/chip';
 import { UserService } from '../../../user.service';
 import { Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Mentor, Student } from '../../../shared/models/user';
+import {
+  Mentor,
+  MentorDTO,
+  Student,
+  StudentDTO,
+} from '../../../shared/models/user';
 
 @Component({
   selector: 'app-form-edit-apropos',
@@ -24,7 +29,7 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
   aproposForm!: FormGroup<any>;
   @Output() destroy = new EventEmitter();
   @Output() profilEmitter = new EventEmitter<{
-    profil: Mentor | Student;
+    profil: MentorDTO | StudentDTO;
     skills: Skill[];
     file?: File;
     fileName?: string;
@@ -32,7 +37,7 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
   file!: File;
   fileName!: string;
   @Input() selectedSkills!: Skill[];
-  @Input() profil!: Mentor;
+  @Input() profil!: MentorDTO;
   skills!: Skill[];
 
   destroyRef = inject(DestroyRef);
@@ -41,6 +46,7 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.profilEmitter.emit({
       profil: {
+        id: this.profil.id,
         title: this.aproposForm.value['title'],
         firstname: this.aproposForm.value['firstname'],
         lastname: this.aproposForm.value['lastname'],
@@ -48,7 +54,7 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
         imgUrl: this.aproposForm.value['imgUrl'],
         linkedinUrl: this.aproposForm.value['linkedinUrl'],
         githubUrl: this.aproposForm.value['githubUrl'],
-      } as Mentor,
+      } as MentorDTO,
       skills: this.selectedSkills,
       file: this.file,
       fileName: this.fileName,
