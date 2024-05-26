@@ -16,7 +16,7 @@ import { ReservationService } from '../../../../../shared/services/reservation.s
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Subscription } from 'rxjs';
 import { Mentor, MentorDTO } from '../../../../../shared/models/user';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-calendar',
@@ -36,12 +36,21 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   events: EventInput[] = [];
   displayModal: boolean = false;
   eventDetails: any = {};
+  mode: string = '';
 
   constructor(
     private reservationService: ReservationService,
     private mentorService: MentorService,
     private fb: FormBuilder
   ) {}
+
+  formulaire: FormGroup = this.fb.group({
+    mode: ['presentiel'],
+  });
+
+  updateMode() {
+    this.formattedSlotInfo.visio = this.formulaire.value.mode === 'visio';
+  }
 
   selectAllow = (selectionInfo: any) => {
     if (selectionInfo.start > new Date()) {
@@ -51,15 +60,31 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   };
 
   onDateSelect = (selectionInfo: any) => {
-    this.formattedSlotInfo = {
-      dateTime: selectionInfo.startStr,
-      dateEnd: selectionInfo.endStr,
-      visio: true,
-      mentorId: this.mentorId,
-    };
+    if (this.formulaire.valid) {
+      const diffMilliseconds = selectionInfo.end - selectionInfo.start;
+      const hours = Math.floor(diffMilliseconds / (1000 * 60 * 60));
+      const minutes = Math.floor(
+        (diffMilliseconds % (1000 * 60 * 60)) / (1000 * 60)
+      );
 
-    this.visible = true;
+      const formattedDuration = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+
+      this.formattedSlotInfo = {
+        formattedDuration,
+        start: selectionInfo.start,
+        end: selectionInfo.end,
+        dateTime: selectionInfo.startStr,
+        dateEnd: selectionInfo.endStr,
+        visio: this.formulaire.value.mode === 'visio',
+        mentorId: this.mentorId,
+      };
+
+      this.visible = true;
+    } else {
+      console.log("Veuillez d'abord soumettre le formulaire.");
+    }
   };
+
   validateSlot() {
     this.reservationService
       .addSlotToMentor(this.formattedSlotInfo)
@@ -156,6 +181,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     selectable: true,
     eventDurationEditable: false,
     defaultTimedEventDuration: '01:00:00',
+    nowIndicator: true,
 
     droppable: false,
 
@@ -188,7 +214,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       title: slot.visio ? 'Visio' : 'Présentiel',
       start: slot.dateTime,
       end: slot.dateEnd,
-      color: 'blue',
+      color: slot.visio ? '#FCBE77' : '#F8156B',
     }));
   }
 
