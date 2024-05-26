@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { Mentor } from '../../../../../shared/models/user';
+import { Mentor, MentorDTO } from '../../../../../shared/models/user';
 import { Skill } from '../../../../../shared/models/chip';
 import { Observable } from 'rxjs';
 import { FavoritesService } from '../../../shared/favorites.service';
@@ -11,10 +11,10 @@ import { MentorService } from '../../../../../shared/services/mentor.service';
 @Component({
   selector: 'app-card-mentor',
   templateUrl: './card-mentor.component.html',
-  styleUrls: ['./card-mentor.component.scss']
+  styleUrls: ['./card-mentor.component.scss'],
 })
 export class CardMentorComponent implements OnInit {
-  @Input() mentor!: Mentor;
+  @Input() mentor!: MentorDTO;
 
   isFavorite: boolean = false;
   mentorId!: number;
@@ -22,29 +22,35 @@ export class CardMentorComponent implements OnInit {
   constructor(
     private favoritesService: FavoritesService,
     private userStoreService: UserStoreService,
-    private studentService: StudentService,
-    private mentorService: MentorService
+    private studentService: StudentService
   ) {}
 
   skillList$?: Observable<Skill[]>;
-  
-userService = inject(UserService);
+
+  userService = inject(UserService);
 
   ngOnInit(): void {
     this.skillList$ = this.userService.getMentorSkillsById(this.mentor.userId);
-    console.log("mentor:", this.mentor.id);
+    console.log('mentor:', this.mentor.id);
     this.checkIfFavorite();
-
   }
 
   checkIfFavorite(): void {
     const studentId = this.userStoreService.getUserId();
     if (studentId) {
-      this.favoritesService.isFavorite(this.studentService.activeStudentProfil$.value.id || 0, this.mentor.id || 0).subscribe(result => {
-        this.isFavorite = result.isFavorite;
-      }, error => {
-        console.error('Error checking favorite status:', error);
-      });
+      this.favoritesService
+        .isFavorite(
+          this.studentService.activeStudentProfil$.value.id,
+          this.mentor.id
+        )
+        .subscribe(
+          (result) => {
+            this.isFavorite = result.isFavorite;
+          },
+          (error) => {
+            console.error('Error checking favorite status:', error);
+          }
+        );
     }
   }
 
@@ -54,18 +60,34 @@ userService = inject(UserService);
     if (studentId) {
       if (this.isFavorite) {
         this.isFavorite = true;
-        this.favoritesService.removeFromFavorites(this.studentService.activeStudentProfil$.value.id || 0, this.mentor.id || 0).subscribe(() => {
-          this.isFavorite = false;
-        }, error => {
-          console.error('Error removing from favorites:', error);
-        });
+        this.favoritesService
+          .removeFromFavorites(
+            this.studentService.activeStudentProfil$.value.id || 0,
+            this.mentor.id || 0
+          )
+          .subscribe(
+            () => {
+              this.isFavorite = false;
+            },
+            (error) => {
+              console.error('Error removing from favorites:', error);
+            }
+          );
       } else {
         this.isFavorite = true;
-        this.favoritesService.addToFavorites(this.studentService.activeStudentProfil$.value.id || 0, this.mentor.id || 0).subscribe(() => {
-          this.isFavorite = true;
-        }, error => {
-          console.error('Error adding to favorites:', error);
-        });
+        this.favoritesService
+          .addToFavorites(
+            this.studentService.activeStudentProfil$.value.id || 0,
+            this.mentor.id || 0
+          )
+          .subscribe(
+            () => {
+              this.isFavorite = true;
+            },
+            (error) => {
+              console.error('Error adding to favorites:', error);
+            }
+          );
       }
     }
   }

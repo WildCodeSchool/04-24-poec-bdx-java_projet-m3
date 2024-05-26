@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Mentor } from '../../../../shared/models/user';
+import { Mentor, MentorDTO } from '../../../../shared/models/user';
 import { MentorService } from '../../../../shared/services/mentor.service';
 
 @Component({
@@ -9,11 +9,11 @@ import { MentorService } from '../../../../shared/services/mentor.service';
   styleUrl: './list-mentors.component.scss',
 })
 export class ListMentorsComponent implements OnInit {
-  private mentorListSubject = new BehaviorSubject<Mentor[]>([]);
+  private mentorListSubject = new BehaviorSubject<MentorDTO[]>([]);
 
   constructor(private _mentorService: MentorService) {}
 
-  mentorList$: Observable<Mentor[]> = this.mentorListSubject.asObservable();
+  mentorList$: Observable<MentorDTO[]> = this.mentorListSubject.asObservable();
 
   ngOnInit(): void {
     this.getMentorsList();
@@ -25,7 +25,7 @@ export class ListMentorsComponent implements OnInit {
     });
   }
 
-  updateMentorList(filteredMentors: Mentor[]) {
+  updateMentorList(filteredMentors: MentorDTO[]) {
     this.mentorListSubject.next(filteredMentors);
   }
 }

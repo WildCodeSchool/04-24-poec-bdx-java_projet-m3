@@ -1,7 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, map, switchMap, tap } from 'rxjs';
-import { Mentor, Student, User } from './shared/models/user';
+import {
+  Mentor,
+  MentorDTO,
+  Student,
+  User,
+  UserDTO,
+} from './shared/models/user';
 import { UserStoreService } from './shared/services/stores/user-store.service';
 import { Router } from '@angular/router';
 import { Skill } from './shared/models/chip';
@@ -34,11 +40,8 @@ export class UserService {
 
   constructor() {}
 
-  private createUser(user: User): Observable<User> {
-    if (user.id) {
-      delete user.id;
-    }
-    return this.http.post<User>(`${this.BASE_URL}/users`, user);
+  private createUser(user: User): Observable<UserDTO> {
+    return this.http.post<UserDTO>(`${this.BASE_URL}/users`, user);
   }
 
   createStudent(registerFormValues: any): Observable<Student> {
@@ -49,8 +52,8 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
-      switchMap((createdUser: User) => {
-        const userId = createdUser.id || 0;
+      switchMap((createdUser: UserDTO) => {
+        const userId = createdUser.id;
 
         const student: Student = new Student(
           userId,
@@ -83,10 +86,10 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
-      switchMap((createdUser: User) => {
+      switchMap((createdUser: UserDTO) => {
         const userId = createdUser.id;
         const mentor: Mentor = new Mentor(
-          userId || 0,
+          userId,
           registerFormValues.firstName,
           registerFormValues.lastName,
           '',
@@ -96,7 +99,7 @@ export class UserService {
           ''
         );
 
-        return this.http.post<Mentor>(
+        return this.http.post<MentorDTO>(
           `${this.BASE_URL}/mentor/mentors`,
           mentor
         );
@@ -108,8 +111,8 @@ export class UserService {
     );
   }
 
-  getUserByToken(token: string): Observable<User> {
-    return this.http.post<User>(`${this.BASE_URL}/users/me`, { token }).pipe(
+  getUserByToken(token: string): Observable<UserDTO> {
+    return this.http.post<UserDTO>(`${this.BASE_URL}/users/me`, { token }).pipe(
       map((user) => {
         const userString = JSON.stringify(user);
         window.localStorage.setItem('user', userString);
@@ -119,9 +122,9 @@ export class UserService {
     );
   }
 
-  login(email: any, password: any): Observable<User | null> {
+  login(email: any, password: any): Observable<UserDTO | null> {
     return this.http
-      .get<User>(`${this.BASE_URL}/users/${email}/${password}`)
+      .get<UserDTO>(`${this.BASE_URL}/users/${email}/${password}`)
 
       .pipe(
         map((users) => {
@@ -143,7 +146,7 @@ export class UserService {
 
   logout() {
     localStorage.removeItem('user');
-    this.userStore.setUserConnected(null);
+    this.userStore.setUserConnected({} as UserDTO);
     this.router.navigate(['']);
   }
 

@@ -4,7 +4,7 @@
       <img [src]="skill.url" alt="skill" width="43" height="43" />
     </button>
     <div class="details">
-      <p class="title">{{ skill.title }}</p>
+      <p class="title">{{ skill.title | titlecase }}</p>
       <div class="date-place">
         <img
           src="assets/svgs/calendar.svg"

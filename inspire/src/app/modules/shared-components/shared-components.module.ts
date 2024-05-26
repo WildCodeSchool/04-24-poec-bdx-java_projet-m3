@@ -32,6 +32,9 @@ import { CardInfosComponent } from './ui/card-infos/card-infos.component';
 import { FileUploadComponent } from './ui/file-upload/file-upload.component';
 import { DashboardLinksComponent } from './dashboard-links/dashboard-links.component';
 import { NavbarButtonComponent } from './ui/navbar-button/navbar-button.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -71,6 +74,8 @@ import { NavbarButtonComponent } from './ui/navbar-button/navbar-button.componen
     DialogModule,
     MultiSelectModule,
     FormsModule,
+    FileUploadModule,
+    ToastModule,
   ],
   exports: [
     ButtonComponent,
@@ -96,5 +101,8 @@ import { NavbarButtonComponent } from './ui/navbar-button/navbar-button.componen
     DashboardLinksComponent,
     NavbarButtonComponent,
   ],
+  providers: [MessageService],
 })
-export class SharedComponentsModule {}
+export class SharedComponentsModule {
+  constructor(private messageService: MessageService) {}
+}

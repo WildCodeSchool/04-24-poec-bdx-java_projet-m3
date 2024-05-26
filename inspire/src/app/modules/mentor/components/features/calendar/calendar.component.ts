@@ -15,7 +15,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { ReservationService } from '../../../../../shared/services/reservation.service';
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Subscription } from 'rxjs';
-import { Mentor } from '../../../../../shared/models/user';
+import { Mentor, MentorDTO } from '../../../../../shared/models/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -32,8 +32,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   mentorId!: number;
   userId!: number;
   mentorSubscription!: Subscription;
-  @Input()
-  formattedSlotInfo!: any;
+  @Input() formattedSlotInfo!: any;
   events: EventInput[] = [];
   displayModal: boolean = false;
   eventDetails: any = {};
@@ -224,7 +223,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     this.calendarOptions.allDayText = 'Heures';
 
     this.mentorSubscription = this.mentorService.activeMentorProfil$.subscribe(
-      (mentor: Mentor) => {
+      (mentor: MentorDTO) => {
         if (mentor && mentor.id) {
           this.mentorId = mentor.userId;
         }

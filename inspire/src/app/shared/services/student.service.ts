@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { BehaviorSubject, of, tap } from 'rxjs';
-import { Student } from '../models/user';
+import { Student, StudentDTO } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
 
 @Injectable({
@@ -14,13 +14,12 @@ export class StudentService {
 
   constructor() {}
 
-  activeStudentProfil$: BehaviorSubject<Student> = new BehaviorSubject<Student>(
-    {} as Student
-  );
+  activeStudentProfil$: BehaviorSubject<StudentDTO> =
+    new BehaviorSubject<StudentDTO>({} as StudentDTO);
 
   getStudentProfil() {
     return this.httpClient
-      .get<Student>(
+      .get<StudentDTO>(
         environment.BASE_URL +
           '/student/students/' +
           this.userConnected.value?.id
@@ -28,11 +27,11 @@ export class StudentService {
       .pipe(tap((res) => this.activeStudentProfil$.next(res)));
   }
 
-  updateStudentProfil(profil: Student) {
+  updateStudentProfil(profil: StudentDTO) {
     return this.httpClient
       .put<{
         affectedRow: number;
-        profil: Student;
+        profil: StudentDTO;
         success: boolean;
       }>(
         environment.BASE_URL +
@@ -52,7 +51,7 @@ export class StudentService {
       return this.httpClient
         .put<{
           affectedRow: number;
-          profil: Student;
+          profil: StudentDTO;
           success: boolean;
         }>(
           environment.BASE_URL +

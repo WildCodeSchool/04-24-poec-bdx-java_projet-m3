@@ -1,7 +1,10 @@
-<div class="main">
+<div class="main" *ngIf="reservation">
   <div class="action-phone" *ngIf="showAction">
-    <button (click)="delete()">
+    <button (click)="delete()" *ngIf="!isHistory">
       <img src="assets/svgs/stop.svg" alt="" width="25" height="25" />
+    </button>
+    <button (click)="showModalNote()" *ngIf="isHistory">
+      <img src="assets/svgs/edit.svg" alt="" width="25" height="25" />
     </button>
   </div>
   <div class="row-reservation" [ngClass]="bgColor" #thisRef>
@@ -46,5 +49,6 @@
     [isHistory]="isHistory"
     (onCancel)="modalVisible = false"
     (onSubmit)="updateReservation($event)"
+    (onDeleteReservation)="deleteReservation()"
   ></app-modal-add-note>
 </p-dialog>

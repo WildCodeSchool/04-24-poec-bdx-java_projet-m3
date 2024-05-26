@@ -1,6 +1,6 @@
 import { Component, DestroyRef, EventEmitter, Output } from '@angular/core';
 import { Skill } from '../../../../../shared/models/chip';
-import { Mentor } from '../../../../../shared/models/user';
+import { Mentor, MentorDTO } from '../../../../../shared/models/user';
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { UserService } from '../../../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -20,7 +20,7 @@ export class FilterSearchListComponent {
   selectedLevel: any[] = [];
   mode: { name: string }[] = [];
 
-  @Output() filteredMentors = new EventEmitter<Mentor[]>();
+  @Output() filteredMentors = new EventEmitter<MentorDTO[]>();
 
   constructor(
     private _mentorService: MentorService,
@@ -56,7 +56,7 @@ export class FilterSearchListComponent {
         .getMentorsList()
         .pipe(takeUntilDestroyed(this._destroyRef))
         .subscribe((mentors) => {
-          let filteredMentors: Mentor[] = [];
+          let filteredMentors: MentorDTO[] = [];
           let completedRequests = 0;
           mentors.forEach((mentor) => {
             this._userService

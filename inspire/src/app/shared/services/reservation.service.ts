@@ -90,7 +90,12 @@ export class ReservationService {
         environment.BASE_URL +
           `/reservation/reservations/mentor/${userId}?perPage=${perPage}&offset=${offset}`
       )
-      .pipe(tap((res) => this.activeMentorReservations$.next(res)));
+      .pipe(
+        tap((res) => {
+          this.activeMentorReservations$.next(res);
+          console.log('res in service ', res);
+        })
+      );
   }
 
   getMentorReservationHistoryList(
@@ -115,19 +120,21 @@ export class ReservationService {
 
   updateMentorReservationHistoryList(
     id: number,
-    mentorId: number,
+    userId: number,
     message: string
   ) {
     return this.httpClient
-      .post<{ reservations: reservationForMentorDTO[]; total: number }>(
-        environment.BASE_URL + `/reservation/reservations/mentor/${id}`,
+      .put<{ reservations: reservationForMentorDTO[]; total: number }>(
+        environment.BASE_URL + `/reservation/reservations/${id}`,
         {
-          mentorId,
           message,
+          mentorId: userId,
         }
       )
       .pipe(
         tap((res) => {
+          console.log('respond upate res', res);
+
           this.activeMentorReservationsHistory$.next(res);
         })
       );
@@ -166,6 +173,20 @@ export class ReservationService {
         tap((res) => {
           this.activeStudentReservationsHistory$.next(res);
           console.log('reservations passés:', res);
+        })
+      );
+  }
+
+  removeMentorReservation(id: number, userId: number) {
+    return this.httpClient
+      .delete<{ reservations: reservationForMentorDTO[]; total: number }>(
+        environment.BASE_URL + `/reservation/reservations/${id}/${userId}`
+      )
+      .pipe(
+        tap((res) => {
+          console.log('respond delete res', res);
+
+          this.activeMentorReservations$.next(res);
         })
       );
   }

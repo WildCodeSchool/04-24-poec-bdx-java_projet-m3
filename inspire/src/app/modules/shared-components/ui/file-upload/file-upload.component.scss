@@ -1,0 +1,32 @@
+@import "variables.scss";
+
+.upload {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px 0 20px;
+  gap: 20px;
+  input[type="file"] {
+    display: none;
+  }
+
+  label span {
+    padding: 8px 12px;
+    background: $primary-color;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s all ease;
+  }
+
+  label span:hover {
+    background: #b90437;
+    transform: scale(0.95);
+  }
+  img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
-import { Mentor } from '../models/user';
+import { Mentor, MentorDTO } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
 import { reservationForMentorDTO } from '../models/reservation';
 import { FavoritesService } from '../../modules/students/shared/favorites.service';
@@ -11,39 +11,36 @@ import { FavoritesService } from '../../modules/students/shared/favorites.servic
   providedIn: 'root',
 })
 export class MentorService {
-  constructor(
-    private httpClient: HttpClient,
-    private userStoreService: UserStoreService,
-    private favoritesService: FavoritesService
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   userConnected = inject(UserStoreService).getUserConnected$();
 
-  activeMentorProfil$: BehaviorSubject<Mentor> = new BehaviorSubject<Mentor>(
-    {} as Mentor
-  );
+  activeMentorProfil$: BehaviorSubject<MentorDTO> =
+    new BehaviorSubject<MentorDTO>({} as MentorDTO);
   mentorsReservations$: BehaviorSubject<reservationForMentorDTO[]> =
     new BehaviorSubject<reservationForMentorDTO[]>([]);
 
   getMentorProfil() {
     return this.httpClient
-      .get<Mentor>(
+      .get<MentorDTO>(
         environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
       )
       .pipe(tap((res) => this.activeMentorProfil$.next(res)));
   }
+
   getMentorProfilById(userId: number) {
-    return this.httpClient.get<Mentor>(
+    return this.httpClient.get<MentorDTO>(
       environment.BASE_URL + '/mentor/mentors/' + userId
     );
   }
 
-  setActiveMentor(mentor: Mentor): void {
+  setActiveMentor(mentor: MentorDTO): void {
     this.activeMentorProfil$.next(mentor);
   }
-  updateMentorProfil(profil: Mentor) {
+
+  updateMentorProfil(profil: MentorDTO) {
     return this.httpClient
-      .put<{ affectedRow: number; profil: Mentor; success: boolean }>(
+      .put<{ affectedRow: number; profil: MentorDTO; success: boolean }>(
         environment.BASE_URL +
           '/mentor/mentors/' +
           this.userConnected.value?.id,
@@ -53,7 +50,7 @@ export class MentorService {
   }
 
   getMentorsList() {
-    return this.httpClient.get<Mentor[]>(
+    return this.httpClient.get<MentorDTO[]>(
       environment.BASE_URL + '/mentor/mentors'
     );
   }
@@ -65,8 +62,8 @@ export class MentorService {
     );
   }
 
-  getMentorListFavoriteByStudent(studentId: number): Observable<Mentor[]> {
-    return this.httpClient.get<Mentor[]>(
+  getMentorListFavoriteByStudent(studentId: number): Observable<MentorDTO[]> {
+    return this.httpClient.get<MentorDTO[]>(
       environment.BASE_URL + `/favorite/mentors/${studentId}`
     );
   }
@@ -88,7 +85,7 @@ export class MentorService {
       return this.httpClient
         .put<{
           affectedRow: number;
-          profil: Mentor;
+          profil: MentorDTO;
           success: boolean;
         }>(
           environment.BASE_URL +
