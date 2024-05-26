@@ -10,7 +10,7 @@
 ></full-calendar>
 <p-dialog
   [modal]="true"
-  [(visible)]="visible && formattedSlotInfo"
+  [visible]="visible && formattedSlotInfo"
   [style]="{ width: '25rem' }"
 >
   <div class="modal">
@@ -31,6 +31,14 @@
         Le créneau selectionné est
         {{ formattedSlotInfo?.visio ? " en Visio" : "en Présentiel" }}
       </p>
+    </div>
+    <div>
+      <form [formGroup]="formulaire">
+        <select formControlName="mode" (change)="updateMode()">
+          <option value="presentiel">Présentiel</option>
+          <option value="visio">Visio</option>
+        </select>
+      </form>
     </div>
 
     <div class="control">
