@@ -50,7 +50,7 @@ export class UserService {
 
     return this.createUser(user).pipe(
       switchMap((createdUser: User) => {
-        const userId = createdUser.userId || 0;
+        const userId = createdUser.id || 0;
 
         const student: Student = new Student(
           userId,
@@ -84,7 +84,7 @@ export class UserService {
 
     return this.createUser(user).pipe(
       switchMap((createdUser: User) => {
-        const userId = createdUser.userId;
+        const userId = createdUser.id;
         const mentor: Mentor = new Mentor(
           userId || 0,
           registerFormValues.firstName,
