@@ -62,7 +62,18 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
   onDateSelect = (selectionInfo: any) => {
     if (this.formulaire.valid) {
+      const diffMilliseconds = selectionInfo.end - selectionInfo.start;
+      const hours = Math.floor(diffMilliseconds / (1000 * 60 * 60));
+      const minutes = Math.floor(
+        (diffMilliseconds % (1000 * 60 * 60)) / (1000 * 60)
+      );
+
+      const formattedDuration = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+
       this.formattedSlotInfo = {
+        formattedDuration,
+        start: selectionInfo.start,
+        end: selectionInfo.end,
         dateTime: selectionInfo.startStr,
         dateEnd: selectionInfo.endStr,
         visio: this.formulaire.value.mode === 'visio',
@@ -171,6 +182,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     selectable: true,
     eventDurationEditable: false,
     defaultTimedEventDuration: '01:00:00',
+    nowIndicator: true,
 
     droppable: false,
 
@@ -203,7 +215,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       title: slot.visio ? 'Visio' : 'Présentiel',
       start: slot.dateTime,
       end: slot.dateEnd,
-      color: 'blue',
+      color: slot.visio ? '#FCBE77' : '#F8156B',
     }));
   }
 
