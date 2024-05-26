@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MentorRoutingModule } from './mentor-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RowReservationComponent } from './components/ui/row-reservation/row-reservation-student.component';
 import { LayoutMentor } from './pages/layout/layout-mentor-component';
 import { SharedModule } from 'primeng/api';
@@ -48,6 +48,7 @@ import { ModalAddNoteComponent } from './components/ui/modal-add-note/modal-add-
     DialogModule,
     FullCalendarModule,
     EditorModule,
+    ReactiveFormsModule,
   ],
   exports: [
     RowReservationComponent,

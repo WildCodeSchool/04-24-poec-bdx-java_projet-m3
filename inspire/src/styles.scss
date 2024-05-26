@@ -124,3 +124,39 @@ a {
 .filter .p-multiselect-clear-icon {
   display: none;
 }
+
+.fc .fc-toolbar.fc-header-toolbar {
+  padding: 30px 0;
+}
+
+.fc .fc-button-primary {
+  background-color: #fedae3;
+  color: #f8156b;
+  border: solid 2px #fedae3;
+  border-radius: 7px;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  background-color: #f8156b;
+  color: white;
+  border: solid 2px #f8156b;
+}
+
+.fc .fc-col-header-cell-cushion {
+  font-weight: 400;
+}
+
+.fc-direction-ltr .fc-button-group > .fc-button:not(:first-child) {
+  margin-left: 5px;
+}
+
+.fc td,
+.fc th {
+  vertical-align: middle;
+}
+
+.fc th {
+  border: none;
+  background-color: #fedae3;
+}
