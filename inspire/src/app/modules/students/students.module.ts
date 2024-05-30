@@ -9,7 +9,7 @@ import { StudentLayoutComponent } from './pages/student-layout/student-layout.co
 import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { FilterSearchListComponent } from './components/features/filter-search-list/filter-search-list.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ListboxModule } from 'primeng/listbox';
 import { DashboardLinkStudentComponent } from './components/ui/dashboard-link-student/dashboard-link-student.component';
@@ -20,6 +20,8 @@ import { MentorProfilByStudentComponent } from './pages/mentor-profil-by-student
 import { StudentReservationComponent } from './pages/student-reservation/student-reservation.component';
 import { ListStudentReservationComponent } from './components/features/list-student-reservation/list-student-reservation.component';
 import { StudentReservationWithSwipeUpcomingComponent } from './components/ui/student-reservation-with-swipe-upcoming/student-reservation-with-swipe-upcoming.component';
+import { MentorReservationPageByStudentComponent } from './pages/mentor-reservation-page-by-student/mentor-reservation-page-by-student.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { StudentReservationWithSwipeUpcomingComponent } from './components/ui/st
     StudentReservationComponent,
     ListStudentReservationComponent,
     StudentReservationWithSwipeUpcomingComponent,
+    MentorReservationPageByStudentComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +48,8 @@ import { StudentReservationWithSwipeUpcomingComponent } from './components/ui/st
     MultiSelectModule,
     ListboxModule,
     MentorModule,
+    FullCalendarModule,
+    ReactiveFormsModule,
   ],
 })
 export class StudentsModule {}
