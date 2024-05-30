@@ -1,6 +1,8 @@
 import {
   AfterViewChecked,
+  ChangeDetectorRef,
   Component,
+  ElementRef,
   Input,
   OnInit,
   ViewChild,
@@ -27,9 +29,6 @@ import { ActivatedRoute } from '@angular/router';
 export class MentorReservationPageByStudentComponent
   implements OnInit, AfterViewChecked
 {
-  @ViewChild('calendar')
-  calendarComponent!: FullCalendarComponent;
-
   today!: string;
   visible = false;
   mentorId!: number;
@@ -44,7 +43,6 @@ export class MentorReservationPageByStudentComponent
 
   constructor(
     private reservationService: ReservationService,
-    private mentorService: MentorService,
     private fb: FormBuilder,
     private activatedRouter: ActivatedRoute
   ) {}
@@ -234,18 +232,17 @@ export class MentorReservationPageByStudentComponent
         this.loadSlots();
       })
     );
-
-    this.calendarComponent.getApi().view;
   }
 
-  ngOnDestroy(): void {
-    if (this.mentorSubscription) {
-      this.mentorSubscription.unsubscribe();
-    }
-  }
-  ngAfterViewChecked(): void {
-    setTimeout(() => {
-      this.today = this.calendarComponent.getApi().view.title;
-    }, 0);
-  }
+  ngOnDestroy(): void {}
+  ngAfterViewChecked(): void {}
 }
+
+/*
+ _______                           .__                                         .__   .__   __     __   .__              __________ .__   __           .__     
+ \      \  _____     ______  ______|__|  _____    ____       _____   ___.__.   |  |  |__|_/  |_ _/  |_ |  |    ____     \______   \|__|_/  |_   ____  |  |__  
+ /   |   \ \__  \   /  ___/ /  ___/|  | /     \ _/ __ \     /     \ <   |  |   |  |  |  |\   __\\   __\|  |  _/ __ \     |    |  _/|  |\   __\_/ ___\ |  |  \ 
+/    |    \ / __ \_ \___ \  \___ \ |  ||  Y Y  \\  ___/    |  Y Y  \ \___  |   |  |__|  | |  |   |  |  |  |__\  ___/     |    |   \|  | |  |  \  \___ |   Y  \
+\____|__  /(____  //____  >/____  >|__||__|_|  / \___  >   |__|_|  / / ____|   |____/|__| |__|   |__|  |____/ \___  >    |______  /|__| |__|   \___  >|___|  /
+        \/      \/      \/      \/           \/      \/          \/  \/                                           \/            \/                 \/      \/ 
+*/

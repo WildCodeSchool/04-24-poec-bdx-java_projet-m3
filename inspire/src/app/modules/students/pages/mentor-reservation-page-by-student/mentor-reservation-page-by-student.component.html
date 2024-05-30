@@ -3,7 +3,7 @@
   Réserver un creneau chez {{ profil.firstname | titlecase }}
 </h2>
 <ng-container *ngIf="today?.length">
-  <h3>La semaine de {{ today }}</h3>
+  <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
 </ng-container>
 <full-calendar
   [events]="events"
