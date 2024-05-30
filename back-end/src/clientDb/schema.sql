@@ -100,7 +100,7 @@ VALUES (
         'mentor'
     ),
     (
-        'chocholastico@gmail.com',
+        'mathieumentor@wilder.school',
         '$2b$10$hVjaq5YMTbZIVq8oF6Edj.Xvth4cH6g/G5M95wHEyD02P4Axizsp6',
         'mentor'
     ),
@@ -110,7 +110,7 @@ VALUES (
         'mentor'
     ),
     (
-        'aurore@free.com',
+        'raph@gmail.com',
         '$2b$10$hVjaq5YMTbZIVq8oF6Edj.Xvth4cH6g/G5M95wHEyD02P4Axizsp6',
         'mentor'
     ),
@@ -120,7 +120,7 @@ VALUES (
         'mentor'
     ),
     (
-        'fred@gmail.com',
+        'nass@gmail.com',
         '$2b$10$hVjaq5YMTbZIVq8oF6Edj.Xvth4cH6g/G5M95wHEyD02P4Axizsp6',
         'mentor'
     ),
