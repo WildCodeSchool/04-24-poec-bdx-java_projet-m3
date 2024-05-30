@@ -22,6 +22,7 @@ import { CalendarComponent } from './components/features/calendar/calendar.compo
 import { ReservationWithSwipeComponentUpcoming } from './components/ui/reservation-with-swipe-upcoming/reservation-with-swipe-upcoming.component';
 import { EditorModule } from 'primeng/editor';
 import { ModalAddNoteComponent } from './components/ui/modal-add-note/modal-add-note.component';
+import { ModalCancelReservationComponent } from './components/ui/modal-cancel-reservation/modal-cancel-reservation.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ModalAddNoteComponent } from './components/ui/modal-add-note/modal-add-
     CalendarComponent,
     ReservationWithSwipeComponentUpcoming,
     ModalAddNoteComponent,
+    ModalCancelReservationComponent,
   ],
   imports: [
     CommonModule,
