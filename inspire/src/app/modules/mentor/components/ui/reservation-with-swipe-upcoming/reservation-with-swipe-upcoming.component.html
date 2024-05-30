@@ -7,7 +7,7 @@
       <img src="assets/svgs/edit.svg" alt="" width="25" height="25" />
     </button>
   </div>
-  <div class="row-reservation" [ngClass]="bgColor" #thisRef>
+  <div class="row-reservation" [ngClass]="bgColor" #thisRef [routerLink]="['/mentor/student-details/', 1]">
     <div class="avatar-name">
       <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" />
       <p>{{ reservation.firstname }}</p>

@@ -15,6 +15,7 @@ import { fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReservationService } from '../../../../../shared/services/reservation.service';
 import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
+import { StudentDTO } from '../../../../../shared/models/user';
 
 @Component({
   selector: 'app-reservation-with-swipe-upcoming',
@@ -24,6 +25,7 @@ import { UserStoreService } from '../../../../../shared/services/stores/user-sto
 export class ReservationWithSwipeComponentUpcoming
   implements AfterViewInit, OnInit, OnChanges
 {
+  @Input() student!: StudentDTO;
   @Input() reservation!: reservationForMentorDTO;
   @Input() bgColor: string = 'transparent';
   @Input() isHistory: boolean = false;
