@@ -196,10 +196,10 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       title: eventClickArg.event.title,
       start: eventClickArg.event.start,
       end: eventClickArg.event.end,
-      visio: eventClickArg.event.extendedProps['visio'], // Utilisation de crochets
+      visio: eventClickArg.event.extendedProps['visio'],
     };
 
-    this.displayModal = true; // Afficher la pop-up de suppression
+    this.displayModal = true;
     eventClickArg.jsEvent.preventDefault();
   }
 
@@ -217,7 +217,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       end: slot.dateEnd,
       color: slot.visio ? '#FCBE77' : '#F8156B',
       extendedProps: {
-        visio: slot.visio, // Ajout de cette ligne
+        visio: slot.visio,
       },
     }));
   }
