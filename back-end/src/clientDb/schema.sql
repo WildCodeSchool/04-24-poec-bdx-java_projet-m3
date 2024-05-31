@@ -428,29 +428,29 @@ VALUES (2, 1),
 
 INSERT INTO
     skills (name)
-VALUES ('javascript'),
-    ('C plus plus'),
-    ('C Sharp'),
-    ('java'),
-    ('html'),
-    ('css'),
-    ('angular'),
-    ('react'),
-    ('spring'),
-    ('node');
+VALUES ('JavaScript'),
+    ("C++"),
+    ("C#"),
+    ('Java'),
+    ('HTML'),
+    ('CSS'),
+    ('Angular'),
+    ('React'),
+    ('Spring'),
+    ('Node');
 
 INSERT INTO
     languages (name)
-VALUES ('français'),
-    ('arabe'),
-    ('anglais'),
-    ('chinois'),
-    ('japonais'),
-    ('koréen'),
-    ('hebreu'),
-    ('turk'),
-    ('farsi'),
-    ('afrikan');
+VALUES ('Français'),
+    ('Arabe'),
+    ('Anglais'),
+    ('Chinois'),
+    ('Japonais'),
+    ('Koréen'),
+    ('Hebreu'),
+    ('Turk'),
+    ('Farsi'),
+    ('Afrikaan');
 
 TRUNCATE TABLE user_skills;
 

@@ -42,12 +42,19 @@ export class ModalEditLanguagesComponent implements OnInit, OnDestroy {
 
   constructor() {}
 
+  toTitleCase(ele: string): string {
+    if (ele.length) return ele.charAt(0).toUpperCase() + ele.slice(1);
+    return ele;
+  }
+
   ngOnInit(): void {
     this.userService
       .getListLanguages()
       .pipe(take(1))
       .subscribe((listLanguages) => {
-        this.languages = listLanguages;
+        this.languages = listLanguages.sort((a, b) =>
+          a.name.localeCompare(b.name)
+        );
       });
   }
 
