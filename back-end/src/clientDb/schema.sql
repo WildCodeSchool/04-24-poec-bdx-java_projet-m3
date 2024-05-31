@@ -100,7 +100,7 @@ VALUES (
         'mentor'
     ),
     (
-        'chocholastico@gmail.com',
+        'mathieumentor@gmail.com',
         '$2b$10$hVjaq5YMTbZIVq8oF6Edj.Xvth4cH6g/G5M95wHEyD02P4Axizsp6',
         'mentor'
     ),
