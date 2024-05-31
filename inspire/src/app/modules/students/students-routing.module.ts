@@ -19,6 +19,7 @@ import {
   studentReservationsHistoryResolver,
   studentReservationsResolver,
 } from '../../shared/resolvers/reservations.resolver';
+import { MentorReservationPageByStudentComponent } from './pages/mentor-reservation-page-by-student/mentor-reservation-page-by-student.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,13 @@ const routes: Routes = [
         resolve: {
           reservationsData: studentReservationsResolver,
           reservationsHistoryData: studentReservationsHistoryResolver,
+        },
+      },
+      {
+        path: 'reserve/:userId',
+        component: MentorReservationPageByStudentComponent,
+        resolve: {
+          profil: mentorProfilByIdResolver,
         },
       },
     ],

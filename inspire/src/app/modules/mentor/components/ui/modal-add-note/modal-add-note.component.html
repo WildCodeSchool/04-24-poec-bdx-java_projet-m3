@@ -1,10 +1,19 @@
-<div class="modal-note" *ngIf="isHistory">
+<div class="modal-note">
   <h3>Vous avez assisté {{ reservation.firstname | titlecase }}</h3>
   <h4>Le {{ reservation.dateTime | date : "short" }}</h4>
   <h3>Notez cette session</h3>
+  <img
+    src="assets/svgs/telecom.svg"
+    alt=""
+    class="image"
+    width="500"
+    height="400"
+  />
 
   <div class="card" *ngIf="!editMessage">
-    <pre [innerHTML]="reservation.message"></pre>
+    <div>
+      <pre [innerHTML]="reservation.message"></pre>
+    </div>
     <app-button
       [text]="'Editer'"
       [variant]="'pink'"
@@ -21,22 +30,5 @@
       (onSubmit)="onCancel.emit()"
     ></app-button>
     <app-button [text]="'Valider'" (onSubmit)="updateMessage()"></app-button>
-  </div>
-</div>
-<div class="modal-note" *ngIf="!isHistory">
-  <h3>Réservation prévue avec {{ reservation.firstname | titlecase }}</h3>
-  <h4>Le {{ reservation.dateTime | date : "short" }}</h4>
-  <h3>Annulez cette réservation?</h3>
-
-  <div class="control">
-    <app-button
-      [text]="'Annuler'"
-      [variant]="'pink'"
-      (onSubmit)="onCancel.emit()"
-    ></app-button>
-    <app-button
-      [text]="'Valider'"
-      (onSubmit)="deleteReservation()"
-    ></app-button>
   </div>
 </div>

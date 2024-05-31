@@ -24,17 +24,18 @@
     </div>
 
     <div class="action" *ngIf="!isHistory">
-      <button (click)="showModalNote()">Annuler</button>
+      <button (click)="delete()">Annuler</button>
     </div>
     <div class="action" *ngIf="isHistory">
       <button (click)="showModalNote()">Plus</button>
     </div>
   </div>
 </div>
+
 <p-dialog
-  *ngIf="modalVisible"
+  *ngIf="modalCancelReservation"
   header=""
-  [(visible)]="modalVisible"
+  [(visible)]="modalCancelReservation"
   [modal]="true"
   [style]="{
     width: 'clamp(350px,40vw, 100%)',
@@ -43,12 +44,26 @@
   [draggable]="false"
   [resizable]="false"
 >
-  <app-modal-add-note
-    *ngIf="modalVisible"
+  <app-modal-cancel-reservation
     [reservation]="reservation"
     [isHistory]="isHistory"
-    (onCancel)="modalVisible = false"
-    (onSubmit)="updateReservation($event)"
+    (onCancel)="modalCancelReservation = false"
     (onDeleteReservation)="deleteReservation()"
-  ></app-modal-add-note>
+  ></app-modal-cancel-reservation>
 </p-dialog>
+<p-sidebar
+  *ngIf="modalEditMessage"
+  [(visible)]="modalEditMessage"
+  position="right"
+  (onHide)="modalEditMessage = false"
+  position="right"
+  [style]="{
+    width: phoneMode ? 'max(50vw, 400px)' : '100vw'
+  }"
+>
+  <app-modal-add-note
+    [reservation]="reservation"
+    (onCancel)="modalEditMessage = false"
+    (onSubmit)="updateReservation($event)"
+  ></app-modal-add-note
+></p-sidebar>
