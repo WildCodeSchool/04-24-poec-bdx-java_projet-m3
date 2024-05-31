@@ -23,6 +23,7 @@ import { ReservationWithSwipeComponentUpcoming } from './components/ui/reservati
 import { EditorModule } from 'primeng/editor';
 import { ModalAddNoteComponent } from './components/ui/modal-add-note/modal-add-note.component';
 import { StudentProfilByMentorComponent } from './pages/student-profil-by-mentor/student-profil-by-mentor.component';
+import { ModalCancelReservationComponent } from './components/ui/modal-cancel-reservation/modal-cancel-reservation.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { StudentProfilByMentorComponent } from './pages/student-profil-by-mentor
     ReservationWithSwipeComponentUpcoming,
     ModalAddNoteComponent,
     StudentProfilByMentorComponent,
+    ModalCancelReservationComponent,
   ],
   imports: [
     CommonModule,

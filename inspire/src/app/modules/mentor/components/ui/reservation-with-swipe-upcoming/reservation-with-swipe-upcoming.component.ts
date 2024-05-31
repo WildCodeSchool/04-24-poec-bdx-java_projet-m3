@@ -16,6 +16,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReservationService } from '../../../../../shared/services/reservation.service';
 import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
 import { StudentDTO } from '../../../../../shared/models/user';
+import { WindowWatcherService } from '../../../../../shared/services/window-watcher.service';
 
 @Component({
   selector: 'app-reservation-with-swipe-upcoming',
@@ -33,12 +34,14 @@ export class ReservationWithSwipeComponentUpcoming
   startingPosition!: number;
   offsetRight = 0;
   showAction = false;
-  modalVisible: boolean = false;
+  modalCancelReservation: boolean = false;
+  modalEditMessage: boolean = false;
   newNote: string = '<p>Pas de comentaires</p>';
 
   destroyRef = inject(DestroyRef);
   connectedUser = inject(UserStoreService).getUserConnected$();
   reservationService = inject(ReservationService);
+  phoneMode = inject(WindowWatcherService).windowSizeChanged;
 
   ngOnInit(): void {
     this.newNote = this.reservation.message || '';
@@ -97,23 +100,27 @@ export class ReservationWithSwipeComponentUpcoming
   delete() {
     this.showAction = false;
     this.elementRef.nativeElement.style.transform = `translateX(0px)`;
-    this.modalVisible = true;
+    this.modalCancelReservation = true;
   }
 
   showModalNote() {
-    this.modalVisible = true;
+    this.modalEditMessage = true;
+    this.elementRef.nativeElement.style.transform = `translateX(0px)`;
+  }
+  showCancelModal() {
+    this.modalEditMessage = true;
     this.elementRef.nativeElement.style.transform = `translateX(0px)`;
   }
 
   cancel() {
-    this.modalVisible = false;
+    this.modalCancelReservation = false;
     this.elementRef.nativeElement.style.transform = `translateX(0px)`;
   }
 
   updateReservation(event: string) {
     this.reservation.message = event;
     console.log('message ', event);
-    this.modalVisible = false;
+    this.modalEditMessage = false;
     this.reservationService
       .updateMentorReservationHistoryList(
         this.reservation.id,
@@ -132,7 +139,7 @@ export class ReservationWithSwipeComponentUpcoming
       )
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((res) => {
-        this.modalVisible = false;
+        this.modalCancelReservation = false;
       });
   }
 }

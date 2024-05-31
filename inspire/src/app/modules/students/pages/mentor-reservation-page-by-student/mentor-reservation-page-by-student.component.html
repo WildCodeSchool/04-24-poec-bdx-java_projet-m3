@@ -1,0 +1,96 @@
+<div class="control"></div>
+<h2 *ngIf="profil | async as profil">
+  Réserver un creneau chez {{ profil.firstname | titlecase }}
+</h2>
+<ng-container *ngIf="today?.length">
+  <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
+</ng-container>
+<full-calendar
+  [events]="events"
+  [options]="calendarOptions"
+  #calendar
+></full-calendar>
+<p-dialog
+  [modal]="true"
+  [visible]="visible && formattedSlotInfo"
+  [style]="{ width: '25rem' }"
+>
+  <div class="modal">
+    <div class="container-img-forgot">
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/validate-slot.svg"
+        alt=""
+      />
+    </div>
+    <h1>Validez le créneau d'ouverture</h1>
+    <div class="content">
+      <p>
+        Ahoy, aventurier en quête de sagesse ! Vous êtes sur le point de
+        franchir les portes d'une aventure épique : la création d'un créneau de
+        mentorat.
+      </p>
+
+      <div class="form-mentorat">
+        <h2>Choisisez le mode de mentorat</h2>
+        <form [formGroup]="formulaire">
+          <select formControlName="mode" (change)="updateMode()">
+            <option value="presentiel">Présentiel</option>
+            <option value="visio">Visio</option>
+          </select>
+        </form>
+      </div>
+
+      <div class="content-resume">
+        <h2>Résumé de votre créneau</h2>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/date-slot.svg"
+            alt=""
+          />
+
+          <h3>
+            Date :
+            {{ formattedSlotInfo?.start | date : "dd MMMM yyyy" : "" : "fr" }}
+          </h3>
+        </div>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/duration.svg"
+            alt=""
+          />
+
+          <h3>
+            De
+            {{ formattedSlotInfo?.start | date : "HH:mm" : "" : "fr" }} à
+            {{ formattedSlotInfo?.end | date : "HH:mm" : "" : "fr" }} ({{
+              formattedSlotInfo?.formattedDuration
+            }})
+          </h3>
+        </div>
+
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/visio.svg"
+            alt=""
+          />
+
+          <h3>
+            Le créneau selectionné est
+            {{ formattedSlotInfo?.visio ? " en Visio" : "en Présentiel" }}
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="control">
+      <button class="btn-general black" (click)="visible = false">
+        Annuler
+      </button>
+      <button class="btn-general pink" (click)="validateSlot()">Valider</button>
+    </div>
+  </div>
+</p-dialog>
