@@ -56,9 +56,9 @@ export class MentorReservationPageByStudentComponent
   }
 
   selectAllow = (selectionInfo: any) => {
-    if (selectionInfo.start > new Date()) {
-      return true;
-    }
+    // if (selectionInfo.start > new Date()) {
+    //   return true;
+    // }
     return false;
   };
 
