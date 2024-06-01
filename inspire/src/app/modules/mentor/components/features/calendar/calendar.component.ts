@@ -233,6 +233,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
     navLinks: true,
     eventStartEditable: true,
+    eventOverlap: false,
 
     weekNumbers: true,
     selectMirror: true,
