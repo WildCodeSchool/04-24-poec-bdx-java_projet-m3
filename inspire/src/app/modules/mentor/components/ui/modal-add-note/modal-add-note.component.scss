@@ -15,7 +15,7 @@
   }
 
   .pop-up-date h3 {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
   }
 
@@ -78,11 +78,21 @@
   height: auto;
   border-radius: 10%;
 }
-.message p {
-  display: flex;
-  flex-wrap: wrap;
-}
 
 .control {
   margin-top: 30px;
+}
+
+.message {
+  display: flex;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.mentorat-header span {
+  color: #f8156b;
+  font-style: italic;
 }
