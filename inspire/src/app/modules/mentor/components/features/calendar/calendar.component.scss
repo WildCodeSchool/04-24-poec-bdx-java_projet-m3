@@ -121,3 +121,11 @@ h3 span {
   color: $primary-color;
   font-weight: 600;
 }
+
+.old-slot.is-editing {
+  color: grey;
+}
+
+.old-slot.is-editing span {
+  color: grey;
+}
