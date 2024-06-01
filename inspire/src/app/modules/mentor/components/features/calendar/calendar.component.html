@@ -104,23 +104,48 @@
         alt=""
       />
     </div>
-    <h1>Information sur votre créneau</h1>
+
     <div class="content">
+      <h1>Information sur votre créneau</h1>
       <p>
-        Le créneau selectionné est le {{ formattedSlotInfo?.dateTime | date }}
+        Un créneau de mentorat est disponible dans notre agenda ! Vous avez la
+        possibilité de le conserver pour accueillir de nouveaux étudiants ou de
+        le supprimer selon vos besoins.
       </p>
-      <p>
-        Le créneau selectionné est
-        {{ formattedSlotInfo?.visio ? " en Visio" : "en Présentiel" }}
-      </p>
-    </div>
-    <div class="control">
-      <button class="btn-general black" (click)="displayModal = false">
-        Annuler
-      </button>
-      <button class="btn-general pink" (click)="deleteSlot()">
-        Supprimer ce créneau
-      </button>
+      <div class="content-resume">
+        <div class="content-resume">
+          <h2>Résumé de votre créneau</h2>
+        </div>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/date-slot.svg"
+            alt=""
+          />
+          <h3>
+            Le créneau selectionné est le {{ eventDetails?.start | date }}
+          </h3>
+        </div>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/date-slot.svg"
+            alt=""
+          />
+          <h3>
+            Le créneau selectionné est
+            {{ eventDetails.visio ? " en Visio" : "en Présentiel" }}
+          </h3>
+        </div>
+      </div>
+      <div class="control">
+        <button class="btn-general black" (click)="displayModal = false">
+          Annuler
+        </button>
+        <button class="btn-general pink" (click)="deleteSlot()">
+          Supprimer ce créneau
+        </button>
+      </div>
     </div>
   </div>
 </p-dialog>

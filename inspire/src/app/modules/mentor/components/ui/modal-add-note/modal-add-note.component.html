@@ -1,17 +1,52 @@
 <div class="modal-note">
-  <h3>Vous avez assisté {{ reservation.firstname | titlecase }}</h3>
-  <h4>Le {{ reservation.dateTime | date : "short" }}</h4>
-  <h3>Notez cette session</h3>
-  <img
-    src="assets/svgs/telecom.svg"
-    alt=""
-    class="image"
-    width="500"
-    height="400"
-  />
+  <div class="mentorat-header">
+    <h1>Vous avez assisté {{ reservation.firstname | titlecase }}</h1>
+    <h3>Vous avez quelques notes à prendre sur votre session de mentorat ?</h3>
+  </div>
+
+  <div class="content-resume">
+    <div class="image-container">
+      <img
+        [src]="reservation.imgUrl"
+        alt="Mentor Image"
+        class="rounded-square"
+      />
+    </div>
+
+    <div class="info-slot">
+      <div class="pop-up-date">
+        <img
+          class="img-fluid forgot-img"
+          src="/assets/svgs/date-slot.svg"
+          alt=""
+        />
+
+        <h3>
+          Date :
+          {{ reservation.dateTime | date : "dd MMMM yyyy" }}
+        </h3>
+      </div>
+      <div class="pop-up-date">
+        <img
+          class="img-fluid forgot-img"
+          src="/assets/svgs/duration.svg"
+          alt=""
+        />
+
+        <h3>Sujet du mentorat : {{ reservation.subject }}</h3>
+      </div>
+
+      <div class="pop-up-date">
+        <img class="img-fluid forgot-img" src="/assets/svgs/visio.svg" alt="" />
+
+        <h3>Durée :</h3>
+      </div>
+    </div>
+  </div>
 
   <div class="card" *ngIf="!editMessage">
-    <div>
+    <h4>Vos commentaires</h4>
+    <div class="message">
       <pre [innerHTML]="reservation.message"></pre>
     </div>
     <app-button

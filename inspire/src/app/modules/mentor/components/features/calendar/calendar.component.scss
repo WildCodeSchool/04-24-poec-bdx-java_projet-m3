@@ -59,7 +59,7 @@
 }
 
 .content-resume {
-  margin-top: 30px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -111,4 +111,8 @@
 }
 .btn-general:hover {
   transform: scale(0.95);
+}
+
+.content p {
+  margin-top: 20px;
 }
