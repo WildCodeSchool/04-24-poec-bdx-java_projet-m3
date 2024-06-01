@@ -7,6 +7,5 @@ export function AutoDestroy(component: any, key: string | symbol): void {
     }
     this[key].next();
     this[key].complete();
-    console.log('auto destroy called');
   };
 }

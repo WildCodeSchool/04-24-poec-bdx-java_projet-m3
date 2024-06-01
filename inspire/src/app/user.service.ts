@@ -175,8 +175,6 @@ export class UserService {
   }
 
   updateUserLanguages(languages: Language[]) {
-    console.log('user id', this.userStore.getUserConnected$().value?.id);
-
     return this.http
       .post<{ success: boolean; message: string; languages: Language[] }>(
         environment.BASE_URL +
@@ -337,8 +335,6 @@ export class UserService {
       .pipe(
         tap((result) => {
           this.activeUserExperiences$.next(result.experiences);
-
-          console.log(result);
         })
       );
   }

@@ -45,8 +45,6 @@ export class DashboardLinksComponent implements OnInit {
   ngOnInit(): void {
     const fragments = this.router.url;
     this.listLink.forEach((link, i) => {
-      console.log(fragments.split('/').join(''), link.path.split('/').join(''));
-
       link.active =
         fragments.split('/').join('') === link.path.split('/').join('');
     });

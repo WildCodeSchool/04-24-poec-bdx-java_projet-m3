@@ -32,7 +32,6 @@ export class CardExperienceComponent {
   }
 
   editExperience(experience: Experience) {
-    console.log(experience);
     this.userService
       .editExperience(experience, experience.id || 0)
       .pipe(takeUntilDestroyed(this.destroyRef))

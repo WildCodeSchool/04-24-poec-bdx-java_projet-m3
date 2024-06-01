@@ -46,7 +46,6 @@ export class DashboardComponent implements OnInit {
       )
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
-    console.log(event);
   }
 
   onPageChangeHistory(event: {
@@ -63,6 +62,5 @@ export class DashboardComponent implements OnInit {
       )
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
-    console.log(event);
   }
 }

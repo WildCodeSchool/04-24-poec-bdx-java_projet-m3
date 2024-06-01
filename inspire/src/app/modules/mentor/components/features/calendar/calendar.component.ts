@@ -81,7 +81,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
       this.visible = true;
     } else {
-      console.log("Veuillez d'abord soumettre le formulaire.");
+      console.error("Veuillez d'abord soumettre le formulaire.");
     }
   };
 

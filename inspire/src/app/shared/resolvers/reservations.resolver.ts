@@ -38,7 +38,6 @@ export const studentReservationsResolver: ResolveFn<{
   total: number;
 }> = (route, state) => {
   const userId = inject(UserStoreService).getUserConnected$().value?.id;
-  console.log('yo where is my userId?', userId);
   const reservationService = inject(ReservationService);
 
   return reservationService.getStudentReservationList(userId || 0, 10, 0);
