@@ -81,7 +81,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
       this.visible = true;
     } else {
-      console.log("Veuillez d'abord soumettre le formulaire.");
+      console.error("Veuillez d'abord soumettre le formulaire.");
     }
   };
 
@@ -241,9 +241,5 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       this.mentorSubscription.unsubscribe();
     }
   }
-  ngAfterViewChecked(): void {
-    setTimeout(() => {
-      this.today = this.calendarComponent.getApi().view.title;
-    }, 0);
-  }
+  ngAfterViewChecked(): void {}
 }

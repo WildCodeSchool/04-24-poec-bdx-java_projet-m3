@@ -31,7 +31,6 @@ export class CardMentorComponent implements OnInit {
 
   ngOnInit(): void {
     this.skillList$ = this.userService.getMentorSkillsById(this.mentor.userId);
-    console.log('mentor:', this.mentor.id);
     this.checkIfFavorite();
   }
 
