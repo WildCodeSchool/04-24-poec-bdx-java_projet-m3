@@ -60,8 +60,9 @@ export default class SlotController {
 
   async updateSlot(req, res) {
     try {
-      const id = req.params.id;
+      const id = req.params.slotId;
       const slotInfo = req.body;
+
       const result = await this.slotManager.updateSlot(id, slotInfo);
       res.json(result);
     } catch (error) {

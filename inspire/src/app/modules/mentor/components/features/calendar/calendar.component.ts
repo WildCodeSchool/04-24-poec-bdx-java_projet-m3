@@ -131,11 +131,30 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
 
   onSubmit() {
-    const id = this.editForm.value.id;
-    const dateStart = this.formatDate(this.editForm.value.dateStart);
+    if (!this.eventDetails.id) {
+      console.error("ID de l'événement non défini.");
+      return;
+    }
+
+    const id = this.eventDetails.id;
+    const dateTime = this.formatDate(this.editForm.value.dateStart);
     const dateEnd = this.formatDate(this.editForm.value.dateEnd);
     const visio = this.editForm.value.visio === 'visio';
-    console.log({ id, dateStart, dateEnd, visio });
+    const mentorId = this.mentorId;
+
+    const slotInfo = {
+      id,
+      dateTime,
+      dateEnd,
+      visio,
+      mentorId,
+    };
+
+    this.reservationService.updateSlot(id, slotInfo).subscribe(() => {
+      this.loadSlots();
+    });
+    this.displayModal = false;
+    this.isModfify = false;
   }
 
   formatDate(date: Date): string {
@@ -234,7 +253,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   };
 
   handleEventClick(eventClickArg: EventClickArg) {
-    console.log(this.eventDetails);
     this.eventDetails = {
       id: eventClickArg.event.id,
       title: eventClickArg.event.title,
@@ -242,6 +260,13 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       end: eventClickArg.event.end,
       visio: eventClickArg.event.extendedProps['visio'],
     };
+
+    this.editForm.setValue({
+      id: '',
+      dateStart: '',
+      dateEnd: '',
+      visio: 'presentiel',
+    });
 
     this.displayModal = true;
     eventClickArg.jsEvent.preventDefault();

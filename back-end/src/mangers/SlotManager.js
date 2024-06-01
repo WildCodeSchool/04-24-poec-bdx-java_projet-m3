@@ -75,6 +75,7 @@ export default class SlotManager {
   }
 
   async updateSlot(id, slotInfo) {
+    console.log("id", id, slotInfo);
     try {
       const [slot] = await this.database.query(
         `SELECT * FROM slots where id = ?`,
@@ -86,8 +87,14 @@ export default class SlotManager {
       }
 
       const result = await this.database.query(
-        `UPDATE slots SET dateTime = ?, visio = ? WHERE id = ?`,
-        [slotInfo.dateTime, slotInfo.visio, id]
+        `UPDATE slots SET dateTime = ?, dateEnd = ?,  visio = ?, mentorId = ? WHERE id = ?`,
+        [
+          slotInfo.dateTime,
+          slotInfo.dateEnd,
+          slotInfo.visio,
+          slotInfo.mentorId,
+          id,
+        ]
       );
 
       return {

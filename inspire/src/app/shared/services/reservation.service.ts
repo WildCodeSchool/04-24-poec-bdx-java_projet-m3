@@ -70,7 +70,9 @@ export class ReservationService {
 
   updateSlot(slotId: number, slotInfo: any): Observable<any> {
     const updatedSlotInfo = {
+      id: slotId,
       dateTime: slotInfo.dateTime,
+      dateEnd: slotInfo.dateEnd,
       visio: slotInfo.visio,
       mentorId: slotInfo.mentorId,
     };
