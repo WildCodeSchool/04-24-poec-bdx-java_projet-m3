@@ -97,7 +97,6 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
   submit() {}
 
   receiveImage(event: { file: File; fileName: string }) {
-    console.log(event);
     this.file = event.file;
     this.fileName = event.fileName;
   }

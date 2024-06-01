@@ -93,7 +93,6 @@ export class ReservationService {
       .pipe(
         tap((res) => {
           this.activeMentorReservations$.next(res);
-          console.log('res in service ', res);
         })
       );
   }
@@ -103,8 +102,6 @@ export class ReservationService {
     perPage: number,
     offset: number
   ) {
-    console.log('called');
-
     return this.httpClient
       .get<{ reservations: reservationForMentorDTO[]; total: number }>(
         environment.BASE_URL +
@@ -113,7 +110,6 @@ export class ReservationService {
       .pipe(
         tap((res) => {
           this.activeMentorReservationsHistory$.next(res);
-          console.log('reservations hs', res);
         })
       );
   }
@@ -133,8 +129,6 @@ export class ReservationService {
       )
       .pipe(
         tap((res) => {
-          console.log('respond upate res', res);
-
           this.activeMentorReservationsHistory$.next(res);
         })
       );
@@ -151,7 +145,6 @@ export class ReservationService {
       )
       .pipe(
         tap((res) => {
-          console.log('ma liste de resa', res);
           this.activeStudentReservations$.next(res);
         })
       );
@@ -162,8 +155,6 @@ export class ReservationService {
     perPage: number,
     offset: number
   ) {
-    console.log('called');
-
     return this.httpClient
       .get<{ reservations: ReservationForStudentDTO[]; total: number }>(
         environment.BASE_URL +
@@ -172,7 +163,6 @@ export class ReservationService {
       .pipe(
         tap((res) => {
           this.activeStudentReservationsHistory$.next(res);
-          console.log('reservations passés:', res);
         })
       );
   }
@@ -184,8 +174,6 @@ export class ReservationService {
       )
       .pipe(
         tap((res) => {
-          console.log('respond delete res', res);
-
           this.activeMentorReservations$.next(res);
         })
       );
