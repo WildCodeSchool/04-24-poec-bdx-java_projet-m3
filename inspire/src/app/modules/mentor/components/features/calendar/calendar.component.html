@@ -10,7 +10,7 @@
 <p-dialog
   [modal]="true"
   [visible]="visible && formattedSlotInfo"
-  [style]="{ width: '25rem' }"
+  [style]="{ width: '50rem' }"
 >
   <div class="modal">
     <div class="container-img-forgot">
@@ -120,7 +120,10 @@
         possibilité de le conserver pour accueillir de nouveaux étudiants ou de
         le supprimer selon vos besoins.
       </p>
-      <div class="content-resume">
+      <div
+        class="content-resume old-slot"
+        [class]="{ 'is-editing': isModfify }"
+      >
         <div class="content-resume">
           <h2>Résumé de votre créneau</h2>
         </div>
@@ -156,7 +159,83 @@
         <button class="btn-general pink" (click)="deleteSlot()">
           Supprimer ce créneau
         </button>
+        <button class="btn-general pink" (click)="editSlot()">Modifier</button>
       </div>
+    </div>
+
+    <div *ngIf="isModfify" class="content">
+      <div class="content-resume">
+        <div class="content-resume">
+          <h2>Votre nouveau créneau</h2>
+        </div>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/date-slot.svg"
+            alt=""
+          />
+          <h3>
+            Le créneau nouveau créneau sélectionné est le
+            <span>{{ editForm.value.dateStart | date }}</span>
+          </h3>
+        </div>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/date-slot.svg"
+            alt=""
+          />
+          <h3>
+            Heure de début :
+            <span>{{ editForm.value.dateStart | date : "HH:mm" }}</span>
+          </h3>
+        </div>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/date-slot.svg"
+            alt=""
+          />
+          <h3>
+            Heure de fin :
+            <span>{{ editForm.value.dateEnd | date : "HH:mm" }}</span>
+          </h3>
+        </div>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/information.svg"
+            alt=""
+          />
+          <h3>
+            Le créneau sélectionné est
+            <span>{{ editForm.value.visio }}</span>
+          </h3>
+        </div>
+      </div>
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <input type="hidden" formControlName="id" />
+        <div>
+          <p-calendar
+            inputId="calendar-start"
+            formControlName="dateStart"
+            [showTime]="true"
+          ></p-calendar>
+        </div>
+        <div>
+          <p-calendar
+            inputId="calendar-end"
+            formControlName="dateEnd"
+            [showTime]="true"
+          ></p-calendar>
+        </div>
+
+        <select formControlName="visio">
+          <option value="presentiel">Présentiel</option>
+          <option value="visio">Visio</option>
+        </select>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   </div>
 </p-dialog>

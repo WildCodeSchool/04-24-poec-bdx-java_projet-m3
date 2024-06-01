@@ -68,18 +68,18 @@ export class ReservationService {
     return this.httpClient.delete(`${environment.BASE_URL}/slot/slots/${id}`);
   }
 
-  // updateSlot(slotId: number, slotInfo: any): Observable<any> {
-  //   const updatedSlotInfo = {
-  //     dateTime: slotInfo.dateTime,
-  //     visio: slotInfo.visio,
-  //     mentorId: slotInfo.mentorId,
-  //   };
+  updateSlot(slotId: number, slotInfo: any): Observable<any> {
+    const updatedSlotInfo = {
+      dateTime: slotInfo.dateTime,
+      visio: slotInfo.visio,
+      mentorId: slotInfo.mentorId,
+    };
 
-  //   return this.httpClient.put(
-  //     `${environment.BASE_URL}/slot/slots/${slotId}`,
-  //     updatedSlotInfo
-  //   );
-  // }
+    return this.httpClient.put(
+      `${environment.BASE_URL}/slot/slots/${slotId}`,
+      updatedSlotInfo
+    );
+  }
 
   getMentorReservationList(userId: number, perPage: number, offset: number) {
     return this.httpClient

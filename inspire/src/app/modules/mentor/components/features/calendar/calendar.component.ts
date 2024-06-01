@@ -37,6 +37,9 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   displayModal: boolean = false;
   eventDetails: any = {};
   mode: string = '';
+  isModfify: boolean = false;
+  datetime24h: Date[] | undefined;
+  time: Date[] | undefined;
 
   constructor(
     private reservationService: ReservationService,
@@ -103,6 +106,46 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     } else {
       console.error('Pas de slot à supprimer');
     }
+  }
+
+  editSlot() {
+    this.isModfify = true;
+    console.log(this.editForm.value);
+  }
+
+  editForm: FormGroup = this.fb.group({
+    id: [''],
+    dateStart: [''],
+    dateEnd: [''],
+    visio: ['presentiel'],
+  });
+
+  validateAndLog(field: string) {
+    const date: Date = this.editForm.get(field)?.value;
+    if (date) {
+      const formattedDate = this.formatDate(date);
+      console.log(`Date and time selected for ${field}: ${formattedDate}`);
+    } else {
+      console.log(`No date selected for ${field}`);
+    }
+  }
+
+  onSubmit() {
+    const id = this.editForm.value.id;
+    const dateStart = this.formatDate(this.editForm.value.dateStart);
+    const dateEnd = this.formatDate(this.editForm.value.dateEnd);
+    const visio = this.editForm.value.visio === 'visio';
+    console.log({ id, dateStart, dateEnd, visio });
+  }
+
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+    const seconds = ('0' + date.getSeconds()).slice(-2);
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
 
   calendarOptions: CalendarOptions = {
@@ -191,6 +234,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   };
 
   handleEventClick(eventClickArg: EventClickArg) {
+    console.log(this.eventDetails);
     this.eventDetails = {
       id: eventClickArg.event.id,
       title: eventClickArg.event.title,

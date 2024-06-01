@@ -74,28 +74,28 @@ export default class SlotManager {
     }
   }
 
-  // async updateSlot(id, slotInfo) {
-  //   try {
-  //     const [slot] = await this.database.query(
-  //       `SELECT * FROM slots where id = ?`,
-  //       [id]
-  //     );
+  async updateSlot(id, slotInfo) {
+    try {
+      const [slot] = await this.database.query(
+        `SELECT * FROM slots where id = ?`,
+        [id]
+      );
 
-  //     if (slot.length === 0) {
-  //       return { success: false, message: "Slot not found" };
-  //     }
+      if (slot.length === 0) {
+        return { success: false, message: "Slot not found" };
+      }
 
-  //     const result = await this.database.query(
-  //       `UPDATE slots SET dateTime = ?, visio = ? WHERE id = ?`,
-  //       [slotInfo.dateTime, slotInfo.visio, id]
-  //     );
+      const result = await this.database.query(
+        `UPDATE slots SET dateTime = ?, visio = ? WHERE id = ?`,
+        [slotInfo.dateTime, slotInfo.visio, id]
+      );
 
-  //     return {
-  //       success: true,
-  //       message: "Slot updated successfully",
-  //     };
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
+      return {
+        success: true,
+        message: "Slot updated successfully",
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
 }
