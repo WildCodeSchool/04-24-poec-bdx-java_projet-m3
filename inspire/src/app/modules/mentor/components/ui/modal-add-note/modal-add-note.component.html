@@ -1,6 +1,9 @@
 <div class="modal-note">
   <div class="mentorat-header">
-    <h1>Vous avez assisté {{ reservation.firstname | titlecase }}</h1>
+    <h1>
+      Vous avez accompagné
+      <span>{{ reservation.firstname | titlecase }} </span>!
+    </h1>
     <h3>Vous avez quelques notes à prendre sur votre session de mentorat ?</h3>
   </div>
 
@@ -27,19 +30,22 @@
         </h3>
       </div>
       <div class="pop-up-date">
-        <img
-          class="img-fluid forgot-img"
-          src="/assets/svgs/duration.svg"
-          alt=""
-        />
+        <img class="img-fluid forgot-img" src="/assets/svgs/visio.svg" alt="" />
 
         <h3>Sujet du mentorat : {{ reservation.subject }}</h3>
       </div>
 
       <div class="pop-up-date">
-        <img class="img-fluid forgot-img" src="/assets/svgs/visio.svg" alt="" />
+        <img
+          class="img-fluid forgot-img"
+          src="/assets/svgs/information.svg"
+          alt=""
+        />
 
-        <h3>Durée :</h3>
+        <h3>
+          Le mentorat était
+          {{ reservation.visio ? " en Visio" : "en Présentiel" }}
+        </h3>
       </div>
     </div>
   </div>
