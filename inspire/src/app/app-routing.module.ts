@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutMentor } from './modules/mentor/pages/layout/layout-mentor-component';
 import {
+  isAdmin,
   isConnected,
   isMentor,
   isMentorLog,
@@ -69,6 +70,11 @@ export const routes: Routes = [
     canActivate: [isMentorLog, isStudentLog],
   },
   { path: 'layout', component: LayoutMentor },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
+  },
 ];
 
 @NgModule({

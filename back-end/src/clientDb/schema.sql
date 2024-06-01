@@ -2,7 +2,7 @@ CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    role ENUM('mentor', 'student') NOT NULL
+    role ENUM('mentor', 'student', 'admin') NOT NULL
 );
 
 CREATE TABLE mentors (
@@ -100,9 +100,9 @@ VALUES (
         'mentor'
     ),
     (
-        'chocholastico@gmail.com',
+        'admin@gmail.com',
         '$2b$10$hVjaq5YMTbZIVq8oF6Edj.Xvth4cH6g/G5M95wHEyD02P4Axizsp6',
-        'mentor'
+        'admin'
     ),
     (
         'madix@gmail.com',

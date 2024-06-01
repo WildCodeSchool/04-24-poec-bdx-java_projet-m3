@@ -8,11 +8,11 @@ import { UserStoreService } from '../../../../shared/services/stores/user-store.
 import { MentorDTO } from '../../../../shared/models/user';
 
 @Component({
-  selector: 'app-side-nav',
-  templateUrl: './layout-mentor-component.html',
-  styleUrl: './layout-mentor-component.scss',
+  selector: 'app-layout-admin',
+  templateUrl: './layout.component.html',
+  styleUrl: './layout.component.scss',
 })
-export class LayoutMentor implements OnInit {
+export class LayoutComponent implements OnInit {
   showNavbar = true;
   modalVisible = false;
   userService = inject(UserService);

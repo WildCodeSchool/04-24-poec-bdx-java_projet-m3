@@ -71,3 +71,24 @@ export const isStudentLog: CanActivateFn = (route, state) => {
     return true;
   }
 };
+
+export const isAdmin: CanActivateFn = (route, state) => {
+  const router = inject(Router);
+  const store = inject(UserStoreService);
+
+  console.log('admin');
+
+  const user = store.getUserConnected$().value?.role;
+
+  if (user === 'admin') {
+    console.log('admin');
+
+    router.navigate(['/admin']);
+    return true;
+  } else {
+    console.log(' not admin admin');
+
+    router.navigate(['']);
+    return false;
+  }
+};

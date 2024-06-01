@@ -129,12 +129,14 @@ export class UserService {
       .pipe(
         map((users) => {
           if (users) {
+            console.log(users);
             const user = users;
             this.userStore.setUserConnected(user);
             const userString = JSON.stringify(user);
             window.localStorage.setItem('user', userString);
             if (user.role === 'mentor') this.router.navigate(['/mentor']);
             if (user.role === 'student') this.router.navigate(['/student']);
+            if (user.role === 'admin') this.router.navigate(['/admin']);
             return user;
           } else {
             alert('Identifiants incorrects');
