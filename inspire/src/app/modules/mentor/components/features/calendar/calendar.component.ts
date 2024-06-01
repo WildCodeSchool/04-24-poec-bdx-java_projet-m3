@@ -37,6 +37,9 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   displayModal: boolean = false;
   eventDetails: any = {};
   mode: string = '';
+  isModfify: boolean = false;
+  datetime24h: Date[] | undefined;
+  time: Date[] | undefined;
 
   constructor(
     private reservationService: ReservationService,
@@ -103,6 +106,65 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     } else {
       console.error('Pas de slot à supprimer');
     }
+  }
+
+  editSlot() {
+    this.isModfify = true;
+    console.log(this.editForm.value);
+  }
+
+  editForm: FormGroup = this.fb.group({
+    id: [''],
+    dateStart: [''],
+    dateEnd: [''],
+    visio: ['presentiel'],
+  });
+
+  validateAndLog(field: string) {
+    const date: Date = this.editForm.get(field)?.value;
+    if (date) {
+      const formattedDate = this.formatDate(date);
+      console.log(`Date and time selected for ${field}: ${formattedDate}`);
+    } else {
+      console.log(`No date selected for ${field}`);
+    }
+  }
+
+  onSubmit() {
+    if (!this.eventDetails.id) {
+      console.error("ID de l'événement non défini.");
+      return;
+    }
+
+    const id = this.eventDetails.id;
+    const dateTime = this.formatDate(this.editForm.value.dateStart);
+    const dateEnd = this.formatDate(this.editForm.value.dateEnd);
+    const visio = this.editForm.value.visio === 'visio';
+    const mentorId = this.mentorId;
+
+    const slotInfo = {
+      id,
+      dateTime,
+      dateEnd,
+      visio,
+      mentorId,
+    };
+
+    this.reservationService.updateSlot(id, slotInfo).subscribe(() => {
+      this.loadSlots();
+    });
+    this.displayModal = false;
+    this.isModfify = false;
+  }
+
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+    const seconds = ('0' + date.getSeconds()).slice(-2);
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
 
   calendarOptions: CalendarOptions = {
@@ -198,6 +260,13 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       end: eventClickArg.event.end,
       visio: eventClickArg.event.extendedProps['visio'],
     };
+
+    this.editForm.setValue({
+      id: '',
+      dateStart: '',
+      dateEnd: '',
+      visio: 'presentiel',
+    });
 
     this.displayModal = true;
     eventClickArg.jsEvent.preventDefault();

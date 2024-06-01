@@ -58,17 +58,18 @@ export default class SlotController {
     }
   }
 
-  // async updateSlotByMentorId(req, res) {
-  //   try {
-  //     const id = req.params.id;
-  //     const slotInfo = req.body;
-  //     const result = await this.slotManager.updateSlot(id, slotInfo);
-  //     res.json(result);
-  //   } catch (error) {
-  //     console.error("Error updating slot:", error);
-  //     res
-  //       .status(500)
-  //       .json({ success: false, message: "Internal Server Error" });
-  //   }
-  // }
+  async updateSlot(req, res) {
+    try {
+      const id = req.params.slotId;
+      const slotInfo = req.body;
+
+      const result = await this.slotManager.updateSlot(id, slotInfo);
+      res.json(result);
+    } catch (error) {
+      console.error("Error updating slot:", error);
+      res
+        .status(500)
+        .json({ success: false, message: "Internal Server Error" });
+    }
+  }
 }
