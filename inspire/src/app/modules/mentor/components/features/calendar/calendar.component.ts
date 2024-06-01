@@ -241,9 +241,5 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       this.mentorSubscription.unsubscribe();
     }
   }
-  ngAfterViewChecked(): void {
-    setTimeout(() => {
-      this.today = this.calendarComponent.getApi().view.title;
-    }, 0);
-  }
+  ngAfterViewChecked(): void {}
 }
