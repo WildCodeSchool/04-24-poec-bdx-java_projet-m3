@@ -17,11 +17,7 @@ export const mentorReservationsResolver: ResolveFn<{
 }> = (route, state) => {
   const userId = inject(UserStoreService).getUserConnected$().value?.id;
 
-  return inject(ReservationService).getMentorReservationList(
-    userId || 0,
-    10,
-    0
-  );
+  return inject(ReservationService).getMentorReservationList(userId, 5, 0);
 };
 
 export const mentorReservationsHistoryResolver: ResolveFn<{
@@ -31,8 +27,8 @@ export const mentorReservationsHistoryResolver: ResolveFn<{
   const userId = inject(UserStoreService).getUserConnected$().value?.id;
 
   return inject(ReservationService).getMentorReservationHistoryList(
-    userId || 0,
-    10,
+    userId,
+    5,
     0
   );
 };

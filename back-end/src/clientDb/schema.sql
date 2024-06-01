@@ -428,29 +428,29 @@ VALUES (2, 1),
 
 INSERT INTO
     skills (name)
-VALUES ('JavaScript'),
-    ("C++"),
-    ("C#"),
-    ('Java'),
-    ('HTML'),
-    ('CSS'),
-    ('Angular'),
-    ('React'),
-    ('Spring'),
-    ('Node');
+VALUES ('javascript'),
+    ('C plus plus'),
+    ('C Sharp'),
+    ('java'),
+    ('html'),
+    ('css'),
+    ('angular'),
+    ('react'),
+    ('spring'),
+    ('node');
 
 INSERT INTO
     languages (name)
-VALUES ('Français'),
-    ('Arabe'),
-    ('Anglais'),
-    ('Chinois'),
-    ('Japonais'),
-    ('Koréen'),
-    ('Hebreu'),
-    ('Turk'),
-    ('Farsi'),
-    ('Afrikaan');
+VALUES ('français'),
+    ('arabe'),
+    ('anglais'),
+    ('chinois'),
+    ('japonais'),
+    ('koréen'),
+    ('hebreu'),
+    ('turk'),
+    ('farsi'),
+    ('afrikan');
 
 TRUNCATE TABLE user_skills;
 
@@ -847,7 +847,33 @@ VALUES (NOW(), true, 1),
     (
         DATE_ADD(NOW(), INTERVAL 7 DAY),
         true,
-        2
+        1
+    ),
+    (
+        DATE_ADD(
+            DATE_ADD(NOW(), INTERVAL 3 DAY),
+            INTERVAL 1 HOUR
+        ),
+        false,
+        1
+    ),
+    (
+        DATE_ADD(
+            DATE_ADD(NOW(), INTERVAL 3 DAY),
+            INTERVAL 2 HOUR
+        ),
+        true,
+        1
+    ),
+    (
+        '2023-05-20 10:00:00',
+        false,
+        1
+    ),
+    (
+        DATE_ADD(NOW(), INTERVAL 7 DAY),
+        true,
+        1
     );
 
 INSERT INTO
