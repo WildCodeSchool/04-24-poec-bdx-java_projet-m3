@@ -167,6 +167,19 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
 
+  handleEventDrop(eventDropArg: any) {
+    this.eventDetails = {
+      id: eventDropArg.event.id,
+      start: eventDropArg.event.start,
+      end: eventDropArg.event.end,
+      visio: eventDropArg.event.extendedProps.visio,
+    };
+
+    // Ouvrez votre pop-up de modification ici
+    this.displayModal = true;
+    this.isModfify = true;
+  }
+
   calendarOptions: CalendarOptions = {
     initialView: 'timeGridWeek',
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
@@ -234,12 +247,12 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     navLinks: true,
     eventStartEditable: true,
     eventOverlap: false,
-
+    eventDrop: this.handleEventDrop.bind(this),
     weekNumbers: true,
     selectMirror: true,
     unselectAuto: true,
     selectOverlap: false,
-    editable: false,
+    editable: true,
     // https://fullcalendar.io/docs/select-callback
     selectable: true,
     eventDurationEditable: false,
