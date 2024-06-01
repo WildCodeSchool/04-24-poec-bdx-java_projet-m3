@@ -1,23 +1,73 @@
 <ng-container *ngIf="mentorProfil$ | async as mentor">
   <div class="container-general-layout">
     <div class="container-layout">
-      <div class="header-container">
-        <h2>Bonjour {{mentor.firstname}}</h2>
-        <p>Votre espace mentor de la Wild Code School</p>
+      <div class="header-layout">
+        <div>
+          <img
+            class="img-fluid"
+            src="/assets/logo-wild.webp"
+            alt="logo"
+            width="35"
+            height="35"
+          />
+        </div>
+        <div class="header-container">
+          <h2>Bonjour {{mentor.firstname}}</h2>
+          <p>Votre espace mentor de la Wild Code School</p>
+        </div>
+
+        <div class="container-notification">
+          <div class="icon-wrapper">
+            <img
+              class="img-fluid"
+              src="/assets/svgs/message.svg"
+              alt="messages"
+              width="25"
+              height="25"
+            />
+            <span class="badge">3</span>
+          </div>
+
+          <div class="icon-wrapper">
+            <img
+              class="img-fluid"
+              src="/assets/svgs/bell.svg"
+              alt="notifications"
+              width="25"
+              height="25"
+            />
+            <span class="badge">5</span>
+          </div>
+
+          <div class="icon-wrapper">
+            <img
+              [src]="mentor.imgUrl"
+              alt="Mentor Image"
+              width="35"
+              height="35"
+              style="border-radius: 50%"
+            />
+          </div>
+        </div>
       </div>
       <div class="container-main">
-        <button
-          class="burger"
-          (click)="toggleVisibility()"
-          [ngClass]="!showNavbar ? 'light' : 'dark'"
-        >
-          <img [src]="'assets/svgs/burger.svg'" alt="" width="25" height="25" />
-        </button>
         <div
           class="container-side-nav"
           [ngStyle]="{transform: (!showNavbar && !windowWatcher.windowSizeChanged.value)? 'scaleX(0)' : 'scaleX(1)', transformOrigin: 'top left'}"
         >
           <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
+          <button
+            class="burger"
+            (click)="toggleVisibility()"
+            [ngClass]="!showNavbar ? 'light' : 'dark'"
+          >
+            <img
+              [src]="'assets/svgs/burger.svg'"
+              alt=""
+              width="25"
+              height="25"
+            />
+          </button>
           <div
             class="logout"
             [ngStyle]="{ margin: showNavbar ? '0 0 0 20px' : '0 auto' }"
