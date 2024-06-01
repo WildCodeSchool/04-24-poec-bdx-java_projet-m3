@@ -47,7 +47,7 @@
   <div class="card" *ngIf="!editMessage">
     <h4>Vos commentaires</h4>
     <div class="message">
-      <pre [innerHTML]="reservation.message"></pre>
+      <div [innerHTML]="reservation.message"></div>
     </div>
     <app-button
       [text]="'Editer'"
