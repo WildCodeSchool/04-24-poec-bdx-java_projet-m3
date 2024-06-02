@@ -150,11 +150,20 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       mentorId,
     };
 
-    this.reservationService.updateSlot(id, slotInfo).subscribe(() => {
-      this.loadSlots();
-    });
-    this.displayModal = false;
-    this.isModfify = false;
+    this.reservationService.updateSlot(id, slotInfo).subscribe(
+      () => {
+        this.loadSlots();
+        this.displayModal = false;
+        this.isModfify = false;
+      },
+      (error) => {
+        if (error.status === 400 && error.error.message) {
+          alert(error.error.message);
+        } else {
+          console.error('Erreur lors de la mise à jour du créneau:', error);
+        }
+      }
+    );
   }
 
   formatDate(date: Date): string {

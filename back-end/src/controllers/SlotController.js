@@ -62,6 +62,26 @@ export default class SlotController {
     try {
       const id = req.params.slotId;
       const slotInfo = req.body;
+      const { dateTime, dateEnd } = slotInfo;
+
+      const existingSlots = await this.slotManager.getSlots();
+
+      const isOverlap = existingSlots.some((slot) => {
+        if (slot.id !== id) {
+          return (
+            new Date(dateTime) < new Date(slot.dateEnd) &&
+            new Date(dateEnd) > new Date(slot.dateTime)
+          );
+        }
+        return false;
+      });
+
+      if (isOverlap) {
+        return res.status(400).json({
+          success: false,
+          message: "Ce créneau est déjà ouvert sur votre agenda",
+        });
+      }
 
       const result = await this.slotManager.updateSlot(id, slotInfo);
       res.json(result);
