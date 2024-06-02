@@ -30,11 +30,11 @@ export default class SlotController {
 
       const filteredSlots = slots.filter((slot) => slot.mentorId == mentorId);
 
-      if (filteredSlots.length === 0) {
-        return res
-          .status(404)
-          .json({ error: "Aucun créneau trouvé pour ce mentorId" });
-      }
+      // if (filteredSlots.length === 0) {
+      //   return res
+      //     .status(404)
+      //     .json({ error: "Aucun créneau trouvé pour ce mentorId" });
+      // }
 
       res.json(filteredSlots);
     } catch (error) {
@@ -62,6 +62,27 @@ export default class SlotController {
     try {
       const id = req.params.slotId;
       const slotInfo = req.body;
+      const { dateTime, dateEnd } = slotInfo;
+      console.log(slotInfo);
+
+      const existingSlots = await this.slotManager.getSlots(slotInfo.mentorId);
+      console.log(existingSlots);
+      const isOverlap = existingSlots.some((slot) => {
+        if (slot.id !== id) {
+          return (
+            new Date(dateTime) < new Date(slot.dateEnd) &&
+            new Date(dateEnd) > new Date(slot.dateTime)
+          );
+        }
+        return false;
+      });
+
+      if (isOverlap) {
+        return res.status(400).json({
+          success: false,
+          message: "Ce créneau est déjà ouvert sur votre agenda",
+        });
+      }
 
       const result = await this.slotManager.updateSlot(id, slotInfo);
       res.json(result);

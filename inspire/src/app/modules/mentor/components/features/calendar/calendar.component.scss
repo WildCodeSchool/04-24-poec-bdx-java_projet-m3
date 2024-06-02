@@ -3,7 +3,6 @@
   padding: 20px 40px;
   display: flex;
   flex-direction: column;
-  align-items: center;
 
   h1 {
     margin-top: 30px;
@@ -70,6 +69,12 @@
   font-weight: 600;
 }
 
+.text-update {
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+}
+
 .form-mentorat {
   margin-top: 30px;
   display: flex;
@@ -96,21 +101,27 @@
   color: white;
 }
 
+.modify {
+  background-color: #fcbe77;
+  color: white;
+}
+
 .black {
   background-color: black;
   color: azure;
 }
 .btn-general {
   width: 100%;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 11px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 11px 15px;
   border-radius: 6px;
   border: none;
   transition: transform 0.4s ease;
 }
 .btn-general:hover {
   transform: scale(0.95);
+  cursor: pointer;
 }
 
 .content p {
@@ -124,8 +135,37 @@ h3 span {
 
 .old-slot.is-editing {
   color: grey;
+  text-decoration: line-through;
+  font-style: italic;
+  font-size: 10px;
 }
 
 .old-slot.is-editing span {
   color: grey;
+  text-decoration: line-through;
+  font-style: italic;
+}
+.new-slot {
+  width: 100%;
+  margin-top: -10px;
+}
+
+.new-slot h2 {
+  color: $primary-color;
+  font-size: 18px;
+}
+.form-update {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.form-update label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.form-update label {
+  margin-bottom: 2px;
 }

@@ -100,8 +100,8 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   deleteSlot() {
     if (this.eventDetails.id) {
       this.reservationService.deleteSlot(this.eventDetails.id).subscribe(() => {
-        this.loadSlots();
         this.displayModal = false;
+        this.loadSlots();
       });
     } else {
       console.error('Pas de slot à supprimer');
@@ -150,11 +150,20 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       mentorId,
     };
 
-    this.reservationService.updateSlot(id, slotInfo).subscribe(() => {
-      this.loadSlots();
-    });
-    this.displayModal = false;
-    this.isModfify = false;
+    this.reservationService.updateSlot(id, slotInfo).subscribe(
+      () => {
+        this.loadSlots();
+        this.displayModal = false;
+        this.isModfify = false;
+      },
+      (error) => {
+        if (error.status === 400 && error.error.message) {
+          alert(error.error.message);
+        } else {
+          console.error('Erreur lors de la mise à jour du créneau:', error);
+        }
+      }
+    );
   }
 
   formatDate(date: Date): string {
@@ -165,6 +174,23 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     const minutes = ('0' + date.getMinutes()).slice(-2);
     const seconds = ('0' + date.getSeconds()).slice(-2);
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+
+  handleEventDrop(eventDropArg: any) {
+    this.eventDetails = {
+      id: eventDropArg.event.id,
+      start: eventDropArg.event.start,
+      end: eventDropArg.event.end,
+      visio: eventDropArg.event.extendedProps.visio,
+    };
+
+    this.displayModal = true;
+    this.isModfify = true;
+  }
+
+  closeModal() {
+    this.displayModal = false;
+    this.isModfify = false;
   }
 
   calendarOptions: CalendarOptions = {
@@ -233,12 +259,13 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
     navLinks: true,
     eventStartEditable: true,
-
+    eventOverlap: false,
+    eventDrop: this.handleEventDrop.bind(this),
     weekNumbers: true,
     selectMirror: true,
     unselectAuto: true,
     selectOverlap: false,
-    editable: false,
+    editable: true,
     // https://fullcalendar.io/docs/select-callback
     selectable: true,
     eventDurationEditable: false,
