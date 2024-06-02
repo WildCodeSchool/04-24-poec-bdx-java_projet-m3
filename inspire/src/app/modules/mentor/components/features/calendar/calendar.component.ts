@@ -120,18 +120,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     visio: ['presentiel'],
   });
 
-  closeModal() {
-    this.displayModal = false;
-    this.isModfify = false;
-    if (this.eventDetails) {
-      let calendarApi = this.calendarComponent.getApi();
-      let event = calendarApi.getEventById(this.eventDetails.id);
-      if (event) {
-        event.setDates(this.eventDetails.start, this.eventDetails.end);
-      }
-    }
-  }
-
   validateAndLog(field: string) {
     const date: Date = this.editForm.get(field)?.value;
     if (date) {
@@ -198,6 +186,11 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
     this.displayModal = true;
     this.isModfify = true;
+  }
+
+  closeModal() {
+    this.displayModal = false;
+    this.isModfify = false;
   }
 
   calendarOptions: CalendarOptions = {
@@ -312,7 +305,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       this.events = this.formatSlotsToEvents(slots);
     });
   }
-
   formatSlotsToEvents(slots: any[]): EventInput[] {
     return slots.map((slot) => ({
       id: slot.id,
