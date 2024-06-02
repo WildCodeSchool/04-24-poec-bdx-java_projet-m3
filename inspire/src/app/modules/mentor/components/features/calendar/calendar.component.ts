@@ -81,7 +81,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
         visio: this.formulaire.value.mode === 'visio',
         mentorId: this.mentorId,
       };
-
       this.visible = true;
     } else {
       console.error("Veuillez d'abord soumettre le formulaire.");
@@ -178,10 +177,10 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
   handleEventDrop(eventDropArg: any) {
     this.eventDetails = {
-      id: eventDropArg.event.id,
-      start: eventDropArg.event.start,
-      end: eventDropArg.event.end,
-      visio: eventDropArg.event.extendedProps.visio,
+      id: eventDropArg.oldEvent.id,
+      start: eventDropArg.oldEvent.start,
+      end: eventDropArg.oldEvent.end,
+      visio: eventDropArg.oldEvent.extendedProps.visio,
     };
 
     this.displayModal = true;
@@ -191,7 +190,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   closeModal() {
     this.displayModal = false;
     this.isModfify = false;
-
     this.loadSlots();
   }
 

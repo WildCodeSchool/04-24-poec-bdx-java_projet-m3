@@ -135,12 +135,12 @@
         <div class="pop-up-date">
           <img
             class="img-fluid forgot-img"
-            src="/assets/svgs/date-slot.svg"
+            src="/assets/svgs/information.svg"
             alt=""
           />
           <h3>
-            L'heure de début est
-            <span>{{ eventDetails?.start | date : "HH:mm" }}</span> à
+            Début du créneau le <span>{{ eventDetails?.start | date }}</span> à
+            <span>{{ eventDetails?.start | date : "HH:mm" }}</span>
           </h3>
         </div>
         <div class="pop-up-date">
@@ -150,7 +150,18 @@
             alt=""
           />
           <h3>
-            Début du créneau le <span>{{ eventDetails?.start | date }}</span> à
+            Fin du créneau le <span>{{ eventDetails?.end | date }}</span> à
+            <span>{{ eventDetails?.end | date : "HH:mm" }}</span>
+          </h3>
+        </div>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/information.svg"
+            alt=""
+          />
+          <h3>
+            Le créneau est
             <span>
               {{ eventDetails.visio ? " en Visio" : "en Présentiel" }}</span
             >
