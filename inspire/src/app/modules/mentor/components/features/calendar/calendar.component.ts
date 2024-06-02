@@ -17,7 +17,6 @@ import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Subscription } from 'rxjs';
 import { Mentor, MentorDTO } from '../../../../../shared/models/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { co } from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-calendar',
@@ -115,7 +114,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
   editSlot() {
     this.isModfify = true;
-    console.log(this.editForm.value);
   }
 
   editForm: FormGroup = this.fb.group({
@@ -142,8 +140,8 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     }
 
     const id = this.eventDetails.id;
-    const dateTime = this.formatDate(this.editForm.value.dateStart);
-    const dateEnd = this.formatDate(this.editForm.value.dateEnd);
+    const dateTime = this.formatDate(this.eventDetails.start);
+    const dateEnd = this.formatDate(this.eventDetails.end);
     const visio = this.editForm.value.visio === 'visio';
     const mentorId = this.mentorId;
 
@@ -309,7 +307,9 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       id: '',
       dateStart: '',
       dateEnd: '',
-      visio: 'Présentiel',
+      visio: eventClickArg.event.extendedProps['visio']
+        ? 'visio'
+        : 'presentiel',
     });
 
     this.displayModal = true;
