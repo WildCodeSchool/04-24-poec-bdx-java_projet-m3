@@ -122,7 +122,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     id: [''],
     dateStart: [''],
     dateEnd: [''],
-    visio: ['presentiel'],
+    visio: ['Présentiel'],
   });
 
   validateAndLog(field: string) {
@@ -285,7 +285,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     editable: true,
     // https://fullcalendar.io/docs/select-callback
     selectable: true,
-    eventDurationEditable: false,
+    eventDurationEditable: true,
     defaultTimedEventDuration: '01:00:00',
     nowIndicator: true,
 
@@ -309,7 +309,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       id: '',
       dateStart: '',
       dateEnd: '',
-      visio: 'presentiel',
+      visio: 'Présentiel',
     });
 
     this.displayModal = true;
