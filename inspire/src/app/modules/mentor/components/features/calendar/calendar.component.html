@@ -173,38 +173,40 @@
     <div *ngIf="isModfify" class="content">
       <div class="content-resume new-slot">
         <div class="content-resume">
-          <h2>Votre nouveau créneau</h2>
+          <h2>Définissez votre nouveau créneau de mentorat</h2>
         </div>
         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
           <input type="hidden" formControlName="id" />
           <div class="form-update">
-            <label for="">Choissisez la date et l'heure de début </label>
+            <label for="">Choissisez la date et l'heure de début * </label>
             <p-calendar
               inputId="calendar-start"
               formControlName="dateStart"
               [showTime]="true"
+              placeholder="Cliquez pour choisir la date et l'heure"
             ></p-calendar>
           </div>
           <div class="form-update">
-            <label for="">Choissisez la date et l'heure de fin </label>
+            <label for="">Choissisez la date et l'heure de fin * </label>
             <p-calendar
               inputId="calendar-end"
               formControlName="dateEnd"
               [showTime]="true"
+              placeholder="Cliquez pour choisir la date et l'heure"
             ></p-calendar>
           </div>
 
           <div class="form-update">
-            <label for="">Choissisez le mode de mentorat </label>
+            <label for="">Choissisez le mode de mentorat *</label>
 
             <select formControlName="visio">
-              <option value="presentiel">Présentiel</option>
-              <option value="visio">Visio</option>
+              <option value="Présentiel">Présentiel</option>
+              <option value="Visio">Visio</option>
             </select>
           </div>
 
-          <div>
-            <h2 class="text-update">Résumée de votre nouveau créneau</h2>
+          <div id="text-update">
+            <h2>Résumée de votre nouveau créneau</h2>
           </div>
 
           <div class="pop-up-date">

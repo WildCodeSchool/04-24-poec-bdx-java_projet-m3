@@ -17,6 +17,7 @@ import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Subscription } from 'rxjs';
 import { Mentor, MentorDTO } from '../../../../../shared/models/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { co } from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-calendar',
@@ -36,10 +37,15 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   events: EventInput[] = [];
   displayModal: boolean = false;
   eventDetails: any = {};
+  eventDetailsEdit: any = {};
+
   mode: string = '';
   isModfify: boolean = false;
   datetime24h: Date[] | undefined;
   time: Date[] | undefined;
+  selectedTime: string = '';
+  selectedDate: string = '';
+  selectedEndTime: string = '';
 
   constructor(
     private reservationService: ReservationService,
@@ -176,10 +182,21 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
 
   handleEventDrop(eventDropArg: any) {
+    console.log(eventDropArg);
     this.eventDetails = {
       id: eventDropArg.oldEvent.id,
       start: eventDropArg.oldEvent.start,
       end: eventDropArg.oldEvent.end,
+      visio: eventDropArg.oldEvent.extendedProps.visio,
+    };
+
+    this.displayModal = true;
+    this.isModfify = true;
+
+    this.eventDetailsEdit = {
+      id: eventDropArg.oldEvent.id,
+      start: eventDropArg.event.start,
+      end: eventDropArg.event.end,
       visio: eventDropArg.oldEvent.extendedProps.visio,
     };
 
