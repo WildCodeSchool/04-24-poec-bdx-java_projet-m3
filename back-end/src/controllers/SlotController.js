@@ -63,12 +63,11 @@ export default class SlotController {
       const id = req.params.slotId;
       const slotInfo = req.body;
       const { dateTime, dateEnd } = slotInfo;
-      console.log(slotInfo);
 
       const existingSlots = await this.slotManager.getSlots(slotInfo.mentorId);
-      console.log(existingSlots);
+
       const isOverlap = existingSlots.some((slot) => {
-        if (slot.id !== id) {
+        if (slot.id != id) {
           return (
             new Date(dateTime) < new Date(slot.dateEnd) &&
             new Date(dateEnd) > new Date(slot.dateTime)
