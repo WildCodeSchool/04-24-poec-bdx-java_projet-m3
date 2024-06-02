@@ -191,6 +191,8 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   closeModal() {
     this.displayModal = false;
     this.isModfify = false;
+
+    this.loadSlots();
   }
 
   calendarOptions: CalendarOptions = {
