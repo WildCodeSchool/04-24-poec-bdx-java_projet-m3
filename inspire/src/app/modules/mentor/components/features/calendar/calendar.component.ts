@@ -108,11 +108,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  closeModal() {
-    this.displayModal = false;
-    this.isModfify = false;
-  }
-
   editSlot() {
     this.isModfify = true;
     console.log(this.editForm.value);
@@ -124,6 +119,18 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     dateEnd: [''],
     visio: ['presentiel'],
   });
+
+  closeModal() {
+    this.displayModal = false;
+    this.isModfify = false;
+    if (this.eventDetails) {
+      let calendarApi = this.calendarComponent.getApi();
+      let event = calendarApi.getEventById(this.eventDetails.id);
+      if (event) {
+        event.setDates(this.eventDetails.start, this.eventDetails.end);
+      }
+    }
+  }
 
   validateAndLog(field: string) {
     const date: Date = this.editForm.get(field)?.value;
