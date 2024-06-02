@@ -100,12 +100,17 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   deleteSlot() {
     if (this.eventDetails.id) {
       this.reservationService.deleteSlot(this.eventDetails.id).subscribe(() => {
-        this.loadSlots();
         this.displayModal = false;
+        this.loadSlots();
       });
     } else {
       console.error('Pas de slot à supprimer');
     }
+  }
+
+  closeModal() {
+    this.displayModal = false;
+    this.isModfify = false;
   }
 
   editSlot() {
@@ -300,6 +305,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       this.events = this.formatSlotsToEvents(slots);
     });
   }
+
   formatSlotsToEvents(slots: any[]): EventInput[] {
     return slots.map((slot) => ({
       id: slot.id,

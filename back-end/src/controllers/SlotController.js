@@ -30,11 +30,11 @@ export default class SlotController {
 
       const filteredSlots = slots.filter((slot) => slot.mentorId == mentorId);
 
-      if (filteredSlots.length === 0) {
-        return res
-          .status(404)
-          .json({ error: "Aucun créneau trouvé pour ce mentorId" });
-      }
+      // if (filteredSlots.length === 0) {
+      //   return res
+      //     .status(404)
+      //     .json({ error: "Aucun créneau trouvé pour ce mentorId" });
+      // }
 
       res.json(filteredSlots);
     } catch (error) {
@@ -63,9 +63,10 @@ export default class SlotController {
       const id = req.params.slotId;
       const slotInfo = req.body;
       const { dateTime, dateEnd } = slotInfo;
+      console.log(slotInfo);
 
-      const existingSlots = await this.slotManager.getSlots();
-
+      const existingSlots = await this.slotManager.getSlots(slotInfo.mentorId);
+      console.log(existingSlots);
       const isOverlap = existingSlots.some((slot) => {
         if (slot.id !== id) {
           return (
