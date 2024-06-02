@@ -10,7 +10,8 @@
 <p-dialog
   [modal]="true"
   [visible]="visible && formattedSlotInfo"
-  [style]="{ width: '50rem' }"
+  [style]="{ width: '30rem' }"
+  [closable]="false"
 >
   <div class="modal">
     <div class="container-img-forgot">
@@ -95,14 +96,17 @@
       <button class="btn-general black" (click)="visible = false">
         Annuler
       </button>
-      <button class="btn-general pink" (click)="validateSlot()">Valider</button>
+      <button class="btn-general pink" (click)="validateSlot()">
+        Enregistrer
+      </button>
     </div>
   </div>
 </p-dialog>
 <p-dialog
   [(visible)]="displayModal"
   [modal]="true"
-  [style]="{ width: '35rem' }"
+  [style]="{ width: '40rem' }"
+  [closable]="false"
 >
   <div class="modal">
     <div class="container-img-forgot">
@@ -152,90 +156,104 @@
           </h3>
         </div>
       </div>
-      <div class="control">
-        <button class="btn-general black" (click)="displayModal = false">
-          Annuler
-        </button>
-        <button class="btn-general pink" (click)="deleteSlot()">
-          Supprimer ce créneau
-        </button>
-        <button class="btn-general pink" (click)="editSlot()">Modifier</button>
-      </div>
     </div>
 
     <div *ngIf="isModfify" class="content">
-      <div class="content-resume">
+      <div class="content-resume new-slot">
         <div class="content-resume">
           <h2>Votre nouveau créneau</h2>
         </div>
-        <div class="pop-up-date">
-          <img
-            class="img-fluid forgot-img"
-            src="/assets/svgs/date-slot.svg"
-            alt=""
-          />
-          <h3>
-            Le créneau nouveau créneau sélectionné est le
-            <span>{{ editForm.value.dateStart | date }}</span>
-          </h3>
-        </div>
-        <div class="pop-up-date">
-          <img
-            class="img-fluid forgot-img"
-            src="/assets/svgs/date-slot.svg"
-            alt=""
-          />
-          <h3>
-            Heure de début :
-            <span>{{ editForm.value.dateStart | date : "HH:mm" }}</span>
-          </h3>
-        </div>
-        <div class="pop-up-date">
-          <img
-            class="img-fluid forgot-img"
-            src="/assets/svgs/date-slot.svg"
-            alt=""
-          />
-          <h3>
-            Heure de fin :
-            <span>{{ editForm.value.dateEnd | date : "HH:mm" }}</span>
-          </h3>
-        </div>
-        <div class="pop-up-date">
-          <img
-            class="img-fluid forgot-img"
-            src="/assets/svgs/information.svg"
-            alt=""
-          />
-          <h3>
-            Le créneau sélectionné est
-            <span>{{ editForm.value.visio }}</span>
-          </h3>
-        </div>
-      </div>
-      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
-        <input type="hidden" formControlName="id" />
-        <div>
-          <p-calendar
-            inputId="calendar-start"
-            formControlName="dateStart"
-            [showTime]="true"
-          ></p-calendar>
-        </div>
-        <div>
-          <p-calendar
-            inputId="calendar-end"
-            formControlName="dateEnd"
-            [showTime]="true"
-          ></p-calendar>
-        </div>
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+          <input type="hidden" formControlName="id" />
+          <div class="form-update">
+            <label for="">Choissisez la date et l'heure de début </label>
+            <p-calendar
+              inputId="calendar-start"
+              formControlName="dateStart"
+              [showTime]="true"
+            ></p-calendar>
+          </div>
+          <div class="form-update">
+            <label for="">Choissisez la date et l'heure de fin </label>
+            <p-calendar
+              inputId="calendar-end"
+              formControlName="dateEnd"
+              [showTime]="true"
+            ></p-calendar>
+          </div>
 
-        <select formControlName="visio">
-          <option value="presentiel">Présentiel</option>
-          <option value="visio">Visio</option>
-        </select>
-        <button type="submit">Submit</button>
-      </form>
+          <div class="form-update">
+            <label for="">Choissisez le mode de mentorat </label>
+
+            <select formControlName="visio">
+              <option value="presentiel">Présentiel</option>
+              <option value="visio">Visio</option>
+            </select>
+          </div>
+
+          <div>
+            <h2 class="text-update">Résumée de votre nouveau créneau</h2>
+          </div>
+
+          <div class="pop-up-date">
+            <img
+              class="img-fluid forgot-img"
+              src="/assets/svgs/date-slot.svg"
+              alt=""
+            />
+            <h3>
+              Début du créneau le
+              <span>{{ editForm.value.dateStart | date }} </span> à
+              <span>{{ editForm.value.dateStart | date : "HH:mm" }} </span>
+            </h3>
+          </div>
+
+          <div class="pop-up-date">
+            <img
+              class="img-fluid forgot-img"
+              src="/assets/svgs/date-slot.svg"
+              alt=""
+            />
+            <h3>
+              Fin du créneau le
+              <span>{{ editForm.value.dateEnd | date }}</span> à
+              <span>{{ editForm.value.dateEnd | date : "HH:mm" }} </span>
+            </h3>
+          </div>
+          <div class="pop-up-date">
+            <img
+              class="img-fluid forgot-img"
+              src="/assets/svgs/information.svg"
+              alt=""
+            />
+            <h3>
+              Le créneau sélectionné est
+              <span>{{ editForm.value.visio }}</span>
+            </h3>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="control">
+      <button class="btn-general black" (click)="closeModal()">Annuler</button>
+
+      <button *ngIf="isModfify" class="btn-general pink" (click)="onSubmit()">
+        Mettre à jour
+      </button>
+      <button
+        *ngIf="!isModfify"
+        class="btn-general modify"
+        (click)="editSlot()"
+      >
+        Modifier
+      </button>
+      <button
+        *ngIf="!isModfify"
+        class="btn-general pink"
+        (click)="deleteSlot()"
+      >
+        Supprimer
+      </button>
     </div>
   </div>
 </p-dialog>
