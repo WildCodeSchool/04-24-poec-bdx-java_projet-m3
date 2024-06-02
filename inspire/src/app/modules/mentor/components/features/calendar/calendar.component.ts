@@ -184,7 +184,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       visio: eventDropArg.event.extendedProps.visio,
     };
 
-    // Ouvrez votre pop-up de modification ici
     this.displayModal = true;
     this.isModfify = true;
   }
