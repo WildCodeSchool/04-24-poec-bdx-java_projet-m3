@@ -36,10 +36,15 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   events: EventInput[] = [];
   displayModal: boolean = false;
   eventDetails: any = {};
+  eventDetailsEdit: any = {};
+
   mode: string = '';
   isModfify: boolean = false;
   datetime24h: Date[] | undefined;
   time: Date[] | undefined;
+  selectedTime: string = '';
+  selectedDate: string = '';
+  selectedEndTime: string = '';
 
   constructor(
     private reservationService: ReservationService,
@@ -81,7 +86,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
         visio: this.formulaire.value.mode === 'visio',
         mentorId: this.mentorId,
       };
-
       this.visible = true;
     } else {
       console.error("Veuillez d'abord soumettre le formulaire.");
@@ -110,14 +114,13 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
   editSlot() {
     this.isModfify = true;
-    console.log(this.editForm.value);
   }
 
   editForm: FormGroup = this.fb.group({
     id: [''],
     dateStart: [''],
     dateEnd: [''],
-    visio: ['presentiel'],
+    visio: ['Présentiel'],
   });
 
   validateAndLog(field: string) {
@@ -137,8 +140,8 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     }
 
     const id = this.eventDetails.id;
-    const dateTime = this.formatDate(this.editForm.value.dateStart);
-    const dateEnd = this.formatDate(this.editForm.value.dateEnd);
+    const dateTime = this.formatDate(this.eventDetails.start);
+    const dateEnd = this.formatDate(this.eventDetails.end);
     const visio = this.editForm.value.visio === 'visio';
     const mentorId = this.mentorId;
 
@@ -177,11 +180,22 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
 
   handleEventDrop(eventDropArg: any) {
+    console.log(eventDropArg);
     this.eventDetails = {
-      id: eventDropArg.event.id,
+      id: eventDropArg.oldEvent.id,
+      start: eventDropArg.oldEvent.start,
+      end: eventDropArg.oldEvent.end,
+      visio: eventDropArg.oldEvent.extendedProps.visio,
+    };
+
+    this.displayModal = true;
+    this.isModfify = true;
+
+    this.eventDetailsEdit = {
+      id: eventDropArg.oldEvent.id,
       start: eventDropArg.event.start,
       end: eventDropArg.event.end,
-      visio: eventDropArg.event.extendedProps.visio,
+      visio: eventDropArg.oldEvent.extendedProps.visio,
     };
 
     this.displayModal = true;
@@ -191,6 +205,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   closeModal() {
     this.displayModal = false;
     this.isModfify = false;
+    this.loadSlots();
   }
 
   calendarOptions: CalendarOptions = {
@@ -268,7 +283,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     editable: true,
     // https://fullcalendar.io/docs/select-callback
     selectable: true,
-    eventDurationEditable: false,
+    eventDurationEditable: true,
     defaultTimedEventDuration: '01:00:00',
     nowIndicator: true,
 
@@ -292,7 +307,9 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       id: '',
       dateStart: '',
       dateEnd: '',
-      visio: 'presentiel',
+      visio: eventClickArg.event.extendedProps['visio']
+        ? 'visio'
+        : 'presentiel',
     });
 
     this.displayModal = true;
