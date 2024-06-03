@@ -21,6 +21,5 @@ export class ModalAddNoteComponent {
 
   deleteReservation() {
     this.onDeleteReservation.emit();
-    console.log('reservation delete ');
   }
 }

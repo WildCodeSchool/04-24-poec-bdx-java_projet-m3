@@ -1,6 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, map, switchMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs';
 import {
   Mentor,
   MentorDTO,
@@ -15,6 +22,7 @@ import { Language } from './shared/models/language';
 import { Experience } from './shared/models/experience';
 import { Formation } from './shared/models/formation';
 import { environment } from '../environments/environment.development';
+import { BroadcastMessage } from './shared/models/broadcastMessage';
 
 @Injectable({
   providedIn: 'root',
@@ -37,8 +45,6 @@ export class UserService {
   activeUserSkills$: BehaviorSubject<Skill[]> = new BehaviorSubject(
     [] as Skill[]
   );
-
-  constructor() {}
 
   private createUser(user: User): Observable<UserDTO> {
     return this.http.post<UserDTO>(`${this.BASE_URL}/users`, user);
@@ -133,6 +139,10 @@ export class UserService {
             this.userStore.setUserConnected(user);
             const userString = JSON.stringify(user);
             window.localStorage.setItem('user', userString);
+            this.publish({
+              type: 'login',
+              payload: this.userStore.getUserConnected$().value,
+            });
             if (user.role === 'mentor') this.router.navigate(['/mentor']);
             if (user.role === 'student') this.router.navigate(['/student']);
             return user;
@@ -144,10 +154,22 @@ export class UserService {
       );
   }
 
+  loginTabs(message: BroadcastMessage) {
+    if (message) {
+      this.userStore.setUserConnected(message.payload as UserDTO);
+      if (message.payload.role === 'mentor') this.router.navigate(['/mentor']);
+      if (message.payload.role === 'student')
+        this.router.navigate(['/student']);
+    }
+  }
+
   logout() {
-    localStorage.removeItem('user');
-    this.userStore.setUserConnected({} as UserDTO);
-    this.router.navigate(['']);
+    if (this.userStore.getUserConnected$().value.email) {
+      localStorage.removeItem('user');
+      this.userStore.setUserConnected({} as UserDTO);
+      this.publish({ type: 'logout' } as BroadcastMessage);
+      this.router.navigate(['']);
+    }
   }
 
   getListSkills() {
@@ -175,8 +197,6 @@ export class UserService {
   }
 
   updateUserLanguages(languages: Language[]) {
-    console.log('user id', this.userStore.getUserConnected$().value?.id);
-
     return this.http
       .post<{ success: boolean; message: string; languages: Language[] }>(
         environment.BASE_URL +
@@ -337,8 +357,6 @@ export class UserService {
       .pipe(
         tap((result) => {
           this.activeUserExperiences$.next(result.experiences);
-
-          console.log(result);
         })
       );
   }
@@ -363,5 +381,28 @@ export class UserService {
           this.activeUserExperiences$.next(res.experiences);
         })
       );
+  }
+
+  // Tabs communication
+
+  onMessage = new Subject();
+  broadcastChannel = new BroadcastChannel('logout');
+
+  constructor() {
+    this.broadcastChannel.onmessage = (
+      message: MessageEvent<BroadcastMessage>
+    ) => {
+      if (message.data.type === 'logout') {
+        this.logout();
+      }
+      if (message.data.type === 'login') {
+        //this.logout();
+        this.loginTabs(message.data);
+      }
+    };
+  }
+
+  publish(message: BroadcastMessage): void {
+    this.broadcastChannel.postMessage(message);
   }
 }

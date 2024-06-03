@@ -23,7 +23,6 @@ export class ListFavoritesComponent {
 
   ngOnInit(): void {
     this.getListFavoriteMentor();
-    console.log('list:', this.getListFavoriteMentor());
   }
 
   getListFavoriteMentor(): void {

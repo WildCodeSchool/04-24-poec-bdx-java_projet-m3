@@ -68,18 +68,20 @@ export class ReservationService {
     return this.httpClient.delete(`${environment.BASE_URL}/slot/slots/${id}`);
   }
 
-  // updateSlot(slotId: number, slotInfo: any): Observable<any> {
-  //   const updatedSlotInfo = {
-  //     dateTime: slotInfo.dateTime,
-  //     visio: slotInfo.visio,
-  //     mentorId: slotInfo.mentorId,
-  //   };
+  updateSlot(slotId: number, slotInfo: any): Observable<any> {
+    const updatedSlotInfo = {
+      id: slotId,
+      dateTime: slotInfo.dateTime,
+      dateEnd: slotInfo.dateEnd,
+      visio: slotInfo.visio,
+      mentorId: slotInfo.mentorId,
+    };
 
-  //   return this.httpClient.put(
-  //     `${environment.BASE_URL}/slot/slots/${slotId}`,
-  //     updatedSlotInfo
-  //   );
-  // }
+    return this.httpClient.put(
+      `${environment.BASE_URL}/slot/slots/${slotId}`,
+      updatedSlotInfo
+    );
+  }
 
   getMentorReservationList(userId: number, perPage: number, offset: number) {
     return this.httpClient
@@ -93,7 +95,6 @@ export class ReservationService {
       .pipe(
         tap((res) => {
           this.activeMentorReservations$.next(res);
-          console.log('res in service ', res);
         })
       );
   }
@@ -103,8 +104,6 @@ export class ReservationService {
     perPage: number,
     offset: number
   ) {
-    console.log('called');
-
     return this.httpClient
       .get<{ reservations: reservationForMentorDTO[]; total: number }>(
         environment.BASE_URL +
@@ -113,7 +112,6 @@ export class ReservationService {
       .pipe(
         tap((res) => {
           this.activeMentorReservationsHistory$.next(res);
-          console.log('reservations hs', res);
         })
       );
   }
@@ -133,8 +131,6 @@ export class ReservationService {
       )
       .pipe(
         tap((res) => {
-          console.log('respond upate res', res);
-
           this.activeMentorReservationsHistory$.next(res);
         })
       );
@@ -151,7 +147,6 @@ export class ReservationService {
       )
       .pipe(
         tap((res) => {
-          console.log('ma liste de resa', res);
           this.activeStudentReservations$.next(res);
         })
       );
@@ -162,8 +157,6 @@ export class ReservationService {
     perPage: number,
     offset: number
   ) {
-    console.log('called');
-
     return this.httpClient
       .get<{ reservations: ReservationForStudentDTO[]; total: number }>(
         environment.BASE_URL +
@@ -172,7 +165,6 @@ export class ReservationService {
       .pipe(
         tap((res) => {
           this.activeStudentReservationsHistory$.next(res);
-          console.log('reservations passés:', res);
         })
       );
   }
@@ -184,8 +176,6 @@ export class ReservationService {
       )
       .pipe(
         tap((res) => {
-          console.log('respond delete res', res);
-
           this.activeMentorReservations$.next(res);
         })
       );

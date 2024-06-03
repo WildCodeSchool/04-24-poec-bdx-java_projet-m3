@@ -37,6 +37,9 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   displayModal: boolean = false;
   eventDetails: any = {};
   mode: string = '';
+  isModfify: boolean = false;
+  datetime24h: Date[] | undefined;
+  time: Date[] | undefined;
 
   constructor(
     private reservationService: ReservationService,
@@ -81,7 +84,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
       this.visible = true;
     } else {
-      console.log("Veuillez d'abord soumettre le formulaire.");
+      console.error("Veuillez d'abord soumettre le formulaire.");
     }
   };
 
@@ -97,12 +100,97 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   deleteSlot() {
     if (this.eventDetails.id) {
       this.reservationService.deleteSlot(this.eventDetails.id).subscribe(() => {
-        this.loadSlots();
         this.displayModal = false;
+        this.loadSlots();
       });
     } else {
       console.error('Pas de slot à supprimer');
     }
+  }
+
+  editSlot() {
+    this.isModfify = true;
+    console.log(this.editForm.value);
+  }
+
+  editForm: FormGroup = this.fb.group({
+    id: [''],
+    dateStart: [''],
+    dateEnd: [''],
+    visio: ['presentiel'],
+  });
+
+  validateAndLog(field: string) {
+    const date: Date = this.editForm.get(field)?.value;
+    if (date) {
+      const formattedDate = this.formatDate(date);
+      console.log(`Date and time selected for ${field}: ${formattedDate}`);
+    } else {
+      console.log(`No date selected for ${field}`);
+    }
+  }
+
+  onSubmit() {
+    if (!this.eventDetails.id) {
+      console.error("ID de l'événement non défini.");
+      return;
+    }
+
+    const id = this.eventDetails.id;
+    const dateTime = this.formatDate(this.editForm.value.dateStart);
+    const dateEnd = this.formatDate(this.editForm.value.dateEnd);
+    const visio = this.editForm.value.visio === 'visio';
+    const mentorId = this.mentorId;
+
+    const slotInfo = {
+      id,
+      dateTime,
+      dateEnd,
+      visio,
+      mentorId,
+    };
+
+    this.reservationService.updateSlot(id, slotInfo).subscribe(
+      () => {
+        this.loadSlots();
+        this.displayModal = false;
+        this.isModfify = false;
+      },
+      (error) => {
+        if (error.status === 400 && error.error.message) {
+          alert(error.error.message);
+        } else {
+          console.error('Erreur lors de la mise à jour du créneau:', error);
+        }
+      }
+    );
+  }
+
+  formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    const hours = ('0' + date.getHours()).slice(-2);
+    const minutes = ('0' + date.getMinutes()).slice(-2);
+    const seconds = ('0' + date.getSeconds()).slice(-2);
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+  }
+
+  handleEventDrop(eventDropArg: any) {
+    this.eventDetails = {
+      id: eventDropArg.event.id,
+      start: eventDropArg.event.start,
+      end: eventDropArg.event.end,
+      visio: eventDropArg.event.extendedProps.visio,
+    };
+
+    this.displayModal = true;
+    this.isModfify = true;
+  }
+
+  closeModal() {
+    this.displayModal = false;
+    this.isModfify = false;
   }
 
   calendarOptions: CalendarOptions = {
@@ -171,12 +259,13 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
     navLinks: true,
     eventStartEditable: true,
-
+    eventOverlap: false,
+    eventDrop: this.handleEventDrop.bind(this),
     weekNumbers: true,
     selectMirror: true,
     unselectAuto: true,
     selectOverlap: false,
-    editable: false,
+    editable: true,
     // https://fullcalendar.io/docs/select-callback
     selectable: true,
     eventDurationEditable: false,
@@ -198,6 +287,13 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       end: eventClickArg.event.end,
       visio: eventClickArg.event.extendedProps['visio'],
     };
+
+    this.editForm.setValue({
+      id: '',
+      dateStart: '',
+      dateEnd: '',
+      visio: 'presentiel',
+    });
 
     this.displayModal = true;
     eventClickArg.jsEvent.preventDefault();
@@ -241,9 +337,5 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       this.mentorSubscription.unsubscribe();
     }
   }
-  ngAfterViewChecked(): void {
-    setTimeout(() => {
-      this.today = this.calendarComponent.getApi().view.title;
-    }, 0);
-  }
+  ngAfterViewChecked(): void {}
 }

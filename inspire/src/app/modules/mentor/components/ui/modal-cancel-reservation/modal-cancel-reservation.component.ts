@@ -15,6 +15,5 @@ export class ModalCancelReservationComponent {
 
   deleteReservation() {
     this.onDeleteReservation.emit();
-    console.log('reservation delete ');
   }
 }
