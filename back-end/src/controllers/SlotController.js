@@ -8,6 +8,7 @@ export default class SlotController {
   async addSlot(req, res) {
     try {
       const slotInfo = req.body;
+      console.log(slotInfo);
       const result = await this.slotManager.addSlot(slotInfo);
       res.json(result);
     } catch (error) {
