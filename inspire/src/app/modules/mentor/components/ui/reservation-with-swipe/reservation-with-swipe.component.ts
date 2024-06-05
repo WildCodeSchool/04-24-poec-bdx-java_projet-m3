@@ -9,7 +9,7 @@ import {
   inject,
 } from '@angular/core';
 import { reservationForMentorDTO } from '../../../../../shared/models/reservation';
-import { auditTime, fromEvent } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({

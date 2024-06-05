@@ -3,12 +3,9 @@ import { UserService } from '../../../../user.service';
 import { MentorService } from '../../../../shared/services/mentor.service';
 import { ActivatedRoute } from '@angular/router';
 import { Language } from '../../../../shared/models/language';
-import { Mentor, MentorDTO } from '../../../../shared/models/user';
-import {
-  Experience,
-  ExperienceDTO,
-} from '../../../../shared/models/experience';
-import { Formation, FormationDTO } from '../../../../shared/models/formation';
+import { MentorDTO } from '../../../../shared/models/user';
+import { ExperienceDTO } from '../../../../shared/models/experience';
+import { FormationDTO } from '../../../../shared/models/formation';
 import { Skill } from '../../../../shared/models/chip';
 
 @Component({

@@ -5,11 +5,7 @@ import {
 } from '../models/reservation';
 import { ReservationService } from '../services/reservation.service';
 import { inject } from '@angular/core';
-import { Mentor } from '../models/user';
-import { MentorService } from '../services/mentor.service';
-import { UserService } from '../../user.service';
 import { UserStoreService } from '../services/stores/user-store.service';
-import { switchMap } from 'rxjs';
 
 export const mentorReservationsResolver: ResolveFn<{
   reservations: reservationForMentorDTO[];

@@ -1,6 +1,6 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Mentor, MentorDTO } from '../../../../shared/models/user';
+import { MentorDTO } from '../../../../shared/models/user';
 import { MentorService } from '../../../../shared/services/mentor.service';
 
 @Component({

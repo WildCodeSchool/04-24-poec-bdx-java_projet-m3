@@ -3,8 +3,6 @@ import { Student } from '../models/user';
 import { inject } from '@angular/core';
 import { StudentService } from '../services/student.service';
 import { UserService } from '../../user.service';
-import { Observable } from 'rxjs';
-import { Language } from '../models/language';
 import { Skill } from '../models/chip';
 import { Experience } from '../models/experience';
 import { Formation } from '../models/formation';

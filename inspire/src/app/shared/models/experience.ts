@@ -1,5 +1,3 @@
-import { Language } from './language';
-
 export type Experience = {
   title: string;
   company: string;
