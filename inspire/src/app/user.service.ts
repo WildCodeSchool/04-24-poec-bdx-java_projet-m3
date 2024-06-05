@@ -50,7 +50,12 @@ export class UserService {
     return this.http.post<{ userId: number }>(`${this.BASE_URL}/users`, user);
   }
 
-  createStudent(registerFormValues: any): Observable<Student> {
+  createStudent(registerFormValues: {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+  }): Observable<Student> {
     const user: User = new User(
       registerFormValues.email,
       registerFormValues.password,
@@ -86,7 +91,12 @@ export class UserService {
     );
   }
 
-  createMentor(registerFormValues: any): Observable<Mentor> {
+  createMentor(registerFormValues: {
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+  }): Observable<Mentor> {
     const user: User = new User(
       registerFormValues.email,
       registerFormValues.password,
@@ -130,7 +140,7 @@ export class UserService {
     );
   }
 
-  login(email: any, password: any): Observable<UserDTO | null> {
+  login(email: string, password: string): Observable<UserDTO | null> {
     return this.http
       .get<UserDTO>(`${this.BASE_URL}/users/${email}/${password}`)
 

@@ -18,6 +18,6 @@ export class LoginFormComponent {
 
   onSubmit() {
     const { email, password } = this.loginForm.value;
-    this.userService.login(email, password).subscribe();
+    this.userService.login(email || '', password || '').subscribe();
   }
 }
