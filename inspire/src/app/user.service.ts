@@ -12,6 +12,7 @@ import {
   Mentor,
   MentorDTO,
   Student,
+  StudentDTO,
   User,
   UserDTO,
 } from './shared/models/user';
@@ -45,8 +46,8 @@ export class UserService {
     [] as Skill[]
   );
 
-  private createUser(user: User): Observable<UserDTO> {
-    return this.http.post<UserDTO>(`${this.BASE_URL}/users`, user);
+  private createUser(user: User): Observable<{ userId: number }> {
+    return this.http.post<{ userId: number }>(`${this.BASE_URL}/users`, user);
   }
 
   createStudent(registerFormValues: any): Observable<Student> {
@@ -57,8 +58,10 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
-      switchMap((createdUser: UserDTO) => {
-        const userId = createdUser.id;
+      switchMap((createdUser: { userId: number }) => {
+        console.log('created user ', createdUser);
+
+        const userId = createdUser.userId;
 
         const student: Student = new Student(
           userId,
@@ -91,8 +94,8 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
-      switchMap((createdUser: UserDTO) => {
-        const userId = createdUser.id;
+      switchMap((createdUser: { userId: number }) => {
+        const userId = createdUser.userId;
         const mentor: Mentor = new Mentor(
           userId,
           registerFormValues.firstName,
