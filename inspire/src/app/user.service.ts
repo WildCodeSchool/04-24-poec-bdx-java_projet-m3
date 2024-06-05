@@ -12,7 +12,6 @@ import {
   Mentor,
   MentorDTO,
   Student,
-  StudentDTO,
   User,
   UserDTO,
 } from './shared/models/user';
@@ -24,6 +23,13 @@ import { Experience, ExperienceDTO } from './shared/models/experience';
 import { Formation, FormationDTO } from './shared/models/formation';
 import { environment } from '../environments/environment.development';
 import { BroadcastMessage } from './shared/models/broadcastMessage';
+
+type InscriptionUser = {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+};
 
 @Injectable({
   providedIn: 'root',
@@ -50,12 +56,7 @@ export class UserService {
     return this.http.post<{ userId: number }>(`${this.BASE_URL}/users`, user);
   }
 
-  createStudent(registerFormValues: {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-  }): Observable<Student> {
+  createStudent(registerFormValues: InscriptionUser): Observable<Student> {
     const user: User = new User(
       registerFormValues.email,
       registerFormValues.password,
@@ -91,12 +92,7 @@ export class UserService {
     );
   }
 
-  createMentor(registerFormValues: {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-  }): Observable<Mentor> {
+  createMentor(registerFormValues: InscriptionUser): Observable<Mentor> {
     const user: User = new User(
       registerFormValues.email,
       registerFormValues.password,
