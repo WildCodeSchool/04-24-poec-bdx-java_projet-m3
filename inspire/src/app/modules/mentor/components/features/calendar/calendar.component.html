@@ -131,15 +131,16 @@
         <div class="content-resume">
           <h2>Résumé de votre créneau</h2>
         </div>
+
         <div class="pop-up-date">
           <img
             class="img-fluid forgot-img"
-            src="/assets/svgs/date-slot.svg"
+            src="/assets/svgs/information.svg"
             alt=""
           />
           <h3>
-            Le créneau selectionné est le
-            <span>{{ eventDetails?.start | date }}</span>
+            Début du créneau le <span>{{ eventDetails?.start | date }}</span> à
+            <span>{{ eventDetails?.start | date : "HH:mm" }}</span>
           </h3>
         </div>
         <div class="pop-up-date">
@@ -149,7 +150,18 @@
             alt=""
           />
           <h3>
-            Le créneau selectionné est
+            Fin du créneau le <span>{{ eventDetails?.end | date }}</span> à
+            <span>{{ eventDetails?.end | date : "HH:mm" }}</span>
+          </h3>
+        </div>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/information.svg"
+            alt=""
+          />
+          <h3>
+            Le créneau est
             <span>
               {{ eventDetails.visio ? " en Visio" : "en Présentiel" }}</span
             >
@@ -161,29 +173,13 @@
     <div *ngIf="isModfify" class="content">
       <div class="content-resume new-slot">
         <div class="content-resume">
-          <h2>Votre nouveau créneau</h2>
+          <h2>Définissez votre nouveau créneau de mentorat</h2>
         </div>
         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
           <input type="hidden" formControlName="id" />
-          <div class="form-update">
-            <label for="">Choissisez la date et l'heure de début </label>
-            <p-calendar
-              inputId="calendar-start"
-              formControlName="dateStart"
-              [showTime]="true"
-            ></p-calendar>
-          </div>
-          <div class="form-update">
-            <label for="">Choissisez la date et l'heure de fin </label>
-            <p-calendar
-              inputId="calendar-end"
-              formControlName="dateEnd"
-              [showTime]="true"
-            ></p-calendar>
-          </div>
 
           <div class="form-update">
-            <label for="">Choissisez le mode de mentorat </label>
+            <label for="">Choissisez le mode de mentorat *</label>
 
             <select formControlName="visio">
               <option value="presentiel">Présentiel</option>
@@ -191,8 +187,8 @@
             </select>
           </div>
 
-          <div>
-            <h2 class="text-update">Résumée de votre nouveau créneau</h2>
+          <div id="text-update">
+            <h2>Résumée de votre nouveau créneau</h2>
           </div>
 
           <div class="pop-up-date">
@@ -203,8 +199,8 @@
             />
             <h3>
               Début du créneau le
-              <span>{{ editForm.value.dateStart | date }} </span> à
-              <span>{{ editForm.value.dateStart | date : "HH:mm" }} </span>
+              <span>{{ eventDetailsEdit.start | date }} </span> à
+              <span>{{ eventDetailsEdit.start | date : "HH:mm" }} </span>
             </h3>
           </div>
 
@@ -216,8 +212,8 @@
             />
             <h3>
               Fin du créneau le
-              <span>{{ editForm.value.dateEnd | date }}</span> à
-              <span>{{ editForm.value.dateEnd | date : "HH:mm" }} </span>
+              <span>{{ eventDetailsEdit.end | date }}</span> à
+              <span>{{ eventDetailsEdit.end | date : "HH:mm" }} </span>
             </h3>
           </div>
           <div class="pop-up-date">
