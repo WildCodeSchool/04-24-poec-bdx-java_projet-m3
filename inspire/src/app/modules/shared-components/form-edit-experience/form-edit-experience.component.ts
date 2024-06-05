@@ -7,7 +7,7 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { Experience } from '../../../shared/models/experience';
+import { Experience, ExperienceDTO } from '../../../shared/models/experience';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -18,9 +18,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './form-edit-experience.component.scss',
 })
 export class FormEditExperienceComponent implements OnInit {
-  @Input() experience!: Experience;
+  @Input() experience!: ExperienceDTO;
   @Output() destroy = new EventEmitter();
-  @Output() experienceEmitter = new EventEmitter<Experience>();
+  @Output() experienceEmitter = new EventEmitter<ExperienceDTO>();
   experienceForm!: FormGroup<any>;
 
   destroyRef = inject(DestroyRef);
@@ -28,10 +28,6 @@ export class FormEditExperienceComponent implements OnInit {
   onSubmit() {
     const id = this.experience.id;
     this.experienceEmitter.emit({ ...this.experienceForm.value, id });
-    // this.userService
-    //   .editExperience(this.experienceForm.value, experienceId as number)
-    //   .pipe(takeUntilDestroyed(this.destroyRef))
-    //   .subscribe();
     this.destroy.emit();
   }
 

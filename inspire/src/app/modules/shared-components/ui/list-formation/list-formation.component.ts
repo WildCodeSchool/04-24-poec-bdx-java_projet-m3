@@ -1,5 +1,5 @@
 import { Component, DestroyRef, Input, OnDestroy, inject } from '@angular/core';
-import { Formation } from '../../../../shared/models/formation';
+import { Formation, FormationDTO } from '../../../../shared/models/formation';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { UserService } from '../../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -11,7 +11,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class ListFormationComponent {
   @Input() title: string = '';
-  @Input() formations!: Formation[];
+  @Input() formations!: FormationDTO[];
   @Input() editModeOn: boolean = true;
   isVisibleFormCourse = false;
 

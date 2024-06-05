@@ -1,5 +1,8 @@
 import { Component, DestroyRef, Input, inject } from '@angular/core';
-import { Experience } from '../../../../shared/models/experience';
+import {
+  Experience,
+  ExperienceDTO,
+} from '../../../../shared/models/experience';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { UserService } from '../../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -11,7 +14,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class ListExperienceComponent {
   @Input() title: string = '';
-  @Input() experiences!: Experience[];
+  @Input() experiences!: ExperienceDTO[];
   @Input() editModeOn: boolean = true;
   isVisibleFormExperience = false;
 
