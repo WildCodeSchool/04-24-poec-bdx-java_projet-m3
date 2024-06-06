@@ -2,7 +2,7 @@ import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { reservationForMentorDTO } from '../../../../shared/models/reservation';
 import { ReservationService } from '../../../../shared/services/reservation.service';
 import { MentorService } from '../../../../shared/services/mentor.service';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({

@@ -19,10 +19,17 @@ import { UserStoreService } from './shared/services/stores/user-store.service';
 import { Router } from '@angular/router';
 import { Skill } from './shared/models/chip';
 import { Language } from './shared/models/language';
-import { Experience } from './shared/models/experience';
-import { Formation } from './shared/models/formation';
+import { Experience, ExperienceDTO } from './shared/models/experience';
+import { Formation, FormationDTO } from './shared/models/formation';
 import { environment } from '../environments/environment.development';
 import { BroadcastMessage } from './shared/models/broadcastMessage';
+
+type InscriptionUser = {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+};
 
 @Injectable({
   providedIn: 'root',
@@ -33,12 +40,11 @@ export class UserService {
   private http = inject(HttpClient);
   private userStore = inject(UserStoreService);
 
-  activeUserFormations$: BehaviorSubject<Formation[]> = new BehaviorSubject(
-    [] as Formation[]
+  activeUserFormations$: BehaviorSubject<FormationDTO[]> = new BehaviorSubject(
+    [] as FormationDTO[]
   );
-  activeUserExperiences$: BehaviorSubject<Experience[]> = new BehaviorSubject(
-    [] as Experience[]
-  );
+  activeUserExperiences$: BehaviorSubject<ExperienceDTO[]> =
+    new BehaviorSubject([] as ExperienceDTO[]);
   activeUserLanguages$: BehaviorSubject<Language[]> = new BehaviorSubject(
     [] as Language[]
   );
@@ -46,11 +52,11 @@ export class UserService {
     [] as Skill[]
   );
 
-  private createUser(user: User): Observable<UserDTO> {
-    return this.http.post<UserDTO>(`${this.BASE_URL}/users`, user);
+  private createUser(user: User): Observable<{ userId: number }> {
+    return this.http.post<{ userId: number }>(`${this.BASE_URL}/users`, user);
   }
 
-  createStudent(registerFormValues: any): Observable<Student> {
+  createStudent(registerFormValues: InscriptionUser): Observable<Student> {
     const user: User = new User(
       registerFormValues.email,
       registerFormValues.password,
@@ -58,8 +64,10 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
-      switchMap((createdUser: UserDTO) => {
-        const userId = createdUser.id;
+      switchMap((createdUser: { userId: number }) => {
+        console.log('created user ', createdUser);
+
+        const userId = createdUser.userId;
 
         const student: Student = new Student(
           userId,
@@ -84,7 +92,7 @@ export class UserService {
     );
   }
 
-  createMentor(registerFormValues: any): Observable<Mentor> {
+  createMentor(registerFormValues: InscriptionUser): Observable<Mentor> {
     const user: User = new User(
       registerFormValues.email,
       registerFormValues.password,
@@ -92,8 +100,8 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
-      switchMap((createdUser: UserDTO) => {
-        const userId = createdUser.id;
+      switchMap((createdUser: { userId: number }) => {
+        const userId = createdUser.userId;
         const mentor: Mentor = new Mentor(
           userId,
           registerFormValues.firstName,
@@ -128,7 +136,7 @@ export class UserService {
     );
   }
 
-  login(email: any, password: any): Observable<UserDTO | null> {
+  login(email: string, password: string): Observable<UserDTO | null> {
     return this.http
       .get<UserDTO>(`${this.BASE_URL}/users/${email}/${password}`)
 
@@ -199,10 +207,10 @@ export class UserService {
   updateUserLanguages(languages: Language[]) {
     return this.http
       .post<{ success: boolean; message: string; languages: Language[] }>(
-        'http://localhost:8080/language/user/update/1',
-        // environment.BASE_URL +
-        //   '/language/languages/user/' +
-        //   this.userStore.getUserConnected$().value?.id,
+        ///'http://localhost:8080/language/user/update/1',
+        environment.BASE_URL +
+          '/language/languages/user/' +
+          this.userStore.getUserConnected$().value?.id,
         languages
       )
       .pipe(
@@ -215,7 +223,7 @@ export class UserService {
   // CRUD Formation
   getUserFormations() {
     return this.http
-      .get<Formation[]>(
+      .get<FormationDTO[]>(
         environment.BASE_URL +
           '/formation/formations/user/' +
           this.userStore.getUserConnected$().value?.id
@@ -226,29 +234,29 @@ export class UserService {
   addFormationUser(formation: Formation): Observable<{
     success: string;
     message: string;
-    formations: Formation[];
+    formations: FormationDTO[];
   }> {
     return this.http
       .post<{
         success: string;
         message: string;
-        formations: Formation[];
+        formations: FormationDTO[];
       }>(`${environment.BASE_URL}/formation/formations/`, formation)
       .pipe(
         tap((response) => this.activeUserFormations$.next(response.formations))
       );
   }
 
-  updateFormationUser(formation: Formation): Observable<{
+  updateFormationUser(formation: FormationDTO): Observable<{
     success: string;
     affectedRows: number;
-    formations: Formation[];
+    formations: FormationDTO[];
   }> {
     return this.http
       .put<{
         success: string;
         affectedRows: number;
-        formations: Formation[];
+        formations: FormationDTO[];
       }>(
         `${environment.BASE_URL}/formation/formations/${formation.id}`,
         formation
@@ -261,13 +269,13 @@ export class UserService {
   deleteFormationUser(formationId: number): Observable<{
     success: string;
     message: string;
-    formations: Formation[];
+    formations: FormationDTO[];
   }> {
     return this.http
       .delete<{
         success: string;
         message: string;
-        formations: Formation[];
+        formations: FormationDTO[];
       }>(
         `${environment.BASE_URL}/formation/formations/${formationId}/${
           this.userStore.getUserConnected$().value?.id
@@ -309,11 +317,9 @@ export class UserService {
   // CRUD Experience
   getUserExperiences() {
     return this.http
-      .get<Experience[]>(
-        // environment.BASE_URL +
-        // '/experience/experiences/user/' +
-        // this.userStore.getUserConnected$().value?.id
-        'http://localhost:8080/experience/user/' +
+      .get<ExperienceDTO[]>(
+        environment.BASE_URL +
+          '/experience/experiences/user/' +
           this.userStore.getUserConnected$().value?.id
       )
       .pipe(
@@ -324,21 +330,17 @@ export class UserService {
   addUserExperience(experience: Experience): Observable<{
     message: string;
     success: boolean;
-    experiences: Experience[];
+    experiences: ExperienceDTO[];
   }> {
     return this.http
       .post<{
         message: string;
         success: boolean;
-        experiences: Experience[];
-      }>(
-        'http://localhost:8080/experience/user/add',
-        // `${environment.BASE_URL}/experience/experiences/`
-        {
-          ...experience,
-          userId: this.userStore.getUserConnected$().value?.id,
-        }
-      )
+        experiences: ExperienceDTO[];
+      }>(`${environment.BASE_URL}/experience/experiences/`, {
+        ...experience,
+        userId: this.userStore.getUserConnected$().value?.id,
+      })
       .pipe(
         tap((result) => {
           this.activeUserExperiences$.next(result.experiences);
@@ -351,12 +353,12 @@ export class UserService {
     experienceId: number
   ): Observable<{
     affectedRows: number;
-    experiences: Experience[];
+    experiences: ExperienceDTO[];
   }> {
     return this.http
       .put<{
         affectedRows: number;
-        experiences: Experience[];
+        experiences: ExperienceDTO[];
       }>(`${this.BASE_URL}/experience/experiences/${experienceId}`, {
         ...experience,
         userId: this.userStore.getUserConnected$().value?.id,
@@ -371,13 +373,13 @@ export class UserService {
   deleteExperience(experienceId: number): Observable<{
     message: string;
     success: boolean;
-    experiences: Experience[];
+    experiences: ExperienceDTO[];
   }> {
     return this.http
       .delete<{
         message: string;
         success: boolean;
-        experiences: Experience[];
+        experiences: ExperienceDTO[];
       }>(
         `${this.BASE_URL}/experience/experiences/${experienceId}/${
           this.userStore.getUserConnected$().value?.id

@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { UserStoreService } from '../../../../../../shared/services/stores/user-store.service';
 import { BehaviorSubject } from 'rxjs';
-import { User, UserDTO } from '../../../../../../shared/models/user';
+import { UserDTO } from '../../../../../../shared/models/user';
 
 @Component({
   selector: 'app-role-register-page',
