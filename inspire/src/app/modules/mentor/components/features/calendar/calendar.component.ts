@@ -68,6 +68,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   };
 
   onDateSelect = (selectionInfo: any) => {
+    console.log('selectionInfo', selectionInfo);
     if (this.formulaire.valid) {
       const diffMilliseconds = selectionInfo.end - selectionInfo.start;
       const hours = Math.floor(diffMilliseconds / (1000 * 60 * 60));
@@ -180,7 +181,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
 
   handleEventDrop(eventDropArg: any) {
-    console.log(eventDropArg);
     this.eventDetails = {
       id: eventDropArg.oldEvent.id,
       start: eventDropArg.oldEvent.start,

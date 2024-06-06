@@ -44,6 +44,7 @@ export default class StudentController {
       );
       res.status(201).json({ affectedRows: result.affectedRows });
     } catch (error) {
+      // console.log(error);
       res.status(401).json({ message: `Demande refusée: ${error.message}` });
     }
   }

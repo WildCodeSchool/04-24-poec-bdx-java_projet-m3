@@ -52,8 +52,9 @@ export class UserService {
     );
 
     return this.createUser(user).pipe(
-      switchMap((createdUser: UserDTO) => {
-        const userId = createdUser.id;
+      switchMap((createdUser: any) => {
+        const userId = createdUser.userId;
+        console.log('User ID:', createdUser);
 
         const student: Student = new Student(
           userId,
@@ -66,14 +67,23 @@ export class UserService {
           ''
         );
 
-        return this.http.post<Student>(
-          `${this.BASE_URL}/student/students`,
-          student
-        );
+        return this.http
+          .post<Student>(`${this.BASE_URL}/student/students`, student)
+          .pipe(
+            tap((response) => {
+              console.log('HTTP response:', response);
+            })
+          );
+      }),
+      tap((student: Student) => {
+        console.log('Student data before navigation:', student);
       }),
       map((data) => {
         this.router.navigate(['']);
         return data;
+      }),
+      tap((finalData) => {
+        console.log('Final data:', finalData);
       })
     );
   }
