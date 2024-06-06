@@ -5,7 +5,7 @@ import { UserService } from '../../../../user.service';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
-import { Mentor, MentorDTO } from '../../../../shared/models/user';
+import { MentorDTO } from '../../../../shared/models/user';
 
 @Component({
   selector: 'app-side-nav',

@@ -1,6 +1,6 @@
 import { Component, DestroyRef, EventEmitter, Output } from '@angular/core';
 import { Skill } from '../../../../../shared/models/chip';
-import { Mentor, MentorDTO } from '../../../../../shared/models/user';
+import { MentorDTO } from '../../../../../shared/models/user';
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { UserService } from '../../../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';

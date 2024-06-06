@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { BehaviorSubject, Observable, of, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { Mentor, MentorDTO } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
 import { reservationForMentorDTO } from '../models/reservation';
-import { FavoritesService } from '../../modules/students/shared/favorites.service';
 
 @Injectable({
   providedIn: 'root',

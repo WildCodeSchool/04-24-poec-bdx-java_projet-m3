@@ -13,12 +13,7 @@ import { Skill } from '../../../shared/models/chip';
 import { UserService } from '../../../user.service';
 import { Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {
-  Mentor,
-  MentorDTO,
-  Student,
-  StudentDTO,
-} from '../../../shared/models/user';
+import { MentorDTO, StudentDTO } from '../../../shared/models/user';
 
 @Component({
   selector: 'app-form-edit-apropos',

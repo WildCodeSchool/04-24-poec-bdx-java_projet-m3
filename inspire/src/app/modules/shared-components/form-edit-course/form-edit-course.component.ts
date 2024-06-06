@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Formation } from '../../../shared/models/formation';
+import { FormationDTO } from '../../../shared/models/formation';
 import { UserService } from '../../../user.service';
-import { MentorService } from '../../../shared/services/mentor.service';
 
 @Component({
   selector: 'app-form-edit-course',
@@ -10,10 +9,10 @@ import { MentorService } from '../../../shared/services/mentor.service';
   styleUrl: './form-edit-course.component.scss',
 })
 export class FormEditCourseComponent implements OnInit {
-  @Input() formation!: Formation;
+  @Input() formation!: FormationDTO;
   @Input() destroy!: () => void;
   @Output()
-  formationEmitter = new EventEmitter<Formation>();
+  formationEmitter = new EventEmitter<FormationDTO>();
   courseForm!: FormGroup<any>;
 
   onSubmit() {
@@ -22,7 +21,7 @@ export class FormEditCourseComponent implements OnInit {
       ...this.courseForm.value,
       id,
       userId: this.formation.userId,
-    } as Formation);
+    } as FormationDTO);
   }
 
   constructor(private fb: FormBuilder, private userService: UserService) {}

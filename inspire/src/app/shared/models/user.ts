@@ -61,7 +61,6 @@ export type MentorDTO = {
 };
 
 export class Student {
-  id?: number;
   firstname: string;
   lastname: string;
   description: string;
