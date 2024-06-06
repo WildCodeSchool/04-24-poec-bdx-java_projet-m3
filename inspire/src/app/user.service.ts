@@ -199,9 +199,10 @@ export class UserService {
   updateUserLanguages(languages: Language[]) {
     return this.http
       .post<{ success: boolean; message: string; languages: Language[] }>(
-        environment.BASE_URL +
-          '/language/languages/user/' +
-          this.userStore.getUserConnected$().value?.id,
+        'http://localhost:8080/language/user/update/1',
+        // environment.BASE_URL +
+        //   '/language/languages/user/' +
+        //   this.userStore.getUserConnected$().value?.id,
         languages
       )
       .pipe(
@@ -309,8 +310,10 @@ export class UserService {
   getUserExperiences() {
     return this.http
       .get<Experience[]>(
-        environment.BASE_URL +
-          '/experience/experiences/user/' +
+        // environment.BASE_URL +
+        // '/experience/experiences/user/' +
+        // this.userStore.getUserConnected$().value?.id
+        'http://localhost:8080/experience/user/' +
           this.userStore.getUserConnected$().value?.id
       )
       .pipe(
@@ -328,10 +331,14 @@ export class UserService {
         message: string;
         success: boolean;
         experiences: Experience[];
-      }>(`${environment.BASE_URL}/experience/experiences/`, {
-        ...experience,
-        userId: this.userStore.getUserConnected$().value?.id,
-      })
+      }>(
+        'http://localhost:8080/experience/user/add',
+        // `${environment.BASE_URL}/experience/experiences/`
+        {
+          ...experience,
+          userId: this.userStore.getUserConnected$().value?.id,
+        }
+      )
       .pipe(
         tap((result) => {
           this.activeUserExperiences$.next(result.experiences);
