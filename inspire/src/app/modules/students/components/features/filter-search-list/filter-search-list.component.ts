@@ -30,9 +30,9 @@ export class FilterSearchListComponent {
     this.skills = [
       { name: 'javascript' },
       { name: 'java' },
-      { name: 'Angular' },
-      { name: 'React' },
-      { name: 'CSS' },
+      { name: 'angular' },
+      { name: 'react' },
+      { name: 'css' },
     ];
 
     this.disponibily = [
