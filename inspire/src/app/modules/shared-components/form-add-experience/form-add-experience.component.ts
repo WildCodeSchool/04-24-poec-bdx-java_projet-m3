@@ -2,17 +2,11 @@ import {
   Component,
   DestroyRef,
   EventEmitter,
-  Input,
   Output,
   inject,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { UserService } from '../../../user.service';
-import { UserStoreService } from '../../../shared/services/stores/user-store.service';
-import { User } from '../../../shared/models/user';
 import { Experience } from '../../../shared/models/experience';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { Formation } from '../../../shared/models/formation';
 
 @Component({
   selector: 'app-form-add-experience',
@@ -30,7 +24,7 @@ export class FormAddExperienceComponent {
   });
 
   @Output() destroy = new EventEmitter();
-  @Output() onExperienceAdd = new EventEmitter<Formation>();
+  @Output() onExperienceAdd = new EventEmitter<Experience>();
 
   destroyedRef = inject(DestroyRef);
 

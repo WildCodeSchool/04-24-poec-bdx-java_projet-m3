@@ -1,6 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, map, switchMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  Observable,
+  Subject,
+  map,
+  switchMap,
+  tap,
+} from 'rxjs';
 import {
   LoginDTO,
   Mentor,
@@ -13,9 +20,17 @@ import { UserStoreService } from './shared/services/stores/user-store.service';
 import { Router } from '@angular/router';
 import { Skill } from './shared/models/chip';
 import { Language } from './shared/models/language';
-import { Experience } from './shared/models/experience';
-import { Formation } from './shared/models/formation';
+import { Experience, ExperienceDTO } from './shared/models/experience';
+import { Formation, FormationDTO } from './shared/models/formation';
 import { environment } from '../environments/environment.development';
+import { BroadcastMessage } from './shared/models/broadcastMessage';
+
+type InscriptionUser = {
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+};
 import { cp } from '@fullcalendar/core/internal-common';
 
 @Injectable({
@@ -28,12 +43,11 @@ export class UserService {
   private http = inject(HttpClient);
   private userStore = inject(UserStoreService);
 
-  activeUserFormations$: BehaviorSubject<Formation[]> = new BehaviorSubject(
-    [] as Formation[]
+  activeUserFormations$: BehaviorSubject<FormationDTO[]> = new BehaviorSubject(
+    [] as FormationDTO[]
   );
-  activeUserExperiences$: BehaviorSubject<Experience[]> = new BehaviorSubject(
-    [] as Experience[]
-  );
+  activeUserExperiences$: BehaviorSubject<ExperienceDTO[]> =
+    new BehaviorSubject([] as ExperienceDTO[]);
   activeUserLanguages$: BehaviorSubject<Language[]> = new BehaviorSubject(
     [] as Language[]
   );
@@ -100,15 +114,12 @@ export class UserService {
             this.userStore.setUserConnected(user);
             const userString = JSON.stringify(user);
             window.localStorage.setItem('user', userString);
-
-            if (user.role === 'MENTOR') {
-              console.log('redirect to mentor');
-              this.router.navigate(['/mentor']);
-            }
-            if (user.role === 'STUDENT') {
-              console.log('redirect to student');
-              this.router.navigate(['/student']);
-            }
+            this.publish({
+              type: 'login',
+              payload: this.userStore.getUserConnected$().value,
+            });
+            if (user.role === 'mentor') this.router.navigate(['/mentor']);
+            if (user.role === 'student') this.router.navigate(['/student']);
             return user;
           } else {
             alert('Identifiants incorrects');
@@ -118,10 +129,22 @@ export class UserService {
       );
   }
 
+  loginTabs(message: BroadcastMessage) {
+    if (message) {
+      this.userStore.setUserConnected(message.payload as UserDTO);
+      if (message.payload.role === 'mentor') this.router.navigate(['/mentor']);
+      if (message.payload.role === 'student')
+        this.router.navigate(['/student']);
+    }
+  }
+
   logout() {
-    localStorage.removeItem('user');
-    this.userStore.setUserConnected({} as UserDTO);
-    this.router.navigate(['']);
+    if (this.userStore.getUserConnected$().value.email) {
+      localStorage.removeItem('user');
+      this.userStore.setUserConnected({} as UserDTO);
+      this.publish({ type: 'logout' } as BroadcastMessage);
+      this.router.navigate(['']);
+    }
   }
 
   getListSkills() {
@@ -132,6 +155,7 @@ export class UserService {
 
   getListLanguages() {
     return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
+    // return this.http.get<Language[]>(`http://localhost:8080/language/get/all`);
   }
 
   getUserLanguages() {
@@ -151,6 +175,7 @@ export class UserService {
   updateUserLanguages(languages: Language[]) {
     return this.http
       .post<{ success: boolean; message: string; languages: Language[] }>(
+        ///'http://localhost:8080/language/user/update/1',
         environment.BASE_URL +
           '/language/languages/user/' +
           this.userStore.getUserConnected$().value?.id,
@@ -166,7 +191,7 @@ export class UserService {
   // CRUD Formation
   getUserFormations() {
     return this.http
-      .get<Formation[]>(
+      .get<FormationDTO[]>(
         environment.BASE_URL +
           '/formation/formations/user/' +
           this.userStore.getUserConnected$().value?.id
@@ -177,29 +202,29 @@ export class UserService {
   addFormationUser(formation: Formation): Observable<{
     success: string;
     message: string;
-    formations: Formation[];
+    formations: FormationDTO[];
   }> {
     return this.http
       .post<{
         success: string;
         message: string;
-        formations: Formation[];
+        formations: FormationDTO[];
       }>(`${environment.BASE_URL}/formation/formations/`, formation)
       .pipe(
         tap((response) => this.activeUserFormations$.next(response.formations))
       );
   }
 
-  updateFormationUser(formation: Formation): Observable<{
+  updateFormationUser(formation: FormationDTO): Observable<{
     success: string;
     affectedRows: number;
-    formations: Formation[];
+    formations: FormationDTO[];
   }> {
     return this.http
       .put<{
         success: string;
         affectedRows: number;
-        formations: Formation[];
+        formations: FormationDTO[];
       }>(
         `${environment.BASE_URL}/formation/formations/${formation.id}`,
         formation
@@ -212,13 +237,13 @@ export class UserService {
   deleteFormationUser(formationId: number): Observable<{
     success: string;
     message: string;
-    formations: Formation[];
+    formations: FormationDTO[];
   }> {
     return this.http
       .delete<{
         success: string;
         message: string;
-        formations: Formation[];
+        formations: FormationDTO[];
       }>(
         `${environment.BASE_URL}/formation/formations/${formationId}/${
           this.userStore.getUserConnected$().value?.id
@@ -260,7 +285,7 @@ export class UserService {
   // CRUD Experience
   getUserExperiences() {
     return this.http
-      .get<Experience[]>(
+      .get<ExperienceDTO[]>(
         environment.BASE_URL +
           '/experience/experiences/user/' +
           this.userStore.getUserConnected$().value?.id
@@ -273,13 +298,13 @@ export class UserService {
   addUserExperience(experience: Experience): Observable<{
     message: string;
     success: boolean;
-    experiences: Experience[];
+    experiences: ExperienceDTO[];
   }> {
     return this.http
       .post<{
         message: string;
         success: boolean;
-        experiences: Experience[];
+        experiences: ExperienceDTO[];
       }>(`${environment.BASE_URL}/experience/experiences/`, {
         ...experience,
         userId: this.userStore.getUserConnected$().value?.id,
@@ -296,12 +321,12 @@ export class UserService {
     experienceId: number
   ): Observable<{
     affectedRows: number;
-    experiences: Experience[];
+    experiences: ExperienceDTO[];
   }> {
     return this.http
       .put<{
         affectedRows: number;
-        experiences: Experience[];
+        experiences: ExperienceDTO[];
       }>(`${this.BASE_URL}/experience/experiences/${experienceId}`, {
         ...experience,
         userId: this.userStore.getUserConnected$().value?.id,
@@ -316,13 +341,13 @@ export class UserService {
   deleteExperience(experienceId: number): Observable<{
     message: string;
     success: boolean;
-    experiences: Experience[];
+    experiences: ExperienceDTO[];
   }> {
     return this.http
       .delete<{
         message: string;
         success: boolean;
-        experiences: Experience[];
+        experiences: ExperienceDTO[];
       }>(
         `${this.BASE_URL}/experience/experiences/${experienceId}/${
           this.userStore.getUserConnected$().value?.id
@@ -333,5 +358,28 @@ export class UserService {
           this.activeUserExperiences$.next(res.experiences);
         })
       );
+  }
+
+  // Tabs communication
+
+  onMessage = new Subject();
+  broadcastChannel = new BroadcastChannel('logout');
+
+  constructor() {
+    this.broadcastChannel.onmessage = (
+      message: MessageEvent<BroadcastMessage>
+    ) => {
+      if (message.data.type === 'logout') {
+        this.logout();
+      }
+      if (message.data.type === 'login') {
+        //this.logout();
+        this.loginTabs(message.data);
+      }
+    };
+  }
+
+  publish(message: BroadcastMessage): void {
+    this.broadcastChannel.postMessage(message);
   }
 }

@@ -24,6 +24,7 @@ export class UserByIdService {
   getUserExperiencesById(userId: number) {
     return this.http.get<Experience[]>(
       environment.BASE_URL + '/experience/experiences/user/' + userId
+      //'http://localhost:8080/experience/user/1'
     );
   }
 

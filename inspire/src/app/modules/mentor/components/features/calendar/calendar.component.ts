@@ -15,7 +15,7 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { ReservationService } from '../../../../../shared/services/reservation.service';
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Subscription } from 'rxjs';
-import { Mentor, MentorDTO } from '../../../../../shared/models/user';
+import { MentorDTO } from '../../../../../shared/models/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({

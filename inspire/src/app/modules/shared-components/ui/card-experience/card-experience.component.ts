@@ -1,5 +1,8 @@
 import { Component, DestroyRef, Input, inject } from '@angular/core';
-import { Experience } from '../../../../shared/models/experience';
+import {
+  Experience,
+  ExperienceDTO,
+} from '../../../../shared/models/experience';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { UserService } from '../../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -11,7 +14,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class CardExperienceComponent {
   @Input() editModeOn: boolean = false;
-  @Input() experience!: Experience;
+  @Input() experience!: ExperienceDTO;
   isVisibleFormEditExperience = false;
   popupDeleteVisible = false;
 
@@ -31,9 +34,9 @@ export class CardExperienceComponent {
     this.popupDeleteVisible = true;
   }
 
-  editExperience(experience: Experience) {
+  editExperience(experience: ExperienceDTO) {
     this.userService
-      .editExperience(experience, experience.id || 0)
+      .editExperience(experience, experience.id)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe();
   }
