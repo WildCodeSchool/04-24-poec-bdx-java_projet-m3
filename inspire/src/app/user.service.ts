@@ -41,96 +41,39 @@ export class UserService {
 
   constructor() {}
 
-  private createUser(user: User): Observable<UserDTO> {
-    return this.http.post<UserDTO>(
-      `${this.BASE_URL_API}/api/v1/auth/register/student`,
-      user
-    );
-  }
+  // private createUser(user: User): Observable<UserDTO> {
+  //   return this.http.post<UserDTO>(
+  //     `${this.BASE_URL_API}/api/v1/auth/register/student`,
+  //     user
+  //   );
+  // }
 
   createStudent(registerFormValues: any): Observable<Student> {
-    return this.http.post<Student>(
-      `${this.BASE_URL_API}/api/v1/auth/register/student`,
-      registerFormValues
-    );
-
-    // const user: User = new User(
-    //   registerFormValues.email,
-    //   registerFormValues.password,
-    //   'student'
-    // );
-
-    // return this.createUser(user).pipe(
-    //   switchMap((createdUser: any) => {
-    //     const userId = createdUser.userId;
-    //     console.log('User ID:', createdUser);
-
-    //     const student: Student = new Student(
-    //       userId,
-    //       registerFormValues.firstName,
-    //       registerFormValues.lastName,
-    //       '',
-    //       '',
-    //       '',
-    //       '',
-    //       ''
-    //     );
-
-    //     return this.http
-    //       .post<Student>(
-    //         `${this.BASE_URL_API}/api/v1/auth/register/student`,
-    //         student
-    //       )
-    //       .pipe(
-    //         tap((response) => {
-    //           console.log('HTTP response:', response);
-    //         })
-    //       );
-    //   }),
-    //   tap((student: Student) => {
-    //     console.log('Student data before navigation:', student);
-    //   }),
-    //   map((data) => {
-    //     this.router.navigate(['']);
-    //     return data;
-    //   }),
-    //   tap((finalData) => {
-    //     console.log('Final data:', finalData);
-    //   })
-    // );
+    return this.http
+      .post<Student>(
+        `${this.BASE_URL_API}/api/v1/auth/register/student`,
+        registerFormValues
+      )
+      .pipe(
+        map((data: Student) => {
+          this.router.navigate(['']);
+          return data;
+        })
+      );
   }
 
   createMentor(registerFormValues: any): Observable<Mentor> {
-    const user: User = new User(
-      registerFormValues.email,
-      registerFormValues.password,
-      'mentor'
-    );
-
-    return this.createUser(user).pipe(
-      switchMap((createdUser: UserDTO) => {
-        const userId = createdUser.id;
-        const mentor: Mentor = new Mentor(
-          userId,
-          registerFormValues.firstName,
-          registerFormValues.lastName,
-          '',
-          '',
-          '',
-          '',
-          ''
-        );
-
-        return this.http.post<MentorDTO>(
-          `${this.BASE_URL}/mentor/mentors`,
-          mentor
-        );
-      }),
-      map((data) => {
-        this.router.navigate(['']);
-        return data;
-      })
-    );
+    return this.http
+      .post<Student>(
+        `${this.BASE_URL_API}/api/v1/auth/register/mentor`,
+        registerFormValues
+      )
+      .pipe(
+        map((data: Mentor) => {
+          this.router.navigate(['']);
+          return data;
+        })
+      );
   }
 
   getUserByToken(token: string): Observable<UserDTO> {
