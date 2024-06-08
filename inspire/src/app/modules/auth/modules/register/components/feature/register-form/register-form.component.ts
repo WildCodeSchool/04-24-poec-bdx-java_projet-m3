@@ -51,7 +51,6 @@ export class RegisterFormComponent implements OnInit {
 
   onSubmit() {
     if (this.role === 'student') {
-      console.log('coucou');
       this.userService.createStudent(this.registerForm.value).subscribe();
     } else if (this.role === 'mentor') {
       this.userService.createMentor(this.registerForm.value).subscribe();

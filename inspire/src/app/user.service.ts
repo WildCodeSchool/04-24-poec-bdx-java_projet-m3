@@ -49,50 +49,55 @@ export class UserService {
   }
 
   createStudent(registerFormValues: any): Observable<Student> {
-    const user: User = new User(
-      registerFormValues.email,
-      registerFormValues.password,
-      'student'
+    return this.http.post<Student>(
+      `${this.BASE_URL_API}/api/v1/auth/register/student`,
+      registerFormValues
     );
 
-    return this.createUser(user).pipe(
-      switchMap((createdUser: any) => {
-        const userId = createdUser.userId;
-        console.log('User ID:', createdUser);
+    // const user: User = new User(
+    //   registerFormValues.email,
+    //   registerFormValues.password,
+    //   'student'
+    // );
 
-        const student: Student = new Student(
-          userId,
-          registerFormValues.firstName,
-          registerFormValues.lastName,
-          '',
-          '',
-          '',
-          '',
-          ''
-        );
+    // return this.createUser(user).pipe(
+    //   switchMap((createdUser: any) => {
+    //     const userId = createdUser.userId;
+    //     console.log('User ID:', createdUser);
 
-        return this.http
-          .post<Student>(
-            `${this.BASE_URL_API}/api/v1/auth/register/student`,
-            student
-          )
-          .pipe(
-            tap((response) => {
-              console.log('HTTP response:', response);
-            })
-          );
-      }),
-      tap((student: Student) => {
-        console.log('Student data before navigation:', student);
-      }),
-      map((data) => {
-        this.router.navigate(['']);
-        return data;
-      }),
-      tap((finalData) => {
-        console.log('Final data:', finalData);
-      })
-    );
+    //     const student: Student = new Student(
+    //       userId,
+    //       registerFormValues.firstName,
+    //       registerFormValues.lastName,
+    //       '',
+    //       '',
+    //       '',
+    //       '',
+    //       ''
+    //     );
+
+    //     return this.http
+    //       .post<Student>(
+    //         `${this.BASE_URL_API}/api/v1/auth/register/student`,
+    //         student
+    //       )
+    //       .pipe(
+    //         tap((response) => {
+    //           console.log('HTTP response:', response);
+    //         })
+    //       );
+    //   }),
+    //   tap((student: Student) => {
+    //     console.log('Student data before navigation:', student);
+    //   }),
+    //   map((data) => {
+    //     this.router.navigate(['']);
+    //     return data;
+    //   }),
+    //   tap((finalData) => {
+    //     console.log('Final data:', finalData);
+    //   })
+    // );
   }
 
   createMentor(registerFormValues: any): Observable<Mentor> {
