@@ -187,22 +187,28 @@ export class UserService {
   // CRUD languages
 
   getListLanguages() {
-    return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
-    // return this.http.get<Language[]>(`http://localhost:8080/language/get/all`);
+    // return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
+    return this.http.get<Language[]>(`http://localhost:8080/language/get/all`);
   }
 
   getUserLanguages() {
-    return this.http
-      .get<Language[]>(
-        environment.BASE_URL +
-          '/language/languages/user/' +
-          this.userStore.getUserConnected$().value?.id
-      )
-      .pipe(
-        tap((languages) => {
-          this.activeUserLanguages$.next(languages);
-        })
-      );
+    return (
+      this.http
+        // .get<Language[]>(
+        //   environment.BASE_URL +
+        //     '/language/languages/user/' +
+        //     this.userStore.getUserConnected$().value?.id
+        // )
+        .get<Language[]>(
+          'http://localhost:8080/language/user/' +
+            this.userStore.getUserConnected$().value.id
+        )
+        .pipe(
+          tap((languages) => {
+            this.activeUserLanguages$.next(languages);
+          })
+        )
+    );
   }
 
   updateUserLanguages(languages: Language[]) {
