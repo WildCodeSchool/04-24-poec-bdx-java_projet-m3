@@ -36,7 +36,7 @@ export const isStudent: CanActivateFn = (route, state) => {
 
   const student = store.getUserConnected$().value?.role;
 
-  if (student === 'student') {
+  if (student === 'STUDENT') {
     return true;
   } else {
     router.navigate(['']);
@@ -50,7 +50,7 @@ export const isMentorLog: CanActivateFn = (route, state) => {
 
   const mentor = store.getUserConnected$().value?.role;
 
-  if (mentor === 'mentor') {
+  if (mentor === 'MENTOR') {
     router.navigate(['/mentor']);
     return false;
   } else {
@@ -64,7 +64,7 @@ export const isStudentLog: CanActivateFn = (route, state) => {
 
   const student = store.getUserConnected$().value?.role;
 
-  if (student === 'student') {
+  if (student === 'STUDENT') {
     router.navigate(['/student']);
     return false;
   } else {

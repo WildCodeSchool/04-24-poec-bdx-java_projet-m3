@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, map, switchMap, tap } from 'rxjs';
 import {
+  LoginDTO,
   Mentor,
   MentorDTO,
   Student,
@@ -15,6 +16,7 @@ import { Language } from './shared/models/language';
 import { Experience } from './shared/models/experience';
 import { Formation } from './shared/models/formation';
 import { environment } from '../environments/environment.development';
+import { cp } from '@fullcalendar/core/internal-common';
 
 @Injectable({
   providedIn: 'root',
@@ -88,9 +90,9 @@ export class UserService {
   }
 
   login(email: any, password: any): Observable<UserDTO | null> {
+    const user = { email, password } as LoginDTO;
     return this.http
-      .get<UserDTO>(`${this.BASE_URL}/users/${email}/${password}`)
-
+      .post<any>(`${this.BASE_URL_API}/api/v1/auth/authenticate `, user)
       .pipe(
         map((users) => {
           if (users) {
@@ -98,8 +100,15 @@ export class UserService {
             this.userStore.setUserConnected(user);
             const userString = JSON.stringify(user);
             window.localStorage.setItem('user', userString);
-            if (user.role === 'mentor') this.router.navigate(['/mentor']);
-            if (user.role === 'student') this.router.navigate(['/student']);
+
+            if (user.role === 'MENTOR') {
+              console.log('redirect to mentor');
+              this.router.navigate(['/mentor']);
+            }
+            if (user.role === 'STUDENT') {
+              console.log('redirect to student');
+              this.router.navigate(['/student']);
+            }
             return user;
           } else {
             alert('Identifiants incorrects');
