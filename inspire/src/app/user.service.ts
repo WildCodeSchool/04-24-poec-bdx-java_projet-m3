@@ -20,6 +20,7 @@ import { environment } from '../environments/environment.development';
   providedIn: 'root',
 })
 export class UserService {
+  private readonly BASE_URL_API = 'http://localhost:8080';
   private readonly BASE_URL = 'http://localhost:3310';
   private router = inject(Router);
   private http = inject(HttpClient);
@@ -41,7 +42,10 @@ export class UserService {
   constructor() {}
 
   private createUser(user: User): Observable<UserDTO> {
-    return this.http.post<UserDTO>(`${this.BASE_URL}/users`, user);
+    return this.http.post<UserDTO>(
+      `${this.BASE_URL_API}/api/v1/auth/register/student`,
+      user
+    );
   }
 
   createStudent(registerFormValues: any): Observable<Student> {
@@ -68,7 +72,10 @@ export class UserService {
         );
 
         return this.http
-          .post<Student>(`${this.BASE_URL}/student/students`, student)
+          .post<Student>(
+            `${this.BASE_URL_API}/api/v1/auth/register/student`,
+            student
+          )
           .pipe(
             tap((response) => {
               console.log('HTTP response:', response);

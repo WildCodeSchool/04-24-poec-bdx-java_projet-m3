@@ -45,11 +45,13 @@ export class RegisterFormComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe((data) => {
       this.role = data['role'];
+      console.log(this.role);
     });
   }
 
   onSubmit() {
     if (this.role === 'student') {
+      console.log('coucou');
       this.userService.createStudent(this.registerForm.value).subscribe();
     } else if (this.role === 'mentor') {
       this.userService.createMentor(this.registerForm.value).subscribe();
