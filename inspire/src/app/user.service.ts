@@ -188,6 +188,7 @@ export class UserService {
 
   getListLanguages() {
     return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
+    // return this.http.get<Language[]>(`http://localhost:8080/language/get/all`);
   }
 
   getUserLanguages() {
