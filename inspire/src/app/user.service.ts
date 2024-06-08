@@ -213,15 +213,21 @@ export class UserService {
 
   updateUserLanguages(languages: Language[]) {
     return this.http
-      .post<{ success: boolean; message: string; languages: Language[] }>(
-        ///'http://localhost:8080/language/user/update/1',
-        environment.BASE_URL +
-          '/language/languages/user/' +
+      .put<{ success: boolean; message: string; languages: Language[] }>(
+        'http://localhost:8080/language/user/update/' +
           this.userStore.getUserConnected$().value?.id,
         languages
+        // environment.BASE_URL +
+        //   '/language/languages/user/' +
+        //   this.userStore.getUserConnected$().value?.id,
+        // languages
       )
       .pipe(
         tap((result) => {
+          console.log('updating !!!');
+
+          console.log(result);
+
           this.activeUserLanguages$.next(result.languages);
         })
       );
