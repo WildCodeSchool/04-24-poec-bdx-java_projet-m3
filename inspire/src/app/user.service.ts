@@ -343,9 +343,10 @@ export class UserService {
   getUserExperiences() {
     return this.http
       .get<ExperienceDTO[]>(
-        environment.BASE_URL +
-          '/experience/experiences/user/' +
-          this.userStore.getUserConnected$().value?.id
+        //  environment.BASE_URL +
+        // '/experience/experiences/user/' +
+        'http://localhost:8080/experience/user/' +
+          this.userStore.getUserConnected$().value.id
       )
       .pipe(
         tap((experiences) => this.activeUserExperiences$.next(experiences))
@@ -362,10 +363,14 @@ export class UserService {
         message: string;
         success: boolean;
         experiences: ExperienceDTO[];
-      }>(`${environment.BASE_URL}/experience/experiences/`, {
-        ...experience,
-        userId: this.userStore.getUserConnected$().value?.id,
-      })
+      }>(
+        'http://localhost:8080/experience/user/add',
+        //`${environment.BASE_URL}/experience/experiences/`,
+        {
+          ...experience,
+          userId: this.userStore.getUserConnected$().value.id,
+        }
+      )
       .pipe(
         tap((result) => {
           this.activeUserExperiences$.next(result.experiences);
@@ -384,10 +389,15 @@ export class UserService {
       .put<{
         affectedRows: number;
         experiences: ExperienceDTO[];
-      }>(`${this.BASE_URL}/experience/experiences/${experienceId}`, {
-        ...experience,
-        userId: this.userStore.getUserConnected$().value?.id,
-      })
+      }>(
+        'http://localhost:8080/experience/user/update/' + experienceId,
+        // `${this.BASE_URL}/experience/experiences/${experienceId}`,
+        {
+          ...experience,
+          id: experienceId,
+          userId: this.userStore.getUserConnected$().value.id,
+        }
+      )
       .pipe(
         tap((result) => {
           this.activeUserExperiences$.next(result.experiences);
@@ -406,12 +416,15 @@ export class UserService {
         success: boolean;
         experiences: ExperienceDTO[];
       }>(
-        `${this.BASE_URL}/experience/experiences/${experienceId}/${
-          this.userStore.getUserConnected$().value?.id
-        }`
+        'http://localhost:8080/experience/user/delete/' + experienceId
+        // `${this.BASE_URL}/experience/experiences/${experienceId}/${
+        // this.userStore.getUserConnected$().value?.id
+        // }`
       )
       .pipe(
         tap((res) => {
+          console.log('deleting res ', res);
+
           this.activeUserExperiences$.next(res.experiences);
         })
       );
