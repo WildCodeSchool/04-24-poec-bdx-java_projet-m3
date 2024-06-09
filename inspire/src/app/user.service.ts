@@ -55,8 +55,6 @@ export class UserService {
     [] as Skill[]
   );
 
-  constructor() {}
-
   // private createUser(user: User): Observable<UserDTO> {
   //   return this.http.post<UserDTO>(
   //     `${this.BASE_URL_API}/api/v1/auth/register/student`,
@@ -93,14 +91,18 @@ export class UserService {
   }
 
   getUserByToken(token: string): Observable<UserDTO> {
-    return this.http.post<UserDTO>(`${this.BASE_URL}/users/me`, { token }).pipe(
-      map((user) => {
-        const userString = JSON.stringify(user);
-        window.localStorage.setItem('user', userString);
-        this.userStore.setUserConnected(user);
-        return user;
+    return this.http
+      .get<UserDTO>(`${this.BASE_URL_API}/api/v1/users/me`, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
       })
-    );
+      .pipe(
+        map((user) => {
+          this.userStore.setUserConnected(user);
+          return user;
+        })
+      );
   }
 
   login(email: any, password: any): Observable<UserDTO | null> {
@@ -113,13 +115,17 @@ export class UserService {
             const user = users;
             this.userStore.setUserConnected(user);
             const userString = JSON.stringify(user);
-            window.localStorage.setItem('user', userString);
+            window.localStorage.setItem('token', user.token);
             this.publish({
               type: 'login',
               payload: this.userStore.getUserConnected$().value,
             });
-            if (user.role === 'mentor') this.router.navigate(['/mentor']);
-            if (user.role === 'student') this.router.navigate(['/student']);
+            if (user.role === 'MENTOR') {
+              this.router.navigate(['/mentor']);
+            }
+            if (user.role === 'STUDENT') {
+              this.router.navigate(['/student']);
+            }
             return user;
           } else {
             alert('Identifiants incorrects');
