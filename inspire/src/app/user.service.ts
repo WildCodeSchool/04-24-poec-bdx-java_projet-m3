@@ -9,6 +9,7 @@ import {
   tap,
 } from 'rxjs';
 import {
+  LoginDTO,
   Mentor,
   MentorDTO,
   Student,
@@ -30,11 +31,13 @@ type InscriptionUser = {
   firstName: string;
   lastName: string;
 };
+import { cp } from '@fullcalendar/core/internal-common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
+  private readonly BASE_URL_API = 'http://localhost:8080';
   private readonly BASE_URL = 'http://localhost:3310';
   private router = inject(Router);
   private http = inject(HttpClient);
@@ -52,107 +55,77 @@ export class UserService {
     [] as Skill[]
   );
 
-  private createUser(user: User): Observable<{ userId: number }> {
-    return this.http.post<{ userId: number }>(`${this.BASE_URL}/users`, user);
+  // private createUser(user: User): Observable<UserDTO> {
+  //   return this.http.post<UserDTO>(
+  //     `${this.BASE_URL_API}/api/v1/auth/register/student`,
+  //     user
+  //   );
+  // }
+
+  createStudent(registerFormValues: any): Observable<Student> {
+    return this.http
+      .post<Student>(
+        `${this.BASE_URL_API}/api/v1/auth/register/student`,
+        registerFormValues
+      )
+      .pipe(
+        map((data: Student) => {
+          this.router.navigate(['']);
+          return data;
+        })
+      );
   }
 
-  createStudent(registerFormValues: InscriptionUser): Observable<Student> {
-    const user: User = new User(
-      registerFormValues.email,
-      registerFormValues.password,
-      'student'
-    );
-
-    return this.createUser(user).pipe(
-      switchMap((createdUser: { userId: number }) => {
-        console.log('created user ', createdUser);
-
-        const userId = createdUser.userId;
-
-        const student: Student = new Student(
-          userId,
-          registerFormValues.firstName,
-          registerFormValues.lastName,
-          '',
-          '',
-          '',
-          '',
-          ''
-        );
-
-        return this.http.post<Student>(
-          `${this.BASE_URL}/student/students`,
-          student
-        );
-      }),
-      map((data) => {
-        this.router.navigate(['']);
-        return data;
-      })
-    );
-  }
-
-  createMentor(registerFormValues: InscriptionUser): Observable<Mentor> {
-    const user: User = new User(
-      registerFormValues.email,
-      registerFormValues.password,
-      'mentor'
-    );
-
-    return this.createUser(user).pipe(
-      switchMap((createdUser: { userId: number }) => {
-        const userId = createdUser.userId;
-        const mentor: Mentor = new Mentor(
-          userId,
-          registerFormValues.firstName,
-          registerFormValues.lastName,
-          '',
-          '',
-          '',
-          '',
-          ''
-        );
-
-        return this.http.post<MentorDTO>(
-          `${this.BASE_URL}/mentor/mentors`,
-          mentor
-        );
-      }),
-      map((data) => {
-        this.router.navigate(['']);
-        return data;
-      })
-    );
+  createMentor(registerFormValues: any): Observable<Mentor> {
+    return this.http
+      .post<Student>(
+        `${this.BASE_URL_API}/api/v1/auth/register/mentor`,
+        registerFormValues
+      )
+      .pipe(
+        map((data: Mentor) => {
+          this.router.navigate(['']);
+          return data;
+        })
+      );
   }
 
   getUserByToken(token: string): Observable<UserDTO> {
-    return this.http.post<UserDTO>(`${this.BASE_URL}/users/me`, { token }).pipe(
-      map((user) => {
-        const userString = JSON.stringify(user);
-        window.localStorage.setItem('user', userString);
-        this.userStore.setUserConnected(user);
-        return user;
+    return this.http
+      .get<UserDTO>(`${this.BASE_URL_API}/api/v1/users/me`, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
       })
-    );
+      .pipe(
+        map((user) => {
+          this.userStore.setUserConnected(user);
+          return user;
+        })
+      );
   }
 
-  login(email: string, password: string): Observable<UserDTO | null> {
+  login(email: any, password: any): Observable<UserDTO | null> {
+    const user = { email, password } as LoginDTO;
     return this.http
-      .get<UserDTO>(`${this.BASE_URL}/users/${email}/${password}`)
-
+      .post<any>(`${this.BASE_URL_API}/api/v1/auth/authenticate `, user)
       .pipe(
         map((users) => {
           if (users) {
             const user = users;
             this.userStore.setUserConnected(user);
             const userString = JSON.stringify(user);
-            window.localStorage.setItem('user', userString);
+            window.localStorage.setItem('token', user.token);
             this.publish({
               type: 'login',
               payload: this.userStore.getUserConnected$().value,
             });
-            if (user.role === 'mentor') this.router.navigate(['/mentor']);
-            if (user.role === 'student') this.router.navigate(['/student']);
+            if (user.role === 'MENTOR') {
+              this.router.navigate(['/mentor']);
+            }
+            if (user.role === 'STUDENT') {
+              this.router.navigate(['/student']);
+            }
             return user;
           } else {
             alert('Identifiants incorrects');

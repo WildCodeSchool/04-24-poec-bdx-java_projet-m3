@@ -68,6 +68,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   };
 
   onDateSelect = (selectionInfo: any) => {
+    console.log('selectionInfo', selectionInfo);
     if (this.formulaire.valid) {
       const diffMilliseconds = selectionInfo.end - selectionInfo.start;
       const hours = Math.floor(diffMilliseconds / (1000 * 60 * 60));
@@ -153,20 +154,11 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       mentorId,
     };
 
-    this.reservationService.updateSlot(id, slotInfo).subscribe(
-      () => {
-        this.loadSlots();
-        this.displayModal = false;
-        this.isModfify = false;
-      },
-      (error) => {
-        if (error.status === 400 && error.error.message) {
-          alert(error.error.message);
-        } else {
-          console.error('Erreur lors de la mise à jour du créneau:', error);
-        }
-      }
-    );
+    console.log('slotInfo', slotInfo.dateEnd);
+
+    this.reservationService.updateSlot(id, slotInfo).subscribe();
+    this.displayModal = false;
+    this.loadSlots();
   }
 
   formatDate(date: Date): string {
@@ -180,7 +172,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
 
   handleEventDrop(eventDropArg: any) {
-    console.log(eventDropArg);
     this.eventDetails = {
       id: eventDropArg.oldEvent.id,
       start: eventDropArg.oldEvent.start,
@@ -197,6 +188,8 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       end: eventDropArg.event.end,
       visio: eventDropArg.oldEvent.extendedProps.visio,
     };
+
+    console.log('eventDropArg', eventDropArg);
 
     this.displayModal = true;
     this.isModfify = true;

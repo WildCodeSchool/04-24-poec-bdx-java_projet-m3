@@ -15,10 +15,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const user: any = JSON.parse(storedUser);
-      const token = user.token;
+    const token = localStorage.getItem('token');
+    if (token) {
       this.userService.getUserByToken(token).subscribe();
     }
   }

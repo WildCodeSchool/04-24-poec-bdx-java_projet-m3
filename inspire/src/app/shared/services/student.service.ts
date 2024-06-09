@@ -19,12 +19,16 @@ export class StudentService {
 
   getStudentProfil() {
     return this.httpClient
-      .get<StudentDTO>(
-        environment.BASE_URL +
-          '/student/students/' +
-          this.userConnected.value?.id
-      )
-      .pipe(tap((res) => this.activeStudentProfil$.next(res)));
+      .get<StudentDTO>(environment.BASE_URL_API + 'api/v1/users/me', {
+        headers: {
+          Authorization: 'Bearer ' + this.userConnected.value?.token,
+        },
+      })
+      .pipe(
+        tap((res) => {
+          this.activeStudentProfil$.next(res);
+        })
+      );
   }
 
   updateStudentProfil(profil: StudentDTO) {
