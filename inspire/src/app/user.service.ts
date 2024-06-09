@@ -238,9 +238,10 @@ export class UserService {
   getUserFormations() {
     return this.http
       .get<FormationDTO[]>(
-        environment.BASE_URL +
-          '/formation/formations/user/' +
-          this.userStore.getUserConnected$().value?.id
+        // environment.BASE_URL +
+        //   '/formation/formations/user/' +
+        'http://localhost:8080/formation/user/' +
+          this.userStore.getUserConnected$().value.id
       )
       .pipe(tap((formations) => this.activeUserFormations$.next(formations)));
   }
@@ -255,7 +256,11 @@ export class UserService {
         success: string;
         message: string;
         formations: FormationDTO[];
-      }>(`${environment.BASE_URL}/formation/formations/`, formation)
+      }>(
+        `http://localhost:8080/formation/user/add`,
+        //`${environment.BASE_URL}/formation/formations/`
+        formation
+      )
       .pipe(
         tap((response) => this.activeUserFormations$.next(response.formations))
       );
@@ -266,13 +271,16 @@ export class UserService {
     affectedRows: number;
     formations: FormationDTO[];
   }> {
+    console.log('formation ', formation);
+
     return this.http
       .put<{
         success: string;
         affectedRows: number;
         formations: FormationDTO[];
       }>(
-        `${environment.BASE_URL}/formation/formations/${formation.id}`,
+        `http://localhost:8080/formation/user/update/` + formation.id,
+        //${environment.BASE_URL}/formation/formations/${formation.id}`,
         formation
       )
       .pipe(
@@ -291,9 +299,10 @@ export class UserService {
         message: string;
         formations: FormationDTO[];
       }>(
-        `${environment.BASE_URL}/formation/formations/${formationId}/${
-          this.userStore.getUserConnected$().value?.id
-        }`
+        `http://localhost:8080/formation/user/delete/` + formationId
+        // `${environment.BASE_URL}/formation/formations/${formationId}/${
+        //   this.userStore.getUserConnected$().value?.id
+        // }`
       )
       .pipe(
         tap((response) => this.activeUserFormations$.next(response.formations))

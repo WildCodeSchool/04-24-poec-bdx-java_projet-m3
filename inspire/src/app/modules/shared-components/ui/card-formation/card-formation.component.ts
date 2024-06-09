@@ -44,6 +44,6 @@ export class CardFormationComponent {
     this.userService
       .deleteFormationUser(formationId as number)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+      .subscribe(() => (this.popupDeleteVisible = false));
   }
 }
