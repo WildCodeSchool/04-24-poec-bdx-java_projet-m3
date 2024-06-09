@@ -181,7 +181,8 @@ export class UserService {
   }
 
   getListSkills() {
-    return this.http.get<Skill[]>(`${this.BASE_URL}/skill/skills`);
+    // return this.http.get<Skill[]>(`${this.BASE_URL}/skill/skills`);
+    return this.http.get<Skill[]>(`http://localhost:8080/skill/get/all`);
   }
 
   // CRUD languages
@@ -303,19 +304,21 @@ export class UserService {
   getUserSkills() {
     return this.http
       .get<Skill[]>(
-        environment.BASE_URL +
-          '/skill/skills/user/' +
-          this.userStore.getUserConnected$().value?.id
+        // environment.BASE_URL +
+        //   '/skill/skills/user/' +
+        'http://localhost:8080/skill/user/' +
+          this.userStore.getUserConnected$().value.id
       )
       .pipe(tap((skills) => this.activeUserSkills$.next(skills)));
   }
 
   updateUserSkills(skills: Skill[]) {
     return this.http
-      .post<{ success: boolean; message: string; skills: Skill[] }>(
-        environment.BASE_URL +
-          '/skill/skills/user/' +
-          this.userStore.getUserConnected$().value?.id,
+      .put<{ success: boolean; message: string; skills: Skill[] }>(
+        // environment.BASE_URL +
+        // '/skill/skills/user/' +
+        'http://localhost:8080/skill/user/update/' +
+          this.userStore.getUserConnected$().value.id,
         skills
       )
       .pipe(tap((result) => this.activeUserSkills$.next(result.skills)));

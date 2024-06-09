@@ -10,7 +10,7 @@ export class UserStoreService {
     new BehaviorSubject<UserDTO>({} as UserDTO);
 
   token$: BehaviorSubject<string> = new BehaviorSubject(
-    'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoibWVudG9yIiwic3ViIjoibWVudG9yMUBnbWFpbC5jb20iLCJpYXQiOjE3MTc4NTI3OTYsImV4cCI6MTcxNzg4ODc5Nn0.Q3ZuzyrzAj8UlKk1gL6apIM4Z0XofBdtdL5eYO5vz0c'
+    'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoibWVudG9yIiwic3ViIjoibWVudG9yMUBnbWFpbC5jb20iLCJpYXQiOjE3MTc5MzA3MTksImV4cCI6MTcxNzIzNTc1Mn0.Q1QZIlIXjHf_uPkh1f0vCR2P5KJuixfOBp8M7LOdXsU'
   );
 
   getUserConnected$(): BehaviorSubject<UserDTO> {
