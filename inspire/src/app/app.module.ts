@@ -7,10 +7,15 @@ import { AppComponent } from './app.component';
 import { ButtonModule } from 'primeng/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MentorModule } from './modules/mentor/mentor.module';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptors,
+} from '@angular/common/http';
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 import '@angular/common/locales/global/fr';
+import { tokenInterceptor } from './token.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +30,7 @@ import '@angular/common/locales/global/fr';
   ],
   providers: [
     provideAnimations(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([tokenInterceptor])),
     { provide: LOCALE_ID, useValue: 'fr' },
   ],
   bootstrap: [AppComponent],

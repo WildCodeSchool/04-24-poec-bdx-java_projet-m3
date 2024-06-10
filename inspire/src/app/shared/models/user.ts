@@ -15,6 +15,7 @@ export type UserDTO = {
   email: string;
   password: string;
   role: string;
+  token: string;
 };
 
 export type LoginDTO = {
