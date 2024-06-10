@@ -91,21 +91,15 @@ export class UserService {
   }
 
   getUserByToken(token: string): Observable<UserDTO> {
-    return this.http
-      .get<UserDTO>(`${this.BASE_URL_API}/api/v1/users/me`, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
+    this.userStore.token$.next(token);
+    return this.http.get<UserDTO>(`${this.BASE_URL_API}/api/v1/users/me`).pipe(
+      tap((user) => {
+        this.userStore.setUserConnected(user);
       })
-      .pipe(
-        map((user) => {
-          this.userStore.setUserConnected(user);
-          return user;
-        })
-      );
+    );
   }
 
-  login(email: any, password: any): Observable<UserDTO | null> {
+  login(email: string, password: string): Observable<UserDTO | null> {
     const user = { email, password } as LoginDTO;
     return this.http
       .post<any>(`${this.BASE_URL_API}/api/v1/auth/authenticate `, user)
@@ -114,13 +108,14 @@ export class UserService {
           if (users) {
             const user = users;
             this.userStore.setUserConnected(user);
-            const userString = JSON.stringify(user);
-            window.localStorage.setItem('token', user.token);
             this.userStore.token$.next(user.token);
+            window.localStorage.setItem('token', user.token);
             this.publish({
               type: 'login',
               payload: this.userStore.getUserConnected$().value,
             });
+            console.log('user', user);
+
             if (user.role === 'MENTOR') {
               this.router.navigate(['/mentor']);
             }
