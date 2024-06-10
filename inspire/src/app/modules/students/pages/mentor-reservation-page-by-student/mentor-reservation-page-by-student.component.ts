@@ -1,23 +1,13 @@
-import {
-  AfterViewChecked,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  Input,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { AfterViewChecked, Component, Input, OnInit } from '@angular/core';
 import { CalendarOptions, EventClickArg, EventInput } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import { FullCalendarComponent } from '@fullcalendar/angular';
 import frLocale from '@fullcalendar/core/locales/fr';
 import interactionPlugin from '@fullcalendar/interaction';
 import { Observable, Subscription, map, tap } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReservationService } from '../../../../shared/services/reservation.service';
-import { MentorService } from '../../../../shared/services/mentor.service';
 import { MentorDTO } from '../../../../shared/models/user';
 import { ActivatedRoute } from '@angular/router';
 
@@ -84,7 +74,7 @@ export class MentorReservationPageByStudentComponent
 
       this.visible = true;
     } else {
-      console.log("Veuillez d'abord soumettre le formulaire.");
+      console.error("Veuillez d'abord soumettre le formulaire.");
     }
   };
 

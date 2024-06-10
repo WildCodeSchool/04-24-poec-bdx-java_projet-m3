@@ -847,7 +847,33 @@ VALUES (NOW(), true, 1),
     (
         DATE_ADD(NOW(), INTERVAL 7 DAY),
         true,
-        2
+        1
+    ),
+    (
+        DATE_ADD(
+            DATE_ADD(NOW(), INTERVAL 3 DAY),
+            INTERVAL 1 HOUR
+        ),
+        false,
+        1
+    ),
+    (
+        DATE_ADD(
+            DATE_ADD(NOW(), INTERVAL 3 DAY),
+            INTERVAL 2 HOUR
+        ),
+        true,
+        1
+    ),
+    (
+        '2023-05-20 10:00:00',
+        false,
+        1
+    ),
+    (
+        DATE_ADD(NOW(), INTERVAL 7 DAY),
+        true,
+        1
     );
 
 INSERT INTO

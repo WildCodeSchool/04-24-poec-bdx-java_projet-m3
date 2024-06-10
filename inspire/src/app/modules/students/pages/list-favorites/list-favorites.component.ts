@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Mentor, MentorDTO } from '../../../../shared/models/user';
+import { MentorDTO } from '../../../../shared/models/user';
 import { MentorService } from '../../../../shared/services/mentor.service';
-import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
-import { FavoritesService } from '../../shared/favorites.service';
 import { StudentService } from '../../../../shared/services/student.service';
 
 @Component({
@@ -23,7 +21,6 @@ export class ListFavoritesComponent {
 
   ngOnInit(): void {
     this.getListFavoriteMentor();
-    console.log('list:', this.getListFavoriteMentor());
   }
 
   getListFavoriteMentor(): void {

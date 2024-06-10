@@ -1,6 +1,6 @@
 import { Component, DestroyRef, EventEmitter, Output } from '@angular/core';
 import { Skill } from '../../../../../shared/models/chip';
-import { Mentor, MentorDTO } from '../../../../../shared/models/user';
+import { MentorDTO } from '../../../../../shared/models/user';
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { UserService } from '../../../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -30,9 +30,9 @@ export class FilterSearchListComponent {
     this.skills = [
       { name: 'javascript' },
       { name: 'java' },
-      { name: 'Angular' },
-      { name: 'React' },
-      { name: 'CSS' },
+      { name: 'angular' },
+      { name: 'react' },
+      { name: 'css' },
     ];
 
     this.disponibily = [

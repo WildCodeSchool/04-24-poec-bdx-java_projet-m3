@@ -119,7 +119,6 @@ export class ReservationWithSwipeComponentUpcoming
 
   updateReservation(event: string) {
     this.reservation.message = event;
-    console.log('message ', event);
     this.modalEditMessage = false;
     this.reservationService
       .updateMentorReservationHistoryList(

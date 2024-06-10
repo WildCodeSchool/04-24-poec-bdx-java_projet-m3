@@ -160,3 +160,23 @@ a {
   border: none;
   background-color: #fedae3;
 }
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background-color: #1e1b1c;
+  color: white;
+}
+.p-paginator {
+  padding: 20px 0;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+  min-height: 20px;
+  width: 20px;
+}
+
+.p-calendar .p-inputtext {
+  border-radius: 5px;
+  font-style: italic;
+  padding: 5px 10px;
+  font-size: 10px;
+  width: 800px;
+}

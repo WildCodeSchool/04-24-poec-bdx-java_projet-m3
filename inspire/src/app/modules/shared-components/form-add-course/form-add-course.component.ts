@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Formation } from '../../../shared/models/formation';
+import { Formation, FormationDTO } from '../../../shared/models/formation';
 import { UserStoreService } from '../../../shared/services/stores/user-store.service';
 import { User } from '../../../shared/models/user';
 
@@ -19,12 +19,11 @@ export class FormAddCourseComponent {
     title: [''],
   });
   @Output() destroy = new EventEmitter();
-  @Output() formationEmitter = new EventEmitter<Formation>();
+  @Output() formationEmitter = new EventEmitter<FormationDTO>();
 
   onSubmit() {
     const user = this.userStore.getUserConnected$().value;
-
-    const formation: Formation = {
+    const formation: FormationDTO = {
       title: this.courseForm.value.title as string,
       company: this.courseForm.value.company as string,
       dateBegin: this.courseForm.value.dateBegin as string,

@@ -24,6 +24,8 @@ import { EditorModule } from 'primeng/editor';
 import { ModalAddNoteComponent } from './components/ui/modal-add-note/modal-add-note.component';
 import { StudentProfilByMentorComponent } from './pages/student-profil-by-mentor/student-profil-by-mentor.component';
 import { ModalCancelReservationComponent } from './components/ui/modal-cancel-reservation/modal-cancel-reservation.component';
+import { PaginatorModule } from 'primeng/paginator';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { ModalCancelReservationComponent } from './components/ui/modal-cancel-re
     FullCalendarModule,
     EditorModule,
     ReactiveFormsModule,
+    PaginatorModule,
+    CalendarModule,
   ],
   exports: [
     RowReservationComponent,

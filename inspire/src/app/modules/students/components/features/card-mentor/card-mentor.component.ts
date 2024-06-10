@@ -1,12 +1,11 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
-import { Mentor, MentorDTO } from '../../../../../shared/models/user';
+import { MentorDTO } from '../../../../../shared/models/user';
 import { Skill } from '../../../../../shared/models/chip';
 import { Observable } from 'rxjs';
 import { FavoritesService } from '../../../shared/favorites.service';
 import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
 import { UserService } from '../../../../../user.service';
 import { StudentService } from '../../../../../shared/services/student.service';
-import { MentorService } from '../../../../../shared/services/mentor.service';
 
 @Component({
   selector: 'app-card-mentor',
@@ -31,7 +30,6 @@ export class CardMentorComponent implements OnInit {
 
   ngOnInit(): void {
     this.skillList$ = this.userService.getMentorSkillsById(this.mentor.userId);
-    console.log('mentor:', this.mentor.id);
     this.checkIfFavorite();
   }
 

@@ -17,6 +17,11 @@ export type UserDTO = {
   role: string;
 };
 
+export type LoginDTO = {
+  email: string;
+  password: string;
+};
+
 export class Mentor {
   firstname: string = '';
   lastname: string = '';
@@ -61,7 +66,6 @@ export type MentorDTO = {
 };
 
 export class Student {
-  id?: number;
   firstname: string;
   lastname: string;
   description: string;

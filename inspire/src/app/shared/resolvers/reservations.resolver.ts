@@ -5,11 +5,7 @@ import {
 } from '../models/reservation';
 import { ReservationService } from '../services/reservation.service';
 import { inject } from '@angular/core';
-import { Mentor } from '../models/user';
-import { MentorService } from '../services/mentor.service';
-import { UserService } from '../../user.service';
 import { UserStoreService } from '../services/stores/user-store.service';
-import { switchMap } from 'rxjs';
 
 export const mentorReservationsResolver: ResolveFn<{
   reservations: reservationForMentorDTO[];
@@ -17,11 +13,7 @@ export const mentorReservationsResolver: ResolveFn<{
 }> = (route, state) => {
   const userId = inject(UserStoreService).getUserConnected$().value?.id;
 
-  return inject(ReservationService).getMentorReservationList(
-    userId || 0,
-    10,
-    0
-  );
+  return inject(ReservationService).getMentorReservationList(userId, 5, 0);
 };
 
 export const mentorReservationsHistoryResolver: ResolveFn<{
@@ -31,8 +23,8 @@ export const mentorReservationsHistoryResolver: ResolveFn<{
   const userId = inject(UserStoreService).getUserConnected$().value?.id;
 
   return inject(ReservationService).getMentorReservationHistoryList(
-    userId || 0,
-    10,
+    userId,
+    5,
     0
   );
 };
@@ -42,7 +34,6 @@ export const studentReservationsResolver: ResolveFn<{
   total: number;
 }> = (route, state) => {
   const userId = inject(UserStoreService).getUserConnected$().value?.id;
-  console.log('yo where is my userId?', userId);
   const reservationService = inject(ReservationService);
 
   return reservationService.getStudentReservationList(userId || 0, 10, 0);

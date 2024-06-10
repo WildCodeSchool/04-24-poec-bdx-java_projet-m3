@@ -35,6 +35,7 @@ import { NavbarButtonComponent } from './ui/navbar-button/navbar-button.componen
 import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { MessageService } from 'primeng/api';
     FormsModule,
     FileUploadModule,
     ToastModule,
+    RouterLink,
   ],
   exports: [
     ButtonComponent,

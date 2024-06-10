@@ -27,7 +27,43 @@
     justify-content: center;
   }
 }
+.header-layout {
+  display: flex;
+  color: white;
+  border-radius: 15px;
+  align-items: center;
+}
 
+.container-notification {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.icon-wrapper img {
+  display: block;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  line-height: 1;
+}
+.round-image {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
 .container-main {
   position: relative;
   display: flex;

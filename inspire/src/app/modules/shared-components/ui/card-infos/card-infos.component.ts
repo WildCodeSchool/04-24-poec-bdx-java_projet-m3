@@ -44,7 +44,6 @@ export class CardInfosComponent {
     fileName?: string;
   }) {
     if (newProfil.file && newProfil.fileName) {
-      console.log(newProfil);
       if (this.userStoreService.getUserConnected$().value?.role === 'mentor') {
         this.mentorService
           .updateMentorImage(newProfil.file)
@@ -79,8 +78,6 @@ export class CardInfosComponent {
   }
 
   toggleFavorite() {
-    console.log('lol');
-
     this.isFavorite != this.isFavorite;
   }
 }

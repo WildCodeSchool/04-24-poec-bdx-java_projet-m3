@@ -1,5 +1,5 @@
 import { Component, DestroyRef, Input, inject } from '@angular/core';
-import { Formation } from '../../../../shared/models/formation';
+import { Formation, FormationDTO } from '../../../../shared/models/formation';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { UserService } from '../../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -10,7 +10,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   styleUrl: './card-formation.component.scss',
 })
 export class CardFormationComponent {
-  @Input() formation!: Formation;
+  @Input() formation!: FormationDTO;
   @Input() editModeOn: boolean = true;
   isVisibleFormEditCourse = false;
   popupDeleteVisible = false;
@@ -31,7 +31,7 @@ export class CardFormationComponent {
     this.popupDeleteVisible = true;
   }
 
-  editForm(formation: Formation) {
+  editForm(formation: FormationDTO) {
     this.userService
       .updateFormationUser(formation)
       .pipe(takeUntilDestroyed(this.destroyRef))
