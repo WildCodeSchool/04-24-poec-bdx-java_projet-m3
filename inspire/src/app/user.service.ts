@@ -289,13 +289,13 @@ export class UserService {
   }
 
   deleteFormationUser(formationId: number): Observable<{
-    success: string;
+    success: boolean;
     message: string;
     formations: FormationDTO[];
   }> {
     return this.http
       .delete<{
-        success: string;
+        success: boolean;
         message: string;
         formations: FormationDTO[];
       }>(
