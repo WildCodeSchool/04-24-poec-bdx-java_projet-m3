@@ -116,6 +116,7 @@ export class UserService {
             this.userStore.setUserConnected(user);
             const userString = JSON.stringify(user);
             window.localStorage.setItem('token', user.token);
+            this.userStore.token$.next(user.token);
             this.publish({
               type: 'login',
               payload: this.userStore.getUserConnected$().value,
