@@ -20,18 +20,26 @@ export class MentorService {
     new BehaviorSubject<reservationForMentorDTO[]>([]);
 
   getMentorProfil() {
-    console.log('user connected ', this.userConnected.value?.id);
+    console.log('user connected ', this.userConnected.value.id);
 
     return this.httpClient
       .get<MentorDTO>(
-        environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
+        'http://localhost:8080/mentor/' + this.userConnected.value.id
+        // environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
       )
-      .pipe(tap((res) => this.activeMentorProfil$.next(res)));
+      .pipe(
+        tap((res) => {
+          console.log('recieved mentor ', res);
+
+          this.activeMentorProfil$.next(res);
+        })
+      );
   }
 
   getMentorProfilById(userId: number) {
     return this.httpClient.get<MentorDTO>(
-      environment.BASE_URL + '/mentor/mentors/' + userId
+      'http://localhost:8080/mentor/' + userId
+      // environment.BASE_URL + '/mentor/mentors/' + userId
     );
   }
 
@@ -42,12 +50,19 @@ export class MentorService {
   updateMentorProfil(profil: MentorDTO) {
     return this.httpClient
       .put<{ affectedRow: number; profil: MentorDTO; success: boolean }>(
-        environment.BASE_URL +
-          '/mentor/mentors/' +
-          this.userConnected.value?.id,
-        { ...profil, userId: this.userConnected.value?.id }
+        'http://localhost:8080/mentor/' + this.userConnected.value.id,
+        // environment.BASE_URL +
+        //   '/mentor/mentors/' +
+        //   this.userConnected.value?.id,
+        { ...profil, userId: this.userConnected.value.id }
       )
-      .pipe(tap((result) => this.activeMentorProfil$.next(result.profil)));
+      .pipe(
+        tap((result) => {
+          console.log(' new profil ', result);
+
+          this.activeMentorProfil$.next(profil);
+        })
+      );
   }
 
   getMentorsList() {
