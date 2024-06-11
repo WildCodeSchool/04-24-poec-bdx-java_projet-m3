@@ -97,19 +97,18 @@ export class MentorService {
       const formData = new FormData();
 
       formData.append('file', file);
+      console.log('upload called');
 
       return this.httpClient
-        .put<{
-          affectedRow: number;
-          profil: MentorDTO;
-          success: boolean;
-        }>(
-          environment.BASE_URL +
-            '/mentor/mentors/image/' +
-            this.userConnected.value?.id,
+        .post<MentorDTO>(
+          //  environment.BASE_URL +
+          //'/mentor/mentors/image/' +
+          'http://localhost:8080/user/upload/image/' +
+            this.userConnected.value.id,
+          // this.userConnected.value.id,
           formData
         )
-        .pipe(tap((res) => this.activeMentorProfil$.next(res.profil)));
+        .pipe(tap((res) => this.activeMentorProfil$.next(res)));
     } else return of();
   }
 }

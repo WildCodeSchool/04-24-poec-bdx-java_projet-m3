@@ -42,6 +42,18 @@ export class CardInfosComponent {
     file?: File;
     fileName?: string;
   }) {
+    if (this.userStoreService.getUserConnected$().value.role === 'MENTOR') {
+      this.mentorService
+        .updateMentorProfil(newProfil.profil)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe();
+    }
+    if (this.userStoreService.getUserConnected$().value.role === 'STUDENT') {
+      this.studentService
+        .updateStudentProfil(newProfil.profil)
+        .pipe(takeUntilDestroyed(this.destroyRef))
+        .subscribe();
+    }
     if (newProfil.file && newProfil.fileName) {
       if (this.userStoreService.getUserConnected$().value.role === 'MENTOR') {
         this.mentorService
@@ -55,18 +67,6 @@ export class CardInfosComponent {
           .pipe(takeUntilDestroyed(this.destroyRef))
           .subscribe();
       }
-    }
-    if (this.userStoreService.getUserConnected$().value.role === 'MENTOR') {
-      this.mentorService
-        .updateMentorProfil(newProfil.profil)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe();
-    }
-    if (this.userStoreService.getUserConnected$().value.role === 'STUDENT') {
-      this.studentService
-        .updateStudentProfil(newProfil.profil)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe();
     }
 
     this.userService
