@@ -17,6 +17,7 @@ import { ReservationService } from '../../../../../shared/services/reservation.s
 import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
 import { StudentDTO } from '../../../../../shared/models/user';
 import { WindowWatcherService } from '../../../../../shared/services/window-watcher.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reservation-with-swipe-upcoming',
@@ -37,6 +38,7 @@ export class ReservationWithSwipeComponentUpcoming
   modalCancelReservation: boolean = false;
   modalEditMessage: boolean = false;
   newNote: string = '<p>Pas de comentaires</p>';
+  router = inject(Router);
 
   destroyRef = inject(DestroyRef);
   connectedUser = inject(UserStoreService).getUserConnected$();
@@ -91,10 +93,12 @@ export class ReservationWithSwipeComponentUpcoming
 
     fromEvent(this.elementRef.nativeElement, 'click')
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe(
-        (ele) =>
-          (this.elementRef.nativeElement.style.transform = `translateX(0px)`)
-      );
+      .subscribe((ele) => {
+        this.elementRef.nativeElement.style.transform = `translateX(0px)`;
+        if (this.student && this.student.userId) {
+          this.router.navigate(['/mentor/student-details/', this.student.userId]);
+        }
+      });
   }
 
   delete() {

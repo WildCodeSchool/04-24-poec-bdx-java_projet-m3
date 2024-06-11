@@ -24,12 +24,17 @@ export class CardInfosComponent {
   @Input() editModeOn = true;
   editFormApropoVisible = false;
   isFavorite: boolean = false;
+  userType: 'mentor' | 'student' | undefined;
 
   mentorService = inject(MentorService);
   studentService = inject(StudentService);
   userService = inject(UserService);
   userStoreService = inject(UserStoreService);
   destroyRef = inject(DestroyRef);
+
+  ngOnInit(): void {
+    this.userType = this.mentor ? 'mentor' : 'student';
+  }
 
   openEditFormApropos() {
     this.editFormApropoVisible = true;

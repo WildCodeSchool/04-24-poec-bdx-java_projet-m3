@@ -5,19 +5,27 @@ import { environment } from '../../../environments/environment.development';
 import { Language } from '../models/language';
 import { Formation } from '../models/formation';
 import { Skill } from '../models/chip';
-import { Mentor } from '../models/user';
+import { Mentor, Student } from '../models/user';
 import { MentorService } from './mentor.service';
+import { StudentService } from './student.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserByIdService {
   mentorService = inject(MentorService);
+  studentService = inject(StudentService);
   http = inject(HttpClient);
 
   getMentorProfilById(userId: number) {
     return this.http.get<Mentor>(
       environment.BASE_URL + '/mentor/mentors/' + userId
+    );
+  }
+
+  getStudentProfilById(userId: number) {
+    return this.http.get<Student>(
+      environment.BASE_URL + '/student/students/' + userId
     );
   }
 

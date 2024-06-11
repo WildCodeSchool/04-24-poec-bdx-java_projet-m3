@@ -11,6 +11,7 @@ import {
 } from '../../shared/resolvers/reservations.resolver';
 import { MentorProfilByStudentComponent } from '../students/pages/mentor-profil-by-student/mentor-profil-by-student.component';
 import { StudentProfilByMentorComponent } from './pages/student-profil-by-mentor/student-profil-by-mentor.component';
+import { studentExperiencesByIdResolver, studentFormationsByIdResolver, studentLanguagesByIdResolver, studentProfilByIdResolver, studentProfilResolver, studentSkillsByIdResolver } from '../../shared/resolvers/student.resolver';
 
 const routes: Routes = [
   {
@@ -36,6 +37,13 @@ const routes: Routes = [
       {
       path: 'student-details/:userId',
       component: StudentProfilByMentorComponent,
+      resolve: {
+        profil: studentProfilByIdResolver,
+        languages: studentLanguagesByIdResolver,
+        skills: studentSkillsByIdResolver,
+        formations: studentFormationsByIdResolver,
+        experiences: studentExperiencesByIdResolver,
+      }
       }
     ],
   },

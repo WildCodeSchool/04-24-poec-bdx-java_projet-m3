@@ -9,12 +9,12 @@
     <img src="assets/svgs/edit.svg" alt="edit" width="25" height="25" />
   </button>
 </div>
-<div class="container-card-infos" *ngIf="mentor">
+<div class="container-card-infos" *ngIf="mentor || student">
   <div class="logo-chips">
     <div class="avatar-social">
       <img
         class="logo"
-        [src]="mentor.imgUrl ? mentor.imgUrl : 'https://picsum.photos/200/200'"
+        [src]="userType === 'mentor' ? (mentor.imgUrl ? mentor.imgUrl : 'https://picsum.photos/200/200') : (student.imgUrl ? student.imgUrl : 'https://picsum.photos/200/200')"
         alt="avatar mentor"
       />
       <div class="social">

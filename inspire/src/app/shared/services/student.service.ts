@@ -31,6 +31,12 @@ export class StudentService {
       );
   }
 
+  getStudentProfilById(userId: number) {
+    return this.httpClient.get<StudentDTO>(
+      environment.BASE_URL + '/student/students/' + userId
+    );
+  }
+
   updateStudentProfil(profil: StudentDTO) {
     return this.httpClient
       .put<{
