@@ -32,26 +32,26 @@ export const routes: Routes = [
         (m) => m.StudentsModule
       ),
     canActivate: [isConnected, isStudent],
-    // resolve: {
-    //   profil: studentProfilResolver,
-    //   languages: mentorLanguagesResolver,
-    //   skills: studentSkillsResolver,
-    //   formations: studentFormationsResolver,
-    //   experiences: studentExperiencesResolver,
-    // },
+    resolve: {
+      profil: studentProfilResolver,
+      languages: mentorLanguagesResolver,
+      skills: studentSkillsResolver,
+      formations: studentFormationsResolver,
+      experiences: studentExperiencesResolver,
+    },
   },
   {
     path: 'mentor',
     loadChildren: () =>
       import('./modules/mentor/mentor.module').then((m) => m.MentorModule),
     canActivate: [isConnected, isMentor],
-    // resolve: {
-    //   languages: mentorLanguagesResolver,
-    //   experiences: mentorExperiencesResolver,
-    //   formations: mentorFormationsResolver,
-    //   skills: mentorSkillsResolver,
-    //   profil: mentorProfilResolver,
-    // },
+    resolve: {
+      languages: mentorLanguagesResolver,
+      experiences: mentorExperiencesResolver,
+      formations: mentorFormationsResolver,
+      skills: mentorSkillsResolver,
+      profil: mentorProfilResolver,
+    },
   },
 
   {
@@ -60,7 +60,7 @@ export const routes: Routes = [
       import('./modules/auth/modules/register/register.module').then(
         (m) => m.RegisterModule
       ),
-    canActivate: [isMentor, isStudent],
+    // canActivate: [isMentor, isStudent],
   },
   { path: 'layout', component: LayoutMentor },
 ];

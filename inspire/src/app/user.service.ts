@@ -91,21 +91,15 @@ export class UserService {
   }
 
   getUserByToken(token: string): Observable<UserDTO> {
-    return this.http
-      .get<UserDTO>(`${this.BASE_URL_API}/api/v1/users/me`, {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
+    this.userStore.token$.next(token);
+    return this.http.get<UserDTO>(`${this.BASE_URL_API}/api/v1/users/me`).pipe(
+      tap((user) => {
+        this.userStore.setUserConnected(user);
       })
-      .pipe(
-        map((user) => {
-          this.userStore.setUserConnected(user);
-          return user;
-        })
-      );
+    );
   }
 
-  login(email: any, password: any): Observable<UserDTO | null> {
+  login(email: string, password: string): Observable<UserDTO | null> {
     const user = { email, password } as LoginDTO;
     return this.http
       .post<any>(`${this.BASE_URL_API}/api/v1/auth/authenticate `, user)
@@ -114,12 +108,14 @@ export class UserService {
           if (users) {
             const user = users;
             this.userStore.setUserConnected(user);
-            const userString = JSON.stringify(user);
+            this.userStore.token$.next(user.token);
             window.localStorage.setItem('token', user.token);
             this.publish({
               type: 'login',
               payload: this.userStore.getUserConnected$().value,
             });
+            console.log('user', user);
+
             if (user.role === 'MENTOR') {
               this.router.navigate(['/mentor']);
             }
@@ -154,41 +150,54 @@ export class UserService {
   }
 
   getListSkills() {
-    return this.http.get<Skill[]>(`${this.BASE_URL}/skill/skills`);
+    // return this.http.get<Skill[]>(`${this.BASE_URL}/skill/skills`);
+    return this.http.get<Skill[]>(`http://localhost:8080/skill/get/all`);
   }
 
   // CRUD languages
 
   getListLanguages() {
-    return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
-    // return this.http.get<Language[]>(`http://localhost:8080/language/get/all`);
+    // return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
+    return this.http.get<Language[]>(`http://localhost:8080/language/get/all`);
   }
 
   getUserLanguages() {
-    return this.http
-      .get<Language[]>(
-        environment.BASE_URL +
-          '/language/languages/user/' +
-          this.userStore.getUserConnected$().value?.id
-      )
-      .pipe(
-        tap((languages) => {
-          this.activeUserLanguages$.next(languages);
-        })
-      );
+    return (
+      this.http
+        // .get<Language[]>(
+        //   environment.BASE_URL +
+        //     '/language/languages/user/' +
+        //     this.userStore.getUserConnected$().value?.id
+        // )
+        .get<Language[]>(
+          'http://localhost:8080/language/user/' +
+            this.userStore.getUserConnected$().value.id
+        )
+        .pipe(
+          tap((languages) => {
+            this.activeUserLanguages$.next(languages);
+          })
+        )
+    );
   }
 
   updateUserLanguages(languages: Language[]) {
     return this.http
-      .post<{ success: boolean; message: string; languages: Language[] }>(
-        ///'http://localhost:8080/language/user/update/1',
-        environment.BASE_URL +
-          '/language/languages/user/' +
+      .put<{ success: boolean; message: string; languages: Language[] }>(
+        'http://localhost:8080/language/user/update/' +
           this.userStore.getUserConnected$().value?.id,
         languages
+        // environment.BASE_URL +
+        //   '/language/languages/user/' +
+        //   this.userStore.getUserConnected$().value?.id,
+        // languages
       )
       .pipe(
         tap((result) => {
+          console.log('updating !!!');
+
+          console.log(result);
+
           this.activeUserLanguages$.next(result.languages);
         })
       );
@@ -198,9 +207,10 @@ export class UserService {
   getUserFormations() {
     return this.http
       .get<FormationDTO[]>(
-        environment.BASE_URL +
-          '/formation/formations/user/' +
-          this.userStore.getUserConnected$().value?.id
+        // environment.BASE_URL +
+        //   '/formation/formations/user/' +
+        'http://localhost:8080/formation/user/' +
+          this.userStore.getUserConnected$().value.id
       )
       .pipe(tap((formations) => this.activeUserFormations$.next(formations)));
   }
@@ -215,7 +225,11 @@ export class UserService {
         success: string;
         message: string;
         formations: FormationDTO[];
-      }>(`${environment.BASE_URL}/formation/formations/`, formation)
+      }>(
+        `http://localhost:8080/formation/user/add`,
+        //`${environment.BASE_URL}/formation/formations/`
+        formation
+      )
       .pipe(
         tap((response) => this.activeUserFormations$.next(response.formations))
       );
@@ -226,13 +240,16 @@ export class UserService {
     affectedRows: number;
     formations: FormationDTO[];
   }> {
+    console.log('formation ', formation);
+
     return this.http
       .put<{
         success: string;
         affectedRows: number;
         formations: FormationDTO[];
       }>(
-        `${environment.BASE_URL}/formation/formations/${formation.id}`,
+        `http://localhost:8080/formation/user/update/` + formation.id,
+        //${environment.BASE_URL}/formation/formations/${formation.id}`,
         formation
       )
       .pipe(
@@ -241,19 +258,20 @@ export class UserService {
   }
 
   deleteFormationUser(formationId: number): Observable<{
-    success: string;
+    success: boolean;
     message: string;
     formations: FormationDTO[];
   }> {
     return this.http
       .delete<{
-        success: string;
+        success: boolean;
         message: string;
         formations: FormationDTO[];
       }>(
-        `${environment.BASE_URL}/formation/formations/${formationId}/${
-          this.userStore.getUserConnected$().value?.id
-        }`
+        `http://localhost:8080/formation/user/delete/` + formationId
+        // `${environment.BASE_URL}/formation/formations/${formationId}/${
+        //   this.userStore.getUserConnected$().value?.id
+        // }`
       )
       .pipe(
         tap((response) => this.activeUserFormations$.next(response.formations))
@@ -264,19 +282,21 @@ export class UserService {
   getUserSkills() {
     return this.http
       .get<Skill[]>(
-        environment.BASE_URL +
-          '/skill/skills/user/' +
-          this.userStore.getUserConnected$().value?.id
+        // environment.BASE_URL +
+        //   '/skill/skills/user/' +
+        'http://localhost:8080/skill/user/' +
+          this.userStore.getUserConnected$().value.id
       )
       .pipe(tap((skills) => this.activeUserSkills$.next(skills)));
   }
 
   updateUserSkills(skills: Skill[]) {
     return this.http
-      .post<{ success: boolean; message: string; skills: Skill[] }>(
-        environment.BASE_URL +
-          '/skill/skills/user/' +
-          this.userStore.getUserConnected$().value?.id,
+      .put<{ success: boolean; message: string; skills: Skill[] }>(
+        // environment.BASE_URL +
+        // '/skill/skills/user/' +
+        'http://localhost:8080/skill/user/update/' +
+          this.userStore.getUserConnected$().value.id,
         skills
       )
       .pipe(tap((result) => this.activeUserSkills$.next(result.skills)));
@@ -292,9 +312,10 @@ export class UserService {
   getUserExperiences() {
     return this.http
       .get<ExperienceDTO[]>(
-        environment.BASE_URL +
-          '/experience/experiences/user/' +
-          this.userStore.getUserConnected$().value?.id
+        //  environment.BASE_URL +
+        // '/experience/experiences/user/' +
+        'http://localhost:8080/experience/user/' +
+          this.userStore.getUserConnected$().value.id
       )
       .pipe(
         tap((experiences) => this.activeUserExperiences$.next(experiences))
@@ -311,10 +332,14 @@ export class UserService {
         message: string;
         success: boolean;
         experiences: ExperienceDTO[];
-      }>(`${environment.BASE_URL}/experience/experiences/`, {
-        ...experience,
-        userId: this.userStore.getUserConnected$().value?.id,
-      })
+      }>(
+        'http://localhost:8080/experience/user/add',
+        //`${environment.BASE_URL}/experience/experiences/`,
+        {
+          ...experience,
+          userId: this.userStore.getUserConnected$().value.id,
+        }
+      )
       .pipe(
         tap((result) => {
           this.activeUserExperiences$.next(result.experiences);
@@ -333,10 +358,15 @@ export class UserService {
       .put<{
         affectedRows: number;
         experiences: ExperienceDTO[];
-      }>(`${this.BASE_URL}/experience/experiences/${experienceId}`, {
-        ...experience,
-        userId: this.userStore.getUserConnected$().value?.id,
-      })
+      }>(
+        'http://localhost:8080/experience/user/update/' + experienceId,
+        // `${this.BASE_URL}/experience/experiences/${experienceId}`,
+        {
+          ...experience,
+          id: experienceId,
+          userId: this.userStore.getUserConnected$().value.id,
+        }
+      )
       .pipe(
         tap((result) => {
           this.activeUserExperiences$.next(result.experiences);
@@ -355,12 +385,15 @@ export class UserService {
         success: boolean;
         experiences: ExperienceDTO[];
       }>(
-        `${this.BASE_URL}/experience/experiences/${experienceId}/${
-          this.userStore.getUserConnected$().value?.id
-        }`
+        'http://localhost:8080/experience/user/delete/' + experienceId
+        // `${this.BASE_URL}/experience/experiences/${experienceId}/${
+        // this.userStore.getUserConnected$().value?.id
+        // }`
       )
       .pipe(
         tap((res) => {
+          console.log('deleting res ', res);
+
           this.activeUserExperiences$.next(res.experiences);
         })
       );

@@ -20,6 +20,8 @@ export class MentorService {
     new BehaviorSubject<reservationForMentorDTO[]>([]);
 
   getMentorProfil() {
+    console.log('user connected ', this.userConnected.value?.id);
+
     return this.httpClient
       .get<MentorDTO>(
         environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
