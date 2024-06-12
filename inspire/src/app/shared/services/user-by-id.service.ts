@@ -48,7 +48,7 @@ export class UserByIdService {
 
   getUserSkillsById(userId: number) {
     return this.http.get<Skill[]>(
-      environment.BASE_URL + '/skill/skills/user/' + userId
+      environment.BASE_URL_API + 'skill/user/' + userId
     );
   }
 }
