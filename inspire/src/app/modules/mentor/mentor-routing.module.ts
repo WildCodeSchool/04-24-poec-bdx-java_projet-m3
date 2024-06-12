@@ -9,6 +9,8 @@ import {
   mentorReservationsHistoryResolver,
   mentorReservationsResolver,
 } from '../../shared/resolvers/reservations.resolver';
+import { StudentProfilByMentorComponent } from './pages/student-profil-by-mentor/student-profil-by-mentor.component';
+import { studentExperiencesByIdResolver, studentFormationsByIdResolver, studentLanguagesByIdResolver, studentProfilByIdResolver, studentSkillsByIdResolver } from '../../shared/resolvers/student.resolver';
 
 const routes: Routes = [
   {
@@ -31,6 +33,17 @@ const routes: Routes = [
         path: 'agenda',
         component: AgendaComponent,
       },
+      {
+        path: 'student-details/:userId',
+        component: StudentProfilByMentorComponent,
+        resolve: {
+          profil: studentProfilByIdResolver,
+          languages: studentLanguagesByIdResolver,
+          skills: studentSkillsByIdResolver,
+          formations: studentFormationsByIdResolver,
+          experiences: studentExperiencesByIdResolver,
+        }
+        }
     ],
   },
 ];

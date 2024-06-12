@@ -4,6 +4,8 @@ import { MentorDTO } from '../../../../../shared/models/user';
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { UserService } from '../../../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FilterService } from '../../../shared/filter.service';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-filter-search-list',
@@ -21,33 +23,44 @@ export class FilterSearchListComponent {
   mode: { name: string }[] = [];
 
   @Output() filteredMentors = new EventEmitter<MentorDTO[]>();
+  private unsubscribe$ = new Subject<void>();
+
 
   constructor(
     private _mentorService: MentorService,
     private _userService: UserService,
-    private _destroyRef: DestroyRef // private _mentorService: MentorServiceService, // private _mentorDetailsService: MentorService // Service pour obtenir les détails des compétences des mentors
+    private _destroyRef: DestroyRef,
+    private _filterService: FilterService,
   ) {
-    this.skills = [
-      { name: 'javascript' },
-      { name: 'java' },
-      { name: 'angular' },
-      { name: 'react' },
-      { name: 'css' },
-    ];
-
+  
     this.disponibily = [
       { name: "Aujourd'hui" },
       { name: 'Dans la semaine' },
       { name: 'Peu importe' },
     ];
 
-    this.mode = [{ name: 'Presentiel' }, { name: 'Distanciel' }];
-
     this.level = [
       { name: "Moins d'un an" },
       { name: 'Entre 1 et 2 ans' },
       { name: 'Entre 2 et 5 ans' },
     ];
+  }
+
+  skillList$?: Observable<Skill[]>;
+
+
+  ngOnInit(): void {
+    this._filterService.getSkillList()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(skills => {
+        this.skills = skills;
+        console.log("skills:", this.skills)
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   filterMentorsBySkills() {
