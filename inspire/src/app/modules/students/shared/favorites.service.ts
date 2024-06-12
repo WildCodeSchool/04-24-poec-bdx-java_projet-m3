@@ -15,15 +15,14 @@ export class FavoritesService {
   constructor(private http: HttpClient) {}
 
   addToFavorites(studentId: number, mentorId: number): Observable<any> {
-    return this.http.post(environment.BASE_URL + '/favorite/add', {
-      studentId,
-      mentorId,
-    });
+    console.log(studentId)
+    console.log(mentorId)
+    return this.http.post(environment.BASE_URL_API + `student/favorite/add/${studentId}/${mentorId}`, {});
   }
 
   removeFromFavorites(studentId: number, mentorId: number): Observable<any> {
     return this.http.delete(
-      environment.BASE_URL + `/favorite/remove/${studentId}/${mentorId}`
+      environment.BASE_URL_API + `student/favorite/delete/${studentId}/${mentorId}`
     );
   }
 
@@ -32,19 +31,19 @@ export class FavoritesService {
     mentorId: number
   ): Observable<{ isFavorite: boolean }> {
     return this.http.get<{ isFavorite: boolean }>(
-      environment.BASE_URL + `/favorite/${studentId}/${mentorId}`
+      environment.BASE_URL_API + `student/favorite/${studentId}/${mentorId}`
     );
   }
 
   getStudentFavorite(studentId: number): Observable<any> {
     return this.http.get<Favorite>(
-      environment.BASE_URL + `/favorite/${studentId}`
+      environment.BASE_URL_API + `student/favorite/${studentId}`
     );
   }
 
   getListFavoriteMentor(studentId: number): Observable<any> {
     return this.http.get<Mentor>(
-      environment.BASE_URL + `/favorite/mentors/${studentId}`
+      environment.BASE_URL_API + `/favorite/mentors/${studentId}`
     );
   }
 }

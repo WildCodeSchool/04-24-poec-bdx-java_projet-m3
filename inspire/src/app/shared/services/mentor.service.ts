@@ -52,8 +52,9 @@ export class MentorService {
 
   getMentorsList() {
     return this.httpClient.get<MentorDTO[]>(
-      environment.BASE_URL + '/mentor/mentors'
-    );
+      environment.BASE_URL_API + 'mentor/get/all'
+    ).pipe(tap(res => console.log(res)
+    ));
   }
 
   getMentorListPagination(perPage: number, offset: number) {
