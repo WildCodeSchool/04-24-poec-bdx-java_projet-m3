@@ -7,6 +7,7 @@ import { UserStoreService } from '../../../../../shared/services/stores/user-sto
 import { UserService } from '../../../../../user.service';
 import { StudentService } from '../../../../../shared/services/student.service';
 import { MentorService } from '../../../../../shared/services/mentor.service';
+import { UserByIdService } from '../../../../../shared/services/user-by-id.service';
 
 @Component({
   selector: 'app-card-mentor',
@@ -24,7 +25,8 @@ export class CardMentorComponent implements OnInit {
     private favoritesService: FavoritesService,
     private userStoreService: UserStoreService,
     private studentService: StudentService,
-    private mentorService: MentorService
+    private mentorService: MentorService,
+    private userIdService: UserByIdService
   ) {}
 
   skillList$?: Observable<Skill[]>;
@@ -32,7 +34,7 @@ export class CardMentorComponent implements OnInit {
   userService = inject(UserService);
 
   ngOnInit(): void {
-    this.skillList$ = this.userService.getMentorSkillsById(this.mentor.userId);
+    this.skillList$ = this.userIdService.getUserSkillsById(this.mentor.userId);
     this.checkIfFavorite();
   }
 

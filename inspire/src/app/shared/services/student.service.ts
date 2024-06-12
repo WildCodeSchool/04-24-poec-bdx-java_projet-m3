@@ -30,6 +30,7 @@ export class StudentService {
       );
   }
 
+
   updateStudentProfil(profil: StudentDTO) {
     return this.httpClient
       .put<StudentDTO>(
