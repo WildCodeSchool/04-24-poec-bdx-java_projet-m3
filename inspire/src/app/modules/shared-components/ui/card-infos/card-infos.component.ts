@@ -47,32 +47,31 @@ export class CardInfosComponent {
     file?: File;
     fileName?: string;
   }) {
-    if (newProfil.file && newProfil.fileName) {
-      if (this.userStoreService.getUserConnected$().value?.role === 'mentor') {
-        this.mentorService
-          .updateMentorImage(newProfil.file)
-          .pipe(takeUntilDestroyed(this.destroyRef))
-          .subscribe();
-      }
-      if (this.userStoreService.getUserConnected$().value?.role === 'student') {
-        this.studentService
-          .updateStudentImage(newProfil.file)
-          .pipe(takeUntilDestroyed(this.destroyRef))
-          .subscribe();
-      }
-    }
-
-    if (this.userStoreService.getUserConnected$().value?.role === 'mentor') {
+    if (this.userStoreService.getUserConnected$().value.role === 'MENTOR') {
       this.mentorService
         .updateMentorProfil(newProfil.profil)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe();
     }
-    if (this.userStoreService.getUserConnected$().value?.role === 'student') {
+    if (this.userStoreService.getUserConnected$().value.role === 'STUDENT') {
       this.studentService
         .updateStudentProfil(newProfil.profil)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe();
+    }
+    if (newProfil.file && newProfil.fileName) {
+      if (this.userStoreService.getUserConnected$().value.role === 'MENTOR') {
+        this.mentorService
+          .updateMentorImage(newProfil.file)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe();
+      }
+      if (this.userStoreService.getUserConnected$().value.role === 'STUDENT') {
+        this.studentService
+          .updateStudentImage(newProfil.file)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe();
+      }
     }
 
     this.userService

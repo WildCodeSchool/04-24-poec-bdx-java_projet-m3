@@ -28,19 +28,10 @@ export class ListLanguageComponent {
     this.isModalVisible = false;
   }
   updateLanguages(newLanguages: Language[]) {
-    if (this.userConnected.value?.role === 'mentor') {
-      this.userService
-        .updateUserLanguages(newLanguages)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe();
-    }
-
-    if (this.userConnected.value?.role === 'student') {
-      this.userService
-        .updateUserLanguages(newLanguages)
-        .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe();
-    }
+    this.userService
+      .updateUserLanguages(newLanguages)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
 
     this.isModalVisible = false;
   }
