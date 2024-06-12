@@ -104,7 +104,7 @@ export class UserService {
     return this.http
       .post<any>(`${this.BASE_URL_API}/api/v1/auth/authenticate `, user)
       .pipe(
-        map((users) => {
+        tap((users) => {
           if (users) {
             const user = users;
             this.userStore.setUserConnected(user);
@@ -122,10 +122,8 @@ export class UserService {
             if (user.role === 'STUDENT') {
               this.router.navigate(['/student']);
             }
-            return user;
           } else {
             alert('Identifiants incorrects');
-            return null;
           }
         })
       );
