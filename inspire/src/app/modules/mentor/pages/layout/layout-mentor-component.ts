@@ -27,6 +27,7 @@ export class LayoutMentor implements OnInit {
 
   logout() {
     this.userService.logout();
+    this.modalVisible = false;
   }
 
   ngOnInit(): void {

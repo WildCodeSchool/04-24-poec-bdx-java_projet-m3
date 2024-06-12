@@ -133,10 +133,11 @@ export class UserService {
 
   logout() {
     if (this.userStore.getUserConnected$().value.email) {
-      localStorage.removeItem('user');
+      localStorage.removeItem('token');
       this.userStore.setUserConnected({} as UserDTO);
-      this.publish({ type: 'logout' } as BroadcastMessage);
+      this.userStore.token$.next('');
       this.router.navigate(['']);
+      this.publish({ type: 'logout' } as BroadcastMessage);
     }
   }
 
