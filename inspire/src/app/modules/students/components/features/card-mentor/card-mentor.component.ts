@@ -6,6 +6,7 @@ import { FavoritesService } from '../../../shared/favorites.service';
 import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
 import { UserService } from '../../../../../user.service';
 import { StudentService } from '../../../../../shared/services/student.service';
+import { MentorService } from '../../../../../shared/services/mentor.service';
 
 @Component({
   selector: 'app-card-mentor',
@@ -17,11 +18,13 @@ export class CardMentorComponent implements OnInit {
 
   isFavorite: boolean = false;
   mentorId!: number;
+  studentId!: number;
 
   constructor(
     private favoritesService: FavoritesService,
     private userStoreService: UserStoreService,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private mentorService: MentorService
   ) {}
 
   skillList$?: Observable<Skill[]>;
@@ -56,6 +59,7 @@ export class CardMentorComponent implements OnInit {
     event.stopPropagation();
     const studentId = this.userStoreService.getUserId();
     if (studentId) {
+      console.log('studentService.activeStudentProfil$.value.id:', this.studentService.activeStudentProfil$.value.id);
       if (this.isFavorite) {
         this.isFavorite = true;
         this.favoritesService
