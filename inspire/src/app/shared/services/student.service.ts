@@ -17,33 +17,29 @@ export class StudentService {
   activeStudentProfil$: BehaviorSubject<StudentDTO> =
     new BehaviorSubject<StudentDTO>({} as StudentDTO);
 
-    getStudentProfil() {
-      return this.httpClient
-        .get<StudentDTO>(
-          'http://localhost:8080/student/' + this.userConnected.value.id
-          // environment.BASE_URL_API + 'api/v1/users/me'
-        )
-        .pipe(
-          tap((res) => {
-            console.log("resultat:", res)
-            this.activeStudentProfil$.next(res);
-          })
-        );
-    }
+  getStudentProfil() {
+    return this.httpClient
+      .get<StudentDTO>(
+        'http://localhost:8080/student/' + this.userConnected.value.id
+        // environment.BASE_URL_API + 'api/v1/users/me'
+      )
+      .pipe(
+        tap((res) => {
+          this.activeStudentProfil$.next(res);
+        })
+      );
+  }
 
   updateStudentProfil(profil: StudentDTO) {
     return this.httpClient
-      .put<{
-        affectedRow: number;
-        profil: StudentDTO;
-        success: boolean;
-      }>(
-        environment.BASE_URL +
-          '/student/students/' +
-          this.userConnected.value?.id,
+      .put<StudentDTO>(
+        'http://localhost:8080/student/' + this.userConnected.value.id,
+        // environment.BASE_URL +
+        //   '/student/students/' +
+        //   this.userConnected.value?.id,
         { ...profil, userId: this.userConnected.value?.id }
       )
-      .pipe(tap((result) => this.activeStudentProfil$.next(result.profil)));
+      .pipe(tap((result) => this.activeStudentProfil$.next(profil)));
   }
 
   updateStudentImage(file: File) {
