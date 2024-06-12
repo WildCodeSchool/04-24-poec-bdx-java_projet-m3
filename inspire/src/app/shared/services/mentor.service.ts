@@ -81,7 +81,7 @@ export class MentorService {
 
   getMentorListFavoriteByStudent(studentId: number): Observable<MentorDTO[]> {
     return this.httpClient.get<MentorDTO[]>(
-      environment.BASE_URL + `/favorite/mentors/${studentId}`
+      environment.BASE_URL_API + `student/favorite/list/${studentId}`
     );
   }
 
