@@ -55,13 +55,6 @@ export class UserService {
     [] as Skill[]
   );
 
-  // private createUser(user: User): Observable<UserDTO> {
-  //   return this.http.post<UserDTO>(
-  //     `${this.BASE_URL_API}/api/v1/auth/register/student`,
-  //     user
-  //   );
-  // }
-
   createStudent(registerFormValues: any): Observable<Student> {
     return this.http
       .post<Student>(
