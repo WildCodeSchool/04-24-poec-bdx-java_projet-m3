@@ -9,7 +9,7 @@
   </div>
   <div class="row-reservation" [ngClass]="bgColor" #thisRef>
     <div class="avatar-name">
-      <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" />
+      <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" [routerLink]="['/mentor/student-details/', reservation.userId]"/>
       <p>{{ reservation.firstname }}</p>
     </div>
     <div class="promotion">
