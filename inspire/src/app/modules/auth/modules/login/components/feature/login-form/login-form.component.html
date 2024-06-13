@@ -1,5 +1,4 @@
 <form
-  class="formulaire"
   [formGroup]="loginForm"
   (ngSubmit)="loginForm.valid && onSubmit()"
   #formLogin="ngForm"
@@ -18,11 +17,14 @@
       class="error"
       *ngIf="formLogin.submitted && loginForm.controls['email'].errors"
     >
-      <div [hidden]="!loginForm.controls['email'].errors['required']">
+      <div *ngIf="loginForm.controls['email'].errors['required']">
         L'email est requis
       </div>
-      <div [hidden]="!loginForm.controls['email'].invalid">
+      <div *ngIf="loginForm.controls['email'].errors['email']">
         L'email est invalide
+      </div>
+      <div *ngIf="loginForm.errors?.['invalidEmail']">
+        Email ou mot de passe incorrect.
       </div>
     </div>
   </div>
@@ -38,9 +40,23 @@
     />
     <div
       class="error"
-      *ngIf="formLogin.submitted && loginForm.get('password')?.errors?.['required']"
+      *ngIf="formLogin.submitted && loginForm.get('password')?.errors"
     >
-      Mot de passe requis
+      <div *ngIf="loginForm.get('password')?.errors?.['required']">
+        Mot de passe requis
+      </div>
+      <div *ngIf="loginForm.errors?.['invalidPassword']">
+        Email ou mot de passe incorrect.
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="formLogin.submitted && loginForm.errors" class="error">
+    <div *ngIf="loginForm.errors['invalidEmail']">
+      Email ou mot de passe incorrect.
+    </div>
+    <div *ngIf="loginForm.errors['invalidPassword']">
+      Email ou mot de passe incorrect.
     </div>
   </div>
 
