@@ -55,6 +55,7 @@ import { CalendarModule } from 'primeng/calendar';
     ReactiveFormsModule,
     PaginatorModule,
     CalendarModule,
+    SidebarModule,
   ],
   exports: [
     RowReservationComponent,

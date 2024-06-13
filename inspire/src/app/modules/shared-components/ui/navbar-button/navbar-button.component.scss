@@ -16,6 +16,9 @@
   background-color: black;
   color: azure;
 }
+.btn-general:hover img {
+  filter: brightness(0) invert(1); /* Cette règle rendra l'image blanche */
+}
 .btn-general {
   font-size: 16px;
   font-weight: 400;
@@ -29,7 +32,8 @@
   align-items: center;
 }
 .btn-general:hover {
-  transform: scale(0.95);
+  background-color: $primary-color;
+  color: white;
 }
 button {
   margin: 5px;
