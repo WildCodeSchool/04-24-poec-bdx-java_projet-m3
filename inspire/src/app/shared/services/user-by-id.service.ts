@@ -17,7 +17,7 @@ export class UserByIdService {
 
   getMentorProfilById(userId: number) {
     return this.http.get<Mentor>(
-      environment.BASE_URL + '/mentor/mentors/' + userId
+      environment.BASE_URL_API + 'mentor/' + userId
     );
   }
 

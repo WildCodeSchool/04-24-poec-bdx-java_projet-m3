@@ -72,6 +72,11 @@ export class MentorService {
     ));
   }
 
+  getMentorsBySkills(skills: string[]): Observable<MentorDTO[]> {
+    const params = { skills: skills.join(',') }
+    return this.httpClient.get<MentorDTO[]>(`${environment.BASE_URL_API}mentor/by-skills`, { params });
+  }
+
   getMentorListPagination(perPage: number, offset: number) {
     return this.httpClient.get<Mentor[]>(
       environment.BASE_URL +

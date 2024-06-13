@@ -65,32 +65,12 @@ export class FilterSearchListComponent {
 
   filterMentorsBySkills() {
     if (this.selectedSkill && this.selectedSkill.length > 0) {
+      const skillNames = this.selectedSkill.map(skill => skill.name);
       this._mentorService
-        .getMentorsList()
+        .getMentorsBySkills(skillNames)
         .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe((mentors) => {
-          let filteredMentors: MentorDTO[] = [];
-          let completedRequests = 0;
-          mentors.forEach((mentor) => {
-            this._userService
-              .getMentorSkillsById(mentor.userId)
-              .pipe(takeUntilDestroyed(this._destroyRef))
-              .subscribe((skills) => {
-                if (
-                  this.selectedSkill.every((skill) =>
-                    skills.some(
-                      (mentorSkill) => mentorSkill.name === skill.name
-                    )
-                  )
-                ) {
-                  filteredMentors.push(mentor);
-                }
-                completedRequests++;
-                if (completedRequests === mentors.length) {
-                  this.filteredMentors.emit(filteredMentors);
-                }
-              });
-          });
+        .subscribe((filteredMentors) => {
+          this.filteredMentors.emit(filteredMentors);
         });
     } else {
       this._mentorService
