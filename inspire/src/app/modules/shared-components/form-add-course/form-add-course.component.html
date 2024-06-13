@@ -10,6 +10,11 @@
         formControlName="title"
         placeholder="Le diplôme obtenu"
       />
+      <div class="error" *ngIf="courseForm.get('title')?.errors">
+        <span *ngIf="courseForm.get('title')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
     </div>
     <div class="container-input">
       <label for="school">Nom de l'établissement *</label>
@@ -20,6 +25,11 @@
         formControlName="company"
         placeholder="Nom de l'établissement"
       />
+      <div class="error" *ngIf="courseForm.get('school')?.errors">
+        <span *ngIf="courseForm.get('school')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
     </div>
     <div class="container-input">
       <label for="city">Ville *</label>
@@ -30,6 +40,11 @@
         formControlName="city"
         placeholder="Ville"
       />
+      <div class="error" *ngIf="courseForm.get('city')?.errors">
+        <span *ngIf="courseForm.get('city')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
     </div>
     <div class="container-input">
       <label for="country">Pays *</label>
@@ -40,6 +55,11 @@
         formControlName="country"
         placeholder="Pays"
       />
+      <div class="error" *ngIf="courseForm.get('country')?.errors">
+        <span *ngIf="courseForm.get('country')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
     </div>
   </div>
 
@@ -52,6 +72,11 @@
       formControlName="dateBegin"
       placeholder="Date de début"
     />
+    <div class="error" *ngIf="courseForm.get('dateBeggin')?.errors">
+      <span *ngIf="courseForm.get('dateBeggin')?.errors?.['required']">
+        Le champ est requis
+      </span>
+    </div>
   </div>
 
   <div class="container-input">
@@ -63,6 +88,11 @@
       formControlName="dateEnd"
       placeholder="Date de fin"
     />
+    <div class="error" *ngIf="courseForm.get('dateEnd')?.errors">
+      <span *ngIf="courseForm.get('dateEnd')?.errors?.['required']">
+        Le champ est requis
+      </span>
+    </div>
   </div>
 
   <div class="btn-connexion">
