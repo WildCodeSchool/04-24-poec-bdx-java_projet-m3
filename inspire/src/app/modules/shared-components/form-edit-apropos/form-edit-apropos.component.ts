@@ -8,7 +8,7 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Skill } from '../../../shared/models/chip';
 import { UserService } from '../../../user.service';
 import { Subscription } from 'rxjs';
@@ -66,8 +66,8 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
       imgUrl: [this.profil.imgUrl],
       linkedinUrl: [this.profil.linkedinUrl],
       githubUrl: [this.profil.githubUrl],
-      firstname: [this.profil.firstname],
-      lastname: [this.profil.lastname],
+      firstname: [this.profil.firstname, Validators.required],
+      lastname: [this.profil.lastname, Validators.required],
       description: [this.profil.description],
       selectedSkill: [this.selectedSkills],
     });

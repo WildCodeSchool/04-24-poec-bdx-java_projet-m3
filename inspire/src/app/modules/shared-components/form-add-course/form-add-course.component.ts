@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Formation, FormationDTO } from '../../../shared/models/formation';
 import { UserStoreService } from '../../../shared/services/stores/user-store.service';
 import { User } from '../../../shared/models/user';
@@ -11,12 +11,12 @@ import { User } from '../../../shared/models/user';
 })
 export class FormAddCourseComponent {
   courseForm = this.fb.group({
-    city: [''],
-    company: [''],
-    country: [''],
-    dateBegin: [''],
-    dateEnd: [''],
-    title: [''],
+    city: ['', Validators.required],
+    company: ['', Validators.required],
+    country: ['', Validators.required],
+    dateBegin: ['', Validators.required],
+    dateEnd: ['', Validators.required],
+    title: ['', Validators.required],
   });
   @Output() destroy = new EventEmitter();
   @Output() formationEmitter = new EventEmitter<FormationDTO>();

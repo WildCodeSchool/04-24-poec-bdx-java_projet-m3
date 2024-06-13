@@ -57,6 +57,7 @@ import { StudentProfilByMentorComponent } from './pages/student-profil-by-mentor
     ReactiveFormsModule,
     PaginatorModule,
     CalendarModule,
+    SidebarModule,
   ],
   exports: [
     RowReservationComponent,
