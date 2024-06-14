@@ -24,6 +24,13 @@
   font-weight: 600;
 }
 
+.container-card .becoming {
+  background-color: rgba(200, 197, 197, 0.881);
+  color: gray;
+  border-radius: 10px;
+  border-color: rgba(235, 228, 228, 0.881);
+}
+
 @media screen and (max-width: $small) {
   .container-login-page {
     flex-direction: column;

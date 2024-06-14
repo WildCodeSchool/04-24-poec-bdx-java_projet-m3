@@ -132,12 +132,16 @@ export class UserService {
   }
 
   logout() {
-    if (this.userStore.getUserConnected$().value.email) {
+    const user = this.userStore.getUserConnected$().value;
+
+    if (user && (user.email || user.token)) {
       localStorage.removeItem('token');
       this.userStore.setUserConnected({} as UserDTO);
       this.userStore.token$.next('');
       this.router.navigate(['']);
       this.publish({ type: 'logout' } as BroadcastMessage);
+    } else {
+      console.log('No valid user data found, aborting logout');
     }
   }
 
