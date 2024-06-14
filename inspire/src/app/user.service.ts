@@ -55,13 +55,6 @@ export class UserService {
     [] as Skill[]
   );
 
-  // private createUser(user: User): Observable<UserDTO> {
-  //   return this.http.post<UserDTO>(
-  //     `${this.BASE_URL_API}/api/v1/auth/register/student`,
-  //     user
-  //   );
-  // }
-
   createStudent(registerFormValues: any): Observable<Student> {
     return this.http
       .post<Student>(
@@ -104,7 +97,7 @@ export class UserService {
     return this.http
       .post<any>(`${this.BASE_URL_API}/api/v1/auth/authenticate `, user)
       .pipe(
-        map((users) => {
+        tap((users) => {
           if (users) {
             const user = users;
             this.userStore.setUserConnected(user);
@@ -122,10 +115,8 @@ export class UserService {
             if (user.role === 'STUDENT') {
               this.router.navigate(['/student']);
             }
-            return user;
           } else {
             alert('Identifiants incorrects');
-            return null;
           }
         })
       );
@@ -146,8 +137,9 @@ export class UserService {
     if (user && (user.email || user.token)) {
       localStorage.removeItem('token');
       this.userStore.setUserConnected({} as UserDTO);
-      this.publish({ type: 'logout' } as BroadcastMessage);
+      this.userStore.token$.next('');
       this.router.navigate(['']);
+      this.publish({ type: 'logout' } as BroadcastMessage);
     } else {
       console.log('No valid user data found, aborting logout');
     }
