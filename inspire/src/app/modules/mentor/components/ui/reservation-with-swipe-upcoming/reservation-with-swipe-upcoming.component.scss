@@ -36,17 +36,17 @@
     align-items: start;
   }
   .action button {
-    background-color: rgba(112, 102, 102, 0.1);
-    color: black;
+    background-color: #f8156b;
+    color: white;
     padding: 10px 18px;
     border: none;
     border-radius: 6px;
     margin: 5px 5px;
     min-width: 90px;
-
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 }
 
