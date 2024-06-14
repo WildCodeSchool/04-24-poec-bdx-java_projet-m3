@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment.development';
 import { reservationForMentorDTO } from '../models/reservation';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { ReservationForStudentDTO } from '../models/reservation';
+import { MentorService } from './mentor.service';
 
 @Injectable({
   providedIn: 'root',
@@ -84,16 +85,20 @@ export class ReservationService {
   }
 
   getMentorReservationList(userId: number, perPage: number, offset: number) {
+    const mentorId = inject(MentorService).activeMentorProfil$.value.id;
     return this.httpClient
       .get<{
         reservations: reservationForMentorDTO[];
         total: number;
       }>(
+        // `http://localhost:8080/reservation/get/mentor/upcoming/${mentorId}/${perPage}/${offset}`
         environment.BASE_URL +
           `/reservation/reservations/mentor/${userId}?perPage=${perPage}&offset=${offset}`
       )
       .pipe(
         tap((res) => {
+          console.log(res);
+
           this.activeMentorReservations$.next(res);
         })
       );
@@ -104,8 +109,10 @@ export class ReservationService {
     perPage: number,
     offset: number
   ) {
+    const mentorId = inject(MentorService).activeMentorProfil$.value.id;
     return this.httpClient
       .get<{ reservations: reservationForMentorDTO[]; total: number }>(
+        // `http://localhost:8080/reservation/get/mentor/history/${mentorId}/${perPage}/${offset}`
         environment.BASE_URL +
           `/reservation/reservations/mentor/history/${userId}?perPage=${perPage}&offset=${offset}`
       )

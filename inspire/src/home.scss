@@ -14,6 +14,12 @@
   padding: 0px 50px;
 }
 
+.firstname-name {
+  display: flex;
+
+  gap: 20px;
+}
+
 .right-content {
   background-color: white;
   width: 65%;
@@ -21,7 +27,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 180px;
+  padding: 0 150px;
   border-top-left-radius: 40px;
   border-bottom-left-radius: 40px;
 }

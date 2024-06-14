@@ -1,4 +1,9 @@
-<form class="form-course" (ngSubmit)="onSubmit()" [formGroup]="experienceForm">
+<form
+  class="form-course"
+  (ngSubmit)="onSubmit()"
+  [formGroup]="experienceForm"
+  #formExperience="ngForm"
+>
   <h1>Ajouter une Experience</h1>
   <div class="infos">
     <div class="container-input">
@@ -10,16 +15,26 @@
         formControlName="title"
         placeholder="Titre du poste occupé"
       />
+      <div class="error" *ngIf="experienceForm.get('title')?.errors">
+        <span *ngIf="experienceForm.get('title')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
     </div>
     <div class="container-input">
-      <label for="school">Nom de l'entreprise *</label>
+      <label for="company">Nom de l'entreprise *</label>
       <input
         type="text"
-        id="school"
-        name="school"
+        id="company"
+        name="company"
         formControlName="company"
         placeholder="Nom de l'entreprise"
       />
+      <div class="error" *ngIf="experienceForm.get('company')?.errors">
+        <span *ngIf="experienceForm.get('company')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
     </div>
   </div>
   <div class="container-input">
@@ -31,6 +46,11 @@
       formControlName="city"
       placeholder="Ville"
     />
+    <div class="error" *ngIf="experienceForm.get('city')?.errors">
+      <span *ngIf="experienceForm.get('city')?.errors?.['required']">
+        Le champ est requis
+      </span>
+    </div>
   </div>
   <div class="container-input">
     <label for="country">Pays *</label>
@@ -41,6 +61,11 @@
       formControlName="country"
       placeholder="Pays"
     />
+    <div class="error" *ngIf="experienceForm.get('country')?.errors">
+      <span *ngIf="experienceForm.get('country')?.errors?.['required']">
+        Le champ est requis
+      </span>
+    </div>
   </div>
 
   <div class="container-input">
@@ -52,6 +77,11 @@
       formControlName="dateBegin"
       placeholder="Date de début"
     />
+    <div class="error" *ngIf="experienceForm.get('dateBegin')?.errors">
+      <span *ngIf="experienceForm.get('dateBegin')?.errors?.['required']">
+        Le champ est requis
+      </span>
+    </div>
   </div>
 
   <div class="container-input">
@@ -63,6 +93,11 @@
       formControlName="dateEnd"
       placeholder="Date de fin"
     />
+    <div class="error" *ngIf="experienceForm.get('dateEnd')?.errors">
+      <span *ngIf="experienceForm.get('dateEnd')?.errors?.['required']">
+        Le champ est requis
+      </span>
+    </div>
   </div>
 
   <div class="btn-connexion">

@@ -10,16 +10,22 @@ import {
   mentorReservationsResolver,
 } from '../../shared/resolvers/reservations.resolver';
 import { StudentProfilByMentorComponent } from './pages/student-profil-by-mentor/student-profil-by-mentor.component';
-import { studentExperiencesByIdResolver, studentFormationsByIdResolver, studentLanguagesByIdResolver, studentProfilByIdResolver, studentSkillsByIdResolver } from '../../shared/resolvers/student.resolver';
+import {
+  studentExperiencesByIdResolver,
+  studentFormationsByIdResolver,
+  studentLanguagesByIdResolver,
+  studentProfilByIdResolver,
+  studentSkillsByIdResolver,
+} from '../../shared/resolvers/student.resolver';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutMentor,
-     resolve: {
-    reservationsData: mentorReservationsResolver,
-     reservationsHistoryData: mentorReservationsHistoryResolver,
-     },
+    resolve: {
+      reservationsData: mentorReservationsResolver,
+      reservationsHistoryData: mentorReservationsHistoryResolver,
+    },
     children: [
       {
         path: '',
@@ -42,8 +48,8 @@ const routes: Routes = [
           skills: studentSkillsByIdResolver,
           formations: studentFormationsByIdResolver,
           experiences: studentExperiencesByIdResolver,
-        }
-        }
+        },
+      },
     ],
   },
 ];

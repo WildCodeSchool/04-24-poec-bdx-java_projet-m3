@@ -6,7 +6,7 @@
   <h1>Editer votre profil</h1>
   <div class="infos">
     <div class="container-input">
-      <label for="title">Titre de votre profil*</label>
+      <label for="title">Titre de votre profil </label>
       <input
         type="text"
         id="title"
@@ -27,6 +27,11 @@
         formControlName="firstname"
         placeholder="Github :"
       />
+      <div class="error" *ngIf="aproposForm.get('firstname')?.errors">
+        <span *ngIf="aproposForm.get('firstname')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
     </div>
     <div class="container-input">
       <label for="lastname">Nom *</label>
@@ -37,12 +42,17 @@
         formControlName="lastname"
         placeholder="Linkedin :"
       />
+      <div class="error" *ngIf="aproposForm.get('lastname')?.errors">
+        <span *ngIf="aproposForm.get('lastname')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
     </div>
   </div>
 
   <div class="infos">
     <div class="container-input">
-      <label for="diplome">Github *</label>
+      <label for="diplome">Github </label>
       <input
         type="text"
         id="github"
@@ -52,7 +62,7 @@
       />
     </div>
     <div class="container-input">
-      <label for="linkedin">Linkedin *</label>
+      <label for="linkedin">Linkedin </label>
       <input
         type="text"
         id="linkedin"
@@ -65,7 +75,7 @@
 
   <div class="infos">
     <div class="container-input">
-      <label for="description">Votre description *</label>
+      <label for="description">Votre description </label>
       <textarea
         type="text"
         id="description"
@@ -76,7 +86,7 @@
     </div>
   </div>
   <div class="edit-skill">
-    <label for="skills">Editez vos skills *</label>
+    <label for="skills">Editez vos skills </label>
   </div>
 
   <div class="skills" *ngIf="skills">
