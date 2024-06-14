@@ -16,7 +16,7 @@ export class RowReservationComponent implements OnInit {
   endAt!: Date;
 
   ngOnInit(): void {
-    this.endAt = new Date(this.reservation.dateTime);
+    this.endAt = new Date(this.reservation.dateBegin);
     this.endAt.setTime(this.endAt.getTime() + this.slotLength * 3600000);
   }
 }
