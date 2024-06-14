@@ -17,6 +17,7 @@ import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Subscription } from 'rxjs';
 import { MentorDTO } from '../../../../../shared/models/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DateTimeService } from '../../../../../shared/services/dateTime.service';
 
 @Component({
   selector: 'app-calendar',
@@ -49,7 +50,8 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   constructor(
     private reservationService: ReservationService,
     private mentorService: MentorService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dateTimeService: DateTimeService
   ) {}
 
   formulaire: FormGroup = this.fb.group({
@@ -68,7 +70,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   };
 
   onDateSelect = (selectionInfo: any) => {
-    console.log('selectionInfo', selectionInfo);
     if (this.formulaire.valid) {
       const diffMilliseconds = selectionInfo.end - selectionInfo.start;
       const hours = Math.floor(diffMilliseconds / (1000 * 60 * 60));
@@ -78,15 +79,19 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
       const formattedDuration = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
 
+      const startLocalDateTime =
+        this.dateTimeService.convertToLocalDateTimeString(selectionInfo.start);
+      const endLocalDateTime =
+        this.dateTimeService.convertToLocalDateTimeString(selectionInfo.end);
+
       this.formattedSlotInfo = {
         formattedDuration,
-        start: selectionInfo.start,
-        end: selectionInfo.end,
-        dateTime: selectionInfo.startStr,
-        dateEnd: selectionInfo.endStr,
+        dateBegin: startLocalDateTime,
+        dateEnd: endLocalDateTime,
         visio: this.formulaire.value.mode === 'visio',
         mentorId: this.mentorId,
       };
+
       this.visible = true;
     } else {
       console.error("Veuillez d'abord soumettre le formulaire.");
@@ -153,8 +158,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       visio,
       mentorId,
     };
-
-    console.log('slotInfo', slotInfo.dateEnd);
 
     this.reservationService.updateSlot(id, slotInfo).subscribe();
     this.displayModal = false;
@@ -310,6 +313,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
 
   loadSlots(): void {
+    console.log('loadSlots');
     const mentorId = this.mentorId;
     this.reservationService.getSlotsForMentor(mentorId).subscribe((slots) => {
       this.events = this.formatSlotsToEvents(slots);
@@ -319,7 +323,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     return slots.map((slot) => ({
       id: slot.id,
       title: slot.visio ? 'Visio' : 'Présentiel',
-      start: slot.dateTime,
+      start: slot.dateBegin,
       end: slot.dateEnd,
       color: slot.visio ? '#FCBE77' : '#F8156B',
       extendedProps: {

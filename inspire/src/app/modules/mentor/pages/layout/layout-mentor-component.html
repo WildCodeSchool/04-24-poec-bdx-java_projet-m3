@@ -5,10 +5,10 @@
         <div>
           <img
             class="img-fluid"
-            src="/assets/logo-wild.webp"
+            src="/assets/logoInspire.webp"
             alt="logo"
-            width="35"
-            height="35"
+            width="42"
+            height="42"
           />
         </div>
         <div class="header-container">
@@ -62,7 +62,7 @@
             [ngClass]="!showNavbar ? 'light' : 'dark'"
           >
             <img
-              [src]="'assets/svgs/burger.svg'"
+              [src]="showNavbar ? 'assets/svgs/left-arrow.svg' : 'assets/svgs/right-arrow.svg'"
               alt=""
               width="25"
               height="25"
