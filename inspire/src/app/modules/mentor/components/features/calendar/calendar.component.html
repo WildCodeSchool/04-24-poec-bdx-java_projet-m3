@@ -233,7 +233,11 @@
     <div class="control">
       <button class="btn-general black" (click)="closeModal()">Annuler</button>
 
-      <button *ngIf="isModfify" class="btn-general pink" (click)="onSubmit()">
+      <button
+        *ngIf="isModfify"
+        class="btn-general pink"
+        (click)="onSubmitDrop()"
+      >
         Mettre à jour
       </button>
       <button

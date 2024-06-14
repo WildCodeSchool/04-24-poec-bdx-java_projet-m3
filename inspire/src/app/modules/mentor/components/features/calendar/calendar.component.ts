@@ -119,7 +119,13 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
 
   editSlot() {
-    console.log('editSlot', this.eventDetails);
+    console.log('editSlotyy', this.eventDetails);
+    this.eventDetailsEdit = {
+      id: this.eventDetails.id,
+      start: this.eventDetails.start,
+      end: this.eventDetails.end,
+      visio: this.eventDetails.visio,
+    };
     this.isModfify = true;
   }
 
@@ -176,6 +182,42 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     );
   }
 
+  onSubmitDrop() {
+    if (!this.eventDetailsEdit.id) {
+      console.error("ID de l'événement non défini.");
+      return;
+    }
+
+    const id = Number(this.eventDetailsEdit.id);
+    const dateBegin = this.dateTimeService.convertToLocalDateTimeString(
+      this.eventDetailsEdit.start
+    );
+    const dateEnd = this.dateTimeService.convertToLocalDateTimeString(
+      this.eventDetailsEdit.end
+    );
+
+    const visio = this.editForm.value.visio === 'visio';
+    const mentorId = this.mentorId;
+
+    const slotInfo = {
+      id,
+      dateBegin,
+      dateEnd,
+      visio,
+      mentorId,
+    };
+
+    this.reservationService.updateSlot(id, slotInfo).subscribe(
+      () => {
+        this.displayModal = false;
+        this.loadSlots();
+      },
+      (error) => {
+        console.error('Erreur lors de la mise à jour du slot:', error);
+      }
+    );
+  }
+
   formatDate(date: Date): string {
     const year = date.getFullYear();
     const month = ('0' + (date.getMonth() + 1)).slice(-2);
@@ -203,8 +245,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       end: eventDropArg.event.end,
       visio: eventDropArg.oldEvent.extendedProps.visio,
     };
-
-    console.log('eventDropArg', eventDropArg);
 
     this.displayModal = true;
     this.isModfify = true;
