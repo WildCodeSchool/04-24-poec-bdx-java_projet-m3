@@ -70,9 +70,6 @@
   display: flex;
 
   button.burger {
-    position: absolute;
-    top: -10px;
-    left: 15px;
     height: 30px;
     display: flex;
     justify-content: center;
@@ -92,10 +89,27 @@
     margin-top: 20px;
     z-index: 10;
     // flex-basis: 250px;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
+
+    &:hover .burger {
+      display: block;
+    }
+
+    .burger {
+      display: none;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateX(50%);
+      background-color: #868686;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
 
     .logout {
       margin-left: 20px;
