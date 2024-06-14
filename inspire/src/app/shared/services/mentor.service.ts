@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
@@ -66,10 +66,9 @@ export class MentorService {
   }
 
   getMentorsList() {
-    return this.httpClient.get<MentorDTO[]>(
-      environment.BASE_URL_API + 'mentor/get/all'
-    ).pipe(tap(res => console.log(res)
-    ));
+    return this.httpClient
+      .get<MentorDTO[]>(environment.BASE_URL_API + 'mentor/get/all')
+      .pipe(tap((res) => console.log(res)));
   }
 
   getMentorListPagination(perPage: number, offset: number) {
@@ -98,7 +97,6 @@ export class MentorService {
       const formData = new FormData();
 
       formData.append('file', file);
-      console.log('upload called');
 
       return this.httpClient
         .post<MentorDTO>(
