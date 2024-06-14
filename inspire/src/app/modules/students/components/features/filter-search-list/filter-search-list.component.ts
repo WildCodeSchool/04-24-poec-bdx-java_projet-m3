@@ -20,7 +20,7 @@ export class FilterSearchListComponent {
   selectedSkill: Skill[] = [];
   selectedDisponibily: any[] = [];
   selectedLevel: any[] = [];
-  mode: { name: string }[] = [];
+
 
   @Output() filteredMentors = new EventEmitter<MentorDTO[]>();
   private unsubscribe$ = new Subject<void>();
@@ -43,6 +43,7 @@ export class FilterSearchListComponent {
       { name: "Moins d'un an" },
       { name: 'Entre 1 et 2 ans' },
       { name: 'Entre 2 et 5 ans' },
+      { name: 'Plus de 5 ans' },
     ];
   }
 
@@ -65,37 +66,64 @@ export class FilterSearchListComponent {
 
   filterMentorsBySkills() {
     if (this.selectedSkill && this.selectedSkill.length > 0) {
+      const skillNames = this.selectedSkill.map(skill => skill.name);
       this._mentorService
-        .getMentorsList()
+        .getMentorsBySkills(skillNames)
         .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe((mentors) => {
-          let filteredMentors: MentorDTO[] = [];
-          let completedRequests = 0;
-          mentors.forEach((mentor) => {
-            this._userService
-              .getMentorSkillsById(mentor.userId)
-              .pipe(takeUntilDestroyed(this._destroyRef))
-              .subscribe((skills) => {
-                if (
-                  this.selectedSkill.every((skill) =>
-                    skills.some(
-                      (mentorSkill) => mentorSkill.name === skill.name
-                    )
-                  )
-                ) {
-                  filteredMentors.push(mentor);
-                }
-                completedRequests++;
-                if (completedRequests === mentors.length) {
-                  this.filteredMentors.emit(filteredMentors);
-                }
-              });
-          });
+        .subscribe((filteredMentors) => {
+          this.filteredMentors.emit(filteredMentors);
         });
     } else {
       this._mentorService
         .getMentorsList()
         .pipe(takeUntilDestroyed(this._destroyRef))
+        .subscribe((mentorList) => {
+          this.filteredMentors.emit(mentorList);
+        });
+    }
+  }
+
+  filterMentorsByExperienceYears(minYears: number, maxYears: number) {
+    this._mentorService
+      .getMentorsByExperienceYears(minYears, maxYears)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((mentors) => {
+        this.filteredMentors.emit(mentors);
+      });
+  }
+
+  onExperienceLevelChange() {
+    if (this.selectedLevel && this.selectedLevel.length > 0) {
+      const selected = this.selectedLevel[0].name;
+      let minYears = 0;
+      let maxYears = 0;
+
+      switch (selected) {
+        case "Moins d'un an":
+          minYears = 0;
+          maxYears = 1;
+          break;
+        case 'Entre 1 et 2 ans':
+          minYears = 1;
+          maxYears = 2;
+          break;
+        case 'Entre 2 et 5 ans':
+          minYears = 2;
+          maxYears = 5;
+          break;
+        case 'Plus de 5 ans':
+          minYears = 5;
+          maxYears = Number.MAX_VALUE;
+          break;
+        default:
+          break;
+      }
+
+      this.filterMentorsByExperienceYears(minYears, maxYears);
+    } else {
+      this._mentorService
+        .getMentorsList()
+        .pipe(takeUntil(this.unsubscribe$))
         .subscribe((mentorList) => {
           this.filteredMentors.emit(mentorList);
         });
