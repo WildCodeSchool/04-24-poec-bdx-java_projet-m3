@@ -48,25 +48,28 @@ export class ReservationService {
 
   addSlotToMentor(slotInfo: any): Observable<any> {
     const formattedSlotInfo = {
-      dateTime: slotInfo.dateTime,
+      dateBegin: slotInfo.dateBegin,
       dateEnd: slotInfo.dateEnd,
       visio: slotInfo.visio,
       mentorId: slotInfo.mentorId,
     };
 
     return this.httpClient
-      .post(`${environment.BASE_URL}/slot/slots`, formattedSlotInfo)
+      .post(`${environment.BASE_URL_API}user/slot/add`, formattedSlotInfo)
       .pipe(switchMap(() => this.getSlotsForMentor(slotInfo.mentorId)));
   }
 
   getSlotsForMentor(mentorId: number): Observable<any> {
+    console.log('getSlotsformentor', mentorId);
     return this.httpClient.get(
-      `${environment.BASE_URL}/slot/slots?mentorId=${mentorId}`
+      `${environment.BASE_URL_API}user/slot/get/${mentorId}`
     );
   }
 
   deleteSlot(id: number): Observable<any> {
-    return this.httpClient.delete(`${environment.BASE_URL}/slot/slots/${id}`);
+    return this.httpClient.delete(
+      `${environment.BASE_URL_API}user/slot/delete/${id}`
+    );
   }
 
   updateSlot(slotId: number, slotInfo: any): Observable<any> {
