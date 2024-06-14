@@ -28,7 +28,6 @@ export default class LanguageManager {
 
   async addLanguage(name) {
     try {
-      console.log("skill", name);
       const [language] = await this.database.query(
         `SELECT * FROM languages where name = ? `,
         [name]
@@ -48,10 +47,39 @@ export default class LanguageManager {
     }
   }
 
+  async editLanguagesList(userId, languages) {
+    try {
+      // delete all languages for specific user
+
+      const deleteUserLanguages = await this.database.query(
+        `delete from user_languages where userId = ?`,
+        [userId]
+      );
+      const resultAddLanguagues = await Promise.all(
+        languages.map(async (language) => {
+          const [res] = await this.database.query(
+            `INSERT INTO user_languages (userId, languageId) VALUES (?, ? )`,
+            [userId, language.id]
+          );
+          return res.insertId;
+        })
+      );
+      const languagesList = await this.getUserLanguages(userId);
+
+      return {
+        success: true,
+        message: "languages added successfully",
+        languages: languagesList,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async addUserLanguage(userId, languageId) {
     try {
       const [language] = await this.database.query(
-        `SELECT * FROM languages where id = ? `,
+        `SELECT * FROM languages where id =  ? `,
         [languageId]
       );
 
@@ -67,7 +95,6 @@ export default class LanguageManager {
           `SELECT * FROM user_languages where userId = ? and languageId = ? `,
           [userId, languageId]
         );
-        console.log("user languages :", userLanguage);
         if (userLanguage.length !== 0) {
           return { success: false, message: "language already exists" };
         }

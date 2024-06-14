@@ -1,13 +1,16 @@
 import {
   AfterViewInit,
   Component,
+  DestroyRef,
   ElementRef,
   Input,
   OnInit,
   ViewChild,
+  inject,
 } from '@angular/core';
-import { ResponseReservation } from '../../../../../shared/models/reservation';
-import { auditTime, fromEvent } from 'rxjs';
+import { reservationForMentorDTO } from '../../../../../shared/models/reservation';
+import { fromEvent } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-reservation-with-swipe',
@@ -15,36 +18,33 @@ import { auditTime, fromEvent } from 'rxjs';
   styleUrl: './reservation-with-swipe.component.scss',
 })
 export class ReservationWithSwipeComponent implements AfterViewInit, OnInit {
-  @Input()
-  reservation!: ResponseReservation;
-  @Input()
-  bgColor: string = 'transparent';
-  @ViewChild('thisRef')
-  elementRef!: ElementRef;
+  @Input() reservation!: reservationForMentorDTO;
+  @Input() bgColor: string = 'transparent';
+  @ViewChild('thisRef') elementRef!: ElementRef;
   startingPosition!: number;
   offsetRight = 0;
   showAction = false;
 
   endAt!: Date;
+  destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.endAt = new Date(this.reservation.slot.dateTime);
+    this.endAt = new Date(this.reservation.dateTime);
     this.endAt.setTime(this.endAt.getTime() + 3600000);
   }
 
   ngAfterViewInit(): void {
-    fromEvent<TouchEvent>(
-      this.elementRef.nativeElement,
-      'touchstart'
-    ).subscribe((ele: TouchEvent) => {
-      ele.stopPropagation();
-      ele.preventDefault();
-      console.log(ele);
-      this.startingPosition = ele.touches[0].clientX;
-    });
+    fromEvent<TouchEvent>(this.elementRef.nativeElement, 'touchstart')
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((ele: TouchEvent) => {
+        ele.stopPropagation();
+        ele.preventDefault();
+        this.startingPosition = ele.touches[0].clientX;
+      });
 
-    fromEvent<TouchEvent>(this.elementRef.nativeElement, 'touchmove').subscribe(
-      (ele: TouchEvent) => {
+    fromEvent<TouchEvent>(this.elementRef.nativeElement, 'touchmove')
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((ele: TouchEvent) => {
         ele.stopPropagation();
         ele.preventDefault();
         const touch = ele.changedTouches[0];
@@ -55,11 +55,11 @@ export class ReservationWithSwipeComponent implements AfterViewInit, OnInit {
               : 150;
           this.elementRef.nativeElement.style.transform = `translateX(${this.offsetRight}px)`;
         }
-      }
-    );
+      });
 
-    fromEvent<TouchEvent>(this.elementRef.nativeElement, 'touchend').subscribe(
-      (ele: TouchEvent) => {
+    fromEvent<TouchEvent>(this.elementRef.nativeElement, 'touchend')
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((ele: TouchEvent) => {
         ele.stopPropagation();
         ele.preventDefault();
         const touch = ele.changedTouches[0];
@@ -72,13 +72,14 @@ export class ReservationWithSwipeComponent implements AfterViewInit, OnInit {
           this.elementRef.nativeElement.style.transform = `translateX(0px)`;
           this.showAction = false;
         }
-      }
-    );
+      });
 
-    fromEvent(this.elementRef.nativeElement, 'click').subscribe(
-      (ele) =>
-        (this.elementRef.nativeElement.style.transform = `translateX(0px)`)
-    );
+    fromEvent(this.elementRef.nativeElement, 'click')
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(
+        (ele) =>
+          (this.elementRef.nativeElement.style.transform = `translateX(0px)`)
+      );
   }
 
   delete() {

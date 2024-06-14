@@ -1,4 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { Button } from 'primeng/button';
 
 @Component({
   selector: 'app-button',
@@ -11,4 +19,10 @@ export class ButtonComponent {
   @Input() variant!: 'pink' | 'black';
 
   @Output() onSubmit = new EventEmitter();
+  @ViewChild('btn') btn!: ElementRef;
+
+  onclick() {
+    this.btn.nativeElement.focus();
+    this.onSubmit.emit();
+  }
 }

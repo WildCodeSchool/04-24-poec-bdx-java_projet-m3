@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ResponseReservation } from '../../../../../shared/models/reservation';
+import { reservationForMentorDTO } from '../../../../../shared/models/reservation';
 
 @Component({
   selector: 'app-list-reservation',
@@ -7,6 +7,6 @@ import { ResponseReservation } from '../../../../../shared/models/reservation';
   styleUrl: './list-reservation.component.scss',
 })
 export class ListReservationComponent {
-  @Input() reservations!: ResponseReservation[];
+  @Input() reservations!: reservationForMentorDTO[];
   @Input() title: string = '';
 }

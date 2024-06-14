@@ -1,0 +1,47 @@
+@import "variables.scss";
+
+.upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  input[type="file"] {
+    display: none;
+  }
+
+  label span {
+    padding: 8px 12px;
+    background: $primary-color;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s all ease;
+  }
+
+  label span:hover {
+    background: #b90437;
+    transform: scale(0.95);
+  }
+  img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+}
+.button-with-icon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+span .icon {
+  width: 25px;
+  height: 25px;
+}
+
+span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+}

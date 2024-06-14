@@ -3,6 +3,43 @@
 .container-general-layout {
   background-color: #fcf6f8;
 }
+.header-layout {
+  display: flex;
+  color: white;
+  border-radius: 15px;
+  align-items: center;
+}
+
+.container-notification {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.icon-wrapper img {
+  display: block;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  line-height: 1;
+}
+.round-image {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+}
 
 .container-layout {
   margin: 0 auto;
@@ -34,6 +71,8 @@
 
   button.burger {
     position: absolute;
+    top: -10px;
+    left: 15px;
     height: 30px;
     display: flex;
     justify-content: center;
@@ -41,6 +80,7 @@
     margin-bottom: 30px;
     background-color: transparent;
     border: none;
+    margin-left: 10px;
   }
   .container-side-nav {
     margin-top: 40px;
@@ -48,15 +88,34 @@
     background-color: white;
     border-radius: 20px;
     transition: 0.2s all ease;
-    padding: 10px 10px;
+    padding: 30px 10px 10px 10px;
     margin-top: 20px;
     z-index: 10;
+    // flex-basis: 250px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .logout {
+      margin-left: 20px;
+
+      .logout-btn {
+        display: flex;
+        background-color: transparent;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: start;
+      }
+    }
   }
   .container-outlet {
     flex-grow: 1;
-    padding: 20px;
+    padding: 15px;
     transition: 0.2s all ease;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 130px);
     overflow-y: auto;
     margin-top: 30px;
   }
@@ -120,7 +179,7 @@
   }
 }
 
-@media screen and (max-width: $small) {
+@media screen and (max-width: $medium) {
   .container-layout {
     .header-container {
       width: 90%;

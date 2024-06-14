@@ -1,0 +1,98 @@
+.modal-note {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+
+  .pop-up-date {
+    display: flex;
+    flex-direction: row;
+  }
+  .pop-up-date img {
+    width: 15px;
+    color: red;
+    margin-right: 5px;
+  }
+
+  .pop-up-date h3 {
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  .pop-up-date p {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .image {
+    width: max(100%, 40vw);
+    height: auto;
+  }
+  .card {
+    width: 100%;
+  }
+
+  .control {
+    margin: 10px 0;
+    display: flex;
+    gap: 10px;
+  }
+
+  .action {
+    height: 300px;
+  }
+}
+.mentorat-header h1 {
+  font-size: 24px;
+  margin-top: 30px;
+}
+.mentorat-header h3 {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.content-resume {
+  display: flex;
+  margin: 50px 0;
+}
+.content-resume img {
+  width: 150px;
+  margin-right: 5px;
+}
+.info-slot {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  justify-content: center;
+}
+
+.image-container {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.rounded-square {
+  width: 100%;
+  height: auto;
+  border-radius: 10%;
+}
+
+.control {
+  margin-top: 30px;
+}
+
+.message {
+  display: flex;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.mentorat-header span {
+  color: #f8156b;
+  font-style: italic;
+}

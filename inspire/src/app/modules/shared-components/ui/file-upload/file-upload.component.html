@@ -1,0 +1,19 @@
+<div class="upload">
+  <ng-container *ngIf="imageUrl">
+    <img [src]="imageUrl" alt="" width="75" height="75" />
+  </ng-container>
+  <label for="images" class="button-with-icon" (click)="fileUpload.click()">
+    <span>
+      <img src="/assets/svgs/upload-img.svg" alt="Icône" class="icon" />
+
+      Choisir une image
+    </span>
+    <input
+      type="file"
+      class="file-input"
+      (change)="onFileSelected($event)"
+      #fileUpload
+      [accept]="'image/png, image/jpeg, image/svg+xml, image/webp'"
+    />
+  </label>
+</div>

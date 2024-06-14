@@ -1,22 +1,17 @@
 <div class="row-reservation" [ngClass]="bgColor" *ngIf="reservation">
   <div class="avatar-name">
-    <img
-      [src]="'https://placehold.jp/35x35.png'"
-      alt="avatar"
-      width="35"
-      height="35"
-    />
-    <p>{{ reservation.student.firstname }}</p>
+    <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" />
+    <p>{{ reservation.firstname }}</p>
   </div>
   <div class="promotion">
-    {{ reservation.student.promotion ?? "Java" }}
+    {{ reservation.title }}
   </div>
   <div class="sujet">{{ reservation.subject || "sans sujet" | titlecase }}</div>
   <div class="date">
-    {{ reservation.slot.dateTime | date : "dd/MM/yyyy" }}
+    {{ reservation.dateTime | date : "dd/MM/yyyy" }}
   </div>
   <div class="creneau">
-    {{ reservation.slot.dateTime | date : "HH:mm:ss" }} -
+    {{ reservation.dateTime | date : "HH:mm:ss" }} -
     {{ endAt | date : "HH:mm:ss" }}
   </div>
   <div class="action">

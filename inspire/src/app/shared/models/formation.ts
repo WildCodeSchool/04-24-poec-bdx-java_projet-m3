@@ -1,12 +1,19 @@
-import { Language } from './language';
-
 export type Formation = {
-  id?: string;
-  userId: string;
   title: string;
-  company: Language;
-  dateBegin: Date;
-  dateEnd: Date;
+  company: string;
+  dateBegin: string;
+  dateEnd: string;
   city: string;
   country: string;
+};
+
+export type FormationDTO = {
+  id?: number;
+  title: string;
+  company: string;
+  dateBegin: string;
+  dateEnd: string;
+  city: string;
+  country: string;
+  userId: number;
 };

@@ -1,0 +1,58 @@
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  height: 120px;
+  background-color: white;
+  border-radius: 15px;
+  margin: 10px 0;
+
+  .top-part {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    h1 {
+      font-size: 1.2em;
+      padding: 10px 20px;
+    }
+    .btn-reset {
+      padding: 10px 20px;
+
+      button {
+        padding: 5px 15px;
+        border: 1px solid #f7156b;
+        background-color: white;
+        color: #f7156b;
+        border-radius: 10px;
+      }
+    }
+  }
+
+  .bottom-part {
+    display: flex;
+    flex: column;
+    gap: 20px;
+    margin: 10px 20px;
+
+    .filter-button {
+      align-self: center;
+
+      button {
+        padding: 5px 15px;
+        color: white;
+        border: none;
+        background-color: #f7156b;
+        border-radius: 10px;
+      }
+    }
+  }
+}
+
+.filter-container button:hover {
+  cursor: pointer;
+}
+
+.p-multiselect-filter-container {
+  background-color: red; /* Définis le style ici */
+}

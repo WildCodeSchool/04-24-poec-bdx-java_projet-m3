@@ -1,6 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Experience } from '../../../shared/models/experience';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
+import { Experience, ExperienceDTO } from '../../../shared/models/experience';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../../../user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-form-edit-experience',
@@ -8,26 +18,36 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrl: './form-edit-experience.component.scss',
 })
 export class FormEditExperienceComponent implements OnInit {
-  @Input() experience!: Experience;
+  @Input() experience!: ExperienceDTO;
+  @Output() destroy = new EventEmitter();
+  @Output() experienceEmitter = new EventEmitter<ExperienceDTO>();
   experienceForm!: FormGroup<any>;
-  @Input() destroy!: () => void;
+
+  destroyRef = inject(DestroyRef);
 
   onSubmit() {
-    console.log(this.experienceForm.value);
+    const id = this.experience.id;
+    this.experienceEmitter.emit({ ...this.experienceForm.value, id });
+    this.destroy.emit();
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private userService: UserService) {}
   ngOnInit(): void {
+    const date = new Date(this.experience.dateBegin);
+    const formattedDate = date.toISOString().split('T')[0];
+    const endDate = new Date(this.experience.dateEnd);
+    const formattedEndDate = endDate.toISOString().split('T')[0];
+
     this.experienceForm = this.fb.group({
-      title: [this.experience.title],
-      company: [this.experience.company],
-      dateBegin: [this.experience.dateBegin],
-      dateEnd: [this.experience.dateEnd],
+      title: [this.experience.title, Validators.required],
+      company: [this.experience.company, Validators.required],
+      dateBegin: [formattedDate, Validators.required],
+      dateEnd: [formattedEndDate, Validators.required],
+      city: [this.experience.city, Validators.required],
+      country: [this.experience.country, Validators.required],
     });
   }
   cancel() {
-    console.log('cancel run');
-
-    this.destroy();
+    this.destroy.emit();
   }
 }

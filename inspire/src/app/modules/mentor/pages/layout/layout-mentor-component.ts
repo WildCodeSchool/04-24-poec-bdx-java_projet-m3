@@ -2,7 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { MentorService } from '../../../../shared/services/mentor.service';
 import { UserService } from '../../../../user.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
+import { MentorDTO } from '../../../../shared/models/user';
 
 @Component({
   selector: 'app-side-nav',
@@ -13,18 +16,18 @@ export class LayoutMentor implements OnInit {
   showNavbar = true;
   modalVisible = false;
   userService = inject(UserService);
-
+  userStoreService = inject(UserStoreService);
   windowWatcher = inject(WindowWatcherService);
-  // b362
-  mentor$ = inject(MentorService).getMentorById();
-
+  activatedRoute = inject(ActivatedRoute);
+  mentorProfil$: BehaviorSubject<MentorDTO> =
+    inject(MentorService).activeMentorProfil$;
   toggleVisibility() {
     this.showNavbar = !this.showNavbar;
-    console.log(this.showNavbar);
   }
 
   logout() {
     this.userService.logout();
+    this.modalVisible = false;
   }
 
   ngOnInit(): void {

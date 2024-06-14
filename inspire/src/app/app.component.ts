@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserStoreService } from './shared/services/stores/user-store.service';
 import { User } from './shared/models/user';
 import { Subscription } from 'rxjs';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -12,17 +12,12 @@ export class AppComponent implements OnInit, OnDestroy {
   userSubscription: Subscription | undefined;
   userDansLeLocalStorage: User | null = null;
 
-  constructor(private store: UserStoreService) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userSubscription = this.store.getUserConnected$().subscribe((user) => {
-      this.userDansLeLocalStorage = user;
-    });
-
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      const user: User = JSON.parse(storedUser);
-      this.store.setUserConnected(user);
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.userService.getUserByToken(token).subscribe();
     }
   }
 

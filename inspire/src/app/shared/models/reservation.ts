@@ -1,26 +1,49 @@
-import { Student } from './user';
-
-export class Reservation {
-  id?: string = '';
-  subject: string = '';
-  message?: string = '';
-  mentorId: string = '';
-  slotId: string = '';
-}
-
 export type Slot = {
-  id?: string;
   dateTime: Date;
   mentorId: number;
   visio: boolean;
 };
 
-export class ResponseReservation {
-  id?: string = '';
-  slotId?: number;
-  userId?: number;
-  message?: string = '';
-  subject: string = '';
-  slot: Slot = {} as Slot;
-  student: Student = {} as Student;
-}
+export type SlotDTO = {
+  id: number;
+  dateTime: Date;
+  mentorId: number;
+  visio: boolean;
+};
+
+export type Reservation = {
+  subject: string;
+  message?: string;
+  mentorId: string;
+  slotId: string;
+};
+
+export type ReservationForStudentDTO = {
+  id: number;
+  mentorId: number;
+  slotId: number;
+  userId: number;
+  message: string;
+  subject: string;
+  dateTime: Date;
+  visio: boolean;
+  title: string;
+  firstname: string;
+  lastname: string;
+  imgUrl: string;
+};
+
+export type reservationForMentorDTO = {
+  id: number;
+  studentId: number;
+  slotId: number;
+  userId: number;
+  message: string;
+  subject: string;
+  dateTime: Date;
+  visio: boolean;
+  title: string;
+  firstname: string;
+  lastname: string;
+  imgUrl: string;
+};

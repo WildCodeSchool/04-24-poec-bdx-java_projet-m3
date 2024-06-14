@@ -1,110 +1,124 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import {
-  BehaviorSubject,
-  Observable,
-  forkJoin,
-  map,
-  of,
-  switchMap,
-  tap,
-} from 'rxjs';
-import { Mentor, MentorFullProfil } from '../models/user';
-import { Skill } from '../models/chip';
-import { Language } from '../models/language';
-import { Formation } from '../models/formation';
-import { Experience } from '../models/experience';
+import { BehaviorSubject, Observable, of, tap } from 'rxjs';
+import { Mentor, MentorDTO } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
-
-type ResponseSkill = {
-  id: string;
-  userId: string;
-  skillId: string;
-  skill: Skill;
-};
-
-type ResponseLanguage = {
-  id: string;
-  userId: string;
-  skillId: string;
-  language: Language;
-};
+import { reservationForMentorDTO } from '../models/reservation';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MentorService {
-  httpClient = inject(HttpClient);
+  constructor(private httpClient: HttpClient) {}
+
   userConnected = inject(UserStoreService).getUserConnected$();
 
-  constructor() {}
+  activeMentorProfil$: BehaviorSubject<MentorDTO> =
+    new BehaviorSubject<MentorDTO>({} as MentorDTO);
+  mentorsReservations$: BehaviorSubject<reservationForMentorDTO[]> =
+    new BehaviorSubject<reservationForMentorDTO[]>([]);
 
-  activeMentor$: BehaviorSubject<MentorFullProfil> = new BehaviorSubject(
-    {} as MentorFullProfil
-  );
-
-  getMentorById() {
-    console.log('connected user value', this.userConnected.value);
+  getMentorProfil() {
+    console.log('user connected ', this.userConnected.value.id);
 
     return this.httpClient
-      .get<Mentor>(
-        environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
+      .get<MentorDTO>(
+        'http://localhost:8080/mentor/' + this.userConnected.value.id
+        // environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
       )
       .pipe(
-        switchMap((ele) => {
-          const listSkills = this.getMentorSkills();
-          const listLanguages = this.getMentorLanguages();
-          const listFormations = this.getMentorFormations();
-          const listExperiences = this.getMentorExperiences();
-          return forkJoin({
-            profil: of(ele),
-            languages: listLanguages,
-            skills: listSkills,
-            formations: listFormations,
-            experiences: listExperiences,
-          });
+        tap((res) => {
+          console.log('recieved mentor ', res);
+
+          this.activeMentorProfil$.next(res);
         })
-      )
-      .pipe(tap((fullProfil) => this.activeMentor$.next(fullProfil)));
+      );
   }
 
-  getMentorSkills() {
-    return this.httpClient
-      .get<Skill[]>(
-        environment.BASE_URL +
-          '/skill/skills/user/' +
-          this.userConnected.value?.id
-      )
-      .pipe(tap((ele) => console.log('skills', ele)));
+  getMentorProfilById(userId: number) {
+    return this.httpClient.get<MentorDTO>(
+      'http://localhost:8080/mentor/' + userId
+      // environment.BASE_URL + '/mentor/mentors/' + userId
+    );
   }
 
-  getMentorLanguages() {
-    return this.httpClient
-      .get<Language[]>(
-        environment.BASE_URL +
-          '/language/languages/user/' +
-          this.userConnected.value?.id
-      )
-      .pipe(tap((ele) => console.log('languages', ele)));
+  setActiveMentor(mentor: MentorDTO): void {
+    this.activeMentorProfil$.next(mentor);
   }
 
-  getMentorFormations() {
+  updateMentorProfil(profil: MentorDTO) {
     return this.httpClient
-      .get<Formation[]>(
-        environment.BASE_URL +
-          '/formation/formations/user/' +
-          this.userConnected.value?.id
+      .put<{ affectedRow: number; profil: MentorDTO; success: boolean }>(
+        'http://localhost:8080/mentor/' + this.userConnected.value.id,
+        // environment.BASE_URL +
+        //   '/mentor/mentors/' +
+        //   this.userConnected.value?.id,
+        { ...profil, userId: this.userConnected.value.id }
       )
-      .pipe(tap((ele) => console.log('languages', ele)));
+      .pipe(
+        tap((result) => {
+          console.log(' new profil ', result);
+
+          this.activeMentorProfil$.next(profil);
+        })
+      );
   }
-  getMentorExperiences() {
+
+  getMentorsList() {
     return this.httpClient
-      .get<Experience[]>(
-        environment.BASE_URL +
-          '/experience/experiences/user/' +
-          this.userConnected.value?.id
-      )
-      .pipe(tap((ele) => console.log('les experiences', ele)));
+      .get<MentorDTO[]>(environment.BASE_URL_API + 'mentor/get/all')
+      .pipe(tap((res) => console.log(res)));
+  }
+
+  getMentorsBySkills(skills: string[]): Observable<MentorDTO[]> {
+    const params = { skills: skills.join(',') }
+    return this.httpClient.get<MentorDTO[]>(`${environment.BASE_URL_API}mentor/by-skills`, { params });
+  }
+
+  getMentorsByExperienceYears(minYears: number, maxYears: number): Observable<MentorDTO[]> {
+    return this.httpClient.get<MentorDTO[]>(
+      `${environment.BASE_URL_API}mentor/by-experience?minYears=${minYears}&maxYears=${maxYears}`
+    );
+  }
+
+  getMentorListPagination(perPage: number, offset: number) {
+    return this.httpClient.get<Mentor[]>(
+      environment.BASE_URL +
+        `/mentor/mentors?perPage=${perPage}&offset=${offset}`
+    );
+  }
+
+  getMentorListFavoriteByStudent(studentId: number): Observable<MentorDTO[]> {
+    return this.httpClient.get<MentorDTO[]>(
+      environment.BASE_URL_API + `student/favorite/list/${studentId}`
+    );
+  }
+
+  getMentorReservationsList() {
+    return this.httpClient.get<reservationForMentorDTO[]>(
+      environment.BASE_URL +
+        '/reservation/reservations/mentor' +
+        this.userConnected.value?.id
+    );
+  }
+
+  updateMentorImage(file: File) {
+    if (file) {
+      const formData = new FormData();
+
+      formData.append('file', file);
+
+      return this.httpClient
+        .post<MentorDTO>(
+          //  environment.BASE_URL +
+          //'/mentor/mentors/image/' +
+          'http://localhost:8080/user/upload/image/' +
+            this.userConnected.value.id,
+          // this.userConnected.value.id,
+          formData
+        )
+        .pipe(tap((res) => this.activeMentorProfil$.next(res)));
+    } else return of();
   }
 }

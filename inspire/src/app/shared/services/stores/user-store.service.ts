@@ -1,26 +1,27 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { User } from '../../models/user';
+import { UserDTO } from '../../models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserStoreService {
-  private userConnected$: BehaviorSubject<User | null> =
-    new BehaviorSubject<User | null>(null);
+  private userConnected$: BehaviorSubject<UserDTO> =
+    new BehaviorSubject<UserDTO>({} as UserDTO);
 
-  constructor() {
-    const storedUser = localStorage.getItem('user');
-    this.userConnected$ = new BehaviorSubject<User | null>(
-      storedUser ? JSON.parse(storedUser) : null
-    );
-  }
+  token$: BehaviorSubject<string> = new BehaviorSubject(
+    'eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiTUVOVE9SIiwic3ViIjoibWVudG9yMUBnbWFpbC5jb20iLCJpYXQiOjE3MTgwMjMyMjMsImV4cCI6MTcxNzMyODI1NX0.3ySg4awLkuY_rvwX7tDXkclc7OSIvfO_MSGJmFIZX04'
+  );
 
-  getUserConnected$(): BehaviorSubject<User | null> {
+  getUserConnected$(): BehaviorSubject<any> {
     return this.userConnected$;
   }
 
-  setUserConnected(user: User | null): void {
+  setUserConnected(user: UserDTO): void {
     this.userConnected$.next(user);
+  }
+
+  getUserId(): number {
+    return this.userConnected$.value?.id ?? null;
   }
 }

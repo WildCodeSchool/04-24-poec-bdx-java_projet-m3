@@ -1,6 +1,6 @@
 <div class="title-list">
   <h3>{{ title }}</h3>
-  <button class="edit-button" (click)="addCourse()">
+  <button class="edit-button" (click)="addCourse()" *ngIf="editModeOn">
     <img src="assets/svgs/plus.svg" alt="edit" width="25" height="25" />
   </button>
 </div>
@@ -29,6 +29,9 @@
       width: phoneMode.phoneMode ? 'max(50vw, 400px)' : '100vw'
     }"
   >
-    <app-form-add-course [destroy]="hideAddFormation"></app-form-add-course>
+    <app-form-add-course
+      (destroy)="hideAddFormation()"
+      (formationEmitter)="addNewCourse($event)"
+    ></app-form-add-course>
   </p-sidebar>
 </ng-container>

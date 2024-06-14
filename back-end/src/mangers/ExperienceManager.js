@@ -48,19 +48,29 @@ export default class ExperienceManager {
         (? , ?, ? , ? ,? ,? ,?)`,
         [title, company, dateBegin, dateEnd, city, country, userId]
       );
+      const experiences = await ExperienceManager.getUserExperiences(userId);
 
-      return { success: true, message: "experience added successfully" };
+      return {
+        success: true,
+        message: "experience added successfully",
+        experiences,
+      };
     } catch (error) {
       throw error;
     }
   }
 
-  static async deleteExperience(experienceId) {
+  static async deleteExperience(experienceId, userId) {
     try {
       await client.query(`DELETE FROM experiences WHERE id = ?`, [
         experienceId,
       ]);
-      return { success: true, message: "experience deleted successfully" };
+      const experiences = await ExperienceManager.getUserExperiences(userId);
+      return {
+        success: true,
+        message: "experience deleted successfully",
+        experiences,
+      };
     } catch (error) {
       throw error;
     }
@@ -76,6 +86,9 @@ export default class ExperienceManager {
     sql += ` where id = ?`;
     sqlValues.push(id);
     const [res] = await client.query(sql, sqlValues);
-    return res.affectedRows;
+    const experiences = await ExperienceManager.getUserExperiences(
+      props.userId
+    );
+    return { affectedRows: res.affectedRows, experiences };
   }
 }

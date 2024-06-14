@@ -1,0 +1,35 @@
+<div class="profil-mentor">
+  <div class="main">
+    <div>
+      <app-card-infos
+        [chips]="skills"
+        [mentor]="profil"
+        [editModeOn]="editModeOn"
+      ></app-card-infos>
+    </div>
+    <app-list-experience
+      [experiences]="experiences"
+      [title]="'Mes expériences'"
+      [editModeOn]="editModeOn"
+    ></app-list-experience>
+  </div>
+  <div class="side-left">
+    <app-list-formation
+      [formations]="formations"
+      [title]="'Mes formations'"
+      [editModeOn]="editModeOn"
+    ></app-list-formation>
+    <app-list-language
+      [languages]="languages"
+      [title]="'Mes langues'"
+      [editModeOn]="editModeOn"
+    ></app-list-language>
+    <div class="action">
+      <app-button
+        [text]="'Réserver un créneau'"
+        [variant]="'black'"
+        [routerLink]="'/student/reserve/' + profil.userId"
+      ></app-button>
+    </div>
+  </div>
+</div>

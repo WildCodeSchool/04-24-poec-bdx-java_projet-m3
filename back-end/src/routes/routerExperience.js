@@ -14,7 +14,7 @@ router.post("/experiences", (req, res) => {
   ExperienceController.add(req, res);
 });
 
-router.delete("/experiences/:experienceId", (req, res) => {
+router.delete("/experiences/:experienceId/:userId", (req, res) => {
   ExperienceController.delete(req, res);
 });
 

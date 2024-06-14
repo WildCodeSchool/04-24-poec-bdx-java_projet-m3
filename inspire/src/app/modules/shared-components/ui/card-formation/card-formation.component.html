@@ -10,7 +10,7 @@
       </div>
     </div>
   </div>
-  <div class="card-skill-control">
+  <div class="card-skill-control" *ngIf="editModeOn">
     <button (click)="showEditForm()">
       <img src="assets/svgs/edit.svg" alt="edit" width="20" height="20" />
     </button>
@@ -35,7 +35,7 @@
   >
     <app-form-edit-course
       [formation]="formation"
-      [destroy]="hideEditForm"
+      (formationEmitter)="editForm($event)"
     ></app-form-edit-course>
   </p-sidebar>
 </ng-container>
@@ -45,5 +45,6 @@
     [question]="'Souhaitez-vous supprimer cette formation?'"
     (onCancel)="popupDeleteVisible = false"
     (onValidate)="popupDeleteVisible = false"
+    (onDelete)="deleteFormation()"
   ></app-modal-validate>
 </ng-container>

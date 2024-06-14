@@ -1,0 +1,255 @@
+<div class="control"></div>
+<ng-container *ngIf="today?.length">
+  <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
+</ng-container>
+<full-calendar
+  [events]="events"
+  [options]="calendarOptions"
+  #calendar
+></full-calendar>
+<p-dialog
+  [modal]="true"
+  [visible]="visible && formattedSlotInfo"
+  [style]="{ width: '30rem' }"
+  [closable]="false"
+>
+  <div class="modal">
+    <div class="container-img-forgot">
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/validate-slot.svg"
+        alt=""
+      />
+    </div>
+    <h1>Validez le créneau d'ouverture</h1>
+    <div class="content">
+      <p>
+        Ahoy, aventurier en quête de sagesse ! Vous êtes sur le point de
+        franchir les portes d'une aventure épique : la création d'un créneau de
+        mentorat.
+      </p>
+
+      <div class="form-mentorat">
+        <h2>Choisisez le mode de mentorat</h2>
+        <form [formGroup]="formulaire">
+          <select formControlName="mode" (change)="updateMode()">
+            <option value="presentiel">Présentiel</option>
+            <option value="visio">Visio</option>
+          </select>
+        </form>
+      </div>
+
+      <div class="content-resume">
+        <h2>Résumé de votre créneau</h2>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/date-slot.svg"
+            alt=""
+          />
+
+          <h3>
+            Date :
+            <span>{{
+              formattedSlotInfo?.start | date : "dd MMMM yyyy" : "" : "fr"
+            }}</span>
+          </h3>
+        </div>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/duration.svg"
+            alt=""
+          />
+
+          <h3>
+            De
+            <span>
+              {{ formattedSlotInfo?.start | date : "HH:mm" : "" : "fr" }} à
+              {{ formattedSlotInfo?.end | date : "HH:mm" : "" : "fr" }} ({{
+                formattedSlotInfo?.formattedDuration
+              }})</span
+            >
+          </h3>
+        </div>
+
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/visio.svg"
+            alt=""
+          />
+
+          <h3>
+            Le créneau selectionné est
+            <span>
+              {{
+                formattedSlotInfo?.visio ? " en Visio" : "en Présentiel"
+              }}</span
+            >
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="control">
+      <button class="btn-general black" (click)="visible = false">
+        Annuler
+      </button>
+      <button class="btn-general pink" (click)="validateSlot()">
+        Enregistrer
+      </button>
+    </div>
+  </div>
+</p-dialog>
+<p-dialog
+  [(visible)]="displayModal"
+  [modal]="true"
+  [style]="{ width: '40rem' }"
+  [closable]="false"
+>
+  <div class="modal">
+    <div class="container-img-forgot">
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/question.svg"
+        alt=""
+      />
+    </div>
+
+    <div class="content">
+      <h1>Information sur votre créneau</h1>
+      <p>
+        Un créneau de mentorat est disponible dans notre agenda ! Vous avez la
+        possibilité de le conserver pour accueillir de nouveaux étudiants ou de
+        le supprimer selon vos besoins.
+      </p>
+      <div
+        class="content-resume old-slot"
+        [class]="{ 'is-editing': isModfify }"
+      >
+        <div class="content-resume">
+          <h2>Résumé de votre créneau</h2>
+        </div>
+
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/information.svg"
+            alt=""
+          />
+          <h3>
+            Début du créneau le <span>{{ eventDetails?.start | date }}</span> à
+            <span>{{ eventDetails?.start | date : "HH:mm" }}</span>
+          </h3>
+        </div>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/information.svg"
+            alt=""
+          />
+          <h3>
+            Fin du créneau le <span>{{ eventDetails?.end | date }}</span> à
+            <span>{{ eventDetails?.end | date : "HH:mm" }}</span>
+          </h3>
+        </div>
+        <div class="pop-up-date">
+          <img
+            class="img-fluid forgot-img"
+            src="/assets/svgs/information.svg"
+            alt=""
+          />
+          <h3>
+            Le créneau est
+            <span>
+              {{ eventDetails.visio ? " en Visio" : "en Présentiel" }}</span
+            >
+          </h3>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isModfify" class="content">
+      <div class="content-resume new-slot">
+        <div class="content-resume">
+          <h2>Définissez votre nouveau créneau de mentorat</h2>
+        </div>
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+          <input type="hidden" formControlName="id" />
+
+          <div class="form-update">
+            <label for="">Choissisez le mode de mentorat *</label>
+
+            <select formControlName="visio">
+              <option value="presentiel">Présentiel</option>
+              <option value="visio">Visio</option>
+            </select>
+          </div>
+
+          <div id="text-update">
+            <h2>Résumée de votre nouveau créneau</h2>
+          </div>
+
+          <div class="pop-up-date">
+            <img
+              class="img-fluid forgot-img"
+              src="/assets/svgs/date-slot.svg"
+              alt=""
+            />
+            <h3>
+              Début du créneau le
+              <span>{{ eventDetailsEdit.start | date }} </span> à
+              <span>{{ eventDetailsEdit.start | date : "HH:mm" }} </span>
+            </h3>
+          </div>
+
+          <div class="pop-up-date">
+            <img
+              class="img-fluid forgot-img"
+              src="/assets/svgs/date-slot.svg"
+              alt=""
+            />
+            <h3>
+              Fin du créneau le
+              <span>{{ eventDetailsEdit.end | date }}</span> à
+              <span>{{ eventDetailsEdit.end | date : "HH:mm" }} </span>
+            </h3>
+          </div>
+          <div class="pop-up-date">
+            <img
+              class="img-fluid forgot-img"
+              src="/assets/svgs/information.svg"
+              alt=""
+            />
+            <h3>
+              Le créneau sélectionné est
+              <span>{{ editForm.value.visio }}</span>
+            </h3>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="control">
+      <button class="btn-general black" (click)="closeModal()">Annuler</button>
+
+      <button *ngIf="isModfify" class="btn-general pink" (click)="onSubmit()">
+        Mettre à jour
+      </button>
+      <button
+        *ngIf="!isModfify"
+        class="btn-general modify"
+        (click)="editSlot()"
+      >
+        Modifier
+      </button>
+      <button
+        *ngIf="!isModfify"
+        class="btn-general pink"
+        (click)="deleteSlot()"
+      >
+        Supprimer
+      </button>
+    </div>
+  </div>
+</p-dialog>

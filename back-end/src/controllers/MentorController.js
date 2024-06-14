@@ -3,7 +3,8 @@ import MentorManager from "../mangers/MentorManager.js";
 export default class MentorController {
   static async browse(req, res) {
     try {
-      const result = await MentorManager.browse();
+      const { perPage, offset } = req.query;
+      const result = await MentorManager.browse(perPage, offset);
       res.status(200).json(result);
     } catch (error) {
       res.status(401).json({ message: "Demande refusée" });
@@ -13,6 +14,7 @@ export default class MentorController {
   static async read(req, res) {
     try {
       const { userId } = req.params;
+
       const result = await MentorManager.read(userId);
       res.status(200).json(result);
     } catch (error) {
@@ -66,12 +68,33 @@ export default class MentorController {
 
   static async update(req, res) {
     try {
-      const { mentorId } = req.params;
+      const { userId } = req.params;
       const props = req.body;
-      const result = await MentorManager.read(mentorId);
+      const result = await MentorManager.read(userId);
       if (result) {
-        const affectedRows = await MentorManager.update(mentorId, props);
-        res.status(202).json({ affectedRows });
+        const affectedRows = await MentorManager.update(userId, props);
+        res.status(202).json({ ...affectedRows });
+      } else
+        res
+          .status(401)
+          .json({ message: `Mise à jour refusée : Mauvais identifiants` });
+    } catch (error) {
+      res
+        .status(401)
+        .json({ message: `Mise à jour refusée : ${error.message}` });
+    }
+  }
+
+  static async updateImage(req, res) {
+    try {
+      const { userId } = req.params;
+      const result = await MentorManager.read(userId);
+      if (result) {
+        const affectedRows = await MentorManager.updateImage(
+          userId,
+          req.newPath
+        );
+        res.status(202).json({ ...affectedRows });
       } else
         res
           .status(401)

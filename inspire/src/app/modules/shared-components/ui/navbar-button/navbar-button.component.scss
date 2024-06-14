@@ -1,0 +1,72 @@
+@import "../../../../../variables.scss";
+.light {
+  background-color: white;
+  color: #4f4e4e;
+}
+.lightActive {
+  background-color: $primary-color;
+  color: white;
+}
+
+.dark {
+  background-color: black;
+  color: azure;
+}
+.darkActive {
+  background-color: black;
+  color: azure;
+}
+.btn-general:hover img {
+  filter: brightness(0) invert(1); /* Cette règle rendra l'image blanche */
+}
+.btn-general {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 13px 10px 13px 10px;
+  border-radius: 20px;
+  border: none;
+  transition: transform 0.4s ease;
+  cursor: pointer;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.btn-general:hover {
+  background-color: $primary-color;
+  color: white;
+}
+button {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  img,
+  p {
+    margin: 0 4px;
+  }
+}
+
+@media screen and (max-width: $extra-large) {
+  .btn-general {
+    font-size: 14px;
+    // margin: 0;
+    // padding: 0px 5px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+    img {
+      margin: 0;
+    }
+  }
+  .container-layout {
+    .container-outlet {
+      margin-left: 60px;
+    }
+  }
+}
+
+@media screen and (max-width: $large) {
+  .btn-general {
+    font-size: 12px;
+  }
+}

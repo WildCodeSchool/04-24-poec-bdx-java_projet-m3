@@ -3,6 +3,7 @@
   background-color: white;
   border-radius: 15px;
   min-height: 400px;
+  cursor: pointer;
 
   .img-card {
     position: relative;
@@ -16,6 +17,16 @@
       object-position: 30% 30%;
       border-radius: 15px 15px 0 0;
     }
+
+    .img-favorite {
+      width: 35px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 5px;
+      padding: 3px;
+      cursor: pointer;
+    }
   }
 
   .img-card h1 {
@@ -27,28 +38,38 @@
     color: white;
     padding: 5px 15px;
     background-color: rgba(0, 0, 0, 0.184);
+    width: 100%;
+    text-align: center;
   }
 
   .title-card {
     margin-top: 10px;
     padding: 5px 10px;
+    font-weight: 500;
   }
 
   .chip-container {
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 7px;
+
+    .skill-list {
+      background-color: #ffdbe3;
+      padding: 2px 15px;
+      border-radius: 5px;
+      color: #f7156b;
+    }
   }
   .social-container {
     display: flex;
     flex-direction: row;
     justify-content: start;
-    margin-top: 10px;
+    padding-top: 10px;
     padding-left: 20px;
     gap: 10px;
 
-    .img-linkedin img{
+    .img-linkedin img {
       height: 30px;
     }
 

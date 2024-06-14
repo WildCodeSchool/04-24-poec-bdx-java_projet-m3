@@ -1,7 +1,7 @@
 <div class="list-languages">
   <div class="title-list">
     <h3>{{ title }}</h3>
-    <button class="edit-button" (click)="showEditModal()">
+    <button class="edit-button" (click)="showEditModal()" *ngIf="editModeOn">
       <img src="assets/svgs/plus.svg" alt="edit" width="25" height="25" />
     </button>
   </div>
@@ -19,5 +19,6 @@
     [visible]="isModalVisible"
     [question]="'Editez vos langues'"
     (onCancel)="isModalVisible = false"
+    (onValidate)="updateLanguages($event)"
   ></app-modal-edit-languages>
 </ng-container>

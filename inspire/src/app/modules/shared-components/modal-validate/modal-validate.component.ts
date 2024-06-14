@@ -7,12 +7,16 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class ModalValidateComponent {
   @Input() question: string = '';
-  @Output() onValidate = new EventEmitter();
+  @Output() onDelete = new EventEmitter();
   @Output() onCancel = new EventEmitter();
   @Input() visible: boolean = false;
 
   focusBtnCancel = true;
   focusBtnValidate = false;
+
+  deleteInfo() {
+    this.onDelete.emit();
+  }
 
   showDialog() {
     this.visible = true;
@@ -23,14 +27,8 @@ export class ModalValidateComponent {
     this.onCancel.emit();
   }
 
-  validate() {
-    this.onValidate.emit();
-    console.log('validate');
-  }
-
   cancel() {
     this.onCancel.emit();
-    console.log('validate');
   }
 
   focusValidate() {

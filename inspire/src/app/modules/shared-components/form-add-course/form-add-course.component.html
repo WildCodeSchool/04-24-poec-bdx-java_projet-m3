@@ -7,19 +7,59 @@
         type="text"
         id="diplome"
         name="title"
-        formControlName="diplome"
+        formControlName="title"
         placeholder="Le diplôme obtenu"
       />
+      <div class="error" *ngIf="courseForm.get('title')?.errors">
+        <span *ngIf="courseForm.get('title')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
     </div>
     <div class="container-input">
-      <label for="school">Nom de l'établissement</label>
+      <label for="school">Nom de l'établissement *</label>
       <input
         type="text"
         id="school"
         name="school"
-        formControlName="school"
+        formControlName="company"
         placeholder="Nom de l'établissement"
       />
+      <div class="error" *ngIf="courseForm.get('school')?.errors">
+        <span *ngIf="courseForm.get('school')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
+    </div>
+    <div class="container-input">
+      <label for="city">Ville *</label>
+      <input
+        type="text"
+        id="city"
+        name="city"
+        formControlName="city"
+        placeholder="Ville"
+      />
+      <div class="error" *ngIf="courseForm.get('city')?.errors">
+        <span *ngIf="courseForm.get('city')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
+    </div>
+    <div class="container-input">
+      <label for="country">Pays *</label>
+      <input
+        type="text"
+        id="country"
+        name="country"
+        formControlName="country"
+        placeholder="Pays"
+      />
+      <div class="error" *ngIf="courseForm.get('country')?.errors">
+        <span *ngIf="courseForm.get('country')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
     </div>
   </div>
 
@@ -29,9 +69,14 @@
       type="date"
       id="dateBeggin"
       name="dateBeggin"
-      formControlName="dateBeggin"
+      formControlName="dateBegin"
       placeholder="Date de début"
     />
+    <div class="error" *ngIf="courseForm.get('dateBeggin')?.errors">
+      <span *ngIf="courseForm.get('dateBeggin')?.errors?.['required']">
+        Le champ est requis
+      </span>
+    </div>
   </div>
 
   <div class="container-input">
@@ -43,16 +88,11 @@
       formControlName="dateEnd"
       placeholder="Date de fin"
     />
-  </div>
-  <div class="container-input">
-    <label for="description">Description *</label>
-    <textarea
-      rows="5"
-      id="description"
-      name="description"
-      formControlName="description"
-      placeholder="Description de la formation"
-    ></textarea>
+    <div class="error" *ngIf="courseForm.get('dateEnd')?.errors">
+      <span *ngIf="courseForm.get('dateEnd')?.errors?.['required']">
+        Le champ est requis
+      </span>
+    </div>
   </div>
 
   <div class="btn-connexion">

@@ -15,7 +15,7 @@ router.post("/formations", (req, res) => {
   FormationController.add(req, res);
 });
 
-router.delete("/formations/:formationId", (req, res) => {
+router.delete("/formations/:formationId/:userId", (req, res) => {
   FormationController.delete(req, res);
 });
 

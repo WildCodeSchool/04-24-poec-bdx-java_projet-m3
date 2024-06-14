@@ -17,8 +17,12 @@ router.post("/languages", (req, res) => {
   languageController.addLanguage(req, res);
 });
 
+// router.post("/languages/user-single/:userId", (req, res) => {
+//   languageController.addUserLanguage(req, res);
+// });
+
 router.post("/languages/user/:userId", (req, res) => {
-  languageController.addUserLanguage(req, res);
+  languageController.editLanguagesList(req, res);
 });
 
 router.delete("/languages/:languageId", (req, res) => {

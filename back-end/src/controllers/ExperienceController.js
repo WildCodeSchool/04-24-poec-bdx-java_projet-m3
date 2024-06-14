@@ -41,9 +41,12 @@ export default class ExperienceController {
 
   static async delete(req, res) {
     try {
-      const { experienceId } = req.params;
+      const { experienceId, userId } = req.params;
 
-      const result = await ExperienceManager.deleteExperience(experienceId);
+      const result = await ExperienceManager.deleteExperience(
+        experienceId,
+        userId
+      );
       res.status(202).json({ ...result });
     } catch (error) {
       res.status(401).json({ message: `Demande refusée: ${error.message}` });
@@ -53,12 +56,13 @@ export default class ExperienceController {
   static async update(req, res) {
     try {
       const { experienceId } = req.params;
+
       const props = req.body;
       const affectedRows = await ExperienceManager.updateExperience(
         experienceId,
         props
       );
-      res.status(202).json({ affectedRows });
+      res.status(202).json({ ...affectedRows });
     } catch (error) {
       res
         .status(401)

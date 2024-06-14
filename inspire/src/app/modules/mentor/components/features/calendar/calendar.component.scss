@@ -1,0 +1,186 @@
+@import "../../../../../../variables.scss";
+.modal {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    margin-top: 30px;
+    font-size: 20px;
+    line-height: 20px;
+    text-align: center;
+  }
+
+  .control {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+  }
+  .content {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .content p {
+    font-size: 12px;
+    font-weight: 400;
+  }
+}
+
+.forgot-img {
+  width: 200px;
+}
+
+.container-img-forgot {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.pop-up-date {
+  display: flex;
+  flex-direction: row;
+}
+.pop-up-date img {
+  width: 15px;
+  color: red;
+  margin-right: 5px;
+}
+
+.pop-up-date h3 {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.pop-up-date p {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.content-resume {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+}
+.content-resume h2 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.text-update {
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+}
+
+.form-mentorat {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  text-align: left;
+}
+
+.form-mentorat h2 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media screen and (max-width: $small) {
+  .modal {
+    .control {
+      flex-direction: column;
+    }
+  }
+}
+
+.pink {
+  background-color: $primary-color;
+  color: white;
+}
+
+.modify {
+  background-color: #fcbe77;
+  color: white;
+}
+
+.black {
+  background-color: black;
+  color: azure;
+}
+.btn-general {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 11px 15px;
+  border-radius: 6px;
+  border: none;
+  transition: transform 0.4s ease;
+}
+.btn-general:hover {
+  transform: scale(0.95);
+  cursor: pointer;
+}
+
+.content p {
+  margin-top: 20px;
+}
+
+h3 span {
+  color: $primary-color;
+  font-weight: 600;
+}
+
+.old-slot.is-editing {
+  color: grey;
+  text-decoration: line-through;
+  font-style: italic;
+  font-size: 10px;
+}
+
+.old-slot.is-editing span {
+  color: grey;
+  text-decoration: line-through;
+  font-style: italic;
+}
+.new-slot {
+  width: 100%;
+  margin-top: -10px;
+}
+
+.new-slot h2 {
+  color: $primary-color;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.form-update {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.form-update label {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.form-update label {
+  margin-bottom: 2px;
+}
+
+select {
+  padding: 4px;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+#text-update h2 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: black;
+}

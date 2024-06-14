@@ -1,0 +1,66 @@
+<div class="title-about">
+  <h2>A Propos</h2>
+
+  <button
+    class="edit-button"
+    (click)="openEditFormApropos()"
+    *ngIf="editModeOn"
+  >
+    <img src="assets/svgs/edit.svg" alt="edit" width="25" height="25" />
+  </button>
+</div>
+<div class="container-card-infos" *ngIf="mentor">
+  <div class="logo-chips">
+    <div class="avatar-social">
+      <img
+        class="logo"
+        [src]="mentor.imgUrl ? mentor.imgUrl : 'https://picsum.photos/200/200'"
+        alt="avatar mentor"
+      />
+      <div class="social">
+        <a [href]="mentor.linkedinUrl">
+          <img
+            src="assets/linkedin.png"
+            alt="linkedin"
+            width="35"
+            height="35"
+          />
+        </a>
+        <a [href]="mentor.githubUrl">
+          <img src="assets/github.png" alt="github" width="35" height="35" />
+        </a>
+      </div>
+    </div>
+    <div class="skills">
+      <div class="title">
+        <h2>
+          {{ !editModeOn ? mentor.firstname + " " + mentor.lastname + ", " : ""
+          }}{{ mentor.title }}
+        </h2>
+      </div>
+      <ng-container *ngIf="chips">
+        <app-list-chip [chips]="chips"></app-list-chip>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="description">
+    <div class="title-propos">
+      <h3>Un peu plus sur moi</h3>
+    </div>
+    <p>
+      {{ mentor.description }}
+    </p>
+  </div>
+</div>
+
+<ng-container *ngIf="editFormApropoVisible">
+  <p-sidebar position="right" [(visible)]="editFormApropoVisible">
+    <app-form-edit-apropos
+      [selectedSkills]="chips"
+      [profil]="mentor"
+      (destroy)="editFormApropoVisible = false"
+      (profilEmitter)="updateProfil($event)"
+    ></app-form-edit-apropos>
+  </p-sidebar>
+</ng-container>

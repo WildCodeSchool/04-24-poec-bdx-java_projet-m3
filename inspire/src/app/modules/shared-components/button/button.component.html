@@ -2,7 +2,8 @@
   [ngClass]="{ pink: variant === 'pink', black: variant === 'black' }"
   class="btn-general"
   [type]="type"
-  (click)="onSubmit.emit()"
+  (click)="onclick()"
+  #btn
 >
   {{ text }}
 </button>

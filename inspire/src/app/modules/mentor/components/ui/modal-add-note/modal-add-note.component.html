@@ -1,0 +1,75 @@
+<div class="modal-note">
+  <div class="mentorat-header">
+    <h1>
+      Vous avez accompagné
+      <span>{{ reservation.firstname | titlecase }} </span>!
+    </h1>
+    <h3>Vous avez quelques notes à prendre sur votre session de mentorat ?</h3>
+  </div>
+
+  <div class="content-resume">
+    <div class="image-container">
+      <img
+        [src]="reservation.imgUrl"
+        alt="Mentor Image"
+        class="rounded-square"
+      />
+    </div>
+
+    <div class="info-slot">
+      <div class="pop-up-date">
+        <img
+          class="img-fluid forgot-img"
+          src="/assets/svgs/date-slot.svg"
+          alt=""
+        />
+
+        <h3>
+          Date :
+          {{ reservation.dateTime | date : "dd MMMM yyyy" }}
+        </h3>
+      </div>
+      <div class="pop-up-date">
+        <img class="img-fluid forgot-img" src="/assets/svgs/visio.svg" alt="" />
+
+        <h3>Sujet du mentorat : {{ reservation.subject }}</h3>
+      </div>
+
+      <div class="pop-up-date">
+        <img
+          class="img-fluid forgot-img"
+          src="/assets/svgs/information.svg"
+          alt=""
+        />
+
+        <h3>
+          Le mentorat était
+          {{ reservation.visio ? " en Visio" : "en Présentiel" }}
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="!editMessage">
+    <h4>Vos commentaires</h4>
+    <div class="message">
+      <div [innerHTML]="reservation.message"></div>
+    </div>
+    <app-button
+      [text]="'Editer'"
+      [variant]="'pink'"
+      (onSubmit)="editMessage = true"
+    ></app-button>
+  </div>
+  <div class="action" *ngIf="editMessage">
+    <p-editor [(ngModel)]="reservation.message" [style]="{ height: '200px' }" />
+  </div>
+  <div class="control" *ngIf="editMessage">
+    <app-button
+      [text]="'Annuler'"
+      [variant]="'pink'"
+      (onSubmit)="onCancel.emit()"
+    ></app-button>
+    <app-button [text]="'Valider'" (onSubmit)="updateMessage()"></app-button>
+  </div>
+</div>

@@ -28,6 +28,14 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { FormEditAproposComponent } from './form-edit-apropos/form-edit-apropos.component';
 import { FormAddExperienceComponent } from './form-add-experience/form-add-experience.component';
 import { FormEditExperienceComponent } from './form-edit-experience/form-edit-experience.component';
+import { CardInfosComponent } from './ui/card-infos/card-infos.component';
+import { FileUploadComponent } from './ui/file-upload/file-upload.component';
+import { DashboardLinksComponent } from './dashboard-links/dashboard-links.component';
+import { NavbarButtonComponent } from './ui/navbar-button/navbar-button.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { RouterLink } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -52,6 +60,10 @@ import { FormEditExperienceComponent } from './form-edit-experience/form-edit-ex
     FormEditAproposComponent,
     FormAddExperienceComponent,
     FormEditExperienceComponent,
+    CardInfosComponent,
+    FileUploadComponent,
+    DashboardLinksComponent,
+    NavbarButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -63,6 +75,9 @@ import { FormEditExperienceComponent } from './form-edit-experience/form-edit-ex
     DialogModule,
     MultiSelectModule,
     FormsModule,
+    FileUploadModule,
+    ToastModule,
+    RouterLink,
   ],
   exports: [
     ButtonComponent,
@@ -83,6 +98,13 @@ import { FormEditExperienceComponent } from './form-edit-experience/form-edit-ex
     ListLanguageComponent,
     ModalValidateComponent,
     FormEditAproposComponent,
+    CardInfosComponent,
+    FileUploadComponent,
+    DashboardLinksComponent,
+    NavbarButtonComponent,
   ],
+  providers: [MessageService],
 })
-export class SharedComponentsModule {}
+export class SharedComponentsModule {
+  constructor(private messageService: MessageService) {}
+}

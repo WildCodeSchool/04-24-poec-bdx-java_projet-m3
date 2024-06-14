@@ -1,5 +1,6 @@
 import {
   Component,
+  DestroyRef,
   EventEmitter,
   Input,
   OnDestroy,
@@ -7,10 +8,12 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Skill } from '../../../shared/models/chip';
 import { UserService } from '../../../user.service';
 import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MentorDTO, StudentDTO } from '../../../shared/models/user';
 
 @Component({
   selector: 'app-form-edit-apropos',
@@ -20,13 +23,38 @@ import { Subscription } from 'rxjs';
 export class FormEditAproposComponent implements OnInit, OnDestroy {
   aproposForm!: FormGroup<any>;
   @Output() destroy = new EventEmitter();
-  skills!: Skill[];
+  @Output() profilEmitter = new EventEmitter<{
+    profil: MentorDTO | StudentDTO;
+    skills: Skill[];
+    file?: File;
+    fileName?: string;
+  }>();
+  file!: File;
+  fileName!: string;
   @Input() selectedSkills!: Skill[];
+  @Input() profil!: MentorDTO;
+  skills!: Skill[];
 
+  destroyRef = inject(DestroyRef);
   listSkills$ = inject(UserService).getListSkills();
 
   onSubmit() {
-    console.log(this.aproposForm.value);
+    this.profilEmitter.emit({
+      profil: {
+        id: this.profil.id,
+        title: this.aproposForm.value['title'],
+        firstname: this.aproposForm.value['firstname'],
+        lastname: this.aproposForm.value['lastname'],
+        description: this.aproposForm.value['description'],
+        imgUrl: this.aproposForm.value['imgUrl'],
+        linkedinUrl: this.aproposForm.value['linkedinUrl'],
+        githubUrl: this.aproposForm.value['githubUrl'],
+      } as MentorDTO,
+      skills: this.selectedSkills,
+      file: this.file,
+      fileName: this.fileName,
+    });
+    this.destroy.emit();
   }
 
   listSkillsSubscriptionRef!: Subscription;
@@ -34,16 +62,23 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.aproposForm = this.fb.group({
-      title: [''],
-      imgUrl: [''],
-      linkedinUrl: [''],
-      githubUrl: [''],
-      description: [''],
-      selectedSkills: new FormControl<Skill[] | null>(this.selectedSkills),
+      title: [this.profil.title],
+      imgUrl: [this.profil.imgUrl],
+      linkedinUrl: [this.profil.linkedinUrl],
+      githubUrl: [this.profil.githubUrl],
+      firstname: [this.profil.firstname, Validators.required],
+      lastname: [this.profil.lastname, Validators.required],
+      description: [this.profil.description],
+      selectedSkill: [this.selectedSkills],
     });
-    this.listSkillsSubscriptionRef = this.listSkills$.subscribe(
-      (res) => (this.skills = res)
-    );
+
+    this.listSkillsSubscriptionRef = this.listSkills$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((res) => (this.skills = res));
+  }
+
+  setSkills(val: Skill[]) {
+    this.selectedSkills = val;
   }
 
   ngOnDestroy(): void {
@@ -54,7 +89,10 @@ export class FormEditAproposComponent implements OnInit, OnDestroy {
     this.destroy.emit();
   }
 
-  submit() {
-    this.destroy.emit();
+  submit() {}
+
+  receiveImage(event: { file: File; fileName: string }) {
+    this.file = event.file;
+    this.fileName = event.fileName;
   }
 }
