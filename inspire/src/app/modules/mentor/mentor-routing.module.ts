@@ -16,10 +16,10 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutMentor,
-    // resolve: {
-    // reservationsData: mentorReservationsResolver,
-    // reservationsHistoryData: mentorReservationsHistoryResolver,
-    // },
+     resolve: {
+    reservationsData: mentorReservationsResolver,
+     reservationsHistoryData: mentorReservationsHistoryResolver,
+     },
     children: [
       {
         path: '',
