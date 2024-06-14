@@ -119,6 +119,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
 
   editSlot() {
+    console.log('editSlot', this.eventDetails);
     this.isModfify = true;
   }
 
@@ -145,23 +146,34 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       return;
     }
 
-    const id = this.eventDetails.id;
-    const dateTime = this.formatDate(this.eventDetails.start);
-    const dateEnd = this.formatDate(this.eventDetails.end);
+    const id = Number(this.eventDetails.id);
+    const dateBegin = this.dateTimeService.convertToLocalDateTimeString(
+      this.eventDetails.start
+    );
+    const dateEnd = this.dateTimeService.convertToLocalDateTimeString(
+      this.eventDetails.end
+    );
+
     const visio = this.editForm.value.visio === 'visio';
     const mentorId = this.mentorId;
 
     const slotInfo = {
       id,
-      dateTime,
+      dateBegin,
       dateEnd,
       visio,
       mentorId,
     };
 
-    this.reservationService.updateSlot(id, slotInfo).subscribe();
-    this.displayModal = false;
-    this.loadSlots();
+    this.reservationService.updateSlot(id, slotInfo).subscribe(
+      () => {
+        this.displayModal = false;
+        this.loadSlots();
+      },
+      (error) => {
+        console.error('Erreur lors de la mise à jour du slot:', error);
+      }
+    );
   }
 
   formatDate(date: Date): string {
@@ -313,7 +325,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
 
   loadSlots(): void {
-    console.log('loadSlots');
     const mentorId = this.mentorId;
     this.reservationService.getSlotsForMentor(mentorId).subscribe((slots) => {
       this.events = this.formatSlotsToEvents(slots);

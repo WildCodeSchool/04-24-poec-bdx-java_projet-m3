@@ -72,17 +72,17 @@ export class ReservationService {
     );
   }
 
-  updateSlot(slotId: number, slotInfo: any): Observable<any> {
+  updateSlot(id: number, slotInfo: any): Observable<any> {
     const updatedSlotInfo = {
-      id: slotId,
-      dateTime: slotInfo.dateTime,
+      id: id,
+      dateBegin: slotInfo.dateBegin,
       dateEnd: slotInfo.dateEnd,
       visio: slotInfo.visio,
       mentorId: slotInfo.mentorId,
     };
 
     return this.httpClient.put(
-      `${environment.BASE_URL}/slot/slots/${slotId}`,
+      `${environment.BASE_URL_API}user/slot/update`,
       updatedSlotInfo
     );
   }
