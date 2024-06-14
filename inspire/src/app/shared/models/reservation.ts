@@ -25,11 +25,11 @@ export type ReservationForStudentDTO = {
   userId: number;
   message: string;
   subject: string;
-  dateTime: Date;
+  dateBegin: Date;
   visio: boolean;
   title: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   imgUrl: string;
 };
 
@@ -40,10 +40,10 @@ export type reservationForMentorDTO = {
   userId: number;
   message: string;
   subject: string;
-  dateTime: Date;
+  dateBegin: Date;
   visio: boolean;
   title: string;
-  firstname: string;
-  lastname: string;
+  firstName: string;
+  lastName: string;
   imgUrl: string;
 };

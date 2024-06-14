@@ -91,9 +91,9 @@ export class ReservationService {
         reservations: reservationForMentorDTO[];
         total: number;
       }>(
-        // `http://localhost:8080/reservation/get/mentor/upcoming/${mentorId}/${perPage}/${offset}`
-        environment.BASE_URL +
-          `/reservation/reservations/mentor/${userId}?perPage=${perPage}&offset=${offset}`
+        `http://localhost:8080/reservation/get/mentor/upcoming/${mentorId}/${perPage}/${offset}`
+        // environment.BASE_URL +
+        //   `/reservation/reservations/mentor/${userId}?perPage=${perPage}&offset=${offset}`
       )
       .pipe(
         tap((res) => {
@@ -112,9 +112,9 @@ export class ReservationService {
     const mentorId = inject(MentorService).activeMentorProfil$.value.id;
     return this.httpClient
       .get<{ reservations: reservationForMentorDTO[]; total: number }>(
-        // `http://localhost:8080/reservation/get/mentor/history/${mentorId}/${perPage}/${offset}`
-        environment.BASE_URL +
-          `/reservation/reservations/mentor/history/${userId}?perPage=${perPage}&offset=${offset}`
+        `http://localhost:8080/reservation/get/mentor/history/${mentorId}/${perPage}/${offset}`
+        // environment.BASE_URL +
+        //   `/reservation/reservations/mentor/history/${userId}?perPage=${perPage}&offset=${offset}`
       )
       .pipe(
         tap((res) => {
