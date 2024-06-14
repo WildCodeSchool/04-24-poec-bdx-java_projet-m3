@@ -15,7 +15,7 @@
         width="35"
         height="35"
       />
-      <p>{{ reservation.firstname }}</p>
+      <p>{{ reservation.firstName }}</p>
     </div>
     <div class="promotion">
       {{ reservation.title | titlecase }}
@@ -24,7 +24,7 @@
       {{ reservation.subject || "sans sujet" | titlecase }}
     </div>
     <div class="date">
-      {{ reservation.dateTime | date : "dd/MM/yyyy" }}
+      {{ reservation.dateBegin | date : "dd/MM/yyyy" }}
     </div>
     <div class="creneau">{{ endAt | date : "dd/MM/yyyy" }}</div>
   </div>
