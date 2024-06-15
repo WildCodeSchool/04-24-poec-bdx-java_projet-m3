@@ -119,7 +119,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
 
   editSlot() {
-    console.log('editSlotyy', this.eventDetails);
     this.eventDetailsEdit = {
       id: this.eventDetails.id,
       start: this.eventDetails.start,
@@ -210,6 +209,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     this.reservationService.updateSlot(id, slotInfo).subscribe(
       () => {
         this.displayModal = false;
+        this.isModfify = false;
         this.loadSlots();
       },
       (error) => {
@@ -259,40 +259,11 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   calendarOptions: CalendarOptions = {
     initialView: 'timeGridWeek',
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
-    events: [
-      {
-        id: 'a',
-        title: 'Mentorat Lucas',
-        start: '2024-05-21T10:30:00+02:00',
-        end: '2024-05-21T11:30:00+02:00',
-        color: 'grey',
-      },
-      {
-        id: 'b',
-        title: 'Résautage avec Cassiopée',
-        start: '2024-05-20T15:30:00+02:00',
-        end: '2024-05-20T16:30:00+02:00',
-        color: 'grey',
-      },
-      {
-        id: 'c',
-        title: 'Résautage avec Aurore',
-        start: '2024-05-23T12:30:00+02:00',
-        end: '2024-05-23T13:30:00+02:00',
-        color: 'grey',
-      },
-      {
-        id: 'd',
-        title: 'Mentorat Mahdi',
-        start: '2024-05-24T15:30:00+02:00',
-        end: '2024-05-24T16:30:00+02:00',
-        color: '#F8146B',
-      },
-    ],
+
     locale: frLocale,
     headerToolbar: {
       right: 'today prev,next',
-      left: 'dayGridMonth timeGridWeek timeGridDay',
+      left: 'title dayGridMonth timeGridWeek timeGridDay',
     },
     views: {
       dayGridMonth: {
@@ -315,10 +286,11 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       list: 'list',
       allDayText: 'tous',
     },
-    weekends: false,
-    slotDuration: '00:15:00',
-    slotMinTime: '10:00',
-    slotMaxTime: '18:00',
+    weekends: true,
+    slotDuration: '01:00:00',
+    slotMinTime: '07:00',
+    slotMaxTime: '23:00',
+    allDaySlot: false,
 
     navLinks: true,
     eventStartEditable: true,
@@ -390,7 +362,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     this.mentorSubscription = this.mentorService.activeMentorProfil$.subscribe(
       (mentor: MentorDTO) => {
         if (mentor && mentor.id) {
-          this.mentorId = mentor.userId;
+          this.mentorId = mentor.id;
         }
       }
     );
