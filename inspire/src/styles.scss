@@ -126,7 +126,7 @@ a {
 }
 
 .fc .fc-toolbar.fc-header-toolbar {
-  padding: 30px 0;
+  padding: 10px 0;
 }
 
 .fc .fc-button-primary {
@@ -179,4 +179,51 @@ a {
   padding: 5px 10px;
   font-size: 10px;
   width: 800px;
+}
+.fc .fc-timegrid-slot {
+  height: 60px;
+}
+
+.fc-timegrid-col-frame {
+  position: relative;
+}
+
+.fc-day-past .fc-timegrid-col-frame {
+  background-color: #f1f0f0d3 !important; /* Couleur grise pour les jours passés */
+}
+
+.fc .fc-toolbar-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+// .fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+//   margin-right: 10px;
+// }
+
+.fc .fc-button {
+  margin-right: 10px;
+}
+
+.fc-v-event .fc-event-title {
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.fc-timegrid-event .fc-event-time {
+  margin-top: 5px;
+
+  margin-left: 10px;
+  font-size: 15px;
+  font-weight: 400;
+}
+/* Changer la couleur de fond du jour actuel dans FullCalendar */
+.fc .fc-timegrid-now-indicator-line {
+  border-color: #f8156b;
+  border-width: 3px;
+  border-radius: 3px;
+}
+
+.fc .fc-timegrid-col.fc-day-today {
+  background-color: #fedae387;
 }
