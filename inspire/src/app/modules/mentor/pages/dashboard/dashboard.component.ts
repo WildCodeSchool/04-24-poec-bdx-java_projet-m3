@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
     rows?: number | undefined;
   }) {
     this.first = (event.page || 0) * (event.rows || 0);
+    console.log('first', this.first);
     this.reservationService
       .getMentorReservationList(
         this.activeMentor$.value.userId,
@@ -54,6 +55,8 @@ export class DashboardComponent implements OnInit {
     rows?: number | undefined;
   }) {
     this.first = (event.page || 0) * (event.rows || 0);
+    console.log('first', this.first);
+
     this.reservationService
       .getMentorReservationHistoryList(
         this.activeMentor$.value.userId,

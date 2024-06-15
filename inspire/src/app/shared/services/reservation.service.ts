@@ -5,6 +5,7 @@ import { Reservation, reservationForMentorDTO } from '../models/reservation';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { ReservationForStudentDTO } from '../models/reservation';
 import { MentorService } from './mentor.service';
+import { StudentService } from './student.service';
 
 @Injectable({
   providedIn: 'root',
@@ -43,6 +44,9 @@ export class ReservationService {
     reservations: [] as ReservationForStudentDTO[],
     total: 0,
   });
+
+  mentorService = inject(MentorService);
+  studentService = inject(StudentService);
 
   constructor() {}
 
@@ -88,7 +92,7 @@ export class ReservationService {
   }
 
   getMentorReservationList(userId: number, perPage: number, offset: number) {
-    const mentorId = inject(MentorService).activeMentorProfil$.value.id;
+    const mentorId = this.mentorService.activeMentorProfil$.value.id;
     return this.httpClient
       .get<{
         reservations: reservationForMentorDTO[];
@@ -112,7 +116,7 @@ export class ReservationService {
     perPage: number,
     offset: number
   ) {
-    const mentorId = inject(MentorService).activeMentorProfil$.value.id;
+    const mentorId = this.mentorService.activeMentorProfil$.value.id;
     return this.httpClient
       .get<{ reservations: reservationForMentorDTO[]; total: number }>(
         `http://localhost:8080/reservation/get/mentor/history/${mentorId}/${perPage}/${offset}`
@@ -147,13 +151,15 @@ export class ReservationService {
   }
 
   getStudentReservationList(userId: number, perPage: number, offset: number) {
+    const studentId = this.studentService.activeStudentProfil$.value.id;
     return this.httpClient
       .get<{
         reservations: ReservationForStudentDTO[];
         total: number;
       }>(
-        environment.BASE_URL +
-          `/reservation/reservations/user/${userId}?perPage=${perPage}&offset=${offset}`
+        `http://localhost:8080/reservation/get/student/upcoming/${studentId}/${perPage}/${offset}`
+        // environment.BASE_URL +
+        //   `/reservation/reservations/user/${userId}?perPage=${perPage}&offset=${offset}`
       )
       .pipe(
         tap((res) => {
@@ -167,10 +173,13 @@ export class ReservationService {
     perPage: number,
     offset: number
   ) {
+    const studentId = this.studentService.activeStudentProfil$.value.id;
+
     return this.httpClient
       .get<{ reservations: ReservationForStudentDTO[]; total: number }>(
-        environment.BASE_URL +
-          `/reservation/reservations/user/history/${userId}?perPage=${perPage}&offset=${offset}`
+        `http://localhost:8080/reservation/get/student/history/${studentId}/${perPage}/${offset}`
+        // environment.BASE_URL +
+        //   `/reservation/reservations/user/history/${userId}?perPage=${perPage}&offset=${offset}`
       )
       .pipe(
         tap((res) => {
@@ -187,6 +196,19 @@ export class ReservationService {
       .pipe(
         tap((res) => {
           this.activeMentorReservations$.next(res);
+        })
+      );
+  }
+  removeReservationByStudent(reservationId: number, studentId: number) {
+    return this.httpClient
+      .delete<{ reservations: ReservationForStudentDTO[]; total: number }>(
+        //environment.BASE_URL + `/reservation/reservations/${id}/${userId}`
+        `http://localhost:8080/reservation/delete/student/${reservationId}/${studentId}`
+      )
+      .pipe(
+        tap((res) => {
+          console.log('active student res : ', res);
+          this.activeStudentReservations$.next(res);
         })
       );
   }

@@ -77,7 +77,10 @@
         [variant]="'pink'"
         (onSubmit)="cancel()"
       ></app-button>
-      <app-button [text]="'Valider'"></app-button>
+      <app-button
+        [text]="'Valider'"
+        (onSubmit)="removeReservation()"
+      ></app-button>
     </div>
   </div>
 </p-dialog>
