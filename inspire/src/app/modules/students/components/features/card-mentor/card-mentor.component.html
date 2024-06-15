@@ -1,13 +1,24 @@
-<div class="container-card" [routerLink]="['/student/mentor-details', mentor.userId]">
+<div
+  class="container-card"
+  [routerLink]="['/student/mentor-details', mentor.userId]"
+>
   <div class="img-card">
     <img src="{{ mentor.imgUrl }}" alt="" />
     <div class="img-favorite" (click)="toggleFavorite($event)">
-      <img *ngIf="!isFavorite" src="../../../../../../assets/svgs/heart-regular.svg" alt="Add to favorites" />
-      <img *ngIf="isFavorite" src="../../../../../../assets/svgs/heart-solid.svg" alt="Remove from favorites" />
+      <img
+        *ngIf="!isFavorite"
+        src="../../../../../../assets/svgs/heart-regular.svg"
+        alt="Add to favorites"
+      />
+      <img
+        *ngIf="isFavorite"
+        src="../../../../../../assets/svgs/heart-solid.svg"
+        alt="Remove from favorites"
+      />
     </div>
-    <h1>{{ mentor.firstname }} {{ mentor.lastname }}</h1>
   </div>
   <div class="title-card">
+    <h1>{{ mentor.firstname }} {{ mentor.lastname }}</h1>
     <p>{{ mentor.title }}</p>
   </div>
   <div class="chip-container">
@@ -30,6 +41,4 @@
     </div>
   </div>
 </div>
-<div *ngIf="skillList$ | async as skillList">
-
-</div>
+<div *ngIf="skillList$ | async as skillList"></div>

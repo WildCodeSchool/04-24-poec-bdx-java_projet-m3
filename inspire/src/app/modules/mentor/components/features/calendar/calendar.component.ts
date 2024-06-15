@@ -287,7 +287,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       allDayText: 'tous',
     },
     weekends: true,
-    slotDuration: '01:00:00',
+    slotDuration: '00:15:00',
     slotMinTime: '07:00',
     slotMaxTime: '23:00',
     allDaySlot: false,

@@ -18,22 +18,22 @@ export class DashboardLinksComponent implements OnInit {
   @Input() listLink: DashboardLink[] = [
     {
       title: 'dashboard',
-      logoUrl: 'assets/svgs/dash.svg',
-      logoUrlActive: 'assets/svgs/dash-white.svg',
+      logoUrl: 'assets/svgs/tdb.svg',
+      logoUrlActive: 'assets/svgs/dash-blanc.svg',
       path: 'mentor',
       active: true,
     },
     {
       title: 'mon profil',
-      logoUrl: 'assets/svgs/calendar.svg',
-      logoUrlActive: 'assets/svgs/calendar-white.svg',
+      logoUrl: 'assets/svgs/profile.svg',
+      logoUrlActive: 'assets/svgs/profile-blanc.svg',
       path: 'mentor/profil',
       active: false,
     },
     {
       title: 'agenda',
-      logoUrl: 'assets/svgs/edit.svg',
-      logoUrlActive: 'assets/svgs/edit-white.svg',
+      logoUrl: 'assets/svgs/agenda.svg',
+      logoUrlActive: 'assets/svgs/agenda-blanc.svg',
       path: 'mentor/agenda',
       active: false,
     },
