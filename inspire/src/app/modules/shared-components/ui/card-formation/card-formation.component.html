@@ -6,7 +6,10 @@
     <div class="details">
       <p class="title">{{ formation.title }}</p>
       <div class="date-place">
-        <p>{{ formation.city }}</p>
+        <p>
+          {{ formation.city }} - De {{ formation.dateBegin | date : " yyyy" }} à
+          {{ formation.dateBegin | date : "  yyy" }}
+        </p>
       </div>
     </div>
   </div>

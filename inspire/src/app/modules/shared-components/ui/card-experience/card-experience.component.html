@@ -4,9 +4,16 @@
       <img src="assets/svgs/job.svg" alt="skill" width="35" height="35" />
     </button>
     <div class="details">
-      <p class="title">{{ experience.title }}</p>
+      <p class="title">
+        {{ experience.title }}
+      </p>
       <div class="date-place">
-        <p>{{ experience.city | titlecase }}</p>
+        <p>
+          {{ experience.city | titlecase }} - De
+          {{ experience.dateBegin | date : " MMMM yyyy" }} à
+          {{ experience.dateEnd | date : "MMMM yyyy" }}
+        </p>
+        <p></p>
       </div>
     </div>
   </div>
