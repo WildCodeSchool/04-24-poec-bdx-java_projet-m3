@@ -13,8 +13,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: $secondary-color;
-      border: none;
+      background-color: $primary-color;
+      border: solid 1px $primary-color;
       border-radius: 15px;
       margin-right: 14px;
 
@@ -24,20 +24,27 @@
     }
 
     .details {
-      p {
+      h2 {
         font-size: 18px;
+        font-weight: 500;
+        color: $primary-color;
       }
       .date-place {
         display: flex;
-        color: $font-color-grey;
-
+        color: black;
         p {
-          font-size: 16px;
           margin-top: -2px;
           font-weight: 300;
+          font-size: 13px;
+          color: black;
         }
       }
     }
+  }
+
+  .company-city p {
+    font-size: 14px;
+    font-weight: 500;
   }
 
   .card-skill-control {
