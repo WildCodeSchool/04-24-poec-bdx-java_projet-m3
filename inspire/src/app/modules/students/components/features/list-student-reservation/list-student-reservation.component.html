@@ -1,13 +1,13 @@
 <div class="list-generic">
   <h3>{{ title }}</h3>
   <div class="list-header" [ngClass]="isHistory ? 'history' : 'upcoming'">
-    <div class="name">ELEVE</div>
+    <div class="name">MENTOR</div>
     <div class="promotion">TITRE</div>
     <div class="sujet">SUJET</div>
     <div class="creneau">CRÉNEAU</div>
     <div class="action">{{ isHistory ? "MESSAGE" : "ACTION" }}</div>
   </div>
-  <h3 *ngIf="!reservations.length">
+  <h3 *ngIf="!reservations?.length">
     {{
       isHistory
         ? "Aucune ancienne réservation"
