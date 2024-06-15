@@ -3,30 +3,6 @@
 .container-general-layout {
   background-color: #fcf6f8;
 }
-
-.container-layout {
-  margin: 0 auto;
-  margin-top: 0;
-  padding: 0;
-  min-height: 100vh;
-  max-width: 1280px;
-  background-color: #fcf6f8;
-
-  .header-container {
-    background-color: #f8156b;
-    width: 60%;
-    height: 100px;
-    margin: 0 auto;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    color: white;
-    padding: 0 20px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-}
 .header-layout {
   display: flex;
   color: white;
@@ -64,14 +40,36 @@
   width: 25px;
   height: 25px;
 }
+
+.container-layout {
+  margin: 0 auto;
+  margin-top: 0;
+  padding: 0 20px;
+  min-height: 100vh;
+  max-width: 1700px;
+  background-color: #fcf6f8;
+
+  .header-container {
+    background-color: #f8156b;
+    width: 60%;
+    height: 100px;
+    margin: 0 auto;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    color: white;
+    padding: 0 20px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
 .container-main {
   position: relative;
   display: flex;
 
   button.burger {
-    position: absolute;
-    top: -10px;
-    left: 15px;
     height: 30px;
     display: flex;
     justify-content: center;
@@ -87,14 +85,31 @@
     background-color: white;
     border-radius: 20px;
     transition: 0.2s all ease;
-    padding: 10px 10px;
+    padding: 30px 10px 10px 10px;
     margin-top: 20px;
     z-index: 10;
     // flex-basis: 250px;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    // position: relative;
+
+    &:hover .burger {
+      display: block;
+    }
+
+    .burger {
+      display: none;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateX(50%);
+      background-color: #868686;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
 
     .logout {
       margin-left: 20px;
@@ -165,23 +180,29 @@
     position: absolute;
   }
   .container-outlet {
-    margin-left: 10px;
+    // margin-left: 10px;
     overflow-y: auto;
   }
   .container-layout {
     .header-container {
-      width: 70%;
+      display: none;
     }
   }
   .btn-logout-container {
-    flex-direction: column;
+    display: none;
+  }
+
+  .header-layout {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
   }
 }
 
 @media screen and (max-width: $medium) {
   .container-layout {
     .header-container {
-      width: 90%;
+      display: none;
     }
   }
   .btn-logout-container {
