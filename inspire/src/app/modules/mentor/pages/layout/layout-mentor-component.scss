@@ -82,7 +82,11 @@
   .container-side-nav {
     margin-top: 40px;
     height: calc(100vh - 140px);
-    background-color: white;
+    background: rgba(255, 255, 255, 0.53);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.8px);
+    -webkit-backdrop-filter: blur(8.8px);
     border-radius: 20px;
     transition: 0.2s all ease;
     padding: 30px 10px 10px 10px;
@@ -122,6 +126,7 @@
         align-items: center;
         gap: 10px;
         justify-content: start;
+        cursor: pointer;
       }
     }
   }
@@ -132,6 +137,7 @@
     height: calc(100vh - 130px);
     overflow-y: auto;
     margin-top: 30px;
+    margin-left: 30px;
   }
 }
 
