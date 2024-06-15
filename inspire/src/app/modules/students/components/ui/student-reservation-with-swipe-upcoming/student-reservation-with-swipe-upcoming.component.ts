@@ -1,15 +1,24 @@
-import { Component, DestroyRef, ElementRef, Input, OnInit, ViewChild, inject } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { ReservationForStudentDTO } from '../../../../../shared/models/reservation';
 import { fromEvent } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ReservationService } from '../../../../../shared/services/reservation.service';
+import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
 
 @Component({
   selector: 'app-student-reservation-with-swipe-upcoming',
   templateUrl: './student-reservation-with-swipe-upcoming.component.html',
-  styleUrl: './student-reservation-with-swipe-upcoming.component.scss'
+  styleUrl: './student-reservation-with-swipe-upcoming.component.scss',
 })
 export class StudentReservationWithSwipeUpcomingComponent implements OnInit {
-
   @Input() reservation!: ReservationForStudentDTO;
   @Input() bgColor: string = 'transparent';
   @Input() isHistory: boolean = false;
@@ -21,6 +30,8 @@ export class StudentReservationWithSwipeUpcomingComponent implements OnInit {
   newNote: string = 'RAS';
 
   destroyRef = inject(DestroyRef);
+  reservationService = inject(ReservationService);
+  user = inject(UserStoreService).getUserConnected$();
 
   ngOnInit(): void {
     this.newNote = this.reservation.message || 'RAS';
@@ -90,7 +101,24 @@ export class StudentReservationWithSwipeUpcomingComponent implements OnInit {
   }
 
   updateReservation() {
+    this.reservationService.removeReservationByStudent(
+      this.reservation.id,
+      this.user.value.id
+    );
     this.reservation.message = this.newNote;
+    this.modalVisible = false;
   }
 
+  removeReservation() {
+    console.log(this.reservation.id, this.user.value.id);
+
+    this.reservationService
+      .removeReservationByStudent(
+        this.reservation.reservationId,
+        this.user.value.id
+      )
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
+    this.modalVisible = false;
+  }
 }

@@ -3,6 +3,14 @@
     [title]="'Mes réservations à venir'"
     [reservations]="reservations.reservations"
   ></app-list-student-reservation>
+  <p-paginator
+    *ngIf="reservations.total"
+    #paginatorRef
+    (onPageChange)="onPageChange($event)"
+    [first]="paginatorRef.first"
+    [rows]="5"
+    [totalRecords]="reservations.total"
+  />
 </ng-container>
 <ng-container *ngIf="reservationsHistory$ | async as reservations">
   <app-list-student-reservation
@@ -10,5 +18,13 @@
     [reservations]="reservations.reservations"
     [isHistory]="true"
   ></app-list-student-reservation>
+  <p-paginator
+    *ngIf="reservations.total"
+    #paginatorHistoryRef
+    (onPageChange)="onPageChangeHistory($event)"
+    [first]="paginatorHistoryRef.first"
+    [rows]="5"
+    [totalRecords]="reservations.total"
+    class="container-btn"
+  />
 </ng-container>
-

@@ -23,6 +23,7 @@ export type Reservation = {
 
 export type ReservationForStudentDTO = {
   id: number;
+  reservationId: number;
   mentorId: number;
   slotId: number;
   userId: number;
@@ -38,6 +39,7 @@ export type ReservationForStudentDTO = {
 
 export type reservationForMentorDTO = {
   id: number;
+  reservationId: number;
   studentId: number;
   slotId: number;
   userId: number;
