@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { reservationForMentorDTO } from '../models/reservation';
+import { Reservation, reservationForMentorDTO } from '../models/reservation';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { ReservationForStudentDTO } from '../models/reservation';
 import { MentorService } from './mentor.service';
@@ -189,5 +189,19 @@ export class ReservationService {
           this.activeMentorReservations$.next(res);
         })
       );
+  }
+
+  bookSlot(slotId: number, studentId: number, subject: string) {
+    const newReservation: Reservation = {
+      slotId: slotId,
+      studentId: studentId,
+      subject: subject,
+    };
+    console.log('lolus');
+
+    return this.httpClient.post<Reservation>(
+      'http://localhost:8080/reservation/add',
+      newReservation
+    );
   }
 }

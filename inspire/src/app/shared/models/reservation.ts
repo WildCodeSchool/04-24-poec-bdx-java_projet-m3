@@ -6,16 +6,19 @@ export type Slot = {
 
 export type SlotDTO = {
   id: number;
-  dateTime: Date;
   mentorId: number;
+  reservationId?: number;
+  dateBegin: Date;
+  dateEnd: Date;
   visio: boolean;
+  booked: boolean;
 };
 
 export type Reservation = {
   subject: string;
   message?: string;
-  mentorId: string;
-  slotId: string;
+  studentId: number;
+  slotId: number;
 };
 
 export type ReservationForStudentDTO = {
