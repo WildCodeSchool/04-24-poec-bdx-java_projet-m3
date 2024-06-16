@@ -23,8 +23,10 @@
               [routerLink]="[link.path]"
               (click)="displayMobileNav = false; router.navigateByUrl(link.path);
             "
-              >{{ link.title }}</a
             >
+              <img [src]="link.logoUrl" alt="" width="25" height="25" />
+              {{ link.title }}
+            </a>
           </div>
           <div>
             <span
@@ -33,6 +35,12 @@
                 modalVisible = true
               "
             >
+              <img
+                src="/assets/svgs/logout.svg"
+                alt=""
+                width="25"
+                height="25"
+              />
               Vous déconnecter
             </span>
           </div>
@@ -124,13 +132,7 @@
         </div>
       </div>
 
-      <p-dialog
-        header=""
-        [(visible)]="modalVisible"
-        [modal]="true"
-        [draggable]="false"
-        [resizable]="false"
-      >
+      <p-dialog [(visible)]="modalVisible" [modal]="true">
         <div class="logout-pop-up">
           <div class="container-img-forgot">
             <img

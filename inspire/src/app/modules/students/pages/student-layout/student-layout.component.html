@@ -24,11 +24,19 @@
               (click)="
                 displayMobileNav = false; router.navigateByUrl(link.path)
               "
-              >{{ link.title }}</a
             >
+              <img [src]="link.logoUrl" alt="" width="25" height="25" />
+              {{ link.title }}
+            </a>
           </div>
           <div>
             <span (click)="displayMobileNav = false; modalVisible = true">
+              <img
+                src="/assets/svgs/logout.svg"
+                alt=""
+                width="25"
+                height="25"
+              />
               Vous déconnecter
             </span>
           </div>
