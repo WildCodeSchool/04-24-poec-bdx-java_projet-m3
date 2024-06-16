@@ -49,11 +49,13 @@
 .pink {
   background-color: #f7156b;
   color: white;
+  cursor: pointer;
 }
 
 .black {
   background-color: black;
   color: azure;
+  cursor: pointer;
 }
 .btn-general {
   font-size: 18px;
@@ -62,7 +64,9 @@
   border-radius: 6px;
   border: none;
   transition: transform 0.4s ease;
+  cursor: pointer;
 }
 .btn-general:hover {
   transform: scale(0.95);
+  cursor: pointer;
 }
