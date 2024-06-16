@@ -60,9 +60,9 @@ export class LayoutMentor implements OnInit {
     this.showNavbar = !this.showNavbar;
   }
 
-  goToProfile() {
-    this.router.navigate(['mentor/profil']);
-  }
+  // goToProfile() {
+  //   this.router.navigate(['mentor/profil']);
+  // }
 
   logout() {
     this.userService.logout();
