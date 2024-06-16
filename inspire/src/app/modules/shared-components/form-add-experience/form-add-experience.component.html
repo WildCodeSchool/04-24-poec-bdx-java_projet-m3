@@ -76,7 +76,7 @@
   </div>
 
   <div class="container-input">
-    <label for="dateBeggin">Date de début *</label>
+    <label for="dateBegin">Date de début *</label>
     <input
       type="date"
       id="dateBegin"
@@ -108,6 +108,12 @@
       *ngIf="formExperience.submitted && experienceForm.get('dateEnd')?.errors"
     >
       <span> La date de fin est requise </span>
+    </div>
+    <div
+      class="error"
+      *ngIf="formExperience.submitted && experienceForm.errors?.['datesNotValid']"
+    >
+      <span>La date de fin ne peut pas être avant la date de début</span>
     </div>
   </div>
 
