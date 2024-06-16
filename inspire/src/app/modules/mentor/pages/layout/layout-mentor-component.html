@@ -4,10 +4,10 @@
       <div>
         <img
           class="img-fluid site-logo"
-          src="/assets/logoo.jpg"
+          src="/assets/insPIRE.png"
           alt="logo"
-          width="70"
-          height="70"
+          width="65"
+          height="65"
         />
         <img
           src="/assets/svgs/bell.svg"
@@ -18,7 +18,7 @@
           (click)="displayMobileNav = true"
         />
         <p-sidebar [(visible)]="displayMobileNav">
-          <div *ngFor="let link of listLink">
+          <div class="mobile" *ngFor="let link of listLink">
             <a
               [routerLink]="[link.path]"
               (click)="displayMobileNav = false; router.navigateByUrl(link.path);
@@ -81,6 +81,7 @@
             width="35"
             height="35"
             style="border-radius: 50%"
+            (click)="goToProfile()"
           />
         </div>
       </div>
