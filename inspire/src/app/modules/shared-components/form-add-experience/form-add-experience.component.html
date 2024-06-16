@@ -109,6 +109,12 @@
     >
       <span> La date de fin est requise </span>
     </div>
+    <div
+      class="error"
+      *ngIf="formExperience.submitted && experienceForm.errors?.['datesNotValid']"
+    >
+      <span>La date de fin ne peut pas être avant la date de début</span>
+    </div>
   </div>
 
   <div class="btn-connexion">

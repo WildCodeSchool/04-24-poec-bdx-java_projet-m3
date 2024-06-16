@@ -83,7 +83,7 @@
     />
     <div
       class="error"
-      *ngIf="formCourse.submitted && courseForm.get('dateBeggin')?.errors"
+      *ngIf="formCourse.submitted && courseForm.get('dateBegin')?.errors"
     >
       <span> La date de début est requise </span>
     </div>
@@ -103,6 +103,12 @@
       *ngIf="formCourse.submitted && courseForm.get('dateEnd')?.errors"
     >
       <span> La date de fin est requise </span>
+    </div>
+    <div
+      class="error"
+      *ngIf="formCourse.submitted && courseForm.errors?.['datesNotValid']"
+    >
+      <span>La date de fin ne peut pas être avant la date de début</span>
     </div>
   </div>
 
