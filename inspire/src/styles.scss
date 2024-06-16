@@ -50,6 +50,18 @@ a {
   padding-left: 20px;
 }
 
+p-multiselect {
+  width: 100%;
+
+  .p-multiselect {
+    width: 100%;
+  }
+
+  .p-multiselect-label {
+    width: 100%;
+  }
+}
+
 .p-multiselect-panel {
   width: 400px;
 }
