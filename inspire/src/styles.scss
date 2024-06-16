@@ -27,6 +27,7 @@
 @media screen and (max-width: 576px) {
   .p-sidebar {
     width: 100%;
+    padding: 20px 20px;
   }
 }
 a {
@@ -48,6 +49,18 @@ a {
 }
 .languages .p-multiselect-items span {
   padding-left: 20px;
+}
+
+p-multiselect {
+  width: 100%;
+
+  .p-multiselect {
+    width: 100%;
+  }
+
+  .p-multiselect-label {
+    width: 100%;
+  }
 }
 
 .p-multiselect-panel {

@@ -3,12 +3,44 @@
     <div class="header-layout">
       <div>
         <img
-          class="img-fluid"
+          class="img-fluid site-logo"
           src="/assets/logoo.jpg"
           alt="logo"
           width="70"
           height="70"
         />
+        <img
+          src="/assets/svgs/bell.svg"
+          class="img-fluid nav-burger"
+          alt=""
+          width="70"
+          height="70"
+          (click)="displayMobileNav = true"
+        />
+        <p-sidebar [(visible)]="displayMobileNav">
+          <div *ngFor="let link of listLink">
+            <a
+              [routerLink]="[link.path]"
+              (click)="
+                displayMobileNav = false; router.navigateByUrl(link.path)
+              "
+            >
+              <img [src]="link.logoUrl" alt="" width="25" height="25" />
+              {{ link.title }}
+            </a>
+          </div>
+          <div>
+            <span (click)="displayMobileNav = false; modalVisible = true">
+              <img
+                src="/assets/svgs/logout.svg"
+                alt=""
+                width="25"
+                height="25"
+              />
+              Vous déconnecter
+            </span>
+          </div>
+        </p-sidebar>
       </div>
       <div class="header-container">
         <h2>Bonjour {{ name }}</h2>
@@ -60,7 +92,10 @@
           transformOrigin: 'top left'
         }"
       >
-        <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
+        <app-dashboard-links
+          [showText]="showNavbar"
+          [listLink]="listLink"
+        ></app-dashboard-links>
         <button
           class="burger"
           (click)="toggleVisibility()"

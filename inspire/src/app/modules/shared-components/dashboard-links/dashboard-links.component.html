@@ -1,4 +1,4 @@
-@for(link of (mentor ? listLink : listLinkStudent); track $index){
+@for(link of listLink; track $index){
 <app-navbar-button
   [showText]="showText"
   [text]="link.title | titlecase"
