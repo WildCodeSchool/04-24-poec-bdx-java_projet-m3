@@ -16,9 +16,7 @@ export class UserByIdService {
   http = inject(HttpClient);
 
   getMentorProfilById(userId: number) {
-    return this.http.get<Mentor>(
-      environment.BASE_URL_API + 'mentor/' + userId
-    );
+    return this.http.get<Mentor>(environment.BASE_URL_API + 'mentor/' + userId);
   }
 
   getStudentProfilById(userId: number) {
@@ -36,13 +34,15 @@ export class UserByIdService {
 
   getUserLanguagesById(userId: number) {
     return this.http.get<Language[]>(
-      environment.BASE_URL + '/language/languages/user/' + userId
+      'http://localhost:8080/language/user/' + userId
+      // environment.BASE_URL + '/language/languages/user/' + userId
     );
   }
 
   getUserFormationsById(userId: number) {
     return this.http.get<Formation[]>(
-      environment.BASE_URL + '/formation/formations/user/' + userId
+      'http://localhost:8080/formation/user/' + userId
+      // environment.BASE_URL + '/formation/formations/user/' + userId
     );
   }
 
