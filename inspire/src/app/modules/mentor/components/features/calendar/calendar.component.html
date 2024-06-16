@@ -1,12 +1,15 @@
 <div class="control"></div>
-<ng-container *ngIf="today?.length">
-  <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
-</ng-container>
-<full-calendar
-  [events]="events"
-  [options]="calendarOptions"
-  #calendar
-></full-calendar>
+<div class="calendar-background">
+  <ng-container *ngIf="today?.length">
+    <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
+  </ng-container>
+
+  <full-calendar
+    [events]="events"
+    [options]="calendarOptions"
+    #calendar
+  ></full-calendar>
+</div>
 <p-dialog
   [modal]="true"
   [visible]="visible && formattedSlotInfo"
