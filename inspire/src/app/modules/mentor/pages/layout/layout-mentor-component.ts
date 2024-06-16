@@ -22,7 +22,7 @@ export class LayoutMentor implements OnInit {
   activatedRoute = inject(ActivatedRoute);
   mentorProfil$: BehaviorSubject<MentorDTO> =
     inject(MentorService).activeMentorProfil$;
-  studentProfil$: BehaviorSubject<StudentDTO> =
+  studentProfil: BehaviorSubject<StudentDTO> =
     inject(StudentService).activeStudentProfil$;
   name!: string;
   intro!: string;
@@ -39,20 +39,11 @@ export class LayoutMentor implements OnInit {
   ngOnInit(): void {
     this.windowWatcher.windowSizeChanged.subscribe((option) => {
       this.showNavbar = option;
-      this.name =
-        this.userStoreService.getUserConnected$().value.role === 'MENTOR'
-          ? this.mentorProfil$.value.firstname
-          : this.studentProfil$.value.firstname;
+      this.name = this.mentorProfil$.value.firstname;
 
-      this.intro =
-        this.userStoreService.getUserConnected$().value.role === 'MENTOR'
-          ? 'Votre espace mentor de la Wild Code School'
-          : 'Votre espace élève de la Wild Code School';
+      this.intro = 'Votre espace mentor de la Wild Code School';
     });
 
-    this.imgUrl =
-      this.userStoreService.getUserConnected$().value.role === 'MENTOR'
-        ? this.mentorProfil$.value.imgUrl
-        : this.studentProfil$.value.lastname;
+    this.imgUrl = this.mentorProfil$.value.imgUrl;
   }
 }

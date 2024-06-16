@@ -11,8 +11,8 @@
         />
       </div>
       <div class="header-container">
-        <h2>Bonjour {{name}}</h2>
-        <p>{{intro}}</p>
+        <h2>Bonjour {{ name }}</h2>
+        <p>{{ intro }}</p>
       </div>
 
       <div class="container-notification">
@@ -52,7 +52,13 @@
     <div class="container-main">
       <div
         class="container-side-nav"
-        [ngStyle]="{transform: (!showNavbar && !windowWatcher.windowSizeChanged.value)? 'scaleX(0)' : 'scaleX(1)', transformOrigin: 'top left'}"
+        [ngStyle]="{
+          transform:
+            !showNavbar && !windowWatcher.windowSizeChanged.value
+              ? 'scaleX(0)'
+              : 'scaleX(1)',
+          transformOrigin: 'top left'
+        }"
       >
         <app-dashboard-links [showText]="showNavbar"></app-dashboard-links>
         <button
@@ -61,7 +67,11 @@
           [ngClass]="!showNavbar ? 'light' : 'dark'"
         >
           <img
-            [src]="showNavbar ? 'assets/svgs/left-arrow.svg' : 'assets/svgs/right-arrow.svg'"
+            [src]="
+              showNavbar
+                ? 'assets/svgs/left-arrow.svg'
+                : 'assets/svgs/right-arrow.svg'
+            "
             alt=""
             width="25"
             height="25"

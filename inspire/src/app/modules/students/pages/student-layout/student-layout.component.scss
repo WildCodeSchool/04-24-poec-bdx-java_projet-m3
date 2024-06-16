@@ -82,7 +82,11 @@
   .container-side-nav {
     margin-top: 40px;
     height: calc(100vh - 140px);
-    background-color: white;
+    background: rgba(255, 255, 255, 0.53);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8.8px);
+    -webkit-backdrop-filter: blur(8.8px);
     border-radius: 20px;
     transition: 0.2s all ease;
     padding: 30px 10px 10px 10px;
@@ -104,11 +108,18 @@
       top: 50%;
       right: 0;
       transform: translateX(50%);
-      background-color: #868686;
+      background-color: $primary-color;
       border-radius: 50%;
       width: 40px;
       height: 40px;
       cursor: pointer;
+      animation: appear 0.5s ease forwards;
+      img {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
     }
 
     .logout {
@@ -122,6 +133,7 @@
         align-items: center;
         gap: 10px;
         justify-content: start;
+        cursor: pointer;
       }
     }
   }
@@ -181,7 +193,7 @@
     position: absolute;
   }
   .container-outlet {
-    // margin-left: 10px;
+    margin-left: 200px;
     overflow-y: auto;
   }
   .container-layout {
@@ -208,5 +220,15 @@
   }
   .btn-logout-container {
     flex-direction: column;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 100;
   }
 }
