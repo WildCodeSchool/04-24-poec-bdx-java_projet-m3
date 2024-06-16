@@ -8,6 +8,10 @@
   color: white;
   border-radius: 15px;
   align-items: center;
+
+  .nav-burger {
+    display: none;
+  }
 }
 
 .container-notification {
@@ -189,6 +193,15 @@
 }
 
 @media screen and (max-width: $large) {
+  .header-layout {
+    .site-logo {
+      display: none;
+    }
+
+    .nav-burger {
+      display: block;
+    }
+  }
   .container-main {
     .container-outlet {
       margin-left: 0;
