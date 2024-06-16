@@ -5,7 +5,8 @@ import { UserService } from '../../../../user.service';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
-import { MentorDTO } from '../../../../shared/models/user';
+import { MentorDTO, StudentDTO } from '../../../../shared/models/user';
+import { StudentService } from '../../../../shared/services/student.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -21,6 +22,11 @@ export class LayoutMentor implements OnInit {
   activatedRoute = inject(ActivatedRoute);
   mentorProfil$: BehaviorSubject<MentorDTO> =
     inject(MentorService).activeMentorProfil$;
+  studentProfil$: BehaviorSubject<StudentDTO> =
+    inject(StudentService).activeStudentProfil$;
+  name!: string;
+  intro!: string;
+  imgUrl!: string;
   toggleVisibility() {
     this.showNavbar = !this.showNavbar;
   }
@@ -33,6 +39,20 @@ export class LayoutMentor implements OnInit {
   ngOnInit(): void {
     this.windowWatcher.windowSizeChanged.subscribe((option) => {
       this.showNavbar = option;
+      this.name =
+        this.userStoreService.getUserConnected$().value.role === 'MENTOR'
+          ? this.mentorProfil$.value.firstname
+          : this.studentProfil$.value.firstname;
+
+      this.intro =
+        this.userStoreService.getUserConnected$().value.role === 'MENTOR'
+          ? 'Votre espace mentor de la Wild Code School'
+          : 'Votre espace élève de la Wild Code School';
     });
+
+    this.imgUrl =
+      this.userStoreService.getUserConnected$().value.role === 'MENTOR'
+        ? this.mentorProfil$.value.imgUrl
+        : this.studentProfil$.value.lastname;
   }
 }
