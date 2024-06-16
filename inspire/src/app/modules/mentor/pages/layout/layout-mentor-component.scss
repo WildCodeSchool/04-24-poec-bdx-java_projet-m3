@@ -189,6 +189,11 @@
 }
 
 @media screen and (max-width: $large) {
+  .container-main {
+    .container-outlet {
+      margin-left: 0;
+    }
+  }
   .container-side-nav {
     position: absolute;
   }
