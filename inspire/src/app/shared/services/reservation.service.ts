@@ -6,12 +6,14 @@ import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { ReservationForStudentDTO } from '../models/reservation';
 import { MentorService } from './mentor.service';
 import { StudentService } from './student.service';
+import { PaginationService } from './pagination.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservationService {
   httpClient = inject(HttpClient);
+  pagination = inject(PaginationService);
 
   activeMentorReservations$: BehaviorSubject<{
     reservations: reservationForMentorDTO[];
@@ -199,16 +201,30 @@ export class ReservationService {
         })
       );
   }
-  removeReservationByStudent(reservationId: number, studentId: number) {
+  removeReservationByStudent(
+    reservationId: number,
+    studentId: number,
+    first: number
+  ): Observable<{
+    reservations: ReservationForStudentDTO[];
+    total: number;
+  }> {
+    const total = this.activeStudentReservations$.value.total;
+
     return this.httpClient
       .delete<{ reservations: ReservationForStudentDTO[]; total: number }>(
         //environment.BASE_URL + `/reservation/reservations/${id}/${userId}`
-        `http://localhost:8080/reservation/delete/student/${reservationId}/${studentId}`
+        `http://localhost:8080/reservation/delete/student/${reservationId}/${studentId}/5/${first}`
       )
       .pipe(
-        tap((res) => {
-          console.log('active student res : ', res);
-          this.activeStudentReservations$.next(res);
+        switchMap(() => {
+          if (total % 5 === 1 && total > 5) {
+            this.pagination.offsetReservationStudent.next(
+              this.pagination.offsetReservationStudent.value - 1
+            );
+            return this.getStudentReservationList(studentId, 5, first - 5);
+          }
+          return this.getStudentReservationList(studentId, 5, first);
         })
       );
   }

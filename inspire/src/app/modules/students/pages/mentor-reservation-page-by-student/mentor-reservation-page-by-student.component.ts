@@ -78,8 +78,8 @@ export class MentorReservationPageByStudentComponent implements OnInit {
       allDayText: 'tous',
     },
     weekends: false,
-    slotDuration: '00:15:00',
-    slotMinTime: '10:00',
+    slotDuration: '00:30:00',
+    slotMinTime: '07:00',
     slotMaxTime: '18:00',
 
     navLinks: true,

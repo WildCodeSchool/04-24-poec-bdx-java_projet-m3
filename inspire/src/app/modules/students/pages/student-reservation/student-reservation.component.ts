@@ -4,6 +4,7 @@ import { ReservationService } from '../../../../shared/services/reservation.serv
 import { MentorService } from '../../../../shared/services/mentor.service';
 import { ReservationForStudentDTO } from '../../../../shared/models/reservation';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PaginationService } from '../../../../shared/services/pagination.service';
 
 @Component({
   selector: 'app-student-reservation',
@@ -20,8 +21,7 @@ export class StudentReservationComponent implements OnInit {
     total: number;
   }>;
   destroyRef = inject(DestroyRef);
-  first: number = 0;
-
+  paginationService = inject(PaginationService);
   reservationService = inject(ReservationService);
   activeMentor$ = inject(MentorService).activeMentorProfil$;
 
@@ -36,7 +36,11 @@ export class StudentReservationComponent implements OnInit {
     first?: number | undefined;
     rows?: number | undefined;
   }) {
-    this.first = (event.page || 0) * (event.rows || 0);
+    // this.first = (event.page || 0) * (event.rows || 0);
+    // this.first = event.first || 0;
+    this.paginationService.offsetReservationStudent.next(event.first || 0);
+    console.log(event.first);
+
     this.reservationService
       .getStudentReservationList(
         this.activeMentor$.value.userId,
@@ -52,7 +56,12 @@ export class StudentReservationComponent implements OnInit {
     first?: number | undefined;
     rows?: number | undefined;
   }) {
-    this.first = (event.page || 0) * (event.rows || 0);
+    // this.firstHistory = (event.page || 0) * (event.rows || 0);
+    // this.firstHistory = event.first || 0;
+    this.paginationService.offsetReservationStudentHistory.next(
+      event.first || 0
+    );
+
     this.reservationService
       .getStudentReservationHistoryList(
         this.activeMentor$.value.userId,
