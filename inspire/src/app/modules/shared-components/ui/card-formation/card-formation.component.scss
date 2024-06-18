@@ -26,25 +26,33 @@
     .details {
       p {
         font-size: 14px;
-        margin-top: -5px;
+        font-weight: 500;
       }
       .date-place {
         display: flex;
-        color: $font-color-grey;
-
+        color: black;
         p {
           font-size: 13px;
+          font-weight: 300;
+          margin-top: -2px;
         }
       }
     }
   }
-
+  .city {
+    font-size: 14px;
+    font-weight: 500;
+  }
   .card-skill-control {
     display: flex;
     gap: 5px;
     button {
       border: none;
       background-color: transparent;
+      cursor: pointer;
     }
   }
+}
+.title {
+  font-size: 18px;
 }

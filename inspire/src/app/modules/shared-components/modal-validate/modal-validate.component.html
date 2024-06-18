@@ -1,7 +1,6 @@
 <p-dialog
   [(visible)]="visible"
   [modal]="true"
-  [style]="{ width: '40vw', height: '60vh' }"
   [draggable]="false"
   [resizable]="false"
   (onHide)="closeDialog()"
@@ -28,12 +27,12 @@
 
       <button
         (click)="deleteInfo()"
-        class="btn-general"
+        class="btn-general pink"
         (focus)="focusValidate()"
         (focusout)="focusOutValidate()"
         [ngClass]="focusBtnValidate ? 'pink' : ''"
       >
-        Valider
+        Supprimer
       </button>
     </div>
   </div>

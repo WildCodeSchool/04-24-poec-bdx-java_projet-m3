@@ -17,6 +17,7 @@ import { MentorService } from '../../../../../shared/services/mentor.service';
 import { Subscription } from 'rxjs';
 import { MentorDTO } from '../../../../../shared/models/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DateTimeService } from '../../../../../shared/services/dateTime.service';
 
 @Component({
   selector: 'app-calendar',
@@ -49,7 +50,8 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   constructor(
     private reservationService: ReservationService,
     private mentorService: MentorService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dateTimeService: DateTimeService
   ) {}
 
   formulaire: FormGroup = this.fb.group({
@@ -68,7 +70,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   };
 
   onDateSelect = (selectionInfo: any) => {
-    console.log('selectionInfo', selectionInfo);
     if (this.formulaire.valid) {
       const diffMilliseconds = selectionInfo.end - selectionInfo.start;
       const hours = Math.floor(diffMilliseconds / (1000 * 60 * 60));
@@ -78,15 +79,19 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
 
       const formattedDuration = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
 
+      const startLocalDateTime =
+        this.dateTimeService.convertToLocalDateTimeString(selectionInfo.start);
+      const endLocalDateTime =
+        this.dateTimeService.convertToLocalDateTimeString(selectionInfo.end);
+
       this.formattedSlotInfo = {
         formattedDuration,
-        start: selectionInfo.start,
-        end: selectionInfo.end,
-        dateTime: selectionInfo.startStr,
-        dateEnd: selectionInfo.endStr,
+        dateBegin: startLocalDateTime,
+        dateEnd: endLocalDateTime,
         visio: this.formulaire.value.mode === 'visio',
         mentorId: this.mentorId,
       };
+
       this.visible = true;
     } else {
       console.error("Veuillez d'abord soumettre le formulaire.");
@@ -114,6 +119,12 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   }
 
   editSlot() {
+    this.eventDetailsEdit = {
+      id: this.eventDetails.id,
+      start: this.eventDetails.start,
+      end: this.eventDetails.end,
+      visio: this.eventDetails.visio,
+    };
     this.isModfify = true;
   }
 
@@ -140,25 +151,71 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       return;
     }
 
-    const id = this.eventDetails.id;
-    const dateTime = this.formatDate(this.eventDetails.start);
-    const dateEnd = this.formatDate(this.eventDetails.end);
+    const id = Number(this.eventDetails.id);
+    const dateBegin = this.dateTimeService.convertToLocalDateTimeString(
+      this.eventDetails.start
+    );
+    const dateEnd = this.dateTimeService.convertToLocalDateTimeString(
+      this.eventDetails.end
+    );
+
     const visio = this.editForm.value.visio === 'visio';
     const mentorId = this.mentorId;
 
     const slotInfo = {
       id,
-      dateTime,
+      dateBegin,
       dateEnd,
       visio,
       mentorId,
     };
 
-    console.log('slotInfo', slotInfo.dateEnd);
+    this.reservationService.updateSlot(id, slotInfo).subscribe(
+      () => {
+        this.displayModal = false;
+        this.loadSlots();
+      },
+      (error) => {
+        console.error('Erreur lors de la mise à jour du slot:', error);
+      }
+    );
+  }
 
-    this.reservationService.updateSlot(id, slotInfo).subscribe();
-    this.displayModal = false;
-    this.loadSlots();
+  onSubmitDrop() {
+    if (!this.eventDetailsEdit.id) {
+      console.error("ID de l'événement non défini.");
+      return;
+    }
+
+    const id = Number(this.eventDetailsEdit.id);
+    const dateBegin = this.dateTimeService.convertToLocalDateTimeString(
+      this.eventDetailsEdit.start
+    );
+    const dateEnd = this.dateTimeService.convertToLocalDateTimeString(
+      this.eventDetailsEdit.end
+    );
+
+    const visio = this.editForm.value.visio === 'visio';
+    const mentorId = this.mentorId;
+
+    const slotInfo = {
+      id,
+      dateBegin,
+      dateEnd,
+      visio,
+      mentorId,
+    };
+
+    this.reservationService.updateSlot(id, slotInfo).subscribe(
+      () => {
+        this.displayModal = false;
+        this.isModfify = false;
+        this.loadSlots();
+      },
+      (error) => {
+        console.error('Erreur lors de la mise à jour du slot:', error);
+      }
+    );
   }
 
   formatDate(date: Date): string {
@@ -189,8 +246,6 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       visio: eventDropArg.oldEvent.extendedProps.visio,
     };
 
-    console.log('eventDropArg', eventDropArg);
-
     this.displayModal = true;
     this.isModfify = true;
   }
@@ -204,40 +259,11 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
   calendarOptions: CalendarOptions = {
     initialView: 'timeGridWeek',
     plugins: [dayGridPlugin, timeGridPlugin, listPlugin, interactionPlugin],
-    events: [
-      {
-        id: 'a',
-        title: 'Mentorat Lucas',
-        start: '2024-05-21T10:30:00+02:00',
-        end: '2024-05-21T11:30:00+02:00',
-        color: 'grey',
-      },
-      {
-        id: 'b',
-        title: 'Résautage avec Cassiopée',
-        start: '2024-05-20T15:30:00+02:00',
-        end: '2024-05-20T16:30:00+02:00',
-        color: 'grey',
-      },
-      {
-        id: 'c',
-        title: 'Résautage avec Aurore',
-        start: '2024-05-23T12:30:00+02:00',
-        end: '2024-05-23T13:30:00+02:00',
-        color: 'grey',
-      },
-      {
-        id: 'd',
-        title: 'Mentorat Mahdi',
-        start: '2024-05-24T15:30:00+02:00',
-        end: '2024-05-24T16:30:00+02:00',
-        color: '#F8146B',
-      },
-    ],
+
     locale: frLocale,
     headerToolbar: {
       right: 'today prev,next',
-      left: 'dayGridMonth timeGridWeek timeGridDay',
+      left: 'title dayGridMonth timeGridWeek timeGridDay',
     },
     views: {
       dayGridMonth: {
@@ -260,10 +286,11 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       list: 'list',
       allDayText: 'tous',
     },
-    weekends: false,
+    weekends: true,
     slotDuration: '00:15:00',
-    slotMinTime: '10:00',
-    slotMaxTime: '18:00',
+    slotMinTime: '07:00',
+    slotMaxTime: '23:00',
+    allDaySlot: false,
 
     navLinks: true,
     eventStartEditable: true,
@@ -319,7 +346,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     return slots.map((slot) => ({
       id: slot.id,
       title: slot.visio ? 'Visio' : 'Présentiel',
-      start: slot.dateTime,
+      start: slot.dateBegin,
       end: slot.dateEnd,
       color: slot.visio ? '#FCBE77' : '#F8156B',
       extendedProps: {
@@ -335,7 +362,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     this.mentorSubscription = this.mentorService.activeMentorProfil$.subscribe(
       (mentor: MentorDTO) => {
         if (mentor && mentor.id) {
-          this.mentorId = mentor.userId;
+          this.mentorId = mentor.id;
         }
       }
     );

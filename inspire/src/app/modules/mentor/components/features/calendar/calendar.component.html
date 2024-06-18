@@ -1,12 +1,15 @@
 <div class="control"></div>
-<ng-container *ngIf="today?.length">
-  <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
-</ng-container>
-<full-calendar
-  [events]="events"
-  [options]="calendarOptions"
-  #calendar
-></full-calendar>
+<div class="calendar-background">
+  <ng-container *ngIf="today?.length">
+    <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
+  </ng-container>
+
+  <full-calendar
+    [events]="events"
+    [options]="calendarOptions"
+    #calendar
+  ></full-calendar>
+</div>
 <p-dialog
   [modal]="true"
   [visible]="visible && formattedSlotInfo"
@@ -51,7 +54,7 @@
           <h3>
             Date :
             <span>{{
-              formattedSlotInfo?.start | date : "dd MMMM yyyy" : "" : "fr"
+              formattedSlotInfo?.dateBegin | date : "dd MMMM yyyy" : "" : "fr"
             }}</span>
           </h3>
         </div>
@@ -65,10 +68,9 @@
           <h3>
             De
             <span>
-              {{ formattedSlotInfo?.start | date : "HH:mm" : "" : "fr" }} à
-              {{ formattedSlotInfo?.end | date : "HH:mm" : "" : "fr" }} ({{
-                formattedSlotInfo?.formattedDuration
-              }})</span
+              {{ formattedSlotInfo?.dateBegin | date : "HH:mm" : "" : "fr" }} à
+              {{ formattedSlotInfo?.dateEnd | date : "HH:mm" : "" : "fr" }}
+              ({{ formattedSlotInfo?.formattedDuration }})</span
             >
           </h3>
         </div>
@@ -233,7 +235,11 @@
     <div class="control">
       <button class="btn-general black" (click)="closeModal()">Annuler</button>
 
-      <button *ngIf="isModfify" class="btn-general pink" (click)="onSubmit()">
+      <button
+        *ngIf="isModfify"
+        class="btn-general pink"
+        (click)="onSubmitDrop()"
+      >
         Mettre à jour
       </button>
       <button
