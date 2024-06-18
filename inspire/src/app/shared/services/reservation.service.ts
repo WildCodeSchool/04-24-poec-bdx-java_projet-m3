@@ -72,6 +72,16 @@ export class ReservationService {
     );
   }
 
+  getSlotsforStudentByMentorId(mentorId: number): Observable<any> {
+    const studentId = this.studentService.activeStudentProfil$.value.id;
+    let end = new Date();
+    end.setDate(end.getDate() + 50);
+    return this.httpClient.post(
+      `${environment.BASE_URL_API}user/slot/slots/${mentorId}/${studentId}`,
+      { start: new Date(), end: end }
+    );
+  }
+
   deleteSlot(id: number): Observable<any> {
     return this.httpClient.delete(
       `${environment.BASE_URL_API}user/slot/delete/${id}`
