@@ -244,3 +244,15 @@ p-multiselect {
 .fc-theme-standard .fc-scrollgrid {
   border: solid 1px #ebebeb;
 }
+.p-toast .p-toast-message .p-toast-message-content {
+  padding: 10px 10px;
+}
+
+.p-toast
+  .p-toast-message
+  .p-toast-message-content
+  .p-icon:not(.p-toast-icon-close-icon) {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
