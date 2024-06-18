@@ -143,7 +143,7 @@ export class MentorReservationPageByStudentComponent implements OnInit {
         );
         console.log('free slots', this.events);
 
-        console.log('slots', slots);
+        console.log('slotss', slots);
       });
   }
   formatSlotsToEvents(slots: SlotDTO[]): EventInput[] {
