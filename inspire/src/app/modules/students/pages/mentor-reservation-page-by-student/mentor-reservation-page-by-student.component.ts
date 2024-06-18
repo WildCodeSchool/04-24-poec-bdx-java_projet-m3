@@ -114,14 +114,16 @@ export class MentorReservationPageByStudentComponent implements OnInit {
 
   loadSlots(): void {
     const mentorId = this.mentorId;
-    this.reservationService.getSlotsForMentor(mentorId).subscribe((slots) => {
-      this.events = this.formatSlotsToEvents(slots).filter(
-        (ele) => !ele['booked']
-      );
-      console.log('free slots', this.events);
+    this.reservationService
+      .getSlotsforStudentByMentorId(mentorId)
+      .subscribe((slots) => {
+        this.events = this.formatSlotsToEvents(slots).filter(
+          (ele) => !ele['booked']
+        );
+        console.log('free slots', this.events);
 
-      console.log('slots', slots);
-    });
+        console.log('slots', slots);
+      });
   }
   formatSlotsToEvents(slots: SlotDTO[]): EventInput[] {
     return slots.map((slot) => ({
