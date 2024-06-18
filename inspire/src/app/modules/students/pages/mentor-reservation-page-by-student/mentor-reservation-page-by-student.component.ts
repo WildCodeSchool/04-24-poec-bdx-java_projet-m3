@@ -143,17 +143,19 @@ export class MentorReservationPageByStudentComponent implements OnInit {
         );
         console.log('free slots', this.events);
 
-        console.log('slots', slots);
+        console.log('slotss', slots);
       });
   }
   formatSlotsToEvents(slots: SlotDTO[]): EventInput[] {
     return slots.map((slot) => ({
       id: '' + slot.id,
-      title: slot.visio ? 'Visio' : 'Présentiel>',
+      title: slot.visio ? 'Visio' : 'Présentiel',
       start: slot.dateBegin,
       end: slot.dateEnd,
-      color: slot.visio ? '#FCBE77' : '#F8156B',
+
+      color: slot.booked ? '#A4A4A2' : slot.visio ? '#FCBE77' : '#F8156B',
       className: slot.booked ? 'booked' : 'not-booked',
+
       extendedProps: {
         slotId: slot.id,
         mentorId: slot.mentorId,
