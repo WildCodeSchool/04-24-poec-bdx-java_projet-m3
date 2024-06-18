@@ -30,29 +30,29 @@ export class StudentLayoutComponent implements OnInit {
   listLink: DashboardLink[] = [
     {
       title: 'Mon profil',
-      logoUrl: 'assets/svgs/dash.svg',
-      logoUrlActive: 'assets/svgs/dash-white.svg',
+      logoUrl: 'assets/svgs/profile.svg',
+      logoUrlActive: 'assets/svgs/profile-blanc.svg',
       path: 'student',
       active: true,
     },
     {
       title: 'Trouver un mentor',
-      logoUrl: 'assets/svgs/calendar.svg',
-      logoUrlActive: 'assets/svgs/calendar-white.svg',
+      logoUrl: 'assets/svgs/find.svg',
+      logoUrlActive: 'assets/svgs/find-blanc.svg',
       path: 'student/list-mentors',
       active: false,
     },
     {
       title: 'Mes réservations',
-      logoUrl: 'assets/svgs/edit.svg',
-      logoUrlActive: 'assets/svgs/edit-white.svg',
+      logoUrl: 'assets/svgs/agenda.svg',
+      logoUrlActive: 'assets/svgs/agenda-blanc.svg',
       path: 'student/reservations',
       active: false,
     },
     {
       title: 'Mes favoris',
-      logoUrl: 'assets/svgs/edit.svg',
-      logoUrlActive: 'assets/svgs/edit-white.svg',
+      logoUrl: 'assets/svgs/coeur.svg',
+      logoUrlActive: 'assets/svgs/coeur-blanc.svg',
       path: 'student/list-favorites',
       active: false,
     },
@@ -73,7 +73,7 @@ export class StudentLayoutComponent implements OnInit {
     this.windowWatcher.windowSizeChanged.subscribe((option) => {
       this.showNavbar = option;
       this.name = this.studentProfil$.value.firstname;
-      this.intro = 'Votre espace élève de la Wild Code School';
+      this.intro = 'Votre espace Étudiant de la Wild Code School';
     });
 
     this.imgUrl = this.studentProfil$.value.imgUrl;
