@@ -200,17 +200,34 @@ export class ReservationService {
       );
   }
 
-  removeMentorReservation(id: number, userId: number) {
+  removeMentorReservation(
+    reservationId: number,
+    mentorId: number,
+    first: number
+  ): Observable<{
+    reservations: reservationForMentorDTO[];
+    total: number;
+  }> {
+    const total = this.activeMentorReservations$.value.total;
+
     return this.httpClient
       .delete<{ reservations: reservationForMentorDTO[]; total: number }>(
-        environment.BASE_URL + `/reservation/reservations/${id}/${userId}`
+        //environment.BASE_URL + `/reservation/reservations/${id}/${userId}`
+        `http://localhost:8080/reservation/delete/mentor/${reservationId}`
       )
       .pipe(
-        tap((res) => {
-          this.activeMentorReservations$.next(res);
+        switchMap(() => {
+          if (total % 5 === 1 && total > 5) {
+            this.pagination.offsetReservationStudent.next(
+              this.pagination.offsetReservationStudent.value - 1
+            );
+            return this.getMentorReservationList(mentorId, 5, first - 5);
+          }
+          return this.getMentorReservationList(mentorId, 5, first);
         })
       );
   }
+
   removeReservationByStudent(
     reservationId: number,
     studentId: number,
@@ -224,7 +241,7 @@ export class ReservationService {
     return this.httpClient
       .delete<{ reservations: ReservationForStudentDTO[]; total: number }>(
         //environment.BASE_URL + `/reservation/reservations/${id}/${userId}`
-        `http://localhost:8080/reservation/delete/student/${reservationId}/${studentId}/5/${first}`
+        `http://localhost:8080/reservation/delete/student/${reservationId}`
       )
       .pipe(
         switchMap(() => {

@@ -4,6 +4,7 @@ import { ReservationService } from '../../../../shared/services/reservation.serv
 import { MentorService } from '../../../../shared/services/mentor.service';
 import { Observable } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PaginationService } from '../../../../shared/services/pagination.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit {
   reservationService = inject(ReservationService);
   activeMentor$ = inject(MentorService).activeMentorProfil$;
   destroyRef = inject(DestroyRef);
+  paginationService = inject(PaginationService);
 
   ngOnInit(): void {
     this.reservations$ =
@@ -37,8 +39,10 @@ export class DashboardComponent implements OnInit {
     first?: number | undefined;
     rows?: number | undefined;
   }) {
-    this.first = (event.page || 0) * (event.rows || 0);
-    console.log('first', this.first);
+    // this.first = (event.page || 0) * (event.rows || 0);
+    // console.log('first', this.first);
+    this.paginationService.offsetReservationMentor.next(event.first || 0);
+
     this.reservationService
       .getMentorReservationList(
         this.activeMentor$.value.userId,
@@ -54,8 +58,11 @@ export class DashboardComponent implements OnInit {
     first?: number | undefined;
     rows?: number | undefined;
   }) {
-    this.first = (event.page || 0) * (event.rows || 0);
-    console.log('first', this.first);
+    // this.first = (event.page || 0) * (event.rows || 0);
+    // console.log('first', this.first);
+    this.paginationService.offsetReservationMentorHistory.next(
+      event.first || 0
+    );
 
     this.reservationService
       .getMentorReservationHistoryList(
