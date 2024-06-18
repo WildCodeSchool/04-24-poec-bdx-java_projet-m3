@@ -1,15 +1,17 @@
 <div class="control"></div>
-<h2 *ngIf="profil | async as profil">
-  Réserver un creneau chez {{ profil.firstname | titlecase }}
-</h2>
-<ng-container *ngIf="today?.length">
-  <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
-</ng-container>
-<full-calendar
-  [events]="events"
-  [options]="calendarOptions"
-  #calendar
-></full-calendar>
+<div class="calendar-background">
+  <h2 *ngIf="profil | async as profil">
+    Réserver un creneau chez {{ profil.firstname | titlecase }}
+  </h2>
+  <ng-container *ngIf="today?.length">
+    <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
+  </ng-container>
+  <full-calendar
+    [events]="events"
+    [options]="calendarOptions"
+    #calendar
+  ></full-calendar>
+</div>
 <p-dialog [modal]="true" [visible]="visible" [style]="{ width: '25rem' }">
   <div class="modal">
     <h2>Reserver ce creneau</h2>

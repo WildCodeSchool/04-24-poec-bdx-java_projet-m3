@@ -152,7 +152,6 @@ export class MentorReservationPageByStudentComponent implements OnInit {
       title: slot.visio ? 'Visio' : 'Présentiel',
       start: slot.dateBegin,
       end: slot.dateEnd,
-      // colorBack: slot.visio ? '#FCBE77' : '#F8156B',
 
       color: slot.booked ? '#A4A4A2' : slot.visio ? '#FCBE77' : '#F8156B',
       className: slot.booked ? 'booked' : 'not-booked',
