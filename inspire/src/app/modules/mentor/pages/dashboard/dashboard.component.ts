@@ -41,6 +41,8 @@ export class DashboardComponent implements OnInit {
   }) {
     // this.first = (event.page || 0) * (event.rows || 0);
     // console.log('first', this.first);
+    console.log('rien');
+
     this.paginationService.offsetReservationMentor.next(event.first || 0);
 
     this.reservationService
