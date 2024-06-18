@@ -13,7 +13,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import frLocale from '@fullcalendar/core/locales/fr';
 import interactionPlugin from '@fullcalendar/interaction';
-import { Observable, Subscription, map, tap } from 'rxjs';
+import { Observable, Subscription, map, switchMap, tap } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ReservationService } from '../../../../shared/services/reservation.service';
 import { MentorDTO } from '../../../../shared/models/user';
@@ -77,10 +77,12 @@ export class MentorReservationPageByStudentComponent implements OnInit {
       list: 'list',
       allDayText: 'tous',
     },
-    weekends: false,
-    slotDuration: '00:30:00',
+
+    weekends: true,
+    slotDuration: '00:15:00',
     slotMinTime: '07:00',
-    slotMaxTime: '18:00',
+    slotMaxTime: '23:00',
+    allDaySlot: false,
 
     navLinks: true,
     eventStartEditable: true,
@@ -97,10 +99,29 @@ export class MentorReservationPageByStudentComponent implements OnInit {
     nowIndicator: true,
 
     droppable: false,
+    eventContent: this.renderEventContent.bind(this),
 
     selectAllow: this.selectAllow,
     eventClick: this.handleEventClick.bind(this),
   };
+
+  renderEventContent(arg: any) {
+    console.log('args', arg);
+
+    let html = `<div class="custom-event">
+                  <b>${arg.event.title}</b>
+                  <div>${
+                    arg.event.extendedProps['isBooked']
+                      ? 'Booked'
+                      : 'not booked'
+                  }</div>
+                </div>`;
+    let arrayOfDomNodes = [];
+    let div = document.createElement('div');
+    div.innerHTML = html;
+    arrayOfDomNodes.push(div.firstChild);
+    return { domNodes: arrayOfDomNodes };
+  }
 
   handleEventClick(eventClickArg: EventClickArg) {
     console.log(eventClickArg.event.extendedProps);
@@ -128,14 +149,16 @@ export class MentorReservationPageByStudentComponent implements OnInit {
   formatSlotsToEvents(slots: SlotDTO[]): EventInput[] {
     return slots.map((slot) => ({
       id: '' + slot.id,
-      title: slot.visio ? 'Visio' : 'Présentiel',
+      title: slot.visio ? 'Visio' : 'Présentiel>',
       start: slot.dateBegin,
       end: slot.dateEnd,
       color: slot.visio ? '#FCBE77' : '#F8156B',
+      className: slot.booked ? 'booked' : 'not-booked',
       extendedProps: {
         slotId: slot.id,
         mentorId: slot.mentorId,
         reservationId: slot.reservationId,
+        isBooked: slot.booked,
       },
     }));
   }
@@ -148,7 +171,21 @@ export class MentorReservationPageByStudentComponent implements OnInit {
         this.eventDetails.subject
       )
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+      .pipe(
+        switchMap(() => {
+          const mentorId = this.mentorId;
+          return this.reservationService.getSlotsforStudentByMentorId(mentorId);
+        }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((slots) => {
+        this.events = this.formatSlotsToEvents(slots).filter(
+          (ele) => !ele['booked']
+        );
+        console.log('free slots', this.events);
+
+        console.log('slots', slots);
+      });
     this.visible = false;
   }
 
