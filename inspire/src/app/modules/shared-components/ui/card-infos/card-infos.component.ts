@@ -11,6 +11,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UserService } from '../../../../user.service';
 import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
 import { StudentService } from '../../../../shared/services/student.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-card-infos',
@@ -30,6 +31,7 @@ export class CardInfosComponent {
   userService = inject(UserService);
   userStoreService = inject(UserStoreService);
   destroyRef = inject(DestroyRef);
+  constructor(private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.userType = this.mentor ? 'mentor' : 'student';
@@ -51,26 +53,50 @@ export class CardInfosComponent {
       this.mentorService
         .updateMentorProfil(newProfil.profil)
         .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe();
+        .subscribe(() => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Super ! ',
+            detail: 'Votre profil a bien été modifié',
+          });
+        });
     }
     if (this.userStoreService.getUserConnected$().value.role === 'STUDENT') {
       this.studentService
         .updateStudentProfil(newProfil.profil)
         .pipe(takeUntilDestroyed(this.destroyRef))
-        .subscribe();
+        .subscribe(() => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Super ! ',
+            detail: 'Votre profil a bien été modifié',
+          });
+        });
     }
     if (newProfil.file && newProfil.fileName) {
       if (this.userStoreService.getUserConnected$().value.role === 'MENTOR') {
         this.mentorService
           .updateMentorImage(newProfil.file)
           .pipe(takeUntilDestroyed(this.destroyRef))
-          .subscribe();
+          .subscribe(() => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Super ! ',
+              detail: 'Votre profil a bien été modifié',
+            });
+          });
       }
       if (this.userStoreService.getUserConnected$().value.role === 'STUDENT') {
         this.studentService
           .updateStudentImage(newProfil.file)
           .pipe(takeUntilDestroyed(this.destroyRef))
-          .subscribe();
+          .subscribe(() => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Super ! ',
+              detail: 'Votre profil a bien été modifié',
+            });
+          });
       }
     }
 

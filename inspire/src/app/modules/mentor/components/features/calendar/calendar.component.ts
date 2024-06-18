@@ -18,6 +18,7 @@ import { Subscription } from 'rxjs';
 import { MentorDTO } from '../../../../../shared/models/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DateTimeService } from '../../../../../shared/services/dateTime.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-calendar',
@@ -51,7 +52,8 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     private reservationService: ReservationService,
     private mentorService: MentorService,
     private fb: FormBuilder,
-    private dateTimeService: DateTimeService
+    private dateTimeService: DateTimeService,
+    private messageService: MessageService
   ) {}
 
   formulaire: FormGroup = this.fb.group({
@@ -103,6 +105,11 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       .addSlotToMentor(this.formattedSlotInfo)
       .subscribe(() => {
         this.visible = false;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Super ! ',
+          detail: 'Votre créneau a bien été ajoutée',
+        });
         this.loadSlots();
       });
   }
@@ -111,6 +118,11 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     if (this.eventDetails.id) {
       this.reservationService.deleteSlot(this.eventDetails.id).subscribe(() => {
         this.displayModal = false;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Super ! ',
+          detail: 'Votre créneau a bien été supprimé',
+        });
         this.loadSlots();
       });
     } else {
@@ -209,6 +221,11 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     this.reservationService.updateSlot(id, slotInfo).subscribe(
       () => {
         this.displayModal = false;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Super ! ',
+          detail: 'Votre créneau a bien été mis à jour',
+        });
         this.isModfify = false;
         this.loadSlots();
       },

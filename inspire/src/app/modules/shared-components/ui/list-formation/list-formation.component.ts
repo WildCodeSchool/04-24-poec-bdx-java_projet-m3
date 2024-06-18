@@ -3,6 +3,7 @@ import { Formation, FormationDTO } from '../../../../shared/models/formation';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { UserService } from '../../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-list-formation',
@@ -19,6 +20,8 @@ export class ListFormationComponent {
   userService = inject(UserService);
   destroyRef = inject(DestroyRef);
 
+  constructor(private messageService: MessageService) {}
+
   addCourse() {
     this.isVisibleFormCourse = true;
   }
@@ -31,6 +34,12 @@ export class ListFormationComponent {
     this.userService
       .addFormationUser(formation)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+      .subscribe(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Super ! ',
+          detail: 'Votre formation a bien été ajoutée',
+        });
+      });
   }
 }

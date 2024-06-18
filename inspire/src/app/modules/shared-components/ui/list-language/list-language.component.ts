@@ -3,6 +3,7 @@ import { Language } from '../../../../shared/models/language';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UserService } from '../../../../user.service';
 import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-list-language',
@@ -19,6 +20,7 @@ export class ListLanguageComponent {
   userService = inject(UserService);
   userConnected = inject(UserStoreService).getUserConnected$();
   destroyRef = inject(DestroyRef);
+  constructor(private messageService: MessageService) {}
 
   showEditModal() {
     this.isModalVisible = true;
@@ -31,7 +33,13 @@ export class ListLanguageComponent {
     this.userService
       .updateUserLanguages(newLanguages)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+      .subscribe(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Super ! ',
+          detail: 'Votre langues ont bien été modifiées',
+        });
+      });
 
     this.isModalVisible = false;
   }

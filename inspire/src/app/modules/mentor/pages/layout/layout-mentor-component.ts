@@ -60,6 +60,10 @@ export class LayoutMentor implements OnInit {
     this.showNavbar = !this.showNavbar;
   }
 
+  // goToProfile() {
+  //   this.router.navigate(['mentor/profil']);
+  // }
+
   logout() {
     this.userService.logout();
     this.modalVisible = false;
@@ -70,7 +74,7 @@ export class LayoutMentor implements OnInit {
       this.showNavbar = option;
       this.name = this.mentorProfil$.value.firstname;
 
-      this.intro = 'Votre espace mentor de la Wild Code School';
+      this.intro = 'Votre espace Mentor de la Wild Code School';
     });
 
     this.imgUrl = this.mentorProfil$.value.imgUrl;

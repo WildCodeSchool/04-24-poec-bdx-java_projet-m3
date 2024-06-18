@@ -26,6 +26,7 @@
 }
 .icon-wrapper img {
   display: block;
+  cursor: pointer;
 }
 
 .badge {
@@ -153,7 +154,7 @@
 }
 
 .logout-pop-up {
-  padding: 20px 40px;
+  padding: 20px 60px 40px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -164,6 +165,7 @@
   font-size: 20px;
   line-height: 20px;
   text-align: center;
+  color: black;
 }
 
 .logout-pop-up p {
@@ -202,6 +204,14 @@
       display: block;
     }
   }
+
+  .mobile a {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
   .container-main {
     .container-outlet {
       margin-left: 0;
