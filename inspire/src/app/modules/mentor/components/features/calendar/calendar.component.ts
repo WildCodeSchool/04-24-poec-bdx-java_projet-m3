@@ -348,6 +348,7 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     div.innerHTML = html;
     arrayOfDomNodes.push(div.firstChild);
     return { domNodes: arrayOfDomNodes };
+    console.log('');
   }
 
   handleEventClick(eventClickArg: EventClickArg) {
