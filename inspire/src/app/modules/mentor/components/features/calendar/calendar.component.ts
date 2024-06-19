@@ -325,11 +325,28 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     nowIndicator: true,
 
     droppable: false,
-
+    eventContent: this.renderEventContent.bind(this),
     select: this.onDateSelect,
     selectAllow: this.selectAllow,
     eventClick: this.handleEventClick.bind(this),
   };
+
+  renderEventContent(arg: any) {
+    console.log('args', arg);
+    let html = `<div class="custom-event">
+                  <b>${arg.event.title}</b>
+                  <div>${
+                    arg.event.extendedProps['isBooked']
+                      ? `<div class="slot-content"><img src=${arg.event.extendedProps.imgUrl} width="24" height="auto"/><span>${arg.event.extendedProps.firstname}</span></div>`
+                      : 'not booked'
+                  }</div>
+                </div>`;
+    let arrayOfDomNodes = [];
+    let div = document.createElement('div');
+    div.innerHTML = html;
+    arrayOfDomNodes.push(div.firstChild);
+    return { domNodes: arrayOfDomNodes };
+  }
 
   handleEventClick(eventClickArg: EventClickArg) {
     this.eventDetails = {
@@ -368,6 +385,9 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       color: slot.visio ? '#FCBE77' : '#F8156B',
       extendedProps: {
         visio: slot.visio,
+        isBooked: slot.booked,
+        imgUrl: slot.imgUrl,
+        firstname: slot.firstname,
       },
     }));
   }
