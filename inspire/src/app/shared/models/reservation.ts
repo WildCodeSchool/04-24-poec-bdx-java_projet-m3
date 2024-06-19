@@ -15,6 +15,7 @@ export type SlotDTO = {
   firstname: string;
   lastname: string;
   imgUrl: string;
+  subject: string;
 };
 
 export type Reservation = {
