@@ -25,7 +25,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss',
 })
-export class CalendarComponent implements OnInit, AfterViewChecked {
+export class CalendarComponent implements OnInit {
   @ViewChild('calendar')
   calendarComponent!: FullCalendarComponent;
 
@@ -415,5 +415,4 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       this.mentorSubscription.unsubscribe();
     }
   }
-  ngAfterViewChecked(): void {}
 }
