@@ -12,14 +12,33 @@
     #calendar
   ></full-calendar>
 </div>
-<p-dialog [modal]="true" [visible]="visible" [style]="{ width: '25rem' }">
+<p-dialog [modal]="true" [visible]="visible">
   <div class="modal">
-    <h2>Reserver ce creneau</h2>
-    <app-button
-      text="Reserver"
-      (onSubmit)="bookSlot()"
-      [variant]="'pink'"
-    ></app-button>
-    <app-button text="Annuler" (onSubmit)="visible = false"></app-button>
+    <div class="container-img-forgot">
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/question.svg"
+        alt=""
+      />
+    </div>
+    <div class="content">
+      <h1>Reserver ce creneau</h1>
+      <div *ngIf="profil | async as mentor">
+        <p>Vous souhaitez réserver un créneau avec {{ mentor.firstname }}</p>
+      </div>
+
+      <div class="control">
+        <app-button
+          text="Annuler"
+          (onSubmit)="visible = false"
+          [variant]="'black'"
+        ></app-button>
+        <app-button
+          text="Reserver"
+          (onSubmit)="bookSlot()"
+          [variant]="'pink'"
+        ></app-button>
+      </div>
+    </div>
   </div>
 </p-dialog>
