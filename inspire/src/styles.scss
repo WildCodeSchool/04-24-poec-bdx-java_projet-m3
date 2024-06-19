@@ -256,3 +256,17 @@ p-multiselect {
   height: 20px;
   margin-right: 10px;
 }
+
+// content of slot
+.slot-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  img {
+    width: clamp(24px, 30%, 50px);
+    height: clamp(24px, 30%, 50px);
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}

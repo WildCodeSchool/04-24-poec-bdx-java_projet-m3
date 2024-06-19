@@ -12,6 +12,10 @@ export type SlotDTO = {
   dateEnd: Date;
   visio: boolean;
   booked: boolean;
+  firstname: string;
+  lastname: string;
+  imgUrl: string;
+  subject: string;
 };
 
 export type Reservation = {

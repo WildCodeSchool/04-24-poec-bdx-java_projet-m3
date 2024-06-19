@@ -14,7 +14,7 @@ import frLocale from '@fullcalendar/core/locales/fr';
 import interactionPlugin from '@fullcalendar/interaction';
 import { ReservationService } from '../../../../../shared/services/reservation.service';
 import { MentorService } from '../../../../../shared/services/mentor.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { MentorDTO } from '../../../../../shared/models/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DateTimeService } from '../../../../../shared/services/dateTime.service';
@@ -325,11 +325,30 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     nowIndicator: true,
 
     droppable: false,
-
+    eventContent: this.renderEventContent.bind(this),
     select: this.onDateSelect,
     selectAllow: this.selectAllow,
     eventClick: this.handleEventClick.bind(this),
   };
+
+  renderEventContent(arg: any) {
+    console.log('args', arg);
+    let html = `<div class="custom-event">
+                  <b>${arg.event.title}</b>
+                  <div>${
+                    arg.event.extendedProps['isBooked']
+                      ? `<div class="slot-content"><img src=${arg.event.extendedProps.imgUrl} width="24" height="auto"/><span>${arg.event.extendedProps.firstname}</span></div>
+                      <div>Sujet: ${arg.event.extendedProps.subject}</div>
+                      `
+                      : 'not booked'
+                  }</div>
+                </div>`;
+    let arrayOfDomNodes = [];
+    let div = document.createElement('div');
+    div.innerHTML = html;
+    arrayOfDomNodes.push(div.firstChild);
+    return { domNodes: arrayOfDomNodes };
+  }
 
   handleEventClick(eventClickArg: EventClickArg) {
     this.eventDetails = {
@@ -368,6 +387,10 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       color: slot.visio ? '#FCBE77' : '#F8156B',
       extendedProps: {
         visio: slot.visio,
+        isBooked: slot.booked,
+        imgUrl: slot.imgUrl,
+        firstname: slot.firstname,
+        subject: slot.subject,
       },
     }));
   }
