@@ -195,6 +195,8 @@
 
 @media screen and (max-width: $large) {
   .header-layout {
+    padding-left: 10px;
+    padding-right: 10px;
     .site-logo {
       display: none;
     }
@@ -202,6 +204,27 @@
     .nav-burger {
       display: block;
     }
+  }
+  a img {
+    margin-right: 10px;
+  }
+  span {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .mobile a {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 20px;
+  }
+
+  span img {
+    width: 30px;
   }
   .container-main {
     .container-outlet {
