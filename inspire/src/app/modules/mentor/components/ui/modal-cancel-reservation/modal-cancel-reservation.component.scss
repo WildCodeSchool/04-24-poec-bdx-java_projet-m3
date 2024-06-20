@@ -4,6 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: black;
 
   .control {
     margin: 10px 0;
@@ -14,4 +15,10 @@
 
 .action {
   height: 250px;
+}
+
+.image {
+  width: 200px;
+  height: 100%;
+  object-fit: cover;
 }

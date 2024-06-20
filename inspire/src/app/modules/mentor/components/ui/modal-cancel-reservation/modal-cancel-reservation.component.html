@@ -7,12 +7,13 @@
   <div class="control">
     <app-button
       [text]="'Annuler'"
-      [variant]="'pink'"
+      [variant]="'black'"
       (onSubmit)="onCancel.emit()"
     ></app-button>
     <app-button
       [text]="'Valider'"
       (onSubmit)="deleteReservation()"
+      [variant]="'pink'"
     ></app-button>
   </div>
 </div>
