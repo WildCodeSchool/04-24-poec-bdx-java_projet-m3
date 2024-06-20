@@ -124,7 +124,7 @@ export class ReservationWithSwipeComponentUpcoming
     this.modalEditMessage = false;
     this.reservationService
       .updateMentorReservationHistoryList(
-        this.reservation.id,
+        this.reservation.reservationId,
         this.connectedUser.value?.id || 0,
         event
       )

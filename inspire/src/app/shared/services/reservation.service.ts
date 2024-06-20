@@ -147,16 +147,19 @@ export class ReservationService {
     userId: number,
     message: string
   ) {
+    const mentorId = this.mentorService.activeMentorProfil$.value.id;
     return this.httpClient
       .put<{ reservations: reservationForMentorDTO[]; total: number }>(
-        environment.BASE_URL + `/reservation/reservations/${id}`,
+        //environment.BASE_URL + `/reservation/reservations/${id}`,
+        `http://localhost:8080/reservation/update/${id}/${this.pagination.offsetReservationMentorHistory.value}`,
         {
           message,
-          mentorId: userId,
+          mentorId,
         }
       )
       .pipe(
         tap((res) => {
+          console.log('new list ', res);
           this.activeMentorReservationsHistory$.next(res);
         })
       );
