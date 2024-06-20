@@ -71,5 +71,6 @@
     [reservation]="reservation"
     (onCancel)="modalEditMessage = false"
     (onSubmit)="updateReservation($event)"
+    (onExit)="hideEditNote()"
   ></app-modal-add-note
 ></p-sidebar>

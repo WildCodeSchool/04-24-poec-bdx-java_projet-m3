@@ -52,14 +52,26 @@
 
   <div class="card" *ngIf="!editMessage">
     <h4>Vos commentaires</h4>
-    <div class="message">
-      <div [innerHTML]="reservation.message"></div>
+    <div class="communication">
+      <div class="message">
+        <div [innerHTML]="reservation.details"></div>
+      </div>
+      <div class="response" *ngIf="reservation.message">
+        <div [innerHTML]="reservation.message"></div>
+      </div>
     </div>
-    <app-button
-      [text]="'Editer'"
-      [variant]="'pink'"
-      (onSubmit)="editMessage = true"
-    ></app-button>
+    <div class="exit">
+      <app-button
+        [text]="'Editer'"
+        [variant]="'pink'"
+        (onSubmit)="editMessage = true"
+      ></app-button>
+      <app-button
+        [text]="'Quitter'"
+        [variant]="'black'"
+        (onSubmit)="exit()"
+      ></app-button>
+    </div>
   </div>
   <div class="action" *ngIf="editMessage">
     <p-editor [(ngModel)]="reservation.message" [style]="{ height: '200px' }" />
@@ -67,9 +79,13 @@
   <div class="control" *ngIf="editMessage">
     <app-button
       [text]="'Annuler'"
-      [variant]="'pink'"
-      (onSubmit)="onCancel.emit()"
+      [type]="'button'"
+      (onSubmit)="editMessage = false"
     ></app-button>
-    <app-button [text]="'Valider'" (onSubmit)="updateMessage()"></app-button>
+    <app-button
+      [text]="'Valider'"
+      (onSubmit)="updateMessage()"
+      [variant]="'pink'"
+    ></app-button>
   </div>
 </div>
