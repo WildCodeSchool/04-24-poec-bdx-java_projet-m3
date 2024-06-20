@@ -259,11 +259,17 @@ export class ReservationService {
       );
   }
 
-  bookSlot(slotId: number, studentId: number, subject: string) {
+  bookSlot(
+    slotId: number,
+    studentId: number,
+    subject: string,
+    details: string
+  ) {
     const newReservation: Reservation = {
       slotId: slotId,
       studentId: studentId,
       subject: subject,
+      details: details,
     };
     console.log('lolus');
 

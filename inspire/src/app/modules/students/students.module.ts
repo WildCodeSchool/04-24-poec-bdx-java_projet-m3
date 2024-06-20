@@ -24,6 +24,7 @@ import { MentorReservationPageByStudentComponent } from './pages/mentor-reservat
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { PaginatorModule } from 'primeng/paginator';
 import { SidebarModule } from 'primeng/sidebar';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,8 @@ import { SidebarModule } from 'primeng/sidebar';
     ReactiveFormsModule,
     PaginatorModule,
     SidebarModule,
+    FloatLabelModule,
+    FormsModule,
   ],
 })
 export class StudentsModule {}
