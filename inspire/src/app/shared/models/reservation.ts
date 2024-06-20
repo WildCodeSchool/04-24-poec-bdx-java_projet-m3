@@ -36,8 +36,8 @@ export type ReservationForStudentDTO = {
   dateBegin: Date;
   visio: boolean;
   title: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   imgUrl: string;
 };
 
@@ -52,7 +52,7 @@ export type reservationForMentorDTO = {
   dateBegin: Date;
   visio: boolean;
   title: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   imgUrl: string;
 };

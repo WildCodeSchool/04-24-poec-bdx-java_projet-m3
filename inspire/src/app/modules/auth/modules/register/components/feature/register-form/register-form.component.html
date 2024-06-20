@@ -7,46 +7,46 @@
   <div class="infos">
     <div class="firstname-name">
       <div class="container-input">
-        <label class="label-form" for="lastName">Nom *</label>
+        <label class="label-form" for="lastname">Nom *</label>
         <input
           class="input-form"
           type="text"
-          id="lastName"
-          name="lastName"
-          formControlName="lastName"
+          id="lastname"
+          name="lastname"
+          formControlName="lastname"
           placeholder="Votre nom"
           autocomplete="on"
         />
         <div
           class="error"
           *ngIf="
-            formRegister.submitted && registerForm.controls['lastName'].errors
+            formRegister.submitted && registerForm.controls['lastname'].errors
           "
         >
-          <div [hidden]="!registerForm.controls['lastName'].errors['required']">
+          <div [hidden]="!registerForm.controls['lastname'].errors['required']">
             Le nom est requis
           </div>
         </div>
       </div>
       <div class="container-input">
-        <label class="label-form" for="firstName">Prénom *</label>
+        <label class="label-form" for="firstname">Prénom *</label>
         <input
           class="input-form"
           type="text"
-          id="firstName"
-          name="firstName"
-          formControlName="firstName"
+          id="firstname"
+          name="firstname"
+          formControlName="firstname"
           placeholder="Votre prénom"
           autocomplete="on"
         />
         <div
           class="error"
           *ngIf="
-            formRegister.submitted && registerForm.controls['firstName'].errors
+            formRegister.submitted && registerForm.controls['firstname'].errors
           "
         >
           <div
-            [hidden]="!registerForm.controls['firstName'].errors['required']"
+            [hidden]="!registerForm.controls['firstname'].errors['required']"
           >
             Le prénom est requis
           </div>
