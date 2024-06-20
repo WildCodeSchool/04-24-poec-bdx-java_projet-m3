@@ -5,7 +5,10 @@
     </button>
   </div>
   <div class="row-reservation" [ngClass]="bgColor" #thisRef>
-    <div class="avatar-name">
+    <div
+      class="avatar-name"
+      [routerLink]="['/student/mentor-details', reservation.mentorUserId]"
+    >
       <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" />
       <p>{{ reservation.firstname }}</p>
     </div>

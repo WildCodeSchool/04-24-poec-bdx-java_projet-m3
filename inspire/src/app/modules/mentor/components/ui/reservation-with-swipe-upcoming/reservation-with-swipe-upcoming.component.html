@@ -8,14 +8,11 @@
     </button>
   </div>
   <div class="row-reservation" [ngClass]="bgColor" #thisRef>
-    <div class="avatar-name">
-      <img
-        [src]="reservation.imgUrl"
-        alt="avatar"
-        width="35"
-        height="35"
-        [routerLink]="['/mentor/student-details/', reservation.studentId]"
-      />
+    <div
+      class="avatar-name"
+      [routerLink]="['/mentor/student-details/', reservation.userId]"
+    >
+      <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" />
       <p>{{ reservation.firstname }}</p>
     </div>
     <div class="promotion">

@@ -264,9 +264,12 @@ p-multiselect {
   align-items: center;
   padding: 10px;
   img {
-    width: clamp(24px, 30%, 50px);
-    height: clamp(24px, 30%, 50px);
+    width: 30px;
+    height: 30px;
     object-fit: cover;
     border-radius: 50%;
   }
+}
+.sujet {
+  padding-left: 10px;
 }

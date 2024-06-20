@@ -125,8 +125,8 @@ export class UserService {
   loginTabs(message: BroadcastMessage) {
     if (message) {
       this.userStore.setUserConnected(message.payload as UserDTO);
-      if (message.payload.role === 'mentor') this.router.navigate(['/mentor']);
-      if (message.payload.role === 'student')
+      if (message.payload.role === 'MENTOR') this.router.navigate(['/mentor']);
+      if (message.payload.role === 'STUDENT')
         this.router.navigate(['/student']);
     }
   }

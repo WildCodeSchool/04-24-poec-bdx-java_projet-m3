@@ -19,9 +19,9 @@ export class UserByIdService {
     return this.http.get<Mentor>(environment.BASE_URL_API + 'mentor/' + userId);
   }
 
-  getStudentProfilById(studentId: number) {
+  getStudentProfilById(userId: number) {
     return this.http.get<StudentDTO>(
-      environment.BASE_URL_API + 'student/students/' + studentId
+      environment.BASE_URL_API + 'student/' + userId
     );
   }
 
