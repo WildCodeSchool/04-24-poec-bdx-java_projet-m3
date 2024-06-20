@@ -26,6 +26,21 @@
       <div *ngIf="profil | async as mentor">
         <p>Vous souhaitez réserver un créneau avec {{ mentor.firstname }}</p>
       </div>
+      <div class="subject-infos">
+        <h4>Suject :</h4>
+        <select
+          name="subject"
+          id="subject"
+          class="subject"
+          [(ngModel)]="subject"
+          (change)="setSubject($event)"
+        >
+          <option value="Réseautage">Réseautage</option>
+          <option value="Deboggage">Deboggage</option>
+          <option value="Entretien Blanc">Entretien Blanc</option>
+          <option value="Autre" [defaultSelected]="true">Autre</option>
+        </select>
+      </div>
 
       <div class="control">
         <app-button

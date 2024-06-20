@@ -12,6 +12,7 @@ import { UserService } from '../../../../user.service';
 import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
 import { StudentService } from '../../../../shared/services/student.service';
 import { MessageService } from 'primeng/api';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-card-infos',
@@ -60,6 +61,21 @@ export class CardInfosComponent {
             detail: 'Votre profil a bien été modifié',
           });
         });
+      //
+      if (newProfil.file && newProfil.fileName) {
+        this.mentorService
+          .updateMentorImage(newProfil.file)
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe(() => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Super ! ',
+              detail: 'Votre profil a bien été modifié',
+            });
+          });
+      }
+
+      //
     }
     if (this.userStoreService.getUserConnected$().value.role === 'STUDENT') {
       this.studentService
@@ -72,21 +88,9 @@ export class CardInfosComponent {
             detail: 'Votre profil a bien été modifié',
           });
         });
-    }
-    if (newProfil.file && newProfil.fileName) {
-      if (this.userStoreService.getUserConnected$().value.role === 'MENTOR') {
-        this.mentorService
-          .updateMentorImage(newProfil.file)
-          .pipe(takeUntilDestroyed(this.destroyRef))
-          .subscribe(() => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Super ! ',
-              detail: 'Votre profil a bien été modifié',
-            });
-          });
-      }
-      if (this.userStoreService.getUserConnected$().value.role === 'STUDENT') {
+      //
+
+      if (newProfil.file && newProfil.fileName) {
         this.studentService
           .updateStudentImage(newProfil.file)
           .pipe(takeUntilDestroyed(this.destroyRef))
@@ -98,7 +102,34 @@ export class CardInfosComponent {
             });
           });
       }
+      //
     }
+    // if (newProfil.file && newProfil.fileName) {
+    //   if (this.userStoreService.getUserConnected$().value.role === 'MENTOR') {
+    //     this.mentorService
+    //       .updateMentorImage(newProfil.file)
+    //       .pipe(takeUntilDestroyed(this.destroyRef))
+    //       .subscribe(() => {
+    //         this.messageService.add({
+    //           severity: 'success',
+    //           summary: 'Super ! ',
+    //           detail: 'Votre profil a bien été modifié',
+    //         });
+    //       });
+    //   }
+    //   if (this.userStoreService.getUserConnected$().value.role === 'STUDENT') {
+    //     this.studentService
+    //       .updateStudentImage(newProfil.file)
+    //       .pipe(takeUntilDestroyed(this.destroyRef))
+    //       .subscribe(() => {
+    //         this.messageService.add({
+    //           severity: 'success',
+    //           summary: 'Super ! ',
+    //           detail: 'Votre profil a bien été modifié',
+    //         });
+    //       });
+    //   }
+    // }
 
     this.userService
       .updateUserSkills(newProfil.skills)

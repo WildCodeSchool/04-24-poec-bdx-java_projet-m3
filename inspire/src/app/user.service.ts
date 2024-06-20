@@ -28,8 +28,8 @@ import { BroadcastMessage } from './shared/models/broadcastMessage';
 type InscriptionUser = {
   email: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
 };
 import { cp } from '@fullcalendar/core/internal-common';
 

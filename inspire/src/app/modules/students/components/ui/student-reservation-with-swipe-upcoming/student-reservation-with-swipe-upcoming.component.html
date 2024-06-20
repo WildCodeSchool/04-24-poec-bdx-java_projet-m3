@@ -7,7 +7,7 @@
   <div class="row-reservation" [ngClass]="bgColor" #thisRef>
     <div class="avatar-name">
       <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" />
-      <p>{{ reservation.firstName }}</p>
+      <p>{{ reservation.firstname }}</p>
     </div>
     <div class="promotion">
       {{ reservation.title | titlecase }}
@@ -44,7 +44,7 @@
   [resizable]="false"
 >
   <div class="modal-note" *ngIf="isHistory">
-    <h3>Vous avez assisté {{ reservation.firstName | titlecase }}</h3>
+    <h3>Vous avez assisté {{ reservation.firstname | titlecase }}</h3>
     <h4>Le {{ reservation.dateBegin | date : "short" }}</h4>
     <h3>Notez cette intervention</h3>
     <input name="Note" id="note" [(ngModel)]="newNote" />
@@ -62,7 +62,7 @@
     </div>
   </div>
   <div class="modal-note" *ngIf="!isHistory">
-    <h3>Réservation prévue avec {{ reservation.firstName | titlecase }}</h3>
+    <h3>Réservation prévue avec {{ reservation.firstname | titlecase }}</h3>
     <h4>Le {{ reservation.dateBegin | date : "short" }}</h4>
     <h3>Annulez cette réservation?</h3>
 

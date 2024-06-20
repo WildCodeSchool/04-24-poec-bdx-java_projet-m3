@@ -15,8 +15,8 @@ import { environment } from '../../../../../../../../environments/environment.de
 export class RegisterFormComponent implements OnInit {
   registerForm = this.fb.group(
     {
-      lastName: ['', [Validators.required]],
-      firstName: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      firstname: ['', [Validators.required]],
       email: [
         '',
         [
