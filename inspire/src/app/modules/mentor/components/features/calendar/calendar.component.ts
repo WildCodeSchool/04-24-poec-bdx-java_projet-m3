@@ -346,7 +346,7 @@ export class CalendarComponent implements OnInit {
                       ? `<div class="slot-content"><img src=${arg.event.extendedProps.imgUrl} width="24" height="24"/><span>${arg.event.extendedProps.firstname}</span></div>
                       <div class="sujet">Sujet: ${arg.event.extendedProps.subject}</div>
                       `
-                      : 'not booked'
+                      : 'Créneau disponible'
                   }</div>
                 </div>`;
     let arrayOfDomNodes = [];
