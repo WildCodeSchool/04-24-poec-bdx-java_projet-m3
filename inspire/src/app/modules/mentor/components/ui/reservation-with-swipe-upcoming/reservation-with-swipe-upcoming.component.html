@@ -8,15 +8,12 @@
     </button>
   </div>
   <div class="row-reservation" [ngClass]="bgColor" #thisRef>
-    <div class="avatar-name">
-      <img
-        [src]="reservation.imgUrl"
-        alt="avatar"
-        width="35"
-        height="35"
-        [routerLink]="['/mentor/student-details/', reservation.userId]"
-      />
-      <p>{{ reservation.firstName }}</p>
+    <div
+      class="avatar-name"
+      [routerLink]="['/mentor/student-details/', reservation.userId]"
+    >
+      <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" />
+      <p>{{ reservation.firstname }}</p>
     </div>
     <div class="promotion">
       {{ reservation.title | titlecase }}
@@ -71,5 +68,6 @@
     [reservation]="reservation"
     (onCancel)="modalEditMessage = false"
     (onSubmit)="updateReservation($event)"
+    (onExit)="hideEditNote()"
   ></app-modal-add-note
 ></p-sidebar>

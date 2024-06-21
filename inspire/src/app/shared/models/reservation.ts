@@ -12,6 +12,10 @@ export type SlotDTO = {
   dateEnd: Date;
   visio: boolean;
   booked: boolean;
+  firstname: string;
+  lastname: string;
+  imgUrl: string;
+  subject: string;
 };
 
 export type Reservation = {
@@ -19,6 +23,7 @@ export type Reservation = {
   message?: string;
   studentId: number;
   slotId: number;
+  details: string;
 };
 
 export type ReservationForStudentDTO = {
@@ -27,14 +32,16 @@ export type ReservationForStudentDTO = {
   mentorId: number;
   slotId: number;
   userId: number;
+  mentorUserId: number;
   message: string;
   subject: string;
   dateBegin: Date;
   visio: boolean;
   title: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   imgUrl: string;
+  details: string;
 };
 
 export type reservationForMentorDTO = {
@@ -43,12 +50,14 @@ export type reservationForMentorDTO = {
   studentId: number;
   slotId: number;
   userId: number;
+  mentorUserId: number;
   message: string;
   subject: string;
   dateBegin: Date;
   visio: boolean;
   title: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   imgUrl: string;
+  details: string;
 };

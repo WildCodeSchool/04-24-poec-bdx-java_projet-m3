@@ -14,17 +14,18 @@ import frLocale from '@fullcalendar/core/locales/fr';
 import interactionPlugin from '@fullcalendar/interaction';
 import { ReservationService } from '../../../../../shared/services/reservation.service';
 import { MentorService } from '../../../../../shared/services/mentor.service';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { MentorDTO } from '../../../../../shared/models/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DateTimeService } from '../../../../../shared/services/dateTime.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrl: './calendar.component.scss',
 })
-export class CalendarComponent implements OnInit, AfterViewChecked {
+export class CalendarComponent implements OnInit {
   @ViewChild('calendar')
   calendarComponent!: FullCalendarComponent;
 
@@ -51,7 +52,8 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     private reservationService: ReservationService,
     private mentorService: MentorService,
     private fb: FormBuilder,
-    private dateTimeService: DateTimeService
+    private dateTimeService: DateTimeService,
+    private messageService: MessageService
   ) {}
 
   formulaire: FormGroup = this.fb.group({
@@ -103,6 +105,11 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       .addSlotToMentor(this.formattedSlotInfo)
       .subscribe(() => {
         this.visible = false;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Super ! ',
+          detail: 'Votre créneau a bien été ajoutée',
+        });
         this.loadSlots();
       });
   }
@@ -111,6 +118,11 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     if (this.eventDetails.id) {
       this.reservationService.deleteSlot(this.eventDetails.id).subscribe(() => {
         this.displayModal = false;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Super ! ',
+          detail: 'Votre créneau a bien été supprimé',
+        });
         this.loadSlots();
       });
     } else {
@@ -209,6 +221,11 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     this.reservationService.updateSlot(id, slotInfo).subscribe(
       () => {
         this.displayModal = false;
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Super ! ',
+          detail: 'Votre créneau a bien été mis à jour',
+        });
         this.isModfify = false;
         this.loadSlots();
       },
@@ -308,11 +325,31 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
     nowIndicator: true,
 
     droppable: false,
-
+    eventContent: this.renderEventContent.bind(this),
     select: this.onDateSelect,
     selectAllow: this.selectAllow,
     eventClick: this.handleEventClick.bind(this),
   };
+
+  renderEventContent(arg: any) {
+    console.log('args', arg);
+    let html = `<div class="custom-event">
+                  <b>${arg.event.title}</b>
+                  <div>${
+                    arg.event.extendedProps['isBooked']
+                      ? `<div class="slot-content"><img src=${arg.event.extendedProps.imgUrl} width="24" height="24"/><span>${arg.event.extendedProps.firstname}</span></div>
+                      <div class="sujet">Sujet: ${arg.event.extendedProps.subject}</div>
+                      `
+                      : 'not booked'
+                  }</div>
+                </div>`;
+    let arrayOfDomNodes = [];
+    let div = document.createElement('div');
+    div.innerHTML = html;
+    arrayOfDomNodes.push(div.firstChild);
+    return { domNodes: arrayOfDomNodes };
+    console.log('');
+  }
 
   handleEventClick(eventClickArg: EventClickArg) {
     this.eventDetails = {
@@ -351,6 +388,10 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       color: slot.visio ? '#FCBE77' : '#F8156B',
       extendedProps: {
         visio: slot.visio,
+        isBooked: slot.booked,
+        imgUrl: slot.imgUrl,
+        firstname: slot.firstname,
+        subject: slot.subject,
       },
     }));
   }
@@ -374,5 +415,4 @@ export class CalendarComponent implements OnInit, AfterViewChecked {
       this.mentorSubscription.unsubscribe();
     }
   }
-  ngAfterViewChecked(): void {}
 }

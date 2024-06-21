@@ -1,23 +1,71 @@
 <div class="control"></div>
-<h2 *ngIf="profil | async as profil">
-  Réserver un creneau chez {{ profil.firstname | titlecase }}
-</h2>
-<ng-container *ngIf="today?.length">
-  <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
-</ng-container>
-<full-calendar
-  [events]="events"
-  [options]="calendarOptions"
-  #calendar
-></full-calendar>
-<p-dialog [modal]="true" [visible]="visible" [style]="{ width: '25rem' }">
+<div class="calendar-background">
+  <h2 *ngIf="profil | async as profil">
+    Réserver un creneau chez {{ profil.firstname | titlecase }}
+  </h2>
+  <ng-container *ngIf="today?.length">
+    <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
+  </ng-container>
+  <full-calendar
+    [events]="events"
+    [options]="calendarOptions"
+    #calendar
+  ></full-calendar>
+</div>
+<p-dialog [modal]="true" [visible]="visible">
   <div class="modal">
-    <h2>Reserver ce creneau</h2>
-    <app-button
-      text="Reserver"
-      (onSubmit)="bookSlot()"
-      [variant]="'pink'"
-    ></app-button>
-    <app-button text="Annuler" (onSubmit)="visible = false"></app-button>
+    <div class="container-img-forgot">
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/question.svg"
+        alt=""
+      />
+    </div>
+    <div class="content">
+      <h1>Reserver ce creneau</h1>
+      <div *ngIf="profil | async as mentor">
+        <p>Vous souhaitez réserver un créneau avec {{ mentor.firstname }}</p>
+      </div>
+      <div class="subject-infos">
+        <h4>Sujet :</h4>
+        <select
+          name="subject"
+          id="subject"
+          class="subject"
+          [(ngModel)]="subject"
+          (change)="setSubject($event)"
+        >
+          <option value="Réseautage">Réseautage</option>
+          <option value="Deboggage">Deboggage</option>
+          <option value="Entretien Blanc">Entretien Blanc</option>
+          <option value="Autre" [defaultSelected]="true">Autre</option>
+        </select>
+      </div>
+
+      <div class="details">
+        <h4 for="float-input">Details</h4>
+        <textarea
+          id="float-input"
+          rows="5"
+          cols="30"
+          pInputTextarea
+          [(ngModel)]="details"
+        >
+        </textarea>
+      </div>
+
+      <div class="control">
+        <app-button
+          text="Annuler"
+          (onSubmit)="visible = false"
+          [variant]="'black'"
+        ></app-button>
+        <app-button
+          text="Reserver"
+          (onSubmit)="bookSlot()"
+          [variant]="'pink'"
+        ></app-button>
+      </div>
+    </div>
   </div>
 </p-dialog>

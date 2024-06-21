@@ -30,7 +30,6 @@ export class StudentService {
       );
   }
 
-
   updateStudentProfil(profil: StudentDTO) {
     return this.httpClient
       .put<StudentDTO>(
@@ -50,17 +49,14 @@ export class StudentService {
       formData.append('file', file);
 
       return this.httpClient
-        .put<{
-          affectedRow: number;
-          profil: StudentDTO;
-          success: boolean;
-        }>(
-          environment.BASE_URL +
-            '/student/students/image/' +
+        .post<StudentDTO>(
+          // environment.BASE_URL +
+          // '/student/students/image/' +
+          'http://localhost:8080/user/upload/image/student/' +
             this.userConnected.value?.id,
           formData
         )
-        .pipe(tap((res) => this.activeStudentProfil$.next(res.profil)));
+        .pipe(tap((res) => this.activeStudentProfil$.next(res)));
     } else return of();
   }
 }

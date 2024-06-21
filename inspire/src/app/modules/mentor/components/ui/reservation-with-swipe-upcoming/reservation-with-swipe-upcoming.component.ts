@@ -16,6 +16,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReservationService } from '../../../../../shared/services/reservation.service';
 import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
 import { WindowWatcherService } from '../../../../../shared/services/window-watcher.service';
+import { MentorService } from '../../../../../shared/services/mentor.service';
+import { PaginationService } from '../../../../../shared/services/pagination.service';
 
 @Component({
   selector: 'app-reservation-with-swipe-upcoming',
@@ -40,6 +42,8 @@ export class ReservationWithSwipeComponentUpcoming
   connectedUser = inject(UserStoreService).getUserConnected$();
   reservationService = inject(ReservationService);
   phoneMode = inject(WindowWatcherService).windowSizeChanged;
+  mentor$ = inject(MentorService).activeMentorProfil$;
+  paginationService = inject(PaginationService);
 
   ngOnInit(): void {
     this.newNote = this.reservation.message || '';
@@ -115,12 +119,16 @@ export class ReservationWithSwipeComponentUpcoming
     this.elementRef.nativeElement.style.transform = `translateX(0px)`;
   }
 
+  hideEditNote() {
+    this.modalEditMessage = false;
+  }
+
   updateReservation(event: string) {
     this.reservation.message = event;
-    this.modalEditMessage = false;
+    this.modalEditMessage = true;
     this.reservationService
       .updateMentorReservationHistoryList(
-        this.reservation.id,
+        this.reservation.reservationId,
         this.connectedUser.value?.id || 0,
         event
       )
@@ -129,10 +137,14 @@ export class ReservationWithSwipeComponentUpcoming
   }
 
   deleteReservation() {
+    const first = this.isHistory
+      ? this.paginationService.offsetReservationMentorHistory.value
+      : this.paginationService.offsetReservationMentor.value;
     this.reservationService
       .removeMentorReservation(
         this.reservation.id,
-        this.connectedUser.value?.id || 0
+        this.mentor$.value.id,
+        first
       )
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe((res) => {

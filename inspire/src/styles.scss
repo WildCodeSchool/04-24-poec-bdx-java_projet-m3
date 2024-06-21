@@ -79,7 +79,7 @@ p-multiselect {
 }
 
 .languages .p-multiselect {
-  border: solid 1px #f8156b;
+  border: solid 1px black;
 }
 .languages .p-multiselect-label {
   color: black;
@@ -90,7 +90,7 @@ p-multiselect {
 }
 
 .filter .p-multiselect {
-  border-color: #f8156b;
+  border-color: black;
 }
 
 .filter .p-multiselect-label {
@@ -245,4 +245,33 @@ p-multiselect {
 
 .fc-theme-standard .fc-scrollgrid {
   border: solid 1px #ebebeb;
+}
+.p-toast .p-toast-message .p-toast-message-content {
+  padding: 10px 10px;
+}
+
+.p-toast
+  .p-toast-message
+  .p-toast-message-content
+  .p-icon:not(.p-toast-icon-close-icon) {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+// content of slot
+.slot-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+.sujet {
+  padding-left: 10px;
 }
