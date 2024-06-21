@@ -1,3 +1,5 @@
+@import "variables.scss";
+
 .modal-note {
   height: 100%;
   display: flex;
@@ -5,6 +7,21 @@
   justify-content: center;
   align-items: center;
   color: black;
+
+  .subject {
+    width: 80%;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    background-color: $anti-primary-color;
+    h4 {
+      margin-bottom: 5px;
+    }
+  }
 
   img {
     height: 80%;
