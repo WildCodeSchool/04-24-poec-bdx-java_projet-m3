@@ -273,3 +273,11 @@ p-multiselect {
 .sujet {
   padding-left: 10px;
 }
+.p-multiSelect {
+  z-index: 9999;
+}
+
+.filter-container {
+  position: relative;
+  z-index: 400;
+}
