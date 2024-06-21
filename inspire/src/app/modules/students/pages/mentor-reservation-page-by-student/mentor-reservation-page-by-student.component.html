@@ -27,7 +27,7 @@
         <p>Vous souhaitez réserver un créneau avec {{ mentor.firstname }}</p>
       </div>
       <div class="subject-infos">
-        <h4>Suject :</h4>
+        <h4>Sujet :</h4>
         <select
           name="subject"
           id="subject"
@@ -40,6 +40,18 @@
           <option value="Entretien Blanc">Entretien Blanc</option>
           <option value="Autre" [defaultSelected]="true">Autre</option>
         </select>
+      </div>
+
+      <div class="details">
+        <h4 for="float-input">Details</h4>
+        <textarea
+          id="float-input"
+          rows="5"
+          cols="30"
+          pInputTextarea
+          [(ngModel)]="details"
+        >
+        </textarea>
       </div>
 
       <div class="control">

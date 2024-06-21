@@ -12,14 +12,20 @@ export class ModalAddNoteComponent {
   @Output() onCancel = new EventEmitter();
   @Output() onSubmit = new EventEmitter<string>();
   @Output() onDeleteReservation = new EventEmitter();
+  @Output() onExit = new EventEmitter();
 
   editMessage: boolean = false;
 
   updateMessage() {
     this.onSubmit.emit(this.reservation.message);
+    this.editMessage = false;
   }
 
   deleteReservation() {
     this.onDeleteReservation.emit();
+  }
+
+  exit() {
+    this.onExit.emit();
   }
 }

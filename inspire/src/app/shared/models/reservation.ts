@@ -23,6 +23,7 @@ export type Reservation = {
   message?: string;
   studentId: number;
   slotId: number;
+  details: string;
 };
 
 export type ReservationForStudentDTO = {
@@ -31,6 +32,7 @@ export type ReservationForStudentDTO = {
   mentorId: number;
   slotId: number;
   userId: number;
+  mentorUserId: number;
   message: string;
   subject: string;
   dateBegin: Date;
@@ -39,6 +41,7 @@ export type ReservationForStudentDTO = {
   firstname: string;
   lastname: string;
   imgUrl: string;
+  details: string;
 };
 
 export type reservationForMentorDTO = {
@@ -47,6 +50,7 @@ export type reservationForMentorDTO = {
   studentId: number;
   slotId: number;
   userId: number;
+  mentorUserId: number;
   message: string;
   subject: string;
   dateBegin: Date;
@@ -55,4 +59,5 @@ export type reservationForMentorDTO = {
   firstname: string;
   lastname: string;
   imgUrl: string;
+  details: string;
 };

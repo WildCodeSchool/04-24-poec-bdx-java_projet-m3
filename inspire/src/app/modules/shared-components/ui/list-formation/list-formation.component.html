@@ -7,7 +7,10 @@
 <div class="list-skills">
   <ng-container *ngIf="formations">
     @for( formation of formations; track $index ){
-    <app-card-formation [formation]="formation"></app-card-formation>
+    <app-card-formation
+      [formation]="formation"
+      [editModeOn]="editModeOn"
+    ></app-card-formation>
     @if($index !== formations.length -1){
     <p-divider></p-divider>
     } }

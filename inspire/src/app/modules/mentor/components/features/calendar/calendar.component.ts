@@ -337,8 +337,8 @@ export class CalendarComponent implements OnInit {
                   <b>${arg.event.title}</b>
                   <div>${
                     arg.event.extendedProps['isBooked']
-                      ? `<div class="slot-content"><img src=${arg.event.extendedProps.imgUrl} width="24" height="auto"/><span>${arg.event.extendedProps.firstname}</span></div>
-                      <div>Sujet: ${arg.event.extendedProps.subject}</div>
+                      ? `<div class="slot-content"><img src=${arg.event.extendedProps.imgUrl} width="24" height="24"/><span>${arg.event.extendedProps.firstname}</span></div>
+                      <div class="sujet">Sujet: ${arg.event.extendedProps.subject}</div>
                       `
                       : 'not booked'
                   }</div>

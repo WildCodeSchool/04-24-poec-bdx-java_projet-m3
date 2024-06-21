@@ -38,6 +38,7 @@ export class MentorReservationPageByStudentComponent implements OnInit {
   studentService = inject(StudentService);
   destroyRef = inject(DestroyRef);
   subject = 'Autre';
+  details = '';
 
   constructor(
     private reservationService: ReservationService,
@@ -130,6 +131,7 @@ export class MentorReservationPageByStudentComponent implements OnInit {
       slotId: eventClickArg.event.extendedProps['slotId'],
       studentId: this.studentService.activeStudentProfil$.value.id,
       subject: this.subject,
+      details: this.details,
     };
     this.visible = true;
   }
@@ -171,7 +173,8 @@ export class MentorReservationPageByStudentComponent implements OnInit {
       .bookSlot(
         this.eventDetails.slotId,
         this.eventDetails.studentId,
-        this.subject
+        this.subject,
+        this.details
       )
       .pipe(takeUntilDestroyed(this.destroyRef))
       .pipe(
