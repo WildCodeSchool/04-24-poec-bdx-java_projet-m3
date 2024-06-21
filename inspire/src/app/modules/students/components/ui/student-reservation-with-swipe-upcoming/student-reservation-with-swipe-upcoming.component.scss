@@ -9,14 +9,17 @@
   grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
 
   .avatar-name {
-    margin-left: 10px;
+    margin-left: 15px;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     img {
       border-radius: 50%;
       object-fit: cover;
     }
+  }
+  .avatar-name:hover {
+    cursor: pointer;
   }
   .promotion,
   .sujet,

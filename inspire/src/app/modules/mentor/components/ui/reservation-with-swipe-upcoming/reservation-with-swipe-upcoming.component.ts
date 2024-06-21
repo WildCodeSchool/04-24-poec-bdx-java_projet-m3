@@ -119,12 +119,16 @@ export class ReservationWithSwipeComponentUpcoming
     this.elementRef.nativeElement.style.transform = `translateX(0px)`;
   }
 
+  hideEditNote() {
+    this.modalEditMessage = false;
+  }
+
   updateReservation(event: string) {
     this.reservation.message = event;
-    this.modalEditMessage = false;
+    this.modalEditMessage = true;
     this.reservationService
       .updateMentorReservationHistoryList(
-        this.reservation.id,
+        this.reservation.reservationId,
         this.connectedUser.value?.id || 0,
         event
       )
