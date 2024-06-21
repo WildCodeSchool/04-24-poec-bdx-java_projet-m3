@@ -21,18 +21,15 @@ export class FilterSearchListComponent {
   selectedDisponibily: any[] = [];
   selectedLevel: any[] = [];
 
-
   @Output() filteredMentors = new EventEmitter<MentorDTO[]>();
   private unsubscribe$ = new Subject<void>();
-
 
   constructor(
     private _mentorService: MentorService,
     private _userService: UserService,
     private _destroyRef: DestroyRef,
-    private _filterService: FilterService,
+    private _filterService: FilterService
   ) {
-  
     this.disponibily = [
       { name: "Aujourd'hui" },
       { name: 'Dans la semaine' },
@@ -49,13 +46,13 @@ export class FilterSearchListComponent {
 
   skillList$?: Observable<Skill[]>;
 
-
   ngOnInit(): void {
-    this._filterService.getSkillList()
+    this._filterService
+      .getSkillList()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(skills => {
+      .subscribe((skills) => {
         this.skills = skills;
-        console.log("skills:", this.skills)
+        console.log('skills:', this.skills);
       });
   }
 
@@ -181,9 +178,9 @@ export class FilterSearchListComponent {
   */
 
   applyFilters() {
-    const skillNames = this.selectedSkill.map(skill => skill.name);
-    const selectedDisponibily = this.selectedDisponibily.map(d => d.name);
-    const selectedLevel = this.selectedLevel.map(l => l.name);
+    const skillNames = this.selectedSkill.map((skill) => skill.name);
+    const selectedDisponibily = this.selectedDisponibily.map((d) => d.name);
+    const selectedLevel = this.selectedLevel.map((l) => l.name);
 
     let minYears = 0;
     let maxYears = Number.MAX_VALUE;
@@ -230,14 +227,26 @@ export class FilterSearchListComponent {
       }
     }
 
-    const skillFilter$ = skillNames.length > 0 ? this._mentorService.getMentorsBySkills(skillNames) : this._mentorService.getMentorsList();
-    const availabilityFilter$ = period ? this._mentorService.getMentorsByAvailability(period) : this._mentorService.getMentorsList();
-    const levelFilter$ = (minYears !== 0 || maxYears !== Number.MAX_VALUE) ? this._mentorService.getMentorsByExperienceYears(minYears, maxYears) : this._mentorService.getMentorsList();
+    const skillFilter$ =
+      skillNames.length > 0
+        ? this._mentorService.getMentorsBySkills(skillNames)
+        : this._mentorService.getMentorsList();
+    const availabilityFilter$ = period
+      ? this._mentorService.getMentorsByAvailability(period)
+      : this._mentorService.getMentorsList();
+    const levelFilter$ =
+      minYears !== 0 || maxYears !== Number.MAX_VALUE
+        ? this._mentorService.getMentorsByExperienceYears(minYears, maxYears)
+        : this._mentorService.getMentorsList();
 
     forkJoin([skillFilter$, availabilityFilter$, levelFilter$])
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(([skillsResult, availabilityResult, levelResult]) => {
-        const combinedResults = this.combineResults([skillsResult, availabilityResult, levelResult]);
+        const combinedResults = this.combineResults([
+          skillsResult,
+          availabilityResult,
+          levelResult,
+        ]);
         this.filteredMentors.emit(combinedResults);
       });
   }
@@ -248,8 +257,8 @@ export class FilterSearchListComponent {
     }
 
     const [firstResult, ...restResults] = results;
-    return firstResult.filter(mentor =>
-      restResults.every(result => result.some(m => m.id === mentor.id))
+    return firstResult.filter((mentor) =>
+      restResults.every((result) => result.some((m) => m.id === mentor.id))
     );
   }
 
@@ -258,9 +267,10 @@ export class FilterSearchListComponent {
     this.selectedDisponibily = [];
     this.selectedLevel = [];
 
-    this._mentorService.getMentorsList()
+    this._mentorService
+      .getMentorsList()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(mentorList => {
+      .subscribe((mentorList) => {
         this.filteredMentors.emit(mentorList);
       });
   }
