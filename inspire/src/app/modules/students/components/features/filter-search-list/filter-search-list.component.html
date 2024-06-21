@@ -7,7 +7,6 @@
   </div>
   <div class="bottom-part">
     <div class="filter">
-    
       <p-multiSelect
         [options]="skills"
         [(ngModel)]="selectedSkill"
@@ -16,8 +15,8 @@
         display="chip"
         [showClear]="true"
         class="custom-multiselect"
+        [styleClass]="'custom-multiselect'"
       />
-
     </div>
     <div class="filter">
       <p-multiSelect
@@ -40,6 +39,7 @@
         [showClear]="true"
         class="custom-multiselect"
         [styleClass]="'custom-multiselect'"
+        [ngStyle]="{ 'z-index': '100' }"
       />
     </div>
     <div class="filter-button">
