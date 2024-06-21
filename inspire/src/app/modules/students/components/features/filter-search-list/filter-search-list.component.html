@@ -7,7 +7,6 @@
   </div>
   <div class="bottom-part">
     <div class="filter">
-    
       <p-multiSelect
         [options]="skills"
         [(ngModel)]="selectedSkill"
@@ -16,8 +15,8 @@
         display="chip"
         [showClear]="true"
         class="custom-multiselect"
+        (onChange)="applyFilters()"
       />
-
     </div>
     <div class="filter">
       <p-multiSelect
@@ -28,6 +27,7 @@
         display="chip"
         [showClear]="true"
         class="custom-multiselect"
+        (onChange)="applyFilters()"
       />
     </div>
     <div class="filter">
@@ -40,10 +40,11 @@
         [showClear]="true"
         class="custom-multiselect"
         [styleClass]="'custom-multiselect'"
+        (onChange)="applyFilters()"
       />
     </div>
     <div class="filter-button">
-      <button (click)="filterMentorsBySkills()">Filtrer</button>
+      <button (click)="applyFilters()">Filtrer</button>
     </div>
   </div>
 </div>

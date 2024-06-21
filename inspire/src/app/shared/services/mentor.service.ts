@@ -88,6 +88,21 @@ export class MentorService {
     );
   }
 
+  getMentorsByAvailability(period: string): Observable<MentorDTO[]> {
+    const params = { period };
+    return this.httpClient.get<MentorDTO[]>(`${environment.BASE_URL_API}mentor/available`, { params });
+  }
+
+  getMentorsByMultipleFilters(skillNames: string[], minYears: number, maxYears: number, period: string): Observable<MentorDTO[]> {
+    const filters = {
+      skills: skillNames,
+      minYears,
+      maxYears,
+      period
+    };
+    return this.httpClient.post<MentorDTO[]>(`${environment.BASE_URL_API}/filter`, filters);
+  }
+
   getMentorListPagination(perPage: number, offset: number) {
     return this.httpClient.get<Mentor[]>(
       environment.BASE_URL +

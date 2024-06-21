@@ -116,6 +116,7 @@ p-multiselect {
 .filter .p-multiselect-label {
   padding: 10px 10px;
   max-width: 220px;
+  z-index: 1000;
 }
 
 .filter .p-checkbox .p-checkbox-box.p-highlight {
@@ -129,6 +130,7 @@ p-multiselect {
   border-radius: 10px;
   padding: 2px 5px;
   margin: 1px 2px;
+  z-index: 1000;
 }
 
 .filter .p-multiselect-token-icon {
@@ -176,7 +178,7 @@ p-multiselect {
   background-color: #fedae3;
 }
 .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-  background-color: #1e1b1c;
+  background-color: #f8156c91;
   color: white;
 }
 .p-paginator {

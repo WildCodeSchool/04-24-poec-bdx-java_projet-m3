@@ -189,8 +189,9 @@ export class MentorReservationPageByStudentComponent implements OnInit {
           (ele) => !ele['booked']
         );
         console.log('free slots', this.events);
-
-        console.log('slots', slots);
+        (this.subject = 'Autre'),
+          (this.details = ''),
+          console.log('slots', slots);
       });
     this.visible = false;
   }
