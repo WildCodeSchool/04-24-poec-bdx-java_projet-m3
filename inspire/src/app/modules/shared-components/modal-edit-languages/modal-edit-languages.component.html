@@ -23,6 +23,7 @@
         optionLabel="name"
         [virtualScroll]="true"
         [virtualScrollItemSize]="50"
+        selectedItemsLabel="{0} langues sélectionnées"
       />
     </div>
 
@@ -42,7 +43,7 @@
         class="btn-general"
         (focus)="focusValidate()"
         (focusout)="focusOutValidate()"
-        [ngClass]="focusBtnValidate ? 'pink' : ''"
+        [ngClass]="'pink'"
       >
         Valider
       </button>

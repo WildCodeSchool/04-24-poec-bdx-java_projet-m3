@@ -5,8 +5,15 @@
     </button>
     <div class="details">
       <p class="title">{{ formation.title }}</p>
+      <div>
+        <p class="city">
+          {{ formation.company | uppercase }} - {{ formation.city | uppercase }}
+        </p>
+      </div>
       <div class="date-place">
-        <p>{{ formation.city }}</p>
+        <p>
+          {{ formation.dateEnd | date : " yyyy" }}
+        </p>
       </div>
     </div>
   </div>
@@ -48,3 +55,4 @@
     (onDelete)="deleteFormation()"
   ></app-modal-validate>
 </ng-container>
+<p-toast></p-toast>

@@ -6,6 +6,7 @@ import {
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { UserService } from '../../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-card-experience',
@@ -21,6 +22,7 @@ export class CardExperienceComponent {
   windowWatcherService = inject(WindowWatcherService);
   userService = inject(UserService);
   destroyRef = inject(DestroyRef);
+  constructor(private messageService: MessageService) {}
 
   showEditForm() {
     this.isVisibleFormEditExperience = true;
@@ -38,7 +40,13 @@ export class CardExperienceComponent {
     this.userService
       .editExperience(experience, experience.id)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+      .subscribe(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Super ! ',
+          detail: 'Votre expérience a bien été modifiée',
+        });
+      });
   }
 
   deleteExperience() {
@@ -46,7 +54,13 @@ export class CardExperienceComponent {
     this.userService
       .deleteExperience(experienceId || 0)
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+      .subscribe(() => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Super ! ',
+          detail: 'Votre expérience a bien été supprimée',
+        });
+      });
     this.popupDeleteVisible = false;
   }
 }

@@ -18,7 +18,7 @@
         alt="avatar mentor"
       />
       <div class="social">
-        <a [href]="mentor.linkedinUrl">
+        <a [href]="mentor.linkedinUrl" target="_blank">
           <img
             src="assets/linkedin.png"
             alt="linkedin"
@@ -26,7 +26,7 @@
             height="35"
           />
         </a>
-        <a [href]="mentor.githubUrl">
+        <a [href]="mentor.githubUrl" target="_blank">
           <img src="assets/github.png" alt="github" width="35" height="35" />
         </a>
       </div>
@@ -64,3 +64,4 @@
     ></app-form-edit-apropos>
   </p-sidebar>
 </ng-container>
+<p-toast></p-toast>

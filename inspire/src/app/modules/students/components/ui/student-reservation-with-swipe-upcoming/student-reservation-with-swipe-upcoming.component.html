@@ -5,13 +5,11 @@
     </button>
   </div>
   <div class="row-reservation" [ngClass]="bgColor" #thisRef>
-    <div class="avatar-name">
-      <img
-        [src]="'https://placehold.jp/35x35.png'"
-        alt="avatar"
-        width="35"
-        height="35"
-      />
+    <div
+      class="avatar-name"
+      [routerLink]="['/student/mentor-details', reservation.mentorUserId]"
+    >
+      <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" />
       <p>{{ reservation.firstname }}</p>
     </div>
     <div class="promotion">
@@ -21,8 +19,8 @@
       {{ reservation.subject || "sans sujet" | titlecase }}
     </div>
     <div class="date">
-      <div>{{ reservation.dateTime | date : "dd/MM/yyyy" }}</div>
-      <div>{{ reservation.dateTime | date : "shortTime" }}</div>
+      <div>{{ reservation.dateBegin | date : "dd/MM/yyyy" }}</div>
+      <div>{{ reservation.dateBegin | date : "shortTime" }}</div>
     </div>
 
     <div class="action" *ngIf="!isHistory">
@@ -50,7 +48,7 @@
 >
   <div class="modal-note" *ngIf="isHistory">
     <h3>Vous avez assisté {{ reservation.firstname | titlecase }}</h3>
-    <h4>Le {{ reservation.dateTime | date : "short" }}</h4>
+    <h4>Le {{ reservation.dateBegin | date : "short" }}</h4>
     <h3>Notez cette intervention</h3>
     <input name="Note" id="note" [(ngModel)]="newNote" />
 
@@ -68,7 +66,7 @@
   </div>
   <div class="modal-note" *ngIf="!isHistory">
     <h3>Réservation prévue avec {{ reservation.firstname | titlecase }}</h3>
-    <h4>Le {{ reservation.dateTime | date : "short" }}</h4>
+    <h4>Le {{ reservation.dateBegin | date : "short" }}</h4>
     <h3>Annulez cette réservation?</h3>
 
     <div class="control">
@@ -77,8 +75,10 @@
         [variant]="'pink'"
         (onSubmit)="cancel()"
       ></app-button>
-      <app-button [text]="'Valider'"></app-button>
+      <app-button
+        [text]="'Valider'"
+        (onSubmit)="removeReservation()"
+      ></app-button>
     </div>
   </div>
 </p-dialog>
-

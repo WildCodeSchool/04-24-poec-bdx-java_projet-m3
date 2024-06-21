@@ -8,10 +8,10 @@
   </div>
   <div class="sujet">{{ reservation.subject || "sans sujet" | titlecase }}</div>
   <div class="date">
-    {{ reservation.dateTime | date : "dd/MM/yyyy" }}
+    {{ reservation.dateBegin | date : "dd/MM/yyyy" }}
   </div>
   <div class="creneau">
-    {{ reservation.dateTime | date : "HH:mm:ss" }} -
+    {{ reservation.dateBegin | date : "HH:mm:ss" }} -
     {{ endAt | date : "HH:mm:ss" }}
   </div>
   <div class="action">

@@ -36,7 +36,7 @@ export const studentReservationsResolver: ResolveFn<{
   const userId = inject(UserStoreService).getUserConnected$().value?.id;
   const reservationService = inject(ReservationService);
 
-  return reservationService.getStudentReservationList(userId || 0, 10, 0);
+  return reservationService.getStudentReservationList(userId || 0, 5, 0);
 };
 
 export const studentReservationsHistoryResolver: ResolveFn<{

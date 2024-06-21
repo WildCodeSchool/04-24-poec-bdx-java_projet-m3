@@ -1,0 +1,76 @@
+.not-booked {
+  background-color: red;
+  border: green;
+  color: black;
+}
+.not-booked {
+  background-color: green;
+  border: gray;
+}
+
+.calendar-background {
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.53);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.8px);
+  -webkit-backdrop-filter: blur(8.8px);
+}
+
+.calendar-background h2 {
+  margin-bottom: 20px;
+}
+
+.modal {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.control {
+  // margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // flex-direction: row;
+  gap: 20px;
+}
+.forgot-img {
+  width: 200px;
+}
+.content {
+  margin-top: 20px;
+  text-align: center;
+}
+h1 {
+  margin-top: 30px;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: center;
+}
+
+.subject-infos {
+  display: flex;
+
+  select.subject {
+    margin: 0 20px;
+    flex-grow: 1;
+    border-radius: 5px;
+  }
+}
+
+.details {
+  margin: 10px 0 5px 0;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  align-items: start;
+
+  textarea {
+    margin-top: 5px;
+    padding: 20px 10px;
+    border-radius: 20px;
+    width: 100%;
+  }
+}

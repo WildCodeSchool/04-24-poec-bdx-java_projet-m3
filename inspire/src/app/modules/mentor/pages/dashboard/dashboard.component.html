@@ -3,7 +3,9 @@
     [title]="'Mes réservations à venir'"
     [reservations]="reservations.reservations"
   ></app-list-reservation-history>
+
   <p-paginator
+    *ngIf="reservations.total"
     #paginatorRef
     (onPageChange)="onPageChange($event)"
     [first]="paginatorRef.first"
@@ -18,6 +20,7 @@
     [isHistory]="true"
   ></app-list-reservation-history>
   <p-paginator
+    *ngIf="reservations.total"
     #paginatorHistoryRef
     (onPageChange)="onPageChangeHistory($event)"
     [first]="paginatorHistoryRef.first"

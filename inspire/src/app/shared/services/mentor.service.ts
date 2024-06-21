@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
@@ -20,18 +20,26 @@ export class MentorService {
     new BehaviorSubject<reservationForMentorDTO[]>([]);
 
   getMentorProfil() {
-    console.log('user connected ', this.userConnected.value?.id);
+    console.log('user connected ', this.userConnected.value.id);
 
     return this.httpClient
       .get<MentorDTO>(
-        environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
+        'http://localhost:8080/mentor/' + this.userConnected.value.id
+        // environment.BASE_URL + '/mentor/mentors/' + this.userConnected.value?.id
       )
-      .pipe(tap((res) => this.activeMentorProfil$.next(res)));
+      .pipe(
+        tap((res) => {
+          console.log('recieved mentor ', res);
+
+          this.activeMentorProfil$.next(res);
+        })
+      );
   }
 
   getMentorProfilById(userId: number) {
     return this.httpClient.get<MentorDTO>(
-      environment.BASE_URL + '/mentor/mentors/' + userId
+      'http://localhost:8080/mentor/' + userId
+      // environment.BASE_URL + '/mentor/mentors/' + userId
     );
   }
 
@@ -42,18 +50,57 @@ export class MentorService {
   updateMentorProfil(profil: MentorDTO) {
     return this.httpClient
       .put<{ affectedRow: number; profil: MentorDTO; success: boolean }>(
-        environment.BASE_URL +
-          '/mentor/mentors/' +
-          this.userConnected.value?.id,
-        { ...profil, userId: this.userConnected.value?.id }
+        'http://localhost:8080/mentor/' + this.userConnected.value.id,
+        // environment.BASE_URL +
+        //   '/mentor/mentors/' +
+        //   this.userConnected.value?.id,
+        { ...profil, userId: this.userConnected.value.id }
       )
-      .pipe(tap((result) => this.activeMentorProfil$.next(result.profil)));
+      .pipe(
+        tap((result) => {
+          console.log(' new profil ', result);
+
+          this.activeMentorProfil$.next(profil);
+        })
+      );
   }
 
   getMentorsList() {
+    return this.httpClient
+      .get<MentorDTO[]>(environment.BASE_URL_API + 'mentor/get/all')
+      .pipe(tap((res) => console.log(res)));
+  }
+
+  getMentorsBySkills(skills: string[]): Observable<MentorDTO[]> {
+    const params = { skills: skills.join(',') };
     return this.httpClient.get<MentorDTO[]>(
-      environment.BASE_URL + '/mentor/mentors'
+      `${environment.BASE_URL_API}mentor/by-skills`,
+      { params }
     );
+  }
+
+  getMentorsByExperienceYears(
+    minYears: number,
+    maxYears: number
+  ): Observable<MentorDTO[]> {
+    return this.httpClient.get<MentorDTO[]>(
+      `${environment.BASE_URL_API}mentor/by-experience?minYears=${minYears}&maxYears=${maxYears}`
+    );
+  }
+
+  getMentorsByAvailability(period: string): Observable<MentorDTO[]> {
+    const params = { period };
+    return this.httpClient.get<MentorDTO[]>(`${environment.BASE_URL_API}mentor/available`, { params });
+  }
+
+  getMentorsByMultipleFilters(skillNames: string[], minYears: number, maxYears: number, period: string): Observable<MentorDTO[]> {
+    const filters = {
+      skills: skillNames,
+      minYears,
+      maxYears,
+      period
+    };
+    return this.httpClient.post<MentorDTO[]>(`${environment.BASE_URL_API}/filter`, filters);
   }
 
   getMentorListPagination(perPage: number, offset: number) {
@@ -65,7 +112,7 @@ export class MentorService {
 
   getMentorListFavoriteByStudent(studentId: number): Observable<MentorDTO[]> {
     return this.httpClient.get<MentorDTO[]>(
-      environment.BASE_URL + `/favorite/mentors/${studentId}`
+      environment.BASE_URL_API + `student/favorite/list/${studentId}`
     );
   }
 
@@ -82,19 +129,20 @@ export class MentorService {
       const formData = new FormData();
 
       formData.append('file', file);
-
+      const headers = new HttpHeaders();
       return this.httpClient
-        .put<{
-          affectedRow: number;
-          profil: MentorDTO;
-          success: boolean;
-        }>(
-          environment.BASE_URL +
-            '/mentor/mentors/image/' +
-            this.userConnected.value?.id,
-          formData
+        .post<MentorDTO>(
+          //  environment.BASE_URL +
+          //'/mentor/mentors/image/' +
+          'http://localhost:8080/user/upload/image/mentor/' +
+            this.userConnected.value.id,
+          // this.userConnected.value.id,
+          formData,
+          {
+            headers: headers,
+          }
         )
-        .pipe(tap((res) => this.activeMentorProfil$.next(res.profil)));
+        .pipe(tap((res) => this.activeMentorProfil$.next(res)));
     } else return of();
   }
 }

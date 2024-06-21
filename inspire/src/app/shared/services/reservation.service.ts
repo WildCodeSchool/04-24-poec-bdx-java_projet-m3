@@ -1,15 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { reservationForMentorDTO } from '../models/reservation';
+import { Reservation, reservationForMentorDTO } from '../models/reservation';
 import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { ReservationForStudentDTO } from '../models/reservation';
+import { MentorService } from './mentor.service';
+import { StudentService } from './student.service';
+import { PaginationService } from './pagination.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservationService {
   httpClient = inject(HttpClient);
+  pagination = inject(PaginationService);
 
   activeMentorReservations$: BehaviorSubject<{
     reservations: reservationForMentorDTO[];
@@ -43,57 +47,77 @@ export class ReservationService {
     total: 0,
   });
 
+  mentorService = inject(MentorService);
+  studentService = inject(StudentService);
+
   constructor() {}
 
   addSlotToMentor(slotInfo: any): Observable<any> {
     const formattedSlotInfo = {
-      dateTime: slotInfo.dateTime,
+      dateBegin: slotInfo.dateBegin,
       dateEnd: slotInfo.dateEnd,
       visio: slotInfo.visio,
       mentorId: slotInfo.mentorId,
     };
 
     return this.httpClient
-      .post(`${environment.BASE_URL}/slot/slots`, formattedSlotInfo)
+      .post(`${environment.BASE_URL_API}user/slot/add`, formattedSlotInfo)
       .pipe(switchMap(() => this.getSlotsForMentor(slotInfo.mentorId)));
   }
 
   getSlotsForMentor(mentorId: number): Observable<any> {
+    console.log('getSlotsformentor', mentorId);
     return this.httpClient.get(
-      `${environment.BASE_URL}/slot/slots?mentorId=${mentorId}`
+      `${environment.BASE_URL_API}user/slot/get/${mentorId}`
+    );
+  }
+
+  getSlotsforStudentByMentorId(mentorId: number): Observable<any> {
+    const studentId = this.studentService.activeStudentProfil$.value.id;
+    let end = new Date();
+    end.setDate(end.getDate() + 50);
+    return this.httpClient.post(
+      `${environment.BASE_URL_API}user/slot/slots/${mentorId}/${studentId}`,
+      { start: new Date(), end: end }
     );
   }
 
   deleteSlot(id: number): Observable<any> {
-    return this.httpClient.delete(`${environment.BASE_URL}/slot/slots/${id}`);
+    return this.httpClient.delete(
+      `${environment.BASE_URL_API}user/slot/delete/${id}`
+    );
   }
 
-  updateSlot(slotId: number, slotInfo: any): Observable<any> {
+  updateSlot(id: number, slotInfo: any): Observable<any> {
     const updatedSlotInfo = {
-      id: slotId,
-      dateTime: slotInfo.dateTime,
+      id: id,
+      dateBegin: slotInfo.dateBegin,
       dateEnd: slotInfo.dateEnd,
       visio: slotInfo.visio,
       mentorId: slotInfo.mentorId,
     };
 
     return this.httpClient.put(
-      `${environment.BASE_URL}/slot/slots/${slotId}`,
+      `${environment.BASE_URL_API}user/slot/update`,
       updatedSlotInfo
     );
   }
 
   getMentorReservationList(userId: number, perPage: number, offset: number) {
+    const mentorId = this.mentorService.activeMentorProfil$.value.id;
     return this.httpClient
       .get<{
         reservations: reservationForMentorDTO[];
         total: number;
       }>(
-        environment.BASE_URL +
-          `/reservation/reservations/mentor/${userId}?perPage=${perPage}&offset=${offset}`
+        `http://localhost:8080/reservation/get/mentor/upcoming/${mentorId}/${perPage}/${offset}`
+        // environment.BASE_URL +
+        //   `/reservation/reservations/mentor/${userId}?perPage=${perPage}&offset=${offset}`
       )
       .pipe(
         tap((res) => {
+          console.log(res);
+
           this.activeMentorReservations$.next(res);
         })
       );
@@ -104,10 +128,12 @@ export class ReservationService {
     perPage: number,
     offset: number
   ) {
+    const mentorId = this.mentorService.activeMentorProfil$.value.id;
     return this.httpClient
       .get<{ reservations: reservationForMentorDTO[]; total: number }>(
-        environment.BASE_URL +
-          `/reservation/reservations/mentor/history/${userId}?perPage=${perPage}&offset=${offset}`
+        `http://localhost:8080/reservation/get/mentor/history/${mentorId}/${perPage}/${offset}`
+        // environment.BASE_URL +
+        //   `/reservation/reservations/mentor/history/${userId}?perPage=${perPage}&offset=${offset}`
       )
       .pipe(
         tap((res) => {
@@ -121,29 +147,34 @@ export class ReservationService {
     userId: number,
     message: string
   ) {
+    const mentorId = this.mentorService.activeMentorProfil$.value.id;
     return this.httpClient
       .put<{ reservations: reservationForMentorDTO[]; total: number }>(
-        environment.BASE_URL + `/reservation/reservations/${id}`,
+        //environment.BASE_URL + `/reservation/reservations/${id}`,
+        `http://localhost:8080/reservation/update/${id}/${this.pagination.offsetReservationMentorHistory.value}`,
         {
           message,
-          mentorId: userId,
+          mentorId,
         }
       )
       .pipe(
         tap((res) => {
+          console.log('new list ', res);
           this.activeMentorReservationsHistory$.next(res);
         })
       );
   }
 
   getStudentReservationList(userId: number, perPage: number, offset: number) {
+    const studentId = this.studentService.activeStudentProfil$.value.id;
     return this.httpClient
       .get<{
         reservations: ReservationForStudentDTO[];
         total: number;
       }>(
-        environment.BASE_URL +
-          `/reservation/reservations/user/${userId}?perPage=${perPage}&offset=${offset}`
+        `http://localhost:8080/reservation/get/student/upcoming/${studentId}/${perPage}/${offset}`
+        // environment.BASE_URL +
+        //   `/reservation/reservations/user/${userId}?perPage=${perPage}&offset=${offset}`
       )
       .pipe(
         tap((res) => {
@@ -157,10 +188,13 @@ export class ReservationService {
     perPage: number,
     offset: number
   ) {
+    const studentId = this.studentService.activeStudentProfil$.value.id;
+
     return this.httpClient
       .get<{ reservations: ReservationForStudentDTO[]; total: number }>(
-        environment.BASE_URL +
-          `/reservation/reservations/user/history/${userId}?perPage=${perPage}&offset=${offset}`
+        `http://localhost:8080/reservation/get/student/history/${studentId}/${perPage}/${offset}`
+        // environment.BASE_URL +
+        //   `/reservation/reservations/user/history/${userId}?perPage=${perPage}&offset=${offset}`
       )
       .pipe(
         tap((res) => {
@@ -169,15 +203,79 @@ export class ReservationService {
       );
   }
 
-  removeMentorReservation(id: number, userId: number) {
+  removeMentorReservation(
+    reservationId: number,
+    mentorId: number,
+    first: number
+  ): Observable<{
+    reservations: reservationForMentorDTO[];
+    total: number;
+  }> {
+    const total = this.activeMentorReservations$.value.total;
+
     return this.httpClient
       .delete<{ reservations: reservationForMentorDTO[]; total: number }>(
-        environment.BASE_URL + `/reservation/reservations/${id}/${userId}`
+        //environment.BASE_URL + `/reservation/reservations/${id}/${userId}`
+        `http://localhost:8080/reservation/delete/mentor/${reservationId}`
       )
       .pipe(
-        tap((res) => {
-          this.activeMentorReservations$.next(res);
+        switchMap(() => {
+          if (total % 5 === 1 && total > 5) {
+            this.pagination.offsetReservationStudent.next(
+              this.pagination.offsetReservationStudent.value - 1
+            );
+            return this.getMentorReservationList(mentorId, 5, first - 5);
+          }
+          return this.getMentorReservationList(mentorId, 5, first);
         })
       );
+  }
+
+  removeReservationByStudent(
+    reservationId: number,
+    studentId: number,
+    first: number
+  ): Observable<{
+    reservations: ReservationForStudentDTO[];
+    total: number;
+  }> {
+    const total = this.activeStudentReservations$.value.total;
+
+    return this.httpClient
+      .delete<{ reservations: ReservationForStudentDTO[]; total: number }>(
+        //environment.BASE_URL + `/reservation/reservations/${id}/${userId}`
+        `http://localhost:8080/reservation/delete/student/${reservationId}`
+      )
+      .pipe(
+        switchMap(() => {
+          if (total % 5 === 1 && total > 5) {
+            this.pagination.offsetReservationStudent.next(
+              this.pagination.offsetReservationStudent.value - 1
+            );
+            return this.getStudentReservationList(studentId, 5, first - 5);
+          }
+          return this.getStudentReservationList(studentId, 5, first);
+        })
+      );
+  }
+
+  bookSlot(
+    slotId: number,
+    studentId: number,
+    subject: string,
+    details: string
+  ) {
+    const newReservation: Reservation = {
+      slotId: slotId,
+      studentId: studentId,
+      subject: subject,
+      details: details,
+    };
+    console.log('lolus');
+
+    return this.httpClient.post<Reservation>(
+      'http://localhost:8080/reservation/add',
+      newReservation
+    );
   }
 }

@@ -5,8 +5,9 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Experience } from '../../../shared/models/experience';
+import { dateOrderValidator } from '../../../shared/validators/dateOrderValidator';
 
 @Component({
   selector: 'app-form-add-experience',
@@ -14,14 +15,17 @@ import { Experience } from '../../../shared/models/experience';
   styleUrls: ['./form-add-experience.component.scss'],
 })
 export class FormAddExperienceComponent {
-  experienceForm = this.fb.group({
-    title: [''],
-    company: [''],
-    dateBegin: [''],
-    dateEnd: [''],
-    city: [''],
-    country: [''],
-  });
+  experienceForm = this.fb.group(
+    {
+      title: ['', Validators.required],
+      company: ['', Validators.required],
+      dateBegin: ['', Validators.required],
+      dateEnd: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+    },
+    { validators: [dateOrderValidator('dateBegin', 'dateEnd')] }
+  );
 
   @Output() destroy = new EventEmitter();
   @Output() onExperienceAdd = new EventEmitter<Experience>();

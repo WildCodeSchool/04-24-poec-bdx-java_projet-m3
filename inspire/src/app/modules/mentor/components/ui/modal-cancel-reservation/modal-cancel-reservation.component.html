@@ -1,18 +1,19 @@
 <div class="modal-note" *ngIf="!isHistory">
   <img src="assets/svgs/telecom.svg" alt="" class="image" />
   <h3>Réservation prévue avec {{ reservation.firstname | titlecase }}</h3>
-  <h4>Le {{ reservation.dateTime | date : "short" }}</h4>
+  <h4>Le {{ reservation.dateBegin | date : "short" }}</h4>
   <h3>Annulez cette réservation?</h3>
 
   <div class="control">
     <app-button
       [text]="'Annuler'"
-      [variant]="'pink'"
+      [variant]="'black'"
       (onSubmit)="onCancel.emit()"
     ></app-button>
     <app-button
       [text]="'Valider'"
       (onSubmit)="deleteReservation()"
+      [variant]="'pink'"
     ></app-button>
   </div>
 </div>

@@ -15,6 +15,7 @@
         display="chip"
         [showClear]="true"
         class="custom-multiselect"
+        (onChange)="applyFilters()"
       />
     </div>
     <div class="filter">
@@ -26,6 +27,7 @@
         display="chip"
         [showClear]="true"
         class="custom-multiselect"
+        (onChange)="applyFilters()"
       />
     </div>
     <div class="filter">
@@ -38,10 +40,11 @@
         [showClear]="true"
         class="custom-multiselect"
         [styleClass]="'custom-multiselect'"
+        (onChange)="applyFilters()"
       />
     </div>
     <div class="filter-button">
-      <button (click)="filterMentorsBySkills()">Filtrer</button>
+      <button (click)="applyFilters()">Filtrer</button>
     </div>
   </div>
 </div>

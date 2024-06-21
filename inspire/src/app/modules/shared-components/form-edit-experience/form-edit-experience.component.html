@@ -1,4 +1,9 @@
-<form class="form-course" (ngSubmit)="onSubmit()" [formGroup]="experienceForm">
+<form
+  class="form-course"
+  (ngSubmit)="experienceForm.valid && onSubmit()"
+  [formGroup]="experienceForm"
+  #formExperienceEdit="ngForm"
+>
   <h1>Editer une Expérience</h1>
   <div class="infos">
     <div class="container-input">
@@ -10,6 +15,14 @@
         formControlName="title"
         placeholder="Titre du poste occupé"
       />
+      <div
+        class="error"
+        *ngIf="
+          formExperienceEdit.submitted && experienceForm.get('title')?.errors
+        "
+      >
+        <span> Le titre du poste est requis</span>
+      </div>
     </div>
     <div class="container-input">
       <label for="company">Nom de l'entreprise *</label>
@@ -20,6 +33,14 @@
         formControlName="company"
         placeholder="Nom de l'entreprise"
       />
+      <div
+        class="error"
+        *ngIf="
+          formExperienceEdit.submitted && experienceForm.get('company')?.errors
+        "
+      >
+        <span> Le nom de l'entreprise est requis</span>
+      </div>
     </div>
   </div>
   <div class="container-input">
@@ -31,6 +52,12 @@
       formControlName="city"
       placeholder="Ville"
     />
+    <div
+      class="error"
+      *ngIf="formExperienceEdit.submitted && experienceForm.get('city')?.errors"
+    >
+      <span> La ville est requise</span>
+    </div>
   </div>
   <div class="container-input">
     <label for="country">Pays *</label>
@@ -41,6 +68,14 @@
       formControlName="country"
       placeholder="Pays"
     />
+    <div
+      class="error"
+      *ngIf="
+        formExperienceEdit.submitted && experienceForm.get('country')?.errors
+      "
+    >
+      <span> Le pays est requis </span>
+    </div>
   </div>
 
   <div class="container-input">
@@ -52,6 +87,14 @@
       formControlName="dateBegin"
       placeholder="Date de début"
     />
+    <div
+      class="error"
+      *ngIf="
+        formExperienceEdit.submitted && experienceForm.get('dateBegin')?.errors
+      "
+    >
+      <span> La date de début est requise </span>
+    </div>
   </div>
 
   <div class="container-input">
@@ -63,6 +106,20 @@
       formControlName="dateEnd"
       placeholder="Date de fin"
     />
+    <div
+      class="error"
+      *ngIf="
+        formExperienceEdit.submitted && experienceForm.get('dateEnd')?.errors
+      "
+    >
+      <span> La date de fin est requise</span>
+    </div>
+    <div
+      class="error"
+      *ngIf="formExperienceEdit.submitted && experienceForm.errors?.['datesNotValid']"
+    >
+      <span>La date de fin ne peut pas être avant la date de début</span>
+    </div>
   </div>
 
   <div class="btn-connexion">

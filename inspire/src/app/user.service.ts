@@ -28,8 +28,8 @@ import { BroadcastMessage } from './shared/models/broadcastMessage';
 type InscriptionUser = {
   email: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
 };
 import { cp } from '@fullcalendar/core/internal-common';
 
@@ -54,13 +54,6 @@ export class UserService {
   activeUserSkills$: BehaviorSubject<Skill[]> = new BehaviorSubject(
     [] as Skill[]
   );
-
-  // private createUser(user: User): Observable<UserDTO> {
-  //   return this.http.post<UserDTO>(
-  //     `${this.BASE_URL_API}/api/v1/auth/register/student`,
-  //     user
-  //   );
-  // }
 
   createStudent(registerFormValues: any): Observable<Student> {
     return this.http
@@ -104,7 +97,7 @@ export class UserService {
     return this.http
       .post<any>(`${this.BASE_URL_API}/api/v1/auth/authenticate `, user)
       .pipe(
-        map((users) => {
+        tap((users) => {
           if (users) {
             const user = users;
             this.userStore.setUserConnected(user);
@@ -122,10 +115,8 @@ export class UserService {
             if (user.role === 'STUDENT') {
               this.router.navigate(['/student']);
             }
-            return user;
           } else {
             alert('Identifiants incorrects');
-            return null;
           }
         })
       );
@@ -134,18 +125,23 @@ export class UserService {
   loginTabs(message: BroadcastMessage) {
     if (message) {
       this.userStore.setUserConnected(message.payload as UserDTO);
-      if (message.payload.role === 'mentor') this.router.navigate(['/mentor']);
-      if (message.payload.role === 'student')
+      if (message.payload.role === 'MENTOR') this.router.navigate(['/mentor']);
+      if (message.payload.role === 'STUDENT')
         this.router.navigate(['/student']);
     }
   }
 
   logout() {
-    if (this.userStore.getUserConnected$().value.email) {
-      localStorage.removeItem('user');
+    const user = this.userStore.getUserConnected$().value;
+
+    if (user && (user.email || user.token)) {
+      localStorage.removeItem('token');
       this.userStore.setUserConnected({} as UserDTO);
-      this.publish({ type: 'logout' } as BroadcastMessage);
+      this.userStore.token$.next('');
       this.router.navigate(['']);
+      this.publish({ type: 'logout' } as BroadcastMessage);
+    } else {
+      console.log('No valid user data found, aborting logout');
     }
   }
 

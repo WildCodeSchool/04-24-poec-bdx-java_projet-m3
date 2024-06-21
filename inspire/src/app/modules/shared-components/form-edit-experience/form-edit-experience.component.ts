@@ -8,9 +8,10 @@ import {
   inject,
 } from '@angular/core';
 import { Experience, ExperienceDTO } from '../../../shared/models/experience';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { dateOrderValidator } from '../../../shared/validators/dateOrderValidator';
 
 @Component({
   selector: 'app-form-edit-experience',
@@ -38,14 +39,17 @@ export class FormEditExperienceComponent implements OnInit {
     const endDate = new Date(this.experience.dateEnd);
     const formattedEndDate = endDate.toISOString().split('T')[0];
 
-    this.experienceForm = this.fb.group({
-      title: [this.experience.title],
-      company: [this.experience.company],
-      dateBegin: [formattedDate],
-      dateEnd: [formattedEndDate],
-      city: [this.experience.city],
-      country: [this.experience.country],
-    });
+    this.experienceForm = this.fb.group(
+      {
+        title: [this.experience.title, Validators.required],
+        company: [this.experience.company, Validators.required],
+        dateBegin: [formattedDate, Validators.required],
+        dateEnd: [formattedEndDate, Validators.required],
+        city: [this.experience.city, Validators.required],
+        country: [this.experience.country, Validators.required],
+      },
+      { validators: [dateOrderValidator('dateBegin', 'dateEnd')] }
+    );
   }
   cancel() {
     this.destroy.emit();

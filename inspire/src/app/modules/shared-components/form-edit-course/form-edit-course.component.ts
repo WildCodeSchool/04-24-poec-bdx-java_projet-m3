@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormationDTO } from '../../../shared/models/formation';
 import { UserService } from '../../../user.service';
+import { dateOrderValidator } from '../../../shared/validators/dateOrderValidator';
 
 @Component({
   selector: 'app-form-edit-course',
@@ -30,15 +31,19 @@ export class FormEditCourseComponent implements OnInit {
     const formattedDate = date.toISOString().split('T')[0];
     const endDate = new Date(this.formation.dateEnd);
     const formattedEndDate = endDate.toISOString().split('T')[0];
-    this.courseForm = this.fb.group({
-      title: [this.formation.title],
-      company: [this.formation.company],
-      dateBegin: [formattedDate],
-      dateEnd: [formattedEndDate],
-      city: [this.formation.city],
-      country: [this.formation.country],
-    });
+    this.courseForm = this.fb.group(
+      {
+        title: [this.formation.title, Validators.required],
+        company: [this.formation.company, Validators.required],
+        dateBegin: [formattedDate, Validators.required],
+        dateEnd: [formattedEndDate, Validators.required],
+        city: [this.formation.city, Validators.required],
+        country: [this.formation.country, Validators.required],
+      },
+      { validators: [dateOrderValidator('dateBegin', 'dateEnd')] }
+    );
   }
+
   cancel() {
     this.destroy();
   }

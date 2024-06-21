@@ -5,47 +5,51 @@
   #formRegister="ngForm"
 >
   <div class="infos">
-    <div class="container-input">
-      <label class="label-form" for="lastName">Nom *</label>
-      <input
-        class="input-form"
-        type="text"
-        id="lastName"
-        name="lastName"
-        formControlName="lastName"
-        placeholder="Votre nom"
-        autocomplete="on"
-      />
-      <div
-        class="error"
-        *ngIf="
-          formRegister.submitted && registerForm.controls['lastName'].errors
-        "
-      >
-        <div [hidden]="!registerForm.controls['lastName'].errors['required']">
-          Le nom est requis
+    <div class="firstname-name">
+      <div class="container-input">
+        <label class="label-form" for="lastname">Nom *</label>
+        <input
+          class="input-form"
+          type="text"
+          id="lastname"
+          name="lastname"
+          formControlName="lastname"
+          placeholder="Votre nom"
+          autocomplete="on"
+        />
+        <div
+          class="error"
+          *ngIf="
+            formRegister.submitted && registerForm.controls['lastname'].errors
+          "
+        >
+          <div [hidden]="!registerForm.controls['lastname'].errors['required']">
+            Le nom est requis
+          </div>
         </div>
       </div>
-    </div>
-    <div class="container-input">
-      <label class="label-form" for="firstName">Prénom *</label>
-      <input
-        class="input-form"
-        type="text"
-        id="firstName"
-        name="firstName"
-        formControlName="firstName"
-        placeholder="Votre prénom"
-        autocomplete="on"
-      />
-      <div
-        class="error"
-        *ngIf="
-          formRegister.submitted && registerForm.controls['firstName'].errors
-        "
-      >
-        <div [hidden]="!registerForm.controls['firstName'].errors['required']">
-          Le prénom est requis
+      <div class="container-input">
+        <label class="label-form" for="firstname">Prénom *</label>
+        <input
+          class="input-form"
+          type="text"
+          id="firstname"
+          name="firstname"
+          formControlName="firstname"
+          placeholder="Votre prénom"
+          autocomplete="on"
+        />
+        <div
+          class="error"
+          *ngIf="
+            formRegister.submitted && registerForm.controls['firstname'].errors
+          "
+        >
+          <div
+            [hidden]="!registerForm.controls['firstname'].errors['required']"
+          >
+            Le prénom est requis
+          </div>
         </div>
       </div>
     </div>

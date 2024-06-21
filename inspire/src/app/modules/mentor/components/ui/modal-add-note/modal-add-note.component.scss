@@ -1,3 +1,4 @@
+@import "variables.scss";
 .modal-note {
   display: flex;
   flex-direction: column;
@@ -30,6 +31,26 @@
   }
   .card {
     width: 100%;
+
+    .communication {
+      display: flex;
+      flex-direction: column;
+      .message {
+        width: 80%;
+        background-color: #dea9bd;
+        border-radius: 10px;
+        padding: 5px 10px;
+      }
+      .response {
+        width: 80%;
+        background-color: #e8d3bc;
+        border-radius: 10px;
+        padding: 5px 10px;
+        justify-self: end;
+        align-self: end;
+        margin-bottom: 20px;
+      }
+    }
   }
 
   .control {
@@ -95,4 +116,9 @@
 .mentorat-header span {
   color: #f8156b;
   font-style: italic;
+}
+
+.exit {
+  display: flex;
+  gap: 20px;
 }

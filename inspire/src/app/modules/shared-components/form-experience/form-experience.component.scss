@@ -24,12 +24,13 @@ label {
 input,
 textarea {
   padding: 12px 10px;
-  border: solid 1px $primary-color;
+  border: solid 1px black;
   border-radius: 5px;
   margin-top: 6px;
   &::placeholder {
     color: rgb(151, 150, 150);
     font-style: italic;
+    font-weight: 500;
   }
 }
 
