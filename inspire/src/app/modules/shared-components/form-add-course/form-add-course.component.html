@@ -23,17 +23,17 @@
       </div>
     </div>
     <div class="container-input">
-      <label for="school">Nom de l'établissement *</label>
+      <label for="company">Nom de l'établissement *</label>
       <input
         type="text"
-        id="school"
-        name="school"
+        id="company"
+        name="company"
         formControlName="company"
         placeholder="Nom de l'établissement"
       />
       <div
         class="error"
-        *ngIf="formCourse.submitted && courseForm.get('school')?.errors"
+        *ngIf="formCourse.submitted && courseForm.get('company')?.errors"
       >
         <span> L'établissement est requis </span>
       </div>
