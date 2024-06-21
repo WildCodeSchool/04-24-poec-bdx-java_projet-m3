@@ -65,10 +65,13 @@ export class CalendarComponent implements OnInit {
   }
 
   selectAllow = (selectionInfo: any) => {
-    if (selectionInfo.start > new Date()) {
-      return true;
-    }
-    return false;
+    return selectionInfo.start > new Date();
+  };
+
+  eventAllow = (dropInfo: any, draggedEvent: any) => {
+    const now = new Date();
+    const isBooked = draggedEvent.extendedProps.isBooked;
+    return dropInfo.start >= now && !isBooked;
   };
 
   onDateSelect = (selectionInfo: any) => {
@@ -265,6 +268,8 @@ export class CalendarComponent implements OnInit {
 
     this.displayModal = true;
     this.isModfify = true;
+    console.log('edit', this.eventDetailsEdit);
+    console.log('pasedit', this.eventDetails);
   }
 
   closeModal() {
@@ -329,6 +334,7 @@ export class CalendarComponent implements OnInit {
     select: this.onDateSelect,
     selectAllow: this.selectAllow,
     eventClick: this.handleEventClick.bind(this),
+    eventAllow: this.eventAllow.bind(this),
   };
 
   renderEventContent(arg: any) {
