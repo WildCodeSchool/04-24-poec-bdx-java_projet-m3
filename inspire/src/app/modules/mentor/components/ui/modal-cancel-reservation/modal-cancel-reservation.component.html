@@ -1,7 +1,15 @@
 <div class="modal-note" *ngIf="!isHistory">
-  <img src="assets/svgs/telecom.svg" alt="" class="image" />
   <h3>Réservation prévue avec {{ reservation.firstname | titlecase }}</h3>
   <h4>Le {{ reservation.dateBegin | date : "short" }}</h4>
+  <img src="assets/svgs/telecom.svg" alt="" class="image" />
+
+  <div class="subject">
+    <h4>
+      Suject: <span>{{ reservation.subject }}</span>
+    </h4>
+    <p [innerHTML]="reservation.details"></p>
+  </div>
+
   <h3>Annulez cette réservation?</h3>
 
   <div class="control">

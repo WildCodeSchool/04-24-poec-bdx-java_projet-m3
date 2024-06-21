@@ -45,6 +45,10 @@ export class MentorReservationPageByStudentComponent implements OnInit {
     private activatedRouter: ActivatedRoute
   ) {}
 
+  eventAllow = (dropInfo: any, draggedEvent: any) => {
+    return false;
+  };
+
   selectAllow = () => {
     return false;
   };
@@ -105,6 +109,7 @@ export class MentorReservationPageByStudentComponent implements OnInit {
 
     selectAllow: this.selectAllow,
     eventClick: this.handleEventClick.bind(this),
+    eventAllow: this.eventAllow.bind(this),
   };
 
   renderEventContent(arg: any) {
@@ -127,6 +132,7 @@ export class MentorReservationPageByStudentComponent implements OnInit {
 
   handleEventClick(eventClickArg: EventClickArg) {
     console.log(eventClickArg.event.extendedProps);
+    if (eventClickArg.event.extendedProps['isBooked']) return;
     this.eventDetails = {
       slotId: eventClickArg.event.extendedProps['slotId'],
       studentId: this.studentService.activeStudentProfil$.value.id,
