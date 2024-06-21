@@ -44,6 +44,8 @@ export class FilterSearchListComponent {
     ];
   }
 
+  // log
+
   skillList$?: Observable<Skill[]>;
 
   ngOnInit(): void {
