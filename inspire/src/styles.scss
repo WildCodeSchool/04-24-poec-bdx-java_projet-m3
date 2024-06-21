@@ -112,6 +112,7 @@ p-multiselect {
 .filter .p-multiselect-label {
   padding: 5px 10px;
   max-width: 220px;
+  z-index: 1000;
 }
 
 .filter .p-checkbox-box {
@@ -119,6 +120,7 @@ p-multiselect {
   width: 15px;
   height: 15px;
   align-self: center;
+  z-index: 1000;
 }
 
 .filter .p-multiselect-token {
@@ -127,6 +129,7 @@ p-multiselect {
   border-radius: 10px;
   padding: 2px 5px;
   margin: 1px 2px;
+  z-index: 1000;
 }
 
 .filter .p-multiselect-token-icon {
