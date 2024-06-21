@@ -1,3 +1,5 @@
+@import "./../../../../../../variables.scss";
+
 .filter-container {
   display: flex;
   flex-direction: column;
@@ -68,4 +70,14 @@
 
 .custom-multiselect {
   z-index: 1000;
+}
+
+@media screen and (max-width: $medium) {
+  .bottom-part {
+    display: flex;
+    flex-direction: column;
+  .filter {
+
+  }
+}
 }
