@@ -114,8 +114,8 @@ export class MentorReservationPageByStudentComponent implements OnInit {
                   <b>${arg.event.title}</b>
                   <div>${
                     arg.event.extendedProps['isBooked']
-                      ? 'Booked'
-                      : 'not booked'
+                      ? 'Créneau réservé'
+                      : 'Créneau disponible'
                   }</div>
                 </div>`;
     let arrayOfDomNodes = [];
