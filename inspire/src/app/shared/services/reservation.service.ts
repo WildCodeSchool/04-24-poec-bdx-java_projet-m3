@@ -88,6 +88,12 @@ export class ReservationService {
     );
   }
 
+  deleteReservationAndSlot(id: number): Observable<any> {
+    return this.httpClient.delete(
+      `${environment.BASE_URL_API}reservation/delete/mentor/${id}`
+    );
+  }
+
   updateSlot(id: number, slotInfo: any): Observable<any> {
     const updatedSlotInfo = {
       id: id,
