@@ -1,0 +1,14 @@
+<div class="card flex justify-content-center">
+  <p-menu #menu [model]="items" [popup]="true" />
+  <!-- <p-button (click)="menu.toggle($event)" icon="pi pi-ellipsis-v" /> -->
+  <div class="icon-wrapper" (click)="menu.toggle($event)">
+    <img
+      class="img-fluid"
+      src="/assets/svgs/bell.svg"
+      alt="notifications"
+      width="25"
+      height="25"
+    />
+    <span class="badge">{{ total }}</span>
+  </div>
+</div>
