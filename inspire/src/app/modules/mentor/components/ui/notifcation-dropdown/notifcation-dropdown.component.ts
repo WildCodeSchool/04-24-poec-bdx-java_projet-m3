@@ -38,5 +38,8 @@ export class NotifcationDropdownComponent {
 
   resetNotification() {
     this.total = '';
+    this.notificationService
+      .resetNotificationsMentor(this.user.value.id)
+      .subscribe();
   }
 }

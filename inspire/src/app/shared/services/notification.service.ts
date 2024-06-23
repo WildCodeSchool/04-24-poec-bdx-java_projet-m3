@@ -23,4 +23,10 @@ export class NotificationService {
         })
       );
   }
+
+  resetNotificationsMentor(userId: number) {
+    return this.http.get<NotificationDTO[]>(
+      'http://localhost:8080/notification/reset/' + userId
+    );
+  }
 }
