@@ -35,4 +35,8 @@ export class NotifcationDropdownComponent {
         ];
       });
   }
+
+  resetNotification() {
+    this.total = '';
+  }
 }
