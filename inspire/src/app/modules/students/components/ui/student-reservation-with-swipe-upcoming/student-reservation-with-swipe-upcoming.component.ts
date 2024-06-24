@@ -13,6 +13,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReservationService } from '../../../../../shared/services/reservation.service';
 import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
 import { PaginationService } from '../../../../../shared/services/pagination.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-student-reservation-with-swipe-upcoming',
@@ -29,16 +30,14 @@ export class StudentReservationWithSwipeUpcomingComponent implements OnInit {
   offsetRight = 0;
   showAction = false;
   modalVisible: boolean = false;
-  newNote: string = 'RAS';
 
   destroyRef = inject(DestroyRef);
   reservationService = inject(ReservationService);
   user = inject(UserStoreService).getUserConnected$();
   paginationService = inject(PaginationService);
+  router = inject(Router);
 
-  ngOnInit(): void {
-    this.newNote = this.reservation.message || 'RAS';
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
     fromEvent<TouchEvent>(this.elementRef.nativeElement, 'touchstart')
@@ -108,7 +107,9 @@ export class StudentReservationWithSwipeUpcomingComponent implements OnInit {
     //   this.reservation.id,
     //   this.user.value.id,
     // );
-    this.reservation.message = this.newNote;
+    this.router.navigateByUrl(
+      '/student/reserve/' + this.reservation.mentorUserId
+    );
     this.modalVisible = false;
   }
 

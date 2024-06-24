@@ -17,6 +17,7 @@ import {
   studentProfilByIdResolver,
   studentSkillsByIdResolver,
 } from '../../shared/resolvers/student.resolver';
+import { notificationResolver } from '../../shared/resolvers/notification.resolver';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     resolve: {
       reservationsData: mentorReservationsResolver,
       reservationsHistoryData: mentorReservationsHistoryResolver,
+      notifications: notificationResolver,
     },
     children: [
       {

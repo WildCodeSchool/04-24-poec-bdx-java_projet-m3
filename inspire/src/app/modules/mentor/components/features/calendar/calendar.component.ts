@@ -14,7 +14,7 @@ import frLocale from '@fullcalendar/core/locales/fr';
 import interactionPlugin from '@fullcalendar/interaction';
 import { ReservationService } from '../../../../../shared/services/reservation.service';
 import { MentorService } from '../../../../../shared/services/mentor.service';
-import { Subject, Subscription } from 'rxjs';
+import { Subject, Subscription, switchMap } from 'rxjs';
 import { MentorDTO } from '../../../../../shared/models/user';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DateTimeService } from '../../../../../shared/services/dateTime.service';
@@ -70,8 +70,8 @@ export class CalendarComponent implements OnInit {
 
   eventAllow = (dropInfo: any, draggedEvent: any) => {
     const now = new Date();
-    const isBooked = draggedEvent.extendedProps.isBooked;
-    return dropInfo.start >= now && !isBooked;
+    const booked = draggedEvent.extendedProps.booked;
+    return dropInfo.start >= now && !booked;
   };
 
   onDateSelect = (selectionInfo: any) => {
@@ -118,6 +118,26 @@ export class CalendarComponent implements OnInit {
   }
 
   deleteSlot() {
+    console.log('event details ', this.eventDetails);
+    if (this.eventDetails.booked) {
+      this.reservationService
+        .deleteReservationAndSlot(this.eventDetails.id)
+        .pipe(
+          switchMap((res) => {
+            return this.reservationService.getMentorReservationList(0, 5, 0);
+          })
+        )
+        .subscribe(() => {
+          this.displayModal = false;
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Super ! ',
+            detail: 'Votre créneau a bien été supprimé',
+          });
+          this.loadSlots();
+        });
+      return;
+    }
     if (this.eventDetails.id) {
       this.reservationService.deleteSlot(this.eventDetails.id).subscribe(() => {
         this.displayModal = false;
@@ -323,7 +343,6 @@ export class CalendarComponent implements OnInit {
     unselectAuto: true,
     selectOverlap: false,
     editable: true,
-    // https://fullcalendar.io/docs/select-callback
     selectable: true,
     eventDurationEditable: true,
     defaultTimedEventDuration: '01:00:00',
@@ -342,7 +361,7 @@ export class CalendarComponent implements OnInit {
     let html = `<div class="custom-event">
                   <b>${arg.event.title}</b>
                   <div>${
-                    arg.event.extendedProps['isBooked']
+                    arg.event.extendedProps['booked']
                       ? `<div class="slot-content"><img src=${arg.event.extendedProps.imgUrl} width="24" height="24"/><span>${arg.event.extendedProps.firstname}</span></div>
                       <div class="sujet">Sujet: ${arg.event.extendedProps.subject}</div>
                       `
@@ -354,16 +373,18 @@ export class CalendarComponent implements OnInit {
     div.innerHTML = html;
     arrayOfDomNodes.push(div.firstChild);
     return { domNodes: arrayOfDomNodes };
-    console.log('');
   }
 
   handleEventClick(eventClickArg: EventClickArg) {
+    console.log('event details ', eventClickArg.event);
+
     this.eventDetails = {
       id: eventClickArg.event.id,
       title: eventClickArg.event.title,
       start: eventClickArg.event.start,
       end: eventClickArg.event.end,
       visio: eventClickArg.event.extendedProps['visio'],
+      booked: eventClickArg.event.extendedProps['booked'],
     };
 
     this.editForm.setValue({
@@ -394,7 +415,7 @@ export class CalendarComponent implements OnInit {
       color: slot.visio ? '#FCBE77' : '#F8156B',
       extendedProps: {
         visio: slot.visio,
-        isBooked: slot.booked,
+        booked: slot.booked,
         imgUrl: slot.imgUrl,
         firstname: slot.firstname,
         subject: slot.subject,
