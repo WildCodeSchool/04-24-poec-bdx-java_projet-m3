@@ -1,5 +1,5 @@
 import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
 import { UserStoreService } from '../../../shared/services/stores/user-store.service';
 import { DashboardLink } from '../../../shared/models/dashboardLink';
@@ -29,6 +29,15 @@ export class DashboardLinksComponent implements OnInit {
           link.active =
             fragments.split('/').join('') === link.path.split('/').join('');
         });
+
+    this.router.events.subscribe((res) => {
+      if (res instanceof NavigationStart) {
+        console.log('Navigation', res);
+        this.listLink.forEach((link) => {
+          link.active = res.url === '/' + link.path;
+        });
+      }
+    });
   }
 
   handleLinkChange(event: boolean, index: number) {
