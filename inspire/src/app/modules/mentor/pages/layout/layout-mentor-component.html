@@ -79,9 +79,12 @@
         <app-notifcation-dropdown></app-notifcation-dropdown>
 
         <div class="icon-wrapper">
-          <a [routerLink]="['/mentor/profil']">
+          <a
+            [routerLink]="['/mentor/profil']"
+            *ngIf="mentorProfil$ | async as mentor"
+          >
             <img
-              [src]="imgUrl"
+              [src]="mentor.imgUrl"
               alt="Student Image"
               width="50"
               height="50"
