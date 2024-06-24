@@ -118,10 +118,20 @@
 
 .modal-note {
   height: 100%;
+  width: 600px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px 0;
+  padding: 20px;
+
+  h2 {
+    color: black;
+  }
+
+  h2 span {
+    color: $primary-color;
+    font-style: italic;
+  }
 
   img {
     width: 200px;
@@ -129,11 +139,57 @@
     object-fit: cover;
   }
 
+  .modal-note h4 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 400;
+  }
+
+  .info-resa {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .info-resa h3 {
+    font-size: 14px;
+    font-weight: 400;
+  }
+  .info-resa h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 15px;
+  }
+
   .control {
     margin: 10px 0;
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
+  }
+  .pop-up-date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .pop-up-date img {
+    width: 15px;
+    color: red;
+    margin-right: 5px;
+  }
+
+  .pop-up-date h3 span {
+    font-weight: 600;
+    color: $primary-color;
+  }
+
+  .pop-up-date h4 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 10px;
   }
 
   .subject {
@@ -153,4 +209,23 @@
       align-self: flex-end;
     }
   }
+}
+.info-session {
+  margin-top: 10px;
+}
+
+.info-session p {
+  border: 1px solid black;
+  border-radius: 8px;
+  height: 100px;
+  padding: 5px;
+}
+
+.info-session span {
+  font-weight: 600;
+  color: #f8156b;
+}
+
+.delete-resa {
+  color: black;
 }
