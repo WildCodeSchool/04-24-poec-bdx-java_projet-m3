@@ -1,5 +1,8 @@
 <div class="modal-note" *ngIf="!isHistory">
-  <img src="assets/svgs/telecom.svg" alt="" class="image" />
+  <div class="img-container">
+    <img src="assets/svgs/telecom.svg" alt="" class="image" />
+  </div>
+
   <h2>
     Réservation prévue avec
     <span>{{ reservation.firstname | titlecase }}</span>
@@ -7,7 +10,13 @@
   <h4>Résumé de votre créneau :</h4>
 
   <div class="pop-up-date">
-    <img class="img-fluid forgot-img" src="/assets/svgs/date-slot.svg" alt="" />
+    <div>
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/date-slot.svg"
+        alt=""
+      />
+    </div>
 
     <h3>
       Date :
@@ -32,16 +41,18 @@
     </h4>
     <p [innerHTML]="reservation.details"></p>
   </div>
-  <div class="delete-resa"><h3>Annulez cette réservation?</h3></div>
+  <div class="delete-resa">
+    <h3>Vous souhaitez annuler cette réservation?</h3>
+  </div>
 
   <div class="control">
     <app-button
-      [text]="'Annuler'"
+      [text]="'Retour'"
       [variant]="'black'"
       (onSubmit)="onCancel.emit()"
     ></app-button>
     <app-button
-      [text]="'Valider'"
+      [text]="'Annuler la réservation'"
       (onSubmit)="deleteReservation()"
       [variant]="'pink'"
     ></app-button>
