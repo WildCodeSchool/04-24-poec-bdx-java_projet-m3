@@ -1,5 +1,8 @@
-<div class="card flex justify-content-center">
+<div class="notif-card flex justify-content-center">
   <p-menu #menu [model]="items" [popup]="true" />
+  <ng-template let-item pTemplate="item">
+    <div [ngClass]="item.class">{{ item.label }}</div>
+  </ng-template>
   <!-- <p-button (click)="menu.toggle($event)" icon="pi pi-ellipsis-v" /> -->
   <div class="icon-wrapper" (click)="menu.toggle($event); resetNotification()">
     <img

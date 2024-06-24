@@ -286,7 +286,10 @@ p-multiselect {
   z-index: 400;
 }
 
-.p-menu-list {
+.notif-card {
+
+
+ .p-menu-list {
   margin: 15px 7px;
   border-radius: 6px;
 }
@@ -302,10 +305,16 @@ padding-left: 10px
 
   padding: 10px;
   border-radius: 6px;
-  background-color: rgb(191, 232, 191);
+  background-color: rgb(190, 245, 190);
+}
+
+.p-menuitem-text .annulation {
+  background-color: red;
+  color: white; 
 }
 
 .ng-trigger {
   width: 280px;
   left: 550px;
+}
 }
