@@ -263,12 +263,7 @@ export class UserService {
         success: boolean;
         message: string;
         formations: FormationDTO[];
-      }>(
-        `http://localhost:8080/formation/user/delete/` + formationId
-        // `${environment.BASE_URL}/formation/formations/${formationId}/${
-        //   this.userStore.getUserConnected$().value?.id
-        // }`
-      )
+      }>(`http://localhost:8080/formation/user/delete/` + formationId)
       .pipe(
         tap((response) => this.activeUserFormations$.next(response.formations))
       );
