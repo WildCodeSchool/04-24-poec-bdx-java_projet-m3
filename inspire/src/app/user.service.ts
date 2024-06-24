@@ -303,8 +303,6 @@ export class UserService {
   getUserExperiences() {
     return this.http
       .get<ExperienceDTO[]>(
-        //  environment.BASE_URL +
-        // '/experience/experiences/user/' +
         'http://localhost:8080/experience/user/' +
           this.userStore.getUserConnected$().value.id
       )
