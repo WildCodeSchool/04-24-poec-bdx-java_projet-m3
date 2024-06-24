@@ -263,12 +263,7 @@ export class UserService {
         success: boolean;
         message: string;
         formations: FormationDTO[];
-      }>(
-        `http://localhost:8080/formation/user/delete/` + formationId
-        // `${environment.BASE_URL}/formation/formations/${formationId}/${
-        //   this.userStore.getUserConnected$().value?.id
-        // }`
-      )
+      }>(`http://localhost:8080/formation/user/delete/` + formationId)
       .pipe(
         tap((response) => this.activeUserFormations$.next(response.formations))
       );
@@ -308,8 +303,6 @@ export class UserService {
   getUserExperiences() {
     return this.http
       .get<ExperienceDTO[]>(
-        //  environment.BASE_URL +
-        // '/experience/experiences/user/' +
         'http://localhost:8080/experience/user/' +
           this.userStore.getUserConnected$().value.id
       )
@@ -328,14 +321,10 @@ export class UserService {
         message: string;
         success: boolean;
         experiences: ExperienceDTO[];
-      }>(
-        'http://localhost:8080/experience/user/add',
-        //`${environment.BASE_URL}/experience/experiences/`,
-        {
-          ...experience,
-          userId: this.userStore.getUserConnected$().value.id,
-        }
-      )
+      }>('http://localhost:8080/experience/user/add', {
+        ...experience,
+        userId: this.userStore.getUserConnected$().value.id,
+      })
       .pipe(
         tap((result) => {
           this.activeUserExperiences$.next(result.experiences);
