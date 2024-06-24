@@ -28,7 +28,7 @@
       </div>
     </ng-container>
   </div>
-  <div class="social-container">
+  <!-- <div class="social-container">
     <div class="img-linkedin">
       <a [href]="mentor.linkedinUrl" target="_blank"
         ><img src="../../../../../../assets/linkedin.png" alt=""
@@ -39,6 +39,12 @@
         ><img src="../../../../../../assets/github.png" alt=""
       /></a>
     </div>
+  </div> -->
+  <div class="booking">
+    <app-button
+      [text]="'Réserver'"
+      variant="black"
+      (click)="navigateToAgenda($event)"
+    ></app-button>
   </div>
 </div>
-<div *ngIf="skillList$ | async as skillList"></div>
