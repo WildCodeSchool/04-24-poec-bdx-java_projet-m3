@@ -34,6 +34,12 @@
         border-radius: 10px;
         font-size: 16px;
         font-weight: 500;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+      button {
+        &:hover {
+          transform: scale(1.05);
+        }
       }
     }
   }
@@ -55,6 +61,12 @@
         border-radius: 10px;
         font-weight: 500;
         font-size: 16px;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+      }
+      button {
+        &:hover {
+          transform: scale(1.05);
+        }
       }
     }
   }
@@ -76,8 +88,7 @@
   .bottom-part {
     display: flex;
     flex-direction: column;
-  .filter {
-
+    .filter {
+    }
   }
-}
 }

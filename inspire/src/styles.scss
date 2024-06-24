@@ -294,14 +294,14 @@ p-multiselect {
   border-radius: 6px;
 }
 
-.p-element .p-submenu-header {
-margin-bottom: 5px;
-font-size: 1.2em;
-padding-left: 10px
-}
+// .p-element .p-submenu-header {
+// margin-bottom: 5px;
+// font-size: 1.2em;
+// padding-left: 10px
+// }
 
-.p-menuitem-text {
-  margin: 8px 0;
+// .p-menuitem-text {
+//   margin: 8px 0;
 
   padding: 10px;
   border-radius: 6px;
@@ -313,8 +313,15 @@ padding-left: 10px
   color: white; 
 }
 
-.ng-trigger {
-  width: 280px;
-  left: 550px;
+// .ng-trigger {
+//   width: 280px;
+//   left: 550px;
+// }
+.scrollbar-off {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
-}
+

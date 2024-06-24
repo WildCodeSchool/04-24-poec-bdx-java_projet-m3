@@ -37,25 +37,62 @@
   [resizable]="false"
 >
   <div class="modal-note" *ngIf="isHistory">
-    <h3>Séance avec {{ reservation.firstname | titlecase }}</h3>
-    <h4>Le {{ reservation.dateBegin | date : "short" }}</h4>
-    <img src="assets/svgs/telecom.svg" alt="" class="image" />
-    <div class="subject">
-      <h4>
-        Suject: <span>{{ reservation.subject }}</span>
-      </h4>
-      <p [innerHTML]="reservation.details"></p>
-      <p [innerHTML]="reservation.message" class="response"></p>
+    <div class="img-pop">
+      <img src="assets/svgs/telecom.svg" alt="" class="image" />
+    </div>
+    <div class="info-resa">
+      <h2>
+        Réservation prévue avec
+        <span>{{ reservation.firstname | titlecase }}</span>
+      </h2>
+      <div class="pop-up-date">
+        <img
+          class="img-fluid forgot-img"
+          src="/assets/svgs/date-slot.svg"
+          alt=""
+        />
+
+        <h3>
+          Date :
+          <span>{{
+            reservation.dateBegin | date : "dd MMMM yyyy" : "" : "fr"
+          }}</span>
+        </h3>
+      </div>
+      <div class="pop-up-date">
+        <img
+          class="img-fluid forgot-img"
+          src="/assets/svgs/date-slot.svg"
+          alt=""
+        />
+
+        <h3>
+          Heure de début :
+          <span>{{ reservation.dateBegin | date : "HH:mm" : "" : "fr" }}</span>
+        </h3>
+      </div>
+    </div>
+    <div class="info">
+      <div>
+        <h4>
+          Sujet de la réservation :
+          <span>{{ reservation.subject }}</span>
+        </h4>
+      </div>
+      <div class="subject-info">
+        <p [innerHTML]="reservation.details"></p>
+        <p [innerHTML]="reservation.message" class="response"></p>
+      </div>
     </div>
 
-    <div class="control">
+    <div class="control-pop">
       <app-button
         [text]="'Quitter'"
         [variant]="'black'"
         (onSubmit)="cancel()"
       ></app-button>
       <app-button
-        [text]="'Reserver'"
+        [text]="'Reserver un nouveau créneau'"
         (onSubmit)="updateReservation()"
         [variant]="'pink'"
       ></app-button>
@@ -83,6 +120,19 @@
           <span>{{
             reservation.dateBegin | date : "dd MMMM yyyy" : "" : "fr"
           }}</span>
+        </h3>
+      </div>
+
+      <div class="pop-up-date">
+        <img
+          class="img-fluid forgot-img"
+          src="/assets/svgs/duration.svg"
+          alt=""
+        />
+
+        <h3>
+          Heure de début :
+          <span>{{ reservation.dateBegin | date : "HH:mm" : "" : "fr" }}</span>
         </h3>
       </div>
       <div class="pop-up-date">

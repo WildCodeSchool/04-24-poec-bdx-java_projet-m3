@@ -31,21 +31,28 @@
   }
   .card {
     width: 100%;
+    border: solid 1px black;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
 
     .communication {
       display: flex;
       flex-direction: column;
       .message {
         width: 80%;
-        background-color: #dea9bd;
+        background-color: #fde9ee;
+        color: black;
         border-radius: 10px;
-        padding: 5px 10px;
+        padding: 10px 10px;
       }
       .response {
         width: 80%;
-        background-color: #e8d3bc;
+        background-color: #fff4e9;
         border-radius: 10px;
-        padding: 5px 10px;
+        padding: 10px 10px;
+        color: black;
+
         justify-self: end;
         align-self: end;
         margin-bottom: 20px;
@@ -120,6 +127,12 @@
 }
 
 .exit {
+  margin-top: 20px;
   display: flex;
   gap: 20px;
+}
+
+span {
+  color: $primary-color;
+  font-weight: 600;
 }
