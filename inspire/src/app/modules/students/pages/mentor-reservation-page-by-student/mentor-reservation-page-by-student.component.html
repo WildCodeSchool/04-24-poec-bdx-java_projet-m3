@@ -12,19 +12,26 @@
     #calendar
   ></full-calendar>
 </div>
-<p-dialog [modal]="true" [visible]="visible">
+<p-dialog [modal]="true" [visible]="visible" [closable]="false">
   <div class="modal">
     <div class="container-img-forgot">
       <img
         class="img-fluid forgot-img"
-        src="/assets/svgs/question.svg"
+        src="/assets/svgs/validate-slot.svg"
         alt=""
       />
     </div>
     <div class="content">
-      <h1>Reserver ce creneau</h1>
       <div *ngIf="profil | async as mentor">
-        <p>Vous souhaitez réserver un créneau avec {{ mentor.firstname }}</p>
+        <h2>
+          Vous souhaitez réserver un créneau avec
+          <span>{{ mentor.firstname }}</span>
+        </h2>
+        <p>
+          Ahoy, aventurier en quête de sagesse ! Vous êtes sur le point de
+          franchir les portes d'une aventure épique : réserver un créneau de
+          mentorat.
+        </p>
       </div>
       <div class="subject-infos">
         <h4>Sujet :</h4>
@@ -43,7 +50,7 @@
       </div>
 
       <div class="details">
-        <h4 for="float-input">Details</h4>
+        <h4 for="float-input">Details de votre réservation :</h4>
         <textarea
           id="float-input"
           rows="5"

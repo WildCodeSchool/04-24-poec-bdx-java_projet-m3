@@ -2,13 +2,15 @@
   <div class="container-layout">
     <div class="header-layout">
       <div>
-        <img
-          class="img-fluid site-logo"
-          src="/assets/insPIRE.png"
-          alt="logo"
-          width="60"
-          height="60"
-        />
+        <a [routerLink]="['/mentor']">
+          <img
+            class="img-fluid site-logo"
+            src="/assets/insPIRE.png"
+            alt="logo"
+            width="60"
+            height="60"
+          />
+        </a>
         <img
           src="/assets/svgs/menu.svg"
           class="img-fluid nav-burger"
@@ -77,13 +79,15 @@
         <app-notifcation-dropdown></app-notifcation-dropdown>
 
         <div class="icon-wrapper">
-          <img
-            [src]="imgUrl"
-            alt="Mentor Image"
-            width="50"
-            height="50"
-            style="border-radius: 50%"
-          />
+          <a [routerLink]="['/mentor/profil']">
+            <img
+              [src]="imgUrl"
+              alt="Student Image"
+              width="50"
+              height="50"
+              style="border-radius: 50%"
+            />
+          </a>
         </div>
       </div>
     </div>

@@ -66,13 +66,7 @@ export class CardInfosComponent {
         this.mentorService
           .updateMentorImage(newProfil.file)
           .pipe(takeUntilDestroyed(this.destroyRef))
-          .subscribe(() => {
-            this.messageService.add({
-              severity: 'success',
-              summary: 'Super ! ',
-              detail: 'Votre profil a bien été modifié',
-            });
-          });
+          .subscribe();
       }
 
       //
