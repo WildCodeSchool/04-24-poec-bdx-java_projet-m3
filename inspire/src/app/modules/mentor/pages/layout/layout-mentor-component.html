@@ -79,13 +79,15 @@
         <app-notifcation-dropdown></app-notifcation-dropdown>
 
         <div class="icon-wrapper">
-          <img
-            [src]="imgUrl"
-            alt="Mentor Image"
-            width="50"
-            height="50"
-            style="border-radius: 50%"
-          />
+          <a [routerLink]="['/mentor/profil']">
+            <img
+              [src]="imgUrl"
+              alt="Student Image"
+              width="50"
+              height="50"
+              style="border-radius: 50%"
+            />
+          </a>
         </div>
       </div>
     </div>
