@@ -72,10 +72,10 @@
           <span class="badge">5</span>
         </div> -->
 
-        <div class="icon-wrapper">
+        <div class="icon-wrapper" *ngIf="studentProfil$ | async as student">
           <a [routerLink]="['/student']">
             <img
-              [src]="imgUrl"
+              [src]="student.imgUrl"
               alt="Student Image"
               width="50"
               height="50"
