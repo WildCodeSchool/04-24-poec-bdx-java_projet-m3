@@ -286,24 +286,31 @@ p-multiselect {
   z-index: 400;
 }
 
-// .p-menu-list {
-//   margin: 15px 7px;
-//   border-radius: 6px;
-// }
+.notif-card {
 
-// .p-element .p-submenu-header {
-// margin-bottom: 5px;
-// font-size: 1.2em;
-// padding-left: 10px
-// }
 
-// .p-menuitem-text {
-//   margin: 8px 0;
+ .p-menu-list {
+  margin: 15px 7px;
+  border-radius: 6px;
+  }
 
-//   padding: 10px;
-//   border-radius: 6px;
-//   background-color: rgb(191, 232, 191);
-// }
+.p-element .p-submenu-header {
+margin-bottom: 5px;
+font-size: 1.2em;
+padding-left: 10px}
+
+.p-menuitem-text {
+  margin: 8px 0;
+
+  padding: 10px;
+  border-radius: 6px;
+  background-color: rgb(190, 245, 190);
+}
+
+.p-menuitem-text .annulation {
+  background-color: red;
+  color: white; 
+}
 
 // .ng-trigger {
 //   width: 280px;
@@ -315,4 +322,5 @@ p-multiselect {
   &::-webkit-scrollbar {
     display: none;
   }
+}
 }
