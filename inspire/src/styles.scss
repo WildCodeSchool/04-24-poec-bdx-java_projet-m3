@@ -5,6 +5,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import "../node_modules/quill/dist/quill.core.css";
 @import "../node_modules/quill/dist/quill.snow.css";
+@import "primeicons/primeicons.css";
 
 * {
   font-family: "Poppins";
@@ -287,40 +288,39 @@ p-multiselect {
 }
 
 .notif-card {
-
-
- .p-menu-list {
-  margin: 15px 7px;
-  border-radius: 6px;
+  .p-menu-list {
+    margin: 15px 7px;
+    border-radius: 6px;
   }
 
-.p-element .p-submenu-header {
-margin-bottom: 5px;
-font-size: 1.2em;
-padding-left: 10px}
-
-.p-menuitem-text {
-  margin: 8px 0;
-
-  padding: 10px;
-  border-radius: 6px;
-  background-color: rgb(190, 245, 190);
-}
-
-.p-menuitem-text .annulation {
-  background-color: red;
-  color: white; 
-}
-
-// .ng-trigger {
-//   width: 280px;
-//   left: 550px;
-// }
-.scrollbar-off {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
+  .p-element .p-submenu-header {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+    padding-left: 10px;
   }
-}
+
+  .p-menuitem-text {
+    margin: 8px 0;
+
+    padding: 10px;
+    border-radius: 6px;
+    background-color: rgb(190, 245, 190);
+  }
+
+  .p-menuitem-text .annulation {
+    background-color: red;
+    color: white;
+  }
+
+  // .ng-trigger {
+  //   width: 280px;
+  //   left: 550px;
+  // }
+  .scrollbar-off {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
