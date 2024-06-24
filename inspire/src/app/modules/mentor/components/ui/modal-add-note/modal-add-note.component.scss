@@ -48,7 +48,7 @@
       }
       .response {
         width: 80%;
-        background-color: #fff4e9;
+        background-color: #fff3e8;
         border-radius: 10px;
         padding: 10px 10px;
         color: black;
@@ -96,12 +96,14 @@
 }
 
 .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100px;
   height: 100px;
   overflow: hidden;
   border-radius: 50%;
 }
-
 .rounded-square {
   width: 100%;
   height: auto;
@@ -135,4 +137,8 @@
 span {
   color: $primary-color;
   font-weight: 600;
+}
+
+h4 {
+  color: black;
 }
