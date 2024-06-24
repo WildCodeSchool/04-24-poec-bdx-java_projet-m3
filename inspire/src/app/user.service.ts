@@ -323,14 +323,10 @@ export class UserService {
         message: string;
         success: boolean;
         experiences: ExperienceDTO[];
-      }>(
-        'http://localhost:8080/experience/user/add',
-        //`${environment.BASE_URL}/experience/experiences/`,
-        {
-          ...experience,
-          userId: this.userStore.getUserConnected$().value.id,
-        }
-      )
+      }>('http://localhost:8080/experience/user/add', {
+        ...experience,
+        userId: this.userStore.getUserConnected$().value.id,
+      })
       .pipe(
         tap((result) => {
           this.activeUserExperiences$.next(result.experiences);
