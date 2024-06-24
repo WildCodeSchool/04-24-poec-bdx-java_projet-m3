@@ -30,14 +30,9 @@
 </div>
 <p-dialog
   *ngIf="modalVisible"
-  header=""
   [(visible)]="modalVisible"
   [modal]="true"
-  [style]="{
-    width: 'clamp(350px,40vw, 100%)',
-    height: 'clamp(521px,70vh, 600px)',
-    'aspect-ration': '3 / 4'
-  }"
+  [closable]="false"
   [draggable]="false"
   [resizable]="false"
 >
@@ -67,16 +62,51 @@
     </div>
   </div>
   <div class="modal-note" *ngIf="!isHistory">
-    <h3>Réservation prévue avec {{ reservation.firstname | titlecase }}</h3>
-    <h4>Le {{ reservation.dateBegin | date : "short" }}</h4>
     <img src="assets/svgs/telecom.svg" alt="" class="image" />
-    <div class="subject">
-      <h4>
-        Suject: <span>{{ reservation.subject }}</span>
-      </h4>
-      <p [innerHTML]="reservation.details"></p>
+
+    <div class="info-resa">
+      <h2>
+        Réservation prévue avec
+        <span>{{ reservation.firstname | titlecase }}</span>
+      </h2>
+      <h4>Résumé de votre créneau :</h4>
+
+      <div class="pop-up-date">
+        <img
+          class="img-fluid forgot-img"
+          src="/assets/svgs/date-slot.svg"
+          alt=""
+        />
+
+        <h3>
+          Date :
+          <span>{{
+            reservation.dateBegin | date : "dd MMMM yyyy" : "" : "fr"
+          }}</span>
+        </h3>
+      </div>
+      <div class="pop-up-date">
+        <img
+          class="img-fluid forgot-img"
+          src="/assets/svgs/duration.svg"
+          alt=""
+        />
+
+        <h3>
+          Heure de début :
+          <span>{{ reservation.dateBegin | date : "HH:mm" : "" : "fr" }}</span>
+        </h3>
+      </div>
+
+      <div class="info-session">
+        <h4>
+          Plus d'information sur la session :
+          <span>{{ reservation.subject }}</span>
+        </h4>
+        <p [innerHTML]="reservation.details"></p>
+      </div>
     </div>
-    <h3>Annulez cette réservation?</h3>
+    <h3 class="delete-resa">Annulez cette réservation?</h3>
 
     <div class="control">
       <app-button
@@ -85,7 +115,7 @@
         (onSubmit)="cancel()"
       ></app-button>
       <app-button
-        [text]="'Valider'"
+        [text]="'Supprimer réservation'"
         [variant]="'pink'"
         (onSubmit)="removeReservation()"
       ></app-button>
