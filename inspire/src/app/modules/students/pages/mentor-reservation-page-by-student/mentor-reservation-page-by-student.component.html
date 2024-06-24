@@ -1,7 +1,7 @@
 <div class="control"></div>
 <div class="calendar-background">
   <h2 *ngIf="profil | async as profil">
-    Réserver un creneau chez {{ profil.firstname | titlecase }}
+    Réservez un créneau avec <span>{{ profil.firstname | titlecase }}</span>
   </h2>
   <ng-container *ngIf="today?.length">
     <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
