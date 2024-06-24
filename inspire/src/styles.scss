@@ -264,18 +264,19 @@ p-multiselect {
 // content of slot
 .slot-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding-top: 10px;
   img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     object-fit: cover;
     border-radius: 50%;
+    margin-right: 10px;
   }
 }
 .sujet {
-  padding-left: 10px;
+  padding-top: 10px;
+  font-style: italic;
 }
 .p-multiSelect {
   z-index: 100;
@@ -287,40 +288,43 @@ p-multiselect {
 }
 
 .notif-card {
-
-
- .p-menu-list {
-  margin: 15px 7px;
-  border-radius: 6px;
+  .p-menu-list {
+    margin: 15px 7px;
+    border-radius: 6px;
   }
 
-.p-element .p-submenu-header {
-margin-bottom: 5px;
-font-size: 1.2em;
-padding-left: 10px}
+  .p-element .p-submenu-header {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+    padding-left: 10px;
+  }
 
-.p-menuitem-text {
-  margin: 8px 0;
+  .p-menuitem-text {
+    margin: 8px 0;
 
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #ecf7f3;
+  }
+
+  .p-menuitem-text .annulation {
+    background-color: red;
+    color: white;
+  }
+
+  // .ng-trigger {
+  //   width: 280px;
+  //   left: 550px;
+  // }
+  .scrollbar-off {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.fc-timegrid-event .fc-event-main {
   padding: 10px;
-  border-radius: 6px;
-  background-color: rgb(190, 245, 190);
-}
-
-.p-menuitem-text .annulation {
-  background-color: red;
-  color: white; 
-}
-
-// .ng-trigger {
-//   width: 280px;
-//   left: 550px;
-// }
-.scrollbar-off {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
 }

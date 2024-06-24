@@ -34,7 +34,8 @@
     <div class="skills">
       <div class="title">
         <h2>
-          {{ !editModeOn ? mentor.firstname + " " + mentor.lastname + ", " : ""
+          {{
+            !editModeOn ? mentor.firstname + " " + mentor.lastname + " - " : ""
           }}{{ mentor.title }}
         </h2>
       </div>
@@ -46,7 +47,7 @@
 
   <div class="description">
     <div class="title-propos">
-      <h3>Un peu plus sur moi</h3>
+      <h3>Un peu plus d'information sur moi</h3>
     </div>
     <p>
       {{ mentor.description }}

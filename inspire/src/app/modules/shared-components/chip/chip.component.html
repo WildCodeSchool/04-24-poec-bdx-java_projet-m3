@@ -1,3 +1,9 @@
-<button pButton pRipple class="chip" [ngClass]="dark ? 'dark' : 'light'">
+<button
+  pButton
+  pRipple
+  class="chip"
+  [ngClass]="dark ? 'dark' : 'light'"
+  [type]="type"
+>
   {{ title | titlecase }}
 </button>
