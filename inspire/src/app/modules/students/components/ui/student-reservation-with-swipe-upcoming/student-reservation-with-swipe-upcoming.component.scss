@@ -48,6 +48,11 @@
   }
 }
 
+.info-resa {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+}
 .transparent {
   background-color: white;
 }
@@ -55,6 +60,10 @@
   background-color: $background-light-list;
 }
 
+.modal-note {
+  width: 600px;
+  background-color: yellowgreen;
+}
 @media screen and (max-width: $large) {
   .row-reservation {
     padding-left: 0;

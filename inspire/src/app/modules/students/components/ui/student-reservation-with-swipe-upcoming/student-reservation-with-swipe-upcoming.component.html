@@ -30,14 +30,9 @@
 </div>
 <p-dialog
   *ngIf="modalVisible"
-  header=""
   [(visible)]="modalVisible"
   [modal]="true"
-  [style]="{
-    width: 'clamp(350px,40vw, 100%)',
-    height: 'clamp(521px,70vh, 600px)',
-    'aspect-ration': '3 / 4'
-  }"
+  [closable]="false"
   [draggable]="false"
   [resizable]="false"
 >
@@ -67,12 +62,16 @@
     </div>
   </div>
   <div class="modal-note" *ngIf="!isHistory">
-    <h3>Réservation prévue avec {{ reservation.firstname | titlecase }}</h3>
-    <h4>Le {{ reservation.dateBegin | date : "short" }}</h4>
     <img src="assets/svgs/telecom.svg" alt="" class="image" />
+
+    <div class="info-resa">
+      <h3>Réservation prévue avec {{ reservation.firstname | titlecase }}</h3>
+      <h4>Le {{ reservation.dateBegin | date : "short" }}</h4>
+    </div>
     <div class="subject">
       <h4>
-        Suject: <span>{{ reservation.subject }}</span>
+        Plus d'information sur la session :
+        <span>{{ reservation.subject }}</span>
       </h4>
       <p [innerHTML]="reservation.details"></p>
     </div>
