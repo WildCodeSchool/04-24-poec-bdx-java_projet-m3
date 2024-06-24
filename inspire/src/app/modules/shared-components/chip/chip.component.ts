@@ -8,4 +8,5 @@ import { Component, Input } from '@angular/core';
 export class ChipComponent {
   @Input() title: string = 'JavaScript';
   @Input() dark: boolean = false;
+  @Input() type: string = 'button';
 }
