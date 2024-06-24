@@ -26,13 +26,15 @@
 
         <h3>
           Date :
-          {{ reservation.dateBegin | date : "dd MMMM yyyy" }}
+          <span>{{ reservation.dateBegin | date : "dd MMMM yyyy" }}</span>
         </h3>
       </div>
       <div class="pop-up-date">
         <img class="img-fluid forgot-img" src="/assets/svgs/visio.svg" alt="" />
 
-        <h3>Sujet du mentorat : {{ reservation.subject }}</h3>
+        <h3>
+          Sujet du mentorat : <span>{{ reservation.subject }}</span>
+        </h3>
       </div>
 
       <div class="pop-up-date">
@@ -44,14 +46,13 @@
 
         <h3>
           Le mentorat était
-          {{ reservation.visio ? " en Visio" : "en Présentiel" }}
+          <span>{{ reservation.visio ? "en Visio" : "en Présentiel" }}</span>
         </h3>
       </div>
     </div>
   </div>
-
+  <h4>Vos commentaires</h4>
   <div class="card" *ngIf="!editMessage">
-    <h4>Vos commentaires</h4>
     <div class="communication">
       <div class="message">
         <div [innerHTML]="reservation.details"></div>
@@ -60,18 +61,18 @@
         <div [innerHTML]="reservation.message"></div>
       </div>
     </div>
-    <div class="exit">
-      <app-button
-        [text]="'Editer'"
-        [variant]="'pink'"
-        (onSubmit)="editMessage = true"
-      ></app-button>
-      <app-button
-        [text]="'Quitter'"
-        [variant]="'black'"
-        (onSubmit)="exit()"
-      ></app-button>
-    </div>
+  </div>
+  <div class="exit">
+    <app-button
+      [text]="'Annuler'"
+      [variant]="'black'"
+      (onSubmit)="exit()"
+    ></app-button>
+    <app-button
+      [text]="'Modifier le message'"
+      [variant]="'pink'"
+      (onSubmit)="editMessage = true"
+    ></app-button>
   </div>
   <div class="action" *ngIf="editMessage">
     <p-editor [(ngModel)]="reservation.message" [style]="{ height: '200px' }" />
@@ -80,6 +81,7 @@
     <app-button
       [text]="'Annuler'"
       [type]="'button'"
+      [variant]="'black'"
       (onSubmit)="editMessage = false"
     ></app-button>
     <app-button
