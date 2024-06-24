@@ -8,6 +8,7 @@ import { UserService } from '../../../../../user.service';
 import { StudentService } from '../../../../../shared/services/student.service';
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { UserByIdService } from '../../../../../shared/services/user-by-id.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-mentor',
@@ -20,6 +21,7 @@ export class CardMentorComponent implements OnInit {
   isFavorite: boolean = false;
   mentorId!: number;
   studentId!: number;
+  router = inject(Router);
 
   constructor(
     private favoritesService: FavoritesService,
@@ -61,7 +63,10 @@ export class CardMentorComponent implements OnInit {
     event.stopPropagation();
     const studentId = this.userStoreService.getUserId();
     if (studentId) {
-      console.log('studentService.activeStudentProfil$.value.id:', this.studentService.activeStudentProfil$.value.id);
+      console.log(
+        'studentService.activeStudentProfil$.value.id:',
+        this.studentService.activeStudentProfil$.value.id
+      );
       if (this.isFavorite) {
         this.isFavorite = true;
         this.favoritesService
@@ -94,5 +99,10 @@ export class CardMentorComponent implements OnInit {
           );
       }
     }
+  }
+
+  navigateToAgenda(event: Event) {
+    event.stopPropagation();
+    this.router.navigateByUrl('/student/reserve/' + this.mentor.userId);
   }
 }
