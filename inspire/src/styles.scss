@@ -285,3 +285,25 @@ p-multiselect {
   position: relative;
   z-index: 400;
 }
+
+.p-menu-list {
+  margin: 15px 7px;
+  border-radius: 6px;
+}
+
+.p-element .p-submenu-header {
+margin-bottom: 5px;
+font-size: 1.2em;
+padding-left: 10px
+}
+
+.p-menuitem-text {
+  margin: 8px 0;
+
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.ng-trigger .ng-trigger-overlayAnimation .ng-tns-c1113693080-2 .p-menu .p-component .p-menu-overlay .ng-star-inserted {
+  width: 600px;
+}
