@@ -292,16 +292,15 @@ p-multiselect {
  .p-menu-list {
   margin: 15px 7px;
   border-radius: 6px;
-}
+  }
 
-// .p-element .p-submenu-header {
-// margin-bottom: 5px;
-// font-size: 1.2em;
-// padding-left: 10px
-// }
+.p-element .p-submenu-header {
+margin-bottom: 5px;
+font-size: 1.2em;
+padding-left: 10px}
 
-// .p-menuitem-text {
-//   margin: 8px 0;
+.p-menuitem-text {
+  margin: 8px 0;
 
   padding: 10px;
   border-radius: 6px;
@@ -324,4 +323,4 @@ p-multiselect {
     display: none;
   }
 }
-
+}
