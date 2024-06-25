@@ -6,8 +6,9 @@
   backdrop-filter: blur(8.8px);
   -webkit-backdrop-filter: blur(8.8px);
   border-radius: 15px;
-  min-height: 370px;
+  min-height: 400px;
   cursor: pointer;
+  position: relative;
 
   .img-card {
     position: relative;
@@ -95,6 +96,8 @@
 
 .booking {
   width: 80%;
-  margin: 0 auto;
-  margin-top: 20px;
+  position: absolute; 
+  bottom: 15px; 
+  left: 50%;
+  transform: translateX(-50%);
 }
