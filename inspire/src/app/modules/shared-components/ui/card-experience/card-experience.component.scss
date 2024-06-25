@@ -1,0 +1,64 @@
+@import "../../../../../variables.scss";
+
+.card-skill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .card-skill-body {
+    display: flex;
+    align-items: center;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $primary-color;
+      border: solid 1px $primary-color;
+      border-radius: 15px;
+      margin-right: 14px;
+
+      img {
+        margin: 10px;
+      }
+    }
+
+    .details {
+      h2 {
+        font-size: 18px;
+        font-weight: 500;
+        color: $primary-color;
+      }
+      .date-place {
+        display: flex;
+        color: black;
+        p {
+          margin-top: -2px;
+          font-weight: 300;
+          font-size: 13px;
+          color: black;
+        }
+      }
+    }
+  }
+
+  .company-city p {
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .card-skill-control {
+    display: flex;
+    gap: 5px;
+    button {
+      border: none;
+      background-color: transparent;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+
+      cursor: pointer;
+    }
+  }
+  .card-skill-control button:hover {
+    transform: scale(1.1);
+  }
+}

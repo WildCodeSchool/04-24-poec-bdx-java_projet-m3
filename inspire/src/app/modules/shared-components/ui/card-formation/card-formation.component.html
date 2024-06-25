@@ -1,0 +1,58 @@
+<div class="card-skill" *ngIf="formation">
+  <div class="card-skill-body">
+    <button>
+      <img src="assets/svgs/school.svg" alt="skill" width="25" height="25" />
+    </button>
+    <div class="details">
+      <p class="title">{{ formation.title }}</p>
+      <div>
+        <p class="city">
+          {{ formation.company | uppercase }} - {{ formation.city | uppercase }}
+        </p>
+      </div>
+      <div class="date-place">
+        <p>
+          {{ formation.dateEnd | date : " yyyy" }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card-skill-control" *ngIf="editModeOn">
+    <button (click)="showEditForm()">
+      <img src="assets/svgs/edit.svg" alt="edit" width="20" height="20" />
+    </button>
+    <button (click)="showPopUpDelete()">
+      <img src="assets/svgs/delete.svg" alt="delete" width="22" height="22" />
+    </button>
+  </div>
+</div>
+<ng-container
+  *ngIf="{
+    phoneMode: windowWatcherService.windowSizeChanged.asObservable() | async
+  } as phoneMode"
+>
+  <p-sidebar
+    (onHide)="hideEditForm()"
+    *ngIf="isVisibleFormEditCourse"
+    [(visible)]="isVisibleFormEditCourse"
+    position="right"
+    [style]="{
+      width: phoneMode.phoneMode ? 'max(50vw, 400px)' : '100vw'
+    }"
+  >
+    <app-form-edit-course
+      [formation]="formation"
+      (formationEmitter)="editForm($event)"
+    ></app-form-edit-course>
+  </p-sidebar>
+</ng-container>
+<ng-container *ngIf="popupDeleteVisible">
+  <app-modal-validate
+    [visible]="popupDeleteVisible"
+    [question]="'Souhaitez-vous supprimer cette formation?'"
+    (onCancel)="popupDeleteVisible = false"
+    (onValidate)="popupDeleteVisible = false"
+    (onDelete)="deleteFormation()"
+  ></app-modal-validate>
+</ng-container>
+<p-toast></p-toast>

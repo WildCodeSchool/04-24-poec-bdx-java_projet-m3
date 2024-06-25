@@ -1,0 +1,27 @@
+<div class="container-login-page">
+  <div class="left-content">
+    <app-welcome
+      title="Bienvenue !"
+      subtitle="La plateforme qui met les étudiants et les mentors en relation"
+    ></app-welcome>
+  </div>
+
+  <div class="right-content">
+    <div class="right-title">
+      <h2>Créer votre compte</h2>
+    </div>
+    <app-register-form class="inner-right"></app-register-form>
+    <div>
+      <h4 class="acount">
+        Vous avez déjà un compte ?
+        <span><a [routerLink]="['']">Connexion</a></span>
+      </h4>
+    </div>
+
+    <div class="social-connexion">
+      <!-- <app-social-connexion
+        title="Ou créez votre compte avec "
+      ></app-social-connexion> -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,93 @@
+<form
+  class="formulaire"
+  [formGroup]="loginForm"
+  (ngSubmit)="loginForm.valid && onSubmit()"
+  #formLogin="ngForm"
+>
+  <div class="container-input">
+    <label class="label-form" for="email">Email *</label>
+    <input
+      class="input-form"
+      type="text"
+      id="email"
+      name="email"
+      formControlName="email"
+      placeholder="Votre email"
+    />
+    <div
+      class="error"
+      *ngIf="formLogin.submitted && loginForm.controls['email'].errors"
+    >
+      <div [hidden]="!loginForm.controls['email'].errors['required']">
+        L'email est requis
+      </div>
+      <div [hidden]="!loginForm.controls['email'].invalid">
+        L'email est invalide
+      </div>
+    </div>
+  </div>
+  <div class="container-input">
+    <label class="label-form" for="password">Mot de passe *</label>
+    <input
+      class="input-form"
+      type="password"
+      id="password"
+      name="password"
+      formControlName="password"
+      placeholder="Votre mot de passe"
+    />
+    <div
+      class="error"
+      *ngIf="formLogin.submitted && loginForm.get('password')?.errors?.['required']"
+    >
+      Mot de passe requis
+    </div>
+  </div>
+
+  <div class="btn-connexion">
+    <app-button variant="pink" text="Connexion" type="submit"></app-button>
+  </div>
+</form>
+<!-- <div class="forgot-pwd">
+  <h3 (click)="modalVisible = true">Mot de passe oublié ?</h3>
+</div> -->
+
+<p-dialog
+  header=""
+  [(visible)]="modalVisible"
+  [modal]="true"
+  [style]="{ width: '30vw', height: '70vh' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="forgot-pwd-pop-up">
+    <div class="container-img-forgot">
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/forgot-pwd.svg"
+        alt=""
+      />
+    </div>
+
+    <h1>Oups, avez-vous oublié votre mot de passe ?</h1>
+    <p>
+      Pas de panique ! Entrez votre adresse e-mail ci-dessous et nous vous
+      enverrons un lien pour réinitialiser votre mot de passe.
+    </p>
+    <form>
+      <div class="container-input">
+        <label class="label-form" for="email">Votre email</label>
+        <input
+          class="input-form"
+          type="email"
+          placeholder="L'email de votre compte"
+        />
+      </div>
+      <app-button
+        variant="pink"
+        text="Récupérer mon mot de passe"
+        type="submit"
+      ></app-button>
+    </form>
+  </div>
+</p-dialog>

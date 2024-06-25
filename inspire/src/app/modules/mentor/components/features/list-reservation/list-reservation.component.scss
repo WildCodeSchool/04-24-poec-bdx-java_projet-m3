@@ -1,0 +1,54 @@
+@import "../../../../../../variables.scss";
+.list-generic {
+  display: block;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.53);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.8px);
+  -webkit-backdrop-filter: blur(8.8px);
+
+  h3 {
+    margin: 0px 0 30px 0;
+    font-weight: 600;
+  }
+
+  .list-header {
+    color: white;
+    height: 65px;
+    padding-left: 33px;
+    background-color: $primary-color;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+
+    .name,
+    .promotion,
+    .sujet,
+    .date,
+    .creneau,
+    .action {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+@media screen and (max-width: $large) {
+  .list-generic {
+    .list-header {
+      padding-left: 10px;
+      grid-template-columns: 2fr 2fr 1fr;
+      .sujet {
+        display: none;
+      }
+      .promotion {
+        display: none;
+      }
+      .creneau {
+        display: none;
+      }
+    }
+  }
+}

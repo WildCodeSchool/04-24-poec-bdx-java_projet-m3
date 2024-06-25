@@ -1,0 +1,20 @@
+<div class="row-reservation" [ngClass]="bgColor" *ngIf="reservation">
+  <div class="avatar-name">
+    <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" />
+    <p>{{ reservation.firstname }}</p>
+  </div>
+  <div class="promotion">
+    {{ reservation.title }}
+  </div>
+  <div class="sujet">{{ reservation.subject || "sans sujet" | titlecase }}</div>
+  <div class="date">
+    {{ reservation.dateBegin | date : "dd/MM/yyyy" }}
+  </div>
+  <div class="creneau">
+    {{ reservation.dateBegin | date : "HH:mm:ss" }} -
+    {{ endAt | date : "HH:mm:ss" }}
+  </div>
+  <div class="action">
+    <button>Annuler</button>
+  </div>
+</div>

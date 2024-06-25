@@ -1,0 +1,21 @@
+<button
+  [ngClass]="{
+    light: !active && variant === 'light',
+    dark: !active && variant === 'dark',
+    lightActive: active && variant === 'light',
+    darkActive: active && variant === 'dark',
+  }"
+  [ngStyle]="{ 'min-width': showText ? '230px' : '0px' }"
+  class="btn-general"
+  (click)="changeState()"
+>
+  <img
+    [src]="active ? logoUrlActive : logoUrl"
+    alt="logo link"
+    width="25"
+    height="25"
+  />
+  <p *ngIf="showText" [ngStyle]="{ display: !showText ? 'none' : 'inherit' }">
+    {{ text }}
+  </p>
+</button>

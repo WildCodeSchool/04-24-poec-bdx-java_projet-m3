@@ -1,0 +1,37 @@
+@import "../../../../variables.scss";
+.welcome-container {
+  background-color: #fef7f1;
+}
+
+.welcome-container h2 {
+  margin-top: 15px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+.welcome-container h1 {
+  font-family: "Poller";
+  font-size: 60px;
+}
+
+@media screen and (max-width: $small) {
+  .welcome-titles {
+    display: none;
+  }
+  .welcome-container {
+    height: 200px;
+  }
+
+  .welcome-container-img img {
+    width: 300px;
+  }
+  .welcome-container-img {
+    padding-left: 130px;
+  }
+}
+
+@media screen and (min-width: $small) and (max-width: $large) {
+  .welcome-container h1 {
+    font-size: 35px;
+  }
+}

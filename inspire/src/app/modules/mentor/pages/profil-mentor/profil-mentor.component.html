@@ -1,0 +1,28 @@
+<div class="profil-mentor">
+  <div class="main">
+    <div *ngIf="profil$ | async as profil">
+      <app-card-infos
+        *ngIf="skills$ | async as skills"
+        [chips]="skills"
+        [mentor]="profil"
+      ></app-card-infos>
+    </div>
+    <app-list-experience
+      *ngIf="experiences$ | async as experiences"
+      [experiences]="experiences"
+      [title]="'Mes expériences'"
+    ></app-list-experience>
+  </div>
+  <div class="side-left">
+    <app-list-formation
+      *ngIf="formations$ | async as formations"
+      [formations]="formations"
+      [title]="'Mes formations'"
+    ></app-list-formation>
+    <app-list-language
+      *ngIf="languages$ | async as languages"
+      [languages]="languages"
+      [title]="'Mes langues'"
+    ></app-list-language>
+  </div>
+</div>

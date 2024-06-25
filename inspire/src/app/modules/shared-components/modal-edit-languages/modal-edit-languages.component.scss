@@ -1,0 +1,72 @@
+@import "../../../../variables.scss";
+
+.modal {
+  .container-chips {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  h1 {
+    font-size: 24px;
+    color: $primary-color;
+    margin: 30px 0px 0px 0px;
+  }
+  h2 {
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+    margin-bottom: 20px;
+  }
+
+  .select-languages {
+    margin-top: 20px;
+  }
+}
+
+.container-select {
+  margin-top: 30px;
+
+  display: flex;
+}
+
+.btn-container {
+  margin-top: 30px;
+  display: flex;
+  padding-left: 2px;
+
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: $small) {
+  .modal {
+    .control {
+      flex-direction: column;
+    }
+  }
+}
+
+.pink {
+  background-color: #f7156b;
+  color: white;
+  cursor: pointer;
+}
+
+.black {
+  background-color: black;
+  color: azure;
+  cursor: pointer;
+}
+.btn-general {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 11px 20px;
+  border-radius: 6px;
+  border: none;
+  transition: transform 0.4s ease;
+  cursor: pointer;
+}
+.btn-general:hover {
+  transform: scale(0.95);
+  cursor: pointer;
+}

@@ -1,0 +1,38 @@
+.list-skills {
+  background: rgba(255, 255, 255, 0.53);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  // backdrop-filter: blur(8.8px);
+  // -webkit-backdrop-filter: blur(8.8px);
+  gap: 18px;
+  border-radius: 25px;
+  padding: 25px 22px;
+  p-divider {
+    margin: 18px;
+  }
+}
+
+.title-list {
+  margin-bottom: 20px;
+  padding-left: 5px;
+  display: flex;
+  gap: 10px;
+}
+
+.title-list h3 {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.edit-button {
+  display: flex;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  transform: scale(1.1);
+}

@@ -1,0 +1,46 @@
+@import "../../../../../variables.scss";
+
+.agenda {
+  display: flex;
+  height: calc(100vh - 170px);
+}
+
+.main {
+  width: 100%;
+  padding-right: 20px;
+  overflow-y: auto;
+}
+
+.side-left {
+  width: auto;
+}
+
+@media screen and (max-width: $medium) {
+  .agenda {
+    flex-direction: column;
+    .main {
+      width: 100%;
+      padding: 0;
+      flex-direction: column;
+    }
+    .side-left {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: $extra-large) {
+  .agenda {
+    flex-direction: column;
+    gap: 20px;
+    .main {
+      width: 100%;
+      padding: 0;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .side-left {
+      width: 100%;
+    }
+  }
+}

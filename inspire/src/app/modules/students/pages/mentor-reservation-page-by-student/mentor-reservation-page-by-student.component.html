@@ -1,0 +1,78 @@
+<div class="control"></div>
+<div class="calendar-background">
+  <h2 *ngIf="profil | async as profil">
+    Réservez un créneau avec <span>{{ profil.firstname | titlecase }}</span>
+  </h2>
+  <ng-container *ngIf="today?.length">
+    <h3>La semaine de {{ calendar.getApi().view.title }}</h3>
+  </ng-container>
+  <full-calendar
+    [events]="events"
+    [options]="calendarOptions"
+    #calendar
+  ></full-calendar>
+</div>
+<p-dialog [modal]="true" [visible]="visible" [closable]="false">
+  <div class="modal">
+    <div class="container-img-forgot">
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/validate-slot.svg"
+        alt=""
+      />
+    </div>
+    <div class="content">
+      <div *ngIf="profil | async as mentor">
+        <h2>
+          Vous souhaitez réserver un créneau avec
+          <span>{{ mentor.firstname }}</span>
+        </h2>
+        <p>
+          Ahoy, aventurier en quête de sagesse ! Vous êtes sur le point de
+          franchir les portes d'une aventure épique : réserver un créneau de
+          mentorat.
+        </p>
+      </div>
+      <div class="subject-infos">
+        <h4>Sujet :</h4>
+        <select
+          name="subject"
+          id="subject"
+          class="subject"
+          [(ngModel)]="subject"
+          (change)="setSubject($event)"
+        >
+          <option value="Réseautage">Réseautage</option>
+          <option value="Deboggage">Deboggage</option>
+          <option value="Entretien Blanc">Entretien Blanc</option>
+          <option value="Autre" [defaultSelected]="true">Autre</option>
+        </select>
+      </div>
+
+      <div class="details">
+        <h4 for="float-input">Details de votre réservation :</h4>
+        <textarea
+          id="float-input"
+          rows="5"
+          cols="30"
+          pInputTextarea
+          [(ngModel)]="details"
+        >
+        </textarea>
+      </div>
+
+      <div class="control">
+        <app-button
+          text="Annuler"
+          (onSubmit)="visible = false"
+          [variant]="'black'"
+        ></app-button>
+        <app-button
+          text="Reserver"
+          (onSubmit)="bookSlot()"
+          [variant]="'pink'"
+        ></app-button>
+      </div>
+    </div>
+  </div>
+</p-dialog>

@@ -1,0 +1,27 @@
+<div class="card-skill">
+  <div class="card-skill-body">
+    <button>
+      <img [src]="skill.url" alt="skill" width="43" height="43" />
+    </button>
+    <div class="details">
+      <p class="title">{{ skill.title | titlecase }}</p>
+      <div class="date-place">
+        <img
+          src="assets/svgs/calendar.svg"
+          alt="calendar"
+          width="23"
+          height="23"
+        />
+        <p>{{ skill.place }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="card-skill-control">
+    <button>
+      <img src="assets/svgs/edit.svg" alt="edit" width="30" height="30" />
+    </button>
+    <button>
+      <img src="assets/svgs/delete.svg" alt="delete" width="30" height="30" />
+    </button>
+  </div>
+</div>

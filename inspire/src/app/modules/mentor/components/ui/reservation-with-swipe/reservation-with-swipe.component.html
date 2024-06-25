@@ -1,0 +1,31 @@
+<div class="main">
+  <div class="action-phone" *ngIf="showAction">
+    <button (click)="delete()">
+      <img src="assets/svgs/delete.svg" alt="" width="25" height="25" />
+    </button>
+    <button (click)="delete()">
+      <img src="assets/svgs/stop.svg" alt="" width="25" height="25" />
+    </button>
+  </div>
+  <div class="row-reservation" [ngClass]="bgColor" #thisRef>
+    <div class="avatar-name">
+      <img
+        [src]="'https://placehold.jp/35x35.png'"
+        alt="avatar"
+        width="35"
+        height="35"
+      />
+      <p>{{ reservation.firstname }}</p>
+    </div>
+    <div class="promotion">
+      {{ reservation.title | titlecase }}
+    </div>
+    <div class="sujet">
+      {{ reservation.subject || "sans sujet" | titlecase }}
+    </div>
+    <div class="date">
+      {{ reservation.dateBegin | date : "dd/MM/yyyy" }}
+    </div>
+    <div class="creneau">{{ endAt | date : "dd/MM/yyyy" }}</div>
+  </div>
+</div>

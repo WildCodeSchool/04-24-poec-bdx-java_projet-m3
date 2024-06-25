@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "m3": "concurrently -c yellow,magenta \"npm:m3-*\"",
+    "mcube": "concurrently -c yellow,magenta \"npm:mcube-*\"",
+    "m3-json": "npx json-server json-server/db.json",
+    "m3-angular": "cd ./inspire && ng s -o",
+    "mcube-angular": "cd ./inspire && ng s -o",
+    "ncube-express": "cd ./back-end && npm run dev",
+    "migrate": "cd ./back-end && npm run build"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "primeicons": "^7.0.0"
+  }
+}

@@ -1,0 +1,95 @@
+<div class="modal-note">
+  <div class="mentorat-header">
+    <h1>
+      Vous avez accompagné
+      <span>{{ reservation.firstname | titlecase }} </span>!
+    </h1>
+    <h3>Vous avez quelques notes à prendre sur votre session de mentorat ?</h3>
+  </div>
+
+  <div class="content-resume">
+    <div class="image-container">
+      <img
+        [src]="reservation.imgUrl"
+        alt="Mentor Image"
+        class="rounded-square"
+      />
+    </div>
+
+    <div class="info-slot">
+      <div class="pop-up-date">
+        <img
+          class="img-fluid forgot-img"
+          src="/assets/svgs/date-slot.svg"
+          alt=""
+        />
+
+        <h3>
+          Date :
+          <span>{{ reservation.dateBegin | date : "dd MMMM yyyy" }}</span>
+        </h3>
+      </div>
+      <div class="pop-up-date">
+        <img class="img-fluid forgot-img" src="/assets/svgs/visio.svg" alt="" />
+
+        <h3>
+          Sujet du mentorat : <span>{{ reservation.subject }}</span>
+        </h3>
+      </div>
+
+      <div class="pop-up-date">
+        <img
+          class="img-fluid forgot-img"
+          src="/assets/svgs/information.svg"
+          alt=""
+        />
+
+        <h3>
+          Le mentorat était
+          <span>{{ reservation.visio ? "en Visio" : "en Présentiel" }}</span>
+        </h3>
+      </div>
+    </div>
+  </div>
+
+  <h4>Votre commentaire</h4>
+  <div class="card" *ngIf="!editMessage">
+    <div class="communication">
+      <div class="message">
+        <div [innerHTML]="reservation.details"></div>
+      </div>
+      <div class="response" *ngIf="reservation.message">
+        <div [innerHTML]="reservation.message"></div>
+      </div>
+    </div>
+    <div class="exit">
+      <app-button
+        [text]="'Annuler'"
+        [variant]="'black'"
+        (onSubmit)="exit()"
+      ></app-button>
+      <app-button
+        [text]="'Modifier le message'"
+        [variant]="'pink'"
+        (onSubmit)="editMessage = true"
+      ></app-button>
+    </div>
+  </div>
+
+  <div class="action" *ngIf="editMessage">
+    <p-editor [(ngModel)]="reservation.message" [style]="{ height: '200px' }" />
+  </div>
+  <div class="control" *ngIf="editMessage">
+    <app-button
+      [text]="'Annuler'"
+      [type]="'button'"
+      [variant]="'black'"
+      (onSubmit)="editMessage = false"
+    ></app-button>
+    <app-button
+      [text]="'Valider'"
+      (onSubmit)="updateMessage()"
+      [variant]="'pink'"
+    ></app-button>
+  </div>
+</div>

@@ -1,0 +1,332 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import url("https://fonts.googleapis.com/css2?family=Poller+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import "../node_modules/quill/dist/quill.core.css";
+@import "../node_modules/quill/dist/quill.snow.css";
+@import "primeicons/primeicons.css";
+
+* {
+  font-family: "Poppins";
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.img-fluid {
+  width: 100%;
+}
+
+.p-sidebar {
+  width: 45%;
+  padding: 50px 40px;
+}
+
+@media screen and (max-width: 576px) {
+  .p-sidebar {
+    width: 100%;
+    padding: 20px 20px;
+  }
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// svgs
+.dash-white {
+  stroke: white;
+  color: white;
+  fill: wheat;
+}
+
+.languages .p-multiselect-label {
+  padding: 10px 20px;
+
+  width: 350px;
+}
+.languages .p-multiselect-items span {
+  padding-left: 20px;
+}
+
+p-multiselect {
+  width: 100%;
+
+  .p-multiselect {
+    width: 100%;
+  }
+
+  .p-multiselect-label {
+    width: 100%;
+  }
+}
+
+.p-multiselect-panel {
+  width: 400px;
+}
+
+.languages .p-multiselect-header {
+  height: 50px;
+}
+
+.languages .p-multiselect-filter-container {
+  padding-left: 20px;
+}
+.languages .p-multiselect-filter-icon {
+  margin-top: -8px;
+}
+
+.languages .p-multiselect {
+  border: solid 1px black;
+}
+.languages .p-multiselect-label {
+  color: black;
+}
+.languages .p-checkbox .p-checkbox-box.p-highlight {
+  border-color: #f8156b;
+  background-color: #f8156b;
+}
+
+.filter .p-multiselect {
+  border-color: black;
+}
+
+.filter .p-multiselect-label {
+  padding-left: 10px;
+}
+
+.filter .p-multiselect-filter-icon {
+  margin-top: -8px;
+}
+
+.filter .p-multiselect-filter-container {
+  padding-left: 20px;
+}
+
+.filter .p-multiselect-items span {
+  padding-left: 10px;
+}
+
+.filter .p-multiselect-item {
+  padding: 15px 0;
+}
+
+.filter .p-multiselect-label {
+  padding: 10px 10px;
+  max-width: 220px;
+  z-index: 1000;
+}
+
+.filter .p-checkbox .p-checkbox-box.p-highlight {
+  background-color: #f8156b;
+  border-color: #f8156b;
+}
+
+.filter .p-multiselect-token {
+  background-color: #f8156b;
+  color: white;
+  border-radius: 10px;
+  padding: 2px 5px;
+  margin: 1px 2px;
+  z-index: 1000;
+}
+
+.filter .p-multiselect-token-icon {
+  padding-left: 2px;
+  margin-left: 5px;
+}
+
+.filter .p-multiselect-clear-icon {
+  display: none;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  padding: 0px 0px 10px 0px;
+}
+
+.fc .fc-button-primary {
+  background-color: #fedae3;
+  color: #f8156b;
+  border: solid 2px #fedae3;
+  border-radius: 7px;
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  background-color: #f8156b;
+  color: white;
+  border: solid 2px #f8156b;
+}
+
+.fc .fc-col-header-cell-cushion {
+  font-weight: 400;
+}
+
+.fc-direction-ltr .fc-button-group > .fc-button:not(:first-child) {
+  margin-left: 5px;
+}
+
+.fc td,
+.fc th {
+  vertical-align: middle;
+}
+
+.fc th {
+  border: none;
+  background-color: #fedae3;
+}
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background-color: #f8156c91;
+  color: white;
+}
+.p-paginator {
+  padding: 20px 0;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+  min-height: 20px;
+  width: 20px;
+}
+
+.p-calendar .p-inputtext {
+  border-radius: 5px;
+  font-style: italic;
+  padding: 5px 10px;
+  font-size: 10px;
+  width: 800px;
+}
+.fc .fc-timegrid-slot {
+  height: 30px;
+}
+
+.fc-timegrid-col-frame {
+  position: relative;
+}
+
+.fc-day-past .fc-timegrid-col-frame {
+  background-color: #f1f0f0d3 !important; /* Couleur grise pour les jours passés */
+}
+
+.fc .fc-toolbar-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {
+  margin: 0 10px 0 0;
+}
+
+.fc .fc-button {
+  margin-right: 10px;
+}
+
+.fc-v-event .fc-event-title {
+  margin-left: 10px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.fc-timegrid-event .fc-event-time {
+  margin-top: 5px;
+
+  margin-left: 10px;
+  font-size: 15px;
+  font-weight: 400;
+}
+/* Changer la couleur de fond du jour actuel dans FullCalendar */
+.fc .fc-timegrid-now-indicator-line {
+  border-color: #f8156b;
+  border-width: 3px;
+  border-radius: 3px;
+}
+
+.fc .fc-timegrid-col.fc-day-today {
+  background-color: #fedae387;
+}
+
+.fc-theme-standard .fc-scrollgrid {
+  border: solid 1px #ebebeb;
+}
+.p-toast .p-toast-message .p-toast-message-content {
+  padding: 10px 10px;
+}
+
+.p-toast
+  .p-toast-message
+  .p-toast-message-content
+  .p-icon:not(.p-toast-icon-close-icon) {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+// content of slot
+.slot-content {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+}
+.sujet {
+  padding-top: 10px;
+  font-style: italic;
+}
+.p-multiSelect {
+  z-index: 100;
+}
+
+.filter-container {
+  position: relative;
+  z-index: 400;
+}
+
+.notif-card {
+  .p-menu-list {
+    margin: 15px 7px;
+    border-radius: 6px;
+  }
+
+  .p-element .p-submenu-header {
+    margin-bottom: 5px;
+    font-size: 1.2em;
+    padding-left: 10px;
+  }
+  .annulation {
+    background-color: red;
+    color: white;
+  }
+
+  .ng-trigger {
+    width: 280px;
+    left: 550px;
+  }
+
+  .scrollbar-off {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.fc-timegrid-event .fc-event-main {
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.scrollbar-off {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

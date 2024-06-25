@@ -1,0 +1,9 @@
+<button
+  [ngClass]="{ pink: variant === 'pink', black: variant === 'black' }"
+  class="btn-general"
+  [type]="type"
+  (click)="onclick()"
+  #btn
+>
+  {{ text }}
+</button>

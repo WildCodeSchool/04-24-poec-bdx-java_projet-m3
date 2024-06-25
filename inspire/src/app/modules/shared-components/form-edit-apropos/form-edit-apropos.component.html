@@ -1,0 +1,125 @@
+<form class="form-course" (ngSubmit)="onSubmit()" [formGroup]="aproposForm">
+  <app-file-upload
+    (fileEmitter)="receiveImage($event)"
+    [imageUrl]="profil.imgUrl"
+  ></app-file-upload>
+  <h1>Editer votre profil</h1>
+  <div class="infos">
+    <div class="container-input">
+      <label for="title">Titre de votre profil </label>
+      <input
+        type="text"
+        id="title"
+        name="title"
+        formControlName="title"
+        placeholder="Votre titre"
+      />
+    </div>
+  </div>
+
+  <div class="infos">
+    <div class="container-input">
+      <label for="firstname">Prénom *</label>
+      <input
+        type="text"
+        id="firstname"
+        name="firstname"
+        formControlName="firstname"
+        placeholder="Prénom"
+      />
+      <div class="error" *ngIf="aproposForm.get('firstname')?.errors">
+        <span *ngIf="aproposForm.get('firstname')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
+    </div>
+    <div class="container-input">
+      <label for="lastname">Nom *</label>
+      <input
+        type="text"
+        id="lastname"
+        name="lastname"
+        formControlName="lastname"
+        placeholder="Nom"
+      />
+      <div class="error" *ngIf="aproposForm.get('lastname')?.errors">
+        <span *ngIf="aproposForm.get('lastname')?.errors?.['required']">
+          Le champ est requis
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="infos">
+    <div class="container-input">
+      <label for="diplome">Github </label>
+      <input
+        type="text"
+        id="github"
+        name="github"
+        formControlName="githubUrl"
+        placeholder="Lien vers votre profil GitHub :"
+      />
+    </div>
+    <div class="container-input">
+      <label for="linkedin">Linkedin </label>
+      <input
+        type="text"
+        id="linkedin"
+        name="linkedin"
+        formControlName="linkedinUrl"
+        placeholder="Lien vers votre profil Linkedin :"
+      />
+    </div>
+  </div>
+
+  <div class="infos">
+    <div class="container-input">
+      <label for="description">Votre description </label>
+      <textarea
+        type="text"
+        id="description"
+        name="description"
+        formControlName="description"
+        placeholder="Votre description"
+        rows="6"
+      ></textarea>
+    </div>
+  </div>
+  <div class="edit-skill">
+    <label for="skills">Editez vos skills </label>
+  </div>
+
+  <div class="skills" *ngIf="skills">
+    <app-chip
+      *ngFor="let skill of selectedSkills"
+      [title]="skill.name"
+      [dark]="true"
+    ></app-chip>
+  </div>
+
+  <div class="container-select">
+    <p-multiSelect
+      class="languages"
+      id="skills"
+      name="skills"
+      [options]="skills"
+      placeholder="Choisissez vos skills"
+      [formControlName]="'selectedSkill'"
+      (onChange)="setSkills($event.value)"
+      optionLabel="name"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="43"
+      selectedItemsLabel="{0} skills sélectionnées"
+    />
+  </div>
+
+  <div class="btn-connexion">
+    <app-button variant="black" text="Annuler" (click)="cancel()"></app-button>
+    <app-button
+      variant="pink"
+      text="Mettre à jour"
+      [type]="'submit'"
+    ></app-button>
+  </div>
+</form>

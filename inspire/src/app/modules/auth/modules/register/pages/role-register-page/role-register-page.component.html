@@ -1,0 +1,43 @@
+<div class="container-login-page">
+  <div class="left-content">
+    <app-welcome
+      title="Bienvenue !"
+      subtitle="La plateforme qui met les étudiants et les mentors en relation"
+    ></app-welcome>
+  </div>
+
+  <div class="right-content">
+    <div class="right-title">
+      <h2>Créer votre compte</h2>
+      <h3>Je crée mon compte en tant que...</h3>
+    </div>
+
+    <div class="container-card">
+      <app-card-role
+        title="Étudiant"
+        subtitle="Je veux être accompagné par un mentor"
+        [link]="'/register/student'"
+        imgCard="/assets/svgs/student.svg"
+      ></app-card-role>
+      <app-card-role
+        title="Mentor"
+        subtitle="Je veux accompagner un étudiant"
+        [link]="'/register/mentor'"
+        imgCard="/assets/svgs/mentor.svg"
+      ></app-card-role>
+      <app-card-role
+        title="Entreprise"
+        class="becoming"
+        subtitle="Je veux trouver un Freelance pour une mission"
+        imgCard="/assets/svgs/company.svg"
+      ></app-card-role>
+    </div>
+
+    <div class="account">
+      <h4>
+        Vous avez déjà un compte ?
+        <span><a [routerLink]="['']">Connexion</a></span>
+      </h4>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<div class="list-skills" *ngIf="chips.length">
+  <app-chip
+    *ngFor="let chip of chips"
+    [title]="chip.name"
+    [dark]="dark"
+  ></app-chip>
+</div>

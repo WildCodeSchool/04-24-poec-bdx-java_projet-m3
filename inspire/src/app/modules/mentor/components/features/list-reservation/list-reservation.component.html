@@ -1,0 +1,20 @@
+<div class="list-generic">
+  <h3>{{ title }}</h3>
+  <div class="list-header">
+    <div class="name">MENTOR</div>
+    <div class="promotion">PROMOTION</div>
+    <div class="sujet">SUJET</div>
+    <div class="date">DATE</div>
+    <div class="creneau">CRÉNEAU</div>
+    <div class="action">ACTION</div>
+  </div>
+  <ng-container *ngIf="reservations">
+    @for(item of reservations; track $index){
+    <app-reservation-with-swipe-upcoming
+      [reservation]="item"
+      [bgColor]="$index % 2 === 0 ? 'transparent' : 'grey'"
+      [isHistory]="true"
+    ></app-reservation-with-swipe-upcoming>
+    }
+  </ng-container>
+</div>

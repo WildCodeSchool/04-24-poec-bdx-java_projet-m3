@@ -1,0 +1,64 @@
+<div class="card-skill">
+  <div class="card-skill-body">
+    <button>
+      <img src="assets/svgs/job.svg" alt="skill" width="35" height="35" />
+    </button>
+    <div class="details">
+      <h2 class="title">
+        {{ experience.title }}
+      </h2>
+      <div class="company-city">
+        <p>
+          {{ experience.company | uppercase }} -
+          {{ experience.city | uppercase }}
+        </p>
+      </div>
+      <div class="date-place">
+        <p>
+          De
+          {{ experience.dateBegin | date : " MMMM yyyy" }} à
+          {{ experience.dateEnd | date : "MMMM yyyy" }}
+        </p>
+        <p></p>
+      </div>
+    </div>
+  </div>
+  <div class="card-skill-control" *ngIf="editModeOn">
+    <button (click)="showEditForm()">
+      <img src="assets/svgs/edit.svg" alt="edit" width="20" height="20" />
+    </button>
+    <button (click)="showPopUpDelete()">
+      <img src="assets/svgs/delete.svg" alt="delete" width="22" height="22" />
+    </button>
+  </div>
+</div>
+<ng-container
+  *ngIf="{
+    phoneMode: windowWatcherService.windowSizeChanged.asObservable() | async
+  } as phoneMode"
+>
+  <p-sidebar
+    (onHide)="hideEditForm()"
+    *ngIf="isVisibleFormEditExperience"
+    [(visible)]="isVisibleFormEditExperience"
+    position="right"
+    [style]="{
+      width: phoneMode.phoneMode ? 'max(50vw, 400px)' : '100vw'
+    }"
+  >
+    <app-form-edit-experience
+      [experience]="experience"
+      (destroy)="hideEditForm()"
+      (experienceEmitter)="editExperience($event)"
+    ></app-form-edit-experience>
+  </p-sidebar>
+</ng-container>
+<ng-container *ngIf="popupDeleteVisible">
+  <app-modal-validate
+    [visible]="popupDeleteVisible"
+    [question]="'Souhaitez-vous supprimer cette experience ?'"
+    (onCancel)="popupDeleteVisible = false"
+    (onDelete)="deleteExperience()"
+  ></app-modal-validate>
+</ng-container>
+<p-toast></p-toast>

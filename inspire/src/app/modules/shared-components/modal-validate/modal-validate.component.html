@@ -1,0 +1,39 @@
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="closeDialog()"
+>
+  <div class="modal">
+    <div class="container-img-forgot">
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/question.svg"
+        alt=""
+      />
+    </div>
+    <h1>{{ question }}</h1>
+    <div class="control">
+      <button
+        (click)="cancel()"
+        class="btn-general"
+        (focus)="focusCancel()"
+        (focusout)="focusOutCancel()"
+        [ngClass]="focusBtnCancel ? 'black' : ''"
+      >
+        Annuler
+      </button>
+
+      <button
+        (click)="deleteInfo()"
+        class="btn-general pink"
+        (focus)="focusValidate()"
+        (focusout)="focusOutValidate()"
+        [ngClass]="focusBtnValidate ? 'pink' : ''"
+      >
+        Supprimer
+      </button>
+    </div>
+  </div>
+</p-dialog>

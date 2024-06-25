@@ -1,0 +1,50 @@
+<div
+  class="container-card"
+  [routerLink]="['/student/mentor-details', mentor.userId]"
+>
+  <div class="img-card">
+    <img src="{{ mentor.imgUrl }}" alt="" />
+    <div class="img-favorite" (click)="toggleFavorite($event)">
+      <img
+        *ngIf="!isFavorite"
+        src="../../../../../../assets/svgs/heart-regular.svg"
+        alt="Add to favorites"
+      />
+      <img
+        *ngIf="isFavorite"
+        src="../../../../../../assets/svgs/heart-solid.svg"
+        alt="Remove from favorites"
+      />
+    </div>
+  </div>
+  <div class="title-card">
+    <h1>{{ mentor.firstname }} {{ mentor.lastname }}</h1>
+    <p>{{ mentor.title }}</p>
+  </div>
+  <div class="chip-container">
+    <ng-container *ngIf="skillList$ | async as skillList">
+      <div *ngFor="let skill of skillList.slice(0, 5)" class="skill-list">
+        {{ skill.name }}
+      </div>
+    </ng-container>
+  </div>
+  <!-- <div class="social-container">
+    <div class="img-linkedin">
+      <a [href]="mentor.linkedinUrl" target="_blank"
+        ><img src="../../../../../../assets/linkedin.png" alt=""
+      /></a>
+    </div>
+    <div class="img-github">
+      <a [href]="mentor.githubUrl" target="_blank"
+        ><img src="../../../../../../assets/github.png" alt=""
+      /></a>
+    </div>
+  </div> -->
+  <div class="booking">
+    <app-button
+      [text]="'Réserver'"
+      variant="black"
+      (click)="navigateToAgenda($event)"
+    ></app-button>
+  </div>
+</div>

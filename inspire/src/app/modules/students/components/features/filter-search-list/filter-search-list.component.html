@@ -1,0 +1,50 @@
+<div class="filter-container">
+  <div class="top-part">
+    <h1>Rechercher un mentor</h1>
+    <div class="btn-reset">
+      <button type="button" (click)="resetFilters()">Réinitialiser</button>
+    </div>
+  </div>
+  <div class="bottom-part">
+    <div class="filter">
+      <p-multiSelect
+        [options]="skills"
+        [(ngModel)]="selectedSkill"
+        placeholder="Compétences"
+        optionLabel="name"
+        display="chip"
+        [showClear]="true"
+        class="custom-multiselect"
+        (onChange)="applyFilters()"
+      />
+    </div>
+    <div class="filter">
+      <p-multiSelect
+        [options]="disponibily"
+        [(ngModel)]="selectedDisponibily"
+        placeholder="Disponibilités"
+        optionLabel="name"
+        display="chip"
+        [showClear]="true"
+        class="custom-multiselect"
+        (onChange)="applyFilters()"
+      />
+    </div>
+    <div class="filter">
+      <p-multiSelect
+        [options]="level"
+        [(ngModel)]="selectedLevel"
+        placeholder="Niveau d'expérience"
+        optionLabel="name"
+        display="chip"
+        [showClear]="true"
+        class="custom-multiselect"
+        [styleClass]="'custom-multiselect'"
+        (onChange)="applyFilters()"
+      />
+    </div>
+    <div class="filter-button">
+      <button (click)="applyFilters()">Filtrer</button>
+    </div>
+  </div>
+</div>

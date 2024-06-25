@@ -1,0 +1,49 @@
+@import "../../../../../../../../variables.scss";
+.container-card {
+  border: solid 1px black;
+  border-radius: 10px;
+  padding: 35px 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: 400px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.container-card:hover {
+  transform: translateY(-3px);
+  border: solid 1px #fb9d01;
+}
+.container-img {
+  width: 200px;
+}
+.container-card h2 {
+  margin-top: 20px;
+  font-size: 22px;
+}
+.container-card p {
+  margin-top: 10px;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 18px;
+}
+@media screen and (max-width: $small) {
+  .container-card {
+    flex-direction: row;
+    padding: 20px 25px;
+    align-items: center;
+  }
+  .info-card {
+    text-align: start;
+    padding-left: 30px;
+  }
+}
+
+@media screen and (min-width: $small) and (max-width: $large) {
+  .container-card {
+    flex-direction: row;
+    padding: 20px 25px;
+    align-items: center;
+  }
+}

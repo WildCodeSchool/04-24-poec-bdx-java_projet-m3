@@ -1,0 +1,103 @@
+.container-card {
+  width: 300px;
+  background: rgba(255, 255, 255, 0.53);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.8px);
+  -webkit-backdrop-filter: blur(8.8px);
+  border-radius: 15px;
+  min-height: 400px;
+  cursor: pointer;
+  position: relative;
+
+  .img-card {
+    position: relative;
+    height: 170px;
+    border-radius: 15px 15px 0 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 30% 30%;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .img-favorite {
+      width: 35px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 5px;
+      padding: 3px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .img-favorite:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  .img-card h1 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    font-size: 1.6em;
+    color: white;
+    padding: 5px 15px;
+    background-color: rgba(0, 0, 0, 0.184);
+    width: 100%;
+    text-align: center;
+  }
+
+  .title-card {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-weight: 500;
+    font-size: 15px;
+  }
+
+  .title-card h1 {
+    font-size: 18px;
+  }
+
+  .chip-container {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+
+    .skill-list {
+      background-color: #ffdbe3;
+      padding: 2px 15px;
+      border-radius: 5px;
+      color: #f7156b;
+    }
+  }
+  .social-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    padding-top: 10px;
+    padding-left: 20px;
+    gap: 10px;
+
+    .img-linkedin img {
+      height: 30px;
+    }
+
+    .img-github img {
+      height: 30px;
+    }
+  }
+}
+
+.booking {
+  width: 80%;
+  position: absolute; 
+  bottom: 15px; 
+  left: 50%;
+  transform: translateX(-50%);
+}

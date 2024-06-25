@@ -1,0 +1,47 @@
+@import "../../../../../variables.scss";
+
+.profil-mentor {
+  display: flex;
+
+  .main {
+    width: 65%;
+    padding-right: 20px;
+  }
+  .side-left {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: $medium) {
+  .profil-mentor {
+    flex-direction: column;
+    .main {
+      width: 100%;
+      padding: 0;
+      flex-direction: column;
+    }
+    .side-left {
+      width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: $extra-large) {
+  .profil-mentor {
+    flex-direction: column;
+    gap: 20px;
+    .main {
+      width: 100%;
+      padding: 0;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .side-left {
+      width: 100%;
+    }
+  }
+}
+
+.action {
+  margin-top: 20px;
+}
