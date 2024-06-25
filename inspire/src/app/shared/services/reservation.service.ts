@@ -94,6 +94,12 @@ export class ReservationService {
     );
   }
 
+  deleteReservationOnly(id: number): Observable<any> {
+    return this.httpClient.delete(
+      `${environment.BASE_URL_API}reservation/delete/mentor/reservation/${id}`
+    );
+  }
+
   updateSlot(id: number, slotInfo: any): Observable<any> {
     const updatedSlotInfo = {
       id: id,
@@ -222,7 +228,7 @@ export class ReservationService {
     return this.httpClient
       .delete<{ reservations: reservationForMentorDTO[]; total: number }>(
         //environment.BASE_URL + `/reservation/reservations/${id}/${userId}`
-        `http://localhost:8080/reservation/delete/mentor/${reservationId}`
+        `http://localhost:8080/reservation/delete/mentor/reservation/${reservationId}`
       )
       .pipe(
         switchMap(() => {
