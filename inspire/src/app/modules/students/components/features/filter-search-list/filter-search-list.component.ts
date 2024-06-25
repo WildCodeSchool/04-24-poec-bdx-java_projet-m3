@@ -3,7 +3,6 @@ import { Skill } from '../../../../../shared/models/chip';
 import { MentorDTO } from '../../../../../shared/models/user';
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { UserService } from '../../../../../user.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FilterService } from '../../../shared/filter.service';
 import { Observable, Subject, forkJoin, takeUntil } from 'rxjs';
 
@@ -26,8 +25,6 @@ export class FilterSearchListComponent {
 
   constructor(
     private _mentorService: MentorService,
-    private _userService: UserService,
-    private _destroyRef: DestroyRef,
     private _filterService: FilterService
   ) {
     this.disponibily = [
@@ -43,8 +40,6 @@ export class FilterSearchListComponent {
       { name: 'Plus de 5 ans' },
     ];
   }
-
-  // log
 
   skillList$?: Observable<Skill[]>;
 
@@ -62,122 +57,6 @@ export class FilterSearchListComponent {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
-
-  /* filterMentorsBySkills() {
-    if (this.selectedSkill && this.selectedSkill.length > 0) {
-      const skillNames = this.selectedSkill.map(skill => skill.name);
-      this._mentorService
-        .getMentorsBySkills(skillNames)
-        .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe((filteredMentors) => {
-          this.filteredMentors.emit(filteredMentors);
-        });
-    } else {
-      this._mentorService
-        .getMentorsList()
-        .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe((mentorList) => {
-          this.filteredMentors.emit(mentorList);
-        });
-    }
-  }
-
-  filterMentorsByExperienceYears(minYears: number, maxYears: number) {
-    this._mentorService
-      .getMentorsByExperienceYears(minYears, maxYears)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((mentors) => {
-        this.filteredMentors.emit(mentors);
-      });
-  }
-
-  onExperienceLevelChange() {
-    if (this.selectedLevel && this.selectedLevel.length > 0) {
-      const selected = this.selectedLevel[0].name;
-      let minYears = 0;
-      let maxYears = 0;
-
-      switch (selected) {
-        case "Moins d'un an":
-          minYears = 0;
-          maxYears = 1;
-          break;
-        case 'Entre 1 et 2 ans':
-          minYears = 1;
-          maxYears = 2;
-          break;
-        case 'Entre 2 et 5 ans':
-          minYears = 2;
-          maxYears = 5;
-          break;
-        case 'Plus de 5 ans':
-          minYears = 5;
-          maxYears = Number.MAX_VALUE;
-          break;
-        default:
-          break;
-      }
-
-      this.filterMentorsByExperienceYears(minYears, maxYears);
-    } else {
-      this._mentorService
-        .getMentorsList()
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((mentorList) => {
-          this.filteredMentors.emit(mentorList);
-        });
-    }
-  }
-
-  filterMentorsByAvailability() {
-    if (this.selectedDisponibily && this.selectedDisponibily.length > 0) {
-      const selected = this.selectedDisponibily[0].name;
-      let period = '';
-
-      switch (selected) {
-        case "Aujourd'hui":
-          period = 'day';
-          break;
-        case 'Dans la semaine':
-          period = 'week';
-          break;
-        case 'Peu importe':
-          period = 'any';
-          break;
-        default:
-          break;
-      }
-
-      this._mentorService
-        .getMentorsByAvailability(period)
-        .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe((filteredMentors) => {
-          this.filteredMentors.emit(filteredMentors);
-        });
-    } else {
-      this._mentorService
-        .getMentorsList()
-        .pipe(takeUntilDestroyed(this._destroyRef))
-        .subscribe((mentorList) => {
-          this.filteredMentors.emit(mentorList);
-        });
-    }
-  } 
-
-  resetFilters() {
-    this.selectedSkill = [];
-    this.selectedDisponibily = [];
-    this.selectedLevel = [];
-
-    this._mentorService
-      .getMentorsList()
-      .pipe(takeUntilDestroyed(this._destroyRef))
-      .subscribe((mentorList) => {
-        this.filteredMentors.emit(mentorList);
-      });
-  }
-
-  */
 
   applyFilters() {
     const skillNames = this.selectedSkill.map((skill) => skill.name);
