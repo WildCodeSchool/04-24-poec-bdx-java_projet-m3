@@ -99,11 +99,13 @@
     </div>
   </div>
   <div class="modal-note" *ngIf="!isHistory">
-    <img src="assets/svgs/telecom.svg" alt="" class="image" />
+    <div class="container-img">
+      <img src="assets/svgs/telecom.svg" alt="" class="image" />
+    </div>
 
     <div class="info-resa">
       <h2>
-        Réservation prévue avec
+        Réservation prévueee avec
         <span>{{ reservation.firstname | titlecase }}</span>
       </h2>
       <h4>Résumé de votre créneau :</h4>
@@ -156,7 +158,9 @@
         <p [innerHTML]="reservation.details"></p>
       </div>
     </div>
-    <h3 class="delete-resa">Annulez cette réservation?</h3>
+    <div class="container-text">
+      <h3 class="delete-resa">Annulez cette réservation?</h3>
+    </div>
 
     <div class="control">
       <app-button
