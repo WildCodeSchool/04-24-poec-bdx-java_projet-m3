@@ -147,6 +147,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: 400;
+    color: black;
   }
 
   .info-resa {
@@ -160,17 +161,20 @@
   .info-resa h3 {
     font-size: 14px;
     font-weight: 400;
+    color: black;
   }
   .info-resa h4 {
     font-size: 15px;
     font-weight: 600;
     margin-bottom: 10px;
     margin-top: 15px;
+    color: black;
   }
 
   .control {
     margin: 10px 0;
     display: flex;
+    justify-content: center;
     gap: 10px;
     margin-bottom: 20px;
   }
@@ -264,6 +268,7 @@
 
 .info-resa h2 {
   margin-bottom: 20px;
+  color: black;
 }
 .img-pop {
   display: flex;
@@ -275,4 +280,24 @@
   display: flex;
   justify-content: center;
   gap: 10px;
+}
+
+.container-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.container-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-session h4 span {
+  font-weight: 600;
+  color: #f8156b;
 }
