@@ -25,9 +25,10 @@ export class NotifcationDropdownComponent {
             icon: ele.message.includes('Annulation')
               ? 'pi pi-times'
               : 'pi pi-plus',
-              class: ele.message.includes('Annulation')
+            class: ele.message.includes('Annulation')
               ? 'annulation'
-              : ''
+              : 'reservation',
+            route: '/mentor',
           };
         });
         this.items = [
