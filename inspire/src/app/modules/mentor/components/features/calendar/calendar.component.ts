@@ -438,6 +438,7 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    this.mentorId = this.mentorService.activeMentorProfil$.value.id;
     if (this.mentorSubscription) {
       this.mentorSubscription.unsubscribe();
     }
