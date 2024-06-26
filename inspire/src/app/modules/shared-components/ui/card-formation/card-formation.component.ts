@@ -27,6 +27,7 @@ export class CardFormationComponent {
 
   hideEditForm() {
     this.isVisibleFormEditCourse = false;
+    console.log('hideEditForm');
   }
 
   showPopUpDelete() {
