@@ -34,7 +34,7 @@ export class LayoutMentor implements OnInit {
 
   listLink: DashboardLink[] = [
     {
-      title: 'dashboard',
+      title: 'Mes réservations',
       logoUrl: 'assets/svgs/tdb.svg',
       logoUrlActive: 'assets/svgs/dash-blanc.svg',
       path: 'mentor',
