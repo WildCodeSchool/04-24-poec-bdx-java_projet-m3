@@ -1,9 +1,14 @@
 .container-card {
   width: 300px;
-  background-color: white;
+  background: rgba(255, 255, 255, 0.53);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.8px);
+  -webkit-backdrop-filter: blur(8.8px);
   border-radius: 15px;
   min-height: 400px;
   cursor: pointer;
+  position: relative;
 
   .img-card {
     position: relative;
@@ -26,6 +31,11 @@
       margin: 5px;
       padding: 3px;
       cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .img-favorite:hover {
+      transform: scale(1.1);
     }
   }
 
@@ -46,6 +56,11 @@
     margin-top: 10px;
     padding: 5px 10px;
     font-weight: 500;
+    font-size: 15px;
+  }
+
+  .title-card h1 {
+    font-size: 18px;
   }
 
   .chip-container {
@@ -77,4 +92,12 @@
       height: 30px;
     }
   }
+}
+
+.booking {
+  width: 80%;
+  position: absolute; 
+  bottom: 15px; 
+  left: 50%;
+  transform: translateX(-50%);
 }

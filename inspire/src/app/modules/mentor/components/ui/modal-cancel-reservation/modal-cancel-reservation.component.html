@@ -1,18 +1,60 @@
 <div class="modal-note" *ngIf="!isHistory">
-  <img src="assets/svgs/telecom.svg" alt="" class="image" />
-  <h3>Réservation prévue avec {{ reservation.firstname | titlecase }}</h3>
-  <h4>Le {{ reservation.dateTime | date : "short" }}</h4>
-  <h3>Annulez cette réservation?</h3>
+  <div class="img-container">
+    <img src="assets/svgs/telecom.svg" alt="" class="image" />
+  </div>
+
+  <h2>
+    Réservation prévue avec
+    <span>{{ reservation.firstname | titlecase }}</span>
+  </h2>
+  <h4>Résumé de votre créneau :</h4>
+
+  <div class="pop-up-date">
+    <div>
+      <img
+        class="img-fluid forgot-img"
+        src="/assets/svgs/date-slot.svg"
+        alt=""
+      />
+    </div>
+
+    <h3>
+      Date :
+      <span>{{
+        reservation.dateBegin | date : "dd MMMM yyyy" : "" : "fr"
+      }}</span>
+    </h3>
+  </div>
+  <div class="pop-up-date">
+    <img class="img-fluid forgot-img" src="/assets/svgs/duration.svg" alt="" />
+
+    <h3>
+      Heure de début :
+      <span>{{ reservation.dateBegin | date : "HH:mm" : "" : "fr" }}</span>
+    </h3>
+  </div>
+
+  <div class="info-session">
+    <h4>
+      Plus d'information sur la session :
+      <span>{{ reservation.subject }}</span>
+    </h4>
+    <p [innerHTML]="reservation.details"></p>
+  </div>
+  <div class="delete-resa">
+    <h3>Vous souhaitez annuler cette réservation?</h3>
+  </div>
 
   <div class="control">
     <app-button
-      [text]="'Annuler'"
-      [variant]="'pink'"
+      [text]="'Retour'"
+      [variant]="'black'"
       (onSubmit)="onCancel.emit()"
     ></app-button>
     <app-button
-      [text]="'Valider'"
+      [text]="'Annuler la réservation'"
       (onSubmit)="deleteReservation()"
+      [variant]="'pink'"
     ></app-button>
   </div>
 </div>

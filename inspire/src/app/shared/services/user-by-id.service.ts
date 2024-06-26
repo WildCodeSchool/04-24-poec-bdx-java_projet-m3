@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment.development';
 import { Language } from '../models/language';
 import { Formation } from '../models/formation';
 import { Skill } from '../models/chip';
-import { Mentor, Student } from '../models/user';
+import { Mentor, Student, StudentDTO } from '../models/user';
 import { MentorService } from './mentor.service';
 
 @Injectable({
@@ -16,14 +16,12 @@ export class UserByIdService {
   http = inject(HttpClient);
 
   getMentorProfilById(userId: number) {
-    return this.http.get<Mentor>(
-      environment.BASE_URL_API + 'mentor/' + userId
-    );
+    return this.http.get<Mentor>(environment.BASE_URL_API + 'mentor/' + userId);
   }
 
   getStudentProfilById(userId: number) {
-    return this.http.get<Student>(
-      environment.BASE_URL + '/student/students/' + userId
+    return this.http.get<StudentDTO>(
+      environment.BASE_URL_API + 'student/' + userId
     );
   }
 
@@ -36,13 +34,15 @@ export class UserByIdService {
 
   getUserLanguagesById(userId: number) {
     return this.http.get<Language[]>(
-      environment.BASE_URL + '/language/languages/user/' + userId
+      'http://localhost:8080/language/user/' + userId
+      // environment.BASE_URL + '/language/languages/user/' + userId
     );
   }
 
   getUserFormationsById(userId: number) {
     return this.http.get<Formation[]>(
-      environment.BASE_URL + '/formation/formations/user/' + userId
+      'http://localhost:8080/formation/user/' + userId
+      // environment.BASE_URL + '/formation/formations/user/' + userId
     );
   }
 

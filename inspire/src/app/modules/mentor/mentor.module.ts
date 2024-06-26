@@ -26,6 +26,10 @@ import { ModalCancelReservationComponent } from './components/ui/modal-cancel-re
 import { PaginatorModule } from 'primeng/paginator';
 import { CalendarModule } from 'primeng/calendar';
 import { StudentProfilByMentorComponent } from './pages/student-profil-by-mentor/student-profil-by-mentor.component';
+import { ToastModule } from 'primeng/toast';
+import { NotifcationDropdownComponent } from './components/ui/notifcation-dropdown/notifcation-dropdown.component';
+import { ButtonModule } from 'primeng/button';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,7 @@ import { StudentProfilByMentorComponent } from './pages/student-profil-by-mentor
     ModalAddNoteComponent,
     ModalCancelReservationComponent,
     StudentProfilByMentorComponent,
+    NotifcationDropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -58,6 +63,9 @@ import { StudentProfilByMentorComponent } from './pages/student-profil-by-mentor
     PaginatorModule,
     CalendarModule,
     SidebarModule,
+    ToastModule,
+    ButtonModule,
+    MenuModule,
   ],
   exports: [
     RowReservationComponent,

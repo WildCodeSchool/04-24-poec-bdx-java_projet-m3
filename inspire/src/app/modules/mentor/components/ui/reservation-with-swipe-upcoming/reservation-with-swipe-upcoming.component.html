@@ -8,8 +8,11 @@
     </button>
   </div>
   <div class="row-reservation" [ngClass]="bgColor" #thisRef>
-    <div class="avatar-name">
-      <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" [routerLink]="['/mentor/student-details/', reservation.userId]"/>
+    <div
+      class="avatar-name"
+      [routerLink]="['/mentor/student-details/', reservation.userId]"
+    >
+      <img [src]="reservation.imgUrl" alt="avatar" width="35" height="35" />
       <p>{{ reservation.firstname }}</p>
     </div>
     <div class="promotion">
@@ -19,15 +22,15 @@
       {{ reservation.subject || "sans sujet" | titlecase }}
     </div>
     <div class="date">
-      <div>{{ reservation.dateTime | date : "dd/MM/yyyy" }}</div>
-      <div>{{ reservation.dateTime | date : "shortTime" }}</div>
+      <div>{{ reservation.dateBegin | date : "dd/MM/yyyy" }}</div>
+      <div>{{ reservation.dateBegin | date : "shortTime" }}</div>
     </div>
 
     <div class="action" *ngIf="!isHistory">
-      <button (click)="delete()">Annuler</button>
+      <button (click)="delete()">Voir plus</button>
     </div>
     <div class="action" *ngIf="isHistory">
-      <button (click)="showModalNote()">Plus</button>
+      <button (click)="showModalNote()">Commentaire</button>
     </div>
   </div>
 </div>
@@ -37,10 +40,6 @@
   header=""
   [(visible)]="modalCancelReservation"
   [modal]="true"
-  [style]="{
-    width: 'clamp(350px,40vw, 100%)',
-    height: 'clamp(350px,60vh, 100%)'
-  }"
   [draggable]="false"
   [resizable]="false"
 >
@@ -65,5 +64,6 @@
     [reservation]="reservation"
     (onCancel)="modalEditMessage = false"
     (onSubmit)="updateReservation($event)"
+    (onExit)="hideEditNote()"
   ></app-modal-add-note
 ></p-sidebar>

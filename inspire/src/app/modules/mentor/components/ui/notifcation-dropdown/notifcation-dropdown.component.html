@@ -1,0 +1,21 @@
+<div class="notif-card flex justify-content-center">
+  <p-menu #menu [model]="items" [popup]="true">
+    <ng-template let-item pTemplate="item">
+      <a [routerLink]="item.route" class="p-menuitem-link">
+        <span [class]="item.icon"></span>
+        <span [class]="'ml-2 notif ' + item.class">{{ item.label }}</span>
+      </a>
+    </ng-template>
+  </p-menu>
+  <!-- <p-button (click)="menu.toggle($event)" icon="pi pi-ellipsis-v" /> -->
+  <div class="icon-wrapper" (click)="menu.toggle($event); resetNotification()">
+    <img
+      class="img-fluid"
+      src="/assets/svgs/bell.svg"
+      alt="notifications"
+      width="25"
+      height="25"
+    />
+    <span class="badge" *ngIf="total">{{ total }}</span>
+  </div>
+</div>

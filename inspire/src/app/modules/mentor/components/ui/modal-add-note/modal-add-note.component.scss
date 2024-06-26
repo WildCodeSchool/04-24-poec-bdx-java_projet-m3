@@ -1,3 +1,4 @@
+@import "variables.scss";
 .modal-note {
   display: flex;
   flex-direction: column;
@@ -30,6 +31,33 @@
   }
   .card {
     width: 100%;
+    border: solid 1px black;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+
+    .communication {
+      display: flex;
+      flex-direction: column;
+      .message {
+        width: 80%;
+        background-color: #fde9ee;
+        color: black;
+        border-radius: 10px;
+        padding: 10px 10px;
+      }
+      .response {
+        width: 80%;
+        background-color: #fff3e8;
+        border-radius: 10px;
+        padding: 10px 10px;
+        color: black;
+
+        justify-self: end;
+        align-self: end;
+        margin-bottom: 20px;
+      }
+    }
   }
 
   .control {
@@ -45,10 +73,12 @@
 .mentorat-header h1 {
   font-size: 24px;
   margin-top: 30px;
+  color: black;
 }
 .mentorat-header h3 {
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
+  color: black;
 }
 
 .content-resume {
@@ -67,12 +97,14 @@
 }
 
 .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100px;
   height: 100px;
   overflow: hidden;
   border-radius: 50%;
 }
-
 .rounded-square {
   width: 100%;
   height: auto;
@@ -95,4 +127,19 @@
 .mentorat-header span {
   color: #f8156b;
   font-style: italic;
+}
+
+.exit {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+span {
+  color: $primary-color;
+  font-weight: 600;
+}
+
+h4 {
+  color: black;
 }

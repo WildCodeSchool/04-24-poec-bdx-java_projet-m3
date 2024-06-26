@@ -29,7 +29,7 @@ export class ReservationWithSwipeComponent implements AfterViewInit, OnInit {
   destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.endAt = new Date(this.reservation.dateTime);
+    this.endAt = new Date(this.reservation.dateBegin);
     this.endAt.setTime(this.endAt.getTime() + 3600000);
   }
 

@@ -4,7 +4,7 @@ import { ReservationForStudentDTO } from '../../../../../shared/models/reservati
 @Component({
   selector: 'app-list-student-reservation',
   templateUrl: './list-student-reservation.component.html',
-  styleUrl: './list-student-reservation.component.scss'
+  styleUrl: './list-student-reservation.component.scss',
 })
 export class ListStudentReservationComponent {
   @Input() reservations!: ReservationForStudentDTO[];

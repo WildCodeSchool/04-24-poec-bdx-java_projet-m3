@@ -22,5 +22,10 @@ h3 {
     align-items: center;
     border: none;
     background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  .edit-button:hover {
+    transform: scale(1.1);
   }
 }

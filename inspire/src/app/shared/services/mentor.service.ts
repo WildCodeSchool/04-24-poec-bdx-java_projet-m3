@@ -72,14 +72,35 @@ export class MentorService {
   }
 
   getMentorsBySkills(skills: string[]): Observable<MentorDTO[]> {
-    const params = { skills: skills.join(',') }
-    return this.httpClient.get<MentorDTO[]>(`${environment.BASE_URL_API}mentor/by-skills`, { params });
+    const params = { skills: skills.join(',') };
+    return this.httpClient.get<MentorDTO[]>(
+      `${environment.BASE_URL_API}mentor/by-skills`,
+      { params }
+    );
   }
 
-  getMentorsByExperienceYears(minYears: number, maxYears: number): Observable<MentorDTO[]> {
+  getMentorsByExperienceYears(
+    minYears: number,
+    maxYears: number
+  ): Observable<MentorDTO[]> {
     return this.httpClient.get<MentorDTO[]>(
       `${environment.BASE_URL_API}mentor/by-experience?minYears=${minYears}&maxYears=${maxYears}`
     );
+  }
+
+  getMentorsByAvailability(period: string): Observable<MentorDTO[]> {
+    const params = { period };
+    return this.httpClient.get<MentorDTO[]>(`${environment.BASE_URL_API}mentor/available`, { params });
+  }
+
+  getMentorsByMultipleFilters(skillNames: string[], minYears: number, maxYears: number, period: string): Observable<MentorDTO[]> {
+    const filters = {
+      skills: skillNames,
+      minYears,
+      maxYears,
+      period
+    };
+    return this.httpClient.post<MentorDTO[]>(`${environment.BASE_URL_API}/filter`, filters);
   }
 
   getMentorListPagination(perPage: number, offset: number) {
@@ -108,15 +129,18 @@ export class MentorService {
       const formData = new FormData();
 
       formData.append('file', file);
-
+      const headers = new HttpHeaders();
       return this.httpClient
         .post<MentorDTO>(
           //  environment.BASE_URL +
           //'/mentor/mentors/image/' +
-          'http://localhost:8080/user/upload/image/' +
+          'http://localhost:8080/user/upload/image/mentor/' +
             this.userConnected.value.id,
           // this.userConnected.value.id,
-          formData
+          formData,
+          {
+            headers: headers,
+          }
         )
         .pipe(tap((res) => this.activeMentorProfil$.next(res)));
     } else return of();

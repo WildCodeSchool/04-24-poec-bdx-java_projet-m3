@@ -10,6 +10,7 @@
     font-size: 20px;
     line-height: 20px;
     text-align: center;
+    color: black;
   }
 
   .control {
@@ -30,21 +31,23 @@
 }
 
 @media screen and (max-width: $small) {
-  .modal {
-    .control {
-      flex-direction: column;
-    }
-  }
+  // .modal {
+  //   // .control {
+  //   //   // flex-direction: column;
+  //   // }
+  // }
 }
 
 .pink {
   background-color: $primary-color;
   color: white;
+  cursor: pointer;
 }
 
 .black {
   background-color: black;
   color: azure;
+  cursor: pointer;
 }
 .btn-general {
   width: 100%;
@@ -54,7 +57,9 @@
   border-radius: 6px;
   border: none;
   transition: transform 0.4s ease;
+  cursor: pointer;
 }
 .btn-general:hover {
   transform: scale(0.95);
+  cursor: pointer;
 }

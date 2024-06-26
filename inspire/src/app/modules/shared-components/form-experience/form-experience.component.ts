@@ -10,7 +10,7 @@ export class FormExperienceComponent {
   experienceForm = this.fb.group({
     title: [''],
     company: [''],
-    dateBeggin: [''],
+    dateBegin: [''],
     dateEnd: [''],
     description: [''],
   });

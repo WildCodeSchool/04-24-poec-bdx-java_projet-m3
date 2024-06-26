@@ -9,6 +9,7 @@
     font-size: 20px;
     line-height: 20px;
     text-align: center;
+    color: black;
   }
 
   .control {
@@ -24,6 +25,7 @@
   .content p {
     font-size: 12px;
     font-weight: 400;
+    color: black;
   }
 }
 
@@ -50,11 +52,13 @@
 .pop-up-date h3 {
   font-size: 14px;
   font-weight: 400;
+  color: black;
 }
 
 .pop-up-date p {
   font-size: 12px;
   font-weight: 400;
+  color: black;
 }
 
 .content-resume {
@@ -63,6 +67,7 @@
   flex-direction: column;
   gap: 5px;
   text-align: left;
+  color: black;
 }
 .content-resume h2 {
   font-size: 14px;
@@ -88,6 +93,14 @@
   font-weight: 600;
 }
 
+.calendar-background {
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.53);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(8.8px);
+  -webkit-backdrop-filter: blur(8.8px);
+}
 @media screen and (max-width: $small) {
   .modal {
     .control {
@@ -99,16 +112,19 @@
 .pink {
   background-color: $primary-color;
   color: white;
+  cursor: pointer;
 }
 
 .modify {
   background-color: #fcbe77;
   color: white;
+  cursor: pointer;
 }
 
 .black {
   background-color: black;
   color: azure;
+  cursor: pointer;
 }
 .btn-general {
   width: 100%;
@@ -118,6 +134,7 @@
   border-radius: 6px;
   border: none;
   transition: transform 0.4s ease;
+  cursor: pointer;
 }
 .btn-general:hover {
   transform: scale(0.95);

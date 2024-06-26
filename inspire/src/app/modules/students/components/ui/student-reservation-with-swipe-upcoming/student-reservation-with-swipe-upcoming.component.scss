@@ -9,13 +9,17 @@
   grid-template-columns: 2fr 2fr 2fr 1fr 1fr;
 
   .avatar-name {
-    margin-left: 10px;
+    margin-left: 15px;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
     img {
       border-radius: 50%;
+      object-fit: cover;
     }
+  }
+  .avatar-name:hover {
+    cursor: pointer;
   }
   .promotion,
   .sujet,
@@ -30,17 +34,22 @@
     align-items: start;
   }
   .action button {
-    background-color: rgba(112, 102, 102, 0.1);
-    color: black;
+    background-color: #f8156b;
+    color: white;
     padding: 10px 18px;
     border: none;
     border-radius: 6px;
     margin: 5px 5px;
     min-width: 90px;
-
+    cursor: pointer;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  .action button:hover {
+    transform: scale(1.05);
+    cursor: pointer;
   }
 }
 
@@ -114,14 +123,194 @@
 
 .modal-note {
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  width: 600px;
+
   align-items: center;
+  padding: 20px;
+
+  h2 {
+    color: black;
+  }
+
+  h2 span {
+    color: $primary-color;
+    font-style: italic;
+  }
+
+  img {
+    width: 200px;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .modal-note h4 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 400;
+    color: black;
+  }
+
+  .info-resa {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 100%;
+    margin: 20px 0;
+  }
+
+  .info-resa h3 {
+    font-size: 14px;
+    font-weight: 400;
+    color: black;
+  }
+  .info-resa h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    margin-top: 15px;
+    color: black;
+  }
 
   .control {
     margin: 10px 0;
     display: flex;
+    justify-content: center;
     gap: 10px;
+    margin-bottom: 20px;
   }
+  .pop-up-date {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .pop-up-date img {
+    width: 15px;
+    margin-right: 5px;
+  }
+
+  .pop-up-date h3 span {
+    font-weight: 600;
+    color: $primary-color;
+  }
+
+  .pop-up-date h4 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-top: 10px;
+  }
+
+  .subject {
+    width: 80%;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: column;
+    background-color: $anti-primary-color;
+    h4 {
+      margin-bottom: 5px;
+    }
+    p.response {
+      align-self: flex-end;
+    }
+  }
+}
+.info-session {
+  margin-top: 10px;
+}
+
+.info-session p {
+  border: 1px solid black;
+  border-radius: 8px;
+  height: 100px;
+  padding: 5px;
+}
+
+// .info-session span {
+//   font-weight: 500;
+//   color: #f8156b;
+// }
+
+.delete-resa {
+  color: black;
+}
+
+.subject-info {
+  border: solid 1px black;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  p {
+    width: 80%;
+    background-color: $anti-primary-color;
+    border-radius: 5px;
+    padding: 5px 10px;
+  }
+  p.response {
+    align-self: flex-end;
+    background-color: $background-light-list;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.info h4 {
+  font-weight: 600;
+}
+
+.info span {
+  font-weight: 600;
+  color: #f8156b;
+}
+
+.subject-info {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.subject-info h4 {
+  color: black;
+}
+
+.info-resa h2 {
+  margin-bottom: 20px;
+  color: black;
+}
+.img-pop {
+  display: flex;
+  justify-content: center;
+}
+.control-pop {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.container-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.container-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.info-session h4 span {
+  font-weight: 600;
+  color: #f8156b;
 }

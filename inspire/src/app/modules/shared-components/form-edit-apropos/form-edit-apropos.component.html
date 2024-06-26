@@ -25,7 +25,7 @@
         id="firstname"
         name="firstname"
         formControlName="firstname"
-        placeholder="Github :"
+        placeholder="Prénom"
       />
       <div class="error" *ngIf="aproposForm.get('firstname')?.errors">
         <span *ngIf="aproposForm.get('firstname')?.errors?.['required']">
@@ -40,7 +40,7 @@
         id="lastname"
         name="lastname"
         formControlName="lastname"
-        placeholder="Linkedin :"
+        placeholder="Nom"
       />
       <div class="error" *ngIf="aproposForm.get('lastname')?.errors">
         <span *ngIf="aproposForm.get('lastname')?.errors?.['required']">
@@ -58,7 +58,7 @@
         id="github"
         name="github"
         formControlName="githubUrl"
-        placeholder="Github :"
+        placeholder="Lien vers votre profil GitHub :"
       />
     </div>
     <div class="container-input">
@@ -68,7 +68,7 @@
         id="linkedin"
         name="linkedin"
         formControlName="linkedinUrl"
-        placeholder="Linkedin :"
+        placeholder="Lien vers votre profil Linkedin :"
       />
     </div>
   </div>
@@ -82,6 +82,7 @@
         name="description"
         formControlName="description"
         placeholder="Votre description"
+        rows="6"
       ></textarea>
     </div>
   </div>
@@ -107,9 +108,9 @@
       [formControlName]="'selectedSkill'"
       (onChange)="setSkills($event.value)"
       optionLabel="name"
-      [showClear]="true"
       [virtualScroll]="true"
       [virtualScrollItemSize]="43"
+      selectedItemsLabel="{0} skills sélectionnées"
     />
   </div>
 
@@ -117,7 +118,7 @@
     <app-button variant="black" text="Annuler" (click)="cancel()"></app-button>
     <app-button
       variant="pink"
-      text="Enregistrer"
+      text="Mettre à jour"
       [type]="'submit'"
     ></app-button>
   </div>

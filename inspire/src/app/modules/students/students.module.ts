@@ -22,6 +22,9 @@ import { ListStudentReservationComponent } from './components/features/list-stud
 import { StudentReservationWithSwipeUpcomingComponent } from './components/ui/student-reservation-with-swipe-upcoming/student-reservation-with-swipe-upcoming.component';
 import { MentorReservationPageByStudentComponent } from './pages/mentor-reservation-page-by-student/mentor-reservation-page-by-student.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { PaginatorModule } from 'primeng/paginator';
+import { SidebarModule } from 'primeng/sidebar';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,10 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     MentorModule,
     FullCalendarModule,
     ReactiveFormsModule,
+    PaginatorModule,
+    SidebarModule,
+    FloatLabelModule,
+    FormsModule,
   ],
 })
 export class StudentsModule {}

@@ -16,6 +16,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 
 import '@angular/common/locales/global/fr';
 import { tokenInterceptor } from './token.interceptor';
+import { ToastModule } from 'primeng/toast';
+import { errorHandlerInterceptor } from './shared/resolvers/error-handler.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,10 +29,13 @@ import { tokenInterceptor } from './token.interceptor';
     MentorModule,
     FullCalendarModule,
     HttpClientModule,
+    ToastModule,
   ],
   providers: [
     provideAnimations(),
-    provideHttpClient(withInterceptors([tokenInterceptor])),
+    provideHttpClient(
+      withInterceptors([tokenInterceptor, errorHandlerInterceptor])
+    ),
     { provide: LOCALE_ID, useValue: 'fr' },
   ],
   bootstrap: [AppComponent],

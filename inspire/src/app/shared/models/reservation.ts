@@ -6,44 +6,58 @@ export type Slot = {
 
 export type SlotDTO = {
   id: number;
-  dateTime: Date;
   mentorId: number;
+  reservationId?: number;
+  dateBegin: Date;
+  dateEnd: Date;
   visio: boolean;
+  booked: boolean;
+  firstname: string;
+  lastname: string;
+  imgUrl: string;
+  subject: string;
 };
 
 export type Reservation = {
   subject: string;
   message?: string;
-  mentorId: string;
-  slotId: string;
+  studentId: number;
+  slotId: number;
+  details: string;
 };
 
 export type ReservationForStudentDTO = {
   id: number;
+  reservationId: number;
   mentorId: number;
   slotId: number;
   userId: number;
+  mentorUserId: number;
   message: string;
   subject: string;
-  dateTime: Date;
+  dateBegin: Date;
   visio: boolean;
   title: string;
   firstname: string;
   lastname: string;
   imgUrl: string;
+  details: string;
 };
 
 export type reservationForMentorDTO = {
   id: number;
+  reservationId: number;
   studentId: number;
   slotId: number;
   userId: number;
+  mentorUserId: number;
   message: string;
   subject: string;
-  dateTime: Date;
+  dateBegin: Date;
   visio: boolean;
   title: string;
   firstname: string;
   lastname: string;
   imgUrl: string;
+  details: string;
 };

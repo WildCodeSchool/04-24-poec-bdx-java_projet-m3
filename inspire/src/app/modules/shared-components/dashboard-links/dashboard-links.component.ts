@@ -1,13 +1,8 @@
 import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { fromEvent } from 'rxjs';
-type DashboardLink = {
-  title: string;
-  logoUrl: string;
-  logoUrlActive: string;
-  path: string;
-  active: boolean;
-};
+import { UserStoreService } from '../../../shared/services/stores/user-store.service';
+import { DashboardLink } from '../../../shared/models/dashboardLink';
 @Component({
   selector: 'app-dashboard-links',
   templateUrl: './dashboard-links.component.html',
@@ -15,44 +10,43 @@ type DashboardLink = {
 })
 export class DashboardLinksComponent implements OnInit {
   @Input() showText = true;
-  @Input() listLink: DashboardLink[] = [
-    {
-      title: 'dashboard',
-      logoUrl: 'assets/svgs/dash.svg',
-      logoUrlActive: 'assets/svgs/dash-white.svg',
-      path: 'mentor',
-      active: true,
-    },
-    {
-      title: 'mon profil',
-      logoUrl: 'assets/svgs/calendar.svg',
-      logoUrlActive: 'assets/svgs/calendar-white.svg',
-      path: 'mentor/profil',
-      active: false,
-    },
-    {
-      title: 'agenda',
-      logoUrl: 'assets/svgs/edit.svg',
-      logoUrlActive: 'assets/svgs/edit-white.svg',
-      path: 'mentor/agenda',
-      active: false,
-    },
-  ];
+  @Input() listLink: DashboardLink[] = [];
+
+  mentor: boolean =
+    inject(UserStoreService).getUserConnected$().value.role === 'MENTOR';
 
   router = inject(Router);
   destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     const fragments = this.router.url;
-    this.listLink.forEach((link, i) => {
-      link.active =
-        fragments.split('/').join('') === link.path.split('/').join('');
+    this.mentor
+      ? this.listLink.forEach((link, i) => {
+          link.active =
+            fragments.split('/').join('') === link.path.split('/').join('');
+        })
+      : this.listLink.forEach((link, i) => {
+          link.active =
+            fragments.split('/').join('') === link.path.split('/').join('');
+        });
+
+    this.router.events.subscribe((res) => {
+      if (res instanceof NavigationStart) {
+        console.log('Navigation', res);
+        this.listLink.forEach((link) => {
+          link.active = res.url === '/' + link.path;
+        });
+      }
     });
   }
 
   handleLinkChange(event: boolean, index: number) {
-    this.listLink.forEach((link, i) => {
-      index === i ? (link.active = event) : (link.active = !event);
-    });
+    this.mentor
+      ? this.listLink.forEach((link, i) => {
+          index === i ? (link.active = event) : (link.active = !event);
+        })
+      : this.listLink.forEach((link, i) => {
+          index === i ? (link.active = event) : (link.active = !event);
+        });
   }
 }

@@ -1,7 +1,7 @@
 @import "../../../../../variables.scss";
 .light {
-  background-color: white;
-  color: #4f4e4e;
+  background-color: transparent;
+  color: black;
 }
 .lightActive {
   background-color: $primary-color;
@@ -20,20 +20,22 @@
   filter: brightness(0) invert(1); /* Cette règle rendra l'image blanche */
 }
 .btn-general {
-  font-size: 16px;
-  font-weight: 400;
-  padding: 13px 10px 13px 10px;
+  font-size: 17px;
+  font-weight: 500;
+  padding: 11px 10px;
   border-radius: 20px;
   border: none;
-  transition: transform 0.4s ease;
+  transition: transform 0.4s ease, background-color 0.4s ease, color 0.4s ease; /* Ajout de la transition */
   cursor: pointer;
   display: flex;
   justify-content: start;
   align-items: center;
 }
+
 .btn-general:hover {
   background-color: $primary-color;
   color: white;
+  transform: scale(1.05); /* Optionnel : pour ajouter un léger agrandissement */
 }
 button {
   margin: 5px;

@@ -23,6 +23,9 @@
       cursor: pointer;
     }
   }
+  .avatar-name:hover {
+    cursor: pointer;
+  }
   .promotion,
   .sujet,
   .date,
@@ -36,17 +39,24 @@
     align-items: start;
   }
   .action button {
-    background-color: rgba(112, 102, 102, 0.1);
-    color: black;
+    background-color: #f8156b;
+    font-weight: 500;
+    color: white;
     padding: 10px 18px;
     border: none;
     border-radius: 6px;
     margin: 5px 5px;
     min-width: 90px;
-
+    cursor: pointer;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     align-items: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+
+  .action button:hover {
+    transform: scale(0.95);
+    cursor: pointer;
   }
 }
 
