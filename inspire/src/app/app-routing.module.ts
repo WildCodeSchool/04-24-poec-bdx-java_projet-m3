@@ -62,7 +62,11 @@ export const routes: Routes = [
       ),
   },
   { path: 'layout', component: LayoutMentor },
-  { path: '**', redirectTo: '' },
+  // {
+  //   path: '404',
+  //   component: ErrorComponent,
+  // },
+  // { path: '**', redirectTo: '/404' },
 ];
 
 @NgModule({

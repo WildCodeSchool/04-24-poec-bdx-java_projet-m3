@@ -106,5 +106,5 @@ import { RouterLink } from '@angular/router';
   providers: [MessageService],
 })
 export class SharedComponentsModule {
-  constructor(private messageService: MessageService) {}
+  constructor() {}
 }
