@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from './shared/models/user';
 import { Subscription } from 'rxjs';
-import { UserService } from './shared/services/user.service';
+import { LoginService } from './shared/services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -10,14 +10,14 @@ import { UserService } from './shared/services/user.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   userSubscription: Subscription | undefined;
-  userDansLeLocalStorage: User | null = null;
+  userDansLeLocalStorage!: User;
 
-  constructor(private userService: UserService) {}
+  constructor(private loginService: LoginService) {}
 
   ngOnInit(): void {
     const token = localStorage.getItem('token');
     if (token) {
-      this.userService.getUserByToken(token).subscribe();
+      this.loginService.getUserByToken(token).subscribe();
     }
   }
 

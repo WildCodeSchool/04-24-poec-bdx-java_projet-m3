@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../../../../../../shared/services/user.service';
+import { LoginService } from '../../../../../../../shared/services/login.service';
 
 @Component({
   selector: 'app-login-form',
@@ -14,10 +15,10 @@ export class LoginFormComponent {
   });
 
   modalVisible = false;
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(private fb: FormBuilder, private loginService: LoginService) {}
 
   onSubmit() {
     const { email, password } = this.loginForm.value;
-    this.userService.login(email || '', password || '').subscribe();
+    this.loginService.login(email || '', password || '').subscribe();
   }
 }

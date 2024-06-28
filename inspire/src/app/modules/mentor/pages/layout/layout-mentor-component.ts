@@ -8,6 +8,7 @@ import { MentorDTO, StudentDTO } from '../../../../shared/models/user';
 import { StudentService } from '../../../../shared/services/student.service';
 import { DashboardLink } from '../../../../shared/models/dashboardLink';
 import { UserService } from '../../../../shared/services/user.service';
+import { LoginService } from '../../../../shared/services/login.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -21,6 +22,7 @@ export class LayoutMentor implements OnInit {
   userStoreService = inject(UserStoreService);
   windowWatcher = inject(WindowWatcherService);
   activatedRoute = inject(ActivatedRoute);
+  loginService = inject(LoginService);
   router = inject(Router);
   mentorProfil$: BehaviorSubject<MentorDTO> =
     inject(MentorService).activeMentorProfil$;
@@ -65,7 +67,7 @@ export class LayoutMentor implements OnInit {
   // }
 
   logout() {
-    this.userService.logout();
+    this.loginService.logout();
     this.modalVisible = false;
   }
 
