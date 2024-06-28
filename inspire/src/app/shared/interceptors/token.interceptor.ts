@@ -1,6 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { UserStoreService } from './shared/services/stores/user-store.service';
+import { UserStoreService } from '../services/stores/user-store.service';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   console.log(req.urlWithParams);

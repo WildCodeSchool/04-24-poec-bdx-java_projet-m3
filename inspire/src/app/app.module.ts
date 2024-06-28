@@ -15,7 +15,7 @@ import {
 import { FullCalendarModule } from '@fullcalendar/angular';
 
 import '@angular/common/locales/global/fr';
-import { tokenInterceptor } from './token.interceptor';
+import { tokenInterceptor } from './shared/interceptors/token.interceptor';
 import { ToastModule } from 'primeng/toast';
 import { errorHandlerInterceptor } from './shared/interceptors/error-handler.interceptor';
 
