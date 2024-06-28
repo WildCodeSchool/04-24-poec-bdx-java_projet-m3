@@ -36,6 +36,7 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { RouterLink } from '@angular/router';
+import { ErrorPageComponent } from './error-page/error-page.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { RouterLink } from '@angular/router';
     FileUploadComponent,
     DashboardLinksComponent,
     NavbarButtonComponent,
+    ErrorPageComponent,
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutMentor } from './modules/mentor/pages/layout/layout-mentor-component';
-import { isConnected, isMentor, isStudent } from './shared/auth.guard';
+import {
+  isConnected,
+  isMentor,
+  isNotLogged,
+  isStudent,
+} from './shared/guards/auth.guard';
 import {
   mentorExperiencesResolver,
   mentorFormationsResolver,
@@ -15,6 +20,7 @@ import {
   studentProfilResolver,
   studentSkillsResolver,
 } from './shared/resolvers/student.resolver';
+import { ErrorPageComponent } from './modules/shared-components/error-page/error-page.component';
 
 export const routes: Routes = [
   {
@@ -23,7 +29,7 @@ export const routes: Routes = [
       import('./modules/auth/modules/login/login.module').then(
         (m) => m.LoginModule
       ),
-    // canActivate: [isMentor, isStudent],
+    canActivate: [isNotLogged],
   },
   {
     path: 'student',
@@ -62,11 +68,11 @@ export const routes: Routes = [
       ),
   },
   { path: 'layout', component: LayoutMentor },
-  // {
-  //   path: '404',
-  //   component: ErrorComponent,
-  // },
-  // { path: '**', redirectTo: '/404' },
+  {
+    path: 'error',
+    component: ErrorPageComponent,
+  },
+  { path: '**', redirectTo: '/lol' },
 ];
 
 @NgModule({
