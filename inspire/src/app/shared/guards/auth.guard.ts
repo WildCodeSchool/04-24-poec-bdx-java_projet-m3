@@ -53,7 +53,6 @@ export const isNotLogged: CanActivateFn = (route, state) => {
   if (!user.email) {
     return true;
   } else {
-    router.navigate(['']);
     return false;
   }
 };
