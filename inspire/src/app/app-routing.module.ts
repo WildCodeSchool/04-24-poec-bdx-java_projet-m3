@@ -20,7 +20,6 @@ import {
   studentProfilResolver,
   studentSkillsResolver,
 } from './shared/resolvers/student.resolver';
-import { ErrorPageComponent } from './modules/shared-components/error-page/error-page.component';
 
 export const routes: Routes = [
   {
@@ -67,12 +66,6 @@ export const routes: Routes = [
         (m) => m.RegisterModule
       ),
   },
-  { path: 'layout', component: LayoutMentor },
-  {
-    path: 'error',
-    component: ErrorPageComponent,
-  },
-  { path: '**', redirectTo: '/lol' },
 ];
 
 @NgModule({

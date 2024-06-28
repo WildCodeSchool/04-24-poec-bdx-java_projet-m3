@@ -10,10 +10,8 @@ import {
 } from '@angular/core';
 import { Language } from '../../../shared/models/language';
 import { Subject, Subscription, take, takeUntil } from 'rxjs';
-import { MentorService } from '../../../shared/services/mentor.service';
 import { UserStoreService } from '../../../shared/services/stores/user-store.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { AutoDestroy } from '../utilities/decorators';
+import { AutoDestroy } from '../../../shared/utilities/decorators';
 import { UserService } from '../../../shared/services/user.service';
 
 @Component({
