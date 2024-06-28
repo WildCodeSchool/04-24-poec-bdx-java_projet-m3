@@ -6,15 +6,14 @@ import { ExperienceDTO } from '../../../../shared/models/experience';
 import { FormationDTO } from '../../../../shared/models/formation';
 import { StudentDTO } from '../../../../shared/models/user';
 import { Skill } from '../../../../shared/models/chip';
-import { UserService } from '../../../../user.service';
+import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-student-profil-by-mentor',
   templateUrl: './student-profil-by-mentor.component.html',
-  styleUrl: './student-profil-by-mentor.component.scss'
+  styleUrl: './student-profil-by-mentor.component.scss',
 })
 export class StudentProfilByMentorComponent {
-
   @Input() editModeOn: boolean = false;
   userService = inject(UserService);
 
@@ -22,14 +21,17 @@ export class StudentProfilByMentorComponent {
   activatedRoute = inject(ActivatedRoute);
 
   languages = this.activatedRoute.snapshot.data['languages'] as Language[];
-  experiences = this.activatedRoute.snapshot.data['experiences'] as ExperienceDTO[];
+  experiences = this.activatedRoute.snapshot.data[
+    'experiences'
+  ] as ExperienceDTO[];
 
-  formations = this.activatedRoute.snapshot.data['formations'] as FormationDTO[];
+  formations = this.activatedRoute.snapshot.data[
+    'formations'
+  ] as FormationDTO[];
   skills = this.activatedRoute.snapshot.data['skills'] as Skill[];
   profil = this.activatedRoute.snapshot.data['profil'] as StudentDTO;
 
   ngOnInit(): void {
-
     this.languages = this.activatedRoute.snapshot.data['languages'];
     this.experiences = this.activatedRoute.snapshot.data['experiences'];
     this.formations = this.activatedRoute.snapshot.data['formations'];
@@ -42,5 +44,4 @@ export class StudentProfilByMentorComponent {
     console.log('Skills:', this.skills);
     console.log('Profil:', this.profil);
   }
-
 }

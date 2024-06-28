@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MentorService } from '../../../../shared/services/mentor.service';
-import { UserService } from '../../../../user.service';
+import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-profil-mentor',

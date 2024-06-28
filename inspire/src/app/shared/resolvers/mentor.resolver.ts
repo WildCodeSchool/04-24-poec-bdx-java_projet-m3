@@ -7,8 +7,8 @@ import { Skill } from '../models/chip';
 import { Experience } from '../models/experience';
 import { Formation } from '../models/formation';
 import { Observable } from 'rxjs';
-import { UserService } from '../../user.service';
 import { UserByIdService } from '../services/user-by-id.service';
+import { UserService } from '../services/user.service';
 
 export const mentorProfilResolver: ResolveFn<Mentor> = (route, state) => {
   return inject(MentorService).getMentorProfil();

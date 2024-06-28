@@ -1,13 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
 import { MentorService } from '../../../../shared/services/mentor.service';
-import { UserService } from '../../../../user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
 import { MentorDTO, StudentDTO } from '../../../../shared/models/user';
 import { StudentService } from '../../../../shared/services/student.service';
 import { DashboardLink } from '../../../../shared/models/dashboardLink';
+import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-side-nav',

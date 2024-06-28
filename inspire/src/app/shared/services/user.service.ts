@@ -1,44 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import {
-  BehaviorSubject,
-  Observable,
-  Subject,
-  map,
-  switchMap,
-  tap,
-} from 'rxjs';
-import {
-  LoginDTO,
-  Mentor,
-  MentorDTO,
-  Student,
-  User,
-  UserDTO,
-} from './shared/models/user';
-import { UserStoreService } from './shared/services/stores/user-store.service';
+import { BehaviorSubject, Observable, Subject, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { Skill } from './shared/models/chip';
-import { Language } from './shared/models/language';
-import { Experience, ExperienceDTO } from './shared/models/experience';
-import { Formation, FormationDTO } from './shared/models/formation';
-import { environment } from '../environments/environment.development';
-import { BroadcastMessage } from './shared/models/broadcastMessage';
-
-type InscriptionUser = {
-  email: string;
-  password: string;
-  firstname: string;
-  lastname: string;
-};
-import { cp } from '@fullcalendar/core/internal-common';
+import { LoginDTO, Mentor, Student, UserDTO } from '../models/user';
+import { UserStoreService } from './stores/user-store.service';
+import { Formation, FormationDTO } from '../models/formation';
+import { Experience, ExperienceDTO } from '../models/experience';
+import { Language } from '../models/language';
+import { Skill } from '../models/chip';
+import { BroadcastMessage } from '../models/broadcastMessage';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private readonly BASE_URL_API = 'http://localhost:8080';
-  private readonly BASE_URL = 'http://localhost:3310';
   private router = inject(Router);
   private http = inject(HttpClient);
   private userStore = inject(UserStoreService);

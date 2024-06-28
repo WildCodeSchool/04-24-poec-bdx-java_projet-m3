@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { checkEqualityValidator } from '../../../validator-password/equality-passwords-validator';
 import { strongPasswordValidator } from '../../../validator-password/password-strength-validator';
-import { UserService } from '../../../../../../../user.service';
 import { ActivatedRoute } from '@angular/router';
 import { emailSchoolValidator } from '../../../validator-email/school-email-validator';
 import { environment } from '../../../../../../../../environments/environment.development';
+import { UserService } from '../../../../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-register-form',

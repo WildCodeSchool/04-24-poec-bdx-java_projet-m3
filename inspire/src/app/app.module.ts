@@ -17,7 +17,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import '@angular/common/locales/global/fr';
 import { tokenInterceptor } from './token.interceptor';
 import { ToastModule } from 'primeng/toast';
-import { errorHandlerInterceptor } from './shared/resolvers/error-handler.interceptor';
+import { errorHandlerInterceptor } from './shared/interceptors/error-handler.interceptor';
 
 @NgModule({
   declarations: [AppComponent],

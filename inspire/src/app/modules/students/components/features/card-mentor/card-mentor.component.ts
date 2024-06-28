@@ -4,11 +4,11 @@ import { Skill } from '../../../../../shared/models/chip';
 import { Observable } from 'rxjs';
 import { FavoritesService } from '../../../shared/favorites.service';
 import { UserStoreService } from '../../../../../shared/services/stores/user-store.service';
-import { UserService } from '../../../../../user.service';
 import { StudentService } from '../../../../../shared/services/student.service';
 import { MentorService } from '../../../../../shared/services/mentor.service';
 import { UserByIdService } from '../../../../../shared/services/user-by-id.service';
 import { Router } from '@angular/router';
+import { UserService } from '../../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-card-mentor',

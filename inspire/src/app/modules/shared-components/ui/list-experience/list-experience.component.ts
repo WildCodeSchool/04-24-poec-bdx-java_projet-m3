@@ -4,9 +4,9 @@ import {
   ExperienceDTO,
 } from '../../../../shared/models/experience';
 import { WindowWatcherService } from '../../../../shared/services/window-watcher.service';
-import { UserService } from '../../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MessageService } from 'primeng/api';
+import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-list-experience',

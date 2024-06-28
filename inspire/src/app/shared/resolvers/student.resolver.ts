@@ -2,22 +2,22 @@ import { ResolveFn } from '@angular/router';
 import { Student } from '../models/user';
 import { inject } from '@angular/core';
 import { StudentService } from '../services/student.service';
-import { UserService } from '../../user.service';
 import { Skill } from '../models/chip';
 import { Experience } from '../models/experience';
 import { Formation } from '../models/formation';
 import { Observable, tap } from 'rxjs';
 import { Language } from '../models/language';
 import { UserByIdService } from '../services/user-by-id.service';
+import { UserService } from '../services/user.service';
 
 export const studentProfilResolver: ResolveFn<Student> = (route, state) => {
   return inject(StudentService).getStudentProfil();
 };
- export const studentLanguagesResolver: ResolveFn<Observable<Language[]>> = (
+export const studentLanguagesResolver: ResolveFn<Observable<Language[]>> = (
   route,
-   state
- ) => {
-   return inject(UserService).getUserLanguages();
+  state
+) => {
+  return inject(UserService).getUserLanguages();
 };
 
 export const studentSkillsResolver: ResolveFn<Skill[]> = (route, state) => {
@@ -41,9 +41,9 @@ export const studentExperiencesResolver: ResolveFn<Experience[]> = (
 export const studentProfilByIdResolver: ResolveFn<Student> = (route, state) => {
   const userId: number = +route.params['userId'];
   console.log('Resolving student profile for userId:', userId);
-  return inject(UserByIdService).getStudentProfilById(userId).pipe(
-    tap(data => console.log('Resolved student profile data:', data))
-  );;
+  return inject(UserByIdService)
+    .getStudentProfilById(userId)
+    .pipe(tap((data) => console.log('Resolved student profile data:', data)));
 };
 
 export const studentLanguagesByIdResolver: ResolveFn<Observable<Language[]>> = (
@@ -52,9 +52,9 @@ export const studentLanguagesByIdResolver: ResolveFn<Observable<Language[]>> = (
 ) => {
   const userId: number = +route.params['userId'];
   console.log('Resolving student languages for userId:', userId);
-  return inject(UserByIdService).getUserLanguagesById(userId).pipe(
-    tap(data => console.log('Resolved student languages data:', data))
-  );;
+  return inject(UserByIdService)
+    .getUserLanguagesById(userId)
+    .pipe(tap((data) => console.log('Resolved student languages data:', data)));
 };
 
 export const studentSkillsByIdResolver: ResolveFn<Skill[]> = (route, state) => {

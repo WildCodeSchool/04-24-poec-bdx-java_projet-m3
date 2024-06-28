@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { UserService } from '../../../../user.service';
 import { StudentService } from '../../../../shared/services/student.service';
+import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-profil-student',

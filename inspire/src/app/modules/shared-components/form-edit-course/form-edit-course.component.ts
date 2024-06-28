@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormationDTO } from '../../../shared/models/formation';
-import { UserService } from '../../../user.service';
 import { dateOrderValidator } from '../../../shared/validators/dateOrderValidator';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-form-edit-course',

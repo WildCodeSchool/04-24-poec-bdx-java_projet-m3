@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { User } from './shared/models/user';
 import { Subscription } from 'rxjs';
-import { UserService } from './user.service';
+import { UserService } from './shared/services/user.service';
 
 @Component({
   selector: 'app-root',

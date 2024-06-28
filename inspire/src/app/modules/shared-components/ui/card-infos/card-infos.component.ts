@@ -8,11 +8,11 @@ import {
 import { Skill } from '../../../../shared/models/chip';
 import { MentorService } from '../../../../shared/services/mentor.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { UserService } from '../../../../user.service';
 import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
 import { StudentService } from '../../../../shared/services/student.service';
 import { MessageService } from 'primeng/api';
 import { switchMap } from 'rxjs';
+import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-card-infos',

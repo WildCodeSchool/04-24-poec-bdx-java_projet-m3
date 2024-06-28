@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { Experience, ExperienceDTO } from '../../../shared/models/experience';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../../../user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { dateOrderValidator } from '../../../shared/validators/dateOrderValidator';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-form-edit-experience',

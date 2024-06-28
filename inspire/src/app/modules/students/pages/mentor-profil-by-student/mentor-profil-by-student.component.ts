@@ -1,5 +1,4 @@
 import { Component, Input, inject } from '@angular/core';
-import { UserService } from '../../../../user.service';
 import { MentorService } from '../../../../shared/services/mentor.service';
 import { ActivatedRoute } from '@angular/router';
 import { Language } from '../../../../shared/models/language';
@@ -7,6 +6,7 @@ import { MentorDTO } from '../../../../shared/models/user';
 import { ExperienceDTO } from '../../../../shared/models/experience';
 import { FormationDTO } from '../../../../shared/models/formation';
 import { Skill } from '../../../../shared/models/chip';
+import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-mentor-profil-by-student',

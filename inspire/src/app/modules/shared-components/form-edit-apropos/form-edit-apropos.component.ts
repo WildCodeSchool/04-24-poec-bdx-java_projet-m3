@@ -10,10 +10,10 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Skill } from '../../../shared/models/chip';
-import { UserService } from '../../../user.service';
 import { Subscription } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MentorDTO, StudentDTO } from '../../../shared/models/user';
+import { UserService } from '../../../shared/services/user.service';
 
 @Component({
   selector: 'app-form-edit-apropos',

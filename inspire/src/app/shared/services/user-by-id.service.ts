@@ -5,7 +5,7 @@ import { environment } from '../../../environments/environment.development';
 import { Language } from '../models/language';
 import { Formation } from '../models/formation';
 import { Skill } from '../models/chip';
-import { Mentor, Student, StudentDTO } from '../models/user';
+import { Mentor, StudentDTO } from '../models/user';
 import { MentorService } from './mentor.service';
 
 @Injectable({

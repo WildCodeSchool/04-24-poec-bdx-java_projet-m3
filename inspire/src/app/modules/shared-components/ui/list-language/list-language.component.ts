@@ -1,9 +1,9 @@
 import { Component, DestroyRef, Input, inject } from '@angular/core';
 import { Language } from '../../../../shared/models/language';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { UserService } from '../../../../user.service';
 import { UserStoreService } from '../../../../shared/services/stores/user-store.service';
 import { MessageService } from 'primeng/api';
+import { UserService } from '../../../../shared/services/user.service';
 
 @Component({
   selector: 'app-list-language',
