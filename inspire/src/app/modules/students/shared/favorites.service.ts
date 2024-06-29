@@ -15,14 +15,19 @@ export class FavoritesService {
   constructor(private http: HttpClient) {}
 
   addToFavorites(studentId: number, mentorId: number): Observable<any> {
-    console.log(studentId)
-    console.log(mentorId)
-    return this.http.post(environment.BASE_URL_API + `student/favorite/add/${studentId}/${mentorId}`, {});
+    console.log(studentId);
+    console.log(mentorId);
+    return this.http.post(
+      environment.BASE_URL_API +
+        `/student/favorite/add/${studentId}/${mentorId}`,
+      {}
+    );
   }
 
   removeFromFavorites(studentId: number, mentorId: number): Observable<any> {
     return this.http.delete(
-      environment.BASE_URL_API + `student/favorite/delete/${studentId}/${mentorId}`
+      environment.BASE_URL_API +
+        `/student/favorite/delete/${studentId}/${mentorId}`
     );
   }
 
@@ -31,13 +36,13 @@ export class FavoritesService {
     mentorId: number
   ): Observable<{ isFavorite: boolean }> {
     return this.http.get<{ isFavorite: boolean }>(
-      environment.BASE_URL_API + `student/favorite/${studentId}/${mentorId}`
+      environment.BASE_URL_API + `/student/favorite/${studentId}/${mentorId}`
     );
   }
 
   getStudentFavorite(studentId: number): Observable<any> {
     return this.http.get<Favorite>(
-      environment.BASE_URL_API + `student/favorite/${studentId}`
+      environment.BASE_URL_API + `/student/favorite/${studentId}`
     );
   }
 

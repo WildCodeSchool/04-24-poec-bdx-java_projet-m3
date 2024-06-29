@@ -22,8 +22,7 @@ export class StudentService {
   getStudentProfil() {
     return this.httpClient
       .get<StudentDTO>(
-        'http://localhost:8080/student/' + this.userConnected.value.id
-        // environment.BASE_URL_API + 'api/v1/users/me'
+        environment.BASE_URL_API + '/student/' + this.userConnected.value.id
       )
       .pipe(
         tap((res) => {
@@ -35,13 +34,10 @@ export class StudentService {
   updateStudentProfil(profil: StudentDTO) {
     return this.httpClient
       .put<StudentDTO>(
-        'http://localhost:8080/student/' + this.userConnected.value.id,
-        // environment.BASE_URL +
-        //   '/student/students/' +
-        //   this.userConnected.value?.id,
+        environment.BASE_URL_API + '/student/' + this.userConnected.value.id,
         { ...profil, userId: this.userConnected.value?.id }
       )
-      .pipe(tap((result) => this.activeStudentProfil$.next(profil)));
+      .pipe(tap(() => this.activeStudentProfil$.next(profil)));
   }
 
   updateStudentImage(file: File) {
@@ -52,9 +48,8 @@ export class StudentService {
 
       return this.httpClient
         .post<StudentDTO>(
-          // environment.BASE_URL +
-          // '/student/students/image/' +
-          'http://localhost:8080/user/upload/image/student/' +
+          environment.BASE_URL_API +
+            '/user/upload/image/student/' +
             this.userConnected.value?.id,
           formData
         )

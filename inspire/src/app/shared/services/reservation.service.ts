@@ -68,7 +68,7 @@ export class ReservationService {
   getSlotsForMentor(mentorId: number): Observable<any> {
     console.log('getSlotsformentor', mentorId);
     return this.httpClient.get(
-      `${environment.BASE_URL_API}user/slot/get/${mentorId}`
+      `${environment.BASE_URL_API}/user/slot/get/${mentorId}`
     );
   }
 
@@ -77,26 +77,26 @@ export class ReservationService {
     let end = new Date();
     end.setDate(end.getDate() + 50);
     return this.httpClient.post(
-      `${environment.BASE_URL_API}user/slot/slots/${mentorId}/${studentId}`,
+      `${environment.BASE_URL_API}/user/slot/slots/${mentorId}/${studentId}`,
       { start: new Date(), end: end }
     );
   }
 
   deleteSlot(id: number): Observable<any> {
     return this.httpClient.delete(
-      `${environment.BASE_URL_API}user/slot/delete/${id}`
+      `${environment.BASE_URL_API}/user/slot/delete/${id}`
     );
   }
 
   deleteReservationAndSlot(id: number): Observable<any> {
     return this.httpClient.delete(
-      `${environment.BASE_URL_API}reservation/delete/mentor/${id}`
+      `${environment.BASE_URL_API}/reservation/delete/mentor/${id}`
     );
   }
 
   deleteReservationOnly(id: number): Observable<any> {
     return this.httpClient.delete(
-      `${environment.BASE_URL_API}reservation/delete/mentor/reservation/${id}`
+      `${environment.BASE_URL_API}/reservation/delete/mentor/reservation/${id}`
     );
   }
 
@@ -110,7 +110,7 @@ export class ReservationService {
     };
 
     return this.httpClient.put(
-      `${environment.BASE_URL_API}user/slot/update`,
+      `${environment.BASE_URL_API}/user/slot/update`,
       updatedSlotInfo
     );
   }
@@ -122,9 +122,8 @@ export class ReservationService {
         reservations: reservationForMentorDTO[];
         total: number;
       }>(
-        `http://localhost:8080/reservation/get/mentor/upcoming/${mentorId}/${perPage}/${offset}`
-        // environment.BASE_URL +
-        //   `/reservation/reservations/mentor/${userId}?perPage=${perPage}&offset=${offset}`
+        environment.BASE_URL_API +
+          `/reservation/get/mentor/upcoming/${mentorId}/${perPage}/${offset}`
       )
       .pipe(
         tap((res) => {
@@ -143,9 +142,8 @@ export class ReservationService {
     const mentorId = this.mentorService.activeMentorProfil$.value.id;
     return this.httpClient
       .get<{ reservations: reservationForMentorDTO[]; total: number }>(
-        `http://localhost:8080/reservation/get/mentor/history/${mentorId}/${perPage}/${offset}`
-        // environment.BASE_URL +
-        //   `/reservation/reservations/mentor/history/${userId}?perPage=${perPage}&offset=${offset}`
+        environment.BASE_URL_API +
+          `/reservation/get/mentor/history/${mentorId}/${perPage}/${offset}`
       )
       .pipe(
         tap((res) => {
@@ -162,8 +160,8 @@ export class ReservationService {
     const mentorId = this.mentorService.activeMentorProfil$.value.id;
     return this.httpClient
       .put<{ reservations: reservationForMentorDTO[]; total: number }>(
-        //environment.BASE_URL + `/reservation/reservations/${id}`,
-        `http://localhost:8080/reservation/update/${id}/${this.pagination.offsetReservationMentorHistory.value}`,
+        environment.BASE_URL_API +
+          `/reservation/update/${id}/${this.pagination.offsetReservationMentorHistory.value}`,
         {
           message,
           mentorId,
@@ -184,9 +182,8 @@ export class ReservationService {
         reservations: ReservationForStudentDTO[];
         total: number;
       }>(
-        `http://localhost:8080/reservation/get/student/upcoming/${studentId}/${perPage}/${offset}`
-        // environment.BASE_URL +
-        //   `/reservation/reservations/user/${userId}?perPage=${perPage}&offset=${offset}`
+        environment.BASE_URL_API +
+          `/reservation/get/student/upcoming/${studentId}/${perPage}/${offset}`
       )
       .pipe(
         tap((res) => {
@@ -204,9 +201,8 @@ export class ReservationService {
 
     return this.httpClient
       .get<{ reservations: ReservationForStudentDTO[]; total: number }>(
-        `http://localhost:8080/reservation/get/student/history/${studentId}/${perPage}/${offset}`
-        // environment.BASE_URL +
-        //   `/reservation/reservations/user/history/${userId}?perPage=${perPage}&offset=${offset}`
+        environment.BASE_URL_API +
+          `/reservation/get/student/history/${studentId}/${perPage}/${offset}`
       )
       .pipe(
         tap((res) => {
@@ -227,8 +223,8 @@ export class ReservationService {
 
     return this.httpClient
       .delete<{ reservations: reservationForMentorDTO[]; total: number }>(
-        //environment.BASE_URL + `/reservation/reservations/${id}/${userId}`
-        `http://localhost:8080/reservation/delete/mentor/reservation/${reservationId}`
+        environment.BASE_URL_API +
+          `/reservation/delete/mentor/reservation/${reservationId}`
       )
       .pipe(
         switchMap(() => {
@@ -255,8 +251,8 @@ export class ReservationService {
 
     return this.httpClient
       .delete<{ reservations: ReservationForStudentDTO[]; total: number }>(
-        //environment.BASE_URL + `/reservation/reservations/${id}/${userId}`
-        `http://localhost:8080/reservation/delete/student/${reservationId}`
+        environment.BASE_URL_API +
+          `/reservation/delete/student/${reservationId}`
       )
       .pipe(
         switchMap(() => {
@@ -286,7 +282,7 @@ export class ReservationService {
     console.log('lolus');
 
     return this.httpClient.post<Reservation>(
-      'http://localhost:8080/reservation/add',
+      environment.BASE_URL_API + '/reservation/add',
       newReservation
     );
   }

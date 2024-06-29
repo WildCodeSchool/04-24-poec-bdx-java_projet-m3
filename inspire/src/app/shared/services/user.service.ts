@@ -61,47 +61,38 @@ export class UserService {
   }
 
   getListSkills() {
-    // return this.http.get<Skill[]>(`${this.BASE_URL}/skill/skills`);
-    return this.http.get<Skill[]>(`http://localhost:8080/skill/get/all`);
+    return this.http.get<Skill[]>(environment.BASE_URL_API + '/skill/get/all');
   }
 
   // CRUD languages
 
   getListLanguages() {
-    // return this.http.get<Language[]>(`${this.BASE_URL}/language/languages`);
-    return this.http.get<Language[]>(`http://localhost:8080/language/get/all`);
+    return this.http.get<Language[]>(
+      environment.BASE_URL_API + '/language/get/all'
+    );
   }
 
   getUserLanguages() {
-    return (
-      this.http
-        // .get<Language[]>(
-        //   environment.BASE_URL +
-        //     '/language/languages/user/' +
-        //     this.userStore.getUserConnected$().value?.id
-        // )
-        .get<Language[]>(
-          'http://localhost:8080/language/user/' +
-            this.userStore.getUserConnected$().value.id
-        )
-        .pipe(
-          tap((languages) => {
-            this.activeUserLanguages$.next(languages);
-          })
-        )
-    );
+    return this.http
+      .get<Language[]>(
+        environment.BASE_URL_API +
+          '/language/user/' +
+          this.userStore.getUserConnected$().value.id
+      )
+      .pipe(
+        tap((languages) => {
+          this.activeUserLanguages$.next(languages);
+        })
+      );
   }
 
   updateUserLanguages(languages: Language[]) {
     return this.http
       .put<{ success: boolean; message: string; languages: Language[] }>(
-        'http://localhost:8080/language/user/update/' +
+        environment.BASE_URL_API +
+          '/language/user/update/' +
           this.userStore.getUserConnected$().value?.id,
         languages
-        // environment.BASE_URL +
-        //   '/language/languages/user/' +
-        //   this.userStore.getUserConnected$().value?.id,
-        // languages
       )
       .pipe(
         tap((result) => {
@@ -118,9 +109,8 @@ export class UserService {
   getUserFormations() {
     return this.http
       .get<FormationDTO[]>(
-        // environment.BASE_URL +
-        //   '/formation/formations/user/' +
-        'http://localhost:8080/formation/user/' +
+        environment.BASE_URL_API +
+          '/formation/user/' +
           this.userStore.getUserConnected$().value.id
       )
       .pipe(tap((formations) => this.activeUserFormations$.next(formations)));
@@ -136,11 +126,7 @@ export class UserService {
         success: string;
         message: string;
         formations: FormationDTO[];
-      }>(
-        `http://localhost:8080/formation/user/add`,
-        //`${environment.BASE_URL}/formation/formations/`
-        formation
-      )
+      }>(environment.BASE_URL_API + '/formation/user/add', formation)
       .pipe(
         tap((response) => this.activeUserFormations$.next(response.formations))
       );
@@ -159,8 +145,7 @@ export class UserService {
         affectedRows: number;
         formations: FormationDTO[];
       }>(
-        `http://localhost:8080/formation/user/update/` + formation.id,
-        //${environment.BASE_URL}/formation/formations/${formation.id}`,
+        environment.BASE_URL_API + '/formation/user/update/' + formation.id,
         formation
       )
       .pipe(
@@ -178,7 +163,7 @@ export class UserService {
         success: boolean;
         message: string;
         formations: FormationDTO[];
-      }>(`http://localhost:8080/formation/user/delete/` + formationId)
+      }>(environment.BASE_URL_API + '/formation/user/delete/' + formationId)
       .pipe(
         tap((response) => this.activeUserFormations$.next(response.formations))
       );
@@ -188,9 +173,8 @@ export class UserService {
   getUserSkills() {
     return this.http
       .get<Skill[]>(
-        // environment.BASE_URL +
-        //   '/skill/skills/user/' +
-        'http://localhost:8080/skill/user/' +
+        environment.BASE_URL_API +
+          '/skill/user/' +
           this.userStore.getUserConnected$().value.id
       )
       .pipe(tap((skills) => this.activeUserSkills$.next(skills)));
@@ -199,9 +183,8 @@ export class UserService {
   updateUserSkills(skills: Skill[]) {
     return this.http
       .put<{ success: boolean; message: string; skills: Skill[] }>(
-        // environment.BASE_URL +
-        // '/skill/skills/user/' +
-        'http://localhost:8080/skill/user/update/' +
+        environment.BASE_URL_API +
+          '/skill/user/update/' +
           this.userStore.getUserConnected$().value.id,
         skills
       )
@@ -210,7 +193,7 @@ export class UserService {
 
   getMentorSkillsById(userId: number) {
     return this.http.get<Skill[]>(
-      environment.BASE_URL + '/skill/skills/user/' + userId
+      environment.BASE_URL_API + '/skill/skills/user/' + userId
     );
   }
 
@@ -218,7 +201,8 @@ export class UserService {
   getUserExperiences() {
     return this.http
       .get<ExperienceDTO[]>(
-        'http://localhost:8080/experience/user/' +
+        environment.BASE_URL_API +
+          '/experience/user/' +
           this.userStore.getUserConnected$().value.id
       )
       .pipe(
@@ -236,7 +220,7 @@ export class UserService {
         message: string;
         success: boolean;
         experiences: ExperienceDTO[];
-      }>('http://localhost:8080/experience/user/add', {
+      }>(environment.BASE_URL_API + '/experience/user/add', {
         ...experience,
         userId: this.userStore.getUserConnected$().value.id,
       })
@@ -258,15 +242,11 @@ export class UserService {
       .put<{
         affectedRows: number;
         experiences: ExperienceDTO[];
-      }>(
-        'http://localhost:8080/experience/user/update/' + experienceId,
-        // `${this.BASE_URL}/experience/experiences/${experienceId}`,
-        {
-          ...experience,
-          id: experienceId,
-          userId: this.userStore.getUserConnected$().value.id,
-        }
-      )
+      }>(environment.BASE_URL_API + '/experience/user/update/' + experienceId, {
+        ...experience,
+        id: experienceId,
+        userId: this.userStore.getUserConnected$().value.id,
+      })
       .pipe(
         tap((result) => {
           this.activeUserExperiences$.next(result.experiences);
@@ -284,12 +264,7 @@ export class UserService {
         message: string;
         success: boolean;
         experiences: ExperienceDTO[];
-      }>(
-        'http://localhost:8080/experience/user/delete/' + experienceId
-        // `${this.BASE_URL}/experience/experiences/${experienceId}/${
-        // this.userStore.getUserConnected$().value?.id
-        // }`
-      )
+      }>(environment.BASE_URL_API + '/experience/user/delete/' + experienceId)
       .pipe(
         tap((res) => {
           console.log('deleting res ', res);

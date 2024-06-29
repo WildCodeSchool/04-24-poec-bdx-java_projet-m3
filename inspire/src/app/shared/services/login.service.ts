@@ -91,7 +91,6 @@ export class LoginService {
         this.logout();
       }
       if (message.data.type === 'login') {
-        //this.logout();
         this.loginTabs(message.data);
       }
     };

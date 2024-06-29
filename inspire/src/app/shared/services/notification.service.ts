@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, tap } from 'rxjs';
 import { NotificationDTO } from '../models/notification-dto';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class NotificationService {
   getNotificationsMentor(userId: number) {
     return this.http
       .get<NotificationDTO[]>(
-        'http://localhost:8080/notification/get/user/' + userId
+        environment.BASE_URL_API + '/notification/get/user/' + userId
       )
       .pipe(
         tap((res) => {
@@ -26,7 +27,7 @@ export class NotificationService {
 
   resetNotificationsMentor(userId: number) {
     return this.http.get<NotificationDTO[]>(
-      'http://localhost:8080/notification/reset/' + userId
+      environment.BASE_URL_API + '/notification/reset/' + userId
     );
   }
 }
