@@ -30,6 +30,7 @@ export class UserService {
   activeUserSkills$: BehaviorSubject<Skill[]> = new BehaviorSubject(
     [] as Skill[]
   );
+  isLoading$ = new BehaviorSubject<boolean>(false);
 
   createStudent(registerFormValues: any): Observable<Student> {
     return this.http

@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment.development';
 import { BehaviorSubject, of, tap } from 'rxjs';
 import { StudentDTO } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +12,7 @@ import { UserStoreService } from './stores/user-store.service';
 export class StudentService {
   httpClient = inject(HttpClient);
   userConnected = inject(UserStoreService).getUserConnected$();
+  loading$ = inject(UserService).isLoading$;
 
   constructor() {}
 
@@ -45,7 +47,7 @@ export class StudentService {
   updateStudentImage(file: File) {
     if (file) {
       const formData = new FormData();
-
+      this.loading$.next(true);
       formData.append('file', file);
 
       return this.httpClient
@@ -56,7 +58,12 @@ export class StudentService {
             this.userConnected.value?.id,
           formData
         )
-        .pipe(tap((res) => this.activeStudentProfil$.next(res)));
+        .pipe(
+          tap((res) => {
+            this.activeStudentProfil$.next(res);
+            this.loading$.next(false);
+          })
+        );
     } else return of();
   }
 }

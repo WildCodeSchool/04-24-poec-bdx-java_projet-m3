@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { Mentor, MentorDTO } from '../models/user';
 import { UserStoreService } from './stores/user-store.service';
 import { reservationForMentorDTO } from '../models/reservation';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class MentorService {
   constructor(private httpClient: HttpClient) {}
 
   userConnected = inject(UserStoreService).getUserConnected$();
+  loading$ = inject(UserService).isLoading$;
 
   activeMentorProfil$: BehaviorSubject<MentorDTO> =
     new BehaviorSubject<MentorDTO>({} as MentorDTO);
@@ -90,17 +92,28 @@ export class MentorService {
 
   getMentorsByAvailability(period: string): Observable<MentorDTO[]> {
     const params = { period };
-    return this.httpClient.get<MentorDTO[]>(`${environment.BASE_URL_API}mentor/available`, { params });
+    return this.httpClient.get<MentorDTO[]>(
+      `${environment.BASE_URL_API}mentor/available`,
+      { params }
+    );
   }
 
-  getMentorsByMultipleFilters(skillNames: string[], minYears: number, maxYears: number, period: string): Observable<MentorDTO[]> {
+  getMentorsByMultipleFilters(
+    skillNames: string[],
+    minYears: number,
+    maxYears: number,
+    period: string
+  ): Observable<MentorDTO[]> {
     const filters = {
       skills: skillNames,
       minYears,
       maxYears,
-      period
+      period,
     };
-    return this.httpClient.post<MentorDTO[]>(`${environment.BASE_URL_API}/filter`, filters);
+    return this.httpClient.post<MentorDTO[]>(
+      `${environment.BASE_URL_API}/filter`,
+      filters
+    );
   }
 
   getMentorListPagination(perPage: number, offset: number) {
@@ -127,7 +140,7 @@ export class MentorService {
   updateMentorImage(file: File) {
     if (file) {
       const formData = new FormData();
-
+      this.loading$.next(true);
       formData.append('file', file);
       const headers = new HttpHeaders();
       return this.httpClient
@@ -142,7 +155,12 @@ export class MentorService {
             headers: headers,
           }
         )
-        .pipe(tap((res) => this.activeMentorProfil$.next(res)));
+        .pipe(
+          tap((res) => {
+            this.activeMentorProfil$.next(res);
+            this.loading$.next(false);
+          })
+        );
     } else return of();
   }
 }

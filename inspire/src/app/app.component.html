@@ -1,2 +1,5 @@
+<div class="card" *ngIf="isLoading$ | async as loading">
+  <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+</div>
 <router-outlet></router-outlet>
 <p-toast></p-toast>

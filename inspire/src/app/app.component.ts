@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 import { LoginService } from './shared/services/login.service';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { UserService } from './shared/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,7 @@ export class AppComponent implements OnInit {
   userDansLeLocalStorage!: User;
   router = inject(Router);
   destropyRef = inject(DestroyRef);
+  isLoading$ = inject(UserService).isLoading$;
 
   constructor(private loginService: LoginService) {}
 

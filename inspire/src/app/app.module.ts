@@ -18,6 +18,9 @@ import '@angular/common/locales/global/fr';
 import { tokenInterceptor } from './shared/interceptors/token.interceptor';
 import { ToastModule } from 'primeng/toast';
 import { errorHandlerInterceptor } from './shared/interceptors/error-handler.interceptor';
+import { MessageService } from 'primeng/api';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { loadingInterceptor } from './shared/interceptors/loading.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +33,7 @@ import { errorHandlerInterceptor } from './shared/interceptors/error-handler.int
     FullCalendarModule,
     HttpClientModule,
     ToastModule,
+    ProgressBarModule,
   ],
   providers: [
     provideAnimations(),
@@ -37,6 +41,7 @@ import { errorHandlerInterceptor } from './shared/interceptors/error-handler.int
       withInterceptors([tokenInterceptor, errorHandlerInterceptor])
     ),
     { provide: LOCALE_ID, useValue: 'fr' },
+    MessageService,
   ],
   bootstrap: [AppComponent],
 })
