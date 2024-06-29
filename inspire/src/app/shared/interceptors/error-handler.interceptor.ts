@@ -2,9 +2,11 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
+import { UserService } from '../services/user.service';
 
 export const errorHandlerInterceptor: HttpInterceptorFn = (req, next) => {
   const messageService = inject(MessageService);
+  const userService = inject(UserService);
   return next(req).pipe(
     catchError((err: any) => {
       console.log('interceptor');
@@ -19,7 +21,7 @@ export const errorHandlerInterceptor: HttpInterceptorFn = (req, next) => {
           messageService.add({
             severity: 'error',
             summary: 'Attention ! ',
-            detail: 'Mauvais identifiants',
+            detail: err.error.Error,
           });
           // You might trigger a re-authentication flow or redirect the user here
         } else {
@@ -30,7 +32,7 @@ export const errorHandlerInterceptor: HttpInterceptorFn = (req, next) => {
         // Handle non-HTTP errors
         console.error('An error occurred:', err);
       }
-
+      userService.isLoading$.next(false);
       // Re-throw the error to propagate it further
       return throwError(() => err);
     })
