@@ -7,16 +7,13 @@ import { UserService } from '../services/user.service';
 export const errorHandlerInterceptor: HttpInterceptorFn = (req, next) => {
   const messageService = inject(MessageService);
   const userService = inject(UserService);
+
   return next(req).pipe(
     catchError((err: any) => {
-      console.log('interceptor');
-
       if (err instanceof HttpErrorResponse) {
-        // Handle HTTP errors
         console.log('response error ');
 
         if (err.status === 404) {
-          // Specific handling for unauthorized errors
           console.error('Unauthorized request:', err);
           messageService.add({
             severity: 'error',

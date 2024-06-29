@@ -61,7 +61,7 @@ export class ReservationService {
     };
 
     return this.httpClient
-      .post(`${environment.BASE_URL_API}user/slot/add`, formattedSlotInfo)
+      .post(`${environment.BASE_URL_API}/user/slot/add`, formattedSlotInfo)
       .pipe(switchMap(() => this.getSlotsForMentor(slotInfo.mentorId)));
   }
 
