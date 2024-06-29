@@ -14,7 +14,7 @@ import { environment } from '../../../environments/environment.development';
   providedIn: 'root',
 })
 export class UserService {
-  private readonly BASE_URL_API = 'http://localhost:8080';
+  private readonly BASE_URL_API = environment.BASE_URL_API;
   private router = inject(Router);
   private http = inject(HttpClient);
   private userStore = inject(UserStoreService);
@@ -202,7 +202,7 @@ export class UserService {
     return this.http
       .get<ExperienceDTO[]>(
         environment.BASE_URL_API +
-          '/experience/user/' +
+          '/experience/user/get/' +
           this.userStore.getUserConnected$().value.id
       )
       .pipe(

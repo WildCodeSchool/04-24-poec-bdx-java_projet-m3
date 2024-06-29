@@ -29,7 +29,7 @@ export class UserByIdService {
 
   getUserExperiencesById(userId: number) {
     return this.http.get<Experience[]>(
-      environment.BASE_URL_API + '/experience/user/' + userId
+      environment.BASE_URL_API + '/experience/user/get/' + userId
     );
   }
 

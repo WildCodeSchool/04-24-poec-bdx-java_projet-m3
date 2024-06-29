@@ -50,7 +50,7 @@ export const isNotLogged: CanActivateFn = (route, state) => {
 
   const user = store.getUserConnected$().value;
 
-  if (!user.email) {
+  if (!user.role) {
     return true;
   } else {
     return false;

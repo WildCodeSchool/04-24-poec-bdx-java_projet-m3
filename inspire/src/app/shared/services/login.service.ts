@@ -5,6 +5,7 @@ import { UserStoreService } from './stores/user-store.service';
 import { Observable, Subject, tap } from 'rxjs';
 import { LoginDTO, UserDTO } from '../models/user';
 import { BroadcastMessage } from '../models/broadcastMessage';
+import { environment } from '../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class LoginService {
   private http = inject(HttpClient);
   private userStore = inject(UserStoreService);
 
-  private readonly BASE_URL_API = 'http://localhost:8080';
+  private readonly BASE_URL_API = environment.BASE_URL_API;
 
   getUserByToken(token: string): Observable<UserDTO> {
     this.userStore.token$.next(token);
@@ -32,6 +33,8 @@ export class LoginService {
       .pipe(
         tap((users) => {
           if (users) {
+            console.log('user authen', users);
+
             const user = users;
             this.userStore.setUserConnected(user);
             this.userStore.token$.next(user.token);
@@ -66,6 +69,7 @@ export class LoginService {
 
   logout() {
     const user = this.userStore.getUserConnected$().value;
+    console.log(' user in service ', user);
 
     if (user && (user.email || user.token)) {
       localStorage.removeItem('token');
