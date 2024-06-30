@@ -8,7 +8,7 @@ export const isConnected: CanActivateFn = (route, state) => {
 
   const user = store.getUserConnected$().value;
 
-  if (user) {
+  if (user.role) {
     return true;
   } else {
     router.navigate(['']);

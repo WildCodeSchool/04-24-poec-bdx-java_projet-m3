@@ -71,7 +71,7 @@ export class LoginService {
     const user = this.userStore.getUserConnected$().value;
     console.log(' user in service ', user);
 
-    if (user && (user.email || user.token)) {
+    if (user && (user.email || user.token || user.id)) {
       localStorage.removeItem('token');
       this.userStore.setUserConnected({} as UserDTO);
       this.userStore.token$.next('');
